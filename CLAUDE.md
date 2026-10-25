@@ -131,6 +131,31 @@ where judgment is involved.
   failure. Different channels declare different profiles; never
   hard-code a recipe in the editor. The optional "audio_style" field in
   scenes.json is appended to every producer prompt.
+- Data overlays (editor): a scene may declare data_overlays, a list of
+  {type: counter | bar | label, text_or_value, at_offset_seconds,
+  duration_s?, visible_s?}, timed from the scene's narration start and
+  placed at the frame CENTRE (the upper band belongs to the subtitles):
+  a counter counts up to its number ("170 °C"), a bar fills to a fraction
+  or percentage ("75%"), a label fades in. Bold white, thick black
+  outline, rendered with Pillow as one PNG sequence per overlay. Overlays
+  of one scene may not overlap in time. Numbers in the script should be
+  carried by overlays, not only spoken.
+- Visual identity: ONE `visual_identity` block per channel (background
+  hex + description, palette hexes, lighting and material wording, the
+  shared `unify` pass parameters, qa_tolerance_de). Each production
+  embeds a verbatim copy in scenes.json so it stays reproducible. EVERY
+  engine consumes it literally: the producer injects it right after the
+  style string in every t2v and image prompt (same style string, same
+  seed); code3d scenes use the exact hex values and render on the spec
+  background. The editor applies ONE unifying pass to every scene before
+  assembly, whatever its engine: shared colour grade (eq/colorbalance) +
+  film grain + vignette. Engines change only at scene boundaries, never
+  mid-action. QA: the background colour of each raw clip is sampled from
+  3 frames (median of 8 border patches) and compared with the spec hex by
+  CIE76 delta-E; scenes above qa_tolerance_de (default 15) are flagged
+  in the build report and build/visual-qa.json for re-grading or
+  regeneration. Sampling is done BEFORE the vignette, which darkens the
+  corners.
 - Phases: A Producer ✓ · B Editor ✓ · C Scriptwriter (an LLM agent that
   writes scenes.json) · D Orchestrator · E Publisher (YouTube API,
   uploads private; the owner always makes the publish call).

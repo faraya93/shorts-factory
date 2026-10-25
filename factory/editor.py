@@ -16,6 +16,9 @@ from pathlib import Path
 import edge_tts
 from PIL import Image, ImageDraw, ImageFont
 
+import visual_identity as vid
+from overlays import render_overlay, validate_scene_overlays, visible_seconds
+
 DEFAULT_VOICE = "es-CL-LorenzoNeural"
 AUDIO_DEFAULTS = {"narration_volume": 1.0, "effects_volume": 0.30, "music_volume": 0.10,
                   "clip_audio": "off", "clip_gate_db": -35.0, "music_file": None, "music_credit": None}
@@ -228,6 +231,13 @@ def main() -> int:
             print(f"ERROR: no scene with id {args.only_scene}")
             return 1
     clips, audio_dir, build = prod / "clips", prod / "audio", prod / "build"
+    identity = cfg.get("visual_identity")
+    problems = vid.validate(identity) if identity else []
+    for s in scenes:
+        problems += validate_scene_overlays(s["id"], s["data_overlays"]) if "data_overlays" in s else []
+    if problems:
+        print("ERROR: invalid scenes.json:\n" + "\n".join(f"  - {x}" for x in problems))
+        return 1
     audio_dir.mkdir(exist_ok=True)
     build.mkdir(exist_ok=True)
 
@@ -268,7 +278,7 @@ def main() -> int:
             freeze = max(0.0, slot - d * factor)
             note = f"ralentizado x{factor:.3f}" + (f" + último frame congelado {freeze:.2f} s" if freeze > 0.001 else "")
         gate = gate_clip(clips / f"{n}.mp4", {**AUDIO_DEFAULTS, **cfg.get("audio", {})}["clip_gate_db"])
-        plan.append({"s": s, "n": n, "slot": slot, "slot_frames": slot_frames, "factor": factor, "freeze": freeze,
+        plan.append({"s": s, "n": n, "dur": d, "slot": slot, "slot_frames": slot_frames, "factor": factor, "freeze": freeze,
                      "has_audio": info["has_audio"], "gate": gate})
         report.append((s["id"], s["name"], narr, slot, d, info["has_audio"], note))
 
@@ -281,7 +291,9 @@ def main() -> int:
     for old in build.glob("cue-*.png"):
         old.unlink()
     # one PNG per highlight state: for each phrase, one image per word with that word marked
-    cue_imgs, srt_cues, offset, n_phrases = [], [], 0.0, 0
+    for old in (build / "ov").glob("*.png") if (build / "ov").exists() else []:
+        old.unlink()
+    cue_imgs, srt_cues, offset, n_phrases, ov_list = [], [], 0.0, 0, []
     for p in plan:
         slot_end = offset + p["slot"]
         for cue in json.loads(words_json(audio_dir / f"{p['n']}.srt").read_text(encoding="utf-8")):
@@ -295,11 +307,23 @@ def main() -> int:
                 png = build / f"cue-{len(cue_imgs):03d}.png"
                 render_cue_state(texts, k, lay, png, font)
                 cue_imgs.append((png, lay["w"], lay["h"], a, min(b, slot_end)))
+        for spec in p["s"].get("data_overlays", []):  # timed from this scene's narration start, centred
+            start = offset + spec["at_offset_seconds"]
+            meta_ov = render_overlay(spec, build / "ov", f"ov{len(ov_list):02d}", font_path, FPS)
+            ov_list.append({**meta_ov, "start": start, "end": min(start + visible_seconds(spec), slot_end),
+                            "type": spec["type"], "scene": p["n"]})
         offset += p["slot"]
     total = offset
     (build if args.only_scene is not None else prod).joinpath("final.srt").write_text(
         "".join(f"{i}\n{srt_time(a)} --> {srt_time(b)}\n{t}\n\n" for i, (a, b, t) in enumerate(srt_cues, 1)),
         encoding="utf-8")
+
+    # 4a. Visual QA: sampled background colour of each raw clip vs the identity spec (flags, never blocks)
+    qa_rows = []
+    if identity:
+        for p in plan:
+            qa_rows.append({"scene": p["n"], **vid.qa_clip(clips / f"{p['n']}.mp4", identity, build / "qa", p["dur"])})
+        (build / "visual-qa.json").write_text(json.dumps(qa_rows, indent=2) + "\n")
 
     # 4b. Audio profile: scenes.json declares the recipe, the code only provides the capability
     audio = {**AUDIO_DEFAULTS, **cfg.get("audio", {})}
@@ -320,6 +344,7 @@ def main() -> int:
 
     # 5. filter_complex: conformar clips + audio + concat + subtítulos, una sola codificación
     n_sc = len(plan)
+    unify = vid.unify_filter(identity)
     parts = []
     for i, p in enumerate(plan):
         chain = [f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos", f"crop={W}:{H}",
@@ -329,6 +354,8 @@ def main() -> int:
         if p["freeze"] > 0.001:
             chain.append(f"tpad=stop_mode=clone:stop_duration={p['freeze'] + 0.2:.3f}")
         chain += [f"trim=end_frame={p['slot_frames']}", "setpts=PTS-STARTPTS"]
+        if unify:  # ONE shared pass for every scene, whatever its engine: grade + grain + vignette
+            chain.append(unify)
         parts.append(f"[{i}:v]{','.join(chain)}[v{i}]")
         parts.append(f"[{n_sc + i}:a]aresample=48000,aformat=channel_layouts=stereo,"
                      f"apad=whole_dur={p['slot']:.5f},atrim=duration={p['slot']:.5f},asetpts=PTS-STARTPTS[a{i}]")
@@ -348,6 +375,12 @@ def main() -> int:
         x, y = (W - w) // 2, SUB_CENTER_Y - h // 2
         parts.append(f"[{last}][{2 * n_sc + k}:v]overlay=x={x}:y={y}:enable='between(t,{a:.3f},{b:.3f})'[o{k}]")
         last = f"o{k}"
+    ov_base = 2 * n_sc + len(cue_imgs)
+    for k, ov in enumerate(ov_list):  # data overlays: frame centre; sequence delayed to its start, last frame held
+        parts.append(f"[{ov_base + k}:v]setpts=PTS+{ov['start']:.3f}/TB[ovs{k}]")
+        parts.append(f"[{last}][ovs{k}]overlay=x={(W - ov['w']) // 2}:y={(H - ov['h']) // 2}:"
+                     f"enable='between(t,{ov['start']:.3f},{ov['end']:.3f})'[p{k}]")
+        last = f"p{k}"
 
     # audio mix: normalize=0 keeps every layer at exactly its configured volume; the limiter only prevents clipping
     parts.append(f"[acat]volume={audio['narration_volume']}[nar]")
@@ -356,7 +389,7 @@ def main() -> int:
         parts.append(f"[fcat]volume={audio['effects_volume']}[fxv]")
         layers.append("[fxv]")
     if music_path:
-        music_idx = 2 * n_sc + len(cue_imgs)
+        music_idx = ov_base + len(ov_list)
         parts.append(f"[{music_idx}:a]aresample=48000,aformat=channel_layouts=stereo,"
                      f"atrim=duration={total:.5f},asetpts=PTS-STARTPTS,volume={audio['music_volume']}[mus]")
         layers.append("[mus]")
@@ -376,6 +409,8 @@ def main() -> int:
         cmd += ["-i", str(audio_dir / f"{p['n']}.mp3")]
     for png, *_ in cue_imgs:
         cmd += ["-i", str(png)]
+    for ov in ov_list:
+        cmd += ["-framerate", str(FPS), "-i", ov["pattern"]]
     if music_path:
         cmd += ["-stream_loop", "-1", "-i", str(music_path)]
     final = build / f"test-scene-{args.only_scene:02d}.mp4" if args.only_scene is not None else prod / "final.mp4"
@@ -422,6 +457,14 @@ def main() -> int:
           f"music {music_note}")
     if music_path and audio.get("music_credit"):
         print(f"Music credit: {audio['music_credit']}")
+    print(f"Shared unify pass: {unify or 'none (no visual_identity)'}")
+    if qa_rows:
+        tol = identity.get("qa_tolerance_de", vid.DEFAULT_TOLERANCE_DE)
+        print(f"Background QA vs {identity['background']['hex']} (CIE76 dE <= {tol:g}):")
+        for r in qa_rows:
+            print(f"  {r['scene']}: sampled {r['hex']}  dE {r['delta_e']:>5}  {'ok' if r['ok'] else 'OUTLIER - re-grade or regenerate'}")
+    for ov in ov_list:
+        print(f"Data overlay: {ov['scene']} {ov['type']} {ov['start']:.2f}-{ov['end']:.2f} s ({ov['frames']} frames)")
     print(f"Subtítulos: {n_phrases} frases / {len(cue_imgs)} estados de palabra | fuente {Path(font_path).name} {SUB_FONT_SIZE}px, contorno {SUB_STROKE}px")
     print(f"{final.name}: {final.stat().st_size / 1e6:.1f} MB" +
           ("" if args.only_scene is not None else f" | cover.jpg: {(prod / 'cover.jpg').stat().st_size / 1e3:.0f} KB"))

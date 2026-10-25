@@ -10,6 +10,9 @@ import sys
 import unicodedata
 from pathlib import Path
 
+import visual_identity
+from overlays import validate_scene_overlays
+
 ENGINES = ("t2v", "keyframes", "code3d")
 FAMILIES = ("objects", "body", "numbers", "whatif")
 FALSE_BELIEF_OPTIONAL = ("numbers", "whatif")  # the only families that may leave false_belief empty
@@ -79,6 +82,9 @@ def validate_production(cfg: dict) -> list[str]:
     if primary != "code3d" and NO_TEXT_CLAUSE not in str(cfg.get("style", "")).lower():
         errors.append(f"style string must contain '{NO_TEXT_CLAUSE}' for model-generated footage")
 
+    if "visual_identity" in cfg:  # optional until the channel config exists; validated whenever present
+        errors += visual_identity.validate(cfg["visual_identity"])
+
     scenes = cfg.get("scenes") or []
     if not scenes:
         errors.append("no scenes")
@@ -96,6 +102,9 @@ def validate_production(cfg: dict) -> list[str]:
         if cam in STATIC_CAMERAS:
             errors.append(f"scene {sid}: camera must move (travels, orbits, tracks), got {cam!r}")
 
+        if "data_overlays" in s:
+            errors += validate_scene_overlays(sid, s["data_overlays"])
+
         override = s.get("engine_override")
         if override is not None:
             if primary == "code3d":
@@ -110,9 +119,13 @@ def validate_production(cfg: dict) -> list[str]:
 
 
 def build_prompt(cfg: dict, scene: dict) -> str:
-    """Final generation prompt: style + scene prompt + transformation + camera + audio_style (if any)."""
+    """Final generation prompt: style + visual identity (if any) + scene prompt + transformation + camera
+    + audio_style (if any)."""
     start, end = ARROW_RE.split(scene["transformation"].strip(), maxsplit=1)
-    parts = [cfg["style"].strip(), scene["prompt"].strip(),
+    parts = [cfg["style"].strip()]
+    if cfg.get("visual_identity"):  # every engine consumes the identity literally, right after the style string
+        parts.append(visual_identity.identity_clause(cfg["visual_identity"]))
+    parts += [scene["prompt"].strip(),
              f"Transformation during the shot: {start.strip().rstrip('.')} becoming {end.strip().rstrip('.')}.",
              f"Camera: {scene['camera'].strip().rstrip('.')}."]
     if cfg.get("audio_style"):
