@@ -47,7 +47,16 @@ where judgment is involved.
   Layers: narration (narration_volume), clip effects (effects_volume,
   used only when clip_audio is "effects"; "off" discards the clips' own
   audio) and music (music_file relative to the production folder, looped
-  or trimmed to the video length, at music_volume). A missing or null
+  or trimmed to the video length, at music_volume). Clip audio goes
+  through a no-music gate first: the mean volume of each clip's audio
+  track is measured (volumedetect) before mixing; above
+  audio.clip_gate_db (default -35 dB) it is music-level continuous
+  audio and is muted entirely, at or below it is genuine foley and is
+  admitted at effects_volume. Every decision (scene, measured dB,
+  admitted/muted) is logged in the build summary and build/audio-gate.json.
+  `editor.py <production> --gate-report` measures without rendering.
+  Never retune the threshold silently: if measured values stop
+  separating music from foley, report the values. A missing or null
   music_file skips the layer and says so in the run summary — never a
   failure. Different channels declare different profiles; never
   hard-code a recipe in the editor. The optional "audio_style" field in

@@ -18,7 +18,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 DEFAULT_VOICE = "es-CL-LorenzoNeural"
 AUDIO_DEFAULTS = {"narration_volume": 1.0, "effects_volume": 0.30, "music_volume": 0.10,
-                  "clip_audio": "off", "music_file": None, "music_credit": None}
+                  "clip_audio": "off", "clip_gate_db": -35.0, "music_file": None, "music_credit": None}
 AUDITION_VOICES =["es-CL-LorenzoNeural", "es-MX-JorgeNeural", "es-ES-AlvaroNeural", "es-CL-CatalinaNeural"]
 W, H, FPS = 1080, 1920, 30
 MAX_SLOWDOWN = 1.25
@@ -52,6 +52,29 @@ def probe(path: Path) -> dict:
     info = json.loads(out)
     return {"duration": float(info["format"]["duration"]),
             "has_audio": any(s["codec_type"] == "audio" for s in info["streams"])}
+
+
+def gate_clip(path: Path, gate_db: float) -> dict:
+    """No-music validator: a clip whose audio is louder (mean volume) than gate_db is music-level
+    continuous audio and is muted entirely; at or below it, it is genuine foley and is admitted."""
+    if not probe(path)["has_audio"]:
+        return {"mean_db": None, "admitted": False, "decision": "no audio track"}
+    r = run(["ffmpeg", "-nostats", "-v", "info", "-i", str(path), "-vn", "-af", "volumedetect", "-f", "null", "-"])
+    m = re.search(r"mean_volume:\s*(-?[\d.]+|-inf) dB", r.stderr)
+    if not m:
+        print(f"ERROR: volumedetect gave no mean_volume for {path}")
+        sys.exit(1)
+    mean_db = float(m.group(1))
+    admitted = mean_db <= gate_db
+    return {"mean_db": mean_db, "admitted": admitted, "decision": "ADMITTED" if admitted else "MUTED"}
+
+
+def print_gate_table(rows: list[tuple[str, dict]], gate_db: float) -> None:
+    print(f"clip audio gate: mean volume > {gate_db:g} dB is muted, <= {gate_db:g} dB is admitted")
+    print(f"{'scene':<10}{'mean dB':>9}  decision")
+    for name, g in rows:
+        mean = f"{g['mean_db']:.1f}" if g["mean_db"] is not None else "n/a"
+        print(f"{name:<10}{mean:>9}  {g['decision']}")
 
 
 # --- Narración (edge-tts) ---------------------------------------------------------------
@@ -154,6 +177,8 @@ def main() -> int:
     ap.add_argument("--voice", help="edge-tts voice; default: scenes.json 'voice', else " + DEFAULT_VOICE)
     ap.add_argument("--audition", action="store_true",
                     help="render scene 1's narration with each AUDITION_VOICES into audio/audition/ and exit")
+    ap.add_argument("--gate-report", action="store_true",
+                    help="measure each clip's audio against audio.clip_gate_db, print the table and exit (no render)")
     args = ap.parse_args()
     prod = args.production
     cfg = json.loads((prod / "scenes.json").read_text())
@@ -168,6 +193,19 @@ def main() -> int:
             asyncio.run(synthesize(text, v, path))
             print(f"{v:<24}{probe(path)['duration']:>6.2f} s  {path.resolve()}")
         return 0
+
+    if args.gate_report:
+        gate_db = {**AUDIO_DEFAULTS, **cfg.get("audio", {})}["clip_gate_db"]
+        rows = []
+        for s in cfg["scenes"]:
+            clip = prod / "clips" / f"scene-{s['id']:02d}.mp4"
+            if not clip.exists():
+                print(f"ERROR: missing clip {clip}")
+                return 1
+            rows.append((f"scene-{s['id']:02d}", gate_clip(clip, gate_db)))
+        print_gate_table(rows, gate_db)
+        return 0
+
     scenes = cfg["scenes"]
     clips, audio_dir, build = prod / "clips", prod / "audio", prod / "build"
     audio_dir.mkdir(exist_ok=True)
@@ -208,8 +246,9 @@ def main() -> int:
             factor = min(slot / d, MAX_SLOWDOWN)
             freeze = max(0.0, slot - d * factor)
             note = f"ralentizado x{factor:.3f}" + (f" + último frame congelado {freeze:.2f} s" if freeze > 0.001 else "")
+        gate = gate_clip(clips / f"{n}.mp4", {**AUDIO_DEFAULTS, **cfg.get("audio", {})}["clip_gate_db"])
         plan.append({"s": s, "n": n, "slot": slot, "slot_frames": slot_frames, "factor": factor, "freeze": freeze,
-                     "has_audio": info["has_audio"]})
+                     "has_audio": info["has_audio"], "gate": gate})
         report.append((s["id"], s["name"], narr, slot, d, info["has_audio"], note))
 
     # 4. Subtítulos globales (cues por escena desplazadas por los slots acumulados) -> PNGs
@@ -265,7 +304,7 @@ def main() -> int:
         parts.append(f"[{n_sc + i}:a]aresample=48000,aformat=channel_layouts=stereo,"
                      f"apad=whole_dur={p['slot']:.5f},atrim=duration={p['slot']:.5f},asetpts=PTS-STARTPTS[a{i}]")
         if fx:  # the clip's own audio, conformed exactly like its video (slow down / silence pad / trim)
-            if p["has_audio"]:
+            if p["has_audio"] and p["gate"]["admitted"]:  # muted clips (music-level audio) become silence
                 tempo = f"atempo={1 / p['factor']:.6f}," if p["factor"] != 1.0 else ""
                 parts.append(f"[{i}:a]aresample=48000,aformat=channel_layouts=stereo,{tempo}"
                              f"apad=whole_dur={p['slot']:.5f},atrim=duration={p['slot']:.5f},asetpts=PTS-STARTPTS[f{i}]")
@@ -328,15 +367,28 @@ def main() -> int:
                           "-of", "json", str(final)]).stdout)
     v = out["streams"][0]
     print(f"\n{'esc':<4}{'nombre':<15}{'narración':>10}{'slot':>8}{'clip':>8}  clip audio       ajuste")
-    for sid, name, narr, slot, d, has_audio, note in report:
-        clip_audio = ("yes (discarded)" if not fx else "yes (mixed)") if has_audio else ("no" if not fx else "no (silence)")
+    for (sid, name, narr, slot, d, has_audio, note), p in zip(report, plan):
+        if not has_audio:
+            clip_audio = "no"
+        elif not fx:
+            clip_audio = "yes (discarded)"
+        else:
+            clip_audio = "yes (admitted)" if p["gate"]["admitted"] else "yes (muted)"
         print(f"{sid:<4}{name:<15}{narr:>9.2f}s{slot:>7.2f}s{d:>7.2f}s  {clip_audio:<16}{note}")
+    gate_db = audio["clip_gate_db"]
+    print()
+    print_gate_table([(p["n"], p["gate"]) for p in plan], gate_db)
+    if not fx:
+        print("(clip_audio is 'off': decisions are logged but no clip audio is mixed)")
+    (build / "audio-gate.json").write_text(json.dumps(
+        {"clip_gate_db": gate_db, "clip_audio": audio["clip_audio"],
+         "decisions": [{"scene": p["n"], **p["gate"]} for p in plan]}, indent=2) + "\n")
     print(f"\nDuración total: {float(out['format']['duration']):.2f} s (timeline {total:.2f} s)")
     print(f"Video: {v['width']}x{v['height']} @ {v['r_frame_rate']} fps, {v['codec_name']} {v['pix_fmt']}")
     print(f"Voz: {voice}")
     print("Audio profile: "
           f"narration x{audio['narration_volume']:.2f} | "
-          f"effects {'ACTIVE x%.2f' % audio['effects_volume'] if fx else 'OFF (clip audio discarded)'} | "
+          f"effects {'ACTIVE x%.2f, gate %g dB' % (audio['effects_volume'], audio['clip_gate_db']) if fx else 'OFF (clip audio discarded)'} | "
           f"music {music_note}")
     if music_path and audio.get("music_credit"):
         print(f"Music credit: {audio['music_credit']}")
