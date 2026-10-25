@@ -322,7 +322,10 @@ def main() -> int:
     qa_rows = []
     if identity:
         for p in plan:
-            qa_rows.append({"scene": p["n"], **vid.qa_clip(clips / f"{p['n']}.mp4", identity, build / "qa", p["dur"])})
+            applies = vid.qa_applies(cfg.get("primary_engine"), p["s"])
+            result = vid.qa_clip(clips / f"{p['n']}.mp4", identity, build / "qa", p["dur"]) if applies else None
+            qa_rows.append({"scene": p["n"], "shot_type": p["s"].get("shot_type", "establishing"),
+                            **(result or {}), "status": vid.qa_status(applies, result, p["s"].get("qa_note"))})
         (build / "visual-qa.json").write_text(json.dumps(qa_rows, indent=2) + "\n")
 
     # 4b. Audio profile: scenes.json declares the recipe, the code only provides the capability
@@ -460,9 +463,11 @@ def main() -> int:
     print(f"Shared unify pass: {unify or 'none (no visual_identity)'}")
     if qa_rows:
         tol = identity.get("qa_tolerance_de", vid.DEFAULT_TOLERANCE_DE)
-        print(f"Background QA vs {identity['background']['hex']} (CIE76 dE <= {tol:g}):")
+        print(f"Background QA vs {identity['background']['hex']} (CIE76 dE <= {tol:g}; establishing shots and code3d "
+              "only; marks are review signals, not defects):")
         for r in qa_rows:
-            print(f"  {r['scene']}: sampled {r['hex']}  dE {r['delta_e']:>5}  {'ok' if r['ok'] else 'OUTLIER - re-grade or regenerate'}")
+            sampled = f"sampled {r['hex']}  dE {r['delta_e']:>5}" if "hex" in r else "not sampled"
+            print(f"  {r['scene']}: {sampled}  {r['status']}")
     for ov in ov_list:
         print(f"Data overlay: {ov['scene']} {ov['type']} {ov['start']:.2f}-{ov['end']:.2f} s ({ov['frames']} frames)")
     print(f"Subtítulos: {n_phrases} frases / {len(cue_imgs)} estados de palabra | fuente {Path(font_path).name} {SUB_FONT_SIZE}px, contorno {SUB_STROKE}px")

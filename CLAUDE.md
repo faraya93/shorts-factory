@@ -150,11 +150,18 @@ where judgment is involved.
   background. The editor applies ONE unifying pass to every scene before
   assembly, whatever its engine: shared colour grade (eq/colorbalance) +
   film grain + vignette. Engines change only at scene boundaries, never
-  mid-action. QA: the background colour of each raw clip is sampled from
-  3 frames (median of 8 border patches) and compared with the spec hex by
-  CIE76 delta-E; scenes above qa_tolerance_de (default 15) are flagged
-  in the build report and build/visual-qa.json for re-grading or
-  regeneration. Sampling is done BEFORE the vignette, which darkens the
+  mid-action. QA: the backdrop and its QA apply ONLY to establishing
+  (wide) shots and to code3d productions; close-ups are exempt because
+  their "background" is the subject — there, consistency is carried by
+  the palette, the lighting wording and the editor's unify pass. A scene
+  declares shot_type "establishing" (default) or "closeup". For checked
+  scenes the background colour of the raw clip is sampled from 3 frames
+  (median of 8 border patches) and compared with the spec hex by CIE76
+  delta-E; scenes above qa_tolerance_de (default 15) get a REVIEW mark
+  in the build report and build/visual-qa.json. A mark is a signal for
+  human review, never an automatic defect (an intentional background
+  is recorded with the scene's qa_note, e.g. the jungle in stitches
+  scene 6). Sampling is done BEFORE the vignette, which darkens the
   corners.
 - Phases: A Producer ✓ · B Editor ✓ · C Scriptwriter (an LLM agent that
   writes scenes.json) · D Orchestrator · E Publisher (YouTube API,

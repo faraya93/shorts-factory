@@ -102,6 +102,11 @@ def validate_production(cfg: dict) -> list[str]:
         if cam in STATIC_CAMERAS:
             errors.append(f"scene {sid}: camera must move (travels, orbits, tracks), got {cam!r}")
 
+        if s.get("shot_type", "establishing") not in visual_identity.SHOT_TYPES:
+            errors.append(f"scene {sid}: shot_type must be one of {visual_identity.SHOT_TYPES}, got {s['shot_type']!r}")
+        if "qa_note" in s and not str(s["qa_note"]).strip():
+            errors.append(f"scene {sid}: qa_note must not be empty")
+
         if "data_overlays" in s:
             errors += validate_scene_overlays(sid, s["data_overlays"])
 

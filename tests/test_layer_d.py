@@ -120,6 +120,21 @@ def test_sample_background_ignores_a_foreground_object():
         assert vid.delta_e(vid.sample_background(Path(d) / "f.png"), (226, 213, 241)) < 2
 
 
+def test_qa_applies_only_to_establishing_shots_and_code3d():
+    assert vid.qa_applies("t2v", {}) and vid.qa_applies("t2v", {"shot_type": "establishing"})
+    assert not vid.qa_applies("t2v", {"shot_type": "closeup"})
+    assert not vid.qa_applies("keyframes", {"shot_type": "closeup"})
+    assert vid.qa_applies("code3d", {"shot_type": "closeup"})  # every code3d scene renders on the spec background
+
+
+def test_qa_marks_are_review_signals():
+    bad, good = {"ok": False}, {"ok": True}
+    assert vid.qa_status(False, None, None) == "exempt (closeup)"
+    assert vid.qa_status(True, good, None) == "ok"
+    assert vid.qa_status(True, bad, None) == "review"
+    assert vid.qa_status(True, bad, "jungle").startswith("review (intentional: jungle")
+
+
 # --- schema integration ------------------------------------------------------------------
 
 def test_prompt_injects_identity_right_after_style():
@@ -127,6 +142,16 @@ def test_prompt_injects_identity_right_after_style():
     prompt = build_prompt(cfg, cfg["scenes"][0])
     assert prompt.index(cfg["style"]) < prompt.index("#E2D5F1") < prompt.index(cfg["scenes"][0]["prompt"])
     assert "#E2D5F1" not in build_prompt(VALID, VALID["scenes"][0])
+
+
+def test_schema_validates_shot_type_and_qa_note():
+    cfg = copy.deepcopy(VALID)
+    cfg["scenes"][0].update(shot_type="closeup", qa_note="intentional jungle")
+    assert validate_production(cfg) == []
+    cfg["scenes"][0]["shot_type"] = "wide"
+    assert any("shot_type" in e for e in validate_production(cfg))
+    cfg["scenes"][0].update(shot_type="closeup", qa_note=" ")
+    assert any("qa_note" in e for e in validate_production(cfg))
 
 
 def test_schema_reports_identity_and_overlay_errors():

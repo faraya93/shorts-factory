@@ -120,6 +120,24 @@ def sample_background(frame: Path) -> tuple[int, int, int]:
     return tuple(statistics.median(m[i] for m in means) for i in range(3))
 
 
+SHOT_TYPES = ("establishing", "closeup")
+
+
+def qa_applies(primary_engine: str | None, scene: dict) -> bool:
+    """The backdrop and its QA apply only to establishing shots and to code3d productions. Close-ups are
+    exempt: their 'background' is the subject, so palette, lighting wording and the unify pass carry them."""
+    return primary_engine == "code3d" or scene.get("shot_type", "establishing") == "establishing"
+
+
+def qa_status(applies: bool, result: dict | None, note: str | None) -> str:
+    """A QA mark is a review signal, never an automatic defect; a scene's qa_note records intent."""
+    if not applies:
+        return "exempt (closeup)"
+    if result is None or result["ok"]:
+        return "ok"
+    return f"review (intentional: {note})" if note else "review"
+
+
 def qa_clip(clip: Path, vi: dict, work: Path, duration: float) -> dict:
     """Sample 3 frames (20/50/80% of the clip), take the median background colour, compare with the spec."""
     work.mkdir(parents=True, exist_ok=True)
