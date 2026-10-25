@@ -1,0 +1,63 @@
+{
+  "channel": "pilot",
+  "video": "puntos-de-sutura-v2",
+  "title": "¿Cómo funcionan los puntos de sutura? 😯",
+  "model": "minimax/h3-max-turbo/text-to-video",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "480P",
+  "aspect_ratio": "9:16",
+  "style": "Bright stylized 3D cartoon animation, Pixar-style explainer short, smooth clean materials, soft studio lighting, medical illustration look. Strictly NOT photorealistic: no realistic skin texture, no real faces, no blood, no gore, no graphic wounds — show the body as clean stylized cross-section models.",
+  "audio_style": "Audio: foley sound effects matching the action only, no music, no voices, no narration.",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "A smooth cartoon forearm model on a clean pastel background. A simple cut opens along the forearm: two rounded skin edges slowly drift apart, leaving a clean flat-colored gap between them. The camera slowly pushes in. Never realistic skin, never blood, never a bleeding or torn wound.",
+      "target_duration_s": 7,
+      "narration": "¿Cómo funcionan los puntos de sutura? Cuando el corte es profundo, los bordes de la piel quedan demasiado lejos para cerrar solos."
+    },
+    {
+      "id": 2,
+      "name": "curved-needle",
+      "prompt": "A stylized curved surgical needle with black thread pierces the skin surface just beside the left edge of a stylized cut, travels under the gap inside the skin, and exits the skin surface just beside the right edge. The thread then tightens and pulls both edges together into one neat zigzag stitch. Never the needle poking into the open gap, never blood.",
+      "target_duration_s": 10,
+      "narration": "Por eso el médico usa una aguja curva: su forma permite coser sin desgarrar más tejido. El hilo acerca los bordes y los mantiene unidos, porque una herida cerrada sana más rápido y deja menos cicatriz."
+    },
+    {
+      "id": 3,
+      "name": "knots",
+      "prompt": "Extreme close-up of a cartoon black thread lying across a closed stylized skin cut. Two thread ends loop around each other and pull tight into one small neat knot sitting on top of the skin, then the next knot forms beside it. Never a tangled mess, never loose threads flying around, no blood.",
+      "target_duration_s": 5,
+      "narration": "Cada punto se asegura con nudos diminutos, para que nada se suelte."
+    },
+    {
+      "id": 4,
+      "name": "absorbable",
+      "prompt": "A clean cartoon cross-section cutaway of skin drawn as flat pastel color layers. A small thread loop sitting inside the layers slowly fades and shrinks until it disappears completely, while the layers stay whole and intact. Never the skin breaking open, never organs or real tissue textures, no blood.",
+      "target_duration_s": 6,
+      "narration": "Algunos hilos son absorbibles y tu cuerpo los disuelve solos: esos nunca hay que sacarlos."
+    },
+    {
+      "id": 5,
+      "name": "risk",
+      "prompt": "Cartoon healed skin with a row of small stitches. The smooth skin slowly grows up and over the thread of one stitch, then cartoon tweezers enter from the top right, grip that stitch and gently lift it out of the skin. Never pulling the skin apart, never reopening the cut, no blood.",
+      "target_duration_s": 7,
+      "narration": "Pero si dejas los normales demasiado tiempo, la piel crece sobre el hilo y retirarlos se vuelve un problema."
+    },
+    {
+      "id": 6,
+      "name": "ant-twist",
+      "prompt": "A big friendly stylized cartoon ant stands beside a small closed cartoon skin cut, bites both edges with its jaws so they pinch together like a staple, against a softly blurred green jungle background. Never a swarm of ants, never a photorealistic insect close-up, no blood.",
+      "target_duration_s": 8,
+      "narration": "Y el dato más loco: durante siglos se usaron hormigas vivas como puntos, porque al morder cerraban la herida con sus mandíbulas."
+    }
+  ]
+}

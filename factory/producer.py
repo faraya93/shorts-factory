@@ -136,6 +136,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("production", type=Path)
     ap.add_argument("--yes", action="store_true", help="confirma de antemano si el total supera US$1")
+    ap.add_argument("--max-spend", type=float, default=HARD_CAP_USD,
+                    help="hard cap in US$ for this run (default %.2f)" % HARD_CAP_USD)
     args = ap.parse_args()
 
     load_dotenv()
@@ -179,7 +181,7 @@ def main() -> int:
     pending = [p for p in plan if not p["done"]]
     total = sum(p["duration"] * rate for p in pending)
     print(f"\nTOTAL ESTIMADO: ${total:.4f} (tarifa normal ${rate}/s)  |  con promo: "
-          f"${sum(p['duration'] * promo for p in pending):.4f}  |  tope duro ${HARD_CAP_USD:.2f}")
+          f"${sum(p['duration'] * promo for p in pending):.4f}  |  tope duro ${args.max_spend:.2f}")
     if not pending:
         print("Nada que generar.")
         return 0
@@ -211,8 +213,8 @@ def main() -> int:
         stale = costs.pending(s["id"])  # trabajo ya pagado cuya descarga se interrumpió
         ok = False
         for attempt in range(1, MAX_ATTEMPTS + 1):
-            if spent + dur * rate > HARD_CAP_USD:
-                print(f"TOPE DE ${HARD_CAP_USD:.2f} alcanzado (gastado ${spent:.4f}); me detengo.")
+            if spent + dur * rate > args.max_spend:
+                print(f"TOPE DE ${args.max_spend:.2f} alcanzado (gastado ${spent:.4f}); me detengo.")
                 _summary(done_ids, failed_ids, spent)
                 return 2
             entry = None
