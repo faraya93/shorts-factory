@@ -31,7 +31,7 @@ FONT_CANDIDATES = [
 ]
 SUB_FONT_SIZE = 57          # px
 SUB_STROKE = 7              # px, contorno negro
-SUBTITLE_Y_CENTER = 0.30    # vertical center of the subtitle block, as a fraction of the frame height
+SUBTITLE_Y_CENTER = 0.24    # channel constant (moves to channels/umbrella-es.yaml in Task F): block center, fraction of frame height
 SUB_MAX_WIDTH = 940         # px, maximum line width before wrapping
 SUB_CENTER_Y = round(H * SUBTITLE_Y_CENTER)
 SUB_WORD_COLOR = (235, 235, 235)       # not-current words: light grey with the black outline
