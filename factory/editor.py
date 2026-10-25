@@ -21,13 +21,17 @@ W, H, FPS = 1080, 1920, 30
 MAX_SLOWDOWN = 1.25
 
 # Subtítulos: negrita blanca, contorno negro grueso, centrados en el tercio inferior
-# (bloque centrado en y=1440, lejos del borde donde YouTube pone su UI).
+# (centro del bloque al 78% de la altura, lejos del borde donde YouTube pone su UI).
 FONT_CANDIDATES = [
     "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
     "/Library/Fonts/Arial Bold.ttf",
     "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
 ]
-FONT_SIZE, STROKE, SUB_CENTER_Y, SUB_MAX_WIDTH = 88, 10, 1440, 940
+SUB_FONT_SIZE = 57          # px
+SUB_STROKE = 7              # px, contorno negro
+SUB_CENTER_Y_FRAC = 0.78    # centro vertical del bloque, como fracción de la altura del frame
+SUB_MAX_WIDTH = 940         # px, ancho máximo antes de partir en 2 líneas
+SUB_CENTER_Y = round(H * SUB_CENTER_Y_FRAC)
 CUE_MAX_WORDS, CUE_MAX_CHARS = 4, 26
 
 
@@ -128,11 +132,11 @@ def render_cue(text: str, path: Path, font: ImageFont.FreeTypeFont) -> tuple[int
             line = trial
     lines.append(line)
     block = "\n".join(lines)
-    box = probe_draw.multiline_textbbox((0, 0), block, font=font, stroke_width=STROKE, align="center", spacing=8)
-    w, h = math.ceil(box[2] - box[0]) + 2 * STROKE, math.ceil(box[3] - box[1]) + 2 * STROKE
+    box = probe_draw.multiline_textbbox((0, 0), block, font=font, stroke_width=SUB_STROKE, align="center", spacing=8)
+    w, h = math.ceil(box[2] - box[0]) + 2 * SUB_STROKE, math.ceil(box[3] - box[1]) + 2 * SUB_STROKE
     img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    ImageDraw.Draw(img).multiline_text((STROKE - box[0], STROKE - box[1]), block, font=font, fill="white",
-                                       stroke_width=STROKE, stroke_fill="black", align="center", spacing=8)
+    ImageDraw.Draw(img).multiline_text((SUB_STROKE - box[0], SUB_STROKE - box[1]), block, font=font, fill="white",
+                                       stroke_width=SUB_STROKE, stroke_fill="black", align="center", spacing=8)
     img.save(path)
     return w, h
 
@@ -192,7 +196,7 @@ def main() -> int:
     if not font_path:
         print("ERROR: no encontré una fuente en negrita en FONT_CANDIDATES.")
         return 1
-    font = ImageFont.truetype(font_path, FONT_SIZE)
+    font = ImageFont.truetype(font_path, SUB_FONT_SIZE)
     for old in build.glob("cue-*.png"):
         old.unlink()
     global_cues, offset = [], 0.0
@@ -260,7 +264,7 @@ def main() -> int:
         print(f"{sid:<4}{name:<15}{narr:>9.2f}s{slot:>7.2f}s{d:>7.2f}s  {'sí (descartado)' if has_audio else 'no':<14}{note}")
     print(f"\nDuración total: {float(out['format']['duration']):.2f} s (timeline {total:.2f} s)")
     print(f"Video: {v['width']}x{v['height']} @ {v['r_frame_rate']} fps, {v['codec_name']} {v['pix_fmt']}")
-    print(f"Subtítulos: {len(cue_imgs)} frases | fuente {Path(font_path).name} {FONT_SIZE}px, contorno {STROKE}px")
+    print(f"Subtítulos: {len(cue_imgs)} frases | fuente {Path(font_path).name} {SUB_FONT_SIZE}px, contorno {SUB_STROKE}px")
     print(f"final.mp4: {final.stat().st_size / 1e6:.1f} MB | cover.jpg: {(prod / 'cover.jpg').stat().st_size / 1e3:.0f} KB")
     return 0
 
