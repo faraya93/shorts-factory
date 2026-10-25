@@ -198,6 +198,8 @@ def main() -> int:
         s, dur = p["scene"], p["duration"]
         target_file = clips / f"scene-{s['id']:02d}.mp4"
         prompt = f"{cfg['style']} {s['prompt']}"
+        if cfg.get("audio_style"):  # optional; appended to every generation prompt
+            prompt += f" {cfg['audio_style']}"
         arguments = {"prompt": prompt, "duration": dur, "resolution": resolution,
                      "aspect_ratio": cfg["aspect_ratio"]}
         if expansion:

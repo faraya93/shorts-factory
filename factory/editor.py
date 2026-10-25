@@ -16,7 +16,10 @@ from pathlib import Path
 import edge_tts
 from PIL import Image, ImageDraw, ImageFont
 
-VOICE = "es-CL-LorenzoNeural"
+DEFAULT_VOICE = "es-CL-LorenzoNeural"
+AUDIO_DEFAULTS = {"narration_volume": 1.0, "effects_volume": 0.30, "music_volume": 0.10,
+                  "clip_audio": "off", "music_file": None, "music_credit": None}
+AUDITION_VOICES =["es-CL-LorenzoNeural", "es-MX-JorgeNeural", "es-ES-AlvaroNeural", "es-CL-CatalinaNeural"]
 W, H, FPS = 1080, 1920, 30
 MAX_SLOWDOWN = 1.25
 
@@ -95,8 +98,8 @@ def group_cues(tokens: list[str], events: list[dict]) -> list[tuple[float, float
     return out
 
 
-async def synthesize(text: str, mp3: Path, srt: Path) -> None:
-    comm = edge_tts.Communicate(text, VOICE, boundary="WordBoundary")
+async def synthesize(text: str, voice: str, mp3: Path, srt: Path | None = None) -> None:
+    comm = edge_tts.Communicate(text, voice, boundary="WordBoundary")
     audio, events = bytearray(), []
     async for chunk in comm.stream():
         if chunk["type"] == "audio":
@@ -104,6 +107,8 @@ async def synthesize(text: str, mp3: Path, srt: Path) -> None:
         elif chunk["type"] == "WordBoundary":
             events.append(chunk)
     mp3.write_bytes(audio)
+    if srt is None:  # audition mode: audio only
+        return
     cues = group_cues(text.split(), events)
     srt.write_text("".join(f"{i}\n{srt_time(s)} --> {srt_time(e)}\n{t}\n\n"
                            for i, (s, e, t) in enumerate(cues, 1)), encoding="utf-8")
@@ -146,8 +151,23 @@ def render_cue(text: str, path: Path, font: ImageFont.FreeTypeFont) -> tuple[int
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("production", type=Path)
-    prod = ap.parse_args().production
+    ap.add_argument("--voice", help="edge-tts voice; default: scenes.json 'voice', else " + DEFAULT_VOICE)
+    ap.add_argument("--audition", action="store_true",
+                    help="render scene 1's narration with each AUDITION_VOICES into audio/audition/ and exit")
+    args = ap.parse_args()
+    prod = args.production
     cfg = json.loads((prod / "scenes.json").read_text())
+    voice = args.voice or cfg.get("voice") or DEFAULT_VOICE
+
+    if args.audition:
+        out_dir = prod / "audio" / "audition"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        text = cfg["scenes"][0]["narration"]
+        for v in AUDITION_VOICES:
+            path = out_dir / f"scene-01-{v}.mp3"
+            asyncio.run(synthesize(text, v, path))
+            print(f"{v:<24}{probe(path)['duration']:>6.2f} s  {path.resolve()}")
+        return 0
     scenes = cfg["scenes"]
     clips, audio_dir, build = prod / "clips", prod / "audio", prod / "build"
     audio_dir.mkdir(exist_ok=True)
@@ -164,12 +184,12 @@ def main() -> int:
     meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
     for s in scenes:
         n = f"scene-{s['id']:02d}"
-        digest = hashlib.sha256(f"{VOICE}|{s['narration']}".encode()).hexdigest()
+        digest = hashlib.sha256(f"{voice}|{s['narration']}".encode()).hexdigest()
         if meta.get(n) == digest and (audio_dir / f"{n}.mp3").exists() and (audio_dir / f"{n}.srt").exists():
             print(f"narración {n}: reutilizada")
             continue
-        print(f"narración {n}: generando con {VOICE}")
-        asyncio.run(synthesize(s["narration"], audio_dir / f"{n}.mp3", audio_dir / f"{n}.srt"))
+        print(f"narración {n}: generando con {voice}")
+        asyncio.run(synthesize(s["narration"], voice, audio_dir / f"{n}.mp3", audio_dir / f"{n}.srt"))
         meta[n] = digest
         meta_path.write_text(json.dumps(meta, indent=2))
 
@@ -188,7 +208,8 @@ def main() -> int:
             factor = min(slot / d, MAX_SLOWDOWN)
             freeze = max(0.0, slot - d * factor)
             note = f"ralentizado x{factor:.3f}" + (f" + último frame congelado {freeze:.2f} s" if freeze > 0.001 else "")
-        plan.append({"s": s, "n": n, "slot": slot, "slot_frames": slot_frames, "factor": factor, "freeze": freeze})
+        plan.append({"s": s, "n": n, "slot": slot, "slot_frames": slot_frames, "factor": factor, "freeze": freeze,
+                     "has_audio": info["has_audio"]})
         report.append((s["id"], s["name"], narr, slot, d, info["has_audio"], note))
 
     # 4. Subtítulos globales (cues por escena desplazadas por los slots acumulados) -> PNGs
@@ -212,6 +233,23 @@ def main() -> int:
         png = build / f"cue-{i:03d}.png"
         cue_imgs.append((png, *render_cue(text, png, font), a, b))
 
+    # 4b. Audio profile: scenes.json declares the recipe, the code only provides the capability
+    audio = {**AUDIO_DEFAULTS, **cfg.get("audio", {})}
+    if audio["clip_audio"] not in ("off", "effects"):
+        print(f"ERROR: audio.clip_audio must be 'off' or 'effects', got {audio['clip_audio']!r}")
+        return 1
+    fx = audio["clip_audio"] == "effects"
+    music_path, music_note = None, "SKIPPED (no music_file configured)"
+    if audio["music_file"]:
+        candidate = prod / audio["music_file"]
+        if candidate.is_file():
+            music_path = candidate
+            src = probe(candidate)["duration"]
+            music_note = (f"ACTIVE x{audio['music_volume']:.2f} ({candidate.name}, {src:.1f} s source, "
+                          f"{'looped' if src < total else 'trimmed'} to {total:.1f} s)")
+        else:
+            music_note = f"SKIPPED ({audio['music_file']} not found in {prod})"
+
     # 5. filter_complex: conformar clips + audio + concat + subtítulos, una sola codificación
     n_sc = len(plan)
     parts = []
@@ -226,24 +264,54 @@ def main() -> int:
         parts.append(f"[{i}:v]{','.join(chain)}[v{i}]")
         parts.append(f"[{n_sc + i}:a]aresample=48000,aformat=channel_layouts=stereo,"
                      f"apad=whole_dur={p['slot']:.5f},atrim=duration={p['slot']:.5f},asetpts=PTS-STARTPTS[a{i}]")
-    parts.append("".join(f"[v{i}][a{i}]" for i in range(n_sc)) + f"concat=n={n_sc}:v=1:a=1[vcat][acat]")
+        if fx:  # the clip's own audio, conformed exactly like its video (slow down / silence pad / trim)
+            if p["has_audio"]:
+                tempo = f"atempo={1 / p['factor']:.6f}," if p["factor"] != 1.0 else ""
+                parts.append(f"[{i}:a]aresample=48000,aformat=channel_layouts=stereo,{tempo}"
+                             f"apad=whole_dur={p['slot']:.5f},atrim=duration={p['slot']:.5f},asetpts=PTS-STARTPTS[f{i}]")
+            else:
+                parts.append(f"anullsrc=r=48000:cl=stereo,atrim=duration={p['slot']:.5f},asetpts=PTS-STARTPTS[f{i}]")
+    if fx:
+        parts.append("".join(f"[v{i}][a{i}][f{i}]" for i in range(n_sc)) + f"concat=n={n_sc}:v=1:a=2[vcat][acat][fcat]")
+    else:
+        parts.append("".join(f"[v{i}][a{i}]" for i in range(n_sc)) + f"concat=n={n_sc}:v=1:a=1[vcat][acat]")
     last = "vcat"
     for k, (png, w, h, a, b) in enumerate(cue_imgs):
         x, y = (W - w) // 2, SUB_BOTTOM_Y - h
         parts.append(f"[{last}][{2 * n_sc + k}:v]overlay=x={x}:y={y}:enable='between(t,{a:.3f},{b:.3f})'[o{k}]")
         last = f"o{k}"
+
+    # audio mix: normalize=0 keeps every layer at exactly its configured volume; the limiter only prevents clipping
+    parts.append(f"[acat]volume={audio['narration_volume']}[nar]")
+    layers = ["[nar]"]
+    if fx:
+        parts.append(f"[fcat]volume={audio['effects_volume']}[fxv]")
+        layers.append("[fxv]")
+    if music_path:
+        music_idx = 2 * n_sc + len(cue_imgs)
+        parts.append(f"[{music_idx}:a]aresample=48000,aformat=channel_layouts=stereo,"
+                     f"atrim=duration={total:.5f},asetpts=PTS-STARTPTS,volume={audio['music_volume']}[mus]")
+        layers.append("[mus]")
+    if len(layers) > 1:
+        parts.append("".join(layers) + f"amix=inputs={len(layers)}:duration=first:normalize=0,"
+                     "alimiter=limit=0.95:level=0[aout]")
+        audio_out = "[aout]"
+    else:
+        audio_out = "[nar]"
     script = build / "filter.txt"
     script.write_text(";\n".join(parts))
 
     cmd = ["ffmpeg", "-y", "-v", "error", "-stats"]
     for p in plan:
-        cmd += ["-i", str(clips / f"{p['n']}.mp4")]       # su audio original se ignora: solo se mapea [acat]
+        cmd += ["-i", str(clips / f"{p['n']}.mp4")]       # clip audio only enters the mix when clip_audio == "effects"
     for p in plan:
         cmd += ["-i", str(audio_dir / f"{p['n']}.mp3")]
     for png, *_ in cue_imgs:
         cmd += ["-i", str(png)]
+    if music_path:
+        cmd += ["-stream_loop", "-1", "-i", str(music_path)]
     final = prod / "final.mp4"
-    cmd += ["-/filter_complex", str(script), "-map", f"[{last}]", "-map", "[acat]",
+    cmd += ["-/filter_complex", str(script), "-map", f"[{last}]", "-map", audio_out,
             "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS),
             "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-t", f"{total:.5f}", str(final)]
     print(f"\nCodificando {len(cue_imgs)} subtítulos sobre {total:.1f} s de video ...")
@@ -259,11 +327,19 @@ def main() -> int:
                           "stream=width,height,r_frame_rate,pix_fmt,codec_name:format=duration",
                           "-of", "json", str(final)]).stdout)
     v = out["streams"][0]
-    print(f"\n{'esc':<4}{'nombre':<15}{'narración':>10}{'slot':>8}{'clip':>8}  clip c/audio  ajuste")
+    print(f"\n{'esc':<4}{'nombre':<15}{'narración':>10}{'slot':>8}{'clip':>8}  clip audio       ajuste")
     for sid, name, narr, slot, d, has_audio, note in report:
-        print(f"{sid:<4}{name:<15}{narr:>9.2f}s{slot:>7.2f}s{d:>7.2f}s  {'sí (descartado)' if has_audio else 'no':<14}{note}")
+        clip_audio = ("yes (discarded)" if not fx else "yes (mixed)") if has_audio else ("no" if not fx else "no (silence)")
+        print(f"{sid:<4}{name:<15}{narr:>9.2f}s{slot:>7.2f}s{d:>7.2f}s  {clip_audio:<16}{note}")
     print(f"\nDuración total: {float(out['format']['duration']):.2f} s (timeline {total:.2f} s)")
     print(f"Video: {v['width']}x{v['height']} @ {v['r_frame_rate']} fps, {v['codec_name']} {v['pix_fmt']}")
+    print(f"Voz: {voice}")
+    print("Audio profile: "
+          f"narration x{audio['narration_volume']:.2f} | "
+          f"effects {'ACTIVE x%.2f' % audio['effects_volume'] if fx else 'OFF (clip audio discarded)'} | "
+          f"music {music_note}")
+    if music_path and audio.get("music_credit"):
+        print(f"Music credit: {audio['music_credit']}")
     print(f"Subtítulos: {len(cue_imgs)} frases | fuente {Path(font_path).name} {SUB_FONT_SIZE}px, contorno {SUB_STROKE}px")
     print(f"final.mp4: {final.stat().st_size / 1e6:.1f} MB | cover.jpg: {(prod / 'cover.jpg').stat().st_size / 1e3:.0f} KB")
     return 0

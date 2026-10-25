@@ -3,9 +3,19 @@
   "video": "puntos-de-sutura",
   "title": "¿Cómo funcionan los puntos de sutura? 😯",
   "model": "minimax/h3-max-turbo/text-to-video",
+  "voice": "es-CL-LorenzoNeural",
   "resolution": "480P",
   "aspect_ratio": "9:16",
   "style": "Stylized 3D medical animation render, clean background, cinematic lighting, educational, no gore, no text on screen, vertical 9:16.",
+  "audio_style": "Audio: foley sound effects matching the action only, no music, no voices, no narration.",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.30,
+    "music_volume": 0.10,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0"
+  },
   "scenes": [
     {"id": 1, "name": "hook",
      "prompt": "Close-up of a deep clean cut on a forearm, wound edges apart, dramatic lighting.",
