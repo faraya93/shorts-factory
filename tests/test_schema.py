@@ -1,0 +1,121 @@
+"""Plain-assert tests for factory/scenes_schema.py. Run: python tests/test_schema.py"""
+
+import copy
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "factory"))
+from scenes_schema import build_prompt, effective_engine, validate_production  # noqa: E402
+
+VALID = {
+    "primary_engine": "t2v",
+    "topic_family": "objects",
+    "hook_question": "¿Por qué la punta de una cinta métrica está floja?",
+    "false_belief": "It is a manufacturing defect.",
+    "closing_reframe": "No está floja: se mueve el grosor de la propia punta.",
+    "share_archetype": "ese amigo que siempre mide mal",
+    "style": "Bright stylized 3D cartoon animation, no text on screen.",
+    "audio_style": "Audio: foley only.",
+    "scenes": [
+        {"id": 1, "name": "hook", "prompt": "A tape measure on a table.", "narration": "x", "target_duration_s": 5,
+         "transformation": "closed tape → fully extended tape", "camera": "slow orbit around the tape"},
+        {"id": 2, "name": "tip", "prompt": "The metal tip slides.", "narration": "y", "target_duration_s": 5,
+         "transformation": "tip pressed in → tip pulled out", "camera": "tracks along the blade"},
+    ],
+}
+
+
+def errors_for(**changes):
+    cfg = copy.deepcopy(VALID)
+    for key, value in changes.items():
+        if value is None:
+            cfg.pop(key, None)
+        else:
+            cfg[key] = value
+    return validate_production(cfg)
+
+
+def scene_errors(index, **changes):
+    cfg = copy.deepcopy(VALID)
+    for key, value in changes.items():
+        if value is None:
+            cfg["scenes"][index].pop(key, None)
+        else:
+            cfg["scenes"][index][key] = value
+    return validate_production(cfg)
+
+
+def expect(errors, fragment):
+    assert any(fragment in e for e in errors), f"expected an error containing {fragment!r}, got {errors}"
+
+
+def test_valid_passes():
+    assert validate_production(VALID) == []
+
+
+def test_missing_production_fields_abort():
+    for field in ("primary_engine", "hook_question", "closing_reframe", "share_archetype", "topic_family"):
+        assert errors_for(**{field: None}), field
+
+
+def test_hook_must_be_por_que():
+    expect(errors_for(hook_question="¿Cómo funciona una cinta métrica?"), "'¿Por qué…?'")
+    assert errors_for(hook_question="¿Por qué se mueve la punta?") == []
+    assert errors_for(hook_question="¿POR QUE se mueve la punta?") == []
+
+
+def test_false_belief_optional_only_for_numbers_and_whatif():
+    expect(errors_for(false_belief=""), "false_belief may be empty only")
+    assert errors_for(false_belief="", topic_family="numbers") == []
+    assert errors_for(false_belief="", topic_family="whatif") == []
+    expect(errors_for(false_belief=None), "missing production field: false_belief")
+
+
+def test_style_needs_no_text_for_model_footage():
+    expect(errors_for(style="Bright stylized 3D cartoon animation."), "no text on screen")
+    assert errors_for(style="Flat code render.", primary_engine="code3d") == []
+
+
+def test_scene_requires_transformation_and_camera():
+    expect(scene_errors(0, transformation=None), "scene 1: missing transformation")
+    expect(scene_errors(1, camera=None), "scene 2: missing camera")
+    expect(scene_errors(0, transformation="a closed tape"), "start state → end state")
+    expect(scene_errors(0, transformation="closed tape →"), "start and an end")
+    expect(scene_errors(0, camera="static"), "camera must move")
+
+
+def test_engine_override_rules():
+    assert scene_errors(1, engine_override="keyframes") == []
+    expect(scene_errors(1, engine_override="code3d"), "never mixed")
+    expect(scene_errors(1, engine_override="t2v"), "may only be 'keyframes'")
+    cfg = copy.deepcopy(VALID)
+    cfg["primary_engine"] = "keyframes"
+    cfg["scenes"][1]["engine_override"] = "keyframes"
+    expect(validate_production(cfg), "only allowed inside a t2v production")
+    cfg["primary_engine"] = "code3d"
+    cfg["style"] = "Flat code render."
+    expect(validate_production(cfg), "code3d in every scene")
+
+
+def test_prompt_assembly_order():
+    prompt = build_prompt(VALID, VALID["scenes"][0])
+    order = [VALID["style"], VALID["scenes"][0]["prompt"], "Transformation during the shot: closed tape becoming "
+             "fully extended tape.", "Camera: slow orbit around the tape.", VALID["audio_style"]]
+    positions = [prompt.index(part) for part in order]
+    assert positions == sorted(positions), prompt
+    no_audio = copy.deepcopy(VALID)
+    del no_audio["audio_style"]
+    assert build_prompt(no_audio, no_audio["scenes"][0]).endswith("Camera: slow orbit around the tape.")
+
+
+def test_effective_engine():
+    assert effective_engine(VALID, VALID["scenes"][0]) == "t2v"
+    assert effective_engine(VALID, {"engine_override": "keyframes"}) == "keyframes"
+
+
+if __name__ == "__main__":
+    tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
+    for name, fn in tests:
+        fn()
+        print(f"ok  {name}")
+    print(f"{len(tests)} tests passed")

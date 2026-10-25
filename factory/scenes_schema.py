@@ -1,0 +1,99 @@
+"""scenes.json schema: validation and final prompt assembly. Pure functions: no network, no spend.
+
+Used by the Producer before any estimate or API call, so an incomplete or contradictory
+production aborts with zero spend. Run `python factory/scenes_schema.py <production>` to check one.
+"""
+
+import json
+import re
+import sys
+from pathlib import Path
+
+ENGINES = ("t2v", "keyframes", "code3d")
+FAMILIES = ("objects", "body", "numbers", "whatif")
+FALSE_BELIEF_OPTIONAL = ("numbers", "whatif")  # the only families that may leave false_belief empty
+NO_TEXT_CLAUSE = "no text on screen"
+HOOK_RE = re.compile(r"^¿\s*por qu[eé]\b.*\?$", re.IGNORECASE | re.DOTALL)
+ARROW_RE = re.compile(r"\s*(?:→|->)\s*")
+STATIC_CAMERAS = {"static", "fixed", "still", "none", "locked"}
+
+PRODUCTION_TEXT_FIELDS = ("hook_question", "closing_reframe", "share_archetype")
+SCENE_FIELDS = ("id", "name", "prompt", "narration", "target_duration_s", "transformation", "camera")
+
+
+def effective_engine(cfg: dict, scene: dict) -> str:
+    """The engine a scene is produced with: its override, else the production's primary engine."""
+    return scene.get("engine_override") or cfg.get("primary_engine", "")
+
+
+def validate_production(cfg: dict) -> list[str]:
+    """Return every schema violation (empty list = valid)."""
+    errors = []
+    primary = cfg.get("primary_engine")
+    family = cfg.get("topic_family")
+
+    if primary not in ENGINES:
+        errors.append(f"primary_engine must be one of {ENGINES}, got {primary!r}")
+    if family not in FAMILIES:
+        errors.append(f"topic_family must be one of {FAMILIES}, got {family!r}")
+    for field in PRODUCTION_TEXT_FIELDS:
+        if not str(cfg.get(field, "")).strip():
+            errors.append(f"missing production field: {field}")
+    hook = str(cfg.get("hook_question", "")).strip()
+    if hook and not HOOK_RE.match(hook):
+        errors.append(f"hook_question must be a '¿Por qué…?' question, got {hook!r}")
+    if "false_belief" not in cfg:
+        errors.append("missing production field: false_belief (use an empty string where it may be empty)")
+    elif not str(cfg["false_belief"]).strip() and family not in FALSE_BELIEF_OPTIONAL:
+        errors.append(f"false_belief may be empty only for {FALSE_BELIEF_OPTIONAL} topics (family is {family!r})")
+
+    # model-generated footage must forbid on-screen text: labels and numbers are Editor overlays
+    if primary != "code3d" and NO_TEXT_CLAUSE not in str(cfg.get("style", "")).lower():
+        errors.append(f"style string must contain '{NO_TEXT_CLAUSE}' for model-generated footage")
+
+    scenes = cfg.get("scenes") or []
+    if not scenes:
+        errors.append("no scenes")
+    for s in scenes:
+        sid = s.get("id", "?")
+        for field in SCENE_FIELDS:
+            if field not in s or not str(s[field]).strip():
+                errors.append(f"scene {sid}: missing {field}")
+        t = str(s.get("transformation", "")).strip()
+        if t and len(ARROW_RE.split(t, maxsplit=1)) != 2:
+            errors.append(f"scene {sid}: transformation must read 'start state → end state', got {t!r}")
+        elif t and not all(part.strip() for part in ARROW_RE.split(t, maxsplit=1)):
+            errors.append(f"scene {sid}: transformation needs both a start and an end state, got {t!r}")
+        cam = str(s.get("camera", "")).strip().rstrip(".").lower()
+        if cam in STATIC_CAMERAS:
+            errors.append(f"scene {sid}: camera must move (travels, orbits, tracks), got {cam!r}")
+
+        override = s.get("engine_override")
+        if override is not None:
+            if primary == "code3d":
+                errors.append(f"scene {sid}: a code3d production is code3d in every scene (no engine_override)")
+            elif override == "code3d":
+                errors.append(f"scene {sid}: code3d is never mixed into a non-code3d production")
+            elif override != "keyframes":
+                errors.append(f"scene {sid}: engine_override may only be 'keyframes', got {override!r}")
+            elif primary != "t2v":
+                errors.append(f"scene {sid}: engine_override keyframes is only allowed inside a t2v production")
+    return errors
+
+
+def build_prompt(cfg: dict, scene: dict) -> str:
+    """Final generation prompt: style + scene prompt + transformation + camera + audio_style (if any)."""
+    start, end = ARROW_RE.split(scene["transformation"].strip(), maxsplit=1)
+    parts = [cfg["style"].strip(), scene["prompt"].strip(),
+             f"Transformation during the shot: {start.strip().rstrip('.')} becoming {end.strip().rstrip('.')}.",
+             f"Camera: {scene['camera'].strip().rstrip('.')}."]
+    if cfg.get("audio_style"):
+        parts.append(cfg["audio_style"].strip())
+    return " ".join(parts)
+
+
+if __name__ == "__main__":
+    config = json.loads((Path(sys.argv[1]) / "scenes.json").read_text(encoding="utf-8"))
+    problems = validate_production(config)
+    print("\n".join(f"  - {p}" for p in problems) if problems else "scenes.json: OK")
+    sys.exit(1 if problems else 0)

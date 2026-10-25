@@ -16,6 +16,7 @@ from pathlib import Path
 
 import fal_client
 from dotenv import load_dotenv
+from scenes_schema import build_prompt, effective_engine, validate_production
 
 SCHEMA_URL = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id={}"
 
@@ -143,6 +144,17 @@ def main() -> int:
     load_dotenv()
     prod = args.production
     cfg = json.loads((prod / "scenes.json").read_text())
+
+    # schema gate: an incomplete or contradictory scenes.json aborts BEFORE any network call or spend
+    problems = validate_production(cfg)
+    if not problems:  # only a valid schema can name routes; the producer implements t2v so far
+        problems = [f"scene {s['id']}: engine {effective_engine(cfg, s)!r} is not implemented in the producer yet"
+                    for s in cfg["scenes"] if effective_engine(cfg, s) != "t2v"]
+    if problems:
+        print("scenes.json rejected, nothing was spent:")
+        print("\n".join(f"  - {x}" for x in problems))
+        return 1
+
     model, resolution = cfg["model"], cfg["resolution"]
     clips = prod / "clips"
     clips.mkdir(exist_ok=True)
@@ -199,9 +211,7 @@ def main() -> int:
     for p in pending:
         s, dur = p["scene"], p["duration"]
         target_file = clips / f"scene-{s['id']:02d}.mp4"
-        prompt = f"{cfg['style']} {s['prompt']}"
-        if cfg.get("audio_style"):  # optional; appended to every generation prompt
-            prompt += f" {cfg['audio_style']}"
+        prompt = build_prompt(cfg, s)  # style + scene prompt + transformation + camera + audio_style
         arguments = {"prompt": prompt, "duration": dur, "resolution": resolution,
                      "aspect_ratio": cfg["aspect_ratio"]}
         if expansion:
