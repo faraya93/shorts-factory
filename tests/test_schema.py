@@ -58,10 +58,35 @@ def test_missing_production_fields_abort():
         assert errors_for(**{field: None}), field
 
 
-def test_hook_must_be_por_que():
-    expect(errors_for(hook_question="¿Cómo funciona una cinta métrica?"), "'¿Por qué…?'")
-    assert errors_for(hook_question="¿Por qué se mueve la punta?") == []
-    assert errors_for(hook_question="¿POR QUE se mueve la punta?") == []
+def test_hook_must_be_a_question():
+    expect(errors_for(hook_question="Por qué se mueve la punta"), "must be a question")
+    expect(errors_for(hook_question="¿Por qué se mueve la punta"), "must be a question")
+    expect(errors_for(hook_question="Por qué se mueve la punta?"), "must be a question")
+
+
+def test_hook_openings_per_family():
+    ok = {
+        "objects": ["¿Por qué se mueve la punta?", "¿POR QUE se mueve la punta?"],
+        "body": ["¿Por qué bostezas cuando otro bosteza?"],
+        "numbers": ["¿Por qué nunca se repite un mazo barajado?", "¿Cuántos mazos distintos existen?",
+                    "¿Cuántas partidas de ajedrez son posibles?", "¿Sabías que barajas algo irrepetible?",
+                    "¿Sabias que barajas algo irrepetible?"],
+        "whatif": ["¿Qué pasaría si desaparece la Luna?", "¿Que pasaria si cae internet?", "¿Por qué lo harías?"],
+    }
+    for family, hooks in ok.items():
+        for hook in hooks:
+            assert errors_for(topic_family=family, hook_question=hook, false_belief="x") == [], (family, hook)
+    bad = {
+        "objects": ["¿Cómo funciona una cinta métrica?", "¿Sabías que la punta está floja?", "¿Cuántos dientes tiene?"],
+        "body": ["¿Qué pasaría si no bostezas?", "¿Cuántos puntos te ponen?"],
+        "numbers": ["¿Cómo se calcula 52!?", "¿Qué pasaría si barajas siempre?"],
+        "whatif": ["¿Cuántos días sin internet?", "¿Sabías que internet puede caer?", "¿Cómo sería sin Luna?"],
+    }
+    for family, hooks in bad.items():
+        for hook in hooks:
+            expect(errors_for(topic_family=family, hook_question=hook, false_belief="x"), "must open with one of")
+    # an opening must be a whole word: '¿Por quésito…' is not '¿Por qué'
+    expect(errors_for(hook_question="¿Por quésito se mueve?"), "must open with one of")
 
 
 def test_false_belief_optional_only_for_numbers_and_whatif():

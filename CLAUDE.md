@@ -14,9 +14,12 @@ we copy the mechanics, never scripts or footage: all scripts are original.
   earlier 30–35 s target: the reference accounts run 36–95 s.
 - Title: short question or "How X works", second person when natural,
   exactly ONE trailing emoji as an emotion label. No hashtags.
-- Hook formula: the first sentence is a "¿Por qué…?" question about a
-  TANGIBLE EVERYDAY OBJECT the viewer has already seen, plus an explicit
-  FALSE BELIEF to bust. Hook in the first 2 seconds. Reveal order: build
+- Hook formula: the first sentence is a question (¿…?) about a TANGIBLE
+  EVERYDAY OBJECT the viewer has already seen, plus an explicit FALSE
+  BELIEF to bust. Approved openings by topic family: objects and body
+  "¿Por qué…"; numbers "¿Por qué…", "¿Cuántos…", "¿Cuántas…", "¿Sabías
+  que…"; whatif "¿Qué pasaría si…", "¿Por qué…". "¿Cómo…?" openers
+  flopped in the references. Hook in the first 2 seconds. Reveal order: build
   the object up step by step — never show the finished phenomenon first.
 - Structure: one hero object or one mechanism chain; each scene
   visualises ONE step of the mechanism (a new fact AND a new visual per
@@ -94,8 +97,8 @@ where judgment is involved.
   so far; other routes abort before spend until they are built.
 - Scene schema (scenes.json), all REQUIRED unless noted. Production
   level: primary_engine (t2v | keyframes | code3d), topic_family
-  (objects | body | numbers | whatif), hook_question (a "¿Por qué…?"
-  question), false_belief (the wrong idea the video corrects; may be ""
+  (objects | body | numbers | whatif), hook_question (a question
+  with an approved opening for the topic_family), false_belief (the wrong idea the video corrects; may be ""
   ONLY for numbers and whatif topics), closing_reframe (the sentence that
   renames the object/fact), share_archetype (the specific person the
   spoken closing names). Scene level: transformation ("start state → end

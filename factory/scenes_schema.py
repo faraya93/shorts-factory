@@ -7,18 +7,46 @@ production aborts with zero spend. Run `python factory/scenes_schema.py <product
 import json
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 ENGINES = ("t2v", "keyframes", "code3d")
 FAMILIES = ("objects", "body", "numbers", "whatif")
 FALSE_BELIEF_OPTIONAL = ("numbers", "whatif")  # the only families that may leave false_belief empty
 NO_TEXT_CLAUSE = "no text on screen"
-HOOK_RE = re.compile(r"^¿\s*por qu[eé]\b.*\?$", re.IGNORECASE | re.DOTALL)
+# approved hook openings per topic family; a hook is a question: starts with ¿ and ends with ?
+HOOK_OPENINGS = {
+    "objects": ("¿Por qué",),
+    "body": ("¿Por qué",),
+    "numbers": ("¿Por qué", "¿Cuántos", "¿Cuántas", "¿Sabías que"),
+    "whatif": ("¿Qué pasaría si", "¿Por qué"),
+}
 ARROW_RE = re.compile(r"\s*(?:→|->)\s*")
 STATIC_CAMERAS = {"static", "fixed", "still", "none", "locked"}
 
 PRODUCTION_TEXT_FIELDS = ("hook_question", "closing_reframe", "share_archetype")
 SCENE_FIELDS = ("id", "name", "prompt", "narration", "target_duration_s", "transformation", "camera")
+
+
+def _fold(text: str) -> str:
+    """Lower-case and strip accents, so '¿Por que' and '¿Sabias que' still match their approved opening."""
+    decomposed = unicodedata.normalize("NFD", text.strip().lower())
+    return "".join(c for c in decomposed if unicodedata.category(c) != "Mn")
+
+
+def hook_errors(hook: str, family: str | None) -> list[str]:
+    hook = hook.strip()
+    if not (hook.startswith("¿") and hook.endswith("?")):
+        return [f"hook_question must be a question (start with ¿, end with ?), got {hook!r}"]
+    openings = HOOK_OPENINGS.get(family)
+    if openings is None:  # invalid family is reported on its own
+        return []
+    folded = _fold(hook)
+    for opening in openings:
+        o = _fold(opening)
+        if folded.startswith(o) and (len(folded) == len(o) or not folded[len(o)].isalnum()):
+            return []
+    return [f"hook_question for a {family!r} topic must open with one of {openings}, got {hook!r}"]
 
 
 def effective_engine(cfg: dict, scene: dict) -> str:
@@ -40,8 +68,8 @@ def validate_production(cfg: dict) -> list[str]:
         if not str(cfg.get(field, "")).strip():
             errors.append(f"missing production field: {field}")
     hook = str(cfg.get("hook_question", "")).strip()
-    if hook and not HOOK_RE.match(hook):
-        errors.append(f"hook_question must be a '¿Por qué…?' question, got {hook!r}")
+    if hook:
+        errors += hook_errors(hook, family)
     if "false_belief" not in cfg:
         errors.append("missing production field: false_belief (use an empty string where it may be empty)")
     elif not str(cfg["false_belief"]).strip() and family not in FALSE_BELIEF_OPTIONAL:
