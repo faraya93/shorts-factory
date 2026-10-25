@@ -1,0 +1,269 @@
+"""Editor (Fase B): monta el video final de una producción. 100% local, no usa fal.ai.
+
+Uso: python factory/editor.py productions/<canal>/<video>
+"""
+
+import argparse
+import asyncio
+import hashlib
+import json
+import math
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+import edge_tts
+from PIL import Image, ImageDraw, ImageFont
+
+VOICE = "es-CL-LorenzoNeural"
+W, H, FPS = 1080, 1920, 30
+MAX_SLOWDOWN = 1.25
+
+# Subtítulos: negrita blanca, contorno negro grueso, centrados en el tercio inferior
+# (bloque centrado en y=1440, lejos del borde donde YouTube pone su UI).
+FONT_CANDIDATES = [
+    "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    "/Library/Fonts/Arial Bold.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+]
+FONT_SIZE, STROKE, SUB_CENTER_Y, SUB_MAX_WIDTH = 88, 10, 1440, 940
+CUE_MAX_WORDS, CUE_MAX_CHARS = 4, 26
+
+
+def run(cmd: list[str]) -> subprocess.CompletedProcess:
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode != 0:
+        print(f"\nERROR: falló {cmd[0]} (código {r.returncode})\n$ {' '.join(cmd)}\n{r.stderr[-3000:]}")
+        sys.exit(1)
+    return r
+
+
+def probe(path: Path) -> dict:
+    out = run(["ffprobe", "-v", "error", "-show_entries",
+               "stream=codec_type,width,height:format=duration", "-of", "json", str(path)]).stdout
+    info = json.loads(out)
+    return {"duration": float(info["format"]["duration"]),
+            "has_audio": any(s["codec_type"] == "audio" for s in info["streams"])}
+
+
+# --- Narración (edge-tts) ---------------------------------------------------------------
+
+def srt_time(sec: float) -> str:
+    ms = round(sec * 1000)
+    return f"{ms // 3600000:02d}:{ms // 60000 % 60:02d}:{ms // 1000 % 60:02d},{ms % 1000:03d}"
+
+
+def parse_srt_time(t: str) -> float:
+    h, m, rest = t.split(":")
+    s, ms = rest.split(",")
+    return int(h) * 3600 + int(m) * 60 + int(s) + int(ms) / 1000
+
+
+def group_cues(tokens: list[str], events: list[dict]) -> list[tuple[float, float, str]]:
+    """Agrupa palabras en frases cortas. Los eventos traen tiempos pero no puntuación,
+    así que se alinean 1:1 con las palabras del texto original."""
+    if len(tokens) != len(events):
+        sys.exit(f"ERROR: edge-tts devolvió {len(events)} palabras y el texto tiene {len(tokens)}; "
+                 "no se pueden alinear los subtítulos.")
+    cues, cur = [], []
+
+    def flush():
+        if cur:
+            cues.append((cur[0][1], cur[-1][2], " ".join(t for t, _, _ in cur)))
+            cur.clear()
+
+    for tok, ev in zip(tokens, events):
+        start, end = ev["offset"] / 1e7, (ev["offset"] + ev["duration"]) / 1e7
+        if cur and (len(cur) >= CUE_MAX_WORDS or len(" ".join(t for t, _, _ in cur) + " " + tok) > CUE_MAX_CHARS):
+            flush()
+        cur.append((tok, start, end))
+        text = " ".join(t for t, _, _ in cur)
+        if re.search(r"[.?!:;]$", tok) or (tok.endswith(",") and len(text) >= 10):
+            flush()
+    flush()
+    # sin huecos entre frases cercanas: cada cue dura hasta el inicio de la siguiente
+    out = []
+    for i, (s, e, t) in enumerate(cues):
+        if i + 1 < len(cues) and cues[i + 1][0] - e < 0.5:
+            e = cues[i + 1][0]
+        out.append((s, e, t))
+    return out
+
+
+async def synthesize(text: str, mp3: Path, srt: Path) -> None:
+    comm = edge_tts.Communicate(text, VOICE, boundary="WordBoundary")
+    audio, events = bytearray(), []
+    async for chunk in comm.stream():
+        if chunk["type"] == "audio":
+            audio += chunk["data"]
+        elif chunk["type"] == "WordBoundary":
+            events.append(chunk)
+    mp3.write_bytes(audio)
+    cues = group_cues(text.split(), events)
+    srt.write_text("".join(f"{i}\n{srt_time(s)} --> {srt_time(e)}\n{t}\n\n"
+                           for i, (s, e, t) in enumerate(cues, 1)), encoding="utf-8")
+
+
+def read_srt(path: Path) -> list[tuple[float, float, str]]:
+    cues = []
+    for block in path.read_text(encoding="utf-8").strip().split("\n\n"):
+        lines = block.split("\n")
+        a, b = lines[1].split(" --> ")
+        cues.append((parse_srt_time(a), parse_srt_time(b), " ".join(lines[2:])))
+    return cues
+
+
+# --- Subtítulos como PNG (este ffmpeg no trae libass/freetype) -------------------------
+
+def render_cue(text: str, path: Path, font: ImageFont.FreeTypeFont) -> tuple[int, int]:
+    probe_draw = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
+    lines, line = [], ""
+    for word in text.split():
+        trial = f"{line} {word}".strip()
+        if line and probe_draw.textlength(trial, font=font) > SUB_MAX_WIDTH:
+            lines.append(line)
+            line = word
+        else:
+            line = trial
+    lines.append(line)
+    block = "\n".join(lines)
+    box = probe_draw.multiline_textbbox((0, 0), block, font=font, stroke_width=STROKE, align="center", spacing=8)
+    w, h = math.ceil(box[2] - box[0]) + 2 * STROKE, math.ceil(box[3] - box[1]) + 2 * STROKE
+    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    ImageDraw.Draw(img).multiline_text((STROKE - box[0], STROKE - box[1]), block, font=font, fill="white",
+                                       stroke_width=STROKE, stroke_fill="black", align="center", spacing=8)
+    img.save(path)
+    return w, h
+
+
+# --- Montaje ---------------------------------------------------------------------------
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("production", type=Path)
+    prod = ap.parse_args().production
+    cfg = json.loads((prod / "scenes.json").read_text())
+    scenes = cfg["scenes"]
+    clips, audio_dir, build = prod / "clips", prod / "audio", prod / "build"
+    audio_dir.mkdir(exist_ok=True)
+    build.mkdir(exist_ok=True)
+
+    # 1. Todos los clips deben existir
+    missing = [f"scene-{s['id']:02d}.mp4" for s in scenes if not (clips / f"scene-{s['id']:02d}.mp4").exists()]
+    if missing:
+        print(f"ERROR: faltan clips en {clips}: {', '.join(missing)}. Corre factory/producer.py primero.")
+        return 1
+
+    # 2. Narración por escena (se reutiliza si el texto y la voz no cambiaron)
+    meta_path = audio_dir / "audio.json"
+    meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
+    for s in scenes:
+        n = f"scene-{s['id']:02d}"
+        digest = hashlib.sha256(f"{VOICE}|{s['narration']}".encode()).hexdigest()
+        if meta.get(n) == digest and (audio_dir / f"{n}.mp3").exists() and (audio_dir / f"{n}.srt").exists():
+            print(f"narración {n}: reutilizada")
+            continue
+        print(f"narración {n}: generando con {VOICE}")
+        asyncio.run(synthesize(s["narration"], audio_dir / f"{n}.mp3", audio_dir / f"{n}.srt"))
+        meta[n] = digest
+        meta_path.write_text(json.dumps(meta, indent=2))
+
+    # 3. Slots y ajuste de cada clip
+    plan, report = [], []
+    for s in scenes:
+        n = f"scene-{s['id']:02d}"
+        narr = probe(audio_dir / f"{n}.mp3")["duration"]
+        info = probe(clips / f"{n}.mp4")
+        slot_frames = math.ceil(narr * FPS - 1e-6)
+        slot, d = slot_frames / FPS, info["duration"]
+        factor, freeze = 1.0, 0.0
+        if d >= slot:
+            note = f"recortado {d - slot:.2f} s" if d > slot else "sin ajuste"
+        else:
+            factor = min(slot / d, MAX_SLOWDOWN)
+            freeze = max(0.0, slot - d * factor)
+            note = f"ralentizado x{factor:.3f}" + (f" + último frame congelado {freeze:.2f} s" if freeze > 0.001 else "")
+        plan.append({"s": s, "n": n, "slot": slot, "slot_frames": slot_frames, "factor": factor, "freeze": freeze})
+        report.append((s["id"], s["name"], narr, slot, d, info["has_audio"], note))
+
+    # 4. Subtítulos globales (cues por escena desplazadas por los slots acumulados) -> PNGs
+    font_path = next((f for f in FONT_CANDIDATES if Path(f).exists()), None)
+    if not font_path:
+        print("ERROR: no encontré una fuente en negrita en FONT_CANDIDATES.")
+        return 1
+    font = ImageFont.truetype(font_path, FONT_SIZE)
+    for old in build.glob("cue-*.png"):
+        old.unlink()
+    global_cues, offset = [], 0.0
+    for p in plan:
+        for a, b, text in read_srt(audio_dir / f"{p['n']}.srt"):
+            global_cues.append((offset + a, min(offset + b, offset + p["slot"]), text))
+        offset += p["slot"]
+    total = offset
+    (prod / "final.srt").write_text("".join(f"{i}\n{srt_time(a)} --> {srt_time(b)}\n{t}\n\n"
+                                            for i, (a, b, t) in enumerate(global_cues, 1)), encoding="utf-8")
+    cue_imgs = []
+    for i, (a, b, text) in enumerate(global_cues):
+        png = build / f"cue-{i:03d}.png"
+        cue_imgs.append((png, *render_cue(text, png, font), a, b))
+
+    # 5. filter_complex: conformar clips + audio + concat + subtítulos, una sola codificación
+    n_sc = len(plan)
+    parts = []
+    for i, p in enumerate(plan):
+        chain = [f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos", f"crop={W}:{H}",
+                 "setsar=1", f"fps={FPS}"]
+        if p["factor"] != 1.0:
+            chain += [f"setpts=PTS*{p['factor']:.6f}", f"fps={FPS}"]
+        if p["freeze"] > 0.001:
+            chain.append(f"tpad=stop_mode=clone:stop_duration={p['freeze'] + 0.2:.3f}")
+        chain += [f"trim=end_frame={p['slot_frames']}", "setpts=PTS-STARTPTS"]
+        parts.append(f"[{i}:v]{','.join(chain)}[v{i}]")
+        parts.append(f"[{n_sc + i}:a]aresample=48000,aformat=channel_layouts=stereo,"
+                     f"apad=whole_dur={p['slot']:.5f},atrim=duration={p['slot']:.5f},asetpts=PTS-STARTPTS[a{i}]")
+    parts.append("".join(f"[v{i}][a{i}]" for i in range(n_sc)) + f"concat=n={n_sc}:v=1:a=1[vcat][acat]")
+    last = "vcat"
+    for k, (png, w, h, a, b) in enumerate(cue_imgs):
+        x, y = (W - w) // 2, SUB_CENTER_Y - h // 2
+        parts.append(f"[{last}][{2 * n_sc + k}:v]overlay=x={x}:y={y}:enable='between(t,{a:.3f},{b:.3f})'[o{k}]")
+        last = f"o{k}"
+    script = build / "filter.txt"
+    script.write_text(";\n".join(parts))
+
+    cmd = ["ffmpeg", "-y", "-v", "error", "-stats"]
+    for p in plan:
+        cmd += ["-i", str(clips / f"{p['n']}.mp4")]       # su audio original se ignora: solo se mapea [acat]
+    for p in plan:
+        cmd += ["-i", str(audio_dir / f"{p['n']}.mp3")]
+    for png, *_ in cue_imgs:
+        cmd += ["-i", str(png)]
+    final = prod / "final.mp4"
+    cmd += ["-/filter_complex", str(script), "-map", f"[{last}]", "-map", "[acat]",
+            "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS),
+            "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-t", f"{total:.5f}", str(final)]
+    print(f"\nCodificando {len(cue_imgs)} subtítulos sobre {total:.1f} s de video ...")
+    run(cmd)
+
+    # 6. Portada: escena 1 a ~1 s, limpia (sin subtítulos)
+    run(["ffmpeg", "-y", "-v", "error", "-ss", "1", "-i", str(clips / "scene-01.mp4"), "-frames:v", "1",
+         "-vf", f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H}",
+         "-q:v", "2", str(prod / "cover.jpg")])
+
+    # 7. Resumen
+    out = json.loads(run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                          "stream=width,height,r_frame_rate,pix_fmt,codec_name:format=duration",
+                          "-of", "json", str(final)]).stdout)
+    v = out["streams"][0]
+    print(f"\n{'esc':<4}{'nombre':<15}{'narración':>10}{'slot':>8}{'clip':>8}  clip c/audio  ajuste")
+    for sid, name, narr, slot, d, has_audio, note in report:
+        print(f"{sid:<4}{name:<15}{narr:>9.2f}s{slot:>7.2f}s{d:>7.2f}s  {'sí (descartado)' if has_audio else 'no':<14}{note}")
+    print(f"\nDuración total: {float(out['format']['duration']):.2f} s (timeline {total:.2f} s)")
+    print(f"Video: {v['width']}x{v['height']} @ {v['r_frame_rate']} fps, {v['codec_name']} {v['pix_fmt']}")
+    print(f"Subtítulos: {len(cue_imgs)} frases | fuente {Path(font_path).name} {FONT_SIZE}px, contorno {STROKE}px")
+    print(f"final.mp4: {final.stat().st_size / 1e6:.1f} MB | cover.jpg: {(prod / 'cover.jpg').stat().st_size / 1e3:.0f} KB")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

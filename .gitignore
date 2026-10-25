@@ -4,3 +4,8 @@ __pycache__/
 output/
 productions/**/clips/
 .DS_Store
+productions/**/build/
+productions/**/audio/
+productions/**/final.mp4
+productions/**/final.srt
+productions/**/cover.jpg
