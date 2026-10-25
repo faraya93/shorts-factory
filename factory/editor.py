@@ -23,8 +23,7 @@ AUDITION_VOICES =["es-CL-LorenzoNeural", "es-MX-JorgeNeural", "es-ES-AlvaroNeura
 W, H, FPS = 1080, 1920, 30
 MAX_SLOWDOWN = 1.25
 
-# Subtítulos: negrita blanca, contorno negro grueso, centrados en el tercio inferior
-# (borde inferior del bloque al 93% de la altura).
+# Subtitles: fixed UPPER band, whole phrase visible, the currently spoken word inside a dark rounded box.
 FONT_CANDIDATES = [
     "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
     "/Library/Fonts/Arial Bold.ttf",
@@ -32,9 +31,13 @@ FONT_CANDIDATES = [
 ]
 SUB_FONT_SIZE = 57          # px
 SUB_STROKE = 7              # px, contorno negro
-SUB_BOTTOM_Y_FRAC = 0.93    # borde INFERIOR del bloque, como fracción de la altura del frame
-SUB_MAX_WIDTH = 940         # px, ancho máximo antes de partir en 2 líneas
-SUB_BOTTOM_Y = round(H * SUB_BOTTOM_Y_FRAC)
+SUBTITLE_Y_CENTER = 0.30    # vertical center of the subtitle block, as a fraction of the frame height
+SUB_MAX_WIDTH = 940         # px, maximum line width before wrapping
+SUB_CENTER_Y = round(H * SUBTITLE_Y_CENTER)
+SUB_WORD_COLOR = (235, 235, 235)       # not-current words: light grey with the black outline
+SUB_CURRENT_COLOR = (255, 255, 255)    # current word: white text ...
+SUB_BOX_FILL = (24, 24, 28, 235)       # ... on a dark rounded box
+SUB_BOX_PAD_X, SUB_BOX_PAD_Y, SUB_BOX_RADIUS = 10, 4, 16
 CUE_MAX_WORDS, CUE_MAX_CHARS = 4, 26
 
 
@@ -84,41 +87,33 @@ def srt_time(sec: float) -> str:
     return f"{ms // 3600000:02d}:{ms // 60000 % 60:02d}:{ms // 1000 % 60:02d},{ms % 1000:03d}"
 
 
-def parse_srt_time(t: str) -> float:
-    h, m, rest = t.split(":")
-    s, ms = rest.split(",")
-    return int(h) * 3600 + int(m) * 60 + int(s) + int(ms) / 1000
-
-
-def group_cues(tokens: list[str], events: list[dict]) -> list[tuple[float, float, str]]:
-    """Agrupa palabras en frases cortas. Los eventos traen tiempos pero no puntuación,
-    así que se alinean 1:1 con las palabras del texto original."""
+def group_cues(tokens: list[str], events: list[dict]) -> list[dict]:
+    """Group words into short phrases (max CUE_MAX_WORDS words). Events carry timings but no punctuation,
+    so they are aligned 1:1 with the words of the original text. Each cue keeps its per-word timings."""
     if len(tokens) != len(events):
-        sys.exit(f"ERROR: edge-tts devolvió {len(events)} palabras y el texto tiene {len(tokens)}; "
-                 "no se pueden alinear los subtítulos.")
+        sys.exit(f"ERROR: edge-tts returned {len(events)} words and the text has {len(tokens)}; "
+                 "the subtitles cannot be aligned.")
     cues, cur = [], []
 
     def flush():
         if cur:
-            cues.append((cur[0][1], cur[-1][2], " ".join(t for t, _, _ in cur)))
+            cues.append({"start": cur[0]["start"], "end": cur[-1]["end"], "words": list(cur)})
             cur.clear()
 
     for tok, ev in zip(tokens, events):
-        start, end = ev["offset"] / 1e7, (ev["offset"] + ev["duration"]) / 1e7
-        if cur and (len(cur) >= CUE_MAX_WORDS or len(" ".join(t for t, _, _ in cur) + " " + tok) > CUE_MAX_CHARS):
+        word = {"text": tok, "start": ev["offset"] / 1e7, "end": (ev["offset"] + ev["duration"]) / 1e7}
+        if cur and (len(cur) >= CUE_MAX_WORDS or len(" ".join(w["text"] for w in cur) + " " + tok) > CUE_MAX_CHARS):
             flush()
-        cur.append((tok, start, end))
-        text = " ".join(t for t, _, _ in cur)
+        cur.append(word)
+        text = " ".join(w["text"] for w in cur)
         if re.search(r"[.?!:;]$", tok) or (tok.endswith(",") and len(text) >= 10):
             flush()
     flush()
-    # sin huecos entre frases cercanas: cada cue dura hasta el inicio de la siguiente
-    out = []
-    for i, (s, e, t) in enumerate(cues):
-        if i + 1 < len(cues) and cues[i + 1][0] - e < 0.5:
-            e = cues[i + 1][0]
-        out.append((s, e, t))
-    return out
+    # no gaps between close phrases: a cue lasts until the next one starts
+    for i, cue in enumerate(cues[:-1]):
+        if cues[i + 1]["start"] - cue["end"] < 0.5:
+            cue["end"] = cues[i + 1]["start"]
+    return cues
 
 
 async def synthesize(text: str, voice: str, mp3: Path, srt: Path | None = None) -> None:
@@ -133,40 +128,58 @@ async def synthesize(text: str, voice: str, mp3: Path, srt: Path | None = None) 
     if srt is None:  # audition mode: audio only
         return
     cues = group_cues(text.split(), events)
-    srt.write_text("".join(f"{i}\n{srt_time(s)} --> {srt_time(e)}\n{t}\n\n"
-                           for i, (s, e, t) in enumerate(cues, 1)), encoding="utf-8")
+    srt.write_text("".join(f"{i}\n{srt_time(c['start'])} --> {srt_time(c['end'])}\n"
+                           f"{' '.join(w['text'] for w in c['words'])}\n\n"
+                           for i, c in enumerate(cues, 1)), encoding="utf-8")
+    words_json(srt).write_text(json.dumps(cues, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
-def read_srt(path: Path) -> list[tuple[float, float, str]]:
-    cues = []
-    for block in path.read_text(encoding="utf-8").strip().split("\n\n"):
-        lines = block.split("\n")
-        a, b = lines[1].split(" --> ")
-        cues.append((parse_srt_time(a), parse_srt_time(b), " ".join(lines[2:])))
-    return cues
+def words_json(srt: Path) -> Path:
+    """Per-word timings of a scene's phrases, next to its SRT (scene-NN.srt -> scene-NN.words.json)."""
+    return srt.with_suffix(".words.json")
 
 
 # --- Subtítulos como PNG (este ffmpeg no trae libass/freetype) -------------------------
 
-def render_cue(text: str, path: Path, font: ImageFont.FreeTypeFont) -> tuple[int, int]:
-    probe_draw = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
-    lines, line = [], ""
-    for word in text.split():
-        trial = f"{line} {word}".strip()
-        if line and probe_draw.textlength(trial, font=font) > SUB_MAX_WIDTH:
-            lines.append(line)
-            line = word
-        else:
-            line = trial
-    lines.append(line)
-    block = "\n".join(lines)
-    box = probe_draw.multiline_textbbox((0, 0), block, font=font, stroke_width=SUB_STROKE, align="center", spacing=8)
-    w, h = math.ceil(box[2] - box[0]) + 2 * SUB_STROKE, math.ceil(box[3] - box[1]) + 2 * SUB_STROKE
-    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    ImageDraw.Draw(img).multiline_text((SUB_STROKE - box[0], SUB_STROKE - box[1]), block, font=font, fill="white",
-                                       stroke_width=SUB_STROKE, stroke_fill="black", align="center", spacing=8)
+def layout_cue(texts: list[str], font: ImageFont.FreeTypeFont) -> dict:
+    """Wrap a phrase into centred lines once, so every highlight state of the phrase shares one layout."""
+    d = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
+    space = d.textlength(" ", font=font)
+    widths = [d.textlength(w, font=font) for w in texts]
+    lines, cur, cur_w = [], [], 0.0
+    for i, w in enumerate(widths):
+        if cur and cur_w + space + w > SUB_MAX_WIDTH:
+            lines.append((cur, cur_w))
+            cur, cur_w = [], 0.0
+        cur_w += (space if cur else 0) + w
+        cur.append(i)
+    lines.append((cur, cur_w))
+    ascent, descent = font.getmetrics()
+    line_h, gap = ascent + descent, 14
+    pad_x, pad_y = SUB_BOX_PAD_X + SUB_STROKE, SUB_BOX_PAD_Y + SUB_STROKE
+    return {"lines": lines, "widths": widths, "space": space, "line_h": line_h, "gap": gap,
+            "pad_x": pad_x, "pad_y": pad_y,
+            "w": math.ceil(max(lw for _, lw in lines)) + 2 * pad_x,
+            "h": len(lines) * line_h + (len(lines) - 1) * gap + 2 * pad_y}
+
+
+def render_cue_state(texts: list[str], current: int, lay: dict, path: Path, font: ImageFont.FreeTypeFont) -> None:
+    """One PNG of the phrase with word `current` marked: dark rounded box + white text; the others grey."""
+    img = Image.new("RGBA", (lay["w"], lay["h"]), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    y = lay["pad_y"]
+    for idxs, line_w in lay["lines"]:
+        x = (lay["w"] - line_w) / 2
+        for i in idxs:
+            if i == current:
+                draw.rounded_rectangle([x - SUB_BOX_PAD_X, y - SUB_BOX_PAD_Y, x + lay["widths"][i] + SUB_BOX_PAD_X,
+                                        y + lay["line_h"] + SUB_BOX_PAD_Y], radius=SUB_BOX_RADIUS, fill=SUB_BOX_FILL)
+                draw.text((x, y), texts[i], font=font, fill=SUB_CURRENT_COLOR)
+            else:
+                draw.text((x, y), texts[i], font=font, fill=SUB_WORD_COLOR, stroke_width=SUB_STROKE, stroke_fill="black")
+            x += lay["widths"][i] + lay["space"]
+        y += lay["line_h"] + lay["gap"]
     img.save(path)
-    return w, h
 
 
 # --- Montaje ---------------------------------------------------------------------------
@@ -179,6 +192,8 @@ def main() -> int:
                     help="render scene 1's narration with each AUDITION_VOICES into audio/audition/ and exit")
     ap.add_argument("--gate-report", action="store_true",
                     help="measure each clip's audio against audio.clip_gate_db, print the table and exit (no render)")
+    ap.add_argument("--only-scene", type=int, metavar="N",
+                    help="test render of scene N only, written to build/test-scene-NN.mp4 (final.mp4 is not touched)")
     args = ap.parse_args()
     prod = args.production
     cfg = json.loads((prod / "scenes.json").read_text())
@@ -207,6 +222,11 @@ def main() -> int:
         return 0
 
     scenes = cfg["scenes"]
+    if args.only_scene is not None:
+        scenes = [s for s in scenes if s["id"] == args.only_scene]
+        if not scenes:
+            print(f"ERROR: no scene with id {args.only_scene}")
+            return 1
     clips, audio_dir, build = prod / "clips", prod / "audio", prod / "build"
     audio_dir.mkdir(exist_ok=True)
     build.mkdir(exist_ok=True)
@@ -223,7 +243,8 @@ def main() -> int:
     for s in scenes:
         n = f"scene-{s['id']:02d}"
         digest = hashlib.sha256(f"{voice}|{s['narration']}".encode()).hexdigest()
-        if meta.get(n) == digest and (audio_dir / f"{n}.mp3").exists() and (audio_dir / f"{n}.srt").exists():
+        if (meta.get(n) == digest and (audio_dir / f"{n}.mp3").exists() and (audio_dir / f"{n}.srt").exists()
+                and words_json(audio_dir / f"{n}.srt").exists()):
             print(f"narración {n}: reutilizada")
             continue
         print(f"narración {n}: generando con {voice}")
@@ -259,18 +280,26 @@ def main() -> int:
     font = ImageFont.truetype(font_path, SUB_FONT_SIZE)
     for old in build.glob("cue-*.png"):
         old.unlink()
-    global_cues, offset = [], 0.0
+    # one PNG per highlight state: for each phrase, one image per word with that word marked
+    cue_imgs, srt_cues, offset, n_phrases = [], [], 0.0, 0
     for p in plan:
-        for a, b, text in read_srt(audio_dir / f"{p['n']}.srt"):
-            global_cues.append((offset + a, min(offset + b, offset + p["slot"]), text))
+        slot_end = offset + p["slot"]
+        for cue in json.loads(words_json(audio_dir / f"{p['n']}.srt").read_text(encoding="utf-8")):
+            texts = [w["text"] for w in cue["words"]]
+            lay = layout_cue(texts, font)
+            srt_cues.append((offset + cue["start"], min(offset + cue["end"], slot_end), " ".join(texts)))
+            n_phrases += 1
+            for k, word in enumerate(cue["words"]):
+                a = offset + (cue["start"] if k == 0 else word["start"])
+                b = offset + (cue["words"][k + 1]["start"] if k + 1 < len(texts) else cue["end"])
+                png = build / f"cue-{len(cue_imgs):03d}.png"
+                render_cue_state(texts, k, lay, png, font)
+                cue_imgs.append((png, lay["w"], lay["h"], a, min(b, slot_end)))
         offset += p["slot"]
     total = offset
-    (prod / "final.srt").write_text("".join(f"{i}\n{srt_time(a)} --> {srt_time(b)}\n{t}\n\n"
-                                            for i, (a, b, t) in enumerate(global_cues, 1)), encoding="utf-8")
-    cue_imgs = []
-    for i, (a, b, text) in enumerate(global_cues):
-        png = build / f"cue-{i:03d}.png"
-        cue_imgs.append((png, *render_cue(text, png, font), a, b))
+    (build if args.only_scene is not None else prod).joinpath("final.srt").write_text(
+        "".join(f"{i}\n{srt_time(a)} --> {srt_time(b)}\n{t}\n\n" for i, (a, b, t) in enumerate(srt_cues, 1)),
+        encoding="utf-8")
 
     # 4b. Audio profile: scenes.json declares the recipe, the code only provides the capability
     audio = {**AUDIO_DEFAULTS, **cfg.get("audio", {})}
@@ -316,7 +345,7 @@ def main() -> int:
         parts.append("".join(f"[v{i}][a{i}]" for i in range(n_sc)) + f"concat=n={n_sc}:v=1:a=1[vcat][acat]")
     last = "vcat"
     for k, (png, w, h, a, b) in enumerate(cue_imgs):
-        x, y = (W - w) // 2, SUB_BOTTOM_Y - h
+        x, y = (W - w) // 2, SUB_CENTER_Y - h // 2
         parts.append(f"[{last}][{2 * n_sc + k}:v]overlay=x={x}:y={y}:enable='between(t,{a:.3f},{b:.3f})'[o{k}]")
         last = f"o{k}"
 
@@ -349,17 +378,18 @@ def main() -> int:
         cmd += ["-i", str(png)]
     if music_path:
         cmd += ["-stream_loop", "-1", "-i", str(music_path)]
-    final = prod / "final.mp4"
+    final = build / f"test-scene-{args.only_scene:02d}.mp4" if args.only_scene is not None else prod / "final.mp4"
     cmd += ["-/filter_complex", str(script), "-map", f"[{last}]", "-map", audio_out,
             "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS),
             "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-t", f"{total:.5f}", str(final)]
-    print(f"\nCodificando {len(cue_imgs)} subtítulos sobre {total:.1f} s de video ...")
+    print(f"\nCodificando {len(cue_imgs)} estados de subtítulo sobre {total:.1f} s de video ...")
     run(cmd)
 
-    # 6. Portada: escena 1 a ~1 s, limpia (sin subtítulos)
-    run(["ffmpeg", "-y", "-v", "error", "-ss", "1", "-i", str(clips / "scene-01.mp4"), "-frames:v", "1",
-         "-vf", f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H}",
-         "-q:v", "2", str(prod / "cover.jpg")])
+    # 6. Cover: scene 1 at ~1 s, clean (no subtitles); not for test renders
+    if args.only_scene is None:
+        run(["ffmpeg", "-y", "-v", "error", "-ss", "1", "-i", str(clips / "scene-01.mp4"), "-frames:v", "1",
+             "-vf", f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H}",
+             "-q:v", "2", str(prod / "cover.jpg")])
 
     # 7. Resumen
     out = json.loads(run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
@@ -392,8 +422,9 @@ def main() -> int:
           f"music {music_note}")
     if music_path and audio.get("music_credit"):
         print(f"Music credit: {audio['music_credit']}")
-    print(f"Subtítulos: {len(cue_imgs)} frases | fuente {Path(font_path).name} {SUB_FONT_SIZE}px, contorno {SUB_STROKE}px")
-    print(f"final.mp4: {final.stat().st_size / 1e6:.1f} MB | cover.jpg: {(prod / 'cover.jpg').stat().st_size / 1e3:.0f} KB")
+    print(f"Subtítulos: {n_phrases} frases / {len(cue_imgs)} estados de palabra | fuente {Path(font_path).name} {SUB_FONT_SIZE}px, contorno {SUB_STROKE}px")
+    print(f"{final.name}: {final.stat().st_size / 1e6:.1f} MB" +
+          ("" if args.only_scene is not None else f" | cover.jpg: {(prod / 'cover.jpg').stat().st_size / 1e3:.0f} KB"))
     return 0
 
 
