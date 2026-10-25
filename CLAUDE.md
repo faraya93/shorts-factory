@@ -42,6 +42,16 @@ where judgment is involved.
   clips are trimmed, slowed (max 1.25x) or last-frame-frozen to fit;
   subtitles are rendered as PNG overlays (this machine's ffmpeg has no
   libass); outputs final.mp4 (1080x1920, 30 fps, H.264/AAC) + cover.jpg.
+- Audio architecture (config-driven, 3 layers): the code provides the
+  mixer, the production's scenes.json "audio" block declares the recipe.
+  Layers: narration (narration_volume), clip effects (effects_volume,
+  used only when clip_audio is "effects"; "off" discards the clips' own
+  audio) and music (music_file relative to the production folder, looped
+  or trimmed to the video length, at music_volume). A missing or null
+  music_file skips the layer and says so in the run summary — never a
+  failure. Different channels declare different profiles; never
+  hard-code a recipe in the editor. The optional "audio_style" field in
+  scenes.json is appended to every producer prompt.
 - Phases: A Producer ✓ · B Editor ✓ · C Scriptwriter (an LLM agent that
   writes scenes.json) · D Orchestrator · E Publisher (YouTube API,
   uploads private; the owner always makes the publish call).
@@ -59,6 +69,12 @@ where judgment is involved.
   titles in Spanish.
 - Commit and push after each working phase, with a clear message. Never
   commit media files or .env.
+- Music credit: whatever a production stores in audio.music_credit MUST
+  be copied into the YouTube description at publish time (Publisher
+  phase). Never publish a video that uses a credited track without it.
+- Definitive music tracks are downloaded from the official source
+  (incompetech.com), not from mirrors. Mirrors are acceptable only for
+  throwaway calibration placeholders. Music files are media: gitignored.
 - Report failures and semantically wrong renders plainly; never work
   around them silently.
 - The owner approves topics, scripts, spend and publishing. You cannot
