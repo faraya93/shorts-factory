@@ -1,0 +1,91 @@
+# channels/umbrella-es.yaml — DRAFT config for the single active channel (owner approval pending).
+# A channel is configuration, not hard-coded assumptions: this file is the single source for the channel's voice,
+# language, style, duration, topic mix and visual identity. Each production embeds a verbatim copy of the blocks it
+# uses (visual_identity, style) in its scenes.json so it stays reproducible if this file changes later.
+# Values marked "starting value" or "not yet tuned" are mine, not measured; the rest cites its source.
+
+channel: umbrella-es
+status: draft
+promise: "Por qué y cómo funcionan las cosas que ves y usas todos los días"   # umbrella curiosity channel
+language: es
+register: neutral pan-Hispanic Spanish — universal topics, no country-specific systems, no local slang
+
+voice:
+  default: es-CL-LorenzoNeural        # provisional: the owner has not chosen yet; Lorenzo stays default until he does
+  audition_candidates: [es-CL-LorenzoNeural, es-MX-JorgeNeural, es-ES-AlvaroNeural, es-CL-CatalinaNeural]
+
+duration:                             # seconds of narration (see CLAUDE.md format doctrine)
+  standard_s: [45, 60]
+  by_family:
+    body: [40, 50]
+    numbers: [50, 60]
+  words_per_second: 2.87              # measured on the pilot narration (126 words in 43.9 s)
+
+topic_families:                       # STARTING mix, percent of the publishing slate; to be re-weighted by performance data
+  objects: 40                         # everyday objects with a hidden mechanism
+  body: 25                            # body / medical how-it-works
+  numbers: 20                         # impossible numbers / scale
+  whatif: 15                          # what-if / dilemmas
+  avoid: [generic textbook science with no everyday anchor, news, sports, labour law]
+
+subtitles:                            # mirrored from factory/editor.py constants; tests/test_channel.py keeps them in sync
+  y_center: 0.24                      # block centre as a fraction of the frame height (upper band)
+  font_size_px: 57
+  stroke_px: 7
+  max_words: 4
+  max_chars: 26
+  max_width_px: 940
+  current_word: dark rounded box with light text; other words light grey with a thick black outline
+
+style:
+  # Base style string, prefix of every scene prompt of every engine. It generalises the v2 golden example (below) so
+  # it works for all four families, and restores "no text on screen" (labels and numbers are Editor overlays).
+  base: >-
+    Bright stylized 3D cartoon animation, Pixar-style explainer short, smooth clean materials, soft studio lighting.
+    Strictly NOT photorealistic: no realistic textures, no real faces, no blood, no gore, no graphic content.
+    No text on screen.
+  by_family:                          # appended after base; only the body family has an approved example so far
+    body: Medical illustration look. Show the body as clean stylized cross-section models.
+    objects: null                     # to be approved after the first production of this family
+    numbers: null
+    whatif: null
+  reference_v2: >-                    # the approved golden example, verbatim (note: it lacks "no text on screen")
+    Bright stylized 3D cartoon animation, Pixar-style explainer short, smooth clean materials, soft studio lighting,
+    medical illustration look. Strictly NOT photorealistic: no realistic skin texture, no real faces, no blood, no
+    gore, no graphic wounds — show the body as clean stylized cross-section models.
+
+visual_identity:
+  # Sampled from the v2 golden example (productions/pilot/puntos-de-sutura-v2, 6 frames per clip).
+  # QA scope (owner decision): the backdrop and its QA apply only to establishing shots and code3d productions; close-ups
+  # are exempt (their "background" is the subject) and are carried by palette + lighting wording + the unify pass.
+  # QA marks are review signals, not automatic defects (the v2 jungle in scene 6 was intentional).
+  background:
+    hex: "#E2D5F1"                    # scene 1 (the establishing shot): stable across 6 frames, max dE 2.8
+    description: soft lavender-white studio backdrop
+  palette:                            # colours present (>= 2% of pixels) in several v2 scenes; scene-specific hues excluded
+    - {hex: "#E0B0A0", name: skin peach}          # 6 of 6 scenes
+    - {hex: "#D18C7D", name: shaded skin}         # 5 of 6
+    - {hex: "#C6544B", name: tissue red}          # 6 of 6
+    - {hex: "#C6CFCE", name: steel grey}          # 2 of 6 (needle, instruments)
+    - {hex: "#E2D5F1", name: backdrop lavender}
+  lighting: soft studio lighting
+  materials: smooth clean materials
+  unify:                              # shared Editor pass for every scene, whatever its engine — not yet tuned
+    saturation: 1.04
+    contrast: 1.03
+    warmth: 0.0
+    grain: 5
+    vignette_angle: 0.9
+  qa_tolerance_de: 15                 # starting value (CIE76); ~2.3 is a just-noticeable difference
+
+audio:                                # starting profile from the pilot; the clip gate keeps music out of the mix
+  narration_volume: 1.0
+  effects_volume: 0.30
+  clip_audio: effects
+  clip_gate_db: -35
+  music_volume: 0.10
+  music_file: null                    # no signature track chosen yet
+
+spinoff_criteria:                     # spin-off channels are decided later, only by data — never micro-topic splits
+  - a topic family that consistently wins AND can sustain its own publishing cadence
+  - the English-language version of the channel

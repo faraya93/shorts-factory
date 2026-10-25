@@ -173,6 +173,30 @@ where judgment is involved.
 - A production lives in productions/<channel>/<video-slug>/; scenes.json
   and costs.json are versioned, generated media is gitignored.
 
+## Channel strategy (owner decisions, 2026-10-25)
+- Audience: pan-Hispanic Spanish speakers, NOT one country (a single small
+  country was explicitly rejected). Neutral Spanish, universal topics, no
+  country-specific systems, no local slang.
+- ONE umbrella channel first. Its promise is "why/how the things you see
+  and use every day work", rotating the four topic families (everyday
+  objects, body/medical, impossible numbers, what-if/dilemmas) under ONE
+  format, voice and brand. Body/medical is one family, not the channel.
+  Why: the recommendation algorithm clusters by audience-and-promise,
+  Shorts test each video largely on its own merits, so rotation inside one
+  promise widens the viral surface; off-promise drift (news, sports,
+  labour law) is what hurt the reference accounts.
+- A channel is CONFIGURATION, never hard-coded: channels/umbrella-es.yaml
+  (DRAFT until the owner approves) holds voice, language, style,
+  duration bands, topic-family mix (starting mix objects 40 / body 25 /
+  numbers 20 / what-if 15), subtitle constants, the visual_identity block
+  and the audio profile. tests/test_channel.py keeps it valid and in sync
+  with the code constants it mirrors. Productions embed a verbatim copy of
+  the blocks they use. This config creates no accounts and uploads nothing.
+- Spin-off channels are decided LATER and ONLY by data, never micro-topic
+  splits from day one. Criteria: (1) a topic family that consistently wins
+  AND can sustain its own publishing cadence, or (2) the English-language
+  version of the channel.
+
 ## Engine selection (binding; from the 2026-10-25 engine spike)
 Evidence: productions/pilot/engine-spike/report.md. The factory assigns
 engines automatically from these rules; the owner is never asked.
