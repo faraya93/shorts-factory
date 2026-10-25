@@ -38,3 +38,16 @@ Session times are machine wall-clock between the first and last command of each 
 One data point only, for the SIMPLEST geometry (primitives, flat shading, ~120 lines): ~1 min wall-clock, 3 renders,
 6.7 s local render. It says nothing yet about HIGH objects with lighting or complex motion; the timeboxes in
 CLAUDE.md stay as initial values until a real code3d production adds more points.
+
+## code3d tooling notes (added 2026-10-25, after the owner approved installing real 3D tooling)
+- Installed: Blender 5.2.3 LTS via `brew install --cask blender` (build 2026-10-22), app at /Applications/Blender.app,
+  command wrapper /opt/homebrew/bin/blender. Install took ~30 s, no errors.
+- Headless check: `blender -b --python spikes/blender_smoke.py -- <out.png> BLENDER_EEVEE` renders cube + sun light +
+  camera to a 540x960 PNG. First run 3.5 s render (includes shader compilation, 3.75 s process); second run 0.58 s.
+- Exact colours (needed because code3d scenes must use the visual_identity hex values literally):
+  (1) `world.color` and `material.diffuse_color` are viewport-only; the final render reads node-based world/material
+  (`use_nodes = True`, Background colour, Principled BSDF Base Color). (2) Set `view_transform = "Standard"` (the
+  default tone-mapper shifts colours). (3) Blender works in linear space: convert sRGB hex to linear first.
+  With all three the rendered background measured #E2D5F1 against the #E2D5F1 spec, dE 0.0.
+- This supersedes the Pillow rasterizer as the code3d ceiling; the Pillow PoC (spikes/code3d_poc.py) is kept as a
+  fallback record. Blender's quality on the real stitches scenes is not demonstrated yet (that is v4's job).

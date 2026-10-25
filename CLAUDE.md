@@ -215,13 +215,17 @@ engines automatically from these rules; the owner is never asked.
   production is code3d in every scene.
 - (d) A route that failed the spike is DISABLED until re-tested
   (scenes_schema.DISABLED_ROUTES, enforced before any spend). Status:
-  t2v enabled. code3d enabled, with the ceiling measured in the spike:
-  the only installed tooling is a Pillow software rasterizer (flat
-  colours, no lighting), so renders are schematic; polished shading would
-  need tooling that is not installed (node/three.js, Blender) — installs
-  are the owner's decision. The code3d production pipeline (scene →
-  code → frames) is not built yet; the proof of concept is
-  spikes/code3d_poc.py. keyframes DISABLED: R2 (fal-ai/flux-2) produced
+  t2v enabled. code3d enabled. Tooling: Blender 5.2.3 LTS (installed
+  2026-10-25 with the owner's approval via `brew install --cask blender`;
+  headless `blender -b --python <script>`, EEVEE; trivial scene rendered in
+  0.58 s warm). The earlier Pillow software rasterizer PoC
+  (spikes/code3d_poc.py) was flat and schematic and is only a fallback
+  record. Exact colours in Blender need node-based world/material colours,
+  the Standard view transform and sRGB->linear conversion (measured: the
+  spec backdrop #E2D5F1 renders at dE 0.0; see spikes/blender_smoke.py and
+  the spike report). The code3d production pipeline (scene -> Blender
+  script -> frames -> clip) is not built yet; its first full test is
+  puntos-de-sutura-v4-code3d. keyframes DISABLED: R2 (fal-ai/flux-2) produced
   warped hands/arms, a needle that changes shape between stills, and no
   continuity between stills; flux-2-pro and reference-image conditioning
   (flux-2/edit) were not tested. Re-testing means a new spike, then
