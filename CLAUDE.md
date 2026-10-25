@@ -249,6 +249,10 @@ engines automatically from these rules; the owner is never asked.
   echo it.
 - Code, comments, filenames and JSON keys in English. Narration and
   titles in Spanish.
+- Language: ALWAYS respond to the owner in English in this project
+  (standing rule, owner decision 2026-10-25) — chat replies, reports and
+  docs. Only the narration, titles and on-screen text of the videos are
+  Spanish.
 - Commit and push after each working phase, with a clear message. Never
   commit media files or .env.
 - Music credit: whatever a production stores in audio.music_credit MUST
