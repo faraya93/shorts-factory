@@ -21,7 +21,7 @@ W, H, FPS = 1080, 1920, 30
 MAX_SLOWDOWN = 1.25
 
 # Subtítulos: negrita blanca, contorno negro grueso, centrados en el tercio inferior
-# (centro del bloque al 78% de la altura, lejos del borde donde YouTube pone su UI).
+# (borde inferior del bloque al 93% de la altura).
 FONT_CANDIDATES = [
     "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
     "/Library/Fonts/Arial Bold.ttf",
@@ -29,9 +29,9 @@ FONT_CANDIDATES = [
 ]
 SUB_FONT_SIZE = 57          # px
 SUB_STROKE = 7              # px, contorno negro
-SUB_CENTER_Y_FRAC = 0.78    # centro vertical del bloque, como fracción de la altura del frame
+SUB_BOTTOM_Y_FRAC = 0.93    # borde INFERIOR del bloque, como fracción de la altura del frame
 SUB_MAX_WIDTH = 940         # px, ancho máximo antes de partir en 2 líneas
-SUB_CENTER_Y = round(H * SUB_CENTER_Y_FRAC)
+SUB_BOTTOM_Y = round(H * SUB_BOTTOM_Y_FRAC)
 CUE_MAX_WORDS, CUE_MAX_CHARS = 4, 26
 
 
@@ -229,7 +229,7 @@ def main() -> int:
     parts.append("".join(f"[v{i}][a{i}]" for i in range(n_sc)) + f"concat=n={n_sc}:v=1:a=1[vcat][acat]")
     last = "vcat"
     for k, (png, w, h, a, b) in enumerate(cue_imgs):
-        x, y = (W - w) // 2, SUB_CENTER_Y - h // 2
+        x, y = (W - w) // 2, SUB_BOTTOM_Y - h
         parts.append(f"[{last}][{2 * n_sc + k}:v]overlay=x={x}:y={y}:enable='between(t,{a:.3f},{b:.3f})'[o{k}]")
         last = f"o{k}"
     script = build / "filter.txt"
