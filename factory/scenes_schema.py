@@ -14,6 +14,11 @@ import visual_identity
 from overlays import validate_scene_overlays
 
 ENGINES = ("t2v", "keyframes", "code3d")
+# A route that failed the engine spike is DISABLED until it is re-tested; this maps route -> why.
+DISABLED_ROUTES = {
+    "keyframes": "failed the engine spike on stitches scene 2 (2026-10-25): warped hands/arms and no continuity "
+                 "between stills; re-test before re-enabling",
+}
 FAMILIES = ("objects", "body", "numbers", "whatif")
 FALSE_BELIEF_OPTIONAL = ("numbers", "whatif")  # the only families that may leave false_belief empty
 NO_TEXT_CLAUSE = "no text on screen"
@@ -65,6 +70,10 @@ def validate_production(cfg: dict) -> list[str]:
 
     if primary not in ENGINES:
         errors.append(f"primary_engine must be one of {ENGINES}, got {primary!r}")
+    elif primary in DISABLED_ROUTES:
+        errors.append(f"primary_engine {primary!r} is disabled: {DISABLED_ROUTES[primary]}")
+    if not str(cfg.get("engine_reason", "")).strip():
+        errors.append("missing production field: engine_reason (one line: why this primary engine)")
     if family not in FAMILIES:
         errors.append(f"topic_family must be one of {FAMILIES}, got {family!r}")
     for field in PRODUCTION_TEXT_FIELDS:
@@ -112,7 +121,11 @@ def validate_production(cfg: dict) -> list[str]:
 
         override = s.get("engine_override")
         if override is not None:
-            if primary == "code3d":
+            if not str(s.get("engine_override_reason", "")).strip():
+                errors.append(f"scene {sid}: engine_override needs engine_override_reason (one line)")
+            if override in DISABLED_ROUTES:
+                errors.append(f"scene {sid}: engine_override {override!r} is disabled: {DISABLED_ROUTES[override]}")
+            elif primary == "code3d":
                 errors.append(f"scene {sid}: a code3d production is code3d in every scene (no engine_override)")
             elif override == "code3d":
                 errors.append(f"scene {sid}: code3d is never mixed into a non-code3d production")

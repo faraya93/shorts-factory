@@ -10,3 +10,6 @@ productions/**/final.mp4
 productions/**/final.srt
 productions/**/cover.jpg
 productions/**/music-*.mp3
+productions/**/engine-spike/*
+!productions/**/engine-spike/costs.json
+!productions/**/engine-spike/report.md

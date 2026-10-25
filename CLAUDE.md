@@ -78,8 +78,8 @@ we copy the mechanics, never scripts or footage: all scripts are original.
   engine_override "keyframes" inside a t2v production (both are
   diffusion-family and share a photographic look). code3d is NEVER mixed
   with diffusion footage: a code3d production is code3d in every scene.
-  scenes_schema.py rejects violations before any spend. The full
-  selection rules are written after the engine spike on stitches scene 2.
+  scenes_schema.py rejects violations before any spend. The binding
+  selection rules are in "Engine selection" below.
 
 ## Pipeline
 Deterministic code wherever money or precision is involved; LLMs only
@@ -104,7 +104,11 @@ where judgment is involved.
   spoken closing names). Scene level: transformation ("start state → end
   state"), camera (how it moves; static is rejected), plus id, name,
   prompt, narration, target_duration_s. Optional: engine_override
-  ("keyframes", only inside a t2v production), audio_style, caption_draft.
+  ("keyframes", only inside a t2v production; needs engine_override_reason),
+  audio_style, caption_draft, shot_type, qa_note, data_overlays,
+  visual_identity. engine_reason (one line: why this primary engine) is
+  REQUIRED at production level. A route listed in
+  scenes_schema.DISABLED_ROUTES is rejected as primary engine or override.
   Any other override, or any code3d scene in a non-code3d production,
   aborts before spend. Productions created before this schema (pilot v1,
   puntos-de-sutura-v2) are frozen controls and no longer pass validation.
@@ -168,6 +172,39 @@ where judgment is involved.
   uploads private; the owner always makes the publish call).
 - A production lives in productions/<channel>/<video-slug>/; scenes.json
   and costs.json are versioned, generated media is gitignored.
+
+## Engine selection (binding; from the 2026-10-25 engine spike)
+Evidence: productions/pilot/engine-spike/report.md. The factory assigns
+engines automatically from these rules; the owner is never asked.
+- (a) Choose ONE primary engine per production from the script's dominant
+  mechanism type. Ambient/organic transformation and camera travel
+  (bodies, tissues, soft or flowing things) → t2v. Rigid geometric hero
+  objects and numbers/scale spectacle → code3d (R3 passed, so the route is
+  enabled; its ceiling is stated below). If a route is disabled, fall
+  back to t2v.
+- (b) The ONLY per-scene override is keyframes inside a t2v production,
+  for contact-mechanics scenes. It is currently unavailable (see d): a
+  contact-mechanics scene in a t2v production stays t2v with a
+  strengthened ACTION prompt (what moves, enters, exits, where, plus a
+  "never ..." clause), and the production report says why.
+- (c) code3d is never mixed into a non-code3d production, and a code3d
+  production is code3d in every scene.
+- (d) A route that failed the spike is DISABLED until re-tested
+  (scenes_schema.DISABLED_ROUTES, enforced before any spend). Status:
+  t2v enabled. code3d enabled, with the ceiling measured in the spike:
+  the only installed tooling is a Pillow software rasterizer (flat
+  colours, no lighting), so renders are schematic; polished shading would
+  need tooling that is not installed (node/three.js, Blender) — installs
+  are the owner's decision. The code3d production pipeline (scene →
+  code → frames) is not built yet; the proof of concept is
+  spikes/code3d_poc.py. keyframes DISABLED: R2 (fal-ai/flux-2) produced
+  warped hands/arms, a needle that changes shape between stills, and no
+  continuity between stills; flux-2-pro and reference-image conditioning
+  (flux-2/edit) were not tested. Re-testing means a new spike, then
+  removing the route from DISABLED_ROUTES.
+- (e) Every assignment and override is logged with a one-line reason
+  (production engine_reason, scene engine_override_reason) and printed
+  in the production report.
 
 ## House rules
 - Never spend without showing the estimate first. The gates are rules,

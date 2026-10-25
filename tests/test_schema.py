@@ -5,10 +5,12 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "factory"))
+import scenes_schema  # noqa: E402
 from scenes_schema import build_prompt, effective_engine, validate_production  # noqa: E402
 
 VALID = {
     "primary_engine": "t2v",
+    "engine_reason": "Organic transformation and camera travel: t2v.",
     "topic_family": "objects",
     "hook_question": "¿Por qué la punta de una cinta métrica está floja?",
     "false_belief": "It is a manufacturing defect.",
@@ -110,16 +112,36 @@ def test_scene_requires_transformation_and_camera():
 
 
 def test_engine_override_rules():
-    assert scene_errors(1, engine_override="keyframes") == []
-    expect(scene_errors(1, engine_override="code3d"), "never mixed")
-    expect(scene_errors(1, engine_override="t2v"), "may only be 'keyframes'")
+    saved = dict(scenes_schema.DISABLED_ROUTES)
+    scenes_schema.DISABLED_ROUTES.clear()  # these rules are about structure; disabling is tested below
+    try:
+        ok = dict(engine_override="keyframes", engine_override_reason="contact mechanics")
+        assert scene_errors(1, **ok) == []
+        expect(scene_errors(1, engine_override="keyframes"), "needs engine_override_reason")
+        expect(scene_errors(1, engine_override="code3d", engine_override_reason="x"), "never mixed")
+        expect(scene_errors(1, engine_override="t2v", engine_override_reason="x"), "may only be 'keyframes'")
+        cfg = copy.deepcopy(VALID)
+        cfg["primary_engine"] = "keyframes"
+        cfg["scenes"][1].update(ok)
+        expect(validate_production(cfg), "only allowed inside a t2v production")
+        cfg["primary_engine"] = "code3d"
+        cfg["style"] = "Flat code render."
+        expect(validate_production(cfg), "code3d in every scene")
+    finally:
+        scenes_schema.DISABLED_ROUTES.update(saved)
+
+
+def test_routes_that_failed_the_spike_are_disabled():
+    assert "keyframes" in scenes_schema.DISABLED_ROUTES
+    expect(scene_errors(1, engine_override="keyframes", engine_override_reason="contact mechanics"), "is disabled")
     cfg = copy.deepcopy(VALID)
     cfg["primary_engine"] = "keyframes"
-    cfg["scenes"][1]["engine_override"] = "keyframes"
-    expect(validate_production(cfg), "only allowed inside a t2v production")
-    cfg["primary_engine"] = "code3d"
-    cfg["style"] = "Flat code render."
-    expect(validate_production(cfg), "code3d in every scene")
+    expect(validate_production(cfg), "primary_engine 'keyframes' is disabled")
+
+
+def test_every_engine_assignment_is_logged_with_a_reason():
+    expect(errors_for(engine_reason=None), "engine_reason")
+    expect(errors_for(engine_reason="  "), "engine_reason")
 
 
 def test_prompt_assembly_order():
