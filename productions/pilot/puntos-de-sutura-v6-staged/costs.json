@@ -1,0 +1,19 @@
+{
+  "model": "blender-5.2.3-eevee",
+  "engine": "code3d",
+  "render_style": "glossy",
+  "scene_script_prefix": "stage",
+  "seed": 1531005828,
+  "entries": [
+    {
+      "scene": 2,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 367,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 672.8,
+      "clip": "clips/scene-02.mp4",
+      "timestamp": "2026-10-26T13:36:30+00:00"
+    }
+  ]
+}
