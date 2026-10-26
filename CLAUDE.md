@@ -193,6 +193,31 @@ where judgment is involved.
 - A production lives in productions/<channel>/<video-slug>/; scenes.json
   and costs.json are versioned, generated media is gitignored.
 
+## code3d sourcing and optimization (binding, owner 2026-10-25)
+Your job is the FASTEST route to each clip, not the most from-scratch one.
+- SOURCE FIRST: search the libraries before modelling anything; model only
+  what no library has. For every element choose in this order and log a
+  one-line reason: (1) an existing library asset (BlenderKit, Poly Haven,
+  ambientCG, Poly Pizza), (2) an AI-generated mesh (Meshy free tier; its
+  output is CC-BY and needs an attribution line), (3) modelled primitives,
+  only when 1 and 2 have nothing usable.
+- Free tiers only. NEVER subscribe or sign up for a paid plan (including
+  BlenderKit Full); if something needs payment, skip it and report it.
+  Tripo's free tier is non-commercial: never use it. Every downloaded
+  asset is logged in code3d/assets/LICENSES.md (committed; the assets
+  themselves are gitignored under code3d/assets/).
+- Verify the current best option LIVE (web search), never from memory:
+  this session alone found a renamed repo (BlenderKit/Blendkit) and a
+  renamed package (blender-mcp -> mcp-for-blender).
+- While iterating render DRAFT quality only (half resolution, low EEVEE
+  samples, short frame ranges); render full quality ONCE, at the end.
+- Never remodel or re-download anything that already exists locally:
+  check code3d/assets/ and code3d/lib/ first.
+- Report per-clip wall time split by phase: search/download, modelling,
+  animation setup, iteration rounds, draft renders, final render.
+- If a faster method is discovered mid-build, adopt it and write it here.
+- Tooling facts and the verified integrations are in code3d/TOOLING.md.
+
 ## Channel strategy (owner decisions, 2026-10-25)
 - Audience: pan-Hispanic Spanish speakers, NOT one country (a single small
   country was explicitly rejected). Neutral Spanish, universal topics, no

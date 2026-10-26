@@ -13,3 +13,5 @@ productions/**/music-*.mp3
 productions/**/engine-spike/*
 !productions/**/engine-spike/costs.json
 !productions/**/engine-spike/report.md
+code3d/assets/*
+!code3d/assets/LICENSES.md
