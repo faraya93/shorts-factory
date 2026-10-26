@@ -46,3 +46,16 @@ redirect (renamed repos), package rename, missing `uv`, urllib 403, the add-on's
   pointless on a 0.1-unit tube and the tube has no UVs); thread = plain near-black Principled; HDRI = Poly Haven
   studio_small_08. Fabric079 was downloaded but not used.
 - Observed speeds (Apple Silicon, EEVEE): ~0.11 s/frame draft, ~1.4 s/frame final for this scene.
+
+## Library additions during the v4 batch (reuse these first)
+- `stage.py`: `Stage(production, mode)` = materials (library skin shader tinted to the palette), studio world, camera, key
+  light, and `stage.run(update, args, slot, name)` (stills for iteration or the animation). New scenes start here.
+- `body.py`: `Forearm` (skin tube over a tissue core with an animated lens-shaped slit, welded seam).
+- `props.py`: `load_tweezers` (BlenderKit Tweezers, grip opens/closes about the hinge, plastic retinted to the palette),
+  `load_ant` (BlenderKit Ant (Rigged): jaws posed through the L.Nose / R.Nose bones; the ant faces -y), `jungle` (fern cards +
+  green backdrop; the camera depth of field blurs it; cards cast no shadow).
+- `suture.py`: `knot_polyline` (overhand/trefoil knot through a straight thread), plus the scene-2 objects.
+- Gotchas found: the BlenderKit SSS skin shader blows out to white on thin shapes (use a plain Principled skin colour for
+  lips/mounds); library assets bring their own colours (retint to the palette); a trefoil's end points sit at z = +/-0.9975
+  and must be ramped to the skin; set `visible_shadow = False` on ground blocks and fern cards to keep shadows off the backdrop.
+- Driver: `python factory/code3d_render.py <production> <scene> [--mode draft|final]` (slot frames from the narration).

@@ -289,9 +289,16 @@ engines automatically from these rules; the owner is never asked.
   session time) and local render time. AFTER each build, report the
   ACTUALS next to the estimate, in the production report and costs.json.
   Effort and time are the honest units: never present token counts as
-  precise. code3d work is timeboxed per effort class (initial values,
-  to be calibrated by the spike actuals: LOW ~15 min / 1–2 rounds,
-  MEDIUM ~45 min / 3–4 rounds, HIGH ~2 h / 6+ rounds).
+  precise. code3d actuals, calibrated on the full v4-code3d build
+  (2026-10-25, six scenes, Blender 5.2.3 EEVEE, scripted, library first):
+  the scene that builds the library took ~18 min / 3 rounds; the five
+  reuse scenes took 4-8 min (avg 5.7) / 2-3 rounds; the whole video ~46
+  min of session time against the 5.3-9.4 h estimate. Final render is
+  ~1.0-1.7 s/frame at 1080x1920 (about 62% of the total time); draft
+  ~0.1 s/frame. These replace the earlier guessed timeboxes (LOW ~15 min
+  / MEDIUM ~45 min / HIGH ~2 h), which were 5-10x too pessimistic for
+  scripted primitive-and-library work. Bespoke organic modelling is still
+  unmeasured. Stop and report if a scene passes 60 min or 2x its estimate.
 - Verify fal.ai model IDs and prices against the current docs/schema
   before using them — never from memory.
 - The fal key lives only in .env (gitignored). Never print, commit or
