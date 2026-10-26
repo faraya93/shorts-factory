@@ -193,6 +193,42 @@
         "props.load_tweezers",
         "scene_05.py (stitch row, growing skin, lift)"
       ]
+    },
+    {
+      "scene": 6,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 227,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 373.1,
+      "clip": "clips/scene-06.mp4",
+      "timestamp": "2026-10-26T01:10:34+00:00"
+    },
+    {
+      "scene": 6,
+      "engine": "code3d",
+      "kind": "phase_log",
+      "clock": "machine wall clock, 2026-10-25",
+      "phases_min": {
+        "search_download": 1.0,
+        "modelling_and_animation_setup": 1.5,
+        "iteration_rounds": 1.0,
+        "draft_renders": 0.1,
+        "final_render": 6.2,
+        "encode_and_log": 0.1
+      },
+      "iteration_rounds": 2,
+      "total_min": 8.3,
+      "window": "21:02:17-21:10:34",
+      "fal_spend_usd": 0.0,
+      "library_assets_used": [
+        "BlenderKit Ant (Rigged) CC0 (tier 1)",
+        "BlenderKit Tall Forest Fern (tier 1)"
+      ],
+      "new": [
+        "props.load_ant, props.jungle",
+        "scene_06.py (lips pinched by the jaws, DOF camera pull-back)"
+      ]
     }
   ]
 }

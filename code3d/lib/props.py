@@ -49,3 +49,65 @@ def load_tweezers(scale: float = 30.0, grip_hex: str = "#C6CFCE"):
             self.root.rotation_euler = direction.normalized().to_track_quat("X", "Z").to_euler()
 
     return Tweezers()
+
+
+def load_ant(scale: float = 90.0):
+    """BlenderKit 'Ant (Rigged)' (CC0, Nik Kottmann): 50 bones. The ant faces -y; its mandibles are the bones L.Nose and
+    R.Nose (x = +/-0.0008, mouth at local y = -0.0087, z = 0.0108). The armature origin is on the ground between the feet.
+    Returns an object with .arm (armature), .set_jaws(deg) (opens or closes the mandibles) and .place(location)."""
+    blend = c.ASSETS / "models" / "blenderkit-ant-rigged.blend"
+    with bpy.data.libraries.load(str(blend), link=False) as (src, dst):
+        dst.objects = ["Ant (Rigged)", "Ant"]
+    for obj in dst.objects:
+        bpy.context.scene.collection.objects.link(obj)
+    arm = bpy.data.objects["Ant (Rigged)"]
+    arm.scale = (scale, scale, scale)
+    for name in ("L.Nose", "R.Nose"):
+        arm.pose.bones[name].rotation_mode = "XYZ"
+
+    class Ant:
+        def __init__(self):
+            self.arm = arm
+            self.scale = scale
+
+        def mouth(self, location: Vector) -> Vector:
+            """World position of the mouth for an ant placed with its feet-origin at `location`."""
+            return location + Vector((0.0, -0.0087, 0.0108)) * self.scale
+
+        def place(self, location: Vector) -> None:
+            self.arm.location = location
+
+        def set_jaws(self, deg: float) -> None:
+            self.arm.pose.bones["L.Nose"].rotation_euler.z = math.radians(deg)
+            self.arm.pose.bones["R.Nose"].rotation_euler.z = -math.radians(deg)
+
+    return Ant()
+
+
+def jungle(stage, green_hex: str = "#3B6C4A", count: int = 9):
+    """A softly blurred jungle behind the action: library fern cards (BlenderKit 'Tall Forest Fern') scattered in front
+    of a dark green backdrop plane. The scene's camera depth of field does the blurring."""
+    blend = c.ASSETS / "models" / "blenderkit-tall-forest-fern.blend"
+    with bpy.data.libraries.load(str(blend), link=False) as (src, dst):
+        dst.objects = ["Tall Forest Fern", "Picsart_24-11-03_17-17-16-746.006"]
+    root, card = (bpy.data.objects[n] for n in ("Tall Forest Fern", "Picsart_24-11-03_17-17-16-746.006"))
+    bpy.context.scene.collection.objects.link(root)
+    bpy.context.scene.collection.objects.link(card)
+    root.hide_render = True
+    # dark green backdrop
+    bpy.ops.mesh.primitive_plane_add(size=60, location=(0, 14, 4), rotation=(math.pi / 2, 0, 0))
+    plane = bpy.context.object
+    plane.data.materials.append(c.principled("jungle_back", green_hex, roughness=1.0))
+    placed = []
+    for i in range(count):
+        copy = card.copy()
+        copy.data = card.data
+        copy.parent = None
+        copy.location = (-9 + 18 * (i / (count - 1)), 8.5 + (i % 3) * 1.6, 0.5 + (i % 2) * 1.2)
+        copy.rotation_euler = (0, 0, math.radians(35 * ((i % 5) - 2)))
+        copy.scale = (6.0, 6.0, 6.0)
+        copy.visible_shadow = False                        # soft jungle: the cards must not cast hard shadows
+        bpy.context.scene.collection.objects.link(copy)
+        placed.append(copy)
+    card.hide_render = True
+    return placed

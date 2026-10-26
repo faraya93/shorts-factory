@@ -14,4 +14,7 @@ line in the video description; Tripo's free tier is non-commercial — never use
 
 | Tweezers (`models/blenderkit-tweezers.blend`; baseId in the sidecar json) — Yahya Janani | BlenderKit free plan (anonymous API download) | BlenderKit Royalty Free (`royalty_free`) | scene 5: the tweezers that lift the stitch (plastic retinted to the palette's steel grey) |
 
+| Ant (Rigged) (`models/blenderkit-ant-rigged.blend`) — Nik Kottmann | BlenderKit free plan | CC0 (`cc_zero`) | scene 6: the ant; jaws posed via the L.Nose / R.Nose bones |
+| Tall Forest Fern (`models/blenderkit-tall-forest-fern.blend`) — Crazy0_0Cat | BlenderKit free plan | BlenderKit Royalty Free (`royalty_free`) | scene 6: blurred jungle fern cards. Also downloaded, not used: Fern Plant - Dense Foliage (Ibrohim Toxirov, royalty_free) |
+
 Tools (not assets): BlenderKit add-on v3.21.3 (GPL-2.0-or-later), mcp-for-blender 1.30.0 (MIT), Blender 5.2.3 LTS (GPL).
