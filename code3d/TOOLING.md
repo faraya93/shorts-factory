@@ -65,3 +65,10 @@ Opt-in per production: `"render_style": "cartoon"` in scenes.json. `cartoon.appl
 before rendering (hooked in `Stage.run` and in scene_02) and restyles by material NAME, so a new asset needs one line in
 `restyle_materials` to land in the same register (unlisted materials keep their library look). Do not change the scene
 scripts for a style change; change the pass. Measured: styling ~1 min, all six scenes ~20 min of final render.
+
+## lace_world animation helpers (v5-drawn)
+- `lace_scene.py` pattern: `args, production, stage, m, SLOT = lw.begin(N)` ... `lw.finish(stage, args, SLOT, update, name)`.
+- `scenes.json` `scene_script_prefix` ("lace") selects `code3d/scenes/<prefix>_NN.py`; default "scene".
+- GOTCHA: `bpy.ops.object.transform_apply(scale=True)` also applies location/rotation unless they are set False (fixed in `shapes`; `suture.box` left as is, v4 depends on it).
+- GOTCHA: never toggle `hide_render` per frame with Freestyle on (Blender 5.2.3 depsgraph crash on frame 2). Use `lw.show(obj, visible)` (parks at z=-500).
+- Check animated scenes with a multi-frame draft (`frames=1-4`), not only stills.
