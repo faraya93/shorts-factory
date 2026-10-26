@@ -94,3 +94,57 @@ def x_lacing(m, rows, g, upto: int, end_a: Vector, end_b: Vector, zl: float = 0.
     B = [lift(eyelet(1 if i % 2 == 0 else -1, rows[i], g)) for i in range(upto + 1)]
     cord(m, A + [end_a], thickness)
     cord(m, B + [end_b], thickness)
+
+
+# ---------------------------------------------------------------------------- animation helpers (v5 production)
+import sys as _sys
+from pathlib import Path as _Path
+
+import bpy as _bpy
+
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+import common as _c  # noqa: E402
+import stage as _st  # noqa: E402
+
+SUN_FROM = Vector((-2.0, -5.0, 7.0))
+ROWS = [-3.4, -1.7, 0.0, 1.7, 3.4]
+
+
+def begin(default_slot: int):
+    """Common start of a lace scene script: returns (args, production, stage, materials, slot_frames)."""
+    args = _c.parse_args()
+    production = _Path(args["production"])
+    stage = _st.Stage(production, args.get("mode", "draft"))
+    return args, production, stage, materials(stage.pal), int(args.get("slot", default_slot))
+
+
+def finish(stage, args, slot: int, update, name: str) -> None:
+    def wrapped(scene_):
+        update(scene_)
+        sun = _bpy.data.objects.get("toon_sun")
+        if sun:
+            sun.rotation_euler = (-SUN_FROM).to_track_quat("-Z", "Y").to_euler()
+    stage.run(wrapped, args, slot, name)
+
+
+def look(stage, target, radius: float, el: float, az: float = 0.0) -> None:
+    _c.orbit(stage.cam, Vector(target), radius, el, az)
+
+
+def pop(k: float) -> float:
+    """0 -> 1 with a small overshoot (a cartoon 'pop'); k in 0..1."""
+    k = min(1.0, max(0.0, k))
+    return k * k * (3 - 2 * k) * (1 + 0.16 * math.sin(math.pi * k))
+
+
+def empty(name: str, loc=(0, 0, 0)):
+    obj = _bpy.data.objects.new(name, None)
+    obj.location = loc
+    _bpy.context.scene.collection.objects.link(obj)
+    return obj
+
+
+def parent(child, root, loc=None) -> None:
+    child.parent = root
+    if loc is not None:
+        child.location = loc

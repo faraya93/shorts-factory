@@ -1,0 +1,125 @@
+{
+  "channel": "pilot",
+  "video": "puntos-de-sutura-v5-drawn",
+  "title": "¿Cómo funcionan los puntos de sutura? 😯",
+  "topic_family": "body",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn production in the lace-up graphic system (owner-approved concepts): every scene is modelled in the cartoon design language from the first object and rendered with the toon pass; code3d is never mixed with diffusion footage.",
+  "hook_question": "¿Por qué los puntos de sutura cierran una herida que no se cierra sola?",
+  "false_belief": "Que una herida profunda se cierra sola si la dejas quieta.",
+  "closing_reframe": "Un punto de sutura no cierra la herida: la mantiene unida mientras tu cuerpo hace el trabajo.",
+  "share_archetype": "ese amigo que se corta cocinando y dice que no necesita puntos",
+  "model": "minimax/h3-max-turbo/text-to-video",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "480P",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values, spec backdrop).",
+  "visual_identity": {
+    "background": {
+      "hex": "#E2D5F1",
+      "description": "soft lavender-white studio backdrop"
+    },
+    "palette": [
+      {
+        "hex": "#E0B0A0",
+        "name": "skin peach"
+      },
+      {
+        "hex": "#D18C7D",
+        "name": "shaded skin"
+      },
+      {
+        "hex": "#C6544B",
+        "name": "tissue red"
+      },
+      {
+        "hex": "#C6CFCE",
+        "name": "steel grey"
+      },
+      {
+        "hex": "#E2D5F1",
+        "name": "backdrop lavender"
+      }
+    ],
+    "lighting": "soft studio lighting",
+    "materials": "smooth clean materials",
+    "unify": {
+      "grain": 0,
+      "vignette_angle": 0
+    },
+    "qa_tolerance_de": 15
+  },
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "effects",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Two boot flaps with bare eyelets open from a closed seam into a very wide red gap; two chubby tapered fingers reach toward each other from the flaps and stop short.",
+      "transformation": "closed boot seam -> a very wide gap with two fingers reaching but not touching",
+      "camera": "slow push-in on the whole boot front, top-down 3/4",
+      "shot_type": "closeup",
+      "target_duration_s": 7,
+      "narration": "¿Cómo funcionan los puntos de sutura? Cuando el corte es profundo, los bordes de la piel quedan demasiado lejos para cerrar solos."
+    },
+    {
+      "id": 2,
+      "name": "curved-needle",
+      "prompt": "A chunky dark-steel needle with an eye, threaded with the lace folded double, slides through the eyelet rings of BOTH flaps; the lace pulls tight and the V-shaped gap closes.",
+      "transformation": "needle outside the left eyelet, open V gap -> lace through both eyelets, gap closed",
+      "camera": "top-down 3/4 boot view, steady",
+      "shot_type": "closeup",
+      "target_duration_s": 10,
+      "narration": "Por eso el médico usa una aguja curva: su forma permite coser sin desgarrar más tejido. El hilo acerca los bordes y los mantiene unidos, porque una herida cerrada sana más rápido y deja menos cicatriz."
+    },
+    {
+      "id": 3,
+      "name": "knots",
+      "prompt": "The criss-cross lace runs up to the top, the strands knot, and a bold bow pops open with its two tails.",
+      "transformation": "laced boot with loose strands -> knotted bold bow",
+      "camera": "slow push-in on the top of the lacing",
+      "shot_type": "closeup",
+      "target_duration_s": 5,
+      "narration": "Cada punto se asegura con nudos diminutos, para que nada se suelte."
+    },
+    {
+      "id": 4,
+      "name": "absorbable",
+      "prompt": "The lace is a chain of beads that shrink from the top down and float away as outline bubbles while the flaps stay shut.",
+      "transformation": "intact bead lace -> no lace left, bubbles drifting up, flaps still closed",
+      "camera": "gentle push-in, steady top-down",
+      "shot_type": "closeup",
+      "target_duration_s": 6,
+      "narration": "Algunos hilos son absorbibles y tu cuerpo los disuelve solos: esos nunca hay que sacarlos."
+    },
+    {
+      "id": 5,
+      "name": "risk",
+      "prompt": "Chunky tweezers pinch a cord sticking out of a tiny hole in one smooth plate and pull it out; the hole closes, the plate is whole again.",
+      "transformation": "cord in a hole -> cord removed, smooth whole plate",
+      "camera": "slow push-in",
+      "shot_type": "closeup",
+      "target_duration_s": 7,
+      "narration": "Pero si dejas los normales demasiado tiempo, la piel crece sobre el hilo y retirarlos se vuelve un problema."
+    },
+    {
+      "id": 6,
+      "name": "ant-twist",
+      "prompt": "A cartoon ant raises two folds of skin and clamps them together with its pincers like a staple.",
+      "transformation": "folds apart, jaws open -> folds pinched together between the jaws",
+      "camera": "low 3/4 view that pulls back and up",
+      "shot_type": "closeup",
+      "target_duration_s": 8,
+      "narration": "Y el dato más loco: durante siglos se usaron hormigas vivas como puntos, porque al morder cerraban la herida con sus mandíbulas."
+    }
+  ],
+  "render_style": "toon",
+  "scene_script_prefix": "lace"
+}

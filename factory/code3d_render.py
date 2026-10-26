@@ -35,7 +35,8 @@ def main() -> int:
     ap.add_argument("--encode-only", action="store_true", help="skip Blender; encode the frames already rendered")
     args = ap.parse_args()
     prod, n = args.production.resolve(), args.scene
-    script = ROOT / "code3d" / "scenes" / f"scene_{n:02d}.py"
+    prefix = json.loads((prod / "scenes.json").read_text(encoding="utf-8")).get("scene_script_prefix", "scene")
+    script = ROOT / "code3d" / "scenes" / f"{prefix}_{n:02d}.py"       # default 'scene': existing productions unchanged
     frames_dir = prod / "build" / "code3d" / f"{args.mode}-scene-{n:02d}"
     slot = narration_slot_frames(prod, n)
 

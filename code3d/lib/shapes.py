@@ -21,7 +21,7 @@ def ellipsoid(name, rx, ry, rz, material, loc=(0, 0, 0), segments=64, rings=32):
     bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=segments, ring_count=rings, location=loc)
     obj = bpy.context.object
     obj.name, obj.scale = name, (rx, ry, rz)
-    bpy.ops.object.transform_apply(scale=True)
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)   # scale ONLY (location/rotation default to True)
     return _finish(obj, material)
 
 
@@ -30,7 +30,7 @@ def rounded_bar(name, hx, hy, hz, material, loc=(0, 0, 0), rot=(0, 0, 0), bevel_
     bpy.ops.mesh.primitive_cube_add(size=2, location=loc, rotation=rot)
     obj = bpy.context.object
     obj.name, obj.scale = name, (hx, hy, hz)
-    bpy.ops.object.transform_apply(scale=True)
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)   # scale ONLY (location/rotation default to True)
     mod = obj.modifiers.new("round", "BEVEL")
     mod.width, mod.segments, mod.limit_method = min(hx, hy, hz) * bevel_frac, 10, "NONE"
     return _finish(obj, material)
