@@ -9,6 +9,7 @@ import bpy
 from mathutils import Vector
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import cartoon  # noqa: E402
 import common as c  # noqa: E402
 
 
@@ -32,6 +33,7 @@ class Stage:
         c.add_light(self.scene, "AREA", (-4.5, -5.5, 7.5), energy=key_energy, size=5.0, target=Vector((0, 0, 0)))
 
     def run(self, update, args: dict, slot: int, name: str) -> None:
+        cartoon.apply_if_requested(self.production, self.scene)   # no-op unless render_style == 'cartoon'
         bpy.app.handlers.frame_change_pre.append(update)
         out = Path(args.get("out", str(self.production / "build" / "code3d" / name)))
         if "stills" in args:

@@ -14,6 +14,7 @@ import bpy
 from mathutils import Vector
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "lib"))
+import cartoon  # noqa: E402
 import common as c  # noqa: E402
 import suture as s  # noqa: E402
 
@@ -111,6 +112,7 @@ def update(scene_):
     c.orbit(cam, Vector((0.0, 0.25, 0.45)), 9.5, 50.0, az)
 
 
+cartoon.apply_if_requested(production, scene)          # no-op unless render_style == 'cartoon'
 bpy.app.handlers.frame_change_pre.append(update)
 out = Path(args.get("out", str(production / "build" / "code3d" / "scene-02")))
 
