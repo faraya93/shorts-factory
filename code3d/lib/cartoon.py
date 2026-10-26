@@ -21,8 +21,12 @@ THREAD_BLACK, JUNGLE_GREEN, FERN_GREEN = "#17171B", "#3B6C4A", "#5E9E6B"   # not
 SKIP_GEOMETRY = {"jungle_back"}
 
 
+def style_of(production: Path) -> str:
+    return json.loads((Path(production) / "scenes.json").read_text(encoding="utf-8")).get("render_style", "photo")
+
+
 def requested(production: Path) -> bool:
-    return json.loads((Path(production) / "scenes.json").read_text(encoding="utf-8")).get("render_style") == "cartoon"
+    return style_of(production) == "cartoon"
 
 
 def _gloss(mat, hex_color: str, roughness: float = GLOSS_ROUGHNESS, metallic: float = 0.0, coat: float = GLOSS_COAT,
@@ -45,7 +49,8 @@ def _gloss(mat, hex_color: str, roughness: float = GLOSS_ROUGHNESS, metallic: fl
         nt.links.new(tex.outputs["Alpha"], bsdf.inputs["Alpha"])
 
 
-def restyle_materials(pal: dict) -> list:
+def material_table(pal: dict) -> dict:
+    """Library/modelled material name -> (palette hex, glossy kwargs). Shared by the cartoon and toon passes."""
     steel, skin, tissue, shaded = pal["steel grey"], pal["skin peach"], pal["tissue red"], pal["shaded skin"]
     by_name = {  # material name -> (hex, kwargs)
         "SSS Skin Shader": (skin, {}), "skin": (skin, {}), "rim": (skin, {}), "mound": (skin, {}), "lip": (skin, {}),
@@ -56,6 +61,11 @@ def restyle_materials(pal: dict) -> list:
         "Ant": (tissue, {}), "Eye": (THREAD_BLACK, dict(roughness=0.08, coat=0.8)),
         "jungle_back": (JUNGLE_GREEN, dict(roughness=0.9, coat=0.0)),
     }
+    return by_name
+
+
+def restyle_materials(pal: dict) -> list:
+    by_name = material_table(pal)
     done = []
     for mat in bpy.data.materials:
         if mat.name in by_name:
@@ -95,7 +105,12 @@ def soften_light() -> None:
 
 def apply_if_requested(production: Path, scene) -> None:
     """Call right before rendering. No-op unless the production asks for render_style 'cartoon'."""
-    if not requested(production):
+    style = style_of(production)
+    if style == "toon":                                 # cel/toon rendering language: its own module
+        import toon
+        toon.apply(production, scene)
+        return
+    if style != "cartoon":
         return
     pal = c.palette(c.identity(Path(production)))
     done = restyle_materials(pal)

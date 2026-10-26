@@ -49,11 +49,11 @@ def reset_scene() -> bpy.types.Scene:
 def setup_render(scene, mode: str = "draft") -> None:
     """draft = half resolution + few samples (iteration); final = 1080x1920 + more samples (rendered once)."""
     scene.render.engine = "BLENDER_EEVEE"
-    scale = 50 if mode == "draft" else 100
+    scale = 50 if mode == "draft" else 100                # "draft-full": 1080x1920 with the draft sample count
     scene.render.resolution_x, scene.render.resolution_y = FULL_W, FULL_H
     scene.render.resolution_percentage = scale
     scene.render.fps = FPS
-    scene.eevee.taa_render_samples = 12 if mode == "draft" else 96
+    scene.eevee.taa_render_samples = 12 if mode.startswith("draft") else 96
     scene.view_settings.view_transform = "Standard"   # the default tone-mapper shifts colours
     scene.view_settings.look = "None"
     scene.render.image_settings.file_format = "PNG"
