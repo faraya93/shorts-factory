@@ -72,3 +72,10 @@ def extruded_polygon(name, pts2d, depth, material, loc=(0, 0, 0), bevel=0.12):
     mod = obj.modifiers.new("round", "BEVEL")
     mod.width, mod.segments, mod.limit_method, mod.angle_limit = bevel, 5, "ANGLE", math.radians(35)
     return _finish(obj, material)
+
+
+def bar_between(name, p0: Vector, p1: Vector, radius: float, material):
+    """A chunky rounded bar from p0 to p1 (cartoon limbs, tweezer arms, pincers)."""
+    d = p1 - p0
+    return rounded_bar(name, radius, d.length / 2, radius, material, loc=(p0 + p1) / 2,
+                       rot=d.to_track_quat("Y", "Z").to_euler())
