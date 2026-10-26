@@ -59,3 +59,9 @@ redirect (renamed repos), package rename, missing `uv`, urllib 403, the add-on's
   lips/mounds); library assets bring their own colours (retint to the palette); a trefoil's end points sit at z = +/-0.9975
   and must be ramped to the skin; set `visible_shadow = False` on ground blocks and fern cards to keep shadows off the backdrop.
 - Driver: `python factory/code3d_render.py <production> <scene> [--mode draft|final]` (slot frames from the narration).
+
+## Cartoon style pass (code3d/lib/cartoon.py)
+Opt-in per production: `"render_style": "cartoon"` in scenes.json. `cartoon.apply_if_requested(production, scene)` runs right
+before rendering (hooked in `Stage.run` and in scene_02) and restyles by material NAME, so a new asset needs one line in
+`restyle_materials` to land in the same register (unlisted materials keep their library look). Do not change the scene
+scripts for a style change; change the pass. Measured: styling ~1 min, all six scenes ~20 min of final render.
