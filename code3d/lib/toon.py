@@ -84,6 +84,13 @@ def _toon_material(mat, hex_color: str, alpha_image=None) -> None:
     nt.links.new(mix.outputs["Shader"], out.inputs["Surface"])
 
 
+def make_material(name: str, hex_color: str):
+    """A new toon material authored directly (for objects modelled in the toon language from the first object)."""
+    mat = bpy.data.materials.new(name)
+    _toon_material(mat, hex_color)
+    return mat
+
+
 def restyle_materials(pal: dict) -> list:
     """Every named material, modelled or downloaded, becomes a toon material of its palette hex."""
     table, done = cartoon.material_table(pal), []

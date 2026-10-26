@@ -15,3 +15,6 @@ productions/**/engine-spike/*
 !productions/**/engine-spike/report.md
 code3d/assets/*
 !code3d/assets/LICENSES.md
+productions/**/spikes/*/*
+!productions/**/spikes/*/scenes.json
+!productions/**/spikes/*/report.md
