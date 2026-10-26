@@ -124,3 +124,31 @@ class Thread:
     def set(self, polyline: list) -> None:
         for point, v in zip(self.spline.points, resample(polyline, self.n)):
             point.co = (v.x, v.y, v.z, 1.0)
+
+
+def knot_polyline(form: float, tight: float, center: Vector, reach: float, base_z: float, scale_loose: float = 0.30,
+                  scale_tight: float = 0.085, m: int = 160) -> list:
+    """A thread along x through `center` that ties an overhand (trefoil) knot.
+    form 0 -> straight thread, 1 -> knot at the loose scale; tight 0 -> loose, 1 -> small tight knot.
+    The strands are identical in both shapes; only the middle section is flattened onto the thread line (form 0)
+    or traces the trefoil (form 1), so the blend never kinks."""
+    scale = scale_loose + (scale_tight - scale_loose) * tight
+    x_end = 2.16 * scale                                # the trefoil's end points, shifted so they sit on y = 0
+    out = []
+    for i in range(m):
+        u = i / (m - 1)
+        if u < 0.25:                                    # left strand into the knot
+            p = Vector((-reach, 0.0, 0.0)).lerp(Vector((-x_end, 0.0, 0.0)), u / 0.25)
+        elif u > 0.75:                                  # right strand out of the knot
+            p = Vector((x_end, 0.0, 0.0)).lerp(Vector((reach, 0.0, 0.0)), (u - 0.75) / 0.25)
+        else:
+            w = (u - 0.25) / 0.5
+            flat = Vector((-x_end + 2 * x_end * w, 0.0, 0.0))
+            ang = (2 * math.pi - 0.5) - w * (2 * math.pi - 1.0)
+            # the trefoil's ends sit at z = +/-0.9975 (before the 0.7 factor): remove that ramp so both ends land on the
+            # skin, and add a small arch so the whole knot stays above it
+            z = 0.7 * (-math.sin(3 * ang) - 0.9975 * (1 - 2 * w)) + 0.9 * math.sin(math.pi * w)
+            knot = Vector((math.sin(ang) + 2 * math.sin(2 * ang), math.cos(ang) - 2 * math.cos(2 * ang) + 0.2, z)) * scale
+            p = flat.lerp(knot, form)
+        out.append(Vector((center.x + p.x, center.y + p.y, base_z + p.z)))
+    return out

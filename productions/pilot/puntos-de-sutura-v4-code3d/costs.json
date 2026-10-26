@@ -41,6 +41,47 @@
         "wound floor",
         "anchor knot"
       ]
+    },
+    {
+      "scene": 3,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 133,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 203.7,
+      "clip": "clips/scene-03.mp4",
+      "timestamp": "2026-10-26T00:46:20+00:00"
+    },
+    {
+      "scene": 3,
+      "engine": "code3d",
+      "kind": "phase_log",
+      "clock": "machine wall clock, 2026-10-25",
+      "phases_min": {
+        "search_download": 0.0,
+        "modelling_and_animation_setup": 0.5,
+        "iteration_rounds": 0.9,
+        "draft_renders": 0.2,
+        "final_render": 3.4,
+        "encode_and_log": 0.1
+      },
+      "iteration_rounds": 3,
+      "total_min": 4.8,
+      "window": "20:41:34-20:46:20",
+      "fal_spend_usd": 0.0,
+      "library_assets_reused": [
+        "skin_half",
+        "wound_floor",
+        "Thread",
+        "common.py render/world/camera",
+        "BlenderKit skin shader",
+        "HDRI"
+      ],
+      "new": [
+        "stage.py (shared setup)",
+        "suture.knot_polyline",
+        "scene_03.py"
+      ]
     }
   ]
 }
