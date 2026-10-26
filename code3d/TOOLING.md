@@ -72,3 +72,9 @@ scripts for a style change; change the pass. Measured: styling ~1 min, all six s
 - GOTCHA: `bpy.ops.object.transform_apply(scale=True)` also applies location/rotation unless they are set False (fixed in `shapes`; `suture.box` left as is, v4 depends on it).
 - GOTCHA: never toggle `hide_render` per frame with Freestyle on (Blender 5.2.3 depsgraph crash on frame 2). Use `lw.show(obj, visible)` (parks at z=-500).
 - Check animated scenes with a multi-frame draft (`frames=1-4`), not only stills.
+
+## Glossy 3D cartoon stage (v6-staged)
+- `boot_world.py`: GlossStage (Principled materials, sun angle 9 deg for soft shadows, HDRI ambient, DOF aperture 0.45, sensor_height 36), `build_boot`, `Flaps`, `adopt` (parents panel-frame objects to the pitched panel), `back()` springy ease, `look()` orbit + DOF focus.
+- GOTCHA: with sensor_fit VERTICAL set sensor_height = 36, or the camera is far tighter than with AUTO.
+- GOTCHA: a Coat layer on a transparent Principled material makes it opaque (bubbles): use coat 0 + alpha, surface_render_method BLENDED.
+- Machine sleep during unattended renders inflates render_seconds; compare frame-file timestamps (gaps > 60 s) for the active time.
