@@ -158,6 +158,41 @@
       "new": [
         "scene_04.py (layered cross-section, dissolving thread loop)"
       ]
+    },
+    {
+      "scene": 5,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 185,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 227.9,
+      "clip": "clips/scene-05.mp4",
+      "timestamp": "2026-10-26T01:01:57+00:00"
+    },
+    {
+      "scene": 5,
+      "engine": "code3d",
+      "kind": "phase_log",
+      "clock": "machine wall clock, 2026-10-25",
+      "phases_min": {
+        "search_download": 1.0,
+        "modelling_and_animation_setup": 1.0,
+        "iteration_rounds": 1.0,
+        "draft_renders": 0.1,
+        "final_render": 3.8,
+        "encode_and_log": 0.1
+      },
+      "iteration_rounds": 2,
+      "total_min": 5.9,
+      "window": "20:56:02-21:01:57",
+      "fal_spend_usd": 0.0,
+      "library_assets_used": [
+        "BlenderKit Tweezers (tier 1, retinted to the palette)"
+      ],
+      "new": [
+        "props.load_tweezers",
+        "scene_05.py (stitch row, growing skin, lift)"
+      ]
     }
   ]
 }

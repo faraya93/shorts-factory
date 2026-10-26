@@ -12,4 +12,6 @@ line in the video description; Tripo's free tier is non-commercial — never use
 | Fabric079 (2K-JPG PBR, `materials/Fabric079/`) | ambientCG | CC0 | suture thread (black fabric) — tested; may be swapped for plain black |
 | SSS Skin Shader (`materials/blenderkit-sss-skin-shader.blend`; baseId 7cdb3a36-e89f-4c92-b8cd-e5cc5ab2c786) — Juan Mazzara | BlenderKit free plan (anonymous API download) | BlenderKit Royalty Free (`royalty_free`) | stylized subsurface skin: a procedural shader, so no realistic skin texture |
 
+| Tweezers (`models/blenderkit-tweezers.blend`; baseId in the sidecar json) — Yahya Janani | BlenderKit free plan (anonymous API download) | BlenderKit Royalty Free (`royalty_free`) | scene 5: the tweezers that lift the stitch (plastic retinted to the palette's steel grey) |
+
 Tools (not assets): BlenderKit add-on v3.21.3 (GPL-2.0-or-later), mcp-for-blender 1.30.0 (MIT), Blender 5.2.3 LTS (GPL).
