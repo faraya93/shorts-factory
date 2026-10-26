@@ -27,3 +27,22 @@ Scripts, not GUI: `blender -b --python <script> -- <args>` is the primary, deter
 ## Part 2 cost (reported separately from any scene)
 Wall clock 20:13 -> ~20:19 (about 6 min of the 45 min timebox); effort MEDIUM; fal spend $0. Course corrections: GitHub API
 redirect (renamed repos), package rename, missing `uv`, urllib 403, the add-on's background-mode refusal.
+
+## Reusable library built in v4 scene 2 (code3d/lib/) — reuse, never remodel
+- `common.py`: exact-hex colours from the production's visual_identity (`identity`, `palette`, `linear`), render setup with
+  DRAFT (540x960, 12 samples) and FINAL (1080x1920, 96 samples) modes, `studio_world` (HDRI lights the scene, the camera
+  sees the exact spec backdrop via Light Path "Is Camera Ray"), `orbit` camera, area light, `principled`, `append_material`
+  (appends a library material from code3d/assets without re-downloading), `smooth` easing, `render_frames`.
+- `suture.py`: `box`, `skin_half` (peach skin layer over a red tissue block, bevelled), `wound_floor`, `curved_needle`
+  (tapered arc tube whose origin is the circle centre, so one rotation about y drives it through the skin), `arc_points`,
+  `resample`, `Thread` (thin tube whose polyline is rewritten every frame by a frame_change_pre handler).
+- Scene recipe (code3d/scenes/scene_NN.py): reset scene -> render/world setup -> materials (library skin shader tinted to
+  palette hexes) -> objects from the library -> a `frame_change_pre` handler that poses everything from time `t` ->
+  stills for iteration (`stills=f1,f2`) or an animation (`frames=a-b`). Driver: `python factory/code3d_render.py
+  <production> <scene> [--mode draft|final]` (slot frames come from the narration, the clip gets the exact frame count,
+  the render is logged to costs.json).
+- Material choices made for speed: the BlenderKit SSS Skin Shader (library) tinted to palette skin peach / shaded skin /
+  tissue red; steel needle = Principled metallic in the palette's steel grey (the ambientCG Metal063 textures are
+  pointless on a 0.1-unit tube and the tube has no UVs); thread = plain near-black Principled; HDRI = Poly Haven
+  studio_small_08. Fabric079 was downloaded but not used.
+- Observed speeds (Apple Silicon, EEVEE): ~0.11 s/frame draft, ~1.4 s/frame final for this scene.

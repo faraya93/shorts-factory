@@ -1,0 +1,46 @@
+{
+  "model": "blender-5.2.3-eevee",
+  "engine": "code3d",
+  "seed": 1531005828,
+  "entries": [
+    {
+      "scene": 2,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 367,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 497.0,
+      "clip": "clips/scene-02.mp4",
+      "timestamp": "2026-10-26T00:33:37+00:00",
+      "note": "final render measured from the blender command (20:25:06-20:33:23); frames encoded with --encode-only"
+    },
+    {
+      "scene": 2,
+      "engine": "code3d",
+      "kind": "phase_log",
+      "clock": "machine wall clock, 2026-10-25",
+      "phases_min": {
+        "search_download": 1.6,
+        "modelling_and_animation_setup": 3.0,
+        "iteration_rounds": 2.0,
+        "draft_renders": 0.8,
+        "final_render": 8.3,
+        "encode_assembly_checks": 2.0
+      },
+      "iteration_rounds": 3,
+      "total_min": 17.7,
+      "fal_spend_usd": 0.0,
+      "library_assets_used": [
+        "BlenderKit SSS Skin Shader",
+        "Poly Haven studio_small_08 HDRI"
+      ],
+      "modelled": [
+        "curved needle",
+        "thread rig",
+        "skin halves",
+        "wound floor",
+        "anchor knot"
+      ]
+    }
+  ]
+}
