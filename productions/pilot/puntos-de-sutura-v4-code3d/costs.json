@@ -82,6 +82,44 @@
         "suture.knot_polyline",
         "scene_03.py"
       ]
+    },
+    {
+      "scene": 1,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 242,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 256.4,
+      "clip": "clips/scene-01.mp4",
+      "timestamp": "2026-10-26T00:52:21+00:00"
+    },
+    {
+      "scene": 1,
+      "engine": "code3d",
+      "kind": "phase_log",
+      "clock": "machine wall clock, 2026-10-25",
+      "phases_min": {
+        "search_download": 0.0,
+        "modelling_and_animation_setup": 1.0,
+        "iteration_rounds": 0.5,
+        "draft_renders": 0.1,
+        "final_render": 4.3,
+        "encode_and_log": 0.2
+      },
+      "iteration_rounds": 2,
+      "total_min": 5.8,
+      "window": "20:46:31-20:52:21",
+      "fal_spend_usd": 0.0,
+      "library_assets_reused": [
+        "stage.py",
+        "common.py",
+        "BlenderKit skin shader",
+        "HDRI"
+      ],
+      "new": [
+        "body.Forearm (slit tube, reusable)",
+        "scene_01.py"
+      ]
     }
   ]
 }
