@@ -137,6 +137,14 @@ def pop(k: float) -> float:
     return k * k * (3 - 2 * k) * (1 + 0.16 * math.sin(math.pi * k))
 
 
+def show(obj, visible: bool) -> None:
+    """Show/hide by PARKING the object far below the stage (toggling hide_render per frame crashes Blender 5.2's depsgraph
+    when Freestyle is on). Keeps the object's own location in a custom property and restores it when visible again."""
+    if "home_z" not in obj:
+        obj["home_z"] = obj.location.z
+    obj.location.z = obj["home_z"] if visible else -500.0
+
+
 def empty(name: str, loc=(0, 0, 0)):
     obj = _bpy.data.objects.new(name, None)
     obj.location = loc

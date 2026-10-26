@@ -38,13 +38,12 @@ def update(scene_):
     for bead, gi in beads:
         s_ = 1.0 - min(1.0, max(0.0, (front - gi) / 0.42))
         bead.scale = (s_, s_, s_)
-        bead.hide_render = s_ < 0.1
+        lw.show(bead, s_ >= 0.1)
     for ring, gi, p, i in bubbles:                                           # what dissolved floats up as an outline bubble
         a = min(1.0, max(0.0, (front - gi - 0.17) / 0.7))
         size = c.smooth(0.0, 0.2, a) * (1 - c.smooth(0.8, 1.0, a)) * (0.55 + 0.45 * ((i * 5) % 7) / 6)
-        ring.hide_render = size < 0.06
         ring.scale = (size, size, size)
-        ring.location = (p.x * 0.5 + 0.5 * math.sin(i), p.y + 0.9 * a * (1 + 0.3 * (i % 4)), 0.9 + 3.0 * a)
+        ring.location = (p.x * 0.5 + 0.5 * math.sin(i), p.y + 0.9 * a * (1 + 0.3 * (i % 4)), 0.9 + 3.0 * a if size >= 0.06 else -500.0)
     k = c.smooth(0.0, T, t)
     lw.look(stage, (0, 1.2, 1.0), 22.0 - 1.5 * k, 66)
 

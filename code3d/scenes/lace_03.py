@@ -45,11 +45,12 @@ def update(scene_):
         thread.set(pts + [path[-1].lerp(KNOT, end)])
     kscale = lw.pop((t - 1.0) / 0.9)
     knot.scale = (0.36 * kscale, 0.34 * kscale, 0.3 * kscale)
-    knot.hide_render = kscale < 0.02
+    lw.show(knot, kscale >= 0.02)
     loop_s = lw.pop((t - 1.7) / 1.4)
     tail_f = c.smooth(2.5, 3.6, t)
     for loop_t, loop, tail_t, tail in bow:
-        loop_t.obj.hide_render = tail_t.obj.hide_render = loop_s < 0.03
+        lw.show(loop_t.obj, loop_s >= 0.03)
+        lw.show(tail_t.obj, loop_s >= 0.03)
         loop_t.set([KNOT + (p - KNOT) * max(loop_s, 0.02) for p in loop])
         tail_t.set(tail[:max(2, int(len(tail) * tail_f))])
     k = c.smooth(0.0, T, t)

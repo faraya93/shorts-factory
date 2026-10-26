@@ -56,7 +56,7 @@ def update(scene_):
     cord.set([E * ((1 - u) ** 2) + C * (2 * u * (1 - u)) + Q * (u * u) for u in [i / 40 for i in range(41)]])
     h = 1 - c.smooth(4.8, 5.6, t)                                         # the hole closes: the surface is whole again
     hole.scale = (h, h, h)
-    hole.hide_render = h < 0.03
+    lw.show(hole, h >= 0.03)
     k = c.smooth(0.0, T, t)
     lw.look(stage, (0, 1.2, 1.4), 22.0 - 1.5 * k, 60)
 
