@@ -17,12 +17,13 @@ VALID = {
     "closing_reframe": "No está floja: se mueve el grosor de la propia punta.",
     "share_archetype": "ese amigo que siempre mide mal",
     "style": "Bright stylized 3D cartoon animation, no text on screen.",
-    "audio_style": "Audio: foley only.",
     "scenes": [
         {"id": 1, "name": "hook", "prompt": "A tape measure on a table.", "narration": "x", "target_duration_s": 5,
-         "transformation": "closed tape → fully extended tape", "camera": "slow orbit around the tape"},
+         "transformation": "closed tape → fully extended tape", "camera": "slow orbit around the tape",
+         "foley": "a soft metallic slide as the tape extends"},
         {"id": 2, "name": "tip", "prompt": "The metal tip slides.", "narration": "y", "target_duration_s": 5,
-         "transformation": "tip pressed in → tip pulled out", "camera": "tracks along the blade"},
+         "transformation": "tip pressed in → tip pulled out", "camera": "tracks along the blade",
+         "foley": "a short metallic click of the tip sliding"},
     ],
 }
 
@@ -147,12 +148,27 @@ def test_every_engine_assignment_is_logged_with_a_reason():
 def test_prompt_assembly_order():
     prompt = build_prompt(VALID, VALID["scenes"][0])
     order = [VALID["style"], VALID["scenes"][0]["prompt"], "Transformation during the shot: closed tape becoming "
-             "fully extended tape.", "Camera: slow orbit around the tape.", VALID["audio_style"]]
+             "fully extended tape.", "Camera: slow orbit around the tape.", "Audio: the only sounds are a soft metallic "
+             "slide as the tape extends. No music, no soundtrack, no background score"]
     positions = [prompt.index(part) for part in order]
     assert positions == sorted(positions), prompt
-    no_audio = copy.deepcopy(VALID)
-    del no_audio["audio_style"]
-    assert build_prompt(no_audio, no_audio["scenes"][0]).endswith("Camera: slow orbit around the tape.")
+    assert prompt.endswith("No music, no soundtrack, no background score, no voices, no narration.")
+
+
+def test_every_model_scene_names_its_foley_and_never_asks_for_music():
+    expect(scene_errors(0, foley=None), "scene 1: missing foley")
+    expect(scene_errors(0, foley="  "), "missing foley")
+    expect(scene_errors(0, foley="soft background music and a click"), "not music")
+    cfg = copy.deepcopy(VALID)
+    cfg["primary_engine"] = "code3d"
+    cfg["style"] = "Flat code render."
+    for s in cfg["scenes"]:
+        s.pop("foley")
+    assert validate_production(cfg) == []   # code3d clips carry no model audio, so no foley request is needed
+    legacy = copy.deepcopy(VALID)
+    legacy["audio_style"] = "Audio: legacy clause."
+    del legacy["scenes"][0]["foley"]
+    assert build_prompt(legacy, legacy["scenes"][0]).endswith("Audio: legacy clause.")
 
 
 def test_effective_engine():

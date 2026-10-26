@@ -103,9 +103,10 @@ where judgment is involved.
   renames the object/fact), share_archetype (the specific person the
   spoken closing names). Scene level: transformation ("start state → end
   state"), camera (how it moves; static is rejected), plus id, name,
-  prompt, narration, target_duration_s. Optional: engine_override
+  prompt, narration, target_duration_s, and foley (the diegetic sounds
+  wanted; required for t2v/keyframes scenes). Optional: engine_override
   ("keyframes", only inside a t2v production; needs engine_override_reason),
-  audio_style, caption_draft, shot_type, qa_note, data_overlays,
+  audio_style (legacy), caption_draft, shot_type, qa_note, data_overlays,
   visual_identity. engine_reason (one line: why this primary engine) is
   REQUIRED at production level. A route listed in
   scenes_schema.DISABLED_ROUTES is rejected as primary engine or override.
@@ -133,8 +134,27 @@ where judgment is involved.
   separating music from foley, report the values. A missing or null
   music_file skips the layer and says so in the run summary — never a
   failure. Different channels declare different profiles; never
-  hard-code a recipe in the editor. The optional "audio_style" field in
-  scenes.json is appended to every producer prompt.
+  hard-code a recipe in the editor.
+- Clip-audio REQUEST doctrine (standing requirement, owner 2026-10-25):
+  every model-generated video request must (a) positively name the exact
+  diegetic sounds wanted for that scene and (b) explicitly forbid music:
+  "no music, no soundtrack, no background score". This is enforced in
+  code: each t2v/keyframes scene REQUIRES a `foley` field (diegetic
+  sounds only, never the word music) and the producer builds the audio
+  clause from a fixed template — "Audio: the only sounds are <foley>. No
+  music, no soundtrack, no background score, no voices, no narration."
+  (scenes_schema.audio_clause; the old production-level audio_style is a
+  legacy fallback only). The request is BEST-EFFORT, never trusted.
+  Measured compliance with the earlier softer clause: v2 3 of 6 clips
+  clean, v3 2 of 6. The clip-audio gate remains the enforcement
+  mechanism, with a known limit: it measures mean volume of ONE mixed
+  stem, so a muted clip loses its real animation foley together with the
+  music, and a quiet clip it admits may still carry quiet music (the
+  owner heard model music in ALL v3 clips, some also with real foley such
+  as the ant biting or the wound opening — v3 ended with no animation
+  sound). FUTURE WORK, not built: an Editor SFX-library layer (hand-placed
+  sound effects per scene, decoupled from the video model's audio) as the
+  durable fix.
 - Data overlays (editor): a scene may declare data_overlays, a list of
   {type: counter | bar | label, text_or_value, at_offset_seconds,
   duration_s?, visible_s?}, timed from the scene's narration start and

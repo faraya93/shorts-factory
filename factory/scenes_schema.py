@@ -31,6 +31,10 @@ HOOK_OPENINGS = {
 }
 ARROW_RE = re.compile(r"\s*(?:→|->)\s*")
 STATIC_CAMERAS = {"static", "fixed", "still", "none", "locked"}
+# Every model-generated video request names the exact diegetic sounds wanted AND forbids music. The request is
+# best-effort, never trusted: the editor's clip-audio gate is the enforcement mechanism.
+NO_MUSIC_CLAUSE = "No music, no soundtrack, no background score, no voices, no narration."
+MODEL_ENGINES = ("t2v", "keyframes")  # routes whose clips come with model-generated audio
 
 PRODUCTION_TEXT_FIELDS = ("hook_question", "closing_reframe", "share_archetype")
 SCENE_FIELDS = ("id", "name", "prompt", "narration", "target_duration_s", "transformation", "camera")
@@ -116,6 +120,13 @@ def validate_production(cfg: dict) -> list[str]:
         if "qa_note" in s and not str(s["qa_note"]).strip():
             errors.append(f"scene {sid}: qa_note must not be empty")
 
+        if effective_engine(cfg, s) in MODEL_ENGINES:
+            foley = str(s.get("foley", "")).strip()
+            if not foley:
+                errors.append(f"scene {sid}: missing foley (the exact diegetic sounds wanted, e.g. 'a soft thread pull')")
+            elif "music" in foley.lower():
+                errors.append(f"scene {sid}: foley must name diegetic sounds only, not music: {foley!r}")
+
         if "data_overlays" in s:
             errors += validate_scene_overlays(sid, s["data_overlays"])
 
@@ -138,7 +149,7 @@ def validate_production(cfg: dict) -> list[str]:
 
 def build_prompt(cfg: dict, scene: dict) -> str:
     """Final generation prompt: style + visual identity (if any) + scene prompt + transformation + camera
-    + audio_style (if any)."""
+    + the audio clause (scene foley + music ban)."""
     start, end = ARROW_RE.split(scene["transformation"].strip(), maxsplit=1)
     parts = [cfg["style"].strip()]
     if cfg.get("visual_identity"):  # every engine consumes the identity literally, right after the style string
@@ -146,9 +157,17 @@ def build_prompt(cfg: dict, scene: dict) -> str:
     parts += [scene["prompt"].strip(),
              f"Transformation during the shot: {start.strip().rstrip('.')} becoming {end.strip().rstrip('.')}.",
              f"Camera: {scene['camera'].strip().rstrip('.')}."]
-    if cfg.get("audio_style"):
-        parts.append(cfg["audio_style"].strip())
+    parts.append(audio_clause(cfg, scene))
     return " ".join(parts)
+
+
+def audio_clause(cfg: dict, scene: dict) -> str:
+    """The audio part of a video request: the scene's diegetic sounds, named positively, plus the music ban.
+    A production-level audio_style is only a legacy fallback for scenes without `foley`."""
+    foley = str(scene.get("foley", "")).strip().rstrip(".")
+    if foley:
+        return f"Audio: the only sounds are {foley}. {NO_MUSIC_CLAUSE}"
+    return str(cfg.get("audio_style", "")).strip()
 
 
 if __name__ == "__main__":
