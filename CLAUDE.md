@@ -317,6 +317,9 @@ engines automatically from these rules; the owner is never asked.
 - Definitive music tracks are downloaded from the official source
   (incompetech.com), not from mirrors. Mirrors are acceptable only for
   throwaway calibration placeholders. Music files are media: gitignored.
+- Drawn (cartoon/toon) code3d productions are modelled in the channel's
+  cartoon design language from the first object (lace-world system,
+  owner-approved 2026-10-25); never model realistic and restyle afterwards.
 - Report failures and semantically wrong renders plainly; never work
   around them silently.
 - The owner approves topics, scripts, spend and publishing. You cannot
