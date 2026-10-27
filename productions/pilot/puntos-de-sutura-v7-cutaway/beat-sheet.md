@@ -1,6 +1,6 @@
-# puntos de sutura, v7 "cutaway": beat sheet for approval (NOTHING GENERATED, $0)
+# puntos de sutura, v7 "cutaway": beat sheet (APPROVED with decisions 2026-10-26; nothing generated yet, $0 so far)
 
-Status: DRAFT for owner approval. No scenes.json, no render, no fal call exists for v7. Doctrine: CLAUDE.md "Reference doctrine"; rules R1-R16 are those of docs/reference-format-spec.md; look rules are those of docs/reference-style-spec.md.
+Status: APPROVED v1.1 (decisions and sourced numbers locked in, see section 7). No scenes.json, no render, no fal call exists for v7 yet. Doctrine: CLAUDE.md "Reference doctrine"; rules R1-R16 are those of docs/reference-format-spec.md; look rules are those of docs/reference-style-spec.md.
 Baseline: the v4 narration and its measured word timings (productions/pilot/puntos-de-sutura-v4-code3d/audio/scene-0N.words.json). Word-lock offsets below are SECONDS FROM THE START OF THE SENTENCE, taken from those timings, so they stay valid when the lines shift; the two new lines and the new hook need TTS before their offsets exist.
 
 ## 0. Concept in one paragraph
@@ -11,7 +11,7 @@ Lines L2-L8 are the owner-approved v4 script, unchanged. Three lines are NEW or 
 
 | # | Line | Status |
 |---|---|---|
-| H | "¿Por qué la aguja recta no sirve para coser una herida?" | NEW, replaces v4's "¿Cómo funcionan los puntos de sutura?" (a "¿Cómo…?" opener, which flopped in the references and names no needle, so it cannot carry the contrast hook). Approved opening family for body: "¿Por qué…". Everyday object (a sewing needle) + the false belief ("any needle works"). ~11 words, ~3.6 s. |
+| H | "¿Por qué la aguja recta no sirve para coser una herida?" | NEW, APPROVED. Replaces v4's "¿Cómo funcionan los puntos de sutura?" (a "¿Cómo…?" opener, which flopped in the references and names no needle, so it cannot carry the contrast hook). Approved opening family for body: "¿Por qué…". Everyday object (a sewing needle) + the false belief ("any needle works"). ~11 words, ~3.6 s. |
 | L2 | "Cuando el corte es profundo, los bordes de la piel quedan demasiado lejos para cerrar solos." | v4 |
 | L3 | "Por eso el médico usa una aguja curva: su forma permite coser sin desgarrar más tejido." | v4 |
 | L4 | "El hilo acerca los bordes y los mantiene unidos, porque una herida cerrada sana más rápido y deja menos cicatriz." | v4 |
@@ -19,8 +19,8 @@ Lines L2-L8 are the owner-approved v4 script, unchanged. Three lines are NEW or 
 | L6 | "Algunos hilos son absorbibles y tu cuerpo los disuelve solos: esos nunca hay que sacarlos." | v4 |
 | L7 | "Pero si dejas los normales demasiado tiempo, la piel crece sobre el hilo y retirarlos se vuelve un problema." | v4 |
 | L8 | "Y el dato más loco: durante siglos se usaron hormigas vivas como puntos, porque al morder cerraban la herida con sus mandíbulas." | v4 |
-| C1 | "Un punto de sutura no cierra la herida: la mantiene unida mientras tu cuerpo hace el trabajo." | NEW to the spoken script: it is the production's `closing_reframe` field, which the v4 narration never spoke (a known script gap) |
-| C2 | "Sígueme, y envíaselo a ese amigo que se corta cocinando y dice que no necesita puntos." | NEW to the spoken script: built from the production's `share_archetype` field |
+| C1 | "Un punto de sutura no cierra la herida: la mantiene unida mientras tu cuerpo hace el trabajo." | NEW, APPROVED. NEW to the spoken script: it is the production's `closing_reframe` field, which the v4 narration never spoke (a known script gap) |
+| C2 | "Sígueme, y envíaselo a ese amigo que se corta cocinando y dice que no necesita puntos." | NEW, APPROVED. NEW to the spoken script: built from the production's `share_archetype` field |
 
 Length: v4 was 43.9 s; with H, C1 and C2 the narration is about 55 s (estimate at 2.87 words/s) plus a 4 s end card, about 59 s total. The body band in CLAUDE.md is 40-50 s and the standard band 45-60 s, so this is over the body band by ~5 s and inside the standard band. Decision needed (section 6).
 
@@ -70,14 +70,14 @@ Event types: XRAY, TRANSFORM, MULT, SCALE, CONTRAST, BEFORE/AFTER, METAPHOR, NUM
 | # | Word lock | EVENT | Rig element (+1) | Camera | Graphics / colour |
 |---|---|---|---|---|---|
 | 19 | "absorbibles" t+0.78 | Two thread types sit in the tissue; the pale one is tagged. | absorbable thread | cutaway orbit | label ABSORBIBLE |
-| 20 | "cuerpo" t+1.61, "disuelve" t+2.04 | XRAY + TRANSFORM: small body cells (yellow-green) gather; the pale thread breaks into particles from the middle. A progress ring fills with NO figure (number audit). | body cells | push-in | yellow-green cells, ring |
+| 20 | "absorbibles" t+0.78 -> "solos" t+2.44 (counter), "cuerpo" t+1.61, "disuelve" t+2.04 | XRAY + TRANSFORM + NUMBER: small body cells (yellow-green) gather; the pale thread breaks into particles from the middle while a DAY COUNTER beside the block runs from DÍA 0 to DÍA 70 and lands on 70 exactly when the thread is gone. A slim strength bar drops to 50% as the counter passes day 21 (chip "~50% de resistencia, ~3 semanas") and is NOT extrapolated beyond that figure. Citation line: "Vicryl" (source wording to confirm, section 7). | body cells, day counter, strength bar | push-in | counter mono, chip teal, cells yellow-green |
 | 21 | "nunca" t+3.30, "sacarlos" t+3.88 | CONTRAST: tweezers come toward the empty path, a red X appears, they retreat. | tweezers | hold | red X |
 
 ### Line L7: "Pero si dejas los normales demasiado tiempo, la piel crece sobre el hilo y retirarlos se vuelve un problema."
 | # | Word lock | EVENT | Rig element (+1) | Camera | Graphics / colour |
 |---|---|---|---|---|---|
 | 22 | "normales" t+0.80 | The dark non-absorbable thread stays; it is tagged. | normal thread | orbit | label NORMAL |
-| 23 | "demasiado tiempo" t+1.21-1.74 | A time-lapse ring sweeps (NO figure); new skin tissue starts to grow from both lips, glowing gold. | growth front | push-in | gold = growth |
+| 23 | "demasiado tiempo" t+1.21-1.74 | NUMBER x3: three chips appear in a staggered row (0.3 s apart) while new skin tissue starts to grow from both lips, glowing gold: CARA 3-5 días, TRONCO 7-10 días, EXTREMIDADES Y ARTICULACIONES 10-14 días. Citation line: "Guías clínicas". | growth front, 3 removal chips | push-in | chips teal, growth gold |
 | 24 | "piel crece sobre el hilo" t+2.49-3.32 | BEFORE/AFTER + XRAY: the new epidermis overgrows and buries the thread. | buried thread | cutaway, tilt | none |
 | 25 | "retirarlos" t+3.62, "problema" t+4.69 | The tweezers pull; the thread will not come: the tissue tents upward, red flash on the tent. | tweezers again | tracking | red |
 
@@ -85,9 +85,9 @@ Event types: XRAY, TRANSFORM, MULT, SCALE, CONTRAST, BEFORE/AFTER, METAPHOR, NUM
 | # | Word lock | EVENT | Rig element (+1) | Camera | Graphics / colour |
 |---|---|---|---|---|---|
 | 26 | "dato más loco" t+0.27-0.73 | Transition: the camera pulls out and tilts the rig flat; a chunky ant silhouette crosses the lip. | ant silhouette | pull-out | none |
-| 27 | "durante siglos" t+1.32-1.65 | NUMBER (flagged): a timeline bar spans the frame left to right with the single word SIGLOS. NO figure until sourced (number audit). | timeline chip | static graphic over a slow drift | teal chip |
-| 28 | "hormigas vivas" t+2.45-2.90 | The ant (chunky, from primitives) walks to the wound. | ANT | push-in | none |
-| 29 | "morder" t+4.40, "cerraban" t+4.70 | SCALE + TRANSFORM: zoom on the jaws; they clamp BOTH lips; the lips pull together. No gore: the ant stays whole. | jaws | macro push | gold pinch at the clamp |
+| 27 | "durante siglos" t+1.32-1.65 | NUMBER + SOURCE: a timeline chip "~500 a. C." with the tag SUSHRUTA and the citation "Sushruta Samhita". | timeline chip | slow drift under the graphic | teal chip |
+| 28 | "hormigas vivas" t+2.45-2.90 | The ant (black, chunky, from primitives; black ants per the source) walks to the wound. | ANT | push-in | none |
+| 29 | "morder" t+4.40, "cerraban" t+4.70 | SCALE + TRANSFORM: zoom on the jaws; they clamp BOTH lips; the lips pull together; the jaws stay as the staple (the source: black ants' jaws left as staples). Stylized and non-graphic; no gore. | jaws | macro push | gold pinch at the clamp |
 | 30 | "mandíbulas" t+5.94 | MULT: two more ants clamp along the wound; it is closed. | ant row | pull-back | none |
 
 ### Line C1 (reframe, ~5.9 s, TBD): "Un punto de sutura no cierra la herida: la mantiene unida mientras tu cuerpo hace el trabajo."
@@ -110,27 +110,27 @@ Density check: 35 events across ~55 s of narration = about 1.6 s per event, dens
 ## 3. Hero-rig ledger (+1 element per fact)
 Hook: wound block + straight needle + curved needle -> L2: layer labels, depth bracket, lip tags, gap bracket -> L3: needle-holder, arc guide, THREAD, ghost path -> L4: TENSION glow, second wound, healing bars, macro skin -> L5: KNOT, stitch row, unknotted counter-stitch -> L6: absorbable thread, body cells, tweezers -> L7: normal thread, growth front, buried thread -> L8: ant (and two more) -> C1: gold bridge -> C2: phone frame. The camera orbits, pushes or pulls in every event; no static hold exceeds ~1 s.
 
-## 4. Number audit (R5: every number is a screen object; no source = flag, never invent)
-The v4 narration contains ONE explicit quantity word and several implied quantities. No digit appears in the script and the repo holds NO source for any figure. Nothing below is shown as a figure.
+## 4. Number audit (R5: every number is a screen object; sourced figures locked 2026-10-26)
+The spoken script still contains no digits; the figures are screen objects timed to the spoken words. Sources are the owner's (decision 3); I have not independently re-verified them.
 
-| Where | Quantity in the narration | Screen object planned | Status |
-|---|---|---|---|
-| L8 | "durante siglos" (centuries) | timeline chip with the word SIGLOS only (event 27) | FLAG: no source and no figure. Also the claim itself ("live ants used as stitches, for centuries") has no source in the repo. Needs your source or approval before production. |
-| L4 | "más rápido" (heals faster) | two healing bars, no figures (event 14) | FLAG: if you want figures (healing time of closed vs open wounds) they need a source. |
-| L7 | "demasiado tiempo" (too long) | time-lapse ring, no figure (event 23) | FLAG: a day counter (when stitches should come out) would be the strongest object here; the figure varies by body site and needs a source. |
-| L6 | dissolving time of absorbable thread | progress ring, no figure (event 20) | FLAG: needs a source before any chip. |
-| L2 | "demasiado lejos" (gap distance) | bracket, no figure (event 7) | FLAG: no figure. |
-| L5 | "cada punto" (how many stitches) | stitch row, no counter (event 17) | no figure used |
+| Where | Figure (on screen) | Screen object | Cited on screen as | Status |
+|---|---|---|---|---|
+| L8, event 27 | ~500 BCE: ants' jaws as staples (black ants) | timeline chip "~500 a. C." + tag SUSHRUTA | "Sushruta Samhita" | LOCKED (owner-sourced) |
+| L6, event 20 | absorbable thread fully absorbed in 56-70 days; ~50% strength at ~3 weeks | DÍA counter 0 -> 70 (mono), strength bar to 50% at day 21, chip "~50% de resistencia, ~3 semanas" | "Vicryl" | LOCKED. Counter ends at 70 (the top of the 56-70 range); no strength value is shown beyond the 3-week figure. |
+| L7, event 23 | removal: face 3-5 days; trunk 7-10; limbs/joints 10-14 | three chips | "Guías clínicas" | LOCKED (owner-sourced) |
+| L4, event 14 | "más rápido" | two healing bars, NO figures | none | qualitative by decision |
+| L2, event 7 | "demasiado lejos" (gap) | bracket, NO figure | none | figure-less by decision |
+| L5, event 17 | "cada punto" (stitch count) | stitch row, NO counter | none | figure-less by decision |
 
-Net: the references carry numbers on almost every beat (counters, chips, years). This script has none, so these beats are weaker than the references until sources are supplied; this is the main content gap.
+Citation wording: the owner gave source names for the ant claim ("Sushruta Samhita") and for removal times ("clinical guidelines"); for Vicryl he gave the product and figures but no source name, so the on-screen line is just "Vicryl". The approximate "~500 a. C." keeps its tilde because the dating of the text is traditional/approximate. Confirm the exact citation strings when approving the build.
 
 ## 5. Doctrine compliance (format spec rules)
-R1 every sentence an event: yes (35 events). R2 hook contrast in 3 s: events 1-3. R3 cutaway: events 4, 20, 24. R4 multiplication: events 14, 17, 30. R5 numbers as objects: BLOCKED by sourcing (section 4). R6 counter-actor: events 11, 18, 21. R7 named-person micro-scene: not used (no "imagine" line in the script). R8 cards/citations: none (needs sources). R9 home experiment: not applicable. R10 reframe single image: event 31. R11 acted-out CTA + end card: events 32-35. R12 word-lock: columns above (offsets measured for v4 lines). R13 meaningful transitions: events 3, 16, 26. R14 one rig revisited: yes. R15 labels while named: yes. R16 colour semantics: gold only for tension/growth/measured thing.
+R1 every sentence an event: yes (35 events). R2 hook contrast in 3 s: events 1-3. R3 cutaway: events 4, 20, 24. R4 multiplication: events 14, 17, 30. R5 numbers as objects: events 20, 23, 27 (sourced, section 4); events 7, 14, 17 figure-less by decision. R6 counter-actor: events 11, 18, 21. R7 named-person micro-scene: not used (no "imagine" line in the script). R8 cards/citations: "Sushruta Samhita", "Vicryl", "Guías clínicas". R9 home experiment: not applicable. R10 reframe single image: event 31. R11 acted-out CTA + end card: events 32-35. R12 word-lock: columns above (offsets measured for v4 lines). R13 meaningful transitions: events 3, 16, 26. R14 one rig revisited: yes. R15 labels while named: yes. R16 colour semantics: gold only for tension/growth/measured thing.
 
-## 6. Decisions I need from you
-1. Hook: approve the replacement H, or give your own line (it must name the needle so the contrast reads).
-2. Approve C1 and C2 as spoken lines, and accept ~55 s of narration (over the 40-50 s body band) or ask me to cut lines.
-3. Numbers: supply sources/figures for any of the six slots in section 4, or approve shipping without figures (weaker against the references). The "siglos" ant claim needs a source either way.
-4. Editor work: the target subtitle style, leader-line labels, chips and counters at arbitrary positions do not exist in factory/editor.py yet (it still has the old dark-box subtitles and centre-placed counters). Building them is a separate task; I will estimate it only after this beat sheet is approved.
-5. Engine: code3d (rigid cutaway rig, emissive accents) per the engine rules; the estimate table follows approval.
-6. Channel name, handle and logo for the end card (placeholder until then); and whether the CTA phone mock should avoid any platform branding (it is drawn generic here).
+## 6. Open points
+1. Confirm the exact on-screen citation strings (section 4) when the build is approved.
+2. Channel handle stays @[CANAL] (placeholder end card). The CTA phone is generic, no platform branding.
+
+## 7. Decision log (owner, 2026-10-26)
+1. Hook H approved. 2. ~55 s narration (H, C1, C2 included) accepted; the 40-50 s body band is superseded when density holds at ~3 s per event. 3. Sourced numbers locked (section 4). 4. Density accepted as written (about 20 ideas, 35 events). 5. Handle stays a placeholder.
+6. BUILD ORDER: (a) Editor work first (leader-line labels, chips, positioned counters, reference-style subtitles on the dark stage), estimated before building; (b) then the fal version from this beat sheet: exact fal estimate, STOP for the owner's spend OK (cap US$1.50) before any fal call; (c) then the code3d version under the two reference specs, one draft gate per scene, stopping on any scene whose model quality fails the reference bar; (d) final report comparing both versions against this sheet, with actuals.
