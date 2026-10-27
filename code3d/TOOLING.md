@@ -78,3 +78,8 @@ scripts for a style change; change the pass. Measured: styling ~1 min, all six s
 - GOTCHA: with sensor_fit VERTICAL set sensor_height = 36, or the camera is far tighter than with AUTO.
 - GOTCHA: a Coat layer on a transparent Principled material makes it opaque (bubbles): use coat 0 + alpha, surface_render_method BLENDED.
 - Machine sleep during unattended renders inflates render_seconds; compare frame-file timestamps (gaps > 60 s) for the active time.
+
+## Dark-stage rig (v7-drawn)
+- `code3d/lib/dark_rig.py`: DarkStage (near-black world, amber rim light, warm halo plane with a spherical-gradient falloff: scale the Mapping by 2 or its plane edge shows), `Wound` (layered cross-section block whose V cut is real geometry, `set_gap`), emissive gold thread with a transparent halo shell (EEVEE has no bloom here), `tweezers`, `ant`, `straight_needle`. Scenes: `code3d/scenes/rig_01..07.py` (`scene_script_prefix` "rig").
+- GOTCHA: `Wound`'s interior wedge must sit slightly below z=0 (coplanar with the epidermis it z-fights).
+- Draft each scene with stills first (`mode=draft-full stills=...`); the ants must be placed farthest-first or the walkers pass through each other.
