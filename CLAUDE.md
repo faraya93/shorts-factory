@@ -119,10 +119,8 @@ Look rules (style spec; evidence cited there):
 7. Text system: subtitles of 1-4 words with the spoken word bold white,
    the others grey (~55%), key words in a selection box; tiny ALL-CAPS
    labels with hairline leader lines (1-2 words); monospace counters;
-   teal chips; tiny source citations. TARGET only: factory/editor.py
-   still renders the old dark-box subtitle style, which is unreadable on
-   a near-black stage, and has no leader-line labels or chips. Editor
-   migration is a pending build task; do not claim it exists.
+   teal chips; tiny source citations. BUILT in factory/editor.py +
+   factory/overlays.py (Editor v2, 2026-10-26; see "Data overlays").
 8. ONE hero rig per video, revisited and re-lit with new data, +1 new
    element per fact. End with a dimmed end card (~25% brightness,
    animated logo, @handle, ~4 s).
@@ -229,6 +227,30 @@ where judgment is involved.
   sound). FUTURE WORK, not built: an Editor SFX-library layer (hand-placed
   sound effects per scene, decoupled from the video model's audio) as the
   durable fix.
+- Editor v2 (reference style, built 2026-10-26; tests/test_editor_v2.py):
+  * Subtitles: spoken word bold white, others grey (150,150,155), thin
+    4 px black outline, no dark box; words listed in the scene field
+    `subtitle_emphasis` get a thin teal selection box with corner handles
+    while spoken.
+  * Overlay types beyond counter/bar/label: chip (teal pill), citation
+    (tiny grey source line), bracket (teal, figure-less measure), ring
+    (dotted teal circle), mark (red X / gold ring pop with overshoot),
+    cta (acted-out phone: FOLLOW tap, share sheet, chat bubble, sent
+    tick; Spanish strings come from the spec). label style "tag" is the
+    tiny ALL-CAPS tracked label with an optional leader_to hairline;
+    counter style "mono" with `from`; bar style "slim" (gold fill,
+    optional marker, show_value false).
+  * Placement and timing: x, y = graphic centre as a frame fraction;
+    keyframes [{t, x, y}] move it (so a label follows an object); exactly
+    one of at_offset_seconds or at_word (WORD LOCK: the overlay starts on
+    that spoken word of the scene, optional offset_s, resolved from the
+    narration's per-word timings). Positioned overlays may overlap in
+    time; legacy centred ones may not.
+  * Production field end_card {duration_s, handle, dim}: after the last
+    scene the final frame is held and dimmed to `dim` brightness, a
+    placeholder logo and the handle (@[CANAL] until the channel exists)
+    fade in; narration/effects go silent, the music continues.
+  * Not built: inline emoji in subtitles.
 - Data overlays (editor): a scene may declare data_overlays, a list of
   {type: counter | bar | label, text_or_value, at_offset_seconds,
   duration_s?, visible_s?}, timed from the scene's narration start and

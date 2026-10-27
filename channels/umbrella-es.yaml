@@ -31,11 +31,11 @@ topic_families:                       # STARTING mix, percent of the publishing 
 subtitles:                            # mirrored from factory/editor.py constants; tests/test_channel.py keeps them in sync
   y_center: 0.24                      # block centre as a fraction of the frame height (upper band)
   font_size_px: 57
-  stroke_px: 7
+  stroke_px: 4
   max_words: 4
   max_chars: 26
   max_width_px: 940
-  current_word: dark rounded box with light text; other words light grey with a thick black outline   # CURRENT editor style; unreadable on a near-black stage. TARGET (reference doctrine): spoken word bold white, other words grey ~55%, key words in a selection box. Editor migration pending, not built.
+  current_word: spoken word bold white, the other words grey (~55%), key words (scene field subtitle_emphasis) in a thin teal selection box with corner handles   # reference doctrine; built in factory/editor.py
 
 style:
   # Base style string, prefix of every scene prompt of every engine (reference doctrine, owner 2026-10-26: dark low-key

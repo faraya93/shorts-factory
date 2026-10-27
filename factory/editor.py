@@ -17,7 +17,13 @@ import edge_tts
 from PIL import Image, ImageDraw, ImageFont
 
 import visual_identity as vid
-from overlays import render_overlay, validate_scene_overlays, visible_seconds
+from overlays import (find_word_start, norm_word, render_end_card, render_overlay, start_offset, track_expr, validate_end_card,
+                      validate_scene_overlays, visible_seconds)
+
+def overlays_fonts() -> dict:
+    import overlays
+    return overlays.FONTS
+
 
 DEFAULT_VOICE = "es-CL-LorenzoNeural"
 AUDIO_DEFAULTS = {"narration_volume": 1.0, "effects_volume": 0.30, "music_volume": 0.10,
@@ -26,21 +32,23 @@ AUDITION_VOICES =["es-CL-LorenzoNeural", "es-MX-JorgeNeural", "es-ES-AlvaroNeura
 W, H, FPS = 1080, 1920, 30
 MAX_SLOWDOWN = 1.25
 
-# Subtitles: fixed UPPER band, whole phrase visible, the currently spoken word inside a dark rounded box.
+# Subtitles (reference style, owner 2026-10-26): fixed UPPER band, whole phrase visible, the spoken word bold white and the
+# others grey (~55%); key words listed in the scene's `subtitle_emphasis` get a thin teal selection box while they are spoken.
 FONT_CANDIDATES = [
     "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
     "/Library/Fonts/Arial Bold.ttf",
     "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
 ]
 SUB_FONT_SIZE = 57          # px
-SUB_STROKE = 7              # px, contorno negro
+SUB_STROKE = 4              # px, thin black outline (readability over bright parts of the scene)
 SUBTITLE_Y_CENTER = 0.24    # channel constant (moves to channels/umbrella-es.yaml in Task F): block center, fraction of frame height
 SUB_MAX_WIDTH = 940         # px, maximum line width before wrapping
 SUB_CENTER_Y = round(H * SUBTITLE_Y_CENTER)
-SUB_WORD_COLOR = (235, 235, 235)       # not-current words: light grey with the black outline
-SUB_CURRENT_COLOR = (255, 255, 255)    # current word: white text ...
-SUB_BOX_FILL = (24, 24, 28, 235)       # ... on a dark rounded box
-SUB_BOX_PAD_X, SUB_BOX_PAD_Y, SUB_BOX_RADIUS = 10, 4, 16
+SUB_WORD_COLOR = (150, 150, 155)       # not-current words: grey (~55% white)
+SUB_CURRENT_COLOR = (255, 255, 255)    # current word: bold white
+SUB_EMPH_COLOR = (103, 205, 190)       # selection box of an emphasised word (annotation teal)
+SUB_BOX_PAD_X, SUB_BOX_PAD_Y, SUB_BOX_RADIUS = 12, 6, 12
+SUB_BOX_WIDTH, SUB_HANDLE = 3, 7       # selection box line width; corner handle half-size
 CUE_MAX_WORDS, CUE_MAX_CHARS = 4, 26
 
 
@@ -166,21 +174,30 @@ def layout_cue(texts: list[str], font: ImageFont.FreeTypeFont) -> dict:
             "h": len(lines) * line_h + (len(lines) - 1) * gap + 2 * pad_y}
 
 
-def render_cue_state(texts: list[str], current: int, lay: dict, path: Path, font: ImageFont.FreeTypeFont) -> None:
-    """One PNG of the phrase with word `current` marked: dark rounded box + white text; the others grey."""
+def render_cue_state(texts: list[str], current: int, lay: dict, path: Path, font: ImageFont.FreeTypeFont,
+                     font_reg: ImageFont.FreeTypeFont | None = None, emphasis: list[bool] | None = None) -> None:
+    """One PNG of the phrase with word `current` marked: bold white; the others grey (regular weight, centred in the same slot);
+    an emphasised current word also gets a thin teal selection box with corner handles."""
     img = Image.new("RGBA", (lay["w"], lay["h"]), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
+    reg = font_reg or font
     y = lay["pad_y"]
     for idxs, line_w in lay["lines"]:
         x = (lay["w"] - line_w) / 2
         for i in idxs:
+            slot_w = lay["widths"][i]
             if i == current:
-                draw.rounded_rectangle([x - SUB_BOX_PAD_X, y - SUB_BOX_PAD_Y, x + lay["widths"][i] + SUB_BOX_PAD_X,
-                                        y + lay["line_h"] + SUB_BOX_PAD_Y], radius=SUB_BOX_RADIUS, fill=SUB_BOX_FILL)
-                draw.text((x, y), texts[i], font=font, fill=SUB_CURRENT_COLOR)
+                draw.text((x, y), texts[i], font=font, fill=SUB_CURRENT_COLOR, stroke_width=SUB_STROKE, stroke_fill="black")
+                if emphasis and emphasis[i]:
+                    x0, y0, x1, y1 = x - SUB_BOX_PAD_X, y - SUB_BOX_PAD_Y, x + slot_w + SUB_BOX_PAD_X, y + lay["line_h"] + SUB_BOX_PAD_Y
+                    draw.rounded_rectangle([x0, y0, x1, y1], radius=SUB_BOX_RADIUS, outline=SUB_EMPH_COLOR, width=SUB_BOX_WIDTH)
+                    for hx, hy in ((x0, y0), (x1, y0), (x0, y1), (x1, y1)):
+                        draw.rectangle([hx - SUB_HANDLE, hy - SUB_HANDLE, hx + SUB_HANDLE, hy + SUB_HANDLE], fill=SUB_EMPH_COLOR)
             else:
-                draw.text((x, y), texts[i], font=font, fill=SUB_WORD_COLOR, stroke_width=SUB_STROKE, stroke_fill="black")
-            x += lay["widths"][i] + lay["space"]
+                tw = draw.textlength(texts[i], font=reg)
+                draw.text((x + (slot_w - tw) / 2, y), texts[i], font=reg, fill=SUB_WORD_COLOR, stroke_width=SUB_STROKE,
+                          stroke_fill="black")
+            x += slot_w + lay["space"]
         y += lay["line_h"] + lay["gap"]
     img.save(path)
 
@@ -235,6 +252,8 @@ def main() -> int:
     problems = vid.validate(identity) if identity else []
     for s in scenes:
         problems += validate_scene_overlays(s["id"], s["data_overlays"]) if "data_overlays" in s else []
+    end_card = cfg.get("end_card") if args.only_scene is None else None     # test renders of one scene have no end card
+    problems += validate_end_card(cfg.get("end_card"))
     if problems:
         print("ERROR: invalid scenes.json:\n" + "\n".join(f"  - {x}" for x in problems))
         return 1
@@ -288,6 +307,8 @@ def main() -> int:
         print("ERROR: no encontré una fuente en negrita en FONT_CANDIDATES.")
         return 1
     font = ImageFont.truetype(font_path, SUB_FONT_SIZE)
+    reg_path = next((f for f in overlays_fonts()["regular"] if Path(f).exists()), font_path)
+    font_reg = ImageFont.truetype(reg_path, SUB_FONT_SIZE)
     for old in build.glob("cue-*.png"):
         old.unlink()
     # one PNG per highlight state: for each phrase, one image per word with that word marked
@@ -296,8 +317,12 @@ def main() -> int:
     cue_imgs, srt_cues, offset, n_phrases, ov_list = [], [], 0.0, 0, []
     for p in plan:
         slot_end = offset + p["slot"]
-        for cue in json.loads(words_json(audio_dir / f"{p['n']}.srt").read_text(encoding="utf-8")):
+        cues = json.loads(words_json(audio_dir / f"{p['n']}.srt").read_text(encoding="utf-8"))
+        scene_words = [w for c in cues for w in c["words"]]                    # {text, start, end} from the scene's narration start
+        emph_set = {norm_word(x) for x in p["s"].get("subtitle_emphasis", [])}
+        for cue in cues:
             texts = [w["text"] for w in cue["words"]]
+            emphasis = [norm_word(t) in emph_set for t in texts]
             lay = layout_cue(texts, font)
             srt_cues.append((offset + cue["start"], min(offset + cue["end"], slot_end), " ".join(texts)))
             n_phrases += 1
@@ -305,15 +330,21 @@ def main() -> int:
                 a = offset + (cue["start"] if k == 0 else word["start"])
                 b = offset + (cue["words"][k + 1]["start"] if k + 1 < len(texts) else cue["end"])
                 png = build / f"cue-{len(cue_imgs):03d}.png"
-                render_cue_state(texts, k, lay, png, font)
+                render_cue_state(texts, k, lay, png, font, font_reg, emphasis)
                 cue_imgs.append((png, lay["w"], lay["h"], a, min(b, slot_end)))
-        for spec in p["s"].get("data_overlays", []):  # timed from this scene's narration start, centred
-            start = offset + spec["at_offset_seconds"]
+        for spec in p["s"].get("data_overlays", []):  # timed from this scene's narration start (or locked to a spoken word)
+            try:
+                start = offset + start_offset(spec, scene_words)
+            except ValueError as e:
+                print(f"ERROR: scene {p['s']['id']}: {e}")
+                return 1
             meta_ov = render_overlay(spec, build / "ov", f"ov{len(ov_list):02d}", font_path, FPS)
             ov_list.append({**meta_ov, "start": start, "end": min(start + visible_seconds(spec), slot_end),
-                            "type": spec["type"], "scene": p["n"]})
+                            "type": spec["type"], "scene": p["n"], "word": spec.get("at_word")})
         offset += p["slot"]
     total = offset
+    ext = float(end_card.get("duration_s", 4.0)) if end_card else 0.0       # the end card extends the video past the narration
+    end_meta = render_end_card(end_card, build / "ov", "endcard", FPS) if end_card else None
     (build if args.only_scene is not None else prod).joinpath("final.srt").write_text(
         "".join(f"{i}\n{srt_time(a)} --> {srt_time(b)}\n{t}\n\n" for i, (a, b, t) in enumerate(srt_cues, 1)),
         encoding="utf-8")
@@ -374,6 +405,9 @@ def main() -> int:
     else:
         parts.append("".join(f"[v{i}][a{i}]" for i in range(n_sc)) + f"concat=n={n_sc}:v=1:a=1[vcat][acat]")
     last = "vcat"
+    if ext:
+        parts.append(f"[vcat]tpad=stop_mode=clone:stop_duration={ext:.3f}[vend]")
+        last = "vend"
     for k, (png, w, h, a, b) in enumerate(cue_imgs):
         x, y = (W - w) // 2, SUB_CENTER_Y - h // 2
         parts.append(f"[{last}][{2 * n_sc + k}:v]overlay=x={x}:y={y}:enable='between(t,{a:.3f},{b:.3f})'[o{k}]")
@@ -381,20 +415,39 @@ def main() -> int:
     ov_base = 2 * n_sc + len(cue_imgs)
     for k, ov in enumerate(ov_list):  # data overlays: frame centre; sequence delayed to its start, last frame held
         parts.append(f"[{ov_base + k}:v]setpts=PTS+{ov['start']:.3f}/TB[ovs{k}]")
-        parts.append(f"[{last}][ovs{k}]overlay=x={(W - ov['w']) // 2}:y={(H - ov['h']) // 2}:"
-                     f"enable='between(t,{ov['start']:.3f},{ov['end']:.3f})'[p{k}]")
+        if "track" in ov:       # keyframed: piecewise-linear position over absolute time
+            ox = track_expr([(t, x) for t, x, y in ov["track"]], ov["start"])
+            oy = track_expr([(t, y) for t, x, y in ov["track"]], ov["start"])
+            pos = f"x='{ox}':y='{oy}'"
+        elif "left" in ov:
+            pos = f"x={ov['left']}:y={ov['top']}"
+        else:
+            pos = f"x={(W - ov['w']) // 2}:y={(H - ov['h']) // 2}"
+        parts.append(f"[{last}][ovs{k}]overlay={pos}:enable='between(t,{ov['start']:.3f},{ov['end']:.3f})'[p{k}]")
         last = f"p{k}"
+    if end_meta:                # dim the final frame and fade in the placeholder logo + handle
+        k_end = ov_base + len(ov_list)
+        parts.append(f"[{k_end}:v]setpts=PTS+{total:.3f}/TB[ovend]")
+        parts.append(f"[{last}][ovend]overlay=x=0:y=0:enable='gte(t,{total:.3f})'[pend]")
+        last = "pend"
 
+    if ext:                      # narration/effects are silent over the end card; the music keeps going
+        parts.append(f"[acat]apad=whole_dur={total + ext:.5f}[acat2]")
+        acat_label = "acat2"
+        if fx:
+            parts.append(f"[fcat]apad=whole_dur={total + ext:.5f}[fcat2]")
+    else:
+        acat_label = "acat"
     # audio mix: normalize=0 keeps every layer at exactly its configured volume; the limiter only prevents clipping
-    parts.append(f"[acat]volume={audio['narration_volume']}[nar]")
+    parts.append(f"[{acat_label}]volume={audio['narration_volume']}[nar]")
     layers = ["[nar]"]
     if fx:
-        parts.append(f"[fcat]volume={audio['effects_volume']}[fxv]")
+        parts.append(f"[{'fcat2' if ext else 'fcat'}]volume={audio['effects_volume']}[fxv]")
         layers.append("[fxv]")
     if music_path:
-        music_idx = ov_base + len(ov_list)
+        music_idx = ov_base + len(ov_list) + (1 if end_meta else 0)
         parts.append(f"[{music_idx}:a]aresample=48000,aformat=channel_layouts=stereo,"
-                     f"atrim=duration={total:.5f},asetpts=PTS-STARTPTS,volume={audio['music_volume']}[mus]")
+                     f"atrim=duration={total + ext:.5f},asetpts=PTS-STARTPTS,volume={audio['music_volume']}[mus]")
         layers.append("[mus]")
     if len(layers) > 1:
         parts.append("".join(layers) + f"amix=inputs={len(layers)}:duration=first:normalize=0,"
@@ -414,12 +467,14 @@ def main() -> int:
         cmd += ["-i", str(png)]
     for ov in ov_list:
         cmd += ["-framerate", str(FPS), "-i", ov["pattern"]]
+    if end_meta:
+        cmd += ["-framerate", str(FPS), "-i", end_meta["pattern"]]
     if music_path:
         cmd += ["-stream_loop", "-1", "-i", str(music_path)]
     final = build / f"test-scene-{args.only_scene:02d}.mp4" if args.only_scene is not None else prod / "final.mp4"
     cmd += ["-/filter_complex", str(script), "-map", f"[{last}]", "-map", audio_out,
             "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS),
-            "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-t", f"{total:.5f}", str(final)]
+            "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-t", f"{total + ext:.5f}", str(final)]
     print(f"\nCodificando {len(cue_imgs)} estados de subtítulo sobre {total:.1f} s de video ...")
     run(cmd)
 
@@ -451,7 +506,8 @@ def main() -> int:
     (build / "audio-gate.json").write_text(json.dumps(
         {"clip_gate_db": gate_db, "clip_audio": audio["clip_audio"],
          "decisions": [{"scene": p["n"], **p["gate"]} for p in plan]}, indent=2) + "\n")
-    print(f"\nDuración total: {float(out['format']['duration']):.2f} s (timeline {total:.2f} s)")
+    print(f"\nDuración total: {float(out['format']['duration']):.2f} s (timeline {total:.2f} s"
+          + (f" + end card {ext:.1f} s)" if ext else ")"))
     print(f"Video: {v['width']}x{v['height']} @ {v['r_frame_rate']} fps, {v['codec_name']} {v['pix_fmt']}")
     print(f"Voz: {voice}")
     print("Audio profile: "
@@ -469,7 +525,8 @@ def main() -> int:
             sampled = f"sampled {r['hex']}  dE {r['delta_e']:>5}" if "hex" in r else "not sampled"
             print(f"  {r['scene']}: {sampled}  {r['status']}")
     for ov in ov_list:
-        print(f"Data overlay: {ov['scene']} {ov['type']} {ov['start']:.2f}-{ov['end']:.2f} s ({ov['frames']} frames)")
+        locked = f" @word {ov['word']!r}" if ov.get("word") else ""
+        print(f"Data overlay: {ov['scene']} {ov['type']} {ov['start']:.2f}-{ov['end']:.2f} s ({ov['frames']} frames){locked}")
     print(f"Subtítulos: {n_phrases} frases / {len(cue_imgs)} estados de palabra | fuente {Path(font_path).name} {SUB_FONT_SIZE}px, contorno {SUB_STROKE}px")
     print(f"{final.name}: {final.stat().st_size / 1e6:.1f} MB" +
           ("" if args.only_scene is not None else f" | cover.jpg: {(prod / 'cover.jpg').stat().st_size / 1e3:.0f} KB"))
