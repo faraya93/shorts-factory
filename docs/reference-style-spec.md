@@ -15,12 +15,12 @@ All three: 720x1280, 30 fps, H.264 + AAC, 9:16. Video 1 and 3 are one channel (@
 |---|---|---|
 | Background (void) | near-black, warm: #120F10 (V1, V3 border median), #151314 (V2) | [V1 1.5s] [V3 4.5s, 11.5s] [V2 25.0s] |
 | Cross-section backdrop | dark navy #16202C with a dotted star/dust field | [V1 36.0s], [V1 0.0s] |
-| Accent: "the active quantity" | gold/amber. Glow lines ~#F5C04A at their brightest (mean of thin lines #AB893F); filled zones #ECA432 | [V1 1.5s] arcs; [V3 11.5s] key zones |
+| Accent: "the active quantity" | gold/amber. Glow lines: mean of thin-line pixels #AB893F; #F5C04A is my ESTIMATE of their brightest value (not measured); filled zones #ECA432 | [V1 1.5s] arcs; [V3 11.5s] key zones |
 | Passive objects | neutral greys: keys #2D2A2B, grid cells #51555A, bin ~#424144, toilet ceramic #DAD8D7 (lit side) | [V3 4.5s] [V1 20.0s] [V2 25.0s] |
 | Natural hero materials | skin peach (fingertip ~#B9948D, lit), terracotta pipe #905932, glove blue-grey knit | [V1 36.0s] [V2 6.0s] [V1 14.0s] |
-| Annotation / measurement | teal-cyan outlines and chips (frames around a cutaway, dashed pipe outline, "4 min" and "2001" chips) | [V2 12.0s, 36.5s, 39.0s, 55.0s] |
-| Alert / negative | red: overflowing bar "10 x 44 = 440 px" | [V3 56.5-58.0s] |
-| Biology / contamination | neon yellow-green particles | [V2 48.5-49.0s] |
+| Annotation / measurement | teal #67CDBE (measured, V2 37.0 s chip); teal-cyan outlines and chips (frames around a cutaway, dashed pipe outline, "4 min" and "2001" chips) | [V2 12.0s, 36.5s, 39.0s, 55.0s] |
+| Alert / negative | red #BE4A4A (measured, V3 57.0 s): overflowing bar "10 x 44 = 440 px" | [V3 56.5-58.0s] |
+| Biology / contamination | yellow-green #CBD764 (measured, V2 49.0 s) particles | [V2 48.5-49.0s] |
 | Text | white; spoken-now word bold white, rest grey (~55%) | all |
 
 Rules:

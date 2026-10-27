@@ -45,12 +45,13 @@ we copy the mechanics, never scripts or footage: all scripts are original.
 - Audience: pan-Hispanic. Neutral Spanish, universal topics and objects
   that exist identically in every Spanish-speaking country; no
   country-specific systems and no local slang in scripts or titles.
-- Visual style: STYLIZED 3D animation, clearly CGI (Pixar-style explainer),
-  NOT photorealistic, no real skin texture, no blood, no gore. Realistic
-  graphic content risks YouTube age-restriction (kills reach and
-  monetization) and disgust-skips; in this format the gross-out is
-  conceptual, not visual. Our pilot v1 rendered photorealistic — that is
-  the anti-pattern to avoid.
+- Visual style: the REFERENCE LOOK (see "Reference doctrine" below):
+  dark low-key stage, stylized 3D, NOT photorealistic, no real skin
+  texture, no blood, no gore. Realistic graphic content risks YouTube
+  age-restriction (kills reach and monetization) and disgust-skips; in
+  this format the gross-out is conceptual, not visual. Our pilot v1
+  rendered photorealistic — that is the anti-pattern to avoid. The
+  earlier bright "Pixar-style" lavender stage is RETIRED.
 - The style string of every model-generated production MUST contain
   "no text on screen". Labels, counters and numbers are Editor overlays,
   never model-generated text (validated by scenes_schema.py).
@@ -80,6 +81,79 @@ we copy the mechanics, never scripts or footage: all scripts are original.
   with diffusion footage: a code3d production is code3d in every scene.
   scenes_schema.py rejects violations before any spend. The binding
   selection rules are in "Engine selection" below.
+
+## Reference doctrine (binding, owner 2026-10-26)
+Adopted from the reference study of three example channels
+(docs/reference-style-spec.md = the LOOK, docs/reference-format-spec.md =
+the STORYTELLING GRAMMAR, with frame evidence for every rule; both specs
+are binding, this section is their summary). Where this section and an
+older paragraph disagree, this section wins.
+
+Identity change (the lavender stage is RETIRED; channels/umbrella-es.yaml
+visual_identity carries the values):
+- DARK stage: near-black warm void ~#120F10 (cross-section backdrop
+  navy #16202C). Never a light or pastel stage.
+- ONE accent: gold/amber (#F5C04A / #ECA432) = the ACTIVE QUANTITY
+  (energy, charge, tension, growth, the thing being measured).
+  Everything passive is GREY (#2D2A2B / #51555A / #DAD8D7). Teal
+  (#67CDBE) = annotation graphics only (labels, chips, frames). Red
+  (#BE4A4A) = error, failure, overflow. Yellow-green (#CBD764) =
+  bacteria/biology. A part stays grey until the narration activates it.
+- Productions v1-v6 (lavender, lace-world, toon, glossy boot) are
+  FROZEN RECORDS of the retired identity: never modified, never reused
+  as a style reference.
+
+Look rules (style spec; evidence cited there):
+1. Low-key frames; one soft key light plus a warm rim halo behind the
+   hero; emissive accents are the second light; dark vignette.
+2. Hero models simplified and chunky; detail only on the feature the
+   fact is about; scale exaggerated so the mechanism is legible.
+3. Energy and charge are emissive glowing tubes with bloom.
+4. Cross-sections are flat clean cuts with a layer stack and tiny parts;
+   cutaways get a glass plate and a cyan/teal frame.
+5. The camera never rests: push-through (into a surface), pull-back
+   (multiplication/context), or orbit/tilt. Scene changes are
+   push-throughs or blur wipes, not bare cuts.
+6. Caption band: the top ~25% of the frame is reserved; the hero is
+   centred in the lower 70% with large dark negative space.
+7. Text system: subtitles of 1-4 words with the spoken word bold white,
+   the others grey (~55%), key words in a selection box; tiny ALL-CAPS
+   labels with hairline leader lines (1-2 words); monospace counters;
+   teal chips; tiny source citations. TARGET only: factory/editor.py
+   still renders the old dark-box subtitle style, which is unreadable on
+   a near-black stage, and has no leader-line labels or chips. Editor
+   migration is a pending build task; do not claim it exists.
+8. ONE hero rig per video, revisited and re-lit with new data, +1 new
+   element per fact. End with a dimmed end card (~25% brightness,
+   animated logo, @handle, ~4 s).
+
+Storytelling rules (format spec; each narration line becomes a visual
+EVENT, never a static illustration):
+1. Every sentence changes something on screen; no 3 s window without an
+   object, number or camera change.
+2. The hook stages the false belief as a CONTRAST in the first 2-3 s:
+   two actors on one stage, one of them fails.
+3. "Inside / under / made of" = push through the surface into a cutaway
+   or exploded layers, active part in the accent colour.
+4. "Each / all / many" = multiplication with a pull-back.
+5. EVERY NUMBER IS A SCREEN OBJECT (counter, chip, bar, year) that
+   appears on the spoken word. A number with no source is NEVER invented:
+   it is flagged to the owner, and the chip stays a placeholder until a
+   sourced figure is approved. Facts get cards and one-line citations.
+6. "But / what if not" = a counter-actor on the same stage with the same
+   readout.
+7. "Imagine..." = a named-person micro-scene; set it up early, return to
+   it as the payoff.
+8. The closing reframe is ONE single-image visual; then the CTA is acted
+   out in the visual world (follow, share sheet, sent) naming the
+   share_archetype, then the end card.
+9. Event timing is word-locked (+-0.3 s) to the highlighted subtitle
+   word.
+10. Transitions carry meaning (blur wipe / push-through).
+A production brief is a BEAT SHEET approved by the owner BEFORE any
+generation: every narration line mapped to an event type with its word
+lock, the hero-rig element ledger, every number with its source (or
+flagged), and the CTA/end card.
 
 ## Pipeline
 Deterministic code wherever money or precision is involved; LLMs only
@@ -164,7 +238,8 @@ where judgment is involved.
   outline, rendered with Pillow as one PNG sequence per overlay. Overlays
   of one scene may not overlap in time. Numbers in the script should be
   carried by overlays, not only spoken.
-- Visual identity: ONE `visual_identity` block per channel (background
+- Visual identity (values: the dark stage in the Reference doctrine
+  above; the mechanism below is unchanged): ONE `visual_identity` block per channel (background
   hex + description, palette hexes, lighting and material wording, the
   shared `unify` pass parameters, qa_tolerance_de). Each production
   embeds a verbatim copy in scenes.json so it stays reproducible. EVERY
@@ -317,9 +392,10 @@ engines automatically from these rules; the owner is never asked.
 - Definitive music tracks are downloaded from the official source
   (incompetech.com), not from mirrors. Mirrors are acceptable only for
   throwaway calibration placeholders. Music files are media: gitignored.
-- Drawn (cartoon/toon) code3d productions are modelled in the channel's
-  cartoon design language from the first object (lace-world system,
-  owner-approved 2026-10-25); never model realistic and restyle afterwards.
+- code3d productions are modelled in the reference look (Reference
+  doctrine: dark stage, one accent) from the first object; never model
+  realistic and restyle afterwards. The lavender lace-world / toon /
+  glossy-boot looks of v4-v6 are retired.
 - Report failures and semantically wrong renders plainly; never work
   around them silently.
 - The owner approves topics, scripts, spend and publishing. You cannot

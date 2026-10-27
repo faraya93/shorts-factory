@@ -35,41 +35,54 @@ subtitles:                            # mirrored from factory/editor.py constant
   max_words: 4
   max_chars: 26
   max_width_px: 940
-  current_word: dark rounded box with light text; other words light grey with a thick black outline
+  current_word: dark rounded box with light text; other words light grey with a thick black outline   # CURRENT editor style; unreadable on a near-black stage. TARGET (reference doctrine): spoken word bold white, other words grey ~55%, key words in a selection box. Editor migration pending, not built.
 
 style:
-  # Base style string, prefix of every scene prompt of every engine. It generalises the v2 golden example (below) so
-  # it works for all four families, and restores "no text on screen" (labels and numbers are Editor overlays).
+  # Base style string, prefix of every scene prompt of every engine (reference doctrine, owner 2026-10-26: dark low-key
+  # stage, one gold accent; see docs/reference-style-spec.md). "No text on screen" stays: labels, counters and chips are
+  # Editor overlays, never model-generated text.
   base: >-
-    Bright stylized 3D cartoon animation, Pixar-style explainer short, smooth clean materials, soft studio lighting.
-    Strictly NOT photorealistic: no realistic textures, no real faces, no blood, no gore, no graphic content.
-    No text on screen.
+    Dark low-key stylized 3D explainer, near-black background, one warm gold accent for the active part and everything
+    else neutral grey, simplified chunky smooth-shaded models with detail only where the fact is, soft key light with a
+    warm rim, cutaway and cross-section views. Strictly NOT photorealistic: no realistic textures, no real faces, no
+    blood, no gore, no graphic content. No text on screen.
   by_family:                          # appended after base; only the body family has an approved example so far
-    body: Medical illustration look. Show the body as clean stylized cross-section models.
+    body: Medical illustration look. Show the body as clean stylized cutaway and cross-section models.
     objects: null                     # to be approved after the first production of this family
     numbers: null
     whatif: null
-  reference_v2: >-                    # the approved golden example, verbatim (note: it lacks "no text on screen")
+  reference_v2: >-                    # RETIRED identity (bright lavender-stage Pixar look), kept verbatim as a historical record
     Bright stylized 3D cartoon animation, Pixar-style explainer short, smooth clean materials, soft studio lighting,
     medical illustration look. Strictly NOT photorealistic: no realistic skin texture, no real faces, no blood, no
     gore, no graphic wounds — show the body as clean stylized cross-section models.
 
 visual_identity:
-  # Sampled from the v2 golden example (productions/pilot/puntos-de-sutura-v2, 6 frames per clip).
-  # QA scope (owner decision): the backdrop and its QA apply only to establishing shots and code3d productions; close-ups
-  # are exempt (their "background" is the subject) and are carried by palette + lighting wording + the unify pass.
-  # QA marks are review signals, not automatic defects (the v2 jungle in scene 6 was intentional).
+  # DARK STAGE (owner 2026-10-26, from the reference study: docs/reference-style-spec.md). The lavender stage #E2D5F1 of
+  # productions v1-v6 is RETIRED; those productions embed their own copy and stay as frozen records.
+  # Hex values below were MEASURED from the three reference videos (median of border pixels / mean of saturated pixels in
+  # the named frames) except where marked "starting value".
+  # QA scope (owner decision, unchanged): the backdrop and its QA apply only to establishing shots and code3d productions;
+  # close-ups are exempt. QA marks are review signals, not automatic defects.
   background:
-    hex: "#E2D5F1"                    # scene 1 (the establishing shot): stable across 6 frames, max dE 2.8
-    description: soft lavender-white studio backdrop
-  palette:                            # colours present (>= 2% of pixels) in several v2 scenes; scene-specific hues excluded
-    - {hex: "#E0B0A0", name: skin peach}          # 6 of 6 scenes
-    - {hex: "#D18C7D", name: shaded skin}         # 5 of 6
-    - {hex: "#C6544B", name: tissue red}          # 6 of 6
-    - {hex: "#C6CFCE", name: steel grey}          # 2 of 6 (needle, instruments)
-    - {hex: "#E2D5F1", name: backdrop lavender}
-  lighting: soft studio lighting
-  materials: smooth clean materials
+    hex: "#120F10"                    # near-black warm void: border median of ejemplo-1 1.5 s, ejemplo-3 4.5 s and 11.5 s
+    description: near-black warm void, dark low-key stage
+  palette:
+    - {hex: "#120F10", name: void}                    # the stage
+    - {hex: "#16202C", name: cross-section navy}      # ejemplo-1 36.0 s cutaway backdrop
+    - {hex: "#2D2A2B", name: passive dark grey}       # ejemplo-3 4.5 s keys
+    - {hex: "#51555A", name: passive grey}            # ejemplo-1 20.0 s grid cells
+    - {hex: "#DAD8D7", name: passive light grey}      # ejemplo-2 25.0 s lit ceramic
+    - {hex: "#F5C04A", name: accent gold}             # starting value: brightest glow-line colour (mean of thin lines #AB893F)
+    - {hex: "#ECA432", name: accent amber}            # ejemplo-3 11.5 s filled zones (mean of saturated pixels)
+    - {hex: "#67CDBE", name: annotation teal}         # ejemplo-2 37.0 s chip and outline
+    - {hex: "#BE4A4A", name: error red}               # ejemplo-3 57.0 s overflow bar
+    - {hex: "#CBD764", name: biology yellow-green}    # ejemplo-2 49.0 s bacteria particles
+    - {hex: "#B9948D", name: skin tone}               # ejemplo-1 36.0 s fingertip, lit side
+  # Colour semantics (binding): ONE accent (gold/amber) = the active quantity (energy, charge, tension, growth, the thing
+  # being measured); everything passive is grey; teal = annotation graphics only; red = error, failure or overflow;
+  # yellow-green = bacteria/biology. A part is grey until the narration activates it.
+  lighting: low-key, one soft key light, warm orange rim halo behind the hero near the top of the frame, emissive accents as the second light, soft shadows, dark vignette toward the edges
+  materials: simplified chunky smooth-shaded models, matte/satin with a faint specular, emissive glowing tubes for energy, flat clean cross-section cuts, no outlines, no cel bands, no photo textures
   unify:                              # shared Editor pass for every scene, whatever its engine — not yet tuned
     saturation: 1.04
     contrast: 1.03
