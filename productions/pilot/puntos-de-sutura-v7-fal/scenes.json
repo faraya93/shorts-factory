@@ -154,11 +154,11 @@
           "style": "tag",
           "text_or_value": "piel",
           "at_word": "corte",
-          "x": 0.22,
-          "y": 0.62,
+          "x": 0.84,
+          "y": 0.82,
           "leader_to": [
-            0.38,
-            0.66
+            0.9,
+            0.46
           ],
           "visible_s": 2.0
         },
@@ -167,23 +167,23 @@
           "style": "tag",
           "text_or_value": "grasa",
           "at_word": "profundo",
-          "x": 0.22,
-          "y": 0.74,
+          "x": 0.56,
+          "y": 0.84,
           "leader_to": [
-            0.38,
-            0.74
+            0.7,
+            0.7
           ],
           "visible_s": 2.0
         },
         {
           "type": "bracket",
           "from": [
-            0.35,
-            0.58
+            0.52,
+            0.6
           ],
           "to": [
-            0.65,
-            0.58
+            0.72,
+            0.6
           ],
           "text_or_value": "",
           "at_word": "demasiado",
@@ -192,8 +192,8 @@
         {
           "type": "mark",
           "kind": "x",
-          "x": 0.5,
-          "y": 0.66,
+          "x": 0.62,
+          "y": 0.68,
           "at_word": "solos",
           "visible_s": 1.5
         }
@@ -225,8 +225,8 @@
         {
           "type": "mark",
           "kind": "x",
-          "x": 0.25,
-          "y": 0.68,
+          "x": 0.32,
+          "y": 0.62,
           "at_word": "desgarrar",
           "visible_s": 1.5
         },
@@ -282,19 +282,19 @@
           "style": "tag",
           "text_or_value": "nudo",
           "at_word": "nudos",
-          "x": 0.3,
-          "y": 0.5,
+          "x": 0.24,
+          "y": 0.38,
           "leader_to": [
-            0.46,
-            0.58
+            0.49,
+            0.47
           ],
           "visible_s": 2.2
         },
         {
           "type": "mark",
           "kind": "x",
-          "x": 0.7,
-          "y": 0.66,
+          "x": 0.78,
+          "y": 0.62,
           "at_word": "suelte",
           "visible_s": 1.3
         }
@@ -360,7 +360,7 @@
         },
         {
           "type": "citation",
-          "text_or_value": "Vicryl",
+          "text_or_value": "Ethicon",
           "at_word": "disuelve",
           "offset_s": 0.2,
           "x": 0.72,
@@ -370,8 +370,8 @@
         {
           "type": "mark",
           "kind": "x",
-          "x": 0.35,
-          "y": 0.7,
+          "x": 0.5,
+          "y": 0.55,
           "at_word": "nunca",
           "visible_s": 1.4
         }
@@ -402,7 +402,7 @@
             0.45,
             0.56
           ],
-          "visible_s": 2.0
+          "visible_s": 1.3
         },
         {
           "type": "chip",
@@ -442,8 +442,8 @@
         {
           "type": "mark",
           "kind": "x",
-          "x": 0.5,
-          "y": 0.7,
+          "x": 0.55,
+          "y": 0.42,
           "at_word": "problema",
           "visible_s": 1.4
         }
@@ -467,8 +467,8 @@
           "type": "chip",
           "text_or_value": "~500 a. C.",
           "at_word": "siglos",
-          "x": 0.5,
-          "y": 0.34,
+          "x": 0.32,
+          "y": 0.8,
           "visible_s": 2.8
         },
         {
@@ -477,8 +477,8 @@
           "text_or_value": "Sushruta",
           "at_word": "siglos",
           "offset_s": 0.1,
-          "x": 0.5,
-          "y": 0.41,
+          "x": 0.32,
+          "y": 0.855,
           "visible_s": 2.6
         },
         {
@@ -486,8 +486,8 @@
           "text_or_value": "Sushruta Samhita",
           "at_word": "siglos",
           "offset_s": 0.35,
-          "x": 0.5,
-          "y": 0.46,
+          "x": 0.32,
+          "y": 0.895,
           "visible_s": 2.4
         }
       ]
