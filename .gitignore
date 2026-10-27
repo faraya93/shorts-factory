@@ -18,3 +18,6 @@ code3d/assets/*
 productions/**/spikes/*/*
 !productions/**/spikes/*/scenes.json
 !productions/**/spikes/*/report.md
+
+# reference videos (media, never committed)
+docs/reference/*.[mM][pP]4
