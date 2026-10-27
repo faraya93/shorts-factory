@@ -83,3 +83,10 @@ scripts for a style change; change the pass. Measured: styling ~1 min, all six s
 - `code3d/lib/dark_rig.py`: DarkStage (near-black world, amber rim light, warm halo plane with a spherical-gradient falloff: scale the Mapping by 2 or its plane edge shows), `Wound` (layered cross-section block whose V cut is real geometry, `set_gap`), emissive gold thread with a transparent halo shell (EEVEE has no bloom here), `tweezers`, `ant`, `straight_needle`. Scenes: `code3d/scenes/rig_01..07.py` (`scene_script_prefix` "rig").
 - GOTCHA: `Wound`'s interior wedge must sit slightly below z=0 (coplanar with the epidermis it z-fights).
 - Draft each scene with stills first (`mode=draft-full stills=...`); the ants must be placed farthest-first or the walkers pass through each other.
+
+## Tape rig notes (huincha-de-medir, 2026-10-27)
+- Cycles on Apple M5 Pro (Metal GPU), 1080x1920, 256 samples + OIDN + adaptive 0.02: 3.8–5.7 s/frame depending on scene; EEVEE draft 0.2–0.27 s/frame. Use `use_overwrite=False` so frame sequences resume.
+- Camera convention in tape_rig.look: az 0 = camera at −y; large negative az looks along the +x blade, so use az ≈ −10..−16 for side views.
+- Blender 5.2 compositor Glare: `scene.compositing_node_group` + `g.interface.new_socket("Image", in_out="OUTPUT")`, Fog Glow.
+- Gotchas: a cylinder scaled on the wrong local axis (scale z for a long cylinder); `show()` restores home location, so assign `location` directly after it; amber rim light makes surfaces mirror-gold (use neutral warm rim); emission needs a cap (0.5+3.2·tension) or the spring blows out.
+- Library sources can't be animated (single baked mesh): model hero hard-surface when the beat needs extend/cutaway/explode.
