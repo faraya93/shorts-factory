@@ -1,0 +1,521 @@
+{
+  "channel": "pilot",
+  "video": "puntos-de-sutura-v7-fal",
+  "title": "¿Por qué la aguja recta no sirve para coser una herida? 🪡",
+  "topic_family": "body",
+  "primary_engine": "t2v",
+  "engine_reason": "Fal t2v version of the approved v7 beat sheet (owner build order b): organic tissue cutaways and transformations suit text-to-video; the same Editor overlays, subtitles and end card as the drawn version; the drawn code3d version follows as build step c and the two are compared.",
+  "hook_question": "¿Por qué la aguja recta no sirve para coser una herida?",
+  "false_belief": "Que cualquier aguja sirve para coser una herida.",
+  "closing_reframe": "Un punto de sutura no cierra la herida: la mantiene unida mientras tu cuerpo hace el trabajo.",
+  "share_archetype": "ese amigo que se corta cocinando y dice que no necesita puntos",
+  "model": "minimax/h3-max-turbo/text-to-video",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "480P",
+  "aspect_ratio": "9:16",
+  "style": "Dark low-key stylized 3D explainer, near-black background, one warm gold accent for the active part and everything else neutral grey, simplified chunky smooth-shaded models with detail only where the fact is, soft key light with a warm rim, cutaway and cross-section views. Strictly NOT photorealistic: no realistic textures, no real faces, no blood, no gore, no graphic content. No text on screen. Medical illustration look. Show the body as clean stylized cutaway and cross-section models.",
+  "visual_identity": {
+    "background": {
+      "hex": "#120F10",
+      "description": "near-black warm void, dark low-key stage"
+    },
+    "palette": [
+      {
+        "hex": "#120F10",
+        "name": "void"
+      },
+      {
+        "hex": "#16202C",
+        "name": "cross-section navy"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#F5C04A",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#ECA432",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#67CDBE",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#BE4A4A",
+        "name": "error red"
+      },
+      {
+        "hex": "#CBD764",
+        "name": "biology yellow-green"
+      },
+      {
+        "hex": "#B9948D",
+        "name": "skin tone"
+      }
+    ],
+    "lighting": "low-key, one soft key light, warm orange rim halo behind the hero near the top of the frame, emissive accents as the second light, soft shadows, dark vignette toward the edges",
+    "materials": "simplified chunky smooth-shaded models, matte/satin with a faint specular, emissive glowing tubes for energy, flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0.9
+    },
+    "qa_tolerance_de": 15
+  },
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "effects",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "end_card": {
+    "duration_s": 4,
+    "handle": "@[CANAL]",
+    "dim": 0.25
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook-contrast",
+      "target_duration_s": 9,
+      "narration": "¿Por qué la aguja recta no sirve para coser una herida? Cuando el corte es profundo, los bordes de la piel quedan demasiado lejos para cerrar solos.",
+      "prompt": "Side-on cross-section of two identical blocks of grey skin tissue on a black void, side by side, each with a V-shaped cut. A straight sewing needle hangs above the left block and a curved surgical needle above the right block. Both needles push into the left lip of their own wound at the same moment. The straight needle can only travel straight down: it goes through the tissue and its tip comes out of the bottom of the block, a red crack running up the tissue, and it never reaches the right lip. The curved needle swings along its arc under the gap and its tip comes out of the right lip, trailing a thread that glows gold along its path. The right block stays bright while the left block dims. Never show the straight needle passing through both lips.",
+      "transformation": "two needles above two open wounds -> straight needle jammed through the base of the left block, curved needle exited the far lip of the right block",
+      "camera": "starts wide on both blocks, then pushes in on the right block while the left block fades",
+      "foley": "soft tissue pierce, a thin thread pulling through",
+      "subtitle_emphasis": [
+        "recta",
+        "bordes"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "recta",
+          "at_word": "recta",
+          "x": 0.27,
+          "y": 0.52,
+          "leader_to": [
+            0.28,
+            0.6
+          ],
+          "visible_s": 3.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "curva",
+          "at_word": "recta",
+          "offset_s": 0.15,
+          "x": 0.73,
+          "y": 0.52,
+          "leader_to": [
+            0.72,
+            0.6
+          ],
+          "visible_s": 3.0
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.27,
+          "y": 0.7,
+          "at_word": "sirve",
+          "visible_s": 1.6
+        },
+        {
+          "type": "mark",
+          "kind": "ok",
+          "x": 0.73,
+          "y": 0.7,
+          "at_word": "sirve",
+          "offset_s": 0.1,
+          "visible_s": 1.6
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "piel",
+          "at_word": "corte",
+          "x": 0.22,
+          "y": 0.62,
+          "leader_to": [
+            0.38,
+            0.66
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "grasa",
+          "at_word": "profundo",
+          "x": 0.22,
+          "y": 0.74,
+          "leader_to": [
+            0.38,
+            0.74
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "bracket",
+          "from": [
+            0.35,
+            0.58
+          ],
+          "to": [
+            0.65,
+            0.58
+          ],
+          "text_or_value": "",
+          "at_word": "demasiado",
+          "visible_s": 2.0
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.5,
+          "y": 0.66,
+          "at_word": "solos",
+          "visible_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "curved-needle",
+      "target_duration_s": 10,
+      "narration": "Por eso el médico usa una aguja curva: su forma permite coser sin desgarrar más tejido. El hilo acerca los bordes y los mantiene unidos, porque una herida cerrada sana más rápido y deja menos cicatriz.",
+      "prompt": "Cross-section of a block of grey skin tissue with an open V-shaped wound on a black void. A steel needle holder carries a curved needle that enters the left lip, swings along a circular arc under the gap and comes out of the right lip, pulling a thread behind it. The thread then tightens, glowing gold with tension, and the two lips slide together until they meet at a hairline. Never a straight needle.",
+      "transformation": "open wound -> curved needle crossing both lips with thread -> lips closed to a hairline by a gold-lit tight thread",
+      "camera": "slow push-in then a gentle orbit around the block",
+      "foley": "needle pierce, thread pulled tight, soft tissue squeak",
+      "subtitle_emphasis": [
+        "curva",
+        "hilo"
+      ],
+      "data_overlays": [
+        {
+          "type": "ring",
+          "radius": 0.2,
+          "x": 0.5,
+          "y": 0.55,
+          "at_word": "forma",
+          "duration_s": 0.8,
+          "visible_s": 2.2
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.25,
+          "y": 0.68,
+          "at_word": "desgarrar",
+          "visible_s": 1.5
+        },
+        {
+          "type": "mark",
+          "kind": "ok",
+          "x": 0.75,
+          "y": 0.52,
+          "at_word": "coser",
+          "visible_s": 1.5
+        },
+        {
+          "type": "bar",
+          "style": "slim",
+          "text_or_value": "35%",
+          "show_value": false,
+          "x": 0.28,
+          "y": 0.8,
+          "at_word": "sana",
+          "duration_s": 1.4,
+          "visible_s": 2.6,
+          "label": "ABIERTA"
+        },
+        {
+          "type": "bar",
+          "style": "slim",
+          "text_or_value": "100%",
+          "show_value": false,
+          "x": 0.72,
+          "y": 0.8,
+          "at_word": "sana",
+          "duration_s": 1.0,
+          "visible_s": 2.6,
+          "label": "CERRADA"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "knots",
+      "target_duration_s": 5,
+      "narration": "Cada punto se asegura con nudos diminutos, para que nada se suelte.",
+      "prompt": "Macro on a thread where it comes out of grey skin tissue on a black void: a loop crosses itself and tightens into a small knot. The camera pulls back along the wound and the stitch repeats from left to right, each stitch with its own knot popping in. One stitch with no knot slides out of the tissue and its lips reopen, while the knotted stitches hold, glowing gold.",
+      "transformation": "a single thread end -> a row of knotted stitches, one unknotted stitch slipping out",
+      "camera": "macro push-in on the knot, then a pull-back along the wound",
+      "foley": "thread tightening, tiny knot snaps",
+      "subtitle_emphasis": [
+        "nudos"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "nudo",
+          "at_word": "nudos",
+          "x": 0.3,
+          "y": 0.5,
+          "leader_to": [
+            0.46,
+            0.58
+          ],
+          "visible_s": 2.2
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.7,
+          "y": 0.66,
+          "at_word": "suelte",
+          "visible_s": 1.3
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "absorbable",
+      "target_duration_s": 6,
+      "narration": "Algunos hilos son absorbibles y tu cuerpo los disuelve solos: esos nunca hay que sacarlos.",
+      "prompt": "Cutaway of the grey skin tissue on a black void: a pale thread sits inside the wound surrounded by small yellow-green cells. The thread breaks into tiny particles starting from its middle and disappears. Metal tweezers approach the empty path where the thread was and withdraw.",
+      "transformation": "pale thread in the tissue -> thread dissolved into particles, empty path",
+      "camera": "slow push-in on the thread inside the cutaway",
+      "foley": "soft dissolving fizz",
+      "subtitle_emphasis": [
+        "absorbibles",
+        "disuelve"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "absorbible",
+          "at_word": "absorbibles",
+          "x": 0.28,
+          "y": 0.46,
+          "leader_to": [
+            0.45,
+            0.56
+          ],
+          "visible_s": 2.4
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "DÍA 70",
+          "from": 0,
+          "at_word": "absorbibles",
+          "x": 0.74,
+          "y": 0.4,
+          "duration_s": 1.9,
+          "visible_s": 3.6
+        },
+        {
+          "type": "bar",
+          "style": "slim",
+          "text_or_value": "50%",
+          "marker": 0.5,
+          "label": "RESISTENCIA",
+          "at_word": "cuerpo",
+          "x": 0.74,
+          "y": 0.48,
+          "duration_s": 1.2,
+          "visible_s": 3.0
+        },
+        {
+          "type": "chip",
+          "text_or_value": "~50% de resistencia\n~3 semanas",
+          "at_word": "disuelve",
+          "x": 0.72,
+          "y": 0.6,
+          "visible_s": 2.4
+        },
+        {
+          "type": "citation",
+          "text_or_value": "Vicryl",
+          "at_word": "disuelve",
+          "offset_s": 0.2,
+          "x": 0.72,
+          "y": 0.67,
+          "visible_s": 2.2
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.35,
+          "y": 0.7,
+          "at_word": "nunca",
+          "visible_s": 1.4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "risk",
+      "target_duration_s": 7,
+      "narration": "Pero si dejas los normales demasiado tiempo, la piel crece sobre el hilo y retirarlos se vuelve un problema.",
+      "prompt": "Cutaway of grey skin tissue on a black void: a dark thread remains in the wound while new skin grows from both lips, glowing gold, and slowly buries the thread under a new layer. Metal tweezers pull the thread and the skin tents upward, resisting, with a red flash on the tented skin.",
+      "transformation": "dark thread visible -> thread buried under new gold-lit skin -> tweezers cannot pull it out",
+      "camera": "slow tilt down along the cutaway with a gentle push-in",
+      "foley": "soft tissue stretch, tweezers click",
+      "subtitle_emphasis": [
+        "normales",
+        "problema"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "normal",
+          "at_word": "normales",
+          "x": 0.28,
+          "y": 0.46,
+          "leader_to": [
+            0.45,
+            0.56
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "chip",
+          "text_or_value": "CARA\n3-5 días",
+          "at_word": "demasiado",
+          "x": 0.27,
+          "y": 0.32,
+          "visible_s": 3.4
+        },
+        {
+          "type": "chip",
+          "text_or_value": "TRONCO\n7-10 días",
+          "at_word": "demasiado",
+          "offset_s": 0.3,
+          "x": 0.73,
+          "y": 0.32,
+          "visible_s": 3.4
+        },
+        {
+          "type": "chip",
+          "text_or_value": "EXTREMIDADES Y ARTICULACIONES\n10-14 días",
+          "at_word": "demasiado",
+          "offset_s": 0.6,
+          "x": 0.5,
+          "y": 0.42,
+          "visible_s": 3.4
+        },
+        {
+          "type": "citation",
+          "text_or_value": "Guías clínicas",
+          "at_word": "tiempo",
+          "offset_s": 0.6,
+          "x": 0.5,
+          "y": 0.49,
+          "visible_s": 2.8
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.5,
+          "y": 0.7,
+          "at_word": "problema",
+          "visible_s": 1.4
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "ants",
+      "target_duration_s": 8,
+      "narration": "Y el dato más loco: durante siglos se usaron hormigas vivas como puntos, porque al morder cerraban la herida con sus mandíbulas.",
+      "prompt": "A small stylized black ant walks along the edge of an open wound in grey skin tissue on a black void, bites both lips with its jaws and clamps them together like a staple. Two more black ants clamp along the wound until it is closed. No gore: the ants stay whole and cartoon-like.",
+      "transformation": "open wound -> wound held closed by three ants clamping like staples",
+      "camera": "push-in on the first ant, macro on its jaws, then a pull-back to the closed wound",
+      "foley": "tiny footsteps, a soft pinch",
+      "subtitle_emphasis": [
+        "siglos",
+        "hormigas"
+      ],
+      "data_overlays": [
+        {
+          "type": "chip",
+          "text_or_value": "~500 a. C.",
+          "at_word": "siglos",
+          "x": 0.5,
+          "y": 0.34,
+          "visible_s": 2.8
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "Sushruta",
+          "at_word": "siglos",
+          "offset_s": 0.1,
+          "x": 0.5,
+          "y": 0.41,
+          "visible_s": 2.6
+        },
+        {
+          "type": "citation",
+          "text_or_value": "Sushruta Samhita",
+          "at_word": "siglos",
+          "offset_s": 0.35,
+          "x": 0.5,
+          "y": 0.46,
+          "visible_s": 2.4
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "reframe-cta",
+      "target_duration_s": 9,
+      "narration": "Un punto de sutura no cierra la herida: la mantiene unida mientras tu cuerpo hace el trabajo. Sígueme, y envíaselo a ese amigo que se corta cocinando y dice que no necesita puntos.",
+      "prompt": "A single composition on a black void: a cross-section of a closed wound where a grey inert thread holds the two lips together while a gold glowing fibre bridge grows across the gap underneath it from the bottom up until it is complete. Nothing else moves.",
+      "transformation": "thread holding the lips in grey -> a gold fibre bridge completing beneath it",
+      "camera": "slow orbit with a gentle push-in",
+      "foley": "a soft low hum",
+      "subtitle_emphasis": [
+        "cuerpo",
+        "Sígueme"
+      ],
+      "data_overlays": [
+        {
+          "type": "cta",
+          "message": "solo es un corte, no necesito puntos",
+          "at_word": "Sígueme",
+          "duration_s": 5.0,
+          "visible_s": 5.4,
+          "x": 0.5,
+          "y": 0.58
+        }
+      ]
+    }
+  ]
+}
