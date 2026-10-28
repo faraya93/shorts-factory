@@ -89,12 +89,6 @@
     "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
     "clip_gate_db": -35
   },
-  "end_card": {
-    "duration_s": 4,
-    "handle": "MECANALIA",
-    "style": "papel",
-    "dim": 0.25
-  },
   "scenes": [
     {
       "id": 1,
@@ -560,17 +554,7 @@
       "subtitle_emphasis": [
         "Sígueme"
       ],
-      "data_overlays": [
-        {
-          "type": "cta",
-          "message": "¡el gancho de mi cinta métrica está roto!",
-          "at_word": "Sígueme",
-          "duration_s": 4.6,
-          "visible_s": 4.7,
-          "x": 0.5,
-          "y": 0.57
-        }
-      ]
+      "data_overlays": []
     }
   ],
   "render_args": [

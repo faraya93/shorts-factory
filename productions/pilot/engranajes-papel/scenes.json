@@ -89,12 +89,6 @@
     "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
     "clip_gate_db": -35
   },
-  "end_card": {
-    "duration_s": 4,
-    "handle": "MECANALIA",
-    "style": "papel",
-    "dim": 0.25
-  },
   "scenes": [
     {
       "id": 1,
@@ -489,17 +483,7 @@
       "subtitle_emphasis": [
         "igual"
       ],
-      "data_overlays": [
-        {
-          "type": "cta",
-          "message": "¡los engranajes no giran todos igual!",
-          "x": 0.5,
-          "y": 0.57,
-          "at_word": "Sígueme,",
-          "offset_s": 0.0,
-          "duration_s": 4.7
-        }
-      ]
+      "data_overlays": []
     }
   ],
   "render_args": [
