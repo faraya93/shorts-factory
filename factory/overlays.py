@@ -41,6 +41,30 @@ BAR_W, BAR_H, BAR_GAP = 760, 56, 22
 NUMBER_RE = re.compile(r"^(?P<pre>[^\d]*?)(?P<num>\d+(?:\.\d+)?)(?P<suf>.*)$", re.DOTALL)
 
 TEAL, RED, GOLD, GREY, PASSIVE, VOID = (103, 205, 190), (190, 74, 74), (245, 192, 74), (150, 150, 155), (81, 85, 90), (18, 15, 16)
+TEAL0, RED0, GOLD0, VOID0, PASSIVE0 = TEAL, RED, GOLD, VOID, PASSIVE          # fixed originals (the CTA phone UI is always a dark phone)
+INK, INK_STROKE = (255, 255, 255), (0, 0, 0)                # text ink + its outline
+CHIP_FILL, CHIP_EDGE, CHIP_TEXT = VOID + (235,), TEAL, (255, 255, 255)
+TRACK_EDGE = VOID
+THEME = "dark"
+THEMES = {   # text/graphics theme for the stage (design system 2026-10-27): "dark" = reference look, "light" = celeste stage
+    "dark": dict(INK=(255, 255, 255), INK_STROKE=(0, 0, 0), TEAL=(103, 205, 190), RED=(190, 74, 74), GOLD=(245, 192, 74), GREY=(150, 150, 155),
+                 PASSIVE=(81, 85, 90), VOID=(18, 15, 16), CHIP_FILL=(18, 15, 16, 235), CHIP_EDGE=(103, 205, 190), CHIP_TEXT=(255, 255, 255),
+                 TRACK_EDGE=(18, 15, 16)),
+    "light": dict(INK=(11, 37, 64), INK_STROKE=(255, 255, 255), TEAL=(11, 37, 64), RED=(201, 42, 42), GOLD=(232, 89, 12), GREY=(11, 37, 64),
+                  PASSIVE=(120, 150, 178), VOID=(11, 37, 64), CHIP_FILL=(11, 37, 64, 245), CHIP_EDGE=(255, 255, 255), CHIP_TEXT=(255, 255, 255),
+                  TRACK_EDGE=(255, 255, 255)),
+}
+
+
+def set_theme(name: str) -> None:
+    """Switch the module palette (annotation = TEAL role, accent = GOLD role, error = RED role) for the stage the production uses."""
+    global THEME, INK, INK_STROKE, TEAL, RED, GOLD, GREY, PASSIVE, VOID, CHIP_FILL, CHIP_EDGE, CHIP_TEXT, TRACK_EDGE
+    t = THEMES[name]
+    THEME = name
+    INK, INK_STROKE, TEAL, RED, GOLD, GREY, PASSIVE, VOID = (t[k] for k in ("INK", "INK_STROKE", "TEAL", "RED", "GOLD", "GREY", "PASSIVE", "VOID"))
+    CHIP_FILL, CHIP_EDGE, CHIP_TEXT, TRACK_EDGE = t["CHIP_FILL"], t["CHIP_EDGE"], t["CHIP_TEXT"], t["TRACK_EDGE"]
+
+
 MONTSERRAT = str(Path(__file__).resolve().parent / "assets" / "fonts" / "Montserrat-VF.ttf")   # SIL OFL, owner 2026-10-27
 VARIANT = {"bold": "ExtraBold", "regular": "SemiBold", "narrow": "ExtraBold", "mono": "ExtraBold"}   # one family everywhere
 FONTS = {
@@ -259,8 +283,9 @@ def _wrap(draw: ImageDraw.ImageDraw, text: str, fnt: ImageFont.FreeTypeFont) -> 
 
 
 def _text_image(text: str, fnt: ImageFont.FreeTypeFont, size: tuple[int, int] | None = None, stroke: int = OV_STROKE,
-                fill=(255, 255, 255, 255)) -> Image.Image:
-    """Text with a black outline, centred on a transparent canvas (of `size` if given)."""
+                fill=None) -> Image.Image:
+    """Text with an outline (theme ink / ink stroke), centred on a transparent canvas (of `size` if given)."""
+    fill = fill or INK + (255,)
     probe = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
     block = _wrap(probe, text, fnt)
     box = probe.multiline_textbbox((0, 0), block, font=fnt, stroke_width=stroke, align="center", spacing=10)
@@ -268,7 +293,7 @@ def _text_image(text: str, fnt: ImageFont.FreeTypeFont, size: tuple[int, int] | 
     w, h = size or (tw + 2 * stroke, th + 2 * stroke)
     img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     ImageDraw.Draw(img).multiline_text(((w - tw) / 2 - box[0], (h - th) / 2 - box[1]), block, font=fnt, fill=fill,
-                                       stroke_width=stroke, stroke_fill="black", align="center", spacing=10)
+                                       stroke_width=stroke, stroke_fill=INK_STROKE, align="center", spacing=10)
     return img
 
 
@@ -299,13 +324,13 @@ def _slim_bar(fraction: float, marker: float | None, label: str | None) -> Image
         img.alpha_composite(lab, ((img.width - lab.width) // 2, 0))
     d = ImageDraw.Draw(img)
     x0, y0 = (img.width - SLIM_W) // 2, top + pad
-    d.rounded_rectangle([x0 - 3, y0 - 3, x0 + SLIM_W + 3, y0 + SLIM_H + 3], radius=SLIM_H // 2 + 3, fill=VOID + (235,))
+    d.rounded_rectangle([x0 - 3, y0 - 3, x0 + SLIM_W + 3, y0 + SLIM_H + 3], radius=SLIM_H // 2 + 3, fill=TRACK_EDGE + (235,))
     d.rounded_rectangle([x0, y0, x0 + SLIM_W, y0 + SLIM_H], radius=SLIM_H // 2, fill=PASSIVE + (255,))
     if fraction > 0:
         d.rounded_rectangle([x0, y0, x0 + max(SLIM_H, round(SLIM_W * fraction)), y0 + SLIM_H], radius=SLIM_H // 2, fill=GOLD + (255,))
     if marker is not None:
         mx = x0 + round(SLIM_W * marker)
-        d.rectangle([mx - 2, y0 - 8, mx + 2, y0 + SLIM_H + 8], fill=(255, 255, 255, 255))
+        d.rectangle([mx - 2, y0 - 8, mx + 2, y0 + SLIM_H + 8], fill=INK + (255,))
     return img
 
 
@@ -317,7 +342,7 @@ def _tracked_text(text: str, fnt: ImageFont.FreeTypeFont, tracking: int, fill) -
     img = Image.new("RGBA", (w, asc + desc + 8), (0, 0, 0, 0))
     d, x = ImageDraw.Draw(img), 4.0
     for ch, cw in zip(text, widths):
-        d.text((x, 4), ch, font=fnt, fill=fill, stroke_width=2, stroke_fill=(0, 0, 0, 255))
+        d.text((x, 4), ch, font=fnt, fill=fill, stroke_width=2, stroke_fill=INK_STROKE + (255,))
         x += cw + tracking
     return img
 
@@ -363,9 +388,9 @@ def _chip_image(text: str) -> Image.Image:
     w, h = math.ceil(max(widths)) + 2 * CHIP_PAD_X, lh * len(lines) + 2 * CHIP_PAD_Y
     img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    d.rounded_rectangle([0, 0, w - 1, h - 1], radius=min(h // 2, 46), fill=VOID + (235,), outline=TEAL + (255,), width=CHIP_OUTLINE)
+    d.rounded_rectangle([0, 0, w - 1, h - 1], radius=min(h // 2, 46), fill=CHIP_FILL, outline=CHIP_EDGE + (255,), width=CHIP_OUTLINE)
     for i, l in enumerate(lines):
-        d.text(((w - widths[i]) / 2, CHIP_PAD_Y + i * lh), l, font=fnt, fill=(255, 255, 255, 255))
+        d.text(((w - widths[i]) / 2, CHIP_PAD_Y + i * lh), l, font=fnt, fill=CHIP_TEXT + (255,))
     return img
 
 
@@ -373,7 +398,7 @@ def _label_tag(spec: dict, n: int):
     """Tiny ALL-CAPS tracked label; with leader_to, a hairline leader grows from the text to the target point (dot at the end).
     Returns (frames, (left, top)) in frame pixels."""
     text = str(spec["text_or_value"]).upper()
-    tag = _tracked_text(text, font("narrow", TAG_SIZE), TAG_TRACK, (255, 255, 255, 255))
+    tag = _tracked_text(text, font("narrow", TAG_SIZE), TAG_TRACK, INK + (255,))
     cx, cy = _center(spec)
     tx0, ty0 = cx - tag.width / 2, cy - tag.height / 2
     target = _px(spec, "leader_to", None)
@@ -395,9 +420,9 @@ def _label_tag(spec: dict, n: int):
         img.alpha_composite(base, (round(tx0 - left), round(ty0 - top)))
         d = ImageDraw.Draw(img)
         ex, ey = sx + (tx - sx) * p, sy + (ty - sy) * p
-        d.line([(sx - left, sy - top), (ex - left, ey - top)], fill=(255, 255, 255, 255), width=3)
+        d.line([(sx - left, sy - top), (ex - left, ey - top)], fill=INK + (255,), width=3)
         if p >= 1.0:
-            d.ellipse([tx - left - 6, ty - top - 6, tx - left + 6, ty - top + 6], fill=(255, 255, 255, 255))
+            d.ellipse([tx - left - 6, ty - top - 6, tx - left + 6, ty - top + 6], fill=INK + (255,))
         frames.append(img)
     return frames, (left, top)
 
@@ -481,17 +506,17 @@ def _cta(spec: dict, n: int, fps: int):
         img = Image.new("RGBA", (pw, ph), (0, 0, 0, 0))
         d = ImageDraw.Draw(img)
         d.rounded_rectangle([0, 0, pw - 1, ph - 1], radius=70, fill=(28, 26, 27, 250), outline=(95, 95, 100, 255), width=6)
-        d.rounded_rectangle([pw // 2 - 70, 22, pw // 2 + 70, 48], radius=13, fill=VOID + (255,))
+        d.rounded_rectangle([pw // 2 - 70, 22, pw // 2 + 70, 48], radius=13, fill=VOID0 + (255,))
         if u < 0.62:                                   # profile screen with the FOLLOW button
             d.ellipse([60, 110, 190, 240], fill=PASSIVE + (255,))
             d.rounded_rectangle([220, 130, 520, 160], radius=14, fill=(110, 110, 116, 255))
             d.rounded_rectangle([220, 185, 420, 210], radius=12, fill=(70, 70, 76, 255))
             tapped = u > 0.18
             bx0, by0, bx1, by1 = 60, 290, pw - 60, 370
-            d.rounded_rectangle([bx0, by0, bx1, by1], radius=22, fill=(PASSIVE + (255,)) if tapped else (GOLD + (255,)))
+            d.rounded_rectangle([bx0, by0, bx1, by1], radius=22, fill=(PASSIVE0 + (255,)) if tapped else (GOLD0 + (255,)))
             label = following if tapped else follow
             tw = d.textlength(label, font=f_btn)
-            d.text(((pw - tw) / 2, by0 + 17), label, font=f_btn, fill=(255, 255, 255, 255) if tapped else VOID + (255,))
+            d.text(((pw - tw) / 2, by0 + 17), label, font=f_btn, fill=(255, 255, 255, 255) if tapped else VOID0 + (255,))
             if 0.10 < u < 0.26:                         # tap ripple
                 k = (u - 0.10) / 0.16
                 r = 20 + 60 * k
@@ -512,11 +537,11 @@ def _cta(spec: dict, n: int, fps: int):
                     d.ellipse([ax, top + 160, ax + 110, top + 270], fill=shades[a] + (255,))
                     if a == 0 and u > 0.42:
                         k2 = min(1.0, (u - 0.42) / 0.10)
-                        d.ellipse([ax - 8, top + 152, ax + 118, top + 278], outline=GOLD + (255,), width=int(2 + 8 * k2))
+                        d.ellipse([ax - 8, top + 152, ax + 118, top + 278], outline=GOLD0 + (255,), width=int(2 + 8 * k2))
                 if u > 0.50:
                     k3 = ease_out(min(1.0, (u - 0.50) / 0.10))
-                    d.rounded_rectangle([50, top + 350, pw - 50, top + 430], radius=26, fill=GOLD + (round(255 * k3),))
-                    d.text((pw // 2 - d.textlength("ENVIAR", font=f_btn) / 2, top + 368), "ENVIAR", font=f_btn, fill=VOID + (round(255 * k3),))
+                    d.rounded_rectangle([50, top + 350, pw - 50, top + 430], radius=26, fill=GOLD0 + (round(255 * k3),))
+                    d.text((pw // 2 - d.textlength("ENVIAR", font=f_btn) / 2, top + 368), "ENVIAR", font=f_btn, fill=VOID0 + (round(255 * k3),))
         else:                                           # chat: the friend's bubble and the sent tick
             d.ellipse([50, 100, 130, 180], fill=(120, 100, 90, 255))
             d.rounded_rectangle([150, 125, 400, 155], radius=14, fill=(110, 110, 116, 255))
@@ -539,9 +564,9 @@ def _cta(spec: dict, n: int, fps: int):
                     d.text((100, by + 22 + 48 * j), l, font=f_msg, fill=(255, 255, 255, 255))
             if u > 0.82:
                 a = round(255 * min(1.0, (u - 0.82) / 0.08))
-                d.text((70, by + bh + 20), sent, font=f_small, fill=TEAL + (a,))
+                d.text((70, by + bh + 20), sent, font=f_small, fill=TEAL0 + (a,))
                 d.ellipse([70 + d.textlength(sent, font=f_small) + 14, by + bh + 28, 70 + d.textlength(sent, font=f_small) + 38, by + bh + 52],
-                          fill=TEAL + (a,))
+                          fill=TEAL0 + (a,))
         frames.append(img)
     return frames, (round(cx - pw / 2), round(cy - ph / 2))
 

@@ -348,10 +348,13 @@ class Stage:
             c.render_frames(self.scene, out, a, b)
 
 
-def begin(default_slot: int):
+def begin(default_slot: int, floor_z: float | None = None):
     args = c.parse_args()
     production = Path(args["production"])
     stage = Stage(production, args.get("mode", "draft"))
+    if args.get("look"):                                  # design-system look (lighting/palette only); absent = the original grey-hero rig
+        import looks
+        looks.apply(stage, stage.mats, args["look"], {**args, **({"floor_z": floor_z} if floor_z is not None else {})})
     return args, production, stage, stage.mats, int(args.get("slot", default_slot))
 
 

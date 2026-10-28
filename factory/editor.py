@@ -175,6 +175,12 @@ def layout_cue(texts: list[str], font: ImageFont.FreeTypeFont) -> dict:
             "h": len(lines) * line_h + (len(lines) - 1) * gap + 2 * pad_y}
 
 
+SUB_THEMES = {   # light stage: navy words (>=8:1 on the celeste), the spoken word reversed in a solid navy box (white on navy 15:1)
+    "dark": None,
+    "light": dict(word=(11, 37, 64), stroke=(255, 255, 255), box=(11, 37, 64), box_text=(255, 255, 255), emph=(232, 89, 12)),
+}
+
+
 def render_cue_state(texts: list[str], current: int, lay: dict, path: Path, font: ImageFont.FreeTypeFont,
                      font_reg: ImageFont.FreeTypeFont | None = None, emphasis: list[bool] | None = None) -> None:
     """One PNG of the phrase with word `current` marked: bold white; the others grey (regular weight, centred in the same slot);
@@ -182,12 +188,23 @@ def render_cue_state(texts: list[str], current: int, lay: dict, path: Path, font
     img = Image.new("RGBA", (lay["w"], lay["h"]), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
     reg = font_reg or font
+    th = SUB_THEMES.get(overlays.THEME)
     y = lay["pad_y"]
     for idxs, line_w in lay["lines"]:
         x = (lay["w"] - line_w) / 2
         for i in idxs:
             slot_w = lay["widths"][i]
-            if i == current:
+            if i == current and th:
+                draw.rounded_rectangle([x - SUB_BOX_PAD_X, y - SUB_BOX_PAD_Y, x + slot_w + SUB_BOX_PAD_X, y + lay["line_h"] + SUB_BOX_PAD_Y],
+                                       radius=SUB_BOX_RADIUS, fill=th["box"] + (255,))
+                draw.text((x, y), texts[i], font=font, fill=th["box_text"])
+                if emphasis and emphasis[i]:
+                    x0, y0, x1, y1 = x - SUB_BOX_PAD_X - 6, y - SUB_BOX_PAD_Y - 6, x + slot_w + SUB_BOX_PAD_X + 6, y + lay["line_h"] + SUB_BOX_PAD_Y + 6
+                    draw.rounded_rectangle([x0, y0, x1, y1], radius=SUB_BOX_RADIUS + 4, outline=th["emph"], width=SUB_BOX_WIDTH + 1)
+            elif th:
+                tw = draw.textlength(texts[i], font=reg)
+                draw.text((x + (slot_w - tw) / 2, y), texts[i], font=reg, fill=th["word"], stroke_width=SUB_STROKE, stroke_fill=th["stroke"])
+            elif i == current:
                 draw.text((x, y), texts[i], font=font, fill=SUB_CURRENT_COLOR, stroke_width=SUB_STROKE, stroke_fill="black")
                 if emphasis and emphasis[i]:
                     x0, y0, x1, y1 = x - SUB_BOX_PAD_X, y - SUB_BOX_PAD_Y, x + slot_w + SUB_BOX_PAD_X, y + lay["line_h"] + SUB_BOX_PAD_Y
@@ -250,6 +267,7 @@ def main() -> int:
             return 1
     clips, audio_dir, build = prod / "clips", prod / "audio", prod / "build"
     identity = cfg.get("visual_identity")
+    overlays.set_theme((identity or {}).get("text_theme", "dark"))
     problems = vid.validate(identity) if identity else []
     for s in scenes:
         problems += validate_scene_overlays(s["id"], s["data_overlays"]) if "data_overlays" in s else []

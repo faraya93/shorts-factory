@@ -1,0 +1,84 @@
+--- channels/umbrella-es.yaml	2026-10-27 20:09:48
++++ docs/design-system-proposal/umbrella-es.yaml	2026-10-27 22:40:45
+@@ -57,40 +57,33 @@
+     gore, no graphic wounds — show the body as clean stylized cross-section models.
+ 
+ visual_identity:
+-  # DARK STAGE (owner 2026-10-26, from the reference study: docs/reference-style-spec.md). The lavender stage #E2D5F1 of
+-  # productions v1-v6 is RETIRED; those productions embed their own copy and stay as frozen records.
+-  # Hex values below were MEASURED from the three reference videos (median of border pixels / mean of saturated pixels in
+-  # the named frames) except where marked "starting value".
+-  # QA scope (owner decision, unchanged): the backdrop and its QA apply only to establishing shots and code3d productions;
+-  # close-ups are exempt. QA marks are review signals, not automatic defects.
++  # CELESTE STUDIO (PROPOSED 2026-10-27, docs/design-system.md; pending owner approval). Replaces the dark stage of 2026-10-26.
++  # Productions v1-v7 and huincha-de-medir v1/v2 are frozen records of earlier identities.
+   background:
+-    hex: "#120F10"                    # near-black warm void: border median of ejemplo-1 1.5 s, ejemplo-3 4.5 s and 11.5 s
+-    description: near-black warm void, dark low-key stage
++    hex: "#8FD6F2"                    # top of the celeste seamless (behind the caption band); bottom #62B4DC (gradient is screen-space)
++    description: soft celeste studio seamless, lighter at the top, deeper low; gentle contact shadows; never a void
++  text_theme: light                   # Editor: navy words, spoken word reversed in a navy box, white outline (factory/editor.py, overlays.THEMES)
+   palette:
+-    - {hex: "#120F10", name: void}                    # the stage
+-    - {hex: "#16202C", name: cross-section navy}      # ejemplo-1 36.0 s cutaway backdrop
+-    - {hex: "#2D2A2B", name: passive dark grey}       # ejemplo-3 4.5 s keys
+-    - {hex: "#51555A", name: passive grey}            # ejemplo-1 20.0 s grid cells
+-    - {hex: "#DAD8D7", name: passive light grey}      # ejemplo-2 25.0 s lit ceramic
+-    - {hex: "#F5C04A", name: accent gold}             # starting value: brightest glow-line colour (mean of thin lines #AB893F)
+-    - {hex: "#ECA432", name: accent amber}            # ejemplo-3 11.5 s filled zones (mean of saturated pixels)
+-    - {hex: "#67CDBE", name: annotation teal}         # ejemplo-2 37.0 s chip and outline
+-    - {hex: "#BE4A4A", name: error red}               # ejemplo-3 57.0 s overflow bar
+-    - {hex: "#CBD764", name: biology yellow-green}    # ejemplo-2 49.0 s bacteria particles
+-    - {hex: "#B9948D", name: skin tone}               # ejemplo-1 36.0 s fingertip, lit side
+-  # Colour semantics (binding): ONE accent (gold/amber) = the active quantity (energy, charge, tension, growth, the thing
+-  # being measured); everything passive is grey; teal = annotation graphics only; red = error, failure or overflow;
+-  # yellow-green = bacteria/biology. A part is grey until the narration activates it.
+-  lighting: low-key, one soft key light, warm orange rim halo behind the hero near the top of the frame, emissive accents as the second light, soft shadows, dark vignette toward the edges
+-  materials: simplified chunky smooth-shaded models, matte/satin with a faint specular, emissive glowing tubes for energy, flat clean cross-section cuts, no outlines, no cel bands, no photo textures
+-  unify:                              # shared Editor pass for every scene, whatever its engine — not yet tuned
++    - {hex: "#8FD6F2", name: stage top}
++    - {hex: "#62B4DC", name: stage bottom}
++    - {hex: "#0B2540", name: navy ink}                # text, leaders, brackets, chips (8.6:1 mean on the stage; white on navy 15.5:1)
++    - {hex: "#2B4C70", name: plinth navy}             # the platform every hero sits on (separates white/silver/yellow bases)
++    - {hex: "#E8590C", name: accent ember}            # the ACTIVE QUANTITY on a light stage (gold has 1.1:1 here)
++    - {hex: "#C92A2A", name: error red}
++    - {hex: "#FFFFFF", name: outline white}
++    - {hex: "#51555A", name: passive grey}
++  # Colour semantics (binding): ONE accent = the active quantity; the hero keeps its REAL colours (yellow tape, red thermos...);
++  # navy = all annotation graphics and text; red = error. Hero rule: parts with L* >= 85 or neutral greys get a navy plinth + rim light.
++  lighting: bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette
++  materials: simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands
++  unify:
+     saturation: 1.04
+     contrast: 1.03
+     warmth: 0.0
+     grain: 5
+     vignette_angle: 0
+-    lift: "0/0.03 0.1/0.21 0.5/0.7 0.85/0.92 1/0.98"   # luminous subject, owner 2026-10-27
+-  qa_tolerance_de: 15                 # starting value (CIE76); ~2.3 is a just-noticeable difference
++    lift: ""
++  qa_tolerance_de: 15
+ 
+ audio:                                # starting profile from the pilot; the clip gate keeps music out of the mix
+   narration_volume: 1.0
+--- CLAUDE.md	2026-10-27 20:09:48
++++ docs/design-system-proposal/CLAUDE.md	2026-10-27 22:40:45
+@@ -85,6 +85,18 @@
+   with diffusion footage: a code3d production is code3d in every scene.
+   scenes_schema.py rejects violations before any spend. The binding
+   selection rules are in "Engine selection" below.
++
++## Channel design system (PROPOSED 2026-10-27; applies only after owner approval; full spec docs/design-system.md)
++Supersedes the DARK-stage identity and look rules 1 and 3 of the Reference doctrine below; the storytelling rules stay.
++- Stage: CELESTE studio seamless (#8FD6F2 top to #62B4DC bottom), gentle contact shadow, no vignette, no halo. Hero keeps REAL colours on a
++  navy plinth (#2B4C70). Constant for every drawn-style video.
++- Ink: navy #0B2540. Accent (active quantity): ember #E8590C. Error: #C92A2A. Subtitles: navy words, the spoken word reversed in a navy
++  box with white text (15.5:1), 4 px white outline on the others. Overlay text/graphics follow factory/overlays.THEMES["light"].
++- Safe zones (1080x1920): captions centred at y=0.24H (above the 288 px top reserve); hero and graphics inside y 0.15-0.75, x 0.10-0.90;
++  nothing needed to read below y=0.75 (platform UI) or right of x=0.82 below y=0.45 (button stack). Counters at y<=0.72.
++- Typography: Montserrat ExtraBold; scale in docs/design-system.md. Cost: celeste lighting renders ~1.4-1.75x the dark looks (tuned
++  96-128 spp, adaptive 0.03-0.05, 4 bounces); measured, never guessed.
++- Brand: name and handle per docs/design-system.md once chosen; mark and end card rendered in code (tools/brand_mark.py).
+ 
+ ## Reference doctrine (binding, owner 2026-10-26)
+ Adopted from the reference study of three example channels

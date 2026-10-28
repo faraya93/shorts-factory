@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "lib"))
 import common as c  # noqa: E402
 import tape_rig as tr  # noqa: E402
 
-args, production, stage, m, SLOT = tr.begin(180)
+args, production, stage, m, SLOT = tr.begin(180, floor_z=-9.0)
 T = SLOT / c.FPS
 ZA, ZB = -4.4, 3.4
 A = tr.Tape(m, loc=(0, 0, ZA), name="flat")

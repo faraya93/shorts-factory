@@ -1,0 +1,98 @@
+# channels/umbrella-es.yaml — DRAFT config for the single active channel (owner approval pending).
+# A channel is configuration, not hard-coded assumptions: this file is the single source for the channel's voice,
+# language, style, duration, topic mix and visual identity. Each production embeds a verbatim copy of the blocks it
+# uses (visual_identity, style) in its scenes.json so it stays reproducible if this file changes later.
+# Values marked "starting value" or "not yet tuned" are mine, not measured; the rest cites its source.
+
+channel: umbrella-es
+status: draft
+promise: "Por qué y cómo funcionan las cosas que ves y usas todos los días"   # umbrella curiosity channel
+language: es
+register: neutral pan-Hispanic Spanish — universal topics, no country-specific systems, no local slang
+
+voice:
+  default: es-CL-LorenzoNeural        # provisional: the owner has not chosen yet; Lorenzo stays default until he does
+  audition_candidates: [es-CL-LorenzoNeural, es-MX-JorgeNeural, es-ES-AlvaroNeural, es-CL-CatalinaNeural]
+
+duration:                             # seconds of narration (see CLAUDE.md format doctrine)
+  standard_s: [45, 60]
+  by_family:
+    body: [40, 50]
+    numbers: [50, 60]
+  words_per_second: 2.87              # measured on the pilot narration (126 words in 43.9 s)
+
+topic_families:                       # STARTING mix, percent of the publishing slate; to be re-weighted by performance data
+  objects: 40                         # everyday objects with a hidden mechanism
+  body: 25                            # body / medical how-it-works
+  numbers: 20                         # impossible numbers / scale
+  whatif: 15                          # what-if / dilemmas
+  avoid: [generic textbook science with no everyday anchor, news, sports, labour law]
+
+subtitles:                            # mirrored from factory/editor.py constants; tests/test_channel.py keeps them in sync
+  y_center: 0.24                      # block centre as a fraction of the frame height (upper band)
+  font_size_px: 57
+  stroke_px: 4
+  max_words: 4
+  max_chars: 26
+  max_width_px: 940
+  current_word: spoken word bold white, the other words grey (~55%), key words (scene field subtitle_emphasis) in a thin teal selection box with corner handles   # reference doctrine; built in factory/editor.py
+
+style:
+  # Base style string, prefix of every scene prompt of every engine (reference doctrine, owner 2026-10-26: dark low-key
+  # stage, one gold accent; see docs/reference-style-spec.md). "No text on screen" stays: labels, counters and chips are
+  # Editor overlays, never model-generated text.
+  base: >-
+    Dark low-key stylized 3D explainer, near-black background, one warm gold accent for the active part and everything
+    else neutral grey, simplified chunky smooth-shaded models with detail only where the fact is, soft key light with a
+    warm rim, cutaway and cross-section views. Strictly NOT photorealistic: no realistic textures, no real faces, no
+    blood, no gore, no graphic content. No text on screen.
+  by_family:                          # appended after base; only the body family has an approved example so far
+    body: Medical illustration look. Show the body as clean stylized cutaway and cross-section models.
+    objects: null                     # to be approved after the first production of this family
+    numbers: null
+    whatif: null
+  reference_v2: >-                    # RETIRED identity (bright lavender-stage Pixar look), kept verbatim as a historical record
+    Bright stylized 3D cartoon animation, Pixar-style explainer short, smooth clean materials, soft studio lighting,
+    medical illustration look. Strictly NOT photorealistic: no realistic skin texture, no real faces, no blood, no
+    gore, no graphic wounds — show the body as clean stylized cross-section models.
+
+visual_identity:
+  # CELESTE STUDIO (PROPOSED 2026-10-27, docs/design-system.md; pending owner approval). Replaces the dark stage of 2026-10-26.
+  # Productions v1-v7 and huincha-de-medir v1/v2 are frozen records of earlier identities.
+  background:
+    hex: "#8FD6F2"                    # top of the celeste seamless (behind the caption band); bottom #62B4DC (gradient is screen-space)
+    description: soft celeste studio seamless, lighter at the top, deeper low; gentle contact shadows; never a void
+  text_theme: light                   # Editor: navy words, spoken word reversed in a navy box, white outline (factory/editor.py, overlays.THEMES)
+  palette:
+    - {hex: "#8FD6F2", name: stage top}
+    - {hex: "#62B4DC", name: stage bottom}
+    - {hex: "#0B2540", name: navy ink}                # text, leaders, brackets, chips (8.6:1 mean on the stage; white on navy 15.5:1)
+    - {hex: "#2B4C70", name: plinth navy}             # the platform every hero sits on (separates white/silver/yellow bases)
+    - {hex: "#E8590C", name: accent ember}            # the ACTIVE QUANTITY on a light stage (gold has 1.1:1 here)
+    - {hex: "#C92A2A", name: error red}
+    - {hex: "#FFFFFF", name: outline white}
+    - {hex: "#51555A", name: passive grey}
+  # Colour semantics (binding): ONE accent = the active quantity; the hero keeps its REAL colours (yellow tape, red thermos...);
+  # navy = all annotation graphics and text; red = error. Hero rule: parts with L* >= 85 or neutral greys get a navy plinth + rim light.
+  lighting: bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette
+  materials: simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands
+  unify:
+    saturation: 1.04
+    contrast: 1.03
+    warmth: 0.0
+    grain: 5
+    vignette_angle: 0
+    lift: ""
+  qa_tolerance_de: 15
+
+audio:                                # starting profile from the pilot; the clip gate keeps music out of the mix
+  narration_volume: 1.0
+  effects_volume: 0.30
+  clip_audio: effects
+  clip_gate_db: -35
+  music_volume: 0.10
+  music_file: null                    # no signature track chosen yet
+
+spinoff_criteria:                     # spin-off channels are decided later, only by data — never micro-topic splits
+  - a topic family that consistently wins AND can sustain its own publishing cadence
+  - the English-language version of the channel
