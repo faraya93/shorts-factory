@@ -119,5 +119,20 @@
     "spoken_text": "#0F1D6B",
     "emph": "#FFA45C",
     "mode": "white"
+  },
+  "frambuesa": {
+    "title": "FRAMBUESA",
+    "top": "#C21B68",
+    "bottom": "#A31256",
+    "plinth": "#FFF3E0",
+    "accent": "#6BFFD8",
+    "error": "#1F0A14",
+    "annot": "#FFFFFF",
+    "ink": "#FFFFFF",
+    "ink_stroke": "#4A0A2B",
+    "spoken_box": "#FFFFFF",
+    "spoken_text": "#4A0A2B",
+    "emph": "#6BFFD8",
+    "mode": "white"
   }
 }
