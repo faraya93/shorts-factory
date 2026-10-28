@@ -16,6 +16,7 @@ from pathlib import Path
 import edge_tts
 from PIL import Image, ImageDraw, ImageFont
 
+import overlays
 import visual_identity as vid
 from overlays import (find_word_start, norm_word, render_end_card, render_overlay, start_offset, track_expr, validate_end_card,
                       validate_scene_overlays, visible_seconds)
@@ -302,13 +303,12 @@ def main() -> int:
         report.append((s["id"], s["name"], narr, slot, d, info["has_audio"], note))
 
     # 4. Subtítulos globales (cues por escena desplazadas por los slots acumulados) -> PNGs
-    font_path = next((f for f in FONT_CANDIDATES if Path(f).exists()), None)
+    font_path = next((f for f in [overlays.MONTSERRAT, *FONT_CANDIDATES] if Path(f).exists()), None)
     if not font_path:
         print("ERROR: no encontré una fuente en negrita en FONT_CANDIDATES.")
         return 1
-    font = ImageFont.truetype(font_path, SUB_FONT_SIZE)
-    reg_path = next((f for f in overlays_fonts()["regular"] if Path(f).exists()), font_path)
-    font_reg = ImageFont.truetype(reg_path, SUB_FONT_SIZE)
+    font = overlays.font("bold", SUB_FONT_SIZE)          # Montserrat ExtraBold (factory/assets/fonts)
+    font_reg = overlays.font("regular", SUB_FONT_SIZE)   # Montserrat SemiBold
     for old in build.glob("cue-*.png"):
         old.unlink()
     # one PNG per highlight state: for each phrase, one image per word with that word marked

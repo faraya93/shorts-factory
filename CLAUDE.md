@@ -63,6 +63,10 @@ we copy the mechanics, never scripts or footage: all scripts are original.
   the owner decides otherwise. Voice-led audio: fast continuous
   narration, no prominent music bed; clip audio only when it is genuine
   mechanism foley (see the audio gate).
+- Typography (owner 2026-10-27): Montserrat ExtraBold (Google Fonts, SIL
+  OFL; factory/assets/fonts/Montserrat-VF.ttf, logged in
+  factory/assets/fonts/LICENSES.md) for subtitles, counters, labels and
+  chips; non-spoken subtitle words use SemiBold of the same family.
 - Subtitles: burned in, upper band centred at SUBTITLE_Y_CENTER = 0.24 of
   the frame height (a channel constant that moves to the channel config),
   short phrases (max 4 words) with the WHOLE current phrase visible; the
@@ -105,7 +109,10 @@ visual_identity carries the values):
 
 Look rules (style spec; evidence cited there):
 1. Low-key frames; one soft key light plus a warm rim halo behind the
-   hero; emissive accents are the second light; dark vignette.
+   hero; emissive accents are the second light. The stage is dark but the SUBJECT
+   is LUMINOUS (owner 2026-10-27: "too dark overall, edges included"):
+   lifted shadows, no heavy vignette (unify `lift` curve, vignette_angle 0),
+   stage never a pure void.
 2. Hero models simplified and chunky; detail only on the feature the
    fact is about; scale exaggerated so the mechanism is legible.
 3. Energy and charge are emissive glowing tubes with bloom.
@@ -119,7 +126,7 @@ Look rules (style spec; evidence cited there):
 7. Text system: subtitles of 1-4 words with the spoken word bold white,
    the others grey (~55%), key words in a selection box; tiny ALL-CAPS
    labels with hairline leader lines (1-2 words); monospace counters;
-   teal chips; tiny source citations. BUILT in factory/editor.py +
+   teal chips (figures/units only, never sources). BUILT in factory/editor.py +
    factory/overlays.py (Editor v2, 2026-10-26; see "Data overlays").
 8. ONE hero rig per video, revisited and re-lit with new data, +1 new
    element per fact. End with a dimmed end card (~25% brightness,
@@ -135,9 +142,14 @@ EVENT, never a static illustration):
    or exploded layers, active part in the accent colour.
 4. "Each / all / many" = multiplication with a pull-back.
 5. EVERY NUMBER IS A SCREEN OBJECT (counter, chip, bar, year) that
-   appears on the spoken word. A number with no source is NEVER invented:
-   it is flagged to the owner, and the chip stays a placeholder until a
-   sourced figure is approved. Facts get cards and one-line citations.
+   appears on the spoken word. A number is NEVER invented: an unsourced
+   figure is flagged to the owner in the report. SOURCES ARE NOT RENDERED
+   ON SCREEN (owner rule 2026-10-27, binding for every future production):
+   no citation lines, no "ficha técnica / fuente" chips, no brand-name
+   credit cards. Numbers stay as counters/chips/bars and are understood
+   as approximate; the source lives in the beat sheet and report, and the
+   spoken narration may name it. Counters, labels and dynamic comments
+   stay. overlays.validate_scene_overlays rejects type "citation".
 6. "But / what if not" = a counter-actor on the same stage with the same
    readout.
 7. "Imagine..." = a named-person micro-scene; set it up early, return to
@@ -232,8 +244,8 @@ where judgment is involved.
     4 px black outline, no dark box; words listed in the scene field
     `subtitle_emphasis` get a thin teal selection box with corner handles
     while spoken.
-  * Overlay types beyond counter/bar/label: chip (teal pill), citation
-    (tiny grey source line), bracket (teal, figure-less measure), ring
+  * Overlay types beyond counter/bar/label: chip (teal pill; never a
+    source chip), bracket (teal, figure-less measure), ring
     (dotted teal circle), mark (red X / gold ring pop with overshoot),
     cta (acted-out phone: FOLLOW tap, share sheet, chat bubble, sent
     tick; Spanish strings come from the spec). label style "tag" is the

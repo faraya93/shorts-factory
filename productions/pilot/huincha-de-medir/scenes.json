@@ -72,7 +72,8 @@
       "contrast": 1.03,
       "warmth": 0.0,
       "grain": 5,
-      "vignette_angle": 0.9
+      "vignette_angle": 0,
+      "lift": "0/0.03 0.1/0.21 0.5/0.7 0.85/0.92 1/0.98"
     },
     "qa_tolerance_de": 15
   },
@@ -257,14 +258,6 @@
           "visible_s": 4.6,
           "x": 0.5,
           "y": 0.8
-        },
-        {
-          "type": "chip",
-          "text_or_value": "FICHA TÉCNICA\nDEL FABRICANTE",
-          "at_offset_seconds": 3.35,
-          "x": 0.5,
-          "y": 0.88,
-          "visible_s": 2.4
         },
         {
           "type": "label",

@@ -42,15 +42,14 @@ def test_word_lock_resolves_against_spoken_words():
 
 
 def test_validation_of_the_new_types_and_fields():
-    ok = [spec(x=0.1, y=0.1), spec(type="citation", text_or_value="Vicryl", x=0.2, y=0.2),
-          spec(type="counter", text_or_value="DÍA 70", **{"from": 0}, style="mono", x=0.3, y=0.3),
+    ok = [spec(x=0.1, y=0.1), spec(type="counter", text_or_value="DÍA 70", **{"from": 0}, style="mono", x=0.3, y=0.3),
           spec(type="bar", text_or_value="50%", style="slim", show_value=False, marker=0.5, x=0.4, y=0.4),
           spec(type="bracket", **{"from": [0.2, 0.4], "to": [0.6, 0.4]}, text_or_value=None),
           spec(type="ring", radius=0.2, x=0.5, y=0.5), spec(type="mark", kind="x", x=0.3, y=0.3),
           spec(type="label", style="tag", text_or_value="borde", leader_to=[0.6, 0.5], x=0.3, y=0.3),
           spec(type="cta", message="hola", x=0.5, y=0.55), {"type": "chip", "text_or_value": "x", "at_word": "bordes", "x": 0.6, "y": 0.6}]
     assert ov.validate_scene_overlays(1, ok) == [], ov.validate_scene_overlays(1, ok)
-    bad = [spec(type="bracket"), spec(type="ring"), spec(type="mark", kind="z"), spec(type="cta"), spec(x=1.5),
+    bad = [spec(type="citation", text_or_value="Vicryl", x=0.2, y=0.2), spec(type="bracket"), spec(type="ring"), spec(type="mark", kind="z"), spec(type="cta"), spec(x=1.5),
            spec(at_word="a", at_offset_seconds=1), {"type": "chip", "text_or_value": "x"},
            spec(keyframes=[{"t": 0, "x": 0.1, "y": 0.1}]), spec(type="label", style="giant"), spec(type="counter", text_or_value="DÍA", **{"from": "a"})]
     for b in bad:

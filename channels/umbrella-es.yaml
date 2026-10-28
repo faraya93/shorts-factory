@@ -88,7 +88,8 @@ visual_identity:
     contrast: 1.03
     warmth: 0.0
     grain: 5
-    vignette_angle: 0.9
+    vignette_angle: 0
+    lift: "0/0.03 0.1/0.21 0.5/0.7 0.85/0.92 1/0.98"   # luminous subject, owner 2026-10-27
   qa_tolerance_de: 15                 # starting value (CIE76); ~2.3 is a just-noticeable difference
 
 audio:                                # starting profile from the pilot; the clip gate keeps music out of the mix

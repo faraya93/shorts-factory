@@ -14,7 +14,7 @@ Placement: x, y = the graphic's centre as a fraction of the frame (default 0.5, 
 Types (reference style: dark stage, gold = active quantity, teal = annotation, red = error):
   label     legacy: big white centred text. style "tag": tiny ALL-CAPS tracked label, optional leader_to [x, y] hairline
   chip      rounded pill, teal outline, white bold text (multi-line with \\n); text_or_value
-  citation  tiny grey source line
+  (citation / source chips are NOT rendered on screen: owner decision 2026-10-27; type rejected)
   counter   counts from `from` (default 0) to the number in text_or_value ("DÍA 70"); style "mono" is the reference counter
   bar       fills to a fraction or percentage; style "slim" (gold fill), show_value false hides the figure, marker draws a tick
   bracket   teal measuring bracket from [x, y] to [x, y] (no figure; optional text_or_value tag at its middle)
@@ -41,13 +41,15 @@ BAR_W, BAR_H, BAR_GAP = 760, 56, 22
 NUMBER_RE = re.compile(r"^(?P<pre>[^\d]*?)(?P<num>\d+(?:\.\d+)?)(?P<suf>.*)$", re.DOTALL)
 
 TEAL, RED, GOLD, GREY, PASSIVE, VOID = (103, 205, 190), (190, 74, 74), (245, 192, 74), (150, 150, 155), (81, 85, 90), (18, 15, 16)
+MONTSERRAT = str(Path(__file__).resolve().parent / "assets" / "fonts" / "Montserrat-VF.ttf")   # SIL OFL, owner 2026-10-27
+VARIANT = {"bold": "ExtraBold", "regular": "SemiBold", "narrow": "ExtraBold", "mono": "ExtraBold"}   # one family everywhere
 FONTS = {
-    "bold": ["/System/Library/Fonts/Supplemental/Arial Bold.ttf", "/Library/Fonts/Arial Bold.ttf",
+    "bold": [MONTSERRAT, "/System/Library/Fonts/Supplemental/Arial Bold.ttf", "/Library/Fonts/Arial Bold.ttf",
              "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"],
-    "regular": ["/System/Library/Fonts/Supplemental/Arial.ttf", "/Library/Fonts/Arial.ttf",
+    "regular": [MONTSERRAT, "/System/Library/Fonts/Supplemental/Arial.ttf", "/Library/Fonts/Arial.ttf",
                 "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"],
-    "narrow": ["/System/Library/Fonts/Supplemental/Arial Narrow Bold.ttf", "/System/Library/Fonts/Supplemental/Arial Bold.ttf"],
-    "mono": ["/System/Library/Fonts/Supplemental/Courier New Bold.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"],
+    "narrow": [MONTSERRAT, "/System/Library/Fonts/Supplemental/Arial Narrow Bold.ttf", "/System/Library/Fonts/Supplemental/Arial Bold.ttf"],
+    "mono": [MONTSERRAT, "/System/Library/Fonts/Supplemental/Courier New Bold.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"],
 }
 TAG_SIZE, TAG_TRACK = 34, 4
 CHIP_SIZE, CHIP_PAD_X, CHIP_PAD_Y, CHIP_OUTLINE = 44, 34, 20, 5
@@ -59,7 +61,10 @@ SLIM_W, SLIM_H = 520, 30
 def font(kind: str, size: int) -> ImageFont.FreeTypeFont:
     for path in FONTS[kind]:
         if Path(path).exists():
-            return ImageFont.truetype(path, size)
+            f = ImageFont.truetype(path, size)
+            if path == MONTSERRAT:
+                f.set_variation_by_name(VARIANT[kind])
+            return f
     raise FileNotFoundError(f"no {kind} font found in {FONTS[kind]}")
 
 
@@ -148,6 +153,9 @@ def validate_scene_overlays(scene_id, overlays) -> list[str]:
             errors.append(f"{tag}: type must be one of {TYPES}")
             continue
         kind, value = spec["type"], spec.get("text_or_value")
+        if kind == "citation":
+            errors.append(f"{tag}: source citations are never rendered on screen (owner rule 2026-10-27)")
+            continue
         if kind in NEEDS_TEXT and (value is None or not str(value).strip()):
             errors.append(f"{tag}: missing text_or_value")
         if ("at_word" in spec) == ("at_offset_seconds" in spec):

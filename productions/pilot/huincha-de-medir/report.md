@@ -48,3 +48,10 @@ Total Cycles 9,090 s (2.53 h) vs ~7 h budget: no samples or fps cut needed. Edit
 1. Scene 2 cross-section legibility (above). 2. Scene 3 blade too thin in the wide shot. 3. Scene 5 spring glow clipping. 4. Scene 4 bright wall blocks (QA mark). 5. Scene 6 weight is a plain cube. Each is a targeted re-render (scene-level, ~10–40 min), not a rebuild.
 
 Regenerate sheets: `.venv/bin/python <sidebyside.py> final.mp4 out.png` (scripts live in the session scratchpad, not committed).
+
+---
+# Revision 2 (owner fixes, 2026-10-27) — $0
+**Brightness: GRADE path taken, no re-render.** Unify pass now has a `lift` curve (`0/0.03 0.1/0.21 0.5/0.7 0.85/0.92 1/0.98`) and vignette removed (angle 0). Measured mean luma on 8 probe frames before -> after: 16/19/8/24/30/25/11/23 -> 54/73/38/85/88/79/45/50 (about 2-4x); stage now a dark charcoal (~#1C1C1C), no longer a void; highlight roll-off keeps the gold spring from clipping further. Sheet: `build/frames/brightness-before-after.png` (top before, bottom after). Not done: the scene-5 spring emission cap (no re-render was needed; the glow is still bright yellow but no longer clipped harder by the lift). Honest note: the lift also brightens the halo to a strong orange, which is more saturated than the references.
+**Typography:** Montserrat ExtraBold (variable font, SIL OFL, `factory/assets/fonts/`, licence logged in `LICENSES.md`) for subtitles, counters, labels, chips; non-spoken words SemiBold. Widest subtitle 776 px (fits). Sheet: `build/frames/subtitle-before-after.png`. Counters are no longer monospace (Montserrat has proportional digits) — a counting number may shimmer slightly in width; I could not see motion to check.
+**Citations:** chip "FICHA TÉCNICA DEL FABRICANTE" deleted (31 -> 30 overlays). `citation` overlay type now rejected by validation; CLAUDE.md, format spec (R8 + rule 8) and channel config amended; tests updated (all pass).
+**Times:** font fetch + code/doctrine edits + grade tests ~10 min; re-assembly 24 s; no Cycles time spent. Output 68.00 s, 26.4 MB (previous 17.0 MB; the lifted frames compress heavier). Prior version kept at `build/final-v1-before.mp4` (gitignored).

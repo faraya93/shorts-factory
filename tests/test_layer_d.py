@@ -100,7 +100,8 @@ def test_identity_clause_is_literal():
 
 def test_unify_filter_is_shared_and_complete():
     f = vid.unify_filter(IDENTITY)
-    assert f.startswith("eq=") and "noise=" in f and "vignette=" in f
+    assert f.startswith("curves=") and "eq=" in f and "noise=" in f
+    assert "vignette=" in vid.unify_filter({**IDENTITY, "unify": {"vignette_angle": 0.9}}) and "vignette=" not in f
     assert vid.unify_filter(None) == ""
     assert "colorbalance" in vid.unify_filter({**IDENTITY, "unify": {"warmth": 0.1}})
 
