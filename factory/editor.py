@@ -410,7 +410,7 @@ def main() -> int:
         last = "vend"
     for k, (png, w, h, a, b) in enumerate(cue_imgs):
         x, y = (W - w) // 2, SUB_CENTER_Y - h // 2
-        parts.append(f"[{last}][{2 * n_sc + k}:v]overlay=x={x}:y={y}:enable='between(t,{a:.3f},{b:.3f})'[o{k}]")
+        parts.append(f"[{last}][{2 * n_sc + k}:v]overlay=x={x}:y={y}:enable='gte(t,{a:.3f})*lt(t,{b:.3f})'[o{k}]")
         last = f"o{k}"
     ov_base = 2 * n_sc + len(cue_imgs)
     for k, ov in enumerate(ov_list):  # data overlays: frame centre; sequence delayed to its start, last frame held
@@ -423,7 +423,7 @@ def main() -> int:
             pos = f"x={ov['left']}:y={ov['top']}"
         else:
             pos = f"x={(W - ov['w']) // 2}:y={(H - ov['h']) // 2}"
-        parts.append(f"[{last}][ovs{k}]overlay={pos}:enable='between(t,{ov['start']:.3f},{ov['end']:.3f})'[p{k}]")
+        parts.append(f"[{last}][ovs{k}]overlay={pos}:enable='gte(t,{ov['start']:.3f})*lt(t,{ov['end']:.3f})'[p{k}]")
         last = f"p{k}"
     if end_meta:                # dim the final frame and fade in the placeholder logo + handle
         k_end = ov_base + len(ov_list)
