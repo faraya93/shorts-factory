@@ -81,7 +81,42 @@ def _seamless_floor(floor_hex, z=None):
     fl.is_shadow_catcher = True                          # Cycles: only the soft shadows show, over the seamless backdrop
 
 
+def _directions() -> dict:
+    import json
+    from pathlib import Path
+    d = json.load(open(Path(__file__).resolve().parents[2] / "factory" / "directions.json"))
+    return {k: v for k, v in d.items() if not k.startswith("_")}
+
+
+def apply_direction(stage, m, name: str, args: dict | None = None) -> None:
+    """Identity direction (factory/directions.json): screen-space gradient stage + shadow-catcher floor + plinth + accent/error swap.
+    Same studio lighting as CEL (cheap, tuned); only palette differs, so per-direction cost differences are the palette's own."""
+    d = _directions()[name]
+    nt, cam, env = _world(stage)
+    key, rim, fill = stage.key, stage.rim, stage.fill
+    glare = next(n for n in stage.scene.compositing_node_group.nodes if n.bl_idname == "CompositorNodeGlare")
+    fz = float(args["floor_z"]) if args and "floor_z" in args else None
+    real_colours(stage, m, d["accent"], d["error"])
+    stage.halo.hide_render = True
+    glare.inputs["Threshold"].default_value = 4.0
+    _gradient_backdrop(nt, cam, d["top"], d["bottom"])
+    _seamless_floor(d["bottom"], fz)
+    m.table = tr.plain("table", d["plinth"], rough=0.55)
+    env.inputs["Strength"].default_value = 0.85
+    key.data.energy, key.data.size = 2600.0, 9.0
+    key.location = Vector((-6.0, -14.0, 22.0))
+    rim.data.energy, rim.data.color = 1000.0, (0.97, 0.98, 1.0)
+    fill.data.energy = 800.0
+    if args:
+        if "thr" in args:
+            stage.scene.cycles.adaptive_threshold = float(args["thr"])
+        if "bounces" in args:
+            stage.scene.cycles.max_bounces = int(args["bounces"])
+
+
 def apply(stage, m, look: str, args: dict | None = None) -> None:
+    if look in _directions():
+        return apply_direction(stage, m, look, args)
     nt, cam, env = _world(stage)
     key, rim, fill = stage.key, stage.rim, stage.fill
     glare = next(n for n in stage.scene.compositing_node_group.nodes if n.bl_idname == "CompositorNodeGlare")

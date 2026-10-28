@@ -8,13 +8,13 @@ NAVY, WHITE, EMBER, CELESTE, SKY = (11, 37, 64), (255, 255, 255), (232, 89, 12),
 FONT = str(Path(__file__).resolve().parent.parent / "factory" / "assets" / "fonts" / "Montserrat-VF.ttf")
 
 
-def mark(size=800, body=NAVY, inner=WHITE, accent=EMBER, ss=4):
+def mark(size=800, body=NAVY, inner=WHITE, accent=EMBER, ss=4, shape="square"):
     """A rounded-square 'object' with its top-right quadrant cut away: the cut face shows the inner layer (white) and the active part
     (ember dot) — the channel's one idea (look inside the object) in three flat shapes."""
     S = size * ss
     img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    r = int(S * 0.22)
+    r = int(S * 0.22) if shape == "square" else S // 2
     d.rounded_rectangle([0, 0, S - 1, S - 1], radius=r, fill=body + (255,))
     cut = Image.new("L", (S, S), 0)
     cd = ImageDraw.Draw(cut)
@@ -52,6 +52,31 @@ def end_card(handle, stage_rgb=SKY, W=1080, H=1920):
     tw = d.textlength(handle, font=f)
     d.text(((W - tw) / 2, 1180), handle, font=f, fill=WHITE + (255,))
     return base
+
+
+def direction_sheet(handle_word="Mecanalia", out=None):
+    """Five identity directions: avatar on each stage colour + wordmark (name is a placeholder), from factory/directions.json."""
+    import json
+    D = json.load(open(Path(__file__).resolve().parent.parent / "factory" / "directions.json"))
+    rgb = lambda h: tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
+    spec = {"esmeralda": ("square", "plinth", "bottom", "accent"), "violeta": ("circle", "plinth", "bottom", "accent"),
+            "mandarina": ("square", "plinth", "top", "accent"), "rosa": ("circle", "plinth", "top", "accent"), "papel": ("square", "plinth", "top", "accent")}
+    f = ImageFont.truetype(FONT, 54); f.set_variation_by_name("ExtraBold")
+    W, H = 5 * 360, 520
+    sheet = Image.new("RGB", (W, H), "white")
+    for i, (k, (shape, b, inn, acc)) in enumerate(spec.items()):
+        d = D[k]
+        tile = Image.new("RGBA", (360, H), rgb(d["top"]) + (255,))
+        m = mark(200, body=rgb(d[b]), inner=rgb(d[inn]) if inn != "bottom" else rgb(d["top"]), accent=rgb(d[acc]), shape=shape)
+        tile.alpha_composite(m, (80, 120))
+        dr = ImageDraw.Draw(tile)
+        tw = dr.textlength(handle_word, font=f)
+        dr.text(((360 - tw) / 2, 370), handle_word, font=f, fill=rgb(d["ink"]) + (255,), stroke_width=2 if d.get("mode") == "white" else 0, stroke_fill=rgb(d["ink_stroke"]) + (255,))
+        dr.text((10, 10), k.upper(), fill=rgb(d["ink"]) + (255,))
+        sheet.paste(tile.convert("RGB"), (i * 360, 0))
+    if out:
+        sheet.save(out)
+    return sheet
 
 
 if __name__ == "__main__":

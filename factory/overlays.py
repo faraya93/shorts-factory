@@ -56,6 +56,24 @@ THEMES = {   # text/graphics theme for the stage (design system 2026-10-27): "da
 }
 
 
+def _load_directions() -> None:
+    """Identity directions (factory/directions.json): one text theme per direction, derived from its hexes."""
+    import json
+    f = Path(__file__).resolve().parent / "directions.json"
+    if not f.exists():
+        return
+    rgb = lambda h: tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
+    for key, d in json.load(open(f)).items():
+        if key.startswith("_"):
+            continue
+        ink, edge = rgb(d["ink"]), rgb(d["ink_stroke"])
+        white_mode = d.get("mode") == "white"
+        THEMES[key] = dict(INK=ink, INK_STROKE=edge, TEAL=rgb(d["annot"]), RED=rgb(d["error"]), GOLD=rgb(d["accent"]), GREY=ink,
+                           PASSIVE=rgb(d["bottom"]), VOID=rgb(d["spoken_box"]), CHIP_FILL=rgb(d["spoken_box"]) + (245,), CHIP_EDGE=rgb(d["spoken_text"]),
+                           CHIP_TEXT=rgb(d["spoken_text"]), TRACK_EDGE=edge,
+                           SUB=dict(word=ink, stroke=edge, box=rgb(d["spoken_box"]), box_text=rgb(d["spoken_text"]), emph=rgb(d["emph"])))
+
+
 def set_theme(name: str) -> None:
     """Switch the module palette (annotation = TEAL role, accent = GOLD role, error = RED role) for the stage the production uses."""
     global THEME, INK, INK_STROKE, TEAL, RED, GOLD, GREY, PASSIVE, VOID, CHIP_FILL, CHIP_EDGE, CHIP_TEXT, TRACK_EDGE
@@ -662,3 +680,6 @@ def render_end_card(card: dict, out_dir: Path, prefix: str, fps: int) -> dict:
     for i, f in enumerate(frames):
         f.save(out_dir / f"{prefix}-{i:03d}.png")
     return {"pattern": str(out_dir / f"{prefix}-%03d.png"), "w": W, "h": H, "frames": n, "anim_s": n / fps}
+
+
+_load_directions()

@@ -1,0 +1,159 @@
+{
+  "channel": "pilot",
+  "video": "dr2-papel-t3",
+  "title": "¿Por qué tu cinta métrica no se dobla? 📏",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route (hard surfaces only, one hero rig): a tape measure is a rigid mechanism (blade, hook, housing, spring) with an animated cross-section; modelled hard-surface in the dark-stage reference look, PBR materials, EEVEE drafts and Cycles finals; labels, counters, chips, CTA and end card are Editor overlays.",
+  "hook_question": "¿Por qué tu cinta métrica se queda recta en el aire, si una tira plana de metal se doblaría al instante?",
+  "false_belief": "Que una cinta métrica es solo una regla enrollada y que su gancho suelto está roto.",
+  "closing_reframe": "Una cinta métrica no es una regla enrollada: es una viga que se despliega, y por eso aguanta peso.",
+  "share_archetype": "ese amigo que jura que el gancho suelto está roto",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (dark stage, exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FDF3DC",
+      "description": "near-black warm void, dark low-key stage"
+    },
+    "palette": [
+      {
+        "hex": "#120F10",
+        "name": "void"
+      },
+      {
+        "hex": "#16202C",
+        "name": "cross-section navy"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#F5C04A",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#ECA432",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#67CDBE",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#BE4A4A",
+        "name": "error red"
+      },
+      {
+        "hex": "#CBD764",
+        "name": "biology yellow-green"
+      },
+      {
+        "hex": "#B9948D",
+        "name": "skin tone"
+      }
+    ],
+    "lighting": "low-key, one soft key light, warm orange rim halo behind the hero near the top of the frame, emissive accents as the second light, soft shadows, dark vignette toward the edges",
+    "materials": "simplified chunky smooth-shaded models, matte/satin with a faint specular, emissive glowing tubes for energy, flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "papel"
+  },
+  "render_style": "tape-rig",
+  "scene_script_prefix": "tape",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "standoff-limit",
+      "prompt": "One housing extends its blade across the stage; at the limit the curve flattens at a single point, the blade kinks and the whole blade falls.",
+      "narration": "Por eso puede salir hasta tres coma cuatro metros sin ningún apoyo. Pero en su límite, la curva se aplasta en un solo punto, se quiebra, y toda la cinta se cae.",
+      "target_duration_s": 10,
+      "transformation": "closed housing -> blade extended across the stage -> kinked and hanging",
+      "camera": "camera tracks the tip then pulls back on the collapse",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "límite",
+        "punto",
+        "quiebra"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "3.4 m",
+          "from": 0,
+          "at_offset_seconds": 0.3,
+          "duration_s": 3.3,
+          "visible_s": 4.6,
+          "x": 0.5,
+          "y": 0.72
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "límite",
+          "at_word": "límite",
+          "offset_s": 0.0,
+          "x": 0.62,
+          "y": 0.42,
+          "leader_to": [
+            0.7,
+            0.55
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "punto",
+          "at_word": "punto",
+          "offset_s": 0.0,
+          "x": 0.62,
+          "y": 0.7,
+          "leader_to": [
+            0.7,
+            0.6
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "at_word": "cae",
+          "offset_s": 0.0,
+          "x": 0.72,
+          "y": 0.72,
+          "visible_s": 1.4
+        }
+      ]
+    }
+  ]
+}

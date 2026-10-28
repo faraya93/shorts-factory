@@ -188,7 +188,7 @@ def render_cue_state(texts: list[str], current: int, lay: dict, path: Path, font
     img = Image.new("RGBA", (lay["w"], lay["h"]), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
     reg = font_reg or font
-    th = SUB_THEMES.get(overlays.THEME)
+    th = SUB_THEMES.get(overlays.THEME) or overlays.THEMES.get(overlays.THEME, {}).get("SUB")
     y = lay["pad_y"]
     for idxs, line_w in lay["lines"]:
         x = (lay["w"] - line_w) / 2
