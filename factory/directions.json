@@ -74,5 +74,50 @@
     "spoken_text": "#FFFFFF",
     "emph": "#F0421C",
     "mode": "ink"
+  },
+  "lima": {
+    "title": "LIMA",
+    "top": "#D9F34F",
+    "bottom": "#C4E233",
+    "plinth": "#1E2412",
+    "accent": "#3A2BD0",
+    "error": "#B3261E",
+    "annot": "#17210A",
+    "ink": "#17210A",
+    "ink_stroke": "#FFFFFF",
+    "spoken_box": "#17210A",
+    "spoken_text": "#FFFFFF",
+    "emph": "#3A2BD0",
+    "mode": "ink"
+  },
+  "fucsia": {
+    "title": "FUCSIA",
+    "top": "#D22C84",
+    "bottom": "#BA1E70",
+    "plinth": "#FFF3E0",
+    "accent": "#6BFFD8",
+    "error": "#2B0A1C",
+    "annot": "#FFFFFF",
+    "ink": "#FFFFFF",
+    "ink_stroke": "#5A0F36",
+    "spoken_box": "#FFFFFF",
+    "spoken_text": "#5A0F36",
+    "emph": "#6BFFD8",
+    "mode": "white"
+  },
+  "cobalto": {
+    "title": "COBALTO",
+    "top": "#3F63F2",
+    "bottom": "#2C47D4",
+    "plinth": "#F4EFE0",
+    "accent": "#FFA45C",
+    "error": "#FFD0C2",
+    "annot": "#FFFFFF",
+    "ink": "#FFFFFF",
+    "ink_stroke": "#0F1D6B",
+    "spoken_box": "#FFFFFF",
+    "spoken_text": "#0F1D6B",
+    "emph": "#FFA45C",
+    "mode": "white"
   }
 }
