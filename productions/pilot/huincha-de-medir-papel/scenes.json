@@ -1,0 +1,579 @@
+{
+  "channel": "pilot",
+  "video": "huincha-de-medir-papel",
+  "title": "¿Por qué tu cinta métrica no se dobla? 📏",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route (hard surfaces only, one hero rig): a tape measure is a rigid mechanism (blade, hook, housing, spring) with an animated cross-section; modelled hard-surface in the dark-stage reference look, PBR materials, EEVEE drafts and Cycles finals; labels, counters, chips, CTA and end card are Editor overlays.",
+  "hook_question": "¿Por qué tu cinta métrica se queda recta en el aire, si una tira plana de metal se doblaría al instante?",
+  "false_belief": "Que una cinta métrica es solo una regla enrollada y que su gancho suelto está roto.",
+  "closing_reframe": "Una cinta métrica no es una regla enrollada: es una viga que se despliega, y por eso aguanta peso.",
+  "share_archetype": "ese amigo que jura que el gancho suelto está roto",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (dark stage, exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FDF3DC",
+      "description": "PAPEL: warm cream studio seamless (#FDF3DC top to #EFE2C4 bottom), ink plinth, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#120F10",
+        "name": "void"
+      },
+      {
+        "hex": "#16202C",
+        "name": "cross-section navy"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#F0421C",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#F0421C",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#67CDBE",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#B3261E",
+        "name": "error red"
+      },
+      {
+        "hex": "#CBD764",
+        "name": "biology yellow-green"
+      },
+      {
+        "hex": "#B9948D",
+        "name": "skin tone"
+      }
+    ],
+    "lighting": "low-key, one soft key light, warm orange rim halo behind the hero near the top of the frame, emissive accents as the second light, soft shadows, dark vignette toward the edges",
+    "materials": "simplified chunky smooth-shaded models, matte/satin with a faint specular, emissive glowing tubes for energy, flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "papel"
+  },
+  "render_style": "tape-rig",
+  "scene_script_prefix": "tape",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "end_card": {
+    "duration_s": 4,
+    "handle": "MECANALIA",
+    "style": "papel",
+    "dim": 0.25
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook-contrast",
+      "prompt": "Two tape measures on a dark table extend their metal blades side by side over the edge: the flat strip flops down at once, the curved blade stays straight.",
+      "narration": "¿Por qué tu cinta métrica se queda recta en el aire, si una tira plana de metal se doblaría al instante?",
+      "target_duration_s": 6,
+      "transformation": "two housings, blades at zero -> flat blade flopped (red X), curved blade straight out",
+      "camera": "camera orbits and pushes in across the two blades",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "recta",
+        "plana"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "curva",
+          "at_word": "cinta",
+          "offset_s": 0.0,
+          "x": 0.7,
+          "y": 0.3,
+          "leader_to": [
+            0.56,
+            0.37
+          ],
+          "visible_s": 3.2
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "plana",
+          "at_word": "cinta",
+          "offset_s": 0.25,
+          "x": 0.72,
+          "y": 0.56,
+          "leader_to": [
+            0.58,
+            0.64
+          ],
+          "visible_s": 3.0
+        },
+        {
+          "type": "mark",
+          "kind": "ok",
+          "at_word": "recta",
+          "offset_s": 0.0,
+          "x": 0.8,
+          "y": 0.43,
+          "visible_s": 2.0
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "at_word": "aire",
+          "offset_s": 0.0,
+          "x": 0.63,
+          "y": 0.7,
+          "visible_s": 2.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "profile-push-through",
+      "prompt": "End-on view of the blade section: a flat strip and an arc. A plate presses each: the flat one folds, the arc holds.",
+      "narration": "Todo está en la forma. Si cortas la cinta, no es plana: es un arco. Aprieta una tira plana y se pliega; aprieta el arco y aguanta.",
+      "target_duration_s": 10,
+      "transformation": "flat and curved cantilevers unloaded -> flat folds, curved resists",
+      "camera": "camera pushes through toward the blade ends, then orbits to the side",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "arco",
+        "pliega",
+        "aguanta"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "sección",
+          "at_word": "cortas",
+          "offset_s": 0.0,
+          "x": 0.5,
+          "y": 0.38,
+          "leader_to": [
+            0.82,
+            0.27
+          ],
+          "visible_s": 2.4
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "plana",
+          "at_word": "plana",
+          "offset_s": 0.0,
+          "x": 0.3,
+          "y": 0.72,
+          "leader_to": [
+            0.12,
+            0.8
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "arco",
+          "at_word": "arco",
+          "offset_s": 0.0,
+          "x": 0.7,
+          "y": 0.4,
+          "leader_to": [
+            0.82,
+            0.27
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "at_word": "pliega",
+          "offset_s": 0.0,
+          "x": 0.45,
+          "y": 0.66,
+          "visible_s": 1.8
+        },
+        {
+          "type": "mark",
+          "kind": "ok",
+          "at_word": "aguanta",
+          "offset_s": 0.0,
+          "x": 0.55,
+          "y": 0.36,
+          "visible_s": 1.8
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "standoff-limit",
+      "prompt": "One housing extends its blade across the stage; at the limit the curve flattens at a single point, the blade kinks and the whole blade falls.",
+      "narration": "Por eso puede salir hasta tres coma cuatro metros sin ningún apoyo. Pero en su límite, la curva se aplasta en un solo punto, se quiebra, y toda la cinta se cae.",
+      "target_duration_s": 10,
+      "transformation": "closed housing -> blade extended across the stage -> kinked and hanging",
+      "camera": "camera tracks the tip then pulls back on the collapse",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "límite",
+        "punto",
+        "quiebra"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "3.4 m",
+          "from": 0,
+          "at_offset_seconds": 0.3,
+          "duration_s": 3.3,
+          "visible_s": 4.6,
+          "x": 0.5,
+          "y": 0.72
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "límite",
+          "at_word": "límite",
+          "offset_s": 0.0,
+          "x": 0.62,
+          "y": 0.42,
+          "leader_to": [
+            0.7,
+            0.55
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "punto",
+          "at_word": "punto",
+          "offset_s": 0.0,
+          "x": 0.62,
+          "y": 0.7,
+          "leader_to": [
+            0.7,
+            0.6
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "at_word": "cae",
+          "offset_s": 0.0,
+          "x": 0.72,
+          "y": 0.72,
+          "visible_s": 1.4
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "hook-slide",
+      "prompt": "Macro of the end hook on its slotted rivets sliding its own thickness against a wall (push) and over an edge (pull); the zero tick reads the same.",
+      "narration": "Y ese gancho flojo del extremo no está roto. Se mueve justo lo que mide su propio grosor. Por eso, medir por dentro o por fuera marca la misma medida. Ese juego es la precisión.",
+      "target_duration_s": 12,
+      "transformation": "hook pushed in -> pulled out by one thickness, same reading both ways",
+      "camera": "macro orbit around the hook",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "flojo",
+        "grosor",
+        "misma"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "gancho",
+          "at_word": "gancho",
+          "offset_s": 0.0,
+          "x": 0.26,
+          "y": 0.42,
+          "leader_to": [
+            0.52,
+            0.57
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "juego",
+          "at_word": "flojo",
+          "offset_s": 0.0,
+          "x": 0.78,
+          "y": 0.42,
+          "leader_to": [
+            0.62,
+            0.6
+          ],
+          "visible_s": 1.8
+        },
+        {
+          "type": "bracket",
+          "from": [
+            0.58,
+            0.7
+          ],
+          "to": [
+            0.68,
+            0.7
+          ],
+          "text_or_value": "grosor",
+          "at_word": "grosor",
+          "visible_s": 2.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "dentro",
+          "at_word": "dentro",
+          "offset_s": 0.0,
+          "x": 0.3,
+          "y": 0.72,
+          "leader_to": [
+            0.56,
+            0.64
+          ],
+          "visible_s": 1.3
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "fuera",
+          "at_word": "fuera",
+          "offset_s": 0.0,
+          "x": 0.3,
+          "y": 0.72,
+          "leader_to": [
+            0.56,
+            0.64
+          ],
+          "visible_s": 1.5
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "misma medida",
+          "at_word": "misma",
+          "offset_s": 0.0,
+          "x": 0.3,
+          "y": 0.36,
+          "leader_to": [
+            0.6,
+            0.55
+          ],
+          "visible_s": 2.4
+        },
+        {
+          "type": "mark",
+          "kind": "ok",
+          "at_word": "misma",
+          "offset_s": 0.1,
+          "x": 0.6,
+          "y": 0.55,
+          "visible_s": 2.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "precisión",
+          "at_word": "precisión",
+          "offset_s": 0.0,
+          "x": 0.3,
+          "y": 0.74,
+          "leader_to": [
+            0.5,
+            0.64
+          ],
+          "visible_s": 1.8
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "spring-motor",
+      "prompt": "Exploded housing: the gold spiral spring winds as the blade is pulled out and unwinds when released; a brake pad presses the blade.",
+      "narration": "Dentro hay un resorte plano en espiral: es el motor. Se tensa cuando sacas la cinta, y siempre quiere volver. Al soltarla, se destensa y la recoge de golpe. El seguro no sostiene nada: solo frena al resorte.",
+      "target_duration_s": 14,
+      "transformation": "housing closed -> shell lifted, spring winds as the blade is pulled, recoils on release, brake holds",
+      "camera": "camera orbits the exploded housing with a slow push-in",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "resorte",
+        "motor",
+        "frena"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "resorte",
+          "at_word": "resorte",
+          "offset_s": 0.0,
+          "x": 0.18,
+          "y": 0.4,
+          "leader_to": [
+            0.43,
+            0.52
+          ],
+          "visible_s": 3.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "cinta",
+          "at_word": "sacas",
+          "offset_s": 0.0,
+          "x": 0.82,
+          "y": 0.72,
+          "leader_to": [
+            0.86,
+            0.67
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "bar",
+          "style": "slim",
+          "text_or_value": "100%",
+          "show_value": false,
+          "label": "TENSIÓN",
+          "at_word": "tensa",
+          "x": 0.5,
+          "y": 0.74,
+          "duration_s": 2.4,
+          "visible_s": 3.6
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "seguro",
+          "at_word": "seguro",
+          "offset_s": 0.0,
+          "x": 0.78,
+          "y": 0.4,
+          "leader_to": [
+            0.7,
+            0.6
+          ],
+          "visible_s": 2.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "freno",
+          "at_word": "frena",
+          "offset_s": 0.0,
+          "x": 0.3,
+          "y": 0.72,
+          "leader_to": [
+            0.66,
+            0.64
+          ],
+          "visible_s": 2.0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "reframe-bridge",
+      "prompt": "One image: the extended blade spans two pedestals as a beam and carries a weight.",
+      "narration": "Así que una cinta métrica no es una regla enrollada: es una viga que se despliega, y por eso aguanta peso.",
+      "target_duration_s": 6,
+      "transformation": "blade extended over a gap -> weight placed on it",
+      "camera": "single image with a slow orbit",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "viga",
+        "aguanta"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "viga",
+          "at_word": "viga",
+          "offset_s": 0.0,
+          "x": 0.5,
+          "y": 0.4,
+          "leader_to": [
+            0.55,
+            0.62
+          ],
+          "visible_s": 2.4
+        },
+        {
+          "type": "mark",
+          "kind": "ok",
+          "at_word": "aguanta",
+          "offset_s": 0.0,
+          "x": 0.5,
+          "y": 0.52,
+          "visible_s": 1.6
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cta",
+      "prompt": "Backdrop for the acted-out call to action: the blade retracts and the tape closes.",
+      "narration": "Sígueme, y envíaselo a ese amigo que jura que el gancho suelto está roto.",
+      "target_duration_s": 5,
+      "transformation": "blade extended -> blade retracted into the closed housing",
+      "camera": "slow orbit behind the phone mock",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "Sígueme"
+      ],
+      "data_overlays": [
+        {
+          "type": "cta",
+          "message": "¡el gancho de mi cinta métrica está roto!",
+          "at_word": "Sígueme",
+          "duration_s": 4.6,
+          "visible_s": 4.7,
+          "x": 0.5,
+          "y": 0.57
+        }
+      ]
+    }
+  ],
+  "render_args": [
+    "look=papel"
+  ]
+}

@@ -664,6 +664,8 @@ def render_end_card(card: dict, out_dir: Path, prefix: str, fps: int) -> dict:
     dim = float(card.get("dim", 0.25))
     handle = str(card["handle"]).upper()
     n = max(2, round(0.6 * fps))
+    if card.get("style") == "papel":
+        return _end_card_papel(handle, out_dir, prefix, fps, n)
     logo = Image.new("RGBA", (200, 200), (0, 0, 0, 0))
     ld = ImageDraw.Draw(logo)
     ld.rounded_rectangle([6, 6, 193, 193], radius=52, outline=(255, 255, 255, 255), width=12)
@@ -679,6 +681,28 @@ def render_end_card(card: dict, out_dir: Path, prefix: str, fps: int) -> dict:
         frames.append(img)
     for i, f in enumerate(frames):
         f.save(out_dir / f"{prefix}-{i:03d}.png")
+    return {"pattern": str(out_dir / f"{prefix}-%03d.png"), "w": W, "h": H, "frames": n, "anim_s": n / fps}
+
+
+def _end_card_papel(name: str, out_dir: Path, prefix: str, fps: int, n: int) -> dict:
+    """Papel end card: ink veil over the last frame, the Papel mark (cream object with a cut quadrant, vermilion dot) and the wordmark."""
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
+    import brand_mark
+    D = {"ink": (29, 27, 46), "cream": (253, 243, 220), "accent": (240, 66, 28)}
+    mk = brand_mark.mark(380, body=D["cream"], inner=D["ink"], accent=D["accent"])
+    f = font("bold", 84)
+    tag = _tracked_text(name, f, 10, D["cream"] + (255,))
+    frames = []
+    for i in range(n):
+        p = ease_out((i + 1) / n)
+        img = Image.new("RGBA", (W, H), D["ink"] + (round(255 * 0.86 * p),))
+        a = lambda im: im.putalpha(im.getchannel("A").point(lambda v: round(v * p))) or im
+        img.alpha_composite(a(mk.copy()), ((W - 380) // 2, round(H * 0.46) - 250))
+        img.alpha_composite(a(tag.copy()), ((W - tag.width) // 2, round(H * 0.46) + 170))
+        frames.append(img)
+    for i, fr in enumerate(frames):
+        fr.save(out_dir / f"{prefix}-{i:03d}.png")
     return {"pattern": str(out_dir / f"{prefix}-%03d.png"), "w": W, "h": H, "frames": n, "anim_s": n / fps}
 
 

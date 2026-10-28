@@ -32,10 +32,15 @@ def main() -> int:
     ap.add_argument("production", type=Path)
     ap.add_argument("scene", type=int)
     ap.add_argument("--mode", choices=("draft", "final"), default="draft")
+    ap.add_argument("--samples", type=int, help="override Cycles samples (final mode)")
     ap.add_argument("--encode-only", action="store_true", help="skip Blender; encode the frames already rendered")
     args = ap.parse_args()
     prod, n = args.production.resolve(), args.scene
-    prefix = json.loads((prod / "scenes.json").read_text(encoding="utf-8")).get("scene_script_prefix", "scene")
+    cfg = json.loads((prod / "scenes.json").read_text(encoding="utf-8"))
+    prefix = cfg.get("scene_script_prefix", "scene")
+    extra = list(cfg.get("render_args", []))                     # e.g. ["look=papel"]: stage look/palette, never choreography
+    if args.samples:
+        extra.append(f"samples={args.samples}")
     script = ROOT / "code3d" / "scenes" / f"{prefix}_{n:02d}.py"       # default 'scene': existing productions unchanged
     frames_dir = prod / "build" / "code3d" / f"{args.mode}-scene-{n:02d}"
     slot = narration_slot_frames(prod, n)
@@ -44,7 +49,7 @@ def main() -> int:
     if not args.encode_only:
         t0 = time.time()
         r = subprocess.run(["blender", "-b", "--python", str(script), "--", f"production={prod}", f"mode={args.mode}",
-                            f"slot={slot}", f"frames=1-{slot}", f"out={frames_dir}"], capture_output=True, text=True)
+                            f"slot={slot}", f"frames=1-{slot}", f"out={frames_dir}", *extra], capture_output=True, text=True)
         render_s = time.time() - t0
         if r.returncode != 0 or "Traceback" in r.stdout + r.stderr:
             print((r.stdout + r.stderr)[-3000:])
