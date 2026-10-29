@@ -19,7 +19,7 @@ Presets in the file: **coral (active)**, papel, esmeralda, violeta, mandarina, r
 |---|---|
 | stage (screen-space gradient, lighter behind the caption band) | **#FEA181 -> #EC9172** (light warm coral-salmon, L* 72) |
 | plinth (every hero stands on it; separates white, yellow and silver bases) | ink **#1D1B2E** |
-| board (gear rig) | #D1795C (derived: stage bottom, 9 L* darker) |
+| support colours (board/plate/panel) | board #D2EAE6 (accent-derived pale teal), plate cream #FFF3E0, panel ink; per-production override `support_colours` |
 | accent = the active quantity | deep teal **#0A5C6B** |
 | error mark | wine **#7A0019** |
 | annotation (tags, leaders, brackets, counters' strokes) | ink #1D1B2E |
@@ -49,3 +49,7 @@ Productions already rendered (huincha-de-medir, ...-papel, engranajes-papel) emb
 - End to end: the render driver on a throw-away production (`productions/pilot/coral-verify`, embedded with `identity.py apply`) rendered gears scene 7 (155 frames, 32-sample ceiling) with the Coral look and the tuned default, 2.21 s/frame, no look or profile named on the command line.
 - Observations: the 3D emissive teal renders as a bright cyan (lighter than the #0A5C6B swatch), so in 3D the accent reads by hue and brightness, in overlays by hue and shape; the gear board (derived 9 L* darker than the stage bottom) almost merges with the stage and may need a darker derivation when the gears are re-rendered in Coral.
 - Expected cost of a Coral production under the adopted default: 2.5-3.7 s/frame (tuned bench 2.87 on scenes 1/3/5; full Coral scene clip 2.79; cross-section 2.93 and exploded housing 3.64 in the rider) = about 1.4-2.0 h for 1,700-1,900 frames.
+
+## 7. Support colours and composition gate (owner rule 2026-10-28)
+The stage colour is background only. Supports (boards, cutaway plates, plinths, panels, large housing surfaces) are chosen per production under SEPARATION (CIEDE2000 >= 20 from both stage-gradient ends) and HARMONY (derived from hero, ink or accent; reason in the production notes). They live in `identity.<preset>.support` and `scenes.json support_colours`, never in code. Before any full render: `mask=1` stills + `tools/composition_gate.py` tabulate stage-support, stage-hero, support-hero, accent-stage and the accent-vs-swatch family; any pair under threshold BLOCKS.
+Coral calibration: `emission_gain` 0.111 makes the 3D accent render at its swatch (#0A5C6B, dE 0.0, 3.44:1 vs stage; uncalibrated it rendered #2EFBFF, dE 47.9). Gears (engranajes-papel) verification, scenes 3/5/6: board #D2EAE6 at 31.5-31.9 from the stage, 40+ from the gears; pinions moved to indigo #4A2BC4 (plinth distance 17.8 -> 24); GATE PASS. Evidence: `docs/design-system-assets/support-gate/`, `productions/pilot/engranajes-papel/notes.md`.

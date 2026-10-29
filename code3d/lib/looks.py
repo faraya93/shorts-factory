@@ -24,6 +24,7 @@ def current() -> dict | None:
 def real_colours(stage, m, accent_hex=None, error_hex=None):
     """Real hero colours: yellow painted housing, black rubber, bright steel blade with bold markings; optional accent/error swap."""
     pal = dict(stage.pal)
+    tr.EMISSION_GAIN = float((_ACTIVE or {}).get("emission_gain", 1.0))      # config: scales every accent/error emissive so the render matches its swatch family
     if accent_hex:
         pal["accent gold"] = accent_hex
         pal["accent amber"] = accent_hex
@@ -51,13 +52,13 @@ def real_colours(stage, m, accent_hex=None, error_hex=None):
     m.shell = tr.pbr("shell_y", "Plastic010", "Plastic010", YELLOW, rough_mul=1.15, scale=0.4, normal=0.45, tint_mix=0.85, coat=0.25)
     m.rubber = tr.pbr("rubber_k", "Rubber004", "Rubber004", BOOT, rough_mul=1.1, scale=0.5, normal=0.5, tint_mix=0.9)
     m.dark_metal = tr.pbr("dark_metal2", "Metal038", "Metal038", "#8E8C92", metallic=1.0, rough_mul=1.0, scale=0.5, normal=0.3, tint_mix=0.5)
-    m.gold = tr.gold_emit("gold", pal["accent gold"], 9.0)
-    m.gold_dim = tr.gold_emit("gold_dim", pal["accent amber"], 1.6)
-    m.red = tr.gold_emit("red", pal["error red"], 6.0)
+    m.gold = tr.gold_emit("gold", pal["accent gold"], 9.0 * tr.EMISSION_GAIN)
+    m.gold_dim = tr.gold_emit("gold_dim", pal["accent amber"], 1.6 * tr.EMISSION_GAIN)
+    m.red = tr.gold_emit("red", pal["error red"], 6.0 * tr.EMISSION_GAIN)
     m.spring = tr.plain("spring", pal["accent amber"], rough=0.3, metallic=1.0)
     sp = m.spring.node_tree.nodes["Principled BSDF"]
     sp.inputs["Emission Color"].default_value = c.linear(pal["accent gold"])
-    sp.inputs["Emission Strength"].default_value = 0.4
+    sp.inputs["Emission Strength"].default_value = 0.4 * tr.EMISSION_GAIN
     return pal
 
 
@@ -116,7 +117,7 @@ def apply(stage, m, look: str, args: dict | None = None) -> None:
     fz = float(args["floor_z"]) if args and "floor_z" in args else None
     real_colours(stage, m, p["accent"], p["error"])
     m.table = tr.plain("table", p["plinth"], rough=0.55)
-    m.block = tr.pbr("block", "Plastic010", "Plastic010", p["plinth"], rough_mul=1.0, scale=0.35, normal=0.2, tint_mix=0.4)
+    m.block = tr.pbr("block", "Plastic010", "Plastic010", p["support_panel"], rough_mul=1.0, scale=0.35, normal=0.2, tint_mix=0.4)
     if p["lighting"] == "studio":
         stage.halo.hide_render = True
         glare.inputs["Threshold"].default_value = 4.0

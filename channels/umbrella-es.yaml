@@ -80,7 +80,8 @@ identity:
       title: CORAL
       stage: {top: '#FEA181', bottom: '#EC9172'}
       plinth: '#1D1B2E'
-      board: '#D1795C'
+      support: {board: '#D2EAE6', plate: '#FFF3E0', panel: '#1D1B2E'}
+      emission_gain: 0.111
       accent: '#0A5C6B'
       error: '#7A0019'
       annotation: '#1D1B2E'
@@ -91,7 +92,8 @@ identity:
       title: PAPEL
       stage: {top: '#FDF3DC', bottom: '#EFE2C4'}
       plinth: '#1D1B2E'
-      board: '#D5C9AB'
+      support: {board: '#26242E', plate: '#26242E', panel: '#1D1B2E'}
+      emission_gain: 1.0
       accent: '#F0421C'
       error: '#B3261E'
       annotation: '#1D1B2E'
@@ -102,7 +104,8 @@ identity:
       title: ESMERALDA
       stage: {top: '#1F8570', bottom: '#1A6E5C'}
       plinth: '#F4EFE0'
-      board: '#1A6E5C'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#F4EFE0'}
+      emission_gain: 1.0
       accent: '#FFF1B8'
       error: '#FF8A7A'
       annotation: '#FFFFFF'
@@ -113,7 +116,8 @@ identity:
       title: VIOLETA
       stage: {top: '#7A4DE8', bottom: '#5B30C2'}
       plinth: '#EDE7FF'
-      board: '#3E18A9'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#EDE7FF'}
+      emission_gain: 1.0
       accent: '#3DFFB0'
       error: '#FFA0B4'
       annotation: '#FFFFFF'
@@ -124,7 +128,8 @@ identity:
       title: MANDARINA
       stage: {top: '#FF9A4A', bottom: '#F26A1D'}
       plinth: '#1B1410'
-      board: '#F26A1D'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#1B1410'}
+      emission_gain: 1.0
       accent: '#1B3BD6'
       error: '#7A0019'
       annotation: '#1B1410'
@@ -135,7 +140,8 @@ identity:
       title: ROSA
       stage: {top: '#FFB6C0', bottom: '#F48FA0'}
       plinth: '#4A1A3A'
-      board: '#D97788'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#4A1A3A'}
+      emission_gain: 1.0
       accent: '#0A5C45'
       error: '#B3001B'
       annotation: '#3A0F2B'
@@ -146,7 +152,8 @@ identity:
       title: LIMA
       stage: {top: '#D9F34F', bottom: '#C4E233'}
       plinth: '#1E2412'
-      board: '#AAC909'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#1E2412'}
+      emission_gain: 1.0
       accent: '#3A2BD0'
       error: '#B3261E'
       annotation: '#17210A'
@@ -157,7 +164,8 @@ identity:
       title: FUCSIA
       stage: {top: '#D22C84', bottom: '#BA1E70'}
       plinth: '#FFF3E0'
-      board: '#BA1E70'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#FFF3E0'}
+      emission_gain: 1.0
       accent: '#6BFFD8'
       error: '#2B0A1C'
       annotation: '#FFFFFF'
@@ -168,7 +176,8 @@ identity:
       title: COBALTO
       stage: {top: '#3F63F2', bottom: '#2C47D4'}
       plinth: '#F4EFE0'
-      board: '#2C47D4'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#F4EFE0'}
+      emission_gain: 1.0
       accent: '#FFA45C'
       error: '#FFD0C2'
       annotation: '#FFFFFF'
@@ -179,7 +188,8 @@ identity:
       title: FRAMBUESA
       stage: {top: '#C21B68', bottom: '#A31256'}
       plinth: '#FFF3E0'
-      board: '#A31256'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#FFF3E0'}
+      emission_gain: 1.0
       accent: '#6BFFD8'
       error: '#1F0A14'
       annotation: '#FFFFFF'
@@ -190,7 +200,8 @@ identity:
       title: CELESTE (round-1 proposal)
       stage: {top: '#8FD6F2', bottom: '#62B4DC'}
       plinth: '#2B4C70'
-      board: '#469CC3'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#2B4C70'}
+      emission_gain: 1.0
       accent: '#E8590C'
       error: '#C92A2A'
       annotation: '#0B2540'
@@ -198,10 +209,12 @@ identity:
       mark: {body: '#0B2540', inner: '#FFFFFF', accent: '#E8590C'}
       lighting: studio
     reference-dark:
+      legacy: true            # frozen test/legacy look: exempt from the support-colour separation rule
       title: REFERENCE DARK (2026-10-26 doctrine; legacy default text theme)
       stage: {top: '#120F10', bottom: '#120F10'}
       plinth: '#2B282D'
-      board: '#120F10'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#2B282D'}
+      emission_gain: 1.0
       accent: '#F5C04A'
       error: '#BE4A4A'
       annotation: '#67CDBE'
@@ -210,10 +223,12 @@ identity:
       lighting: dark-stage
       halo: '#C8601A'
     dark-teal:
+      legacy: true            # frozen test/legacy look: exempt from the support-colour separation rule
       title: DARK TEAL (round-2 test stage)
       stage: {top: '#0B2A2F', bottom: '#0B2A2F'}
       plinth: '#1E3C42'
-      board: '#0B2A2F'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#1E3C42'}
+      emission_gain: 1.0
       accent: '#F5C04A'
       error: '#BE4A4A'
       annotation: '#67CDBE'

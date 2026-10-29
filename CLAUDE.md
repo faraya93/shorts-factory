@@ -452,3 +452,10 @@ engines automatically from these rules; the owner is never asked.
   hear audio or watch video: verify mechanically (format, durations,
   extracted frames) and never claim a render looks or sounds right
   beyond that.
+
+## Support colours and composition gate (binding, owner 2026-10-28)
+The stage colour is the BACKGROUND ONLY. Every support element (backing boards, cutaway plates, plinths, panels, large housing surfaces) gets a colour chosen per production by the design lens:
+1. SEPARATION: CIEDE2000 >= 20 from BOTH ends of the stage gradient (`identity.support_errors`).
+2. HARMONY: derived from the hero, ink or accent system; value and reason recorded in the production's notes.md.
+Support colours are parameters (`identity.<preset>.support {board, plate, panel}`, overridden per production by `scenes.json` `support_colours`), never code literals and never the stage value.
+THE GATE: before any full render, render representative stills with `mask=1` and run `tools/composition_gate.py <still dir> --identity <export>`. Pairs stage-support, stage-hero, support-hero (>= 20) and accent-stage (>= 20 and 3:1 luminance) must pass, and the rendered accent must match its swatch family (dE <= 15; calibrate `emission_gain`). Any BLOCK stops the render until fixed.

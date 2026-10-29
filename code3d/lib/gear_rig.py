@@ -22,7 +22,7 @@ DIST = RP + RB                           # 4.0 centre distance of a meshing pair
 THICK = 0.5
 PLANE_STEP = 0.62
 PHI_DEG = (55, 125)
-COBALT, DEEP, CREAM = "#2F63D6", "#1F3FA0", "#FFF8E6"      # HERO colours of the gears (not identity)
+COBALT, DEEP, CREAM = "#2F63D6", "#4A2BC4", "#FFF8E6"      # HERO colours of the gears (not identity)
 FALLBACK_INK, FALLBACK_BOARD = "#1E1E22", "#CFC1A6"          # only for runs without an identity look; with a look the plinth/board come from the channel config
 
 
@@ -139,7 +139,7 @@ class Train:
         return {"big": tr.pbr("g_big", "Plastic010", "Plastic010", COBALT, rough_mul=1.0, scale=0.4, normal=0.25, tint_mix=0.9, coat=0.3),
                 "pinion": tr.pbr("g_pin", "Plastic010", "Plastic010", DEEP, rough_mul=1.0, scale=0.4, normal=0.25, tint_mix=0.9, coat=0.3),
                 "input": m.gold, "ink": ink, "marker": tr.plain("g_mark", CREAM, rough=0.4, coat=0.2),
-                "taupe": tr.plain("g_board", p["board"] if p else FALLBACK_BOARD, rough=0.7)}
+                "taupe": tr.plain("g_board", p["support_board"] if p else FALLBACK_BOARD, rough=0.7)}
 
     # ---- kinematics ---------------------------------------------------------------------------------
     def angles(self, theta0: float) -> list[float]:

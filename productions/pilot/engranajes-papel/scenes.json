@@ -488,5 +488,9 @@
   ],
   "render_args": [
     "look=papel"
-  ]
+  ],
+  "support_colours": {
+    "board": "#D2EAE6",
+    "reason": "Coral gears re-render: pale teal tint derived from the Coral accent (#0A5C6B); cool against the warm stage, dE>=31 from the stage in frame; cream (#FFF3E0) passed too but sits in the stage's warm family. Hero pinion colour moved to indigo #4A2BC4 so it clears the ink plinth (dE 24)."
+  }
 }

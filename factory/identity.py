@@ -33,14 +33,50 @@ def _flat(name: str, raw: dict, neutrals: dict) -> dict:
     sub, mark = raw["subtitle"], raw.get("mark", {})
     return {
         "name": name, "title": raw["title"], "lighting": raw.get("lighting", "studio"),
-        "top": raw["stage"]["top"], "bottom": raw["stage"]["bottom"], "plinth": raw["plinth"], "board": raw["board"],
+        "top": raw["stage"]["top"], "bottom": raw["stage"]["bottom"], "plinth": raw["plinth"],
+        "board": raw["support"]["board"], "support_board": raw["support"]["board"], "support_plate": raw["support"]["plate"],
+        "support_panel": raw["support"]["panel"], "emission_gain": float(raw.get("emission_gain", 1.0)),
         "accent": raw["accent"], "error": raw["error"], "annot": raw["annotation"],
         "mode": sub["mode"], "ink": sub["ink"], "ink_stroke": sub["outline"], "word": sub.get("word", sub["ink"]),
         "spoken_box": sub["spoken_box"], "spoken_text": sub["spoken_text"], "emph": sub["emphasis"],
         "mark_body": mark.get("body", raw["plinth"]), "mark_inner": mark.get("inner", raw["stage"]["top"]), "mark_accent": mark.get("accent", raw["accent"]),
-        "halo": raw.get("halo"), "rim": raw.get("rim"),
+        "halo": raw.get("halo"), "rim": raw.get("rim"), "legacy": bool(raw.get("legacy", False)),
         "passive_dark": neutrals["passive_dark"], "passive": neutrals["passive"], "passive_light": neutrals["passive_light"],
     }
+
+
+def _de(a: str, b: str) -> float:
+    """CIEDE2000 between two #RRGGBB colours (self-contained so the Editor does not depend on tools/)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("palette_metrics", ROOT / "tools" / "palette_metrics.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m.de2000(a, b)
+
+
+SUPPORT_MIN_DE = 20.0       # design rule (CLAUDE.md "Support colours"): every support colour >= 20 CIEDE2000 from BOTH ends of the stage gradient
+
+
+def support_errors(p: dict) -> list[str]:
+    """Rule 1 (SEPARATION) for the support colours of a flat preset: board, plate, panel and plinth must not default to, or sit close to, the stage."""
+    errs = []
+    for key in ("support_board", "support_plate", "support_panel", "plinth"):
+        for end in ("top", "bottom"):
+            d = _de(p[key], p[end])
+            if d < SUPPORT_MIN_DE:
+                errs.append(f"{p['name']}.{key} {p[key]} is only dE {d:.1f} from the stage {end} {p[end]} (needs >= {SUPPORT_MIN_DE:g})")
+    return errs
+
+
+def apply_production_support(p: dict, scenes: dict | None) -> dict:
+    """A production may carry its own support colours (chosen by the design lens, with the reasons in scenes.json `support_colours.reason`)."""
+    sc = (scenes or {}).get("support_colours") or {}
+    q = dict(p)
+    for key, field in (("board", "support_board"), ("plate", "support_plate"), ("panel", "support_panel")):
+        if sc.get(key):
+            q[field] = sc[key]
+    q["board"] = q["support_board"]
+    return q
 
 
 def presets(cfg: dict | None = None) -> dict:
@@ -75,11 +111,16 @@ def visual_identity_block(name: str | None = None, cfg: dict | None = None) -> d
             "qa_tolerance_de": base["qa_tolerance_de"], "text_theme": p["name"]}
 
 
-def export_json(path: Path | None = None, name: str | None = None) -> Path:
+def export_json(path: Path | None = None, name: str | None = None, production: Path | None = None) -> Path:
+    """Snapshot for Blender. With `production`, that production's scenes.json `support_colours` override the preset's support colours."""
     cfg = load()
     out = Path(path or EXPORT)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps({"active": name or active_name(cfg), "presets": presets(cfg), "render": render_config(cfg)}, indent=1), encoding="utf-8")
+    P = presets(cfg)
+    if production:
+        scenes = json.loads((Path(production) / "scenes.json").read_text(encoding="utf-8"))
+        P = {k: apply_production_support(v, scenes) for k, v in P.items()}
+    out.write_text(json.dumps({"active": name or active_name(cfg), "presets": P, "render": render_config(cfg)}, indent=1), encoding="utf-8")
     return out
 
 
@@ -99,8 +140,9 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     name = args[args.index("--preset") + 1] if "--preset" in args else None
     if args and args[0] == "export":
-        pos = [a for a in args[1:] if not a.startswith("--") and a != name]
-        print(export_json(Path(pos[0]) if pos else None, name))
+        prod = args[args.index("--production") + 1] if "--production" in args else None
+        pos = [a for a in args[1:] if not a.startswith("--") and a not in (name, prod)]
+        print(export_json(Path(pos[0]) if pos else None, name, Path(prod) if prod else None))
     elif args and args[0] == "apply":
         apply_to_scenes(Path(args[1]), name)
         print("identity embedded in", args[1])

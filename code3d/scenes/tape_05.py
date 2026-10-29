@@ -34,7 +34,7 @@ def update(scene_):
     A.spring_group.location.z = tr.MOUTH_Z + R
     tension = min(1.0, d / 7.0)
     A.spring_rebuild(twist_amount=-2 * math.pi * 1.3 * tension, scale=1.0)
-    spring_mat.inputs["Emission Strength"].default_value = 0.5 + 3.2 * tension
+    spring_mat.inputs["Emission Strength"].default_value = (0.5 + 3.2 * tension) * tr.EMISSION_GAIN
     A.spring_group.rotation_euler.y = 0.0
     A.pad_pivot.location.z = tr.MOUTH_Z + 0.12 + 0.55 * (1 - brake) * 1.0 - 0.0
     A.place_blade(d, theta=None, cs=lambda s: 1.0)

@@ -65,6 +65,13 @@ def test_no_active_identity_colour_is_hard_coded_in_the_code():
     assert not offenders, offenders
 
 
+def test_support_colours_separate_from_stage():
+    for name, p in identity.presets().items():
+        if p.get("legacy"):
+            continue
+        assert not identity.support_errors(p), (name, identity.support_errors(p))
+
+
 if __name__ == "__main__":
     tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
     for name, fn in tests:

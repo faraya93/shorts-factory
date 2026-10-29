@@ -43,7 +43,7 @@ def main() -> int:
     prefix = cfg.get("scene_script_prefix", "scene")
     extra = list(cfg.get("render_args", []))                     # e.g. ["look=coral"]: stage look/palette, never choreography
     import identity
-    extra.append(f"identity={identity.export_json()}")          # snapshot of channels/umbrella-es.yaml for Blender (identity presets + render profiles)
+    extra.append(f"identity={identity.export_json(production=prod)}")          # snapshot of channels/umbrella-es.yaml for Blender (identity presets + render profiles)
     if cfg.get("identity_preset") and not any(a.startswith("look=") for a in extra):
         extra.append(f"look={cfg['identity_preset']}")
     if args.samples:

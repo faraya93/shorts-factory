@@ -134,6 +134,9 @@ def plain(name, hex_color, rough=0.5, metallic=0.0, coat=0.0):
     return mat
 
 
+EMISSION_GAIN = 1.0          # set from the identity preset by looks.real_colours (config `emission_gain`)
+
+
 def gold_emit(name, hex_color, strength):
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
@@ -349,10 +352,17 @@ class Stage:
         out = Path(args.get("out", str(self.production / "build" / "code3d" / name)))
         if "stills" in args:
             out.mkdir(parents=True, exist_ok=True)
-            for f in [int(x) for x in args["stills"].split(",")]:
+            frames_ = [int(x) for x in args["stills"].split(",")]
+            for f in frames_:
                 self.scene.frame_set(f)
                 self.scene.render.filepath = str(out / f"still-{f:04d}.png")
                 bpy.ops.render.render(write_still=True)
+            if "mask" in args:                                      # composition gate: flat class masks of the SAME frames, after all beauty stills
+                import composition
+                composition.begin_masks(self.scene)
+                for f in frames_:
+                    self.scene.frame_set(f)
+                    composition.save_mask_still(self.scene, str(out / f"mask-{f:04d}.png"))
         else:
             a, b = (int(x) for x in args.get("frames", f"1-{slot}").split("-"))
             c.render_frames(self.scene, out, a, b)
@@ -497,7 +507,7 @@ class Blade:
 
     def stress(self, amp: float, centre: float = 0.0, width: float = 1.0) -> None:
         nt = self.obj.data.materials[0].node_tree
-        nt.nodes["stress_amp"].outputs[0].default_value = amp
+        nt.nodes["stress_amp"].outputs[0].default_value = amp * EMISSION_GAIN
         nt.nodes["stress_centre"].outputs[0].default_value = centre
         nt.nodes["stress_width"].outputs[0].default_value = width
 
