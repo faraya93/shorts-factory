@@ -130,6 +130,7 @@
         },
         {
           "type": "mark",
+          "kind": "ok",
           "x": 0.5,
           "y": 0.56,
           "at_word": "dormida",
@@ -316,6 +317,7 @@
         },
         {
           "type": "mark",
+          "kind": "ok",
           "x": 0.5,
           "y": 0.58,
           "at_word": "avanza",

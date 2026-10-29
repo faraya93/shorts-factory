@@ -1,0 +1,4 @@
+# reloj-coral: colour plan, topic rationale (overnight 2026-10-29)
+Topic (three lenses; marketing led): why a wall clock's hour hand barely moves (12:1 via a 3:1 and a 4:1 motion-work stage). Objects family, same hit pattern as the gear-ratio video, verifiable on the spot, drawable with the existing gear rig (Gear class with 10/30/8/32 teeth) plus a new dial/hands (code3d/lib/clock_rig.py), no body family, hero separates on Coral. Risk: same rig family as engranajes (diversity). Motion work is shown as a laid-out chain (real clocks are concentric).
+Colour plan (design lens led): board #D2EAE6 (accent-derived pale teal, inherited from gears), plate cream #FFF3E0 (dial), panel/plinth ink #1D1B2E, gears cobalt/indigo, hour hand ink, minute hand accent teal. Gate: PASS (build/gate/gate.md).
+Deviations: shadow-catcher floor hidden in clock scenes (dark horizon band); the "mark" overlays (ok ring) added kind "ok" after the Editor rejected them.
