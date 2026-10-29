@@ -1,0 +1,418 @@
+{
+  "channel": "pilot",
+  "video": "reloj-coral",
+  "title": "¿Por qué la manecilla de las horas casi no se mueve? 🕰️",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: a clock's motion work is a rigid compound gear train (reuses gear_rig Gear/Train classes and the Coral look); numbers are Editor overlays.",
+  "hook_question": "¿Por qué la manecilla de las horas casi no se mueve, si el reloj solo tiene un motor?",
+  "false_belief": "Cada manecilla tiene su propio motor.",
+  "closing_reframe": "Un reloj no tiene dos motores: tiene uno, y engranajes que lo dividen entre doce.",
+  "share_archetype": "el amigo que cree que cada manecilla tiene su propio motor",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (dark stage, exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "gear-rig",
+  "scene_script_prefix": "clock",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook-contraste",
+      "prompt": "Escena de reloj dibujada con código (tren de engranajes compuesto, estética Coral): hook-contraste.",
+      "narration": "¿Por qué la manecilla de las horas casi no se mueve, si el reloj solo tiene un motor? Mira: la de los minutos corre, y la de las horas parece dormida.",
+      "target_duration_s": 9,
+      "transformation": "dos manecillas de un reloj de pared → una corre, la otra casi no se mueve",
+      "camera": "orbita lenta alrededor de la esfera",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "minutos",
+        "horas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.22,
+          "y": 0.42,
+          "visible_s": 2.4,
+          "at_word": "minutos",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MINUTOS",
+          "leader_to": [
+            0.36,
+            0.5
+          ]
+        },
+        {
+          "type": "label",
+          "x": 0.78,
+          "y": 0.5,
+          "visible_s": 2.4,
+          "at_word": "horas",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "HORAS",
+          "leader_to": [
+            0.6,
+            0.56
+          ]
+        },
+        {
+          "type": "mark",
+          "x": 0.5,
+          "y": 0.56,
+          "at_word": "dormida",
+          "offset_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "detras-de-la-esfera",
+      "prompt": "Escena de reloj dibujada con código (tren de engranajes compuesto, estética Coral): detras-de-la-esfera.",
+      "narration": "Detrás de la esfera hay engranajes. Uno de diez dientes mueve uno de treinta: tres a uno. Otro de ocho mueve uno de treinta y dos: cuatro a uno.",
+      "target_duration_s": 10,
+      "transformation": "la esfera sube → el tren de engranajes queda a la vista",
+      "camera": "la cámara atraviesa la esfera y se acerca al tren",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tres",
+        "cuatro"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.2,
+          "y": 0.42,
+          "visible_s": 2.2,
+          "at_word": "diez",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "10 DIENTES",
+          "leader_to": [
+            0.32,
+            0.52
+          ]
+        },
+        {
+          "type": "label",
+          "x": 0.78,
+          "y": 0.4,
+          "visible_s": 2.2,
+          "at_word": "treinta",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "30 DIENTES",
+          "leader_to": [
+            0.7,
+            0.5
+          ]
+        },
+        {
+          "type": "chip",
+          "x": 0.5,
+          "y": 0.74,
+          "visible_s": 2.0,
+          "at_word": "tres",
+          "offset_s": 0.0,
+          "text_or_value": "3 : 1"
+        },
+        {
+          "type": "chip",
+          "x": 0.5,
+          "y": 0.74,
+          "visible_s": 2.0,
+          "at_word": "cuatro",
+          "offset_s": 0.0,
+          "text_or_value": "4 : 1"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "tres-por-cuatro",
+      "prompt": "Escena de reloj dibujada con código (tren de engranajes compuesto, estética Coral): tres-por-cuatro.",
+      "narration": "Tres por cuatro: doce. Por cada doce vueltas del minutero, el horario da una sola.",
+      "target_duration_s": 7,
+      "transformation": "un par → dos pares en cadena",
+      "camera": "sale hacia atrás y muestra el tren completo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "doce"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "3 × 4",
+          "from": 0,
+          "x": 0.5,
+          "y": 0.72,
+          "duration_s": 1.2,
+          "visible_s": 2.0,
+          "at_word": "tres"
+        },
+        {
+          "type": "chip",
+          "x": 0.5,
+          "y": 0.72,
+          "visible_s": 3.0,
+          "at_word": "doce",
+          "offset_s": 0.0,
+          "text_or_value": "12 : 1"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "un-dia",
+      "prompt": "Escena de reloj dibujada con código (tren de engranajes compuesto, estética Coral): un-dia.",
+      "narration": "Eso es una hora contra doce. En un día entero, el minutero da veinticuatro vueltas, y el horario, solo dos.",
+      "target_duration_s": 8,
+      "transformation": "una vuelta → un día entero girando",
+      "camera": "empuja hacia el centro y se aleja",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "veinticuatro",
+        "dos"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "24 vueltas",
+          "from": 0,
+          "x": 0.3,
+          "y": 0.72,
+          "duration_s": 1.6,
+          "visible_s": 2.6,
+          "at_word": "veinticuatro"
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "2 vueltas",
+          "from": 0,
+          "x": 0.72,
+          "y": 0.72,
+          "duration_s": 0.8,
+          "visible_s": 2.4,
+          "at_word": "solo"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "comprueba",
+      "prompt": "Escena de reloj dibujada con código (tren de engranajes compuesto, estética Coral): comprueba.",
+      "narration": "Compruébalo en un reloj de pared: cuando el minutero da una vuelta, el horario avanza apenas un número.",
+      "target_duration_s": 8,
+      "transformation": "la esfera vuelve → una vuelta del minutero mueve el horario un número",
+      "camera": "orbita suave frente a la esfera",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "una",
+        "apenas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.25,
+          "y": 0.42,
+          "visible_s": 2.2,
+          "at_word": "una",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "1 VUELTA",
+          "leader_to": [
+            0.4,
+            0.52
+          ]
+        },
+        {
+          "type": "label",
+          "x": 0.76,
+          "y": 0.46,
+          "visible_s": 2.4,
+          "at_word": "apenas",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "1 NÚMERO",
+          "leader_to": [
+            0.6,
+            0.54
+          ]
+        },
+        {
+          "type": "mark",
+          "x": 0.5,
+          "y": 0.58,
+          "at_word": "avanza",
+          "offset_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "reencuadre",
+      "prompt": "Escena de reloj dibujada con código (tren de engranajes compuesto, estética Coral): reencuadre.",
+      "narration": "Así que un reloj no tiene dos motores: tiene uno, y engranajes que lo dividen entre doce.",
+      "target_duration_s": 7,
+      "transformation": "dos motores imaginarios → uno solo con un tren de engranajes",
+      "camera": "retrocede hasta ver el reloj entero",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "uno",
+        "doce"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.3,
+          "y": 0.44,
+          "visible_s": 2.4,
+          "at_word": "uno",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "1 MOTOR",
+          "leader_to": [
+            0.42,
+            0.54
+          ]
+        },
+        {
+          "type": "label",
+          "x": 0.72,
+          "y": 0.44,
+          "visible_s": 2.4,
+          "at_word": "doce",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "÷ 12",
+          "leader_to": [
+            0.6,
+            0.54
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cta",
+      "prompt": "Escena de reloj dibujada con código (tren de engranajes compuesto, estética Coral): cta.",
+      "narration": "Sígueme, y envíaselo a ese amigo que cree que cada manecilla tiene su propio motor.",
+      "target_duration_s": 6,
+      "transformation": "el reloj completo en reposo",
+      "camera": "cierre lento",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.66
+        }
+      ]
+    }
+  ],
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "Tu reloj de pared tiene UN solo motor… entonces, ¿por qué la manecilla de las horas parece dormida? La respuesta está detrás de la esfera: tres por cuatro, doce. Compruébalo en tu casa y envíaselo a ese amigo que cree que cada manecilla tiene su propio motor.",
+  "gate_stills": {
+    "1": [
+      120
+    ],
+    "2": [
+      160
+    ],
+    "5": [
+      120
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "gear_rig",
+    "clock_rig"
+  ],
+  "support_colours": {
+    "board": "#D2EAE6",
+    "reason": "Case/board of the clock: pale teal tint, accent-derived, inherited from engranajes-coral (gate-verified there, 31.5-31.9 dE from the stage); the cream dial (#FFF3E0 plate) reads against it and against the coral stage; plinth = Coral ink."
+  }
+}

@@ -76,6 +76,7 @@ def apply_production_support(p: dict, scenes: dict | None) -> dict:
         if sc.get(key):
             q[field] = sc[key]
     q["board"] = q["support_board"]
+    q["hero"] = dict((scenes or {}).get("hero_colours") or {})      # per-production hero colour decisions (design lens; reasons in notes.md)
     return q
 
 

@@ -48,9 +48,13 @@ def real_colours(stage, m, accent_hex=None, error_hex=None):
         return img
 
     tr.ticks_image = bold_ticks
-    m.blade = tr.blade_material(pal, "#E9E9EC")
-    m.shell = tr.pbr("shell_y", "Plastic010", "Plastic010", YELLOW, rough_mul=1.15, scale=0.4, normal=0.45, tint_mix=0.85, coat=0.25)
-    m.rubber = tr.pbr("rubber_k", "Rubber004", "Rubber004", BOOT, rough_mul=1.1, scale=0.5, normal=0.5, tint_mix=0.9)
+    hero = (_ACTIVE or {}).get("hero") or {}                         # production hero colours (scenes.json hero_colours) override the defaults
+    m.blade = tr.blade_material(pal, hero.get("steel", "#E9E9EC"), metallic=float(hero.get("steel_metallic", 0.85)))
+    m.shell = tr.pbr("shell_y", "Plastic010", "Plastic010", hero.get("housing", YELLOW), rough_mul=1.15, scale=0.4, normal=0.45, tint_mix=0.85, coat=0.25)
+    if hero.get("boot_plain"):                                      # production decision: a flat coloured boot (textured rubber renders ~3x darker than its albedo)
+        m.rubber = tr.plain("rubber_k", hero["boot_plain"], rough=0.55)
+    else:
+        m.rubber = tr.pbr("rubber_k", "Rubber004", "Rubber004", hero.get("boot", BOOT), rough_mul=1.1, scale=0.5, normal=0.5, tint_mix=0.9)
     m.dark_metal = tr.pbr("dark_metal2", "Metal038", "Metal038", "#8E8C92", metallic=1.0, rough_mul=1.0, scale=0.5, normal=0.3, tint_mix=0.5)
     m.gold = tr.gold_emit("gold", pal["accent gold"], 9.0 * tr.EMISSION_GAIN)
     m.gold_dim = tr.gold_emit("gold_dim", pal["accent amber"], 1.6 * tr.EMISSION_GAIN)

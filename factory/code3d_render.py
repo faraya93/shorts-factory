@@ -41,6 +41,12 @@ def main() -> int:
     prod, n = args.production.resolve(), args.scene
     cfg = json.loads((prod / "scenes.json").read_text(encoding="utf-8"))
     prefix = cfg.get("scene_script_prefix", "scene")
+    if args.mode == "final" and not args.encode_only:                                  # HARD BLOCK (owner 2026-10-28): no full render without a fresh passing gate record
+        import gate
+        ok, msg = gate.check(prod)
+        if not ok:
+            print(f"RENDER BLOCKED by the composition gate: {msg}")
+            return 2
     extra = list(cfg.get("render_args", []))                     # e.g. ["look=coral"]: stage look/palette, never choreography
     import identity
     extra.append(f"identity={identity.export_json(production=prod)}")          # snapshot of channels/umbrella-es.yaml for Blender (identity presets + render profiles)

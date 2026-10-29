@@ -173,10 +173,10 @@ def ticks_image() -> bpy.types.Image:
     return img
 
 
-def blade_material(pal, hex_steel):
+def blade_material(pal, hex_steel, metallic=0.85):
     """Brushed steel (ambientCG Metal012, box-mapped) with the printed ticks (UV) and a GOLD stress glow driven by three node values
     (amplitude, arc-length centre, width) that the scene animates; everything stays grey until the narration activates it."""
-    mat = pbr("blade", "Metal012", "Metal012", hex_steel, metallic=0.85, rough_mul=1.7, scale=0.5, normal=0.15, tint_mix=0.5)
+    mat = pbr("blade", "Metal012", "Metal012", hex_steel, metallic=metallic, rough_mul=1.7, scale=0.5, normal=0.15, tint_mix=0.5)
     nt = mat.node_tree
     bsdf = next(n for n in nt.nodes if n.type == "BSDF_PRINCIPLED")
     uv = nt.nodes.new("ShaderNodeUVMap")

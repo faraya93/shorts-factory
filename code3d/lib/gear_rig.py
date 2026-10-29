@@ -139,6 +139,7 @@ class Train:
         return {"big": tr.pbr("g_big", "Plastic010", "Plastic010", COBALT, rough_mul=1.0, scale=0.4, normal=0.25, tint_mix=0.9, coat=0.3),
                 "pinion": tr.pbr("g_pin", "Plastic010", "Plastic010", DEEP, rough_mul=1.0, scale=0.4, normal=0.25, tint_mix=0.9, coat=0.3),
                 "input": m.gold, "ink": ink, "marker": tr.plain("g_mark", CREAM, rough=0.4, coat=0.2),
+                "plate": tr.plain("plate", p["support_plate"] if p else FALLBACK_BOARD, rough=0.6),
                 "taupe": tr.plain("g_board", p["support_board"] if p else FALLBACK_BOARD, rough=0.7)}
 
     # ---- kinematics ---------------------------------------------------------------------------------

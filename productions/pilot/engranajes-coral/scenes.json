@@ -1,0 +1,514 @@
+{
+  "channel": "pilot",
+  "video": "engranajes-coral",
+  "title": "¿Por qué el último engranaje casi no se mueve? ⚙️",
+  "topic_family": "numbers",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: a compound gear train is a rigid hard-surface rig (spur gears, shafts, a block); numbers are Editor overlays; Papel look.",
+  "hook_question": "¿Por qué la última rueda de una cadena de engranajes casi no se mueve, si todas están conectadas?",
+  "false_belief": "Si los engranajes están conectados, todos giran a la misma velocidad.",
+  "closing_reframe": "Una cadena de engranajes no transmite velocidad: la cambia por fuerza.",
+  "share_archetype": "el amigo que cree que todos los engranajes giran igual",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (dark stage, exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "gear-rig",
+  "scene_script_prefix": "gear",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "rueda lenta",
+      "prompt": "Escena de engranajes dibujada con código (rig compuesto, esteticamente Papel): rueda lenta.",
+      "narration": "¿Por qué la última rueda de una cadena de engranajes casi no se mueve, si todas están conectadas? Parece que deberían girar igual.",
+      "target_duration_s": 8,
+      "transformation": "dos pares de engranajes: igual tamaño → el grande casi quieto",
+      "camera": "cámara frontal que se acerca al par de la derecha y rodea",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "última",
+        "casi"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "1 : 1",
+          "x": 0.42,
+          "y": 0.47,
+          "visible_s": 3.0,
+          "at_offset_seconds": 0.5
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "4 : 1",
+          "x": 0.86,
+          "y": 0.62,
+          "visible_s": 3.0,
+          "at_offset_seconds": 1.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ÚLTIMA",
+          "x": 0.8,
+          "y": 0.55,
+          "visible_s": 2.4,
+          "leader_to": [
+            0.72,
+            0.64
+          ],
+          "at_word": "rueda",
+          "offset_s": 0.0
+        },
+        {
+          "type": "ring",
+          "radius": 0.27,
+          "x": 0.58,
+          "y": 0.72,
+          "at_word": "mueve,",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 1.8
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CONECTADAS",
+          "x": 0.2,
+          "y": 0.56,
+          "visible_s": 2.2,
+          "leader_to": [
+            0.36,
+            0.69
+          ],
+          "at_word": "todas",
+          "offset_s": 0.0
+        },
+        {
+          "type": "mark",
+          "kind": "ok",
+          "x": 0.74,
+          "y": 0.36,
+          "at_word": "igual.",
+          "offset_s": 0.0,
+          "visible_s": 1.4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "una etapa",
+      "prompt": "Escena de engranajes dibujada con código (rig compuesto, esteticamente Papel): una etapa.",
+      "narration": "Mira una sola etapa. Cada diente del engranaje chico empuja uno del grande, pero el grande tiene cuatro veces más dientes. Por eso, cuando el chico da cuatro vueltas, el grande da una.",
+      "target_duration_s": 8,
+      "transformation": "un piñón de 10 dientes → un grande de 40",
+      "camera": "empuja hacia el engrane y orbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cuatro",
+        "una"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "10 DIENTES",
+          "x": 0.22,
+          "y": 0.4,
+          "visible_s": 2.4,
+          "leader_to": [
+            0.13,
+            0.52
+          ],
+          "at_word": "chico",
+          "offset_s": 0.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "40 DIENTES",
+          "x": 0.8,
+          "y": 0.34,
+          "visible_s": 2.4,
+          "leader_to": [
+            0.74,
+            0.46
+          ],
+          "at_word": "tiene",
+          "offset_s": 0.0
+        },
+        {
+          "type": "chip",
+          "text_or_value": "4 : 1",
+          "x": 0.5,
+          "y": 0.74,
+          "visible_s": 2.2,
+          "at_word": "cuatro",
+          "offset_s": 0.0
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "4 vueltas",
+          "from": 0,
+          "x": 0.27,
+          "y": 0.74,
+          "duration_s": 1.5,
+          "visible_s": 2.4,
+          "at_offset_seconds": 9.55
+        },
+        {
+          "type": "chip",
+          "text_or_value": "1 vuelta",
+          "x": 0.74,
+          "y": 0.74,
+          "visible_s": 1.4,
+          "at_offset_seconds": 10.95
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "la cadena",
+      "prompt": "Escena de engranajes dibujada con código (rig compuesto, esteticamente Papel): la cadena.",
+      "narration": "Ahora encadénalas. Una etapa, dos, tres, cuatro, cinco: cada una divide la velocidad entre cuatro, y la última gira mil veinticuatro veces más lento.",
+      "target_duration_s": 8,
+      "transformation": "una etapa → cinco etapas encadenadas",
+      "camera": "retrocede revelando toda la cadena",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "mil",
+        "veinticuatro"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "ETAPA 5",
+          "from": 1,
+          "x": 0.5,
+          "y": 0.74,
+          "duration_s": 2.5,
+          "visible_s": 3.2,
+          "at_offset_seconds": 2.08
+        },
+        {
+          "type": "chip",
+          "text_or_value": "÷ 4",
+          "x": 0.84,
+          "y": 0.4,
+          "visible_s": 2.2,
+          "at_word": "divide",
+          "offset_s": 0.0
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "1024",
+          "from": 0,
+          "x": 0.5,
+          "y": 0.74,
+          "duration_s": 1.5,
+          "visible_s": 2.6,
+          "at_word": "mil",
+          "offset_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "el tiempo",
+      "prompt": "Escena de engranajes dibujada con código (rig compuesto, esteticamente Papel): el tiempo.",
+      "narration": "Si la primera da una vuelta por segundo, la última tarda diecisiete minutos en dar una sola.",
+      "target_duration_s": 8,
+      "transformation": "la primera gira → la última casi no avanza",
+      "camera": "sube siguiendo la cadena hasta la última rueda",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "diecisiete"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "1 VUELTA / S",
+          "x": 0.72,
+          "y": 0.4,
+          "visible_s": 2.0,
+          "leader_to": [
+            0.5,
+            0.52
+          ],
+          "at_word": "una",
+          "offset_s": 0.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ÚLTIMA",
+          "x": 0.75,
+          "y": 0.4,
+          "visible_s": 1.8,
+          "leader_to": [
+            0.62,
+            0.52
+          ],
+          "at_word": "última",
+          "offset_s": 0.0
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "17 min",
+          "from": 0,
+          "x": 0.5,
+          "y": 0.72,
+          "duration_s": 2.5,
+          "visible_s": 3.0,
+          "at_offset_seconds": 2.7
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "la fuerza",
+      "prompt": "Escena de engranajes dibujada con código (rig compuesto, esteticamente Papel): la fuerza.",
+      "narration": "Pero lo que pierde en velocidad, lo gana en fuerza: más de mil veces más, sin contar la fricción. Por eso una manivela pequeña puede mover algo enorme.",
+      "target_duration_s": 8,
+      "transformation": "manivela pequeña → bloque enorme movido",
+      "camera": "rodea la última rueda y el bloque",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "fuerza",
+        "mil"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "VELOCIDAD",
+          "x": 0.25,
+          "y": 0.34,
+          "visible_s": 2.2,
+          "leader_to": [
+            0.2,
+            0.58
+          ],
+          "at_word": "velocidad,",
+          "offset_s": 0.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "FUERZA",
+          "x": 0.82,
+          "y": 0.28,
+          "visible_s": 2.4,
+          "leader_to": [
+            0.76,
+            0.4
+          ],
+          "at_word": "fuerza:",
+          "offset_s": 0.0
+        },
+        {
+          "type": "bar",
+          "style": "slim",
+          "text_or_value": "100%",
+          "show_value": false,
+          "label": "FUERZA",
+          "x": 0.5,
+          "y": 0.74,
+          "at_word": "más",
+          "offset_s": 0.0,
+          "duration_s": 2.2,
+          "visible_s": 4.0
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "+1000",
+          "from": 0,
+          "x": 0.5,
+          "y": 0.66,
+          "duration_s": 1.4,
+          "visible_s": 2.2,
+          "at_word": "mil",
+          "offset_s": 0.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENORME",
+          "x": 0.82,
+          "y": 0.27,
+          "visible_s": 1.6,
+          "leader_to": [
+            0.7,
+            0.38
+          ],
+          "at_word": "enorme.",
+          "offset_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "el reencuadre",
+      "prompt": "Escena de engranajes dibujada con código (rig compuesto, esteticamente Papel): el reencuadre.",
+      "narration": "Así que una cadena de engranajes no transmite velocidad: la cambia por fuerza.",
+      "target_duration_s": 8,
+      "transformation": "cadena de engranajes → una sola imagen: rápido entra, fuerte sale",
+      "camera": "retrocede a la cadena completa",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cambia"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENTRA RÁPIDO",
+          "x": 0.7,
+          "y": 0.7,
+          "visible_s": 2.6,
+          "leader_to": [
+            0.41,
+            0.7
+          ],
+          "at_word": "velocidad:",
+          "offset_s": 0.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SALE FUERTE",
+          "x": 0.8,
+          "y": 0.3,
+          "visible_s": 1.2,
+          "leader_to": [
+            0.7,
+            0.17
+          ],
+          "at_word": "fuerza.",
+          "offset_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cta",
+      "prompt": "Escena de engranajes dibujada con código (rig compuesto, esteticamente Papel): cta.",
+      "narration": "Sígueme, y envíaselo a ese amigo que cree que todos los engranajes giran igual.",
+      "target_duration_s": 8,
+      "transformation": "cadena en reposo → fondo del CTA",
+      "camera": "órbita lenta de fondo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "igual"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.66
+        }
+      ]
+    }
+  ],
+  "render_args": [
+    "look=coral"
+  ],
+  "support_colours": {
+    "board": "#D2EAE6",
+    "reason": "Coral gears re-render: pale teal tint derived from the Coral accent (#0A5C6B); cool against the warm stage, dE>=31 from the stage in frame; cream (#FFF3E0) passed too but sits in the stage's warm family. Hero pinion colour moved to indigo #4A2BC4 so it clears the ink plinth (dE 24)."
+  },
+  "gate_stills": {
+    "3": [
+      230
+    ],
+    "5": [
+      150
+    ],
+    "6": [
+      80
+    ]
+  },
+  "identity_preset": "coral"
+}

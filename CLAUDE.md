@@ -98,6 +98,14 @@ annotation, near-black void, vignette) disagree, THIS section wins**; the doctri
 end card (owner 2026-10-28). Render default: the tuned Cycles profile (`render.profiles.tuned`: GPU denoise, adaptive 0.04, min 24, ceiling 128,
 Persistent Data on, Fast GI off; EEVEE for drafts; the grain pass stays mandatory); per-scene-type exceptions live in `render.scene_type_profiles`.
 
+## Closing standard (ratified 2026-10-28, owner; supersedes the CTA-phone / end-card text elsewhere in this file)
+The phone graphic (overlay type `cta`) and the appended end card (`end_card`) are REMOVED from every production (marketing verdict, docs/marketing-verdicts.md;
+audit in docs/cta-endcard-audit.md). The standard closing for EVERY video: the spoken follow + share ask naming the share_archetype (unchanged), plus ONE
+tiny ink "ENVÍASELO" tag (`label`, style `tag`) word-locked (`at_word: "envíaselo"`, ~2.6 s) in the last scene, placed in the cream space beside the hero (C2 in
+docs/cta-redesign/). No extra seconds, nothing covers the hero. Where "Reference doctrine" point 8, storytelling rule 8, the Editor v2 `cta` / `end_card`
+bullets or the beat-sheet wording ("the CTA/end card") still mention the phone or the end card, read them through this section: the code for them stays
+(frozen productions), new productions do not use it.
+
 ## Reference doctrine (binding, owner 2026-10-26)
 Adopted from the reference study of three example channels
 (docs/reference-style-spec.md = the LOOK, docs/reference-format-spec.md =
@@ -457,5 +465,7 @@ engines automatically from these rules; the owner is never asked.
 The stage colour is the BACKGROUND ONLY. Every support element (backing boards, cutaway plates, plinths, panels, large housing surfaces) gets a colour chosen per production by the design lens:
 1. SEPARATION: CIEDE2000 >= 20 from BOTH ends of the stage gradient (`identity.support_errors`).
 2. HARMONY: derived from the hero, ink or accent system; value and reason recorded in the production's notes.md.
-Support colours are parameters (`identity.<preset>.support {board, plate, panel}`, overridden per production by `scenes.json` `support_colours`), never code literals and never the stage value.
-THE GATE: before any full render, render representative stills with `mask=1` and run `tools/composition_gate.py <still dir> --identity <export>`. Pairs stage-support, stage-hero, support-hero (>= 20) and accent-stage (>= 20 and 3:1 luminance) must pass, and the rendered accent must match its swatch family (dE <= 15; calibrate `emission_gain`). Any BLOCK stops the render until fixed.
+Support colours are parameters (`identity.<preset>.support {board, plate, panel}`, overridden per production by `scenes.json` `support_colours`; per-production hero colours in `hero_colours`), never code literals and never the stage value.
+THE GATE IS A HARD BLOCK in the render driver: `factory/code3d_render.py --mode final` refuses to launch (exit 2) unless the production has a FRESH PASSING gate record (`build/gate/gate.json` + the distance table `build/gate/gate.md` + the stills). Create it with
+`.venv/bin/python factory/gate.py run productions/<ch>/<video>` (renders the stills declared in scenes.json `gate_stills` {scene id: [frames]} with `mask=1` under caffeinate, tabulates the pairs through `tools/composition_gate.py`); `gate.py check` verifies it. The record carries a fingerprint of the identity preset, support/hero colours, the gate scene scripts and the rig libraries (scenes.json `rig_libs`), so any change makes it stale and forces a re-run.
+Thresholds: stage-support, stage-hero, support-hero >= 20 (CIEDE2000, in frame); accent-stage >= 20 and 3:1 luminance contrast; the rendered accent/error must match its swatch family (dE <= 15; calibrate the preset's `emission_gain`). Any BLOCK stops the render until fixed.
