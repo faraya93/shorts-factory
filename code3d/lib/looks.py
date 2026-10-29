@@ -114,9 +114,28 @@ def apply_direction(stage, m, name: str, args: dict | None = None) -> None:
             stage.scene.cycles.max_bounces = int(args["bounces"])
 
 
+def tuned_profile(stage) -> None:
+    """The tuned Cycles profile of docs/render-bench.md (cyc_B): GPU denoise, looser adaptive threshold, min samples 24, no transmission/volume,
+    bounce limits 3/4/8, persistent data. Samples stay the ceiling given by `samples=`."""
+    cy, sc = stage.scene.cycles, stage.scene
+    cy.use_adaptive_sampling = True
+    cy.adaptive_threshold = 0.04
+    cy.adaptive_min_samples = 24
+    cy.denoising_use_gpu = True
+    cy.transmission_bounces = 0
+    cy.volume_bounces = 0
+    cy.diffuse_bounces, cy.glossy_bounces, cy.max_bounces = 3, 4, 8
+    sc.render.use_persistent_data = True
+
+
 def apply(stage, m, look: str, args: dict | None = None) -> None:
-    if look in _directions():
-        return apply_direction(stage, m, look, args)
+    out = apply_direction(stage, m, look, args) if look in _directions() else _apply_legacy(stage, m, look, args)
+    if args and args.get("profile") == "tuned":
+        tuned_profile(stage)
+    return out
+
+
+def _apply_legacy(stage, m, look: str, args: dict | None = None) -> None:
     nt, cam, env = _world(stage)
     key, rim, fill = stage.key, stage.rim, stage.fill
     glare = next(n for n in stage.scene.compositing_node_group.nodes if n.bl_idname == "CompositorNodeGlare")

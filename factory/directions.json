@@ -134,5 +134,20 @@
     "spoken_text": "#4A0A2B",
     "emph": "#6BFFD8",
     "mode": "white"
+  },
+  "coral": {
+    "title": "CORAL",
+    "top": "#FEA181",
+    "bottom": "#EC9172",
+    "plinth": "#1D1B2E",
+    "accent": "#0A5C6B",
+    "error": "#7A0019",
+    "annot": "#1D1B2E",
+    "ink": "#1D1B2E",
+    "ink_stroke": "#FFFFFF",
+    "spoken_box": "#1D1B2E",
+    "spoken_text": "#FFFFFF",
+    "emph": "#0A5C6B",
+    "mode": "ink"
   }
 }
