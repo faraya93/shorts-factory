@@ -15,7 +15,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "factory"))
 FPS = 30
+import shutil
+CAFFEINATE = ["caffeinate", "-dimsu"] if shutil.which("caffeinate") else []     # standing rule (owner 2026-10-28): every render runs under caffeinate -dimsu
 
 
 def narration_slot_frames(prod: Path, scene_id: int) -> int:
@@ -38,7 +41,11 @@ def main() -> int:
     prod, n = args.production.resolve(), args.scene
     cfg = json.loads((prod / "scenes.json").read_text(encoding="utf-8"))
     prefix = cfg.get("scene_script_prefix", "scene")
-    extra = list(cfg.get("render_args", []))                     # e.g. ["look=papel"]: stage look/palette, never choreography
+    extra = list(cfg.get("render_args", []))                     # e.g. ["look=coral"]: stage look/palette, never choreography
+    import identity
+    extra.append(f"identity={identity.export_json()}")          # snapshot of channels/umbrella-es.yaml for Blender (identity presets + render profiles)
+    if cfg.get("identity_preset") and not any(a.startswith("look=") for a in extra):
+        extra.append(f"look={cfg['identity_preset']}")
     if args.samples:
         extra.append(f"samples={args.samples}")
     script = ROOT / "code3d" / "scenes" / f"{prefix}_{n:02d}.py"       # default 'scene': existing productions unchanged
@@ -48,7 +55,7 @@ def main() -> int:
     render_s = None
     if not args.encode_only:
         t0 = time.time()
-        r = subprocess.run(["blender", "-b", "--python", str(script), "--", f"production={prod}", f"mode={args.mode}",
+        r = subprocess.run([*CAFFEINATE, "blender", "-b", "--python", str(script), "--", f"production={prod}", f"mode={args.mode}",
                             f"slot={slot}", f"frames=1-{slot}", f"out={frames_dir}", *extra], capture_output=True, text=True)
         render_s = time.time() - t0
         if r.returncode != 0 or "Traceback" in r.stdout + r.stderr:

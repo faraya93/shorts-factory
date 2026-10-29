@@ -20,8 +20,7 @@ from pathlib import Path
 from PIL import Image, ImageStat
 
 HEX_RE = re.compile(r"^#[0-9A-Fa-f]{6}$")
-DEFAULT_UNIFY = {"saturation": 1.04, "contrast": 1.03, "warmth": 0.0, "grain": 5, "vignette_angle": 0,
-                 "lift": "0/0.03 0.1/0.21 0.5/0.7 0.85/0.92 1/0.98"}
+DEFAULT_UNIFY = {"saturation": 1.04, "contrast": 1.03, "warmth": 0.0, "grain": 5, "vignette_angle": 0, "lift": ""}
 DEFAULT_TOLERANCE_DE = 15.0
 
 

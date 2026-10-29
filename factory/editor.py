@@ -45,9 +45,10 @@ SUB_STROKE = 4              # px, thin black outline (readability over bright pa
 SUBTITLE_Y_CENTER = 0.24    # channel constant (moves to channels/umbrella-es.yaml in Task F): block center, fraction of frame height
 SUB_MAX_WIDTH = 940         # px, maximum line width before wrapping
 SUB_CENTER_Y = round(H * SUBTITLE_Y_CENTER)
-SUB_WORD_COLOR = (150, 150, 155)       # not-current words: grey (~55% white)
-SUB_CURRENT_COLOR = (255, 255, 255)    # current word: bold white
-SUB_EMPH_COLOR = (103, 205, 190)       # selection box of an emphasised word (annotation teal)
+_REF = overlays.presets_flat()["reference-dark"]              # the legacy "reference" subtitle theme comes from the identity presets too
+SUB_WORD_COLOR = overlays._rgb(_REF["word"])                   # not-current words: grey (~55% white)
+SUB_CURRENT_COLOR = overlays._rgb(_REF["ink"])                 # current word: bold white
+SUB_EMPH_COLOR = overlays._rgb(_REF["emph"])                   # selection box of an emphasised word (annotation teal)
 SUB_BOX_PAD_X, SUB_BOX_PAD_Y, SUB_BOX_RADIUS = 12, 6, 12
 SUB_BOX_WIDTH, SUB_HANDLE = 3, 7       # selection box line width; corner handle half-size
 CUE_MAX_WORDS, CUE_MAX_CHARS = 4, 26
@@ -175,10 +176,7 @@ def layout_cue(texts: list[str], font: ImageFont.FreeTypeFont) -> dict:
             "h": len(lines) * line_h + (len(lines) - 1) * gap + 2 * pad_y}
 
 
-SUB_THEMES = {   # light stage: navy words (>=8:1 on the celeste), the spoken word reversed in a solid navy box (white on navy 15:1)
-    "dark": None,
-    "light": dict(word=(11, 37, 64), stroke=(255, 255, 255), box=(11, 37, 64), box_text=(255, 255, 255), emph=(232, 89, 12)),
-}
+# Subtitle themes other than the legacy reference one come from the identity presets (overlays.THEMES[name]["SUB"]).
 
 
 def render_cue_state(texts: list[str], current: int, lay: dict, path: Path, font: ImageFont.FreeTypeFont,
@@ -188,7 +186,7 @@ def render_cue_state(texts: list[str], current: int, lay: dict, path: Path, font
     img = Image.new("RGBA", (lay["w"], lay["h"]), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
     reg = font_reg or font
-    th = SUB_THEMES.get(overlays.THEME) or overlays.THEMES.get(overlays.THEME, {}).get("SUB")
+    th = overlays.THEMES.get(overlays.THEME, {}).get("SUB")
     y = lay["pad_y"]
     for idxs, line_w in lay["lines"]:
         x = (lay["w"] - line_w) / 2

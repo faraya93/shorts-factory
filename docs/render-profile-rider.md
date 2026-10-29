@@ -1,0 +1,10 @@
+# Rider: tuned vs previous render profile on the two untested scene types (Coral look)
+Run 2026-10-28 under `caffeinate -dimsu`. Scene types: **cross-section** (tape scene 2: end-on push-through, blades pressed by plates) frames 150-161; **exploded housing** (tape scene 5: coil, spring, brake) frames 200-211. Both with `look=coral`, 128-sample ceiling, same frames for both profiles; reference = frame 155 / 205 rendered at 1024 samples (adaptive 0.001, 12 bounces, previous profile). `previous` = adaptive 0.02, OIDN on CPU, bounces 6/4/4/12, persistent data off; `tuned` = the new default (GPU denoise, 0.04, min 24, bounces 3/4/8, persistent on, Fast GI off).
+| scene type | profile | s/frame (steady, 12 frames) | speed-up | RMSE vs reference, whole / central band (0-255 levels) | p99.9 error |
+|---|---|---|---|---|---|
+| cross-section | previous | 8.44 | 1.0x | 0.59 / 0.68 | 5 |
+| cross-section | **tuned** | **2.93** | 2.9x | 0.69 / 0.76 | 6 |
+| exploded housing | previous | 9.47 | 1.0x | 0.97 / 1.35 | 10 |
+| exploded housing | **tuned** | **3.64** | 2.6x | 1.15 / 1.58 | 12 |
+**Blind sheets** (`docs/render-bench/rider-blind-cross-section.png`, `rider-blind-exploded-housing.png`): panels X and Y (full frame + a zoom on the fine detail: the blade section / the coil and spring) and a third panel with the difference between the two profiles amplified x8. **KEY: in both sheets X = tuned, Y = previous.**
+**Outcome: no regression; both scene types stay on the tuned profile.** The difference maps are near black (only faint speckle on metal edges and the spring coils), the added error against the high-sample reference is 0.1-0.2 levels (up to 2 levels at the 99.9th percentile on the exploded housing), and I cannot tell X from Y in the zooms. `render.scene_type_profiles` therefore keeps `cross_section: tuned` and `exploded_housing: tuned` (the mechanism for a per-scene-type override exists and is tested by `tests/test_channel.py`, but no override is needed). Caveat: one frame each; thin parallel structures such as the spring coil are exactly where a looser adaptive threshold would show first, and they look the same here.

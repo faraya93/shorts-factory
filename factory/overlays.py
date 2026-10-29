@@ -40,38 +40,49 @@ OV_FONT_SIZE, OV_STROKE, OV_MAX_WIDTH = 120, 11, 900
 BAR_W, BAR_H, BAR_GAP = 760, 56, 22
 NUMBER_RE = re.compile(r"^(?P<pre>[^\d]*?)(?P<num>\d+(?:\.\d+)?)(?P<suf>.*)$", re.DOTALL)
 
-TEAL, RED, GOLD, GREY, PASSIVE, VOID = (103, 205, 190), (190, 74, 74), (245, 192, 74), (150, 150, 155), (81, 85, 90), (18, 15, 16)
-TEAL0, RED0, GOLD0, VOID0, PASSIVE0 = TEAL, RED, GOLD, VOID, PASSIVE          # fixed originals (the CTA phone UI is always a dark phone)
-INK, INK_STROKE = (255, 255, 255), (0, 0, 0)                # text ink + its outline
-CHIP_FILL, CHIP_EDGE, CHIP_TEXT = VOID + (235,), TEAL, (255, 255, 255)
-TRACK_EDGE = VOID
+# The CTA phone is a DEVICE mock-up (always a dark phone), not channel identity: its colours are fixed on purpose.
+TEAL0, RED0, GOLD0, VOID0, PASSIVE0 = (103, 205, 190), (190, 74, 74), (245, 192, 74), (18, 15, 16), (81, 85, 90)
+THEMES: dict = {}
+
+
+def _rgb(h: str) -> tuple:
+    return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
+
+
+def _theme_from_preset(p: dict) -> dict:
+    """One text/graphics theme per identity preset (factory/identity.py reads channels/umbrella-es.yaml). Role names are historical:
+    TEAL = annotation graphics, GOLD = the accent (active quantity), RED = error, VOID = the plate behind chips."""
+    if p["mode"] == "reference":     # the dark reference look: white spoken word, grey others, thin black outline, no box
+        return dict(INK=_rgb(p["ink"]), INK_STROKE=_rgb(p["ink_stroke"]), TEAL=_rgb(p["annot"]), RED=_rgb(p["error"]), GOLD=_rgb(p["accent"]),
+                    GREY=_rgb(p["word"]), PASSIVE=_rgb(p["passive"]), VOID=_rgb(p["top"]), CHIP_FILL=_rgb(p["top"]) + (235,),
+                    CHIP_EDGE=_rgb(p["annot"]), CHIP_TEXT=_rgb(p["ink"]), TRACK_EDGE=_rgb(p["top"]), SUB=None)
+    ink, edge, box = _rgb(p["ink"]), _rgb(p["ink_stroke"]), _rgb(p["spoken_box"])
+    return dict(INK=ink, INK_STROKE=edge, TEAL=_rgb(p["annot"]), RED=_rgb(p["error"]), GOLD=_rgb(p["accent"]), GREY=ink,
+                PASSIVE=_rgb(p["bottom"]), VOID=box, CHIP_FILL=box + (245,), CHIP_EDGE=_rgb(p["spoken_text"]), CHIP_TEXT=_rgb(p["spoken_text"]),
+                TRACK_EDGE=edge, SUB=dict(word=ink, stroke=edge, box=box, box_text=_rgb(p["spoken_text"]), emph=_rgb(p["emph"])))
+
+
+def _load_identity() -> None:
+    """Fill THEMES from the identity presets (single source: channels/umbrella-es.yaml). 'dark' and 'light' stay as aliases of the two
+    legacy text themes that frozen productions name in their scenes.json."""
+    import identity
+    for name, p in identity.presets().items():
+        THEMES[name] = _theme_from_preset(p)
+    THEMES["dark"], THEMES["light"] = THEMES["reference-dark"], THEMES["celeste"]
+
+
+_load_identity()
+
+
+def presets_flat() -> dict:
+    import identity
+    return identity.presets()
+
+
 THEME = "dark"
-THEMES = {   # text/graphics theme for the stage (design system 2026-10-27): "dark" = reference look, "light" = celeste stage
-    "dark": dict(INK=(255, 255, 255), INK_STROKE=(0, 0, 0), TEAL=(103, 205, 190), RED=(190, 74, 74), GOLD=(245, 192, 74), GREY=(150, 150, 155),
-                 PASSIVE=(81, 85, 90), VOID=(18, 15, 16), CHIP_FILL=(18, 15, 16, 235), CHIP_EDGE=(103, 205, 190), CHIP_TEXT=(255, 255, 255),
-                 TRACK_EDGE=(18, 15, 16)),
-    "light": dict(INK=(11, 37, 64), INK_STROKE=(255, 255, 255), TEAL=(11, 37, 64), RED=(201, 42, 42), GOLD=(232, 89, 12), GREY=(11, 37, 64),
-                  PASSIVE=(120, 150, 178), VOID=(11, 37, 64), CHIP_FILL=(11, 37, 64, 245), CHIP_EDGE=(255, 255, 255), CHIP_TEXT=(255, 255, 255),
-                  TRACK_EDGE=(255, 255, 255)),
-}
-
-
-def _load_directions() -> None:
-    """Identity directions (factory/directions.json): one text theme per direction, derived from its hexes."""
-    import json
-    f = Path(__file__).resolve().parent / "directions.json"
-    if not f.exists():
-        return
-    rgb = lambda h: tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
-    for key, d in json.load(open(f)).items():
-        if key.startswith("_"):
-            continue
-        ink, edge = rgb(d["ink"]), rgb(d["ink_stroke"])
-        white_mode = d.get("mode") == "white"
-        THEMES[key] = dict(INK=ink, INK_STROKE=edge, TEAL=rgb(d["annot"]), RED=rgb(d["error"]), GOLD=rgb(d["accent"]), GREY=ink,
-                           PASSIVE=rgb(d["bottom"]), VOID=rgb(d["spoken_box"]), CHIP_FILL=rgb(d["spoken_box"]) + (245,), CHIP_EDGE=rgb(d["spoken_text"]),
-                           CHIP_TEXT=rgb(d["spoken_text"]), TRACK_EDGE=edge,
-                           SUB=dict(word=ink, stroke=edge, box=rgb(d["spoken_box"]), box_text=rgb(d["spoken_text"]), emph=rgb(d["emph"])))
+TEAL, RED, GOLD, GREY, PASSIVE, VOID = (THEMES["dark"][k] for k in ("TEAL", "RED", "GOLD", "GREY", "PASSIVE", "VOID"))
+INK, INK_STROKE = THEMES["dark"]["INK"], THEMES["dark"]["INK_STROKE"]
+CHIP_FILL, CHIP_EDGE, CHIP_TEXT, TRACK_EDGE = (THEMES["dark"][k] for k in ("CHIP_FILL", "CHIP_EDGE", "CHIP_TEXT", "TRACK_EDGE"))
 
 
 def set_theme(name: str) -> None:
@@ -504,6 +515,9 @@ def _mark(spec: dict, n: int):
             for p in (a, b):
                 d.ellipse([p[0] - 9, p[1] - 9, p[0] + 9, p[1] + 9], fill=RED + (255,))
     else:
+        # a dark accent (Coral's teal, 3.2:1 on the stage) reads by HUE and shape, not by brightness: a thin outline in the theme's stroke colour
+        # keeps the ring readable on any stage (identity rule, docs/design-system.md)
+        d.ellipse([10, 10, size - 10, size - 10], outline=INK_STROKE + (255,), width=22)
         d.ellipse([14, 14, size - 14, size - 14], outline=GOLD + (255,), width=14)
     frames = _pop_frames(img, n)
     cw = frames[0].width
@@ -664,8 +678,8 @@ def render_end_card(card: dict, out_dir: Path, prefix: str, fps: int) -> dict:
     dim = float(card.get("dim", 0.25))
     handle = str(card["handle"]).upper()
     n = max(2, round(0.6 * fps))
-    if card.get("style") == "papel":
-        return _end_card_papel(handle, out_dir, prefix, fps, n)
+    if card.get("style") in ("brand", "papel"):          # "papel" = legacy name of the same brand card
+        return _end_card_brand(handle, out_dir, prefix, fps, n)
     logo = Image.new("RGBA", (200, 200), (0, 0, 0, 0))
     ld = ImageDraw.Draw(logo)
     ld.rounded_rectangle([6, 6, 193, 193], radius=52, outline=(255, 255, 255, 255), width=12)
@@ -684,20 +698,22 @@ def render_end_card(card: dict, out_dir: Path, prefix: str, fps: int) -> dict:
     return {"pattern": str(out_dir / f"{prefix}-%03d.png"), "w": W, "h": H, "frames": n, "anim_s": n / fps}
 
 
-def _end_card_papel(name: str, out_dir: Path, prefix: str, fps: int, n: int) -> dict:
-    """Papel end card: ink veil over the last frame, the Papel mark (cream object with a cut quadrant, vermilion dot) and the wordmark."""
+def _end_card_brand(name: str, out_dir: Path, prefix: str, fps: int, n: int) -> dict:
+    """Brand end card: a veil in the mark's dark colour over the last frame, the brand mark and the wordmark. Colours = the production's
+    identity preset (mark.body / mark.inner / mark.accent), nothing hard-coded."""
     import sys as _sys
     _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
     import brand_mark
-    D = {"ink": (29, 27, 46), "cream": (253, 243, 220), "accent": (240, 66, 28)}
-    mk = brand_mark.mark(380, body=D["cream"], inner=D["ink"], accent=D["accent"])
-    f = font("bold", 84)
-    tag = _tracked_text(name, f, 10, D["cream"] + (255,))
+    import identity
+    p = identity.presets().get(THEME) or identity.preset()
+    veil, light, acc = _rgb(p["mark_body"]), _rgb(p["mark_inner"]), _rgb(p["mark_accent"])
+    mk = brand_mark.mark(380, body=light, inner=veil, accent=acc)
+    tag = _tracked_text(name, font("bold", 84), 10, light + (255,))
     frames = []
     for i in range(n):
-        p = ease_out((i + 1) / n)
-        img = Image.new("RGBA", (W, H), D["ink"] + (round(255 * 0.86 * p),))
-        a = lambda im: im.putalpha(im.getchannel("A").point(lambda v: round(v * p))) or im
+        pr = ease_out((i + 1) / n)
+        img = Image.new("RGBA", (W, H), veil + (round(255 * 0.86 * pr),))
+        a = lambda im: im.putalpha(im.getchannel("A").point(lambda v: round(v * pr))) or im
         img.alpha_composite(a(mk.copy()), ((W - 380) // 2, round(H * 0.46) - 250))
         img.alpha_composite(a(tag.copy()), ((W - tag.width) // 2, round(H * 0.46) + 170))
         frames.append(img)
@@ -706,4 +722,3 @@ def _end_card_papel(name: str, out_dir: Path, prefix: str, fps: int, n: int) -> 
     return {"pattern": str(out_dir / f"{prefix}-%03d.png"), "w": W, "h": H, "frames": n, "anim_s": n / fps}
 
 
-_load_directions()

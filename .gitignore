@@ -22,3 +22,4 @@ productions/**/spikes/*/*
 # reference videos (media, never committed)
 docs/reference/*.[mM][pP]4
 productions/pilot/closing-test/
+/build/

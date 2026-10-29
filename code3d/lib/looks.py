@@ -1,17 +1,24 @@
-"""Stage looks for the tape rig (design system, owner 2026-10-27): lighting + palette ONLY, never choreography.
-begin(look=...) calls apply() right after the Stage is built and BEFORE the scene creates its objects, so the replaced materials are used.
-Looks: A (near-black, real colours), E (dark teal), CEL (celeste studio: the proposed light stage), D0 (round-2 pale celeste)."""
+"""Stage looks for the rigs: lighting + palette ONLY, never choreography. begin(look=...) calls apply() right after the Stage is built and BEFORE the
+scene creates its objects, so the replaced materials are used. EVERY identity colour (stage gradient, plinth, board, accent, error, halo, rim) comes from the
+channel config snapshot (code3d/lib/pipeline_config.py <- factory/identity.py <- channels/umbrella-es.yaml); `look=<preset name>` picks the preset
+(legacy aliases A, E, CEL keep working). Hero colours (below) are properties of the hero objects, not channel identity."""
 import math
 
 import bpy
 from mathutils import Vector
 
 import common as c
+import pipeline_config as cfg
 import tape_rig as tr
 
-YELLOW, BOOT = "#F2BD12", "#161618"
-EMBER, ERR_LIGHT = "#E8590C", "#C92A2A"          # accent / error on a light stage (gold has 1.1:1 on celeste, see docs/design-system.md)
-CEL_TOP, CEL_BOTTOM = "#8FD6F2", "#62B4DC"        # celeste seamless: lighter behind the caption band, deeper low
+YELLOW, BOOT = "#F2BD12", "#161618"          # HERO colours of the tape (painted housing, rubber boot); not identity
+LEGACY_LOOKS = {"A": "reference-dark", "E": "dark-teal", "CEL": "celeste"}
+_ACTIVE: dict | None = None
+
+
+def current() -> dict | None:
+    """The preset applied by apply() in this Blender session (rigs read plinth/board/accent from it)."""
+    return _ACTIVE
 
 
 def real_colours(stage, m, accent_hex=None, error_hex=None):
@@ -81,100 +88,48 @@ def _seamless_floor(floor_hex, z=None):
     fl.is_shadow_catcher = True                          # Cycles: only the soft shadows show, over the seamless backdrop
 
 
-def _directions() -> dict:
-    import json
-    from pathlib import Path
-    d = json.load(open(Path(__file__).resolve().parents[2] / "factory" / "directions.json"))
-    return {k: v for k, v in d.items() if not k.startswith("_")}
-
-
-def apply_direction(stage, m, name: str, args: dict | None = None) -> None:
-    """Identity direction (factory/directions.json): screen-space gradient stage + shadow-catcher floor + plinth + accent/error swap.
-    Same studio lighting as CEL (cheap, tuned); only palette differs, so per-direction cost differences are the palette's own."""
-    d = _directions()[name]
-    nt, cam, env = _world(stage)
+def _lights(stage, studio: bool, p: dict, env):
     key, rim, fill = stage.key, stage.rim, stage.fill
-    glare = next(n for n in stage.scene.compositing_node_group.nodes if n.bl_idname == "CompositorNodeGlare")
-    fz = float(args["floor_z"]) if args and "floor_z" in args else None
-    real_colours(stage, m, d["accent"], d["error"])
-    stage.halo.hide_render = True
-    glare.inputs["Threshold"].default_value = 4.0
-    _gradient_backdrop(nt, cam, d["top"], d["bottom"])
-    _seamless_floor(d["bottom"], fz)
-    m.table = tr.plain("table", d["plinth"], rough=0.55)
-    env.inputs["Strength"].default_value = 0.85
-    key.data.energy, key.data.size = 2600.0, 9.0
-    key.location = Vector((-6.0, -14.0, 22.0))
-    rim.data.energy, rim.data.color = 1000.0, (0.97, 0.98, 1.0)
-    fill.data.energy = 800.0
-    if args:
-        if "thr" in args:
-            stage.scene.cycles.adaptive_threshold = float(args["thr"])
-        if "bounces" in args:
-            stage.scene.cycles.max_bounces = int(args["bounces"])
-
-
-def tuned_profile(stage) -> None:
-    """The tuned Cycles profile of docs/render-bench.md (cyc_B): GPU denoise, looser adaptive threshold, min samples 24, no transmission/volume,
-    bounce limits 3/4/8, persistent data. Samples stay the ceiling given by `samples=`."""
-    cy, sc = stage.scene.cycles, stage.scene
-    cy.use_adaptive_sampling = True
-    cy.adaptive_threshold = 0.04
-    cy.adaptive_min_samples = 24
-    cy.denoising_use_gpu = True
-    cy.transmission_bounces = 0
-    cy.volume_bounces = 0
-    cy.diffuse_bounces, cy.glossy_bounces, cy.max_bounces = 3, 4, 8
-    sc.render.use_persistent_data = True
-
-
-def apply(stage, m, look: str, args: dict | None = None) -> None:
-    out = apply_direction(stage, m, look, args) if look in _directions() else _apply_legacy(stage, m, look, args)
-    if args and args.get("profile") == "tuned":
-        tuned_profile(stage)
-    return out
-
-
-def _apply_legacy(stage, m, look: str, args: dict | None = None) -> None:
-    nt, cam, env = _world(stage)
-    key, rim, fill = stage.key, stage.rim, stage.fill
-    glare = next(n for n in stage.scene.compositing_node_group.nodes if n.bl_idname == "CompositorNodeGlare")
-    halo_emit = next(n for n in stage.halo.data.materials[0].node_tree.nodes if n.bl_idname == "ShaderNodeEmission")
-    fz = float(args["floor_z"]) if args and "floor_z" in args else None   # scenes with objects below the table (1, 2) pass a lower floor
-    light = look in ("CEL", "D0")
-    real_colours(stage, m, EMBER if light else None, ERR_LIGHT if light else None)
-    if look == "A":
-        cam.inputs["Color"].default_value = c.linear("#120F10")
-        env.inputs["Strength"].default_value = 0.55
-        key.data.energy, key.data.size = 11000.0, 7.0
-        rim.data.energy, fill.data.energy = 3200.0, 1800.0
-        m.table = tr.plain("table", "#2B282D", rough=0.5)
-    elif look == "E":
-        cam.inputs["Color"].default_value = c.linear("#0B2A2F")
-        env.inputs["Strength"].default_value = 0.55
-        halo_emit.inputs["Color"].default_value = c.linear("#2A8F96")
-        halo_emit.inputs["Strength"].default_value = 0.55
-        key.data.energy, key.data.size = 11000.0, 7.0
-        rim.data.energy, rim.data.color = 3200.0, c.linear("#CFF3F0")[:3]
-        fill.data.energy = 1800.0
-        m.table = tr.plain("table", "#1E3C42", rough=0.5)
-    else:                                             # CEL / D0: celeste studio, tuned cheap light
-        stage.halo.hide_render = True
-        glare.inputs["Threshold"].default_value = 4.0
-        if look == "CEL":
-            _gradient_backdrop(nt, cam, CEL_TOP, CEL_BOTTOM)
-            _seamless_floor("#62B4DC", fz)
-            m.table = tr.plain("table", "#2B4C70", rough=0.55)          # deep-navy plinth: separates white/silver/yellow bases
-        else:
-            cam.inputs["Color"].default_value = c.linear("#B9DCF0")
-            _seamless_floor("#A9CDE4", fz)
-            m.table = tr.plain("table", "#E6EEF4", rough=0.6)
+    if studio:                                         # cheap bright studio: one big soft key, cool rim, soft fill
         env.inputs["Strength"].default_value = 0.85
         key.data.energy, key.data.size = 2600.0, 9.0
         key.location = Vector((-6.0, -14.0, 22.0))
-        rim.data.energy, rim.data.color = 1000.0, (0.95, 0.98, 1.0)
+        rim.data.energy, rim.data.color = 1000.0, (0.97, 0.98, 1.0)
         fill.data.energy = 800.0
-    if args:
+    else:                                              # dark stage: strong key, rim and halo carry the subject
+        env.inputs["Strength"].default_value = 0.55
+        key.data.energy, key.data.size = 11000.0, 7.0
+        rim.data.energy, fill.data.energy = 3200.0, 1800.0
+        if p.get("rim"):
+            rim.data.color = c.linear(p["rim"])[:3]
+
+
+def apply(stage, m, look: str, args: dict | None = None) -> None:
+    """Apply an identity preset to the stage: gradient backdrop, shadow-catcher floor, plinth, accent/error, lighting rig."""
+    global _ACTIVE
+    d = cfg.data(args)
+    name = d["active"] if look in ("active", "", None) else LEGACY_LOOKS.get(look, look)
+    p = d["presets"][name]
+    _ACTIVE = p
+    nt, cam, env = _world(stage)
+    glare = next(n for n in stage.scene.compositing_node_group.nodes if n.bl_idname == "CompositorNodeGlare")
+    fz = float(args["floor_z"]) if args and "floor_z" in args else None
+    real_colours(stage, m, p["accent"], p["error"])
+    m.table = tr.plain("table", p["plinth"], rough=0.55)
+    m.block = tr.pbr("block", "Plastic010", "Plastic010", p["plinth"], rough_mul=1.0, scale=0.35, normal=0.2, tint_mix=0.4)
+    if p["lighting"] == "studio":
+        stage.halo.hide_render = True
+        glare.inputs["Threshold"].default_value = 4.0
+        _gradient_backdrop(nt, cam, p["top"], p["bottom"])
+        _seamless_floor(p["bottom"], fz)
+    else:
+        cam.inputs["Color"].default_value = c.linear(p["top"])
+        if p.get("halo"):
+            halo_emit = next(n for n in stage.halo.data.materials[0].node_tree.nodes if n.bl_idname == "ShaderNodeEmission")
+            halo_emit.inputs["Color"].default_value = c.linear(p["halo"])
+            halo_emit.inputs["Strength"].default_value = 0.55
+    _lights(stage, p["lighting"] == "studio", p, env)
+    if args:                                           # bench overrides on top of the configured render profile
         if "thr" in args:
             stage.scene.cycles.adaptive_threshold = float(args["thr"])
         if "bounces" in args:

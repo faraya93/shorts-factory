@@ -4,7 +4,18 @@ import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-NAVY, WHITE, EMBER, CELESTE, SKY = (11, 37, 64), (255, 255, 255), (232, 89, 12), (118, 204, 238), (143, 214, 242)
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "factory"))
+import identity  # noqa: E402  (the colours come from channels/umbrella-es.yaml through factory/identity.py)
+
+
+def _rgb(h):
+    return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
+
+
+_P = identity.preset()                                                 # the ACTIVE preset
+NAVY, WHITE, EMBER = _rgb(_P["mark_body"]), _rgb(_P["mark_inner"]), _rgb(_P["mark_accent"])   # historical names; values = mark body / inner / accent
+CELESTE = SKY = _rgb(_P["top"])
 FONT = str(Path(__file__).resolve().parent.parent / "factory" / "assets" / "fonts" / "Montserrat-VF.ttf")
 
 
@@ -54,25 +65,22 @@ def end_card(handle, stage_rgb=SKY, W=1080, H=1920):
     return base
 
 
-def direction_sheet(handle_word="Mecanalia", out=None):
-    """Five identity directions: avatar on each stage colour + wordmark (name is a placeholder), from factory/directions.json."""
-    import json
-    D = json.load(open(Path(__file__).resolve().parent.parent / "factory" / "directions.json"))
-    rgb = lambda h: tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
-    spec = {"esmeralda": ("square", "plinth", "bottom", "accent"), "violeta": ("circle", "plinth", "bottom", "accent"),
-            "mandarina": ("square", "plinth", "top", "accent"), "rosa": ("circle", "plinth", "top", "accent"), "papel": ("square", "plinth", "top", "accent")}
+def direction_sheet(handle_word="Mecanalia", out=None, names=None):
+    """Avatar on each preset's stage colour + wordmark (the name is a placeholder), from the identity presets."""
+    P = identity.presets()
+    names = names or [n for n in P if P[n]["lighting"] == "studio"]
     f = ImageFont.truetype(FONT, 54); f.set_variation_by_name("ExtraBold")
-    W, H = 5 * 360, 520
+    W, H = len(names) * 360, 520
     sheet = Image.new("RGB", (W, H), "white")
-    for i, (k, (shape, b, inn, acc)) in enumerate(spec.items()):
-        d = D[k]
-        tile = Image.new("RGBA", (360, H), rgb(d["top"]) + (255,))
-        m = mark(200, body=rgb(d[b]), inner=rgb(d[inn]) if inn != "bottom" else rgb(d["top"]), accent=rgb(d[acc]), shape=shape)
+    for i, k in enumerate(names):
+        d = P[k]
+        tile = Image.new("RGBA", (360, H), _rgb(d["top"]) + (255,))
+        m = mark(200, body=_rgb(d["mark_body"]), inner=_rgb(d["mark_inner"]), accent=_rgb(d["mark_accent"]))
         tile.alpha_composite(m, (80, 120))
         dr = ImageDraw.Draw(tile)
         tw = dr.textlength(handle_word, font=f)
-        dr.text(((360 - tw) / 2, 370), handle_word, font=f, fill=rgb(d["ink"]) + (255,), stroke_width=2 if d.get("mode") == "white" else 0, stroke_fill=rgb(d["ink_stroke"]) + (255,))
-        dr.text((10, 10), k.upper(), fill=rgb(d["ink"]) + (255,))
+        dr.text(((360 - tw) / 2, 370), handle_word, font=f, fill=_rgb(d["ink"]) + (255,), stroke_width=2 if d["mode"] == "white" else 0, stroke_fill=_rgb(d["ink_stroke"]) + (255,))
+        dr.text((10, 10), k.upper(), fill=_rgb(d["ink"]) + (255,))
         sheet.paste(tile.convert("RGB"), (i * 360, 0))
     if out:
         sheet.save(out)

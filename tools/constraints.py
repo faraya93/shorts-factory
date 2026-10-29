@@ -3,12 +3,14 @@ Thresholds (proposed, stated in docs/hard-constraints.md): C0 owner exclusions; 
 C3 visibility vs white and black UIs; C4 cost under the tuned profile."""
 import csv, json, math, sys
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 2)[0] + "/factory")
+import identity  # presets come from channels/umbrella-es.yaml (run with the project venv)
 from palette_metrics import de2000, wcag, lab, lab2hex
 
 FAM = {
  "objects": ["#F2BD12", "#CC2229", "#F2F1EE", "#151517", "#F28A1E", "#3FA34D", "#2E6FD6", "#E8719A", "#8A8F96", "#C8CBD0", "#7A4FBF", "#7B4A2A"],
  "body": ["#F2C9AE", "#8D5A3B", "#E58A99", "#A63C3C", "#EDE3D0", "#F3D675", "#CBD764", "#4A6FB5"],
- "numbers": ["#161618", "#F2F1EE", "#2F63D6", "#F5C04A", "#CC2229", "#8A8F96", "#3FA34D", "#1D1B2E"],
+ "numbers": ["#161618", "#F2F1EE", "#2F63D6", "#F5C04A", "#CC2229", "#8A8F96", "#3FA34D", "#26242E"],
  "what-if": ["#2E6FD6", "#3FA34D", "#B7B7BA", "#F5A623", "#D63B3B", "#161618", "#F4F4F6", "#2FA8B8"]}
 T = dict(text=4.5, spoken=7.0, accent=3.0, error=3.0, hero_total=4, hero_family=2, ui=25.0, cost=5.0, min_L=30.0, celeste=25.0)
 CELESTE = ["#9CCBEA", "#B9DCF0"]
@@ -50,7 +52,7 @@ def load_cost(path):
 
 
 if __name__ == "__main__":
-    D = json.load(open(__file__.rsplit("/", 2)[0] + "/factory/directions.json"))
+    D = {k: {**v, "top": v["top"], "bottom": v["bottom"]} for k, v in identity.presets().items() if v["lighting"] == "studio"}
     cost = load_cost(sys.argv[1]) if len(sys.argv) > 1 else {}
     names = [k for k in D if not k.startswith("_")]
     print("| direction | C0 exclusions | C1 legibility | C2 hero sep. | C3 UI visibility | C4 cost (tuned) | verdict |\n|---|---|---|---|---|---|---|")

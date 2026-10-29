@@ -268,20 +268,30 @@ class Stage:
             prefs.refresh_devices()
             for d in prefs.devices:
                 d.use = d.type == "METAL"
-            sc.cycles.samples = int(self.args_samples())
-            sc.cycles.use_denoising = True
-            sc.cycles.denoiser = "OPENIMAGEDENOISE"
-            sc.cycles.use_adaptive_sampling = True
-            sc.cycles.adaptive_threshold = 0.02
-            sc.cycles.max_bounces = 6
+            self._apply_render_profile(sc)
             sc.cycles.caustics_reflective = sc.cycles.caustics_refractive = False
             sc.render.use_overwrite = False                         # resumable: existing frames are skipped
             sc.render.use_placeholder = False
         sc.render.film_transparent = False
 
     @staticmethod
-    def args_samples() -> int:
-        return int(c.parse_args().get("samples", 256))
+    def _apply_render_profile(sc) -> None:
+        """Cycles quality from the channel config (render.profiles, per-scene-type override, `profile=`/`samples=` args): see
+        channels/umbrella-es.yaml. Defaults = the tuned stack: GPU denoise, adaptive 0.04, min 24, ceiling 128, persistent data, Fast GI off."""
+        import pipeline_config
+        args = c.parse_args()
+        name, pr = pipeline_config.render_profile(args)
+        cy = sc.cycles
+        cy.samples = int(args.get("samples", pr["samples_ceiling"]))            # the ceiling: adaptive sampling stops earlier where converged
+        cy.use_adaptive_sampling = True
+        cy.adaptive_threshold, cy.adaptive_min_samples = float(pr["adaptive_threshold"]), int(pr["min_samples"])
+        cy.use_denoising, cy.denoiser = True, "OPENIMAGEDENOISE"
+        cy.denoising_use_gpu = bool(pr["denoise_gpu"])
+        cy.transmission_bounces, cy.volume_bounces = int(pr["transmission_bounces"]), int(pr["volume_bounces"])
+        cy.diffuse_bounces, cy.glossy_bounces, cy.max_bounces = int(pr["diffuse_bounces"]), int(pr["glossy_bounces"]), int(pr["max_bounces"])
+        cy.use_fast_gi = bool(pr["fast_gi"])
+        sc.render.use_persistent_data = bool(pr["persistent_data"])
+        print(f"[render profile] {name}: {pr}")
 
     def _halo(self):
         bpy.ops.mesh.primitive_plane_add(size=34.0, location=(7.0, 14.0, 6.0), rotation=(math.radians(90), 0, 0))

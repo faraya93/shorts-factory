@@ -86,6 +86,18 @@ we copy the mechanics, never scripts or footage: all scripts are original.
   scenes_schema.py rejects violations before any spend. The binding
   selection rules are in "Engine selection" below.
 
+## Channel identity (ADOPTED 2026-10-28, owner; provisional): CORAL — parameters, not code
+The channel's colour identity is PARAMETERS in ONE place: `channels/umbrella-es.yaml`, blocks `identity` (active preset + named presets) and
+`render` (profiles). Everything reads it through `factory/identity.py` (the Editor themes, the end-card mark, the code3d stage via an exported JSON
+snapshot, brand tools, new productions). **To switch identity: edit `identity.active` (or one preset's values) and re-render; never edit code.**
+Full spec: `docs/design-system.md`. Active values: stage gradient #FEA181 -> #EC9172, ink plinth #1D1B2E, deep-teal accent #0A5C6B, error #7A0019,
+ink subtitle theme (ink words, white outline, spoken word in an ink box). Coral's production rules: (1) body-family heroes stand in a cream cutaway
+plate (skin/organ colours are close to the stage); (2) the accent is dark, so it reads by hue and shape, never by glow or text colour. Papel and the
+other directions are kept as presets. **Where this section and the "Reference doctrine" palette points below (dark stage, gold accent, teal
+annotation, near-black void, vignette) disagree, THIS section wins**; the doctrine's storytelling rules are unchanged. No CTA phone and no appended
+end card (owner 2026-10-28). Render default: the tuned Cycles profile (`render.profiles.tuned`: GPU denoise, adaptive 0.04, min 24, ceiling 128,
+Persistent Data on, Fast GI off; EEVEE for drafts; the grain pass stays mandatory); per-scene-type exceptions live in `render.scene_type_profiles`.
+
 ## Reference doctrine (binding, owner 2026-10-26)
 Adopted from the reference study of three example channels
 (docs/reference-style-spec.md = the LOOK, docs/reference-format-spec.md =
@@ -418,6 +430,10 @@ engines automatically from these rules; the owner is never asked.
   (standing rule, owner decision 2026-10-25) — chat replies, reports and
   docs. Only the narration, titles and on-screen text of the videos are
   Spanish.
+- **Render launches ALWAYS run under caffeinate (standing rule, owner 2026-10-28).** EVERY render launch (finals, benches, stills, drafts, any
+  Blender or ffmpeg-render invocation, direct or via a script) is prefixed with `caffeinate -dimsu`, held for the render process's whole life, so
+  the Mac cannot idle-sleep mid-render. `factory/code3d_render.py` already wraps its Blender calls; scripts that launch Blender must do the same.
+  If a render is ever launched without it, say so explicitly in the report.
 - Commit and push after each working phase, with a clear message. Never
   commit media files or .env.
 - Music credit: whatever a production stores in audio.music_credit MUST
