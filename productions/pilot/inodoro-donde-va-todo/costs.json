@@ -1,1 +1,94 @@
-{"entries": []}
+{
+  "entries": [
+    {
+      "scene": 1,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 199,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 463.2,
+      "clip": "clips/scene-01.mp4",
+      "timestamp": "2026-10-30T02:26:18+00:00"
+    },
+    {
+      "scene": 2,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 299,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 720.2,
+      "clip": "clips/scene-02.mp4",
+      "timestamp": "2026-10-30T02:38:20+00:00"
+    },
+    {
+      "scene": 3,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 254,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 802.6,
+      "clip": "clips/scene-03.mp4",
+      "timestamp": "2026-10-30T02:51:43+00:00"
+    },
+    {
+      "scene": 4,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 183,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 569.1,
+      "clip": "clips/scene-04.mp4",
+      "timestamp": "2026-10-30T03:01:14+00:00"
+    },
+    {
+      "scene": 5,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 232,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 693.3,
+      "clip": "clips/scene-05.mp4",
+      "timestamp": "2026-10-30T03:12:48+00:00"
+    },
+    {
+      "scene": 6,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 240,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 844.5,
+      "clip": "clips/scene-06.mp4",
+      "timestamp": "2026-10-30T03:26:54+00:00"
+    },
+    {
+      "scene": 7,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 191,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 661.2,
+      "clip": "clips/scene-07.mp4",
+      "timestamp": "2026-10-30T03:37:57+00:00"
+    },
+    {
+      "scene": 8,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 301,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 1035.7,
+      "clip": "clips/scene-08.mp4",
+      "timestamp": "2026-10-30T03:55:14+00:00"
+    },
+    {
+      "scene": 9,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 326,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 735.1,
+      "clip": "clips/scene-09.mp4",
+      "timestamp": "2026-10-30T04:07:31+00:00"
+    }
+  ]
+}
