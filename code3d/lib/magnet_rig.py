@@ -29,7 +29,7 @@ def materials():
             "n": tr.plain("mag_n", N_HEX, rough=0.35, coat=0.2), "s": tr.plain("mag_s", S_HEX, rough=0.35, coat=0.2),
             "steel": tr.plain("blade", STEEL, rough=0.35, metallic=0.25), "alu": tr.plain("alu", ALU, rough=0.3, metallic=0.25),
             "copper": tr.plain("copper", COPPER, rough=0.4, metallic=0.2), "stainless": tr.plain("stainless", STAINLESS, rough=0.3, metallic=0.25),
-            "filings": tr.plain("filings", "#1D1B2E", rough=0.5)}
+            "filings": tr.plain("filings", ((__import__("looks").current() or {}).get("plinth", "#222230")), rough=0.5)}
 
 
 def clip_path(w=0.8, length=2.0, d=0.16):

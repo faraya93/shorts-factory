@@ -36,7 +36,7 @@ def material_set():
     bsdf = nt.nodes["Principled BSDF"]
     bsdf.inputs["Alpha"].default_value = 0.86
     water.surface_render_method = "BLENDED"
-    return {"ink": ink, "porcelain": tr.plain("plate", p["support_plate"] if p else "#FFF3E0", rough=0.25, coat=0.3),
+    return {"ink": ink, "porcelain": tr.plain("plate", p["support_plate"] if p else "#F0E6D2", rough=0.25, coat=0.3),
             "back": tr.plain("g_board", p["support_board"] if p else "#CFC1A6", rough=0.7),
             "water": water, "waste": tr.plain("waste", "#8A3E1C", rough=0.55),
             "steel": tr.plain("blade", "#4E586A", rough=0.35, metallic=0.25), "lever": tr.plain("g_pin", "#4A2BC4", rough=0.4, coat=0.2)}
