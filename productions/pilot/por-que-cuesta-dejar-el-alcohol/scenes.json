@@ -1,0 +1,486 @@
+{
+  "channel": "pilot",
+  "video": "por-que-cuesta-dejar-el-alcohol",
+  "title": "¿Por qué a algunas personas les cuesta tanto dejar el alcohol? 🧠",
+  "topic_family": "body",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: an abstract reward-loop machine (bottle, tracks, tokens, sliders, lamps) is rigid hard-surface geometry on the Coral look; no person, brain or drinking scene is drawn.",
+  "hook_question": "¿Por qué una persona puede tomarse una copa y parar, mientras otra, con esa misma copa, ya está pensando en la siguiente?",
+  "false_belief": "Quien no puede parar es porque le falta voluntad.",
+  "closing_reframe": "No es que una persona tenga voluntad y la otra no: pelean con cerebros e historias distintos y un circuito que ya funciona en automático.",
+  "share_archetype": "quien cree que es cuestión de voluntad",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (dark stage, exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "loop-rig",
+  "scene_script_prefix": "loop",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "La misma copa, dos máquinas distintas. 🧠 La adicción al alcohol no es falta de voluntad: es biología, historia y un circuito que aprende. Envíaselo a quien cree que es cuestión de voluntad.",
+  "gate_stills": {
+    "1": [
+      190
+    ],
+    "2": [
+      250
+    ],
+    "3": [
+      250
+    ],
+    "4": [
+      300
+    ],
+    "5": [
+      230
+    ],
+    "6": [
+      280
+    ],
+    "7": [
+      300
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "machine_kit",
+    "loop_rig"
+  ],
+  "support_colours": {
+    "board": "#D2EAE6",
+    "reason": "Design lens: pale teal board derived from the accent system (deep teal lightened), gate-verified in earlier productions at 31.5-32.3 dE from the stage; cream nodes, cobalt frosted bottles and the indigo/butter/violet sliders read on it; ink tracks and plinth = Coral ink."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook-dos-maquinas",
+      "prompt": "Escena dibujada con código (estética Coral): hook-dos-maquinas.",
+      "narration": "¿Por qué una persona puede tomarse una copa y parar, mientras otra, con esa misma copa, ya está pensando en la siguiente?",
+      "target_duration_s": 8,
+      "transformation": "dos máquinas idénticas reciben la misma botella: una completa una vuelta y se detiene, la otra sigue girando",
+      "camera": "órbita lenta",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "copa",
+        "siguiente"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.515,
+          "visible_s": 1.6,
+          "at_word": "parar,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SE DETIENE"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.515,
+          "visible_s": 1.3,
+          "at_word": "siguiente?",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SIGUE"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "ajustes-de-fabrica",
+      "prompt": "Escena dibujada con código (estética Coral): ajustes-de-fabrica.",
+      "narration": "Son dos máquinas distintas. Primero, nadie parte igual: cambian la recompensa, el freno de los impulsos y la respuesta al estrés.",
+      "target_duration_s": 8,
+      "transformation": "los tres controles de cada máquina se mueven a posiciones distintas",
+      "camera": "empuje hacia los controles",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "recompensa",
+        "freno",
+        "estrés"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.6,
+          "y": 0.28,
+          "visible_s": 1.1,
+          "at_word": "recompensa,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "RECOMPENSA"
+        },
+        {
+          "type": "label",
+          "x": 0.76,
+          "y": 0.31,
+          "visible_s": 1.0,
+          "at_word": "freno",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "FRENO"
+        },
+        {
+          "type": "label",
+          "x": 0.88,
+          "y": 0.28,
+          "visible_s": 1.3,
+          "at_word": "estrés.",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "ESTRÉS"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "herencia-y-riesgo",
+      "prompt": "Escena dibujada con código (estética Coral): herencia-y-riesgo.",
+      "narration": "La herencia pesa, pero no hay un gen del alcoholismo y los genes no son destino. Ansiedad, trauma y empezar muy joven también suben el riesgo.",
+      "target_duration_s": 8,
+      "transformation": "muchos ajustes pequeños mueven los controles; pesos de riesgo se apilan sobre el estrés",
+      "camera": "plano abierto con ligera órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "gen",
+        "destino",
+        "riesgo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.3,
+          "visible_s": 1.6,
+          "at_word": "gen",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "VARIOS GENES"
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.5,
+          "y": 0.515,
+          "at_word": "destino.",
+          "offset_s": 0.0
+        },
+        {
+          "type": "label",
+          "x": 0.7,
+          "y": 0.515,
+          "visible_s": 0.8,
+          "at_word": "Ansiedad,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "ANSIEDAD"
+        },
+        {
+          "type": "label",
+          "x": 0.7,
+          "y": 0.515,
+          "visible_s": 0.9,
+          "at_word": "trauma",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "TRAUMA"
+        },
+        {
+          "type": "label",
+          "x": 0.7,
+          "y": 0.515,
+          "visible_s": 1.3,
+          "at_word": "joven",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MUY JOVEN"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "el-circuito-aprende",
+      "prompt": "Escena dibujada con código (estética Coral): el-circuito-aprende.",
+      "narration": "Segundo, el cerebro aprende el circuito: une el alcohol con una botella, un lugar o la tristeza. Cada repetición lo acorta, lo acelera y lo vuelve más difícil de interrumpir.",
+      "target_duration_s": 8,
+      "transformation": "luces de señal se conectan al circuito; con las vueltas aparece un atajo y las fichas giran más rápido",
+      "camera": "acercamiento al circuito",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "circuito",
+        "repetición"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.35,
+          "visible_s": 0.7,
+          "at_word": "botella,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "BOTELLA"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.35,
+          "visible_s": 0.6,
+          "at_word": "lugar",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "LUGAR"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.35,
+          "visible_s": 1.0,
+          "at_word": "tristeza.",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "TRISTEZA"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.64,
+          "visible_s": 0.8,
+          "at_word": "acorta,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "ATAJO"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.64,
+          "visible_s": 1.4,
+          "at_word": "acelera",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MÁS RÁPIDO"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "adaptacion",
+      "prompt": "Escena dibujada con código (estética Coral): adaptacion.",
+      "narration": "Tercero, la adaptación: con tolerancia, la misma cantidad hace menos efecto y hace falta más; y beber pasa de buscar placer a evitar el malestar.",
+      "target_duration_s": 8,
+      "transformation": "hacen falta más fichas para llegar a la misma marca; el motivo cambia de placer a evitar malestar",
+      "camera": "plano fijo con ligera órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tolerancia",
+        "malestar"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.38,
+          "y": 0.34,
+          "visible_s": 1.6,
+          "at_word": "tolerancia,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MISMA MARCA"
+        },
+        {
+          "type": "label",
+          "x": 0.38,
+          "y": 0.34,
+          "visible_s": 1.4,
+          "at_word": "falta",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MÁS FICHAS"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.34,
+          "visible_s": 0.9,
+          "at_word": "placer",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "PLACER"
+        },
+        {
+          "type": "label",
+          "x": 0.38,
+          "y": 0.34,
+          "visible_s": 1.3,
+          "at_word": "malestar.",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MALESTAR"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "deseo-sin-botella",
+      "prompt": "Escena dibujada con código (estética Coral): deseo-sin-botella.",
+      "narration": "Las señales disparan el deseo aunque la persona quiera parar: las luces se encienden antes de que la botella toque la máquina. Precio y disponibilidad también lo alimentan.",
+      "target_duration_s": 8,
+      "transformation": "las luces de señal encienden el circuito con la botella lejos; fichas de entorno alimentan la bandeja",
+      "camera": "retroceso suave",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "señales",
+        "luces"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.3,
+          "visible_s": 1.6,
+          "at_word": "señales",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SEÑALES"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.3,
+          "visible_s": 1.6,
+          "at_word": "antes",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SIN BOTELLA"
+        },
+        {
+          "type": "label",
+          "x": 0.25,
+          "y": 0.62,
+          "visible_s": 1.0,
+          "at_word": "Precio",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "PRECIO"
+        },
+        {
+          "type": "label",
+          "x": 0.25,
+          "y": 0.62,
+          "visible_s": 1.2,
+          "at_word": "disponibilidad",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "DISPONIBLE"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cta",
+      "prompt": "Escena dibujada con código (estética Coral): cta.",
+      "narration": "No es que una persona tenga voluntad y la otra no: pelean con cerebros e historias distintos. La adicción es un espectro, y la recuperación es posible con apoyo y tratamiento. Sígueme, y envíaselo a quien cree que es cuestión de voluntad.",
+      "target_duration_s": 8,
+      "transformation": "las dos máquinas, cada una con su ajuste, y una puerta de ayuda abierta",
+      "camera": "cierre lento",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.8,
+          "y": 0.74,
+          "visible_s": 1.5,
+          "at_word": "apoyo",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "APOYO"
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

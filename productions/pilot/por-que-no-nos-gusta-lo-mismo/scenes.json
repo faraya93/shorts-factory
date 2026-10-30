@@ -1,0 +1,378 @@
+{
+  "channel": "pilot",
+  "video": "por-que-no-nos-gusta-lo-mismo",
+  "title": "¿Por qué no todos sentimos igual el sabor de la palta? 🥑",
+  "topic_family": "body",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: one stylised avocado, sensor towers, tokens and gauges are rigid hard-surface objects on the Coral look; labels are Editor overlays.",
+  "hook_question": "¿Cómo puede la misma palta ser cremosa para una persona y casi incomible para otra?",
+  "false_belief": "El sabor depende solo de la comida, igual para todos.",
+  "closing_reframe": "Un gusto es biología más aprendizaje, no prueba de que el otro se equivoque.",
+  "share_archetype": "el amigo que odia la palta",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (dark stage, exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "flavour-rig",
+  "scene_script_prefix": "flavour",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "La misma palta, tres señales distintas. 🥑 Tus sensores y tu historia deciden si te parece cremosa o incomible. Envíaselo a ese amigo que odia la palta.",
+  "gate_stills": {
+    "1": [
+      200
+    ],
+    "2": [
+      300
+    ],
+    "3": [
+      330
+    ],
+    "4": [
+      230
+    ],
+    "5": [
+      260
+    ],
+    "6": [
+      350
+    ],
+    "7": [
+      300
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "machine_kit",
+    "flavour_rig"
+  ],
+  "support_colours": {
+    "board": "#D2EAE6",
+    "reason": "Design lens: pale teal board derived from the accent system (deep teal #0A5C6B lightened), inherited from engranajes/reloj/imanes where it measured 31.5-32.3 dE from the stage; it separates the avocado greens, the indigo/lime/butter signal colours and the ink slots; plinth and slots = Coral ink."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook-misma-palta",
+      "prompt": "Escena dibujada con código (estética Coral): hook-misma-palta.",
+      "narration": "¿Cómo puede la misma palta ser cremosa para una persona y casi incomible para otra? Cambia la señal que recibe cada cerebro.",
+      "target_duration_s": 8,
+      "transformation": "una mitad de palta alimenta tres columnas; cada columna muestra una señal distinta",
+      "camera": "órbita lenta",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "palta",
+        "señal"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.53,
+          "visible_s": 1.6,
+          "at_word": "cremosa",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "CREMOSA"
+        },
+        {
+          "type": "label",
+          "x": 0.25,
+          "y": 0.53,
+          "visible_s": 1.6,
+          "at_word": "incomible",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "INCOMIBLE"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "sabor-mezcla",
+      "prompt": "Escena dibujada con código (estética Coral): sabor-mezcla.",
+      "narration": "Primero, el sabor no es solo la lengua: ella detecta dulce, salado, ácido, amargo y umami, pero gran parte viene del olfato. La textura y la grasa también cuentan.",
+      "target_duration_s": 8,
+      "transformation": "tres canales (sabor, olor, textura) llenan una columna",
+      "camera": "empuje hacia la columna central",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "lengua",
+        "olfato",
+        "textura"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.375,
+          "y": 0.74,
+          "visible_s": 2.5,
+          "at_word": "lengua:",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SABOR"
+        },
+        {
+          "type": "label",
+          "x": 0.375,
+          "y": 0.68,
+          "visible_s": 2.0,
+          "at_word": "olfato.",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "OLOR"
+        },
+        {
+          "type": "label",
+          "x": 0.375,
+          "y": 0.62,
+          "visible_s": 2.0,
+          "at_word": "textura",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "TEXTURA"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "sensores-distintos",
+      "prompt": "Escena dibujada con código (estética Coral): sensores-distintos.",
+      "narration": "Segundo, los sensores cambian. Variantes del gen TAS2R38 hacen que ciertos amargos sean intensísimos para unos y casi invisibles para otros. Los supercatadores sienten más, no mejor.",
+      "target_duration_s": 8,
+      "transformation": "las torres de sabor de cada persona crecen o se achican; el amargo cambia",
+      "camera": "plano abierto con ligera órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "TAS2R38",
+        "supercatadores"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.2,
+          "y": 0.42,
+          "visible_s": 2.4,
+          "at_word": "TAS2R38",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "TAS2R38"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "olfato-cilantro",
+      "prompt": "Escena dibujada con código (estética Coral): olfato-cilantro.",
+      "narration": "Con el olfato pasa igual: por variantes del receptor OR6A2, el cilantro huele a jabón para algunas personas, y fresco para otras.",
+      "target_duration_s": 8,
+      "transformation": "una ramita de cilantro entra en dos torres de olor: sale fresco o jabón",
+      "camera": "acercamiento a las torres de olor",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cilantro",
+        "jabón",
+        "fresco"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.22,
+          "y": 0.6,
+          "visible_s": 1.6,
+          "at_word": "jabón",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "JABÓN"
+        },
+        {
+          "type": "label",
+          "x": 0.78,
+          "y": 0.6,
+          "visible_s": 1.6,
+          "at_word": "fresco",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "FRESCO"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "por-que-palta",
+      "prompt": "Escena dibujada con código (estética Coral): por-que-palta.",
+      "narration": "¿Y la palta? Casi no tiene azúcar ni sal, pero sí mucha grasa: es sobre todo textura. Para uno es mantecosa, para otro pastosa, y según su madurez es casi otra comida.",
+      "target_duration_s": 8,
+      "transformation": "la palta alimenta casi solo el canal de textura; la madurez cambia su color y señal",
+      "camera": "órbita suave",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "textura",
+        "madurez"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.53,
+          "visible_s": 1.6,
+          "at_word": "mantecosa,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MANTECOSA"
+        },
+        {
+          "type": "label",
+          "x": 0.25,
+          "y": 0.53,
+          "visible_s": 1.4,
+          "at_word": "pastosa,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "PASTOSA"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "cerebro-aprende",
+      "prompt": "Escena dibujada con código (estética Coral): cerebro-aprende.",
+      "narration": "Tercero, el cerebro aprende. La infancia, la familia y probar muchas veces moldean el gusto, y una mala experiencia deja huella. La evolución suma: lo graso suena a energía; lo muy amargo, a peligro.",
+      "target_duration_s": 8,
+      "transformation": "la ganancia de la torre baja con la práctica; una mala experiencia la marca; energía vs peligro",
+      "camera": "retroceso suave",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "aprende",
+        "evolución"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.25,
+          "y": 0.53,
+          "visible_s": 1.6,
+          "at_word": "veces",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "PRÁCTICA"
+        },
+        {
+          "type": "label",
+          "x": 0.2,
+          "y": 0.34,
+          "visible_s": 1.6,
+          "at_word": "energía;",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "ENERGÍA"
+        },
+        {
+          "type": "label",
+          "x": 0.8,
+          "y": 0.34,
+          "visible_s": 1.6,
+          "at_word": "peligro.",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "PELIGRO"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cta",
+      "prompt": "Escena dibujada con código (estética Coral): cta.",
+      "narration": "Cada cerebro recibe otra señal del mismo bocado, y la interpreta con su historia. Un gusto es biología más aprendizaje, no un error del otro. Sígueme, y envíaselo a ese amigo que odia la palta.",
+      "target_duration_s": 8,
+      "transformation": "las tres columnas con la misma palta, cada una con su señal",
+      "camera": "cierre lento",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}
