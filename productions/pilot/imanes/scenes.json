@@ -1,0 +1,468 @@
+{
+  "channel": "pilot",
+  "video": "imanes",
+  "title": "¿Por qué un imán no atrae todos los metales? 🧲",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: a magnet, clips, a can and iron filings are rigid hard-surface objects (new magnet_rig on the Coral look); numbers and labels are Editor overlays.",
+  "hook_question": "¿Por qué un imán levanta un clip, pero ignora una lata de aluminio, si las dos son de metal?",
+  "false_belief": "Los imanes pegan a todos los metales.",
+  "closing_reframe": "Un imán no es un pegamento mágico: es un campo invisible que atrae, rechaza y ordena ciertos materiales.",
+  "share_archetype": "el amigo que cree que los imanes pegan a todo",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (dark stage, exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "magnet-rig",
+  "scene_script_prefix": "magnet",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "Un imán levanta un clip pero ignora una lata de aluminio… y las dos son de metal. 🧲 El secreto es un campo invisible que solo organiza ciertos materiales. Envíaselo a ese amigo que cree que los imanes pegan a todo.",
+  "gate_stills": {
+    "1": [
+      230
+    ],
+    "2": [
+      200
+    ],
+    "3": [
+      260
+    ],
+    "4": [
+      150
+    ],
+    "5": [
+      120
+    ],
+    "6": [
+      200
+    ],
+    "7": [
+      330
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "magnet_rig"
+  ],
+  "support_colours": {
+    "board": "#D2EAE6",
+    "reason": "Backing board for the filings plate: pale teal derived from the accent system (inherited from engranajes/reloj, gate-verified at 31.5-32.3 dE from the stage); ink filings and the cobalt/cream magnet read on it; plinth = Coral ink."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook-contraste",
+      "prompt": "Escena dibujada con código (estética Coral): hook-contraste.",
+      "narration": "¿Por qué un imán levanta un clip, pero ignora una lata de aluminio, si las dos son de metal? Mira: el clip salta hacia el imán, y la lata ni se inmuta.",
+      "target_duration_s": 8,
+      "transformation": "un imán sobre la mesa: el clip salta hacia él, la lata no se mueve",
+      "camera": "órbita lenta alrededor del imán",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "clip",
+        "lata"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.62,
+          "y": 0.44,
+          "visible_s": 1.0,
+          "at_word": "clip",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "ACERO",
+          "leader_to": [
+            0.64,
+            0.53
+          ]
+        },
+        {
+          "type": "label",
+          "x": 0.76,
+          "y": 0.44,
+          "visible_s": 2.4,
+          "at_word": "lata",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "ALUMINIO",
+          "leader_to": [
+            0.86,
+            0.53
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "no-todos-los-metales",
+      "prompt": "Escena dibujada con código (estética Coral): no-todos-los-metales.",
+      "narration": "Los imanes no atraen todos los metales: solo el hierro, el níquel, el cobalto y los aceros que los contienen. El aluminio y el cobre no se mueven, y algunos aceros inoxidables casi tampoco.",
+      "target_duration_s": 8,
+      "transformation": "una fila de objetos de metal: solo los de acero saltan al imán que pasa",
+      "camera": "travelling lateral siguiendo al imán",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "hierro",
+        "aluminio",
+        "cobre"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.3,
+          "y": 0.47,
+          "visible_s": 1.3,
+          "at_word": "hierro",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "FE"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.47,
+          "visible_s": 1.3,
+          "at_word": "níquel",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "NI"
+        },
+        {
+          "type": "label",
+          "x": 0.7,
+          "y": 0.47,
+          "visible_s": 1.3,
+          "at_word": "cobalto",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "CO"
+        },
+        {
+          "type": "label",
+          "x": 0.37,
+          "y": 0.46,
+          "visible_s": 1.5,
+          "at_word": "aluminio",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "ALUMINIO"
+        },
+        {
+          "type": "label",
+          "x": 0.6,
+          "y": 0.52,
+          "visible_s": 1.5,
+          "at_word": "cobre",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "COBRE"
+        },
+        {
+          "type": "label",
+          "x": 0.74,
+          "y": 0.46,
+          "visible_s": 1.8,
+          "at_word": "inoxidables",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "INOXIDABLE"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "campo-invisible",
+      "prompt": "Escena dibujada con código (estética Coral): campo-invisible.",
+      "narration": "Lo que atrae no es el imán, sino un campo invisible a su alrededor. Si esparces limaduras de hierro, se ordenan en líneas que salen de un polo y llegan al otro.",
+      "target_duration_s": 8,
+      "transformation": "limaduras al azar → líneas de campo entre los dos polos",
+      "camera": "empuje lento hacia el imán con ligera órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "campo",
+        "limaduras",
+        "polo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.4,
+          "visible_s": 2.0,
+          "at_word": "campo",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "CAMPO INVISIBLE"
+        },
+        {
+          "type": "label",
+          "x": 0.27,
+          "y": 0.67,
+          "visible_s": 1.8,
+          "at_word": "polo",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "N"
+        },
+        {
+          "type": "label",
+          "x": 0.73,
+          "y": 0.67,
+          "visible_s": 1.8,
+          "at_word": "otro",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "S"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "cadena-de-clips",
+      "prompt": "Escena dibujada con código (estética Coral): cadena-de-clips.",
+      "narration": "En ese campo, cada clip se vuelve un imán temporal: por eso un clip sostiene a otro, y ese a otro más. Si apartas el imán, casi toda la cadena se suelta.",
+      "target_duration_s": 8,
+      "transformation": "un clip cuelga del imán, luego una cadena de cuatro, y al apartar el imán cae",
+      "camera": "retroceso suave con la cadena creciendo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "imán",
+        "temporal",
+        "cadena"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.74,
+          "y": 0.4,
+          "visible_s": 2.2,
+          "at_word": "temporal",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "IMÁN TEMPORAL",
+          "leader_to": [
+            0.58,
+            0.42
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "polos",
+      "prompt": "Escena dibujada con código (estética Coral): polos.",
+      "narration": "Los polos también tienen reglas: los opuestos se atraen, y los iguales se empujan. Acerca dos imanes por el mismo polo, y se rechazan solos.",
+      "target_duration_s": 8,
+      "transformation": "dos imanes: polos opuestos se pegan; polos iguales se alejan",
+      "camera": "plano lateral con ligera órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "opuestos",
+        "iguales"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.66,
+          "visible_s": 1.6,
+          "at_word": "atraen,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SE ATRAEN"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.66,
+          "visible_s": 1.4,
+          "at_word": "empujan.",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SE REPELEN"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.6,
+          "visible_s": 1.6,
+          "at_word": "mismo",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MISMO POLO"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.66,
+          "visible_s": 1.5,
+          "at_word": "rechazan",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SE REPELEN"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "cortar-un-iman",
+      "prompt": "Escena dibujada con código (estética Coral): cortar-un-iman.",
+      "narration": "Y si cortas un imán por la mitad, no separas sus polos. Obtienes dos imanes completos, cada uno con su propio norte y su propio sur.",
+      "target_duration_s": 8,
+      "transformation": "un imán se corta por la mitad → dos imanes completos",
+      "camera": "acercamiento al corte y retroceso",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "mitad",
+        "completos"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.2,
+          "y": 0.68,
+          "visible_s": 1.2,
+          "at_word": "norte",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "N"
+        },
+        {
+          "type": "label",
+          "x": 0.64,
+          "y": 0.68,
+          "visible_s": 1.2,
+          "at_word": "norte",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "N"
+        },
+        {
+          "type": "label",
+          "x": 0.46,
+          "y": 0.68,
+          "visible_s": 1.2,
+          "at_word": "sur",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "S"
+        },
+        {
+          "type": "label",
+          "x": 0.92,
+          "y": 0.68,
+          "visible_s": 1.2,
+          "at_word": "sur",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "S"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cta",
+      "prompt": "Escena dibujada con código (estética Coral): cta.",
+      "narration": "Un imán no es un pegamento mágico. Es un campo invisible que atrae, rechaza y ordena ciertos materiales. Sígueme, y envíaselo a ese amigo que cree que los imanes pegan a todo.",
+      "target_duration_s": 8,
+      "transformation": "el imán con su campo, el clip pegado y la lata quieta",
+      "camera": "cierre lento",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.16,
+          "y": 0.58,
+          "at_word": "mágico",
+          "offset_s": 0.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

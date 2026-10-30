@@ -1,0 +1,507 @@
+{
+  "channel": "pilot",
+  "video": "inodoro-donde-va-todo",
+  "title": "¿Adónde va todo cuando accionas el inodoro? 🚽",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: a cutaway toilet (hard-surface porcelain + translucent water volumes) and a simplified route diorama share one model language; no fluid simulation, numbers/labels are Editor overlays.",
+  "hook_question": "¿Adónde va la caca cuando accionas el inodoro?",
+  "false_belief": "El agua simplemente empuja los desechos y desaparecen.",
+  "closing_reframe": "El inodoro no es un hueco que hace desaparecer cosas: es un sifón conectado a todo un sistema de limpieza subterráneo.",
+  "share_archetype": "el amigo que cree que todo desaparece",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (dark stage, exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "toilet-rig",
+  "scene_script_prefix": "toilet",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": "music-placeholder.mp3",
+    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "Cuando accionas el inodoro, el agua no empuja: un sifón escondido jala todo, y después empieza un viaje subterráneo hasta una planta de tratamiento. 🚽 Envíaselo a ese amigo que cree que todo simplemente desaparece.",
+  "gate_stills": {
+    "1": [
+      60
+    ],
+    "2": [
+      90
+    ],
+    "3": [
+      120
+    ],
+    "4": [
+      150
+    ],
+    "5": [
+      100
+    ],
+    "6": [
+      120
+    ],
+    "7": [
+      120
+    ],
+    "8": [
+      120
+    ],
+    "9": [
+      200
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "toilet_rig",
+    "sewer_rig"
+  ],
+  "support_colours": {
+    "board": "#93CBC6",
+    "plate": "#FFF3E0",
+    "reason": "Pocket back of the cutaway (the interior wall the water sits on): a deeper accent-derived teal so the cream porcelain cut face separates from it and the blue water reads on it; plate cream = the porcelain/station walls; plinth/soil = Coral ink."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (estética Coral): hook.",
+      "narration": "¿Adónde va la caca cuando accionas el inodoro? No la empuja el agua: la jala un sifón escondido.",
+      "target_duration_s": 8,
+      "transformation": "un inodoro en corte con un desecho flotando en la taza",
+      "camera": "órbita lenta alrededor del corte",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "sifón"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.4,
+          "y": 0.58,
+          "visible_s": 1.6,
+          "at_word": "sifón",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SIFÓN"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "tanque",
+      "prompt": "Escena dibujada con código (estética Coral): tanque.",
+      "narration": "Primero, el tanque: guarda agua limpia, lista para la siguiente vez. Al accionarlo, una válvula se levanta y el agua se lanza por el borde de la taza.",
+      "target_duration_s": 8,
+      "transformation": "el tanque lleno → la válvula se levanta y el agua baja hacia la taza",
+      "camera": "descenso suave del tanque a la taza",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tanque",
+        "limpia",
+        "válvula"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.5,
+          "visible_s": 1.8,
+          "at_word": "limpia,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "AGUA LIMPIA"
+        },
+        {
+          "type": "label",
+          "x": 0.32,
+          "y": 0.6,
+          "visible_s": 1.6,
+          "at_word": "válvula",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "VÁLVULA"
+        },
+        {
+          "type": "label",
+          "x": 0.78,
+          "y": 0.45,
+          "visible_s": 1.4,
+          "at_word": "borde",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "BORDE"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "sifon",
+      "prompt": "Escena dibujada con código (estética Coral): sifon.",
+      "narration": "El agua sube y llena de golpe un tubo curvo escondido. Entonces el sifón jala todo lo demás, y la taza se vacía con un gorgoteo.",
+      "target_duration_s": 8,
+      "transformation": "la taza sube → el tubo curvo se llena → el sifón vacía la taza y el desecho viaja por el tubo",
+      "camera": "acercamiento al tubo curvo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tubo",
+        "sifón",
+        "gorgoteo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.45,
+          "y": 0.55,
+          "visible_s": 1.6,
+          "at_word": "curvo",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "TUBO CURVO"
+        },
+        {
+          "type": "label",
+          "x": 0.45,
+          "y": 0.55,
+          "visible_s": 1.6,
+          "at_word": "sifón",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SIFÓN"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "sello",
+      "prompt": "Escena dibujada con código (estética Coral): sello.",
+      "narration": "Luego la taza se rellena, y esa agua que queda no sobra: es un sello que bloquea los malos olores.",
+      "target_duration_s": 8,
+      "transformation": "la taza se rellena → el sello de agua frena el aire que sube del drenaje",
+      "camera": "plano medio con leve órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "sello",
+        "olores"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.52,
+          "visible_s": 1.8,
+          "at_word": "sello",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SELLO DE AGUA"
+        },
+        {
+          "type": "label",
+          "x": 0.3,
+          "y": 0.5,
+          "visible_s": 1.3,
+          "at_word": "olores.",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "OLORES"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "ruta",
+      "prompt": "Escena dibujada con código (estética Coral): ruta.",
+      "narration": "Los desechos bajan por la tubería, llegan al alcantarillado y siguen, casi siempre por gravedad, hasta una planta de tratamiento.",
+      "target_duration_s": 8,
+      "transformation": "el desecho sale de la casa por la tubería → la alcantarilla de la calle → la planta",
+      "camera": "descenso siguiendo al desecho",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tubería",
+        "alcantarillado",
+        "gravedad"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.3,
+          "y": 0.55,
+          "visible_s": 1.4,
+          "at_word": "tubería,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "TUBERÍA"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.45,
+          "visible_s": 1.5,
+          "at_word": "alcantarillado",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "ALCANTARILLADO"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.52,
+          "visible_s": 1.4,
+          "at_word": "gravedad,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "GRAVEDAD"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.42,
+          "visible_s": 1.8,
+          "at_word": "planta",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "PLANTA DE TRATAMIENTO"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "rejas",
+      "prompt": "Escena dibujada con código (estética Coral): rejas.",
+      "narration": "Unas rejas atrapan lo que no debería estar ahí: el papel higiénico se deshace en el agua, pero muchas toallitas no, y tapan tuberías.",
+      "target_duration_s": 8,
+      "transformation": "las rejas atrapan toallitas; el papel se deshace",
+      "camera": "plano fijo de la estación con ligera órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "rejas",
+        "toallitas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.55,
+          "visible_s": 1.6,
+          "at_word": "rejas",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "REJAS"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.48,
+          "visible_s": 1.5,
+          "at_word": "papel",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "PAPEL"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.45,
+          "visible_s": 1.5,
+          "at_word": "toallitas",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "TOALLITAS"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "decantacion",
+      "prompt": "Escena dibujada con código (estética Coral): decantacion.",
+      "narration": "Después, lo pesado se hunde y forma lodo, y los microbios se comen gran parte de la materia orgánica.",
+      "target_duration_s": 8,
+      "transformation": "el lodo se hunde en el tanque → los microbios achican la materia",
+      "camera": "descenso a las dos estaciones",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "lodo",
+        "microbios"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.45,
+          "visible_s": 1.4,
+          "at_word": "lodo,",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "LODO"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.45,
+          "visible_s": 1.8,
+          "at_word": "microbios",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "MICROBIOS"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "final",
+      "prompt": "Escena dibujada con código (estética Coral): final.",
+      "narration": "Al final, el agua se desinfecta y vuelve al ambiente, y el lodo se trata aparte. Sin alcantarillado, un tanque séptico asienta los sólidos y filtra el líquido.",
+      "target_duration_s": 8,
+      "transformation": "agua desinfectada sale al ambiente; el lodo va aparte; un tanque séptico hace algo parecido",
+      "camera": "descenso y panorámica lateral al séptico",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "desinfecta",
+        "séptico"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.4,
+          "visible_s": 1.4,
+          "at_word": "desinfecta",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "DESINFECCIÓN"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.45,
+          "visible_s": 1.4,
+          "at_word": "lodo",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "LODO"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.42,
+          "visible_s": 1.6,
+          "at_word": "séptico",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "TANQUE SÉPTICO"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.62,
+          "visible_s": 1.0,
+          "at_word": "sólidos",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "SÓLIDOS"
+        },
+        {
+          "type": "label",
+          "x": 0.5,
+          "y": 0.5,
+          "visible_s": 1.0,
+          "at_word": "líquido.",
+          "offset_s": 0.0,
+          "style": "tag",
+          "text_or_value": "LÍQUIDO"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "cta",
+      "prompt": "Escena dibujada con código (estética Coral): cta.",
+      "narration": "Así que el inodoro no hace desaparecer nada: es un sifón conectado a todo un sistema de limpieza subterráneo. Sígueme, y envíaselo a ese amigo que cree que todo desaparece.",
+      "target_duration_s": 8,
+      "transformation": "el inodoro conectado al sistema subterráneo completo",
+      "camera": "retroceso amplio",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

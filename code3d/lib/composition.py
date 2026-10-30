@@ -13,7 +13,7 @@ BY_MATERIAL = {   # base material name (suffix .001 stripped) -> class
     "g_board": "support_board", "table": "support_plinth", "ink": "support_plinth", "blockm": "support_panel", "block": "support_panel", "plate": "support_plate",
     "g_big": "hero_big", "g_pin": "hero_small", "g_mark": "hero_marker", "shell_y": "hero_housing", "rubber_k": "hero_rubber", "blade": "hero_blade",
     "dark_metal2": "hero_other", "coil": "hero_other", "metal": "hero_other", "slot": "hero_other",
-    "gold": "accent", "gold_dim": "accent", "spring": "accent", "red": "error"}
+    "mag_n": "hero_big", "mag_s": "hero_housing", "alu": "hero_small", "copper": "hero_rubber", "stainless": "hero_other", "filings": "other", "water": "hero_big", "waste": "hero_rubber", "sewage": "hero_housing", "microbe": "hero_small", "wipe": "hero_blade", "paper": "other", "foam": "other", "gas": "other", "gold": "accent", "gold_dim": "accent", "spring": "accent", "red": "error"}
 
 
 def _base(name: str) -> str:
