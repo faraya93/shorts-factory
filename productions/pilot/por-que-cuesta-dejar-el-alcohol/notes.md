@@ -44,7 +44,10 @@ Hero rig: a reward-loop machine drawn twice (A top, B bottom). Each: a frosted c
 - Marketing/scriptwriter lenses: a calm, neutral palette (no alarm red, no liquid, no gore) keeps the video monetisation-safe and non-stigmatising.
 
 ## Composition gate
-(see the final section appended after the render)
+Result: PASS (7 stills, 0 blocks) after one fix. First run BLOCKED scene 6: support_board vs hero_small 17.9. Cause: the lime tokens (material `microbe`) share the hero_small class with the indigo REWARD knob, so the class mean went grey. Fix: tokens moved to material `waste` (class not gated); re-run gave 42-43 for that pair. Tables in `build/gate/gate.md`. Accent vs stage 3.49-3.60:1; rendered error #650013 vs swatch dE 4.1.
 
 ## Render and QA
-(see the final section appended after the render)
+- Rendered through the driver (caffeinate-wrapped) via `tools/chain_render.sh`, gate fresh before every scene. 2,088 frames in 80.1 min = **2.30 s/frame**; final.mp4 **69.60 s**, 1080x1920, 30 fps, 21.9 MB. fal spend US$0.
+- `glitch_scan.py 0.8`: no suspect frames in any of the 7 clips.
+- Frames inspected at 10, 20, 31, 42, 52, 60, 66, 68.5 s: both machines, sliders, shortcut track, tolerance gauge, wine X, closing accent ring and the ENVÍASELO tag are present. Tag positions were estimated from stills; the small tags (MÁS FICHAS, PRECIO) and ENVÍASELO (y 0.84, on the Coral background under the plinth) are tiny at phone size. The abstract machine is dense at small size. I did not watch the video or hear the audio.
+- Deviations: ALDH2/metabolism beat cut for length; gate fix described above.
