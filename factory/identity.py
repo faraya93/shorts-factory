@@ -1,4 +1,5 @@
-"""The channel identity as PARAMETERS: one source of truth, channels/umbrella-es.yaml (blocks `identity` and `render`).
+"""The channel identity as PARAMETERS: one source of truth, the BRAND package channels/mecanalia/brand.yaml (blocks `identity` and `render`),
+read through factory/channel.py (a channel variant may override a value; today none does).
 Everything that draws the channel's look reads it through here: the Editor's text themes (overlays.py, editor.py), the end-card mark, the code3d
 stage/plinth/accent (via a JSON snapshot, because Blender has no PyYAML), the brand tools and new productions' visual_identity.
 
@@ -6,7 +7,7 @@ CLI (run with the project venv):
   .venv/bin/python factory/identity.py show                      # active preset + the presets available
   .venv/bin/python factory/identity.py export [path] [--preset N] # JSON snapshot for Blender (default build/identity-export.json)
   .venv/bin/python factory/identity.py apply productions/x/scenes.json [--preset N]  # embed the identity into a production's scenes.json
-TO SWITCH THE CHANNEL IDENTITY: edit `identity.active` (or one preset's values) in channels/umbrella-es.yaml, then re-render. No code change."""
+TO SWITCH THE CHANNEL IDENTITY: edit `identity.active` (or one preset's values) in channels/mecanalia/brand.yaml, then re-render. No code change."""
 
 import json
 import sys
@@ -14,14 +15,18 @@ from pathlib import Path
 
 import yaml
 
+import channel
+
 ROOT = Path(__file__).resolve().parent.parent
-CONFIG = ROOT / "channels" / "umbrella-es.yaml"
 EXPORT = ROOT / "build" / "identity-export.json"
 HEX = "#"
 
 
-def load(path: Path | None = None) -> dict:
-    return yaml.safe_load(Path(path or CONFIG).read_text(encoding="utf-8"))
+def load(path: Path | None = None, channel_id: str = channel.DEFAULT_CHANNEL) -> dict:
+    """The merged channel config (brand + variant); an explicit `path` reads one yaml file as is (tests, proposals)."""
+    if path:
+        return yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+    return channel.load(channel_id)
 
 
 def active_name(cfg: dict | None = None) -> str:

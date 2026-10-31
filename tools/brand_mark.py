@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import sys as _sys
 _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "factory"))
-import identity  # noqa: E402  (the colours come from channels/umbrella-es.yaml through factory/identity.py)
+import identity  # noqa: E402  (the colours come from channels/mecanalia/brand.yaml through factory/identity.py)
 
 
 def _rgb(h):
@@ -16,7 +16,7 @@ def _rgb(h):
 _P = identity.preset()                                                 # the ACTIVE preset
 NAVY, WHITE, EMBER = _rgb(_P["mark_body"]), _rgb(_P["mark_inner"]), _rgb(_P["mark_accent"])   # historical names; values = mark body / inner / accent
 CELESTE = SKY = _rgb(_P["top"])
-FONT = str(Path(__file__).resolve().parent.parent / "factory" / "assets" / "fonts" / "Montserrat-VF.ttf")
+FONT = str(Path(__file__).resolve().parent.parent / "channels" / "mecanalia" / "assets" / "fonts" / "Montserrat-VF.ttf")
 
 
 def mark(size=800, body=NAVY, inner=WHITE, accent=EMBER, ss=4, shape="square"):

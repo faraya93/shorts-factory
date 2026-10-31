@@ -1,0 +1,282 @@
+# channels/mecanalia/brand.yaml: the MECANALIA BRAND package (language-independent). ONE source of truth for the brand's identity (palette,
+# typography, subtitles, style string, render defaults, audio profile, topic-family mix, format defaults), owned by NO consumer: the factory
+# (factory/channel.py) and the future orchestrator READ it by reference and never copy its values.
+# Each channel is a thin variant that EXTENDS this package (channels/mecanalia/<lang>.yaml) and stores only what differs (language, handles,
+# voice, bio, description template, hashtags, words_per_second). A channel value wins; a missing value inherits from here.
+# Each production embeds a verbatim copy of the blocks it uses (visual_identity, style) in its scenes.json so it stays reproducible.
+# NEVER put platform credentials in this package (it is public and versioned): tokens live only in the orchestrator's credential store.
+# Values marked "starting value" or "not yet tuned" are not measured; the rest cites its source.
+
+brand: mecanalia
+status: draft                          # owner approval pending (identity adopted provisionally 2026-10-28)
+name: Mecanalia
+formats:                               # how a video is made; each format is a module of the factory sharing the core. One channel, one format by default.
+  default: explainer-short             # the 9:16 "how things work" short (docs/current/specs/reference-format-spec.md)
+  available: [explainer-short]
+assets:                                # shared brand assets, held by the package
+  fonts: assets/fonts                  # Montserrat ExtraBold (SIL OFL), licences in assets/fonts/LICENSES.md
+  mark: tools/brand_mark.py            # the mark is generated from the identity preset, never stored as a second source
+
+duration:                             # seconds of narration (see CLAUDE.md format doctrine)
+  standard_s: [45, 60]
+  by_family:
+    body: [40, 50]
+    numbers: [50, 60]
+
+topic_families:                       # STARTING mix, percent of the publishing slate; to be re-weighted by performance data
+  objects: 40                         # everyday objects with a hidden mechanism
+  body: 25                            # body / medical how-it-works
+  numbers: 20                         # impossible numbers / scale
+  whatif: 15                          # what-if / dilemmas
+  avoid: [generic textbook science with no everyday anchor, news, sports, labour law]
+
+subtitles:                            # mirrored from factory/editor.py constants; tests/test_channel.py keeps them in sync
+  y_center: 0.24                      # block centre as a fraction of the frame height (upper band)
+  font_size_px: 57
+  stroke_px: 4
+  max_words: 4
+  max_chars: 26
+  max_width_px: 940
+  current_word: spoken word bold white, the other words grey (~55%), key words (scene field subtitle_emphasis) in a thin teal selection box with corner handles   # reference doctrine; built in factory/editor.py
+
+style:
+  # Base style string, prefix of every scene prompt of every engine. IDENTITY CHANGE (owner 2026-10-28): the CORAL studio replaces the
+  # dark reference look (the dark text is kept below as `reference_dark_v1`, a historical record). Colour words here follow the active
+  # preset in `identity` (coral at the time of writing; update the wording when the active preset changes). "No text on screen" stays:
+  # labels, counters and chips are Editor overlays, never model-generated text.
+  base: >-
+    Bright warm coral-salmon studio stylized 3D explainer, soft seamless coral background lighter at the top, one deep teal accent for
+    the active part, hero objects in their real colours on a dark ink plinth with a soft contact shadow, simplified chunky smooth-shaded
+    models with detail only where the fact is, one large soft key light, cutaway and cross-section views. Strictly NOT photorealistic:
+    no realistic textures, no real faces, no blood, no gore, no graphic content. No text on screen.
+  reference_dark_v1: >-               # RETIRED 2026-10-28 (dark low-key reference look), kept verbatim as a historical record
+    Dark low-key stylized 3D explainer, near-black background, one warm gold accent for the active part and everything
+    else neutral grey, simplified chunky smooth-shaded models with detail only where the fact is, soft key light with a
+    warm rim, cutaway and cross-section views. Strictly NOT photorealistic: no realistic textures, no real faces, no
+    blood, no gore, no graphic content. No text on screen.
+  by_family:                          # appended after base; only the body family has an approved example so far
+    body: Medical illustration look. Show the body as clean stylized cutaway and cross-section models.
+    objects: null                     # to be approved after the first production of this family
+    numbers: null
+    whatif: null
+  reference_v2: >-                    # RETIRED identity (bright lavender-stage Pixar look), kept verbatim as a historical record
+    Bright stylized 3D cartoon animation, Pixar-style explainer short, smooth clean materials, soft studio lighting,
+    medical illustration look. Strictly NOT photorealistic: no realistic skin texture, no real faces, no blood, no
+    gore, no graphic wounds — show the body as clean stylized cross-section models.
+
+identity:
+  # SINGLE SOURCE OF TRUTH for the channel's look (owner decision 2026-10-28: CORAL is the identity, provisional).
+  # `active` names the preset in force; every consumer (Editor themes, overlays, end-card mark, code3d stage/plinth/accent, brand tools,
+  # new-production scenes.json) reads it through factory/identity.py. Blender cannot read YAML, so factory/identity.py exports a JSON
+  # snapshot (build/identity-export.json, generated, git-ignored) that the render driver passes to Blender. TO SWITCH IDENTITY: change
+  # `active` below (or edit the values of one preset), re-render. No code change. Presets other than the active one are kept as named options.
+  # Hero colours (yellow tape, red thermos, blue gears...) are NOT identity: they live with the rigs.
+  # Preset fields: stage.top/bottom = the screen-space gradient behind the hero; plinth = what every hero stands on (ink for light stages);
+  # board = the backing board of the gear rig (derived from the stage bottom); accent = the active quantity; error = failure marks;
+  # annotation = leaders/brackets/tags; subtitle = ink words + outline + spoken-word box (mode ink|white|reference);
+  # mark = brand mark colours (end card, avatar); lighting = studio | dark-stage.
+  active: coral
+  neutrals: {passive_dark: '#2D2A2B', passive: '#51555A', passive_light: '#DAD8D7'}
+  presets:
+    coral:
+      title: CORAL
+      stage: {top: '#FEA181', bottom: '#EC9172'}
+      plinth: '#1D1B2E'
+      support: {board: '#D2EAE6', plate: '#FFF3E0', panel: '#1D1B2E'}
+      emission_gain: 0.111
+      accent: '#0A5C6B'
+      error: '#7A0019'
+      annotation: '#1D1B2E'
+      subtitle: {mode: ink, ink: '#1D1B2E', outline: '#FFFFFF', spoken_box: '#1D1B2E', spoken_text: '#FFFFFF', emphasis: '#0A5C6B'}
+      mark: {body: '#1D1B2E', inner: '#FFF3E0', accent: '#0A5C6B'}
+      lighting: studio
+    papel:
+      title: PAPEL
+      stage: {top: '#FDF3DC', bottom: '#EFE2C4'}
+      plinth: '#1D1B2E'
+      support: {board: '#26242E', plate: '#26242E', panel: '#1D1B2E'}
+      emission_gain: 1.0
+      accent: '#F0421C'
+      error: '#B3261E'
+      annotation: '#1D1B2E'
+      subtitle: {mode: ink, ink: '#1D1B2E', outline: '#FFFFFF', spoken_box: '#1D1B2E', spoken_text: '#FFFFFF', emphasis: '#F0421C'}
+      mark: {body: '#1D1B2E', inner: '#FDF3DC', accent: '#F0421C'}
+      lighting: studio
+    esmeralda:
+      title: ESMERALDA
+      stage: {top: '#1F8570', bottom: '#1A6E5C'}
+      plinth: '#F4EFE0'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#F4EFE0'}
+      emission_gain: 1.0
+      accent: '#FFF1B8'
+      error: '#FF8A7A'
+      annotation: '#FFFFFF'
+      subtitle: {mode: white, ink: '#FFFFFF', outline: '#0A3A2F', spoken_box: '#FFFFFF', spoken_text: '#0A3A2F', emphasis: '#FFF1B8'}
+      mark: {body: '#F4EFE0', inner: '#1F8570', accent: '#FFF1B8'}
+      lighting: studio
+    violeta:
+      title: VIOLETA
+      stage: {top: '#7A4DE8', bottom: '#5B30C2'}
+      plinth: '#EDE7FF'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#EDE7FF'}
+      emission_gain: 1.0
+      accent: '#3DFFB0'
+      error: '#FFA0B4'
+      annotation: '#FFFFFF'
+      subtitle: {mode: white, ink: '#FFFFFF', outline: '#2A1470', spoken_box: '#FFFFFF', spoken_text: '#2A1470', emphasis: '#3DFFB0'}
+      mark: {body: '#EDE7FF', inner: '#7A4DE8', accent: '#3DFFB0'}
+      lighting: studio
+    mandarina:
+      title: MANDARINA
+      stage: {top: '#FF9A4A', bottom: '#F26A1D'}
+      plinth: '#1B1410'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#1B1410'}
+      emission_gain: 1.0
+      accent: '#1B3BD6'
+      error: '#7A0019'
+      annotation: '#1B1410'
+      subtitle: {mode: ink, ink: '#1B1410', outline: '#FFFFFF', spoken_box: '#1B1410', spoken_text: '#FFFFFF', emphasis: '#1B3BD6'}
+      mark: {body: '#1B1410', inner: '#FF9A4A', accent: '#1B3BD6'}
+      lighting: studio
+    rosa:
+      title: ROSA
+      stage: {top: '#FFB6C0', bottom: '#F48FA0'}
+      plinth: '#4A1A3A'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#4A1A3A'}
+      emission_gain: 1.0
+      accent: '#0A5C45'
+      error: '#B3001B'
+      annotation: '#3A0F2B'
+      subtitle: {mode: ink, ink: '#3A0F2B', outline: '#FFFFFF', spoken_box: '#3A0F2B', spoken_text: '#FFFFFF', emphasis: '#0A5C45'}
+      mark: {body: '#4A1A3A', inner: '#FFB6C0', accent: '#0A5C45'}
+      lighting: studio
+    lima:
+      title: LIMA
+      stage: {top: '#D9F34F', bottom: '#C4E233'}
+      plinth: '#1E2412'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#1E2412'}
+      emission_gain: 1.0
+      accent: '#3A2BD0'
+      error: '#B3261E'
+      annotation: '#17210A'
+      subtitle: {mode: ink, ink: '#17210A', outline: '#FFFFFF', spoken_box: '#17210A', spoken_text: '#FFFFFF', emphasis: '#3A2BD0'}
+      mark: {body: '#1E2412', inner: '#D9F34F', accent: '#3A2BD0'}
+      lighting: studio
+    fucsia:
+      title: FUCSIA
+      stage: {top: '#D22C84', bottom: '#BA1E70'}
+      plinth: '#FFF3E0'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#FFF3E0'}
+      emission_gain: 1.0
+      accent: '#6BFFD8'
+      error: '#2B0A1C'
+      annotation: '#FFFFFF'
+      subtitle: {mode: white, ink: '#FFFFFF', outline: '#5A0F36', spoken_box: '#FFFFFF', spoken_text: '#5A0F36', emphasis: '#6BFFD8'}
+      mark: {body: '#FFF3E0', inner: '#D22C84', accent: '#6BFFD8'}
+      lighting: studio
+    cobalto:
+      title: COBALTO
+      stage: {top: '#3F63F2', bottom: '#2C47D4'}
+      plinth: '#F4EFE0'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#F4EFE0'}
+      emission_gain: 1.0
+      accent: '#FFA45C'
+      error: '#FFD0C2'
+      annotation: '#FFFFFF'
+      subtitle: {mode: white, ink: '#FFFFFF', outline: '#0F1D6B', spoken_box: '#FFFFFF', spoken_text: '#0F1D6B', emphasis: '#FFA45C'}
+      mark: {body: '#F4EFE0', inner: '#3F63F2', accent: '#FFA45C'}
+      lighting: studio
+    frambuesa:
+      title: FRAMBUESA
+      stage: {top: '#C21B68', bottom: '#A31256'}
+      plinth: '#FFF3E0'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#FFF3E0'}
+      emission_gain: 1.0
+      accent: '#6BFFD8'
+      error: '#1F0A14'
+      annotation: '#FFFFFF'
+      subtitle: {mode: white, ink: '#FFFFFF', outline: '#4A0A2B', spoken_box: '#FFFFFF', spoken_text: '#4A0A2B', emphasis: '#6BFFD8'}
+      mark: {body: '#FFF3E0', inner: '#C21B68', accent: '#6BFFD8'}
+      lighting: studio
+    celeste:
+      title: CELESTE (round-1 proposal)
+      stage: {top: '#8FD6F2', bottom: '#62B4DC'}
+      plinth: '#2B4C70'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#2B4C70'}
+      emission_gain: 1.0
+      accent: '#E8590C'
+      error: '#C92A2A'
+      annotation: '#0B2540'
+      subtitle: {mode: ink, ink: '#0B2540', outline: '#FFFFFF', spoken_box: '#0B2540', spoken_text: '#FFFFFF', emphasis: '#E8590C'}
+      mark: {body: '#0B2540', inner: '#FFFFFF', accent: '#E8590C'}
+      lighting: studio
+    reference-dark:
+      legacy: true            # frozen test/legacy look: exempt from the support-colour separation rule
+      title: REFERENCE DARK (2026-10-26 doctrine; legacy default text theme)
+      stage: {top: '#120F10', bottom: '#120F10'}
+      plinth: '#2B282D'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#2B282D'}
+      emission_gain: 1.0
+      accent: '#F5C04A'
+      error: '#BE4A4A'
+      annotation: '#67CDBE'
+      subtitle: {mode: reference, ink: '#FFFFFF', word: '#96969B', outline: '#000000', spoken_box: '#120F10', spoken_text: '#FFFFFF', emphasis: '#67CDBE'}
+      mark: {body: '#FFFFFF', inner: '#120F10', accent: '#F5C04A'}
+      lighting: dark-stage
+      halo: '#C8601A'
+    dark-teal:
+      legacy: true            # frozen test/legacy look: exempt from the support-colour separation rule
+      title: DARK TEAL (round-2 test stage)
+      stage: {top: '#0B2A2F', bottom: '#0B2A2F'}
+      plinth: '#1E3C42'
+      support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#1E3C42'}
+      emission_gain: 1.0
+      accent: '#F5C04A'
+      error: '#BE4A4A'
+      annotation: '#67CDBE'
+      subtitle: {mode: reference, ink: '#FFFFFF', word: '#96969B', outline: '#000000', spoken_box: '#0B2A2F', spoken_text: '#FFFFFF', emphasis: '#67CDBE'}
+      mark: {body: '#FFFFFF', inner: '#0B2A2F', accent: '#F5C04A'}
+      lighting: dark-stage
+      halo: '#2A8F96'
+      rim: '#CFF3F0'
+
+visual_identity:
+  # NON-COLOUR identity fields and shared Editor pass. The colour fields (background, palette, text theme) are GENERATED from the active
+  # preset above by factory/identity.py (visual_identity_block): never edit colours here. Each production embeds the generated block.
+  # QA scope (owner decision): the backdrop and its QA apply only to establishing shots and code3d productions; close-ups are exempt.
+  lighting: bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette
+  materials: simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures
+  unify:                              # shared Editor pass for every scene, whatever its engine: grain is MANDATORY (it hides the 8-bit gradient steps)
+    saturation: 1.04
+    contrast: 1.03
+    warmth: 0.0
+    grain: 5
+    vignette_angle: 0
+    lift: ""
+  qa_tolerance_de: 15                 # starting value (CIE76); ~2.3 is a just-noticeable difference
+
+render:
+  # Production render defaults (owner decision 2026-10-28, from docs/current/reports/render-bench.md). Exported to Blender with the identity snapshot.
+  # profiles.tuned = default; profiles.previous = the profile before the change. Per-scene-type overrides: scene_types maps a scene script to a
+  # type, scene_type_profiles picks the profile for that type (the rider bench in docs/current/reports/render-profile-rider.md decides them).
+  default_profile: tuned
+  profiles:
+    tuned: {samples_ceiling: 128, adaptive_threshold: 0.04, min_samples: 24, denoise_gpu: true, transmission_bounces: 0, volume_bounces: 0, diffuse_bounces: 3, glossy_bounces: 4, max_bounces: 8, persistent_data: true,
+      fast_gi: false}
+    previous: {samples_ceiling: 128, adaptive_threshold: 0.02, min_samples: 0, denoise_gpu: false, transmission_bounces: 12, volume_bounces: 0, diffuse_bounces: 4, glossy_bounces: 4, max_bounces: 6, persistent_data: false,
+      fast_gi: false}
+  scene_types: {tape_02: cross_section, tape_05: exploded_housing}
+  scene_type_profiles: {cross_section: tuned, exploded_housing: tuned}
+  draft_engine: eevee
+
+audio:                                # starting profile from the pilot; the clip gate keeps music out of the mix
+  narration_volume: 1.0
+  effects_volume: 0.30
+  clip_audio: effects
+  clip_gate_db: -35
+  music_volume: 0.10
+  music_file: null                    # no signature track chosen yet
+
+spinoff_criteria:                     # spin-off channels are decided later, only by data — never micro-topic splits
+  - a topic family that consistently wins AND can sustain its own publishing cadence
+  - the English-language version of the channel

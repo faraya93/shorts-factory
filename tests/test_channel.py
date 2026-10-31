@@ -1,4 +1,5 @@
-"""Keeps channels/umbrella-es.yaml valid and in sync with the code it mirrors. Run: python tests/test_channel.py"""
+"""Keeps the Mecanalia brand package + channel variants valid, inheriting correctly, credential-free, and in sync with the code they mirror.
+Run: .venv/bin/python tests/test_channel.py"""
 
 import sys
 from pathlib import Path
@@ -7,12 +8,13 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "factory"))
+import channel  # noqa: E402
 import editor  # noqa: E402
 import identity  # noqa: E402
 import visual_identity as vid  # noqa: E402
 from scenes_schema import FAMILIES  # noqa: E402
 
-CFG = yaml.safe_load((ROOT / "channels" / "umbrella-es.yaml").read_text(encoding="utf-8"))
+CFG = channel.load("mecanalia-es")          # brand + Spanish variant, merged
 
 
 def test_generated_visual_identity_block_is_valid_for_every_preset():
@@ -68,6 +70,37 @@ def test_duration_bands_are_ordered():
     d = CFG["duration"]
     assert d["standard_s"][0] < d["standard_s"][1]
     assert all(lo < hi for lo, hi in d["by_family"].values())
+
+
+def test_channel_variants_extend_the_brand_and_inherit_it():
+    ids = channel.variants()
+    assert {"mecanalia-es", "mecanalia-en"} <= set(ids)
+    brand = channel.load_brand("mecanalia")
+    for cid in ids:
+        cfg = channel.load(cid)
+        assert cfg["extends"] == brand["brand"] and cfg["channel"] == cid
+        for block in ("render", "style", "subtitles", "visual_identity", "audio", "topic_families"):
+            assert cfg[block] == brand[block], block
+        assert cfg["identity"] == brand["identity"], "a channel variant must not copy or fork the identity"
+    es, en = channel.load("mecanalia-es"), channel.load("mecanalia-en")
+    assert es["language"] == "es" and en["language"] == "en" and es["handles"]["primary"] == "@mecanalia" and en["handles"]["primary"] == "@mecanaliaen"
+    assert en["handles"]["fallbacks"] == ["mecanalia_en", "mecanalia.en"]
+    assert es["duration"]["standard_s"] == en["duration"]["standard_s"] == brand["duration"]["standard_s"]
+
+
+def test_variants_store_only_what_differs():
+    allowed = {"channel", "extends", "language", "register", "promise", "handles", "voice", "duration", "publish"}
+    for cid, f in channel.variants().items():
+        extra = set(yaml.safe_load(f.read_text(encoding="utf-8"))) - allowed
+        assert not extra, (cid, extra)
+
+
+def test_packages_hold_no_credentials():
+    banned = ("token", "secret", "password", "api_key", "apikey", "access_key", "client_id", "bearer")
+    for f in (ROOT / "channels").glob("*/*.yaml"):
+        low = f.read_text(encoding="utf-8").lower().replace("tokens live only", "")      # the comment that states the rule
+        for k in banned:
+            assert k not in low, (f.name, k)
 
 
 if __name__ == "__main__":

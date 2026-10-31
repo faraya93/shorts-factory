@@ -1,4 +1,4 @@
-"""Identity is parameters: one source (channels/umbrella-es.yaml), read through factory/identity.py. Run: python tests/test_identity.py"""
+"""Identity is parameters: one source (channels/mecanalia/brand.yaml), read through factory/identity.py. Run: python tests/test_identity.py"""
 import re
 import sys
 from pathlib import Path

@@ -50,7 +50,7 @@ def _rgb(h: str) -> tuple:
 
 
 def _theme_from_preset(p: dict) -> dict:
-    """One text/graphics theme per identity preset (factory/identity.py reads channels/umbrella-es.yaml). Role names are historical:
+    """One text/graphics theme per identity preset (factory/identity.py reads channels/mecanalia/brand.yaml). Role names are historical:
     TEAL = annotation graphics, GOLD = the accent (active quantity), RED = error, VOID = the plate behind chips."""
     if p["mode"] == "reference":     # the dark reference look: white spoken word, grey others, thin black outline, no box
         return dict(INK=_rgb(p["ink"]), INK_STROKE=_rgb(p["ink_stroke"]), TEAL=_rgb(p["annot"]), RED=_rgb(p["error"]), GOLD=_rgb(p["accent"]),
@@ -63,7 +63,7 @@ def _theme_from_preset(p: dict) -> dict:
 
 
 def _load_identity() -> None:
-    """Fill THEMES from the identity presets (single source: channels/umbrella-es.yaml). 'dark' and 'light' stay as aliases of the two
+    """Fill THEMES from the identity presets (single source: channels/mecanalia/brand.yaml). 'dark' and 'light' stay as aliases of the two
     legacy text themes that frozen productions name in their scenes.json."""
     import identity
     for name, p in identity.presets().items():
@@ -94,7 +94,7 @@ def set_theme(name: str) -> None:
     CHIP_FILL, CHIP_EDGE, CHIP_TEXT, TRACK_EDGE = t["CHIP_FILL"], t["CHIP_EDGE"], t["CHIP_TEXT"], t["TRACK_EDGE"]
 
 
-MONTSERRAT = str(Path(__file__).resolve().parent / "assets" / "fonts" / "Montserrat-VF.ttf")   # SIL OFL, owner 2026-10-27
+MONTSERRAT = str(Path(__file__).resolve().parent.parent / "channels" / "mecanalia" / "assets" / "fonts" / "Montserrat-VF.ttf")   # SIL OFL, owner 2026-10-27
 VARIANT = {"bold": "ExtraBold", "regular": "SemiBold", "narrow": "ExtraBold", "mono": "ExtraBold"}   # one family everywhere
 FONTS = {
     "bold": [MONTSERRAT, "/System/Library/Fonts/Supplemental/Arial Bold.ttf", "/Library/Fonts/Arial Bold.ttf",
@@ -516,7 +516,7 @@ def _mark(spec: dict, n: int):
                 d.ellipse([p[0] - 9, p[1] - 9, p[0] + 9, p[1] + 9], fill=RED + (255,))
     else:
         # a dark accent (Coral's teal, 3.2:1 on the stage) reads by HUE and shape, not by brightness: a thin outline in the theme's stroke colour
-        # keeps the ring readable on any stage (identity rule, docs/design-system.md)
+        # keeps the ring readable on any stage (identity rule, docs/current/specs/design-system.md)
         d.ellipse([10, 10, size - 10, size - 10], outline=INK_STROKE + (255,), width=22)
         d.ellipse([14, 14, size - 14, size - 14], outline=GOLD + (255,), width=14)
     frames = _pop_frames(img, n)

@@ -20,6 +20,6 @@ productions/**/spikes/*/*
 !productions/**/spikes/*/report.md
 
 # reference videos (media, never committed)
-docs/reference/*.[mM][pP]4
-productions/pilot/closing-test/
+docs/current/research/reference/*.[mM][pP]4
+productions/_lab/closing-test/
 /build/

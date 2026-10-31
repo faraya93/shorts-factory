@@ -6,7 +6,7 @@ maximize views and retention. Every technical choice serves that goal. The
 reference format is Zack D Films' stylized 3D "how it works" explainers —
 we copy the mechanics, never scripts or footage: all scripts are original.
 
-## Format doctrine (channel research, Oct 2026; evidence in docs/reference-channels.md)
+## Format doctrine (channel research, Oct 2026; evidence in docs/current/research/reference-channels.md)
 - Vertical 9:16. Duration, by topic family (measured pace of the channel
   voice: ~2.9 words/s on the pilot): standard target 45–60 s of narration
   (~130–170 words); body/medical may run 40–50 s (~115–145 words);
@@ -64,8 +64,8 @@ we copy the mechanics, never scripts or footage: all scripts are original.
   narration, no prominent music bed; clip audio only when it is genuine
   mechanism foley (see the audio gate).
 - Typography (owner 2026-10-27): Montserrat ExtraBold (Google Fonts, SIL
-  OFL; factory/assets/fonts/Montserrat-VF.ttf, logged in
-  factory/assets/fonts/LICENSES.md) for subtitles, counters, labels and
+  OFL; channels/mecanalia/assets/fonts/Montserrat-VF.ttf, logged in
+  channels/mecanalia/assets/fonts/LICENSES.md) for subtitles, counters, labels and
   chips; non-spoken subtitle words use SemiBold of the same family.
 - Subtitles: burned in, upper band centred at SUBTITLE_Y_CENTER = 0.24 of
   the frame height (a channel constant that moves to the channel config),
@@ -87,10 +87,10 @@ we copy the mechanics, never scripts or footage: all scripts are original.
   selection rules are in "Engine selection" below.
 
 ## Channel identity (ADOPTED 2026-10-28, owner; provisional): CORAL — parameters, not code
-The channel's colour identity is PARAMETERS in ONE place: `channels/umbrella-es.yaml`, blocks `identity` (active preset + named presets) and
+The channel's colour identity is PARAMETERS in ONE place: `channels/mecanalia/brand.yaml`, blocks `identity` (active preset + named presets) and
 `render` (profiles). Everything reads it through `factory/identity.py` (the Editor themes, the end-card mark, the code3d stage via an exported JSON
 snapshot, brand tools, new productions). **To switch identity: edit `identity.active` (or one preset's values) and re-render; never edit code.**
-Full spec: `docs/design-system.md`. Active values: stage gradient #FEA181 -> #EC9172, ink plinth #1D1B2E, deep-teal accent #0A5C6B, error #7A0019,
+Full spec: `docs/current/specs/design-system.md`. Active values: stage gradient #FEA181 -> #EC9172, ink plinth #1D1B2E, deep-teal accent #0A5C6B, error #7A0019,
 ink subtitle theme (ink words, white outline, spoken word in an ink box). Coral's production rules: (1) body-family heroes stand in a cream cutaway
 plate (skin/organ colours are close to the stage); (2) the accent is dark, so it reads by hue and shape, never by glow or text colour. Papel and the
 other directions are kept as presets. **Where this section and the "Reference doctrine" palette points below (dark stage, gold accent, teal
@@ -99,21 +99,21 @@ end card (owner 2026-10-28). Render default: the tuned Cycles profile (`render.p
 Persistent Data on, Fast GI off; EEVEE for drafts; the grain pass stays mandatory); per-scene-type exceptions live in `render.scene_type_profiles`.
 
 ## Closing standard (ratified 2026-10-28, owner; supersedes the CTA-phone / end-card text elsewhere in this file)
-The phone graphic (overlay type `cta`) and the appended end card (`end_card`) are REMOVED from every production (marketing verdict, docs/marketing-verdicts.md;
-audit in docs/cta-endcard-audit.md). The standard closing for EVERY video: the spoken follow + share ask naming the share_archetype (unchanged), plus ONE
+The phone graphic (overlay type `cta`) and the appended end card (`end_card`) are REMOVED from every production (marketing verdict, docs/current/reports/marketing-verdicts.md;
+audit in docs/current/reports/cta-endcard-audit.md). The standard closing for EVERY video: the spoken follow + share ask naming the share_archetype (unchanged), plus ONE
 tiny ink "ENVÍASELO" tag (`label`, style `tag`) word-locked (`at_word: "envíaselo"`, ~2.6 s) in the last scene, placed in the cream space beside the hero (C2 in
-docs/cta-redesign/). No extra seconds, nothing covers the hero. Where "Reference doctrine" point 8, storytelling rule 8, the Editor v2 `cta` / `end_card`
+docs/current/reports/cta-redesign/). No extra seconds, nothing covers the hero. Where "Reference doctrine" point 8, storytelling rule 8, the Editor v2 `cta` / `end_card`
 bullets or the beat-sheet wording ("the CTA/end card") still mention the phone or the end card, read them through this section: the code for them stays
 (frozen productions), new productions do not use it.
 
 ## Reference doctrine (binding, owner 2026-10-26)
 Adopted from the reference study of three example channels
-(docs/reference-style-spec.md = the LOOK, docs/reference-format-spec.md =
+(docs/current/specs/reference-style-spec.md = the LOOK, docs/current/specs/reference-format-spec.md =
 the STORYTELLING GRAMMAR, with frame evidence for every rule; both specs
 are binding, this section is their summary). Where this section and an
 older paragraph disagree, this section wins.
 
-Identity change (the lavender stage is RETIRED; channels/umbrella-es.yaml
+Identity change (the lavender stage is RETIRED; channels/mecanalia/brand.yaml
 visual_identity carries the values):
 - DARK stage: near-black warm void ~#120F10 (cross-section backdrop
   navy #16202C). Never a light or pastel stage.
@@ -319,8 +319,9 @@ where judgment is involved.
 - Phases: A Producer ✓ · B Editor ✓ · C Scriptwriter (an LLM agent that
   writes scenes.json) · D Orchestrator · E Publisher (YouTube API,
   uploads private; the owner always makes the publish call).
-- A production lives in productions/<channel>/<video-slug>/; scenes.json
-  and costs.json are versioned, generated media is gitignored.
+- A production lives in productions/<channel-id>/<NNN>-<slug>/ (see "Repository
+  organization"); scenes.json, costs.json, notes.md and publish.json are
+  versioned, generated media is gitignored.
 
 ## code3d sourcing and optimization (binding, owner 2026-10-25)
 Your job is the FASTEST route to each clip, not the most from-scratch one.
@@ -359,20 +360,28 @@ Your job is the FASTEST route to each clip, not the most from-scratch one.
   Shorts test each video largely on its own merits, so rotation inside one
   promise widens the viral surface; off-promise drift (news, sports,
   labour law) is what hurt the reference accounts.
-- A channel is CONFIGURATION, never hard-coded: channels/umbrella-es.yaml
-  (DRAFT until the owner approves) holds voice, language, style,
-  duration bands, topic-family mix (starting mix objects 40 / body 25 /
-  numbers 20 / what-if 15), subtitle constants, the visual_identity block
-  and the audio profile. tests/test_channel.py keeps it valid and in sync
-  with the code constants it mirrors. Productions embed a verbatim copy of
-  the blocks they use. This config creates no accounts and uploads nothing.
+- A channel is CONFIGURATION, never hard-coded, as PACKAGES (docs/architecture.md):
+  channels/mecanalia/brand.yaml is the BRAND package (language-independent:
+  identity, style, duration bands, topic-family mix (starting mix objects 40 /
+  body 25 / numbers 20 / what-if 15), subtitle constants, visual_identity, render
+  and audio profiles); each channel is a thin variant that EXTENDS it and stores
+  only what differs (channels/mecanalia/es.yaml = mecanalia-es, en.yaml =
+  mecanalia-en: language, handles, voice, bio, publish texts, words_per_second).
+  A channel value wins, a missing value inherits (factory/channel.py: `load(id)`).
+  tests/test_channel.py keeps the packages valid, thin and credential-free.
+  Productions embed a verbatim copy of the blocks they use (a record, not a
+  second source). Packages are public and versioned: NO platform credentials in
+  them, ever (tokens live only in the orchestrator's credential store). The
+  factory never publishes; nothing publishes without the owner's per-video OK.
+  Default: one channel, one format; an exception needs the owner's explicit
+  instruction for that video and never becomes the default.
 - Spin-off channels are decided LATER and ONLY by data, never micro-topic
   splits from day one. Criteria: (1) a topic family that consistently wins
   AND can sustain its own publishing cadence, or (2) the English-language
   version of the channel.
 
 ## Engine selection (binding; from the 2026-10-25 engine spike)
-Evidence: productions/pilot/engine-spike/report.md. The factory assigns
+Evidence: productions/_lab/engine-spike/report.md. The factory assigns
 engines automatically from these rules; the owner is never asked.
 - (a) Choose ONE primary engine per production from the script's dominant
   mechanism type. Ambient/organic transformation and camera travel
@@ -460,6 +469,24 @@ engines automatically from these rules; the owner is never asked.
   hear audio or watch video: verify mechanically (format, durations,
   extracted frames) and never claim a render looks or sounds right
   beyond that.
+
+## Repository organization (binding, owner 2026-10-31; spec and map of moves in docs/architecture.md)
+Every new file is created in its correct place; orderly file creation is a standing rule, the owner does not have to ask again.
+- **productions/** holds only channel trees, `_lab` and `_archive`. Current videos: `productions/<channel-id>/<NNN>-<slug>/` (`mecanalia-es`, `mecanalia-en`);
+  three-digit number per channel in order of creation, never reused, highest = newest. CREATE A NEW VIDEO ONLY with
+  `.venv/bin/python tools/new_production.py <channel-id> <slug>` (assigns the number, adds a row to the channel's `INDEX.md`). Slugs: lowercase ascii, hyphens.
+  Experiments and tests (look tests, benches, validations, spikes, closing tests) go in `productions/_lab/<kind>/<name>`. Superseded or frozen productions
+  are moved with `git mv` to `productions/_archive/<series>/`. There is no `pilot` folder any more.
+- **Publish package** (factory -> orchestrator contract): in the production folder, `final.mp4` + `cover.jpg` + `publish.json`
+  (`tools/publish_package.py build|check`; texts come from the production's notes.md "Publish package" section and the channel package's `publish` block).
+- **docs/** holds `README.md`, `architecture.md` and three classes: `docs/current/{specs,reports,research}/` (in force), `docs/experiments/` (rounds, proposals,
+  tests, dated run logs in `runs/`), `docs/archive/` (superseded, kept verbatim, with a first line saying what replaced them). Evidence folders sit next to the
+  document that cites them. File names: lowercase with hyphens.
+- **channels/** holds brand packages and their channel variants only (`channels/<brand>/brand.yaml`, `<lang>.yaml`, `assets/`); **craft skills never live in
+  this repo** (they are at user level, `~/.claude/skills/`); this repo holds channel packages, doctrines and style-locks (`.tastemaker/`).
+- Never delete material: move it to the right class. When moving a path, update every reference (code, docs, notes) and run the full test suite
+  (`tests/test_layout.py` guards this layout; `tests/test_channel.py` the packages). Editing `code3d/lib/{looks,common,composition,pipeline_config,tape_rig}.py`
+  or any rig library, even a comment, invalidates composition-gate records.
 
 ## Support colours and composition gate (binding, owner 2026-10-28)
 The stage colour is the BACKGROUND ONLY. Every support element (backing boards, cutaway plates, plinths, panels, large housing surfaces) gets a colour chosen per production by the design lens:

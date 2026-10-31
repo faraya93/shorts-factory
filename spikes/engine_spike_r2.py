@@ -13,8 +13,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "factory"))
 from keyframes import animate_keyframes, generate_keyframes  # noqa: E402
 
 load_dotenv()
-V2 = Path("productions/pilot/puntos-de-sutura-v2")
-OUT = Path("productions/pilot/engine-spike")
+V2 = Path("productions/_archive/puntos-de-sutura/puntos-de-sutura-v2")
+OUT = Path("productions/_lab/engine-spike")
 cfg = json.loads((V2 / "scenes.json").read_text(encoding="utf-8"))
 seed = json.loads((V2 / "costs.json").read_text())["seed"]
 style = cfg["style"] + " No text on screen."

@@ -1,10 +1,10 @@
 """Hard-constraint table for the identity directions (owner round 2026-10-28). Run: python3 tools/constraints.py [tuned_bench.csv]
-Thresholds (proposed, stated in docs/hard-constraints.md): C0 owner exclusions; C1 legibility; C2 hero separation over 36 colours;
+Thresholds (proposed, stated in docs/experiments/hard-constraints.md): C0 owner exclusions; C1 legibility; C2 hero separation over 36 colours;
 C3 visibility vs white and black UIs; C4 cost under the tuned profile."""
 import csv, json, math, sys
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 sys.path.insert(0, __file__.rsplit("/", 2)[0] + "/factory")
-import identity  # presets come from channels/umbrella-es.yaml (run with the project venv)
+import identity  # presets come from channels/mecanalia/brand.yaml (run with the project venv)
 from palette_metrics import de2000, wcag, lab, lab2hex
 
 FAM = {

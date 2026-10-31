@@ -1,0 +1,29 @@
+# channels/mecanalia/es.yaml: MECANALIA ES, the Spanish variant. A thin channel package: it stores only what differs from the brand
+# (channels/mecanalia/brand.yaml); everything else is inherited by reference (factory/channel.py merges brand + this file, this file wins).
+# Public and versioned: NO platform credentials here, ever (tokens live only in the orchestrator's credential store).
+
+channel: mecanalia-es
+extends: mecanalia
+language: es
+register: neutral pan-Hispanic Spanish — universal topics, no country-specific systems, no local slang
+promise: "Por qué y cómo funcionan las cosas que ves y usas todos los días"   # umbrella curiosity channel
+
+handles:                               # intended handles; creating and verifying accounts belongs to the owner / the orchestrator
+  primary: "@mecanalia"
+  fallbacks: [mecanalia_es, mecanalia.es]    # only if the primary is taken on a platform
+
+voice:
+  default: es-CL-LorenzoNeural         # provisional: the owner has not chosen yet; Lorenzo stays default until they do
+  audition_candidates: [es-CL-LorenzoNeural, es-MX-JorgeNeural, es-ES-AlvaroNeural, es-CL-CatalinaNeural]
+
+duration:
+  words_per_second: 2.87               # measured on the pilot narration (126 words in 43.9 s)
+
+publish:                               # texts the marketing lens uses to build each video's publish package (Spanish)
+  bio: "Por qué y cómo funcionan las cosas que ves y usas todos los días. Un mecanismo por video."
+  description_template: |
+    {hook_and_twist}
+    {supportive_note}
+    {music_credit}
+  hashtags_base: ["#shorts", "#ciencia", "#curiosidades", "#comoFunciona"]
+  share_cta: "Sígueme, y envíaselo a {share_archetype}."

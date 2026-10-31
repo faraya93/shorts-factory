@@ -42,7 +42,7 @@ FONT_CANDIDATES = [
 ]
 SUB_FONT_SIZE = 57          # px
 SUB_STROKE = 4              # px, thin black outline (readability over bright parts of the scene)
-SUBTITLE_Y_CENTER = 0.24    # channel constant (moves to channels/umbrella-es.yaml in Task F): block center, fraction of frame height
+SUBTITLE_Y_CENTER = 0.24    # channel constant (moves to channels/mecanalia/brand.yaml in Task F): block center, fraction of frame height
 SUB_MAX_WIDTH = 940         # px, maximum line width before wrapping
 SUB_CENTER_Y = round(H * SUBTITLE_Y_CENTER)
 _REF = overlays.presets_flat()["reference-dark"]              # the legacy "reference" subtitle theme comes from the identity presets too
@@ -323,7 +323,7 @@ def main() -> int:
     if not font_path:
         print("ERROR: no encontré una fuente en negrita en FONT_CANDIDATES.")
         return 1
-    font = overlays.font("bold", SUB_FONT_SIZE)          # Montserrat ExtraBold (factory/assets/fonts)
+    font = overlays.font("bold", SUB_FONT_SIZE)          # Montserrat ExtraBold (channels/mecanalia/assets/fonts)
     font_reg = overlays.font("regular", SUB_FONT_SIZE)   # Montserrat SemiBold
     for old in build.glob("cue-*.png"):
         old.unlink()

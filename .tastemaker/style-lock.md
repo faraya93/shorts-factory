@@ -1,4 +1,4 @@
-# Style lock — shorts-factory drawn channel (PROPOSED 2026-10-27, pending owner approval; see docs/design-system.md)
+# Style lock — shorts-factory drawn channel (PROPOSED 2026-10-27, pending owner approval; see docs/current/specs/design-system.md)
 Direction contract: thesis = "look inside everyday objects on a bright, constant celeste stage"; first frame = real-colour hero on a navy plinth, caption band clear; risk = accent legibility on a light stage.
 ## Colour contract (verified with tools/palette_metrics.py, WCAG 2.x)
 | pair | ratio | verdict |

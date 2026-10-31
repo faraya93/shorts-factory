@@ -1,0 +1,30 @@
+# channels/mecanalia/en.yaml: MECANALIA EN, the English variant. A thin channel package: language, handles, voice, bio and publish texts only;
+# palette, typography, subtitles, style, render and audio profile are inherited from the brand package (factory/channel.py).
+# Public and versioned: NO platform credentials here, ever (tokens live only in the orchestrator's credential store).
+# STATUS: configuration only. No English production exists yet; every value below is a provisional starting point for the owner to confirm.
+
+channel: mecanalia-en
+extends: mecanalia
+language: en
+register: neutral international English — universal topics, no country-specific systems, no local slang
+promise: "Why and how the things you see and use every day work"
+
+handles:                               # intended handles; creating and verifying accounts belongs to the owner / the orchestrator
+  primary: "@mecanaliaen"
+  fallbacks: [mecanalia_en, mecanalia.en]    # only if the primary is taken on a platform
+
+voice:
+  default: en-US-AndrewNeural          # provisional starting voice (edge-tts, exists in the voice list); not auditioned, the owner decides
+  audition_candidates: [en-US-AndrewNeural, en-US-BrianNeural, en-US-GuyNeural, en-US-ChristopherNeural]
+
+duration:
+  words_per_second: null               # NOT measured for English narration yet: measure on the first English production before relying on word counts
+
+publish:
+  bio: "Why and how the things you see and use every day work. One mechanism per video."
+  description_template: |
+    {hook_and_twist}
+    {supportive_note}
+    {music_credit}
+  hashtags_base: ["#shorts", "#science", "#howitworks", "#facts"]
+  share_cta: "Follow me, and send it to {share_archetype}."
