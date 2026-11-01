@@ -1,4 +1,12 @@
 # engranajes-coral: colour plan (2026-10-28)
+
+## Publish package (Spanish; the owner publishes)
+- **Título:** ¿Por qué el último engranaje casi no se mueve? ⚙️
+- **Descripción:** La última rueda de una cadena de engranajes gira 1024 veces más lento que la primera, aunque todas estén conectadas. ⚙️ Lo que pierde en velocidad lo gana en fuerza: por eso una manivela pequeña puede mover algo enorme. Sígueme y envíaselo a ese amigo que cree que todos los engranajes giran igual.
+  Música: Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0 (placeholder track; the credit MUST be copied into the YouTube description).
+- **Hashtags (description, not title):** #engranajes #mecanica #cienciaencasa #sabiasque #shorts
+
+## Production notes
 Script, narration and choreography identical to engranajes-papel; Coral identity; closing C2 "ENVÍASELO" tag (no phone, no end card).
 - Backing board #D2EAE6 (pale teal tint), inherited from the standing-rule application (reason in scenes.json `support_colours`): 31.5-31.9 dE from the stage, 40+ from the cobalt gears, accent-derived.
 - Pinions (hero_small) are indigo #4A2BC4 (gear_rig DEEP) so they clear the ink plinth (24.0 dE; the old deep blue was 17.8-19.7).

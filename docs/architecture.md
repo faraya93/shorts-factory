@@ -166,7 +166,7 @@ as the historical record they are.
 ## Left for the owner
 - Gate records of `001` to `003` (tape, gears, clock) were already stale before this reorganization (a later change to shared rigs or identity); `004` to `007` pass. Re-run
   `.venv/bin/python factory/gate.py run productions/mecanalia-es/<NNN-slug>` before any re-render of those three.
-- `001` to `003` have no `publish.json` (their notes predate the publish-package section). Write a "Publish package" section in their notes and run `tools/publish_package.py build`.
+- `001` to `003` now carry a "Publish package" notes section and a `publish.json` (2026-11-01; 001 and 002 descriptions drafted from their narration, pending owner review; 003 uses its caption_draft).
 - `code3d/lib/` still mixes live rigs with retired ones (`cartoon.py`, `toon.py`, `lace_world.py`, `body.py`, `suture.py`, `boot_world.py`, `dark_rig.py`, ...); moving them would change gate
   fingerprints, so it is left as a separate decision. `spikes/` at the repo root and `code3d/scenes/` (one prefix per production family) were not reorganized: out of this run's scope.
 - Whether `mecanalia-en` gets a voice other than the provisional one, and when its first production starts.
