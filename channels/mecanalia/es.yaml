@@ -21,6 +21,11 @@ duration:
 
 publish:                               # texts the marketing lens uses to build each video's publish package (Spanish)
   bio: "Por qué y cómo funcionan las cosas que ves y usas todos los días. Un mecanismo por video."
+  bios:                                # final per-platform profile bios, ready to paste; `bio` above is the canonical wording (tests/test_channel.py checks the limits)
+    instagram: "Por qué y cómo funcionan las cosas que ves y usas todos los días. Un mecanismo por video."   # limit 150
+    tiktok: "Por qué y cómo funcionan las cosas que usas a diario. Un mecanismo por video."                    # limit 80; the stored text is 89, so shortened: "ves y usas todos los días" -> "usas a diario"
+    facebook: "Por qué y cómo funcionan las cosas que ves y usas todos los días. Un mecanismo por video."         # limit 255
+    youtube: "Por qué y cómo funcionan las cosas que ves y usas todos los días. Un mecanismo por video."          # limit 1000
   description_template: |
     {hook_and_twist}
     {supportive_note}

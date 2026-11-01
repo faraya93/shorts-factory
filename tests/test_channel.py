@@ -118,6 +118,16 @@ def test_hashtag_policy_is_valid_and_enforced():
         assert pp.hashtag_errors(bad, "mecanalia-es", "objects"), bad
 
 
+def test_platform_bios_fit_their_limits():
+    limits = {"instagram": 150, "tiktok": 80, "facebook": 255, "youtube": 1000}
+    pub = channel.load("mecanalia-es")["publish"]
+    assert set(pub["bios"]) == set(limits)
+    for platform, limit in limits.items():
+        assert 0 < len(pub["bios"][platform]) <= limit, platform
+        if platform != "tiktok":
+            assert pub["bios"][platform] == pub["bio"], platform      # the stored wording stays unchanged wherever it fits
+
+
 if __name__ == "__main__":
     tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
     for name, fn in tests:
