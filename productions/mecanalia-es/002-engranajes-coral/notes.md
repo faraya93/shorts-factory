@@ -2,8 +2,8 @@
 
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué el último engranaje casi no se mueve? ⚙️
-- **Descripción:** La última rueda de una cadena de engranajes gira 1024 veces más lento que la primera, aunque todas estén conectadas. ⚙️ Lo que pierde en velocidad lo gana en fuerza: por eso una manivela pequeña puede mover algo enorme. Sígueme y envíaselo a ese amigo que cree que todos los engranajes giran igual.
-  Música: Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0 (placeholder track; the credit MUST be copied into the YouTube description).
+- **Descripción:** En una cadena de cinco engranajes, si el primero da una vuelta por segundo, el último tarda 17 minutos en dar una sola. ⚙️ Lo que pierde en velocidad lo gana en fuerza: por eso una manivela pequeña puede mover algo enorme. Envíaselo a ese amigo que cree que todos los engranajes giran igual.
+  Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
 - **Hashtags (description, not title):** #engranajes #mecanica #curiosidades #shorts
 
 ## Production notes

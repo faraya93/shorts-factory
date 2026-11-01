@@ -3,7 +3,7 @@
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué un imán no atrae todos los metales? 🧲
 - **Descripción:** Un imán levanta un clip, pero ignora una lata de aluminio… y las dos son de metal. 🧲 El secreto es un campo invisible que solo organiza ciertos materiales: lo ves cuando las limaduras de hierro se ordenan entre los dos polos, y cuando un clip se vuelve imán temporal para sostener a otro. Sígueme y envíaselo a ese amigo que cree que los imanes pegan a todo.
-  Música: Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0 (placeholder track; the credit MUST be copied into the YouTube description).
+  Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
 - **Hashtags (description, not title):** #imanes #magnetismo #comofunciona #shorts
 
 ## Script (7 scenes, ~69 s) and visual per line

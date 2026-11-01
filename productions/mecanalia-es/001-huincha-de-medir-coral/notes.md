@@ -3,8 +3,8 @@ Script, narration and choreography identical to huincha-de-medir-papel; only the
 
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué tu cinta métrica no se dobla? 📏
-- **Descripción:** Tu cinta métrica se queda recta en el aire, pero una tira plana de metal se doblaría al instante. 📏 El secreto es la curva: la cinta no es plana, es un arco que se comporta como una viga, y por dentro un resorte en espiral la recoge de golpe. Sígueme y envíaselo a ese amigo que jura que el gancho suelto está roto.
-  Música: Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0 (placeholder track; the credit MUST be copied into the YouTube description).
+- **Descripción:** Tu cinta métrica se queda recta en el aire, pero una tira plana de metal se doblaría al instante. 📏 El secreto es la curva: no es una regla enrollada, es una viga que se despliega, y por dentro un resorte en espiral la recoge de golpe. Compruébalo con la tuya y envíaselo a ese amigo que jura que el gancho suelto está roto.
+  Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
 - **Hashtags (description, not title):** #cintametrica #ingenieria #comofunciona #shorts
 
 ## Lens review (design leads)

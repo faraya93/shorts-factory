@@ -25,7 +25,6 @@ publish:
   description_template: |
     {hook_and_twist}
     {supportive_note}
-    {music_credit}
   hashtags:                            # tags only; the counts and slot order are the brand rule (brand.yaml publish.hashtags)
     base: ["#shorts"]                  # fixed, minimal, always LAST: a repeated big base wastes the visible slots and dilutes topical signal
     family: {objects: "#howitworks", body: "#humanbody", numbers: "#mindblowing", whatif: "#whatif"}  # one per topic_family, always present

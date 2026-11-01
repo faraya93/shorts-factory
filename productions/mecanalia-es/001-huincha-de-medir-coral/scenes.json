@@ -81,8 +81,8 @@
     "effects_volume": 0.3,
     "music_volume": 0.1,
     "clip_audio": "off",
-    "music_file": "music-placeholder.mp3",
-    "music_credit": "Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0",
+    "music_file": null,
+    "music_credit": null,
     "clip_gate_db": -35
   },
   "scenes": [

@@ -453,6 +453,9 @@ engines automatically from these rules; the owner is never asked.
   If a render is ever launched without it, say so explicitly in the report.
 - Commit and push after each working phase, with a clear message. Never
   commit media files or .env.
+- NO MUSIC (owner decision 2026-11-01; marketing/design/scriptwriter lenses): productions 001-007 ship narration only, `music_file`/`music_credit` null, and no
+  publication carries a music credit line; the description template has no credit slot. A future track needs the owner's explicit OK and, if it carries a credit
+  condition, the rule below applies again.
 - Music credit: whatever a production stores in audio.music_credit MUST
   be copied into the YouTube description at publish time (Publisher
   phase). Never publish a video that uses a credited track without it.

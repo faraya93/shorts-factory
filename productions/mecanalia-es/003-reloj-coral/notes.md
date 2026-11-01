@@ -3,7 +3,7 @@
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué la manecilla de las horas casi no se mueve? 🕰️
 - **Descripción:** Tu reloj de pared tiene UN solo motor… entonces, ¿por qué la manecilla de las horas parece dormida? La respuesta está detrás de la esfera: tres por cuatro, doce. Compruébalo en tu casa y envíaselo a ese amigo que cree que cada manecilla tiene su propio motor.
-  Música: Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0 (placeholder track; the credit MUST be copied into the YouTube description).
+  Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
 - **Hashtags (description, not title):** #reloj #engranajes #comofunciona #shorts
 
 ## Production notes

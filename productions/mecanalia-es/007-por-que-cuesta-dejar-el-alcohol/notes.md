@@ -4,7 +4,7 @@
 - **Título:** ¿Por qué a algunas personas les cuesta tanto dejar el alcohol? 🧠
 - **Descripción:** Dos personas, la misma copa, resultados distintos. No es falta de voluntad: el riesgo de desarrollar un trastorno por consumo de alcohol surge de la interacción entre el punto de partida (herencia, ansiedad, estrés, empezar muy joven), un circuito de aprendizaje del cerebro que une el alcohol con señales y alivio, y una adaptación que hace más difícil parar (tolerancia, malestar al dejar de beber). No existe un "gen del alcoholismo" y los genes no son destino. La adicción es un espectro y la recuperación es posible con apoyo y tratamiento.
   **Si sientes que estás perdiendo el control con el alcohol, no tienes que enfrentarlo solo/a: habla con un profesional de salud o busca un grupo de apoyo en tu comunidad.** Este video es informativo y no diagnostica a nadie.
-  Música: "Sneaky Snitch" de Kevin MacLeod (incompetech.com), licencia CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/). *(pista provisional: copiar `audio.music_credit` de scenes.json)*
+  Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
 - **Hashtags:** #alcohol #cerebro #adicción #cuerpohumano #shorts
 - No country-specific hotline is named (pan-Hispanic audience), as the brief asks.
 
