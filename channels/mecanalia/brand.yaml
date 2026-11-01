@@ -23,6 +23,13 @@ duration:                             # seconds of narration (see CLAUDE.md form
     body: [40, 50]
     numbers: [50, 60]
 
+publish:                               # language-independent publish rules (channel variants add their texts and tags)
+  hashtags:                            # HASHTAG POLICY (marketing lead, 2026-11-01; enforced by tools/publish_package.py check)
+    min: 3                             # YouTube shows only the first 3 above the title and ignores a description with more than 15; 3-5 keeps them all useful
+    max: 5                             # the count varies per video: 1-3 topical tags + 1 family tag + the base
+    # slot order: topical tags first (what a viewer searches: the object, then the phenomenon), then the topic-family tag, then the fixed base LAST.
+    # The first slots are the ones YouTube displays, so they must be topical, never the base.
+
 topic_families:                       # STARTING mix, percent of the publishing slate; to be re-weighted by performance data
   objects: 40                         # everyday objects with a hidden mechanism
   body: 25                            # body / medical how-it-works

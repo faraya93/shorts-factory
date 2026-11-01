@@ -61,6 +61,12 @@ graph LR
   `publish.json` `{channel, title, description, music_credit, hashtags, video, cover}`. `tools/publish_package.py build|check` writes and validates it;
   `music_credit` is copied from `scenes.json audio.music_credit` and must reach the platform description. Productions 004 to 007 have one; 001 to 003 predate
   it (see "Left for the owner").
+- **Hashtag policy (marketing lead, 2026-11-01; rule in `brand.yaml publish.hashtags`, tags in each variant's `publish.hashtags`, enforced by `publish_package.py check`):**
+  3-5 hashtags per video (the count varies), in the description, never the title. Slot order: 1-3 TOPICAL tags first (the object, then the phenomenon: what a viewer
+  searches; YouTube shows only the first three above the title), then ONE family tag fixed per `topic_family` (es: objects #comofunciona, body #cuerpohumano, numbers
+  #curiosidades, whatif #quepasaria), then the fixed base LAST (`#shorts` only). Why: a big fixed base repeated on every video (the old `#shorts #ciencia #curiosidades
+  #comoFunciona`, and the de-facto `#cienciaencasa #sabiasque`) spends the few visible slots on generic words and dilutes the topical signal; a base of one plus a family
+  tag gives series grouping at no cost. Pan-Hispanic synonyms are welcome as topical tags (#palta #aguacate). `hashtags_base` is retired.
 - **The factory never holds platform credentials** and never publishes.
 - **Invariant:** nothing publishes without the owner's explicit per-video OK. The cadence around that gate belongs to the orchestrator's design.
 

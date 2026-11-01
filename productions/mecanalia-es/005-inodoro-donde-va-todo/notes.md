@@ -4,7 +4,7 @@
 - **Título:** ¿Adónde va todo cuando accionas el inodoro? 🚽
 - **Descripción:** Cuando accionas el inodoro, el agua no empuja: un sifón escondido jala todo, y después empieza un viaje subterráneo por la tubería de tu casa, el alcantarillado y una planta de tratamiento. 🚽 Sígueme y envíaselo a ese amigo que cree que todo desaparece.
   Música: Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0 (placeholder track; the credit MUST be copied into the YouTube description).
-- **Hashtags (description, not title):** #inodoro #sifon #aguaresidual #sabiasque #shorts
+- **Hashtags (description, not title):** #inodoro #sifon #aguaresidual #comofunciona #shorts
 
 ## Script (9 scenes, ~74 s: above the 55-70 s target; trimmed twice) and visual
 1 hook: ¿Adónde va la caca cuando accionas el inodoro? No la empuja el agua: la jala un sifón escondido. (cutaway toilet, waste pops in on "caca", ring marks the trap on "sifón")

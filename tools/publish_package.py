@@ -8,6 +8,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from factory import channel as channel_cfg  # noqa: E402
+
 REQUIRED = ("channel", "title", "description", "hashtags", "video", "cover")
 
 
@@ -31,6 +34,26 @@ def build(prod: Path) -> dict:
     return pkg
 
 
+def hashtag_errors(tags: list[str], channel_id: str, family: str) -> list[str]:
+    """The channel's hashtag policy (brand.yaml publish.hashtags + the variant's base/family tags): 3-5 tags, topical first,
+    then the topic-family tag, then the fixed base LAST; no duplicates."""
+    conf = channel_cfg.load(channel_id)["publish"]
+    rule, base, fam = conf["hashtags"], conf["hashtags"]["base"], conf["hashtags"]["family"].get(family)
+    low = [t.lower() for t in tags]
+    errs = [f"hashtag {t!r} is not a single #word" for t in tags if not re.fullmatch(r"#\w+", t)]
+    if not rule["min"] <= len(tags) <= rule["max"]:
+        errs.append(f"hashtags: {len(tags)} tags, policy is {rule['min']}-{rule['max']}")
+    if len(set(low)) != len(low):
+        errs.append("hashtags: duplicates")
+    if [t.lower() for t in base] != low[len(low) - len(base):]:
+        errs.append(f"hashtags: the fixed base {base} must come last")
+    if fam is None or fam.lower() not in low:
+        errs.append(f"hashtags: the {family} family tag {fam} is missing")
+    if low and (low[0] in [b.lower() for b in base] or low[0] == (fam or "").lower()):
+        errs.append("hashtags: the first slot must be topical (the object or mechanism), not the base or family tag")
+    return errs
+
+
 def check(prod: Path) -> list[str]:
     f = prod / "publish.json"
     if not f.exists():
@@ -42,6 +65,7 @@ def check(prod: Path) -> list[str]:
     cfg = json.loads((prod / "scenes.json").read_text(encoding="utf-8"))
     if (cfg.get("audio") or {}).get("music_credit") and pkg.get("music_credit") != cfg["audio"]["music_credit"]:
         errs.append("music_credit differs from scenes.json audio.music_credit (it must be copied into the description at publish time)")
+    errs += hashtag_errors(pkg.get("hashtags") or [], pkg["channel"], cfg["topic_family"])
     return errs
 
 

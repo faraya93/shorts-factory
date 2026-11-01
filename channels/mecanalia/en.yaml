@@ -26,5 +26,7 @@ publish:
     {hook_and_twist}
     {supportive_note}
     {music_credit}
-  hashtags_base: ["#shorts", "#science", "#howitworks", "#facts"]
+  hashtags:                            # tags only; the counts and slot order are the brand rule (brand.yaml publish.hashtags)
+    base: ["#shorts"]                  # fixed, minimal, always LAST: a repeated big base wastes the visible slots and dilutes topical signal
+    family: {objects: "#howitworks", body: "#humanbody", numbers: "#mindblowing", whatif: "#whatif"}  # one per topic_family, always present
   share_cta: "Follow me, and send it to {share_archetype}."

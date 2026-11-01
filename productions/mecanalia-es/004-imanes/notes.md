@@ -4,7 +4,7 @@
 - **Título:** ¿Por qué un imán no atrae todos los metales? 🧲
 - **Descripción:** Un imán levanta un clip, pero ignora una lata de aluminio… y las dos son de metal. 🧲 El secreto es un campo invisible que solo organiza ciertos materiales: lo ves cuando las limaduras de hierro se ordenan entre los dos polos, y cuando un clip se vuelve imán temporal para sostener a otro. Sígueme y envíaselo a ese amigo que cree que los imanes pegan a todo.
   Música: Sneaky Snitch by Kevin MacLeod (incompetech.com), CC BY 3.0 (placeholder track; the credit MUST be copied into the YouTube description).
-- **Hashtags (description, not title):** #imanes #magnetismo #cienciaencasa #sabiasque #shorts
+- **Hashtags (description, not title):** #imanes #magnetismo #comofunciona #shorts
 
 ## Script (7 scenes, ~69 s) and visual per line
 1 hook: ¿Por qué un imán levanta un clip, pero ignora una lata de aluminio, si las dos son de metal? Mira: el clip salta hacia el imán, y la lata ni se inmuta. (objects pop in on their words; the clip hops to the magnet; the magnet is pushed to the can, which never moves)

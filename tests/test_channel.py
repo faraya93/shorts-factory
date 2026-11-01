@@ -103,6 +103,21 @@ def test_packages_hold_no_credentials():
             assert k not in low, (f.name, k)
 
 
+def test_hashtag_policy_is_valid_and_enforced():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("publish_package", ROOT / "tools" / "publish_package.py")
+    pp = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(pp)
+    for cid in ("mecanalia-es", "mecanalia-en"):
+        cfg = channel.load(cid)
+        h = cfg["publish"]["hashtags"]
+        assert 3 <= h["min"] <= h["max"] <= 5 and h["base"] and set(h["family"]) == set(cfg["topic_families"]) - {"avoid"}, cid
+    assert pp.hashtag_errors(["#imanes", "#magnetismo", "#comofunciona", "#shorts"], "mecanalia-es", "objects") == []
+    for bad in (["#shorts", "#imanes", "#comofunciona"], ["#imanes", "#shorts", "#comofunciona"], ["#imanes", "#shorts"],
+                ["#a", "#b", "#c", "#d", "#e", "#comofunciona", "#shorts"], ["#imanes", "#imanes", "#comofunciona", "#shorts"]):
+        assert pp.hashtag_errors(bad, "mecanalia-es", "objects"), bad
+
+
 if __name__ == "__main__":
     tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
     for name, fn in tests:

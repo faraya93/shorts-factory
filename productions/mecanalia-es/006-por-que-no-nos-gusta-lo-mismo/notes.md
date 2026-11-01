@@ -4,7 +4,7 @@
 - **Título:** ¿Por qué no todos sentimos igual el sabor de la palta? 🥑
 - **Descripción:** La misma palta puede ser cremosa para una persona y casi incomible para otra. No es capricho: el sabor mezcla lengua, olfato y textura, cada persona tiene sensores distintos (por ejemplo, variantes del gen TAS2R38 para ciertos amargos y del receptor OR6A2 para el olor del cilantro) y el cerebro aprende qué le gusta con la infancia, la cultura y la experiencia. Un gusto es biología más aprendizaje, no un error del otro. Envíaselo a ese amigo que odia la palta (o el aguacate).
   Música: "Sneaky Snitch" de Kevin MacLeod (incompetech.com), licencia CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/). *(pista provisional: copiar `audio.music_credit` de scenes.json)*
-- **Hashtags:** #shorts #ciencia #sabor #palta #aguacate #curiosidades #comoFunciona
+- **Hashtags:** #palta #aguacate #sabor #cuerpohumano #shorts
 
 ## Script (final, 7 scenes; neutral Latin American Spanish; "palta" as in the owner's hook, "aguacate" in the description)
 1. **Hook** — ¿Cómo puede la misma palta ser cremosa para una persona y casi incomible para otra? Cambia la señal que recibe cada cerebro.
