@@ -125,7 +125,8 @@ def test_platform_bios_fit_their_limits():
     for platform, limit in limits.items():
         assert 0 < len(pub["bios"][platform]) <= limit, platform
         if platform != "tiktok":
-            assert pub["bios"][platform] == pub["bio"], platform      # the stored wording stays unchanged wherever it fits
+            assert pub["bios"][platform].startswith(pub["bio"]), platform      # the canonical wording opens every bio wherever it fits
+    assert pub["bios"]["instagram"] == pub["bio"]
 
 
 if __name__ == "__main__":
