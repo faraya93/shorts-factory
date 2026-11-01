@@ -20,12 +20,13 @@ duration:
   words_per_second: 2.87               # measured on the pilot narration (126 words in 43.9 s)
 
 publish:                               # texts the marketing lens uses to build each video's publish package (Spanish)
-  bio: "Por qué y cómo funcionan las cosas que ves y usas todos los días, vistas por dentro en 3D. Un mecanismo por video. Sígueme."
+  bio: "Por qué y cómo funcionan las cosas que ves y usas todos los días, explicado paso a paso. Un mecanismo por video. Sígueme."
   bios:                                # final per-platform profile bios, ready to paste; `bio` above is the canonical wording (tests/test_channel.py checks the limits)
-    instagram: "Por qué y cómo funcionan las cosas que ves y usas todos los días, vistas por dentro en 3D. Un mecanismo por video. Sígueme."   # limit 150
-    tiktok: "Por qué funcionan las cosas que usas a diario, por dentro y en 3D. Sígueme."   # limit 80; the canonical does not fit, so: the same promise, shortened
-    facebook: "Por qué y cómo funcionan las cosas que ves y usas todos los días, vistas por dentro en 3D. Un mecanismo por video. Sígueme. ¿Por qué tu cinta métrica no se dobla? ¿Por qué un imán ignora una lata?"   # limit 255; canonical + two real video questions
-    youtube: "Por qué y cómo funcionan las cosas que ves y usas todos los días, vistas por dentro en 3D. Un mecanismo por video. Sígueme.\n\nCada video abre un objeto cotidiano y te muestra su mecanismo paso a paso: ¿por qué tu cinta métrica no se dobla?, ¿por qué un imán ignora una lata de aluminio?, ¿por qué la manecilla de las horas casi no se mueve? Si te dio curiosidad, envíaselo a ese amigo que cree que todo funciona por magia."   # limit 1000; canonical + what each video does + the share ask
+    # EVERGREEN by owner ruling (2026-11-01): no technique named (not every video is 3D) and no video titles (they age as the catalogue grows).
+    instagram: "Por qué y cómo funcionan las cosas que ves y usas todos los días, explicado paso a paso. Un mecanismo por video. Sígueme."   # limit 150
+    tiktok: "Por qué funcionan las cosas que usas a diario, paso a paso. Sígueme."   # limit 80; the canonical does not fit, so: the same promise, shortened
+    facebook: "Por qué y cómo funcionan las cosas que ves y usas todos los días, explicado paso a paso. Un mecanismo por video. Sígueme. Si te dio curiosidad, envíaselo a ese amigo que cree que todo funciona por magia."   # limit 255; canonical + the share ask
+    youtube: "Por qué y cómo funcionan las cosas que ves y usas todos los días, explicado paso a paso. Un mecanismo por video. Sígueme.\n\nCada video toma algo de tu día a día y te enseña cómo funciona, un paso a la vez. Si te dio curiosidad, envíaselo a ese amigo que cree que todo funciona por magia."   # limit 1000; canonical + what each video does + the share ask
   description_template: |
     {hook_and_twist}
     {supportive_note}
