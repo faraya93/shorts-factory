@@ -67,6 +67,7 @@ graph LR
   #curiosidades, whatif #quepasaria), then the fixed base LAST (`#shorts` only). Why: a big fixed base repeated on every video (the old `#shorts #ciencia #curiosidades
   #comoFunciona`, and the de-facto `#cienciaencasa #sabiasque`) spends the few visible slots on generic words and dilutes the topical signal; a base of one plus a family
   tag gives series grouping at no cost. Pan-Hispanic synonyms are welcome as topical tags (#palta #aguacate). `hashtags_base` is retired.
+- **Cadence (marketing lead, 2026-11-03):** 1 video per day per automated platform, test kept pure to 2026-11-30; conditions to revisit in `docs/current/reports/cadence-decision.md`.
 - **The factory never holds platform credentials** and never publishes.
 - **Invariant:** nothing publishes without the owner's explicit per-video OK. The cadence around that gate belongs to the orchestrator's design.
 
