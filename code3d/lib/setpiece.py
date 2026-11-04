@@ -121,10 +121,10 @@ class Shot:
         return self.m.table
 
     def plate_mat(self, rough=0.5):
-        return tr.plain("plate", self.p.get("support_plate", "#FFF3E0"), rough=rough)
+        return tr.plain("plate", self.p.get("support_plate", "#EEEEEE"), rough=rough)
 
     def board_mat(self, rough=0.7):
-        return tr.plain("g_board", self.p.get("support_board", "#D2EAE6"), rough=rough)
+        return tr.plain("g_board", self.p.get("support_board", "#DDDDDD"), rough=rough)
 
     def plinth(self, w=26.0, d=8.0, h=1.2):
         return tr.rbox("plinth", (w, d, h), (0, 0, -h / 2 + 0.0), self.m.table, bevel=0.3)

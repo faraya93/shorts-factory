@@ -11,12 +11,13 @@ Publish package of each video: `final.mp4` + `cover.jpg` + `publish.json` (where
 | 004 | imanes | objects | rendered, gate PASS, closing standard | 2026-10-29 | publish.json |
 | 005 | inodoro-donde-va-todo | objects | rendered, gate PASS | 2026-10-29 | publish.json |
 
+| 006 | pieles-arrugadas-agua | body | rendered 47.8 s, gate PASS, Coral | 2026-11-03 | publish.json |
+| 007 | nube-cuantos-autos-pesa | numbers | rendered 50.5 s, gate PASS, departure: sky stage (celeste), violet accent | 2026-11-03 | publish.json |
+| 008 | hielo-que-pasaria-si-se-hundiera | whatif | rendered 54.4 s, gate PASS, departure: deep-blue cold stage (cobalto) | 2026-11-03 | publish.json |
+| 009 | jabon-agua-sola-no-quita-grasa | objects | rendered 47.9 s, gate PASS, departure: purple molecular world (violeta) | 2026-11-04 | publish.json |
+| 010 | corazon-botellas-al-dia | numbers | rendered 48.9 s, gate PASS, departure: raspberry stage (frambuesa), stylised fluid, no anatomy | 2026-11-04 | publish.json |
+| 011 | palomitas-por-que-explota-el-maiz | objects | rendered 49.2 s, gate PASS, departure: orange hot-kitchen stage (mandarina) | 2026-11-04 | publish.json |
+
 **Archived before publication (2026-11-03, owner instruction):** the ORIGINAL 006 (`por-que-no-nos-gusta-lo-mismo`, food taste) and 007 (`por-que-cuesta-dejar-el-alcohol`, alcohol)
 were moved to `productions/_archive/retired-006-007-2026-11-03/` (never published, never queued; judged "very monotonous, the same scene throughout"). Numbers 006-011 are
 REASSIGNED to the new batch below; any reference to an older "006/007" means the archived pair.
-| 006 | pieles-arrugadas-agua | draft | 2026-11-03 | |
-| 007 | nube-cuantos-autos-pesa | draft | 2026-11-03 | |
-| 008 | hielo-que-pasaria-si-se-hundiera | draft | 2026-11-03 | |
-| 009 | jabon-agua-sola-no-quita-grasa | draft | 2026-11-04 | |
-| 010 | corazon-botellas-al-dia | draft | 2026-11-04 | |
-| 011 | palomitas-por-que-explota-el-maiz | draft | 2026-11-04 | |

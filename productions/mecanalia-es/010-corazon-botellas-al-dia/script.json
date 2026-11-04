@@ -13,7 +13,7 @@
  "support_colours": {
   "board": "#FFF3E0",
   "plate": "#FFF3E0",
-  "reason": "Frambuesa defaults (cream board and plate, plinth cream): cream separates from the raspberry stage; the heart pump is a deep wine and the bottles carry their own tones."
+  "reason": "Frambuesa defaults (cream board and plate, plinth cream): cream separates from the raspberry stage; the heart pump is a deep indigo and the bottles carry their own tones."
  },
  "hero_colours": {},
  "rig_libs": [
@@ -242,5 +242,5 @@
   "The pump is a toy heart; the loop is one ring, not the real circuit; bottle and pool counts are drawn at a representative scale (about 176 bottles in the pull-back, a 22x8x5 block, 84 pools exactly).",
   "The sixty-second circuit is compressed in time."
  ],
- "departure": "Departure from Coral: the FRAMBUESA raspberry stage (#C21B68 -> #A31256), body-theme colour; cream supports; the pump heart is a near-black plum #38091B (a wine tone merged with the stage, dE 10.5, in the gate); mint accent #6BFFD8 with emission_gain tuned to 0.12."
+ "departure": "Departure from Coral: the FRAMBUESA raspberry stage (#C21B68 -> #A31256), body-theme colour; cream supports; the pump heart is a deep indigo #1F2F7A (wine and plum tones reflected the raspberry stage and measured only dE 9-18 from it in the gate); mint accent #6BFFD8 with emission_gain tuned to 0.12."
 }

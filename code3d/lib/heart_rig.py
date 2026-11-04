@@ -10,7 +10,7 @@ import setpiece as sp  # noqa: E402
 import tape_rig as tr  # noqa: E402
 import machine_kit as mk  # noqa: E402
 
-WINE, FLUID, CAP, SHIRT, SKINTONE, POOL = "#38091B", "#E8553C", "#F6F1E8", "#2F7DE6", "#FFD9B8", "#3FC1E8"
+WINE, FLUID, CAP, SHIRT, SKINTONE, POOL = "#1F2F7A", "#E8553C", "#F6F1E8", "#2F7DE6", "#FFD9B8", "#3FC1E8"
 BEAT = 0.857            # 70 beats per minute
 
 

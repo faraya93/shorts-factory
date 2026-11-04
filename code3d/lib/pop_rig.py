@@ -11,7 +11,7 @@ import setpiece as sp  # noqa: E402
 import tape_rig as tr  # noqa: E402
 import machine_kit as mk  # noqa: E402
 
-KERNEL, SHELL, STARCH, DROP, FOAM, STEEL, OIL, GEL = "#A8650F", "#C98A1E", "#FFE9B8", "#2E7FE0", "#FFF6E6", "#C9CED6", "#E8A33D", "#FFD98A"
+KERNEL, SHELL, STARCH, DROP, FOAM, STEEL, OIL, GEL = "#3A1C04", "#4A280A", "#FFE9B8", "#2E7FE0", "#FFF6E6", "#C9CED6", "#7A4A0C", "#FFD98A"
 
 
 def palette(S):

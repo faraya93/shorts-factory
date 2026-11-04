@@ -17,8 +17,8 @@
 Hook formula: ¿Cuántas botellas de refresco llenarías con la sangre que bombea tu corazón en un solo día? | false belief: (none: numbers/what-if) | reframe: Tu corazón no es solo un órgano que late: es la bomba más constante que tendrás. | share archetype: el amigo que dice que hoy no ha hecho nada
 
 ## Identity
-- Preset: **frambuesa**. Departure from Coral: the FRAMBUESA raspberry stage (#C21B68 -> #A31256), body-theme colour; cream supports; the pump heart is a near-black plum #38091B (a wine tone merged with the stage, dE 10.5, in the gate); mint accent #6BFFD8 with emission_gain tuned to 0.12.
-- Support colours: {"board": "#FFF3E0", "plate": "#FFF3E0"}: Frambuesa defaults (cream board and plate, plinth cream): cream separates from the raspberry stage; the heart pump is a deep wine and the bottles carry their own tones.
+- Preset: **frambuesa**. Departure from Coral: the FRAMBUESA raspberry stage (#C21B68 -> #A31256), body-theme colour; cream supports; the pump heart is a deep indigo #1F2F7A (wine and plum tones reflected the raspberry stage and measured only dE 9-18 from it in the gate); mint accent #6BFFD8 with emission_gain tuned to 0.12.
+- Support colours: {"board": "#FFF3E0", "plate": "#FFF3E0"}: Frambuesa defaults (cream board and plate, plinth cream): cream separates from the raspberry stage; the heart pump is a deep indigo and the bottles carry their own tones.
 
 ## Lens decisions
 - Marketing: numbers family, "¿Cuántas…?" with a tangible unit (soda bottles); every figure is a counter; it ends with a twist on the share archetype (a heart that does not rest).

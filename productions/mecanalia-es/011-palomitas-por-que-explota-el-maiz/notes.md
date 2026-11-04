@@ -17,8 +17,8 @@
 Hook formula: ¿Por qué un grano de maíz explota y se vuelve palomita? | false belief: El aceite caliente es lo que revienta el grano. | reframe: Una palomita no es un grano quemado: es un pequeño explosivo de vapor. | share archetype: el amigo que cree que el aceite hace explotar el maíz
 
 ## Identity
-- Preset: **mandarina**. Departure from Coral: the MANDARINA orange stage (#FF9A4A -> #F26A1D), a hot-kitchen mood, with the dark ink plinth #1B1410; supports are a dark roasted brown #4A2F26 (cream merged with the cream popcorn); accent blue #1B3BD6 (flames, dial) with emission_gain tuned to 0.1.
-- Support colours: {"board": "#4A2F26", "plate": "#4A2F26"}: Mandarina's cream supports merged with the cream popcorn foam, so the supports are a dark roasted brown derived from the preset's ink plinth #1B1410; the popcorn stays cream, the kernel a deep gold.
+- Preset: **mandarina**. Departure from Coral: the MANDARINA orange stage (#FF9A4A -> #F26A1D), a hot-kitchen mood, with the dark ink plinth #1B1410; supports are a deep teal #1B4F5A (cream merged with the cream popcorn; dark brown merged with the kernel); accent blue #1B3BD6 (flames, dial) with emission_gain tuned to 0.1. Kernel, shell and oil were darkened to roasted browns (#3A1C04 / #4A280A / #7A4A0C): the first gold tones measured dE 9-11 from the orange stage in the gate.
+- Support colours: {"board": "#1B4F5A", "plate": "#1B4F5A"}: Mandarina's cream supports merged with the cream popcorn, and a dark brown merged with the roasted kernel (dE 12-17); the supports are a deep teal #1B4F5A derived from the blue accent family, far from the orange stage, the browns and the cream.
 
 ## Lens decisions
 - Marketing: objects family, "¿Por qué…?" on a snack everybody has made, the false belief ("the hot oil bursts it") in the hook; two numbers carried by overlays (9 atm, 180 °C); the reframe renames the popcorn (a small steam explosive).

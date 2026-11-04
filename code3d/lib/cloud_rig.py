@@ -15,7 +15,7 @@ CLOUD, DROP, CAR_COLOURS, SMOKE = "#FFFFFF", "#1E4DB0", ("#F2C94C", "#6C4FD6", "
 
 def palette(S):
     return {"cloud": S.hero("big", CLOUD, rough=0.9, coat=0.0), "drop": S.glass("#5468E0", alpha=0.7, rough=0.05), "drop_solid": S.hero("small", DROP, rough=0.15, coat=0.4),
-            "smoke": S.hero("rubber", SMOKE, rough=0.9, coat=0.0), "wheel": S.hero("ink", "#1D1B2E", rough=0.6), "glass": S.glass("#FFFFFF", alpha=0.14, rough=0.1, name="foam"),
+            "smoke": S.hero("rubber", SMOKE, rough=0.9, coat=0.0), "wheel": S.hero("ink", "#202020", rough=0.6), "glass": S.glass("#FFFFFF", alpha=0.14, rough=0.1, name="foam"),
             "cars": [S.hero(r, h, rough=0.35, coat=0.4) for r, h in zip(("housing", "mark", "blade", "small"), CAR_COLOURS)], "plate": S.plate_mat(), "board": S.board_mat()}
 
 
