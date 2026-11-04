@@ -16,6 +16,7 @@ extra = list(cfg.get("render_args", [])) + [f"identity={identity.export_json(pro
 cmd = ["caffeinate", "-dimsu", "blender", "-b", "--python", str(ROOT / "code3d" / "scenes" / f"{prefix}_{n:02d}.py"), "--", f"production={prod}", "mode=draft", f"slot={slot}", f"stills={frames}", f"out={out}", *extra]
 if "--mask" in sys.argv: cmd.append("mask=1")
 if "--cpu" in sys.argv: cmd.append("cpu=1")
+if "--dbg" in sys.argv: cmd.append("debug=1")
 r = subprocess.run(cmd, capture_output=True, text=True)
 if "--debug" in sys.argv: print(r.stdout[-3000:])
 if r.returncode != 0 or "Traceback" in r.stdout + r.stderr: print((r.stdout + r.stderr)[-3500:]); sys.exit(1)

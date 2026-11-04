@@ -1,0 +1,264 @@
+{
+ "video": "hielo-que-pasaria-si-se-hundiera",
+ "title": "¿Qué pasaría si el hielo se hundiera? 🧊",
+ "topic_family": "whatif",
+ "preset": "cobalto",
+ "prefix": "ice",
+ "engine_reason": "Drawn route: glassware, ice cubes, a molecule lattice and a lake cross-section are rigid or simple translucent solids; the what-if is told by two versions of the same lake, no fluid simulation; counters and labels are Editor overlays.",
+ "hook_question": "¿Qué pasaría si el hielo se hundiera?",
+ "false_belief": "",
+ "closing_reframe": "El hielo no flota porque sí: el agua es de las pocas sustancias que se vuelven más ligeras al congelarse.",
+ "share_archetype": "el amigo que cree que todo se hunde en su propio líquido",
+ "caption_draft": "El hielo flota por una rareza del agua: al congelarse se expande y pesa menos. Si se hundiera, muchos lagos se congelarían de abajo hacia arriba. 🧊 Envíaselo a ese amigo que cree que todo se hunde en su propio líquido.",
+ "support_colours": {
+  "board": "#FFF3E0",
+  "plate": "#FFF3E0",
+  "reason": "Cobalto defaults (cream board/plate, cream plinth #F4EFE0): cream separates from the deep-blue stage; ice and water carry their own pale cyan tones."
+ },
+ "hero_colours": {},
+ "rig_libs": [
+  "tape_rig",
+  "setpiece",
+  "ice_rig"
+ ],
+ "gate_stills": {
+  "1": [
+   150
+  ],
+  "2": [
+   200
+  ],
+  "3": [
+   100
+  ],
+  "4": [
+   150
+  ],
+  "5": [
+   120
+  ],
+  "6": [
+   120
+  ],
+  "7": [
+   180
+  ]
+ },
+ "scenes": [
+  {
+   "name": "vasos",
+   "narration": "¿Qué pasaría si el hielo se hundiera? Casi todo sólido se hunde en su propio líquido, pero el hielo de tu vaso flota.",
+   "transformation": "un trozo de aceite congelado cae → se hunde, y un cubo de hielo cae → flota",
+   "camera": "órbita que cruza de un vaso al otro",
+   "emphasis": [
+    "hundiera",
+    "flota"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "SE HUNDE",
+     "at_word": "hunde",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.27,
+     "y": 0.76
+    },
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "FLOTA",
+     "at_word": "flota.",
+     "offset_s": 0.0,
+     "visible_s": 1.6,
+     "x": 0.73,
+     "y": 0.76
+    }
+   ]
+  },
+  {
+   "name": "expansion",
+   "narration": "Flota porque, al congelarse, el agua se expande: sus moléculas forman una red abierta, y el hielo ocupa un nueve por ciento más de espacio.",
+   "transformation": "moléculas apretadas en el líquido → una red abierta que sube el nivel un nueve por ciento",
+   "camera": "empuje hacia las moléculas y retroceso",
+   "emphasis": [
+    "expande",
+    "red",
+    "nueve"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "RED ABIERTA",
+     "at_word": "red",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.5,
+     "y": 0.3
+    },
+    {
+     "type": "counter",
+     "style": "mono",
+     "text_or_value": "+9 %",
+     "at_word": "nueve",
+     "offset_s": 0.0,
+     "visible_s": 2.2,
+     "x": 0.5,
+     "y": 0.8,
+     "from": 0
+    }
+   ]
+  },
+  {
+   "name": "cubos",
+   "narration": "Ahora imagina que no: cada cubo cae al fondo, y el hielo nuevo se apila encima del anterior.",
+   "transformation": "el vaso vacío → los cubos caen al fondo y se apilan hasta llenarlo",
+   "camera": "empuje y descenso por el vaso",
+   "emphasis": [
+    "fondo",
+    "apila"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "SE APILA",
+     "at_word": "apila.",
+     "offset_s": 0.0,
+     "visible_s": 1.4,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "lago",
+   "narration": "En un lago, el frío formaría hielo en la superficie, que se hundiría, y el lago se iría llenando desde abajo hasta quedar casi sólido.",
+   "transformation": "lago de agua → láminas de hielo caen y lo rellenan desde el fondo",
+   "camera": "travelling lateral del corte del lago",
+   "emphasis": [
+    "superficie",
+    "abajo",
+    "sólido"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "HIELO",
+     "at_word": "hielo",
+     "offset_s": 0.0,
+     "visible_s": 1.5,
+     "x": 0.5,
+     "y": 0.28
+    },
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "LAGO SÓLIDO",
+     "at_word": "sólido.",
+     "offset_s": 0.0,
+     "visible_s": 1.6,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "tapa",
+   "narration": "Pero hoy el hielo flota, hace de tapa que aísla el agua de abajo, y los peces pasan el invierno en ella.",
+   "transformation": "agua abierta en invierno → una tapa de hielo flota y los peces nadan debajo",
+   "camera": "dolly lateral siguiendo a los peces",
+   "emphasis": [
+    "tapa",
+    "peces"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "TAPA AISLANTE",
+     "at_word": "tapa",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.5,
+     "y": 0.3
+    },
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "PECES",
+     "at_word": "peces",
+     "offset_s": 0.0,
+     "visible_s": 1.4,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "congelado",
+   "narration": "Sin esa rareza del agua, muchos lagos se congelarían hasta el fondo, y casi nada podría vivir en ellos.",
+   "transformation": "lago con peces → hielo desde el fondo que atrapa a los peces; el sol apenas derrite la superficie",
+   "camera": "retroceso con elevación",
+   "emphasis": [
+    "fondo",
+    "vivir"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "CONGELADO",
+     "at_word": "fondo,",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "cierre",
+   "narration": "Así que el hielo no flota porque sí: el agua es de las pocas sustancias que se vuelven más ligeras al congelarse. Sígueme, y envíaselo a ese amigo que cree que todo se hunde en su propio líquido.",
+   "transformation": "un cubo de hielo flotando → muestra su red abierta de moléculas por dentro",
+   "camera": "órbita amplia con acercamiento al cubo",
+   "emphasis": [],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "ENVÍASELO",
+     "at_word": "envíaselo",
+     "duration_s": 2.6,
+     "x": 0.5,
+     "y": 0.84
+    }
+   ]
+  }
+ ],
+ "description": "El hielo flota por una rareza del agua: al congelarse se expande y ocupa un nueve por ciento más de espacio. Si se hundiera, muchos lagos se congelarían desde el fondo y casi nada podría vivir en ellos. 🧊 Sígueme y envíaselo a ese amigo que cree que todo se hunde en su propio líquido.",
+ "hashtags": [
+  "#hielo",
+  "#agua",
+  "#quepasaria",
+  "#shorts"
+ ],
+ "lens": [
+  "Marketing: what-if family, opening \"¿Qué pasaría si…?\" on an object in every viewer's glass; the false belief (\"everything sinks in its own liquid\") is stated in sentence 2 and busted in sentence 3; the share archetype is that belief.",
+  "Design: the imagined world and the real world are shown as two versions of the same lake (cross-section), plus a molecule scene and a cups lineup; camera moves in every scene; the molecule lattice reveal is the x-ray moment."
+ ],
+ "sources": [
+  "Ice is ~9 % larger in volume than the water it came from (density ~917 vs 1000 kg/m³).",
+  "Few substances expand on freezing (water, silicon, gallium, bismuth...): spoken as \"de las pocas sustancias\".",
+  "Ice lids insulate lake water and let fish overwinter: standard limnology. The sinking-ice lake is a hypothesis, hedged in the narration (\"muchos lagos\", \"casi sólido\", \"casi nada\")."
+ ],
+ "simplifications": [
+  "The what-if lake is a thought experiment: a real lake would also be affected by heat from the bottom, currents and depth; the video does not claim a figure.",
+  "Molecules are balls with a schematic open lattice (not the exact hexagonal geometry); level rise of +9 % is drawn on a beaker.",
+  "Ice sheets in the imagined lake are tiled plates, not a simulation."
+ ],
+ "departure": "Departure from Coral: the COBALTO deep-blue stage (#3F63F2 -> #2C47D4), a cold, what-if mood, with the cream plinth #F4EFE0; accent orange #FFA45C (emission_gain tuned to 0.15, luminance 3.46:1 on the stage). Ice and water were retuned to #68B8EA / #8FD3F5 after the gate blocked paler tones against the cream plinth."
+}

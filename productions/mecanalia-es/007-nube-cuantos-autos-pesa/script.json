@@ -1,0 +1,251 @@
+{
+ "video": "nube-cuantos-autos-pesa",
+ "title": "¿Cuántos autos pesa una nube? ☁️",
+ "topic_family": "numbers",
+ "preset": "celeste",
+ "prefix": "cloud",
+ "engine_reason": "Drawn route: balance scale, car swarm, droplet swarms and a cloud built from spheres share one chunky model language; scale and number spectacle (multiplication with pull-back) is the code3d sweet spot; counters are Editor overlays.",
+ "hook_question": "¿Cuántos autos pesa una nube?",
+ "false_belief": "",
+ "closing_reframe": "Una nube no es humo ni vapor ligero: es un lago de gotas flotando sobre ti.",
+ "share_archetype": "el amigo que cree que las nubes son humo",
+ "caption_draft": "Una nube pesa como más de trescientos autos y aun así flota: sus gotitas son tan pequeñas que el aire que sube las sostiene. ☁️ Envíaselo a ese amigo que cree que las nubes son humo.",
+ "support_colours": {
+  "board": "#E8956A",
+  "plate": "#E8956A",
+  "reason": "Celeste's cream support merged with the white cloud (dE 0.5-3), so the support is a peach derived from the original orange accent system (#E8956A, dE >= 20 from both ends of the sky gradient and from the white cloud); plinth stays the deep blue #2B4C70."
+ },
+ "hero_colours": {},
+ "rig_libs": [
+  "tape_rig",
+  "setpiece",
+  "cloud_rig"
+ ],
+ "gate_stills": {
+  "1": [
+   150
+  ],
+  "2": [
+   120
+  ],
+  "3": [
+   100
+  ],
+  "4": [
+   120
+  ],
+  "5": [
+   120
+  ],
+  "6": [
+   120
+  ],
+  "7": [
+   200
+  ]
+ },
+ "scenes": [
+  {
+   "name": "balanza",
+   "narration": "¿Cuántos autos pesa una nube? Parece que no pesa nada, porque flota, pero una nube común pesa como trescientos autos.",
+   "transformation": "una nube inclina la balanza → los autos se apilan en el otro plato hasta equilibrarla",
+   "camera": "retroceso mientras los autos se multiplican",
+   "emphasis": [
+    "trescientos"
+   ],
+   "overlays": [
+    {
+     "type": "counter",
+     "style": "mono",
+     "text_or_value": "300 AUTOS",
+     "at_word": "trescientos",
+     "offset_s": 0.0,
+     "visible_s": 3.2,
+     "x": 0.5,
+     "y": 0.8,
+     "from": 0
+    }
+   ]
+  },
+  {
+   "name": "cubo",
+   "narration": "Una nube está hecha de millones de gotitas de agua. Una nube de buen tamaño, de un kilómetro por lado, guarda unos quinientos mil kilos de agua.",
+   "transformation": "la nube se vuelve transparente y se ven las gotitas → el agua se junta en un bloque",
+   "camera": "empuje hacia dentro de la nube y órbita",
+   "emphasis": [
+    "gotitas",
+    "quinientos"
+   ],
+   "overlays": [
+    {
+     "type": "counter",
+     "style": "mono",
+     "text_or_value": "500.000 KG",
+     "at_word": "quinientos",
+     "offset_s": 0.0,
+     "visible_s": 3.0,
+     "x": 0.5,
+     "y": 0.8,
+     "from": 0
+    },
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "1 KM",
+     "at_word": "kilómetro",
+     "offset_s": 0.0,
+     "visible_s": 1.6,
+     "x": 0.5,
+     "y": 0.3
+    }
+   ]
+  },
+  {
+   "name": "corriente",
+   "narration": "Cada gotita es tan pequeña y liviana que el aire que sube la sostiene, como una pelusa en el viento.",
+   "transformation": "las gotas caen → la corriente de aire las empuja de vuelta hacia arriba",
+   "camera": "elevación lenta siguiendo la corriente",
+   "emphasis": [
+    "sube",
+    "pelusa"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "AIRE QUE SUBE",
+     "at_word": "sube",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "reparto",
+   "narration": "Y ese peso se reparte en un espacio enorme: un metro cúbico de nube apenas tiene medio gramo de agua.",
+   "transformation": "un metro cúbico con tres gotas → una cuadrícula de miles de cubos",
+   "camera": "retroceso amplio sobre la cuadrícula",
+   "emphasis": [
+    "cúbico",
+    "medio"
+   ],
+   "overlays": [
+    {
+     "type": "counter",
+     "style": "mono",
+     "text_or_value": "0,5 G",
+     "at_word": "medio",
+     "offset_s": 0.0,
+     "visible_s": 2.4,
+     "x": 0.5,
+     "y": 0.8,
+     "from": 0
+    },
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "1 M³",
+     "at_word": "cúbico",
+     "offset_s": 0.0,
+     "visible_s": 1.4,
+     "x": 0.5,
+     "y": 0.35
+    }
+   ]
+  },
+  {
+   "name": "lluvia",
+   "narration": "Cuando las gotitas chocan y se juntan, crecen. Y cuando una pesa demasiado para el aire, cae: eso es la lluvia.",
+   "transformation": "gotitas pequeñas → se funden en una gota grande que cae y salpica",
+   "camera": "inclinación hacia abajo siguiendo la gota",
+   "emphasis": [
+    "crecen",
+    "lluvia"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "GOTA GRANDE",
+     "at_word": "cae:",
+     "offset_s": 0.0,
+     "visible_s": 1.6,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "millon",
+   "narration": "Una sola gota de lluvia reúne alrededor de un millón de gotitas de nube.",
+   "transformation": "una gota de lluvia → estalla en una nube de miles de gotitas",
+   "camera": "retroceso al estallar",
+   "emphasis": [
+    "millón"
+   ],
+   "overlays": [
+    {
+     "type": "counter",
+     "style": "mono",
+     "text_or_value": "1.000.000",
+     "at_word": "millón",
+     "offset_s": 0.0,
+     "visible_s": 2.0,
+     "x": 0.5,
+     "y": 0.8,
+     "from": 0
+    }
+   ]
+  },
+  {
+   "name": "cierre",
+   "narration": "Así que una nube no es humo ni vapor ligero: es un lago de gotas flotando sobre ti. Sígueme, y envíaselo a ese amigo que cree que las nubes son humo.",
+   "transformation": "humo de chimenea tachado → la nube se aplana y se vuelve un lago en el cielo",
+   "camera": "órbita amplia",
+   "emphasis": [],
+   "overlays": [
+    {
+     "type": "mark",
+     "kind": "x",
+     "x": 0.3,
+     "y": 0.58,
+     "at_word": "humo",
+     "offset_s": 0.0
+    },
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "ENVÍASELO",
+     "at_word": "envíaselo",
+     "duration_s": 2.6,
+     "x": 0.5,
+     "y": 0.84
+    }
+   ]
+  }
+ ],
+ "departure": "Departure from Coral: the CELESTE sky stage (#8FD6F2 -> #62B4DC), because the subject is a cloud and the sky is its natural world. The preset's accent was changed from orange #E8590C to deep violet #5A1AA0 (orange reached only 1.76:1 luminance contrast against a light stage, the gate needs 3:1; emission_gain 0.1) and the supports are peach #E8956A (cream merged with the white cloud, dE 0.5-3). Lake blue #5468E0.",
+ "description": "Parece que no pesa nada, porque flota, pero una nube común pesa como unos trescientos autos: guarda unos quinientos mil kilos de agua en gotitas tan pequeñas que el aire que sube las sostiene. ☁️ Sígueme y envíaselo a ese amigo que cree que las nubes son humo.",
+ "hashtags": [
+  "#nubes",
+  "#clima",
+  "#curiosidades",
+  "#shorts"
+ ],
+ "lens": [
+  "Marketing: numbers family, hook \"¿Cuántos…?\" on a tangible object (a cloud everyone has seen) with the false belief stated inside the hook (it floats, so it weighs nothing); the number is carried by a balance scale and a car pile; closing reframe renames the cloud (a lake of drops).",
+  "Design: seven different set pieces (balance + 66-car pile with pull-back; cloud dissolving into droplets with a km cube; updraft with a falling droplet pushed back; 1 m³ cube multiplying into a grid; droplets merging into rain; a raindrop bursting; smoke crossed out and a floating lake). Every scene has a camera path and an in-shot transformation."
+ ],
+ "sources": [
+  "~500,000 kg of water in a 1 km³ fair-weather cumulus (about 0.5 g/m³): NCAR / USGS explanation (M. LeMone). Flagged: an order-of-magnitude figure, spoken as \"unos\".",
+  "\"Trescientos autos\": 500 t / ~1.5 t per car = ~330. Approximate, spoken as \"como trescientos\".",
+  "A raindrop (~2 mm) holds about a million cloud droplets (~20 µm): volume ratio (2000/20)^3 = 10^6, spoken as \"alrededor de un millón\"."
+ ],
+ "simplifications": [
+  "The pile shows 66 cars for 300 (counter carries the number); the droplet swarms are a few hundred spheres for millions; the \"km cube\" and the water block are schematic, not to scale.",
+  "Droplets are held up by updrafts (and tiny terminal speed); the scene shows it as arrows, no airflow simulation.",
+  "The lake-in-the-sky is a metaphor for the closing reframe."
+ ]
+}

@@ -126,7 +126,7 @@ identity:
       stage: {top: '#7A4DE8', bottom: '#5B30C2'}
       plinth: '#EDE7FF'
       support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#EDE7FF'}
-      emission_gain: 1.0
+      emission_gain: 0.12
       accent: '#3DFFB0'
       error: '#FFA0B4'
       annotation: '#FFFFFF'
@@ -138,7 +138,7 @@ identity:
       stage: {top: '#FF9A4A', bottom: '#F26A1D'}
       plinth: '#1B1410'
       support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#1B1410'}
-      emission_gain: 1.0
+      emission_gain: 0.1
       accent: '#1B3BD6'
       error: '#7A0019'
       annotation: '#1B1410'
@@ -186,7 +186,7 @@ identity:
       stage: {top: '#3F63F2', bottom: '#2C47D4'}
       plinth: '#F4EFE0'
       support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#F4EFE0'}
-      emission_gain: 1.0
+      emission_gain: 0.15
       accent: '#FFA45C'
       error: '#FFD0C2'
       annotation: '#FFFFFF'
@@ -198,7 +198,7 @@ identity:
       stage: {top: '#C21B68', bottom: '#A31256'}
       plinth: '#FFF3E0'
       support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#FFF3E0'}
-      emission_gain: 1.0
+      emission_gain: 0.12
       accent: '#6BFFD8'
       error: '#1F0A14'
       annotation: '#FFFFFF'
@@ -210,12 +210,12 @@ identity:
       stage: {top: '#8FD6F2', bottom: '#62B4DC'}
       plinth: '#2B4C70'
       support: {board: '#FFF3E0', plate: '#FFF3E0', panel: '#2B4C70'}
-      emission_gain: 1.0
-      accent: '#E8590C'
+      emission_gain: 0.1
+      accent: '#5A1AA0'
       error: '#C92A2A'
       annotation: '#0B2540'
-      subtitle: {mode: ink, ink: '#0B2540', outline: '#FFFFFF', spoken_box: '#0B2540', spoken_text: '#FFFFFF', emphasis: '#E8590C'}
-      mark: {body: '#0B2540', inner: '#FFFFFF', accent: '#E8590C'}
+      subtitle: {mode: ink, ink: '#0B2540', outline: '#FFFFFF', spoken_box: '#0B2540', spoken_text: '#FFFFFF', emphasis: '#5A1AA0'}
+      mark: {body: '#0B2540', inner: '#FFFFFF', accent: '#5A1AA0'}
       lighting: studio
     reference-dark:
       legacy: true            # frozen test/legacy look: exempt from the support-colour separation rule

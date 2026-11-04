@@ -1,0 +1,247 @@
+{
+ "video": "jabon-agua-sola-no-quita-grasa",
+ "title": "¿Por qué el agua sola no quita la grasa? 🧼",
+ "topic_family": "objects",
+ "preset": "violeta",
+ "prefix": "soap",
+ "engine_reason": "Drawn route: a palm plate, a soap bar and a molecular world of spheres (heads, tails, grease, water) are simple rigid solids in swarms; the story is multiplication (one molecule, then many, then micelles) with pull-backs; no fluid simulation, labels are Editor overlays.",
+ "hook_question": "¿Por qué el agua sola no te quita la grasa de las manos?",
+ "false_belief": "El jabón solo ayuda a resbalar y el agua es la que limpia.",
+ "closing_reframe": "El jabón no es un resbalón: es un puente entre el agua y la grasa.",
+ "share_archetype": "el amigo que se lava las manos solo con agua",
+ "caption_draft": "El agua y la grasa no se mezclan; el jabón sí: una cabeza que ama el agua y una cola que ama la grasa rodean la mancha y la rompen en bolitas que el agua se lleva. 🧼 Envíaselo a ese amigo que se lava las manos solo con agua.",
+ "support_colours": {
+  "board": "#FFF3E0",
+  "plate": "#FFF3E0",
+  "reason": "Violeta defaults (cream board and plate, plinth #EDE7FF): cream separates from the purple stage; the molecules carry their own colours."
+ },
+ "hero_colours": {},
+ "rig_libs": [
+  "tape_rig",
+  "setpiece",
+  "soap_rig"
+ ],
+ "gate_stills": {
+  "1": [
+   150
+  ],
+  "2": [
+   120
+  ],
+  "3": [
+   120
+  ],
+  "4": [
+   120
+  ],
+  "5": [
+   120
+  ],
+  "6": [
+   100
+  ],
+  "7": [
+   180
+  ]
+ },
+ "scenes": [
+  {
+   "name": "mano",
+   "narration": "¿Por qué el agua sola no te quita la grasa de las manos? Creemos que el jabón solo ayuda a resbalar, pero hace algo mucho más raro.",
+   "transformation": "el agua cae y la grasa se queda → una barra de jabón la arrastra, tachada como falsa explicación",
+   "camera": "órbita baja alrededor de la palma",
+   "emphasis": [
+    "agua",
+    "resbalar"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "GRASA",
+     "at_word": "grasa",
+     "offset_s": 0.0,
+     "visible_s": 1.6,
+     "x": 0.5,
+     "y": 0.72
+    },
+    {
+     "type": "mark",
+     "kind": "x",
+     "x": 0.5,
+     "y": 0.52,
+     "at_word": "resbalar,",
+     "offset_s": 0.0
+    }
+   ]
+  },
+  {
+   "name": "agua-aceite",
+   "narration": "El agua y el aceite no se mezclan: las moléculas de agua se atraen entre sí y empujan la grasa a un lado.",
+   "transformation": "grasa dispersa entre moléculas de agua → el agua se cierra y compacta la grasa en una bola",
+   "camera": "empuje al mundo molecular y órbita",
+   "emphasis": [
+    "no se mezclan",
+    "atraen"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "AGUA",
+     "at_word": "agua",
+     "offset_s": 0.0,
+     "visible_s": 1.4,
+     "x": 0.27,
+     "y": 0.8
+    },
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "ACEITE",
+     "at_word": "aceite",
+     "offset_s": 0.0,
+     "visible_s": 1.4,
+     "x": 0.73,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "molecula",
+   "narration": "Cada molécula de jabón tiene dos extremos: una cabeza que se lleva bien con el agua y una cola que se lleva bien con la grasa.",
+   "transformation": "una molécula de jabón → se multiplican en un anillo de moléculas",
+   "camera": "acercamiento y órbita, retroceso final",
+   "emphasis": [
+    "cabeza",
+    "cola"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "CABEZA",
+     "at_word": "cabeza",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.5,
+     "y": 0.35
+    },
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "COLA",
+     "at_word": "cola",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.5,
+     "y": 0.75
+    }
+   ]
+  },
+  {
+   "name": "rodean",
+   "narration": "Las colas se clavan en la grasa, las cabezas quedan afuera, hacia el agua, y rodean la mancha.",
+   "transformation": "una gota de grasa desnuda → las moléculas llegan y la cubren con las cabezas hacia afuera",
+   "camera": "órbita completa con empuje",
+   "emphasis": [
+    "colas",
+    "cabezas"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "CABEZAS AFUERA",
+     "at_word": "cabezas",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "bolitas",
+   "narration": "Al frotar, la mancha se rompe en miles de bolitas diminutas, cada una cubierta de cabezas de jabón.",
+   "transformation": "una mancha grande → se rompe en ocho bolitas pequeñas, cada una cubierta de jabón",
+   "camera": "retroceso amplio mientras estalla",
+   "emphasis": [
+    "rompe",
+    "bolitas"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "MILES DE BOLITAS",
+     "at_word": "miles",
+     "offset_s": 0.0,
+     "visible_s": 2.2,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "enjuague",
+   "narration": "Cubiertas así, las bolitas sí se mezclan con el agua, y el enjuague se las lleva.",
+   "transformation": "las bolitas flotan entre el agua → la corriente se las lleva y la palma queda limpia",
+   "camera": "travelling lateral siguiendo la corriente",
+   "emphasis": [
+    "enjuague"
+   ],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "SE LAS LLEVA",
+     "at_word": "enjuague",
+     "offset_s": 0.0,
+     "visible_s": 1.8,
+     "x": 0.5,
+     "y": 0.8
+    }
+   ]
+  },
+  {
+   "name": "cierre",
+   "narration": "Así que el jabón no es un resbalón: es un puente entre el agua y la grasa. Sígueme, y envíaselo a ese amigo que se lava las manos solo con agua.",
+   "transformation": "agua a un lado y grasa al otro → las moléculas forman un puente entre ambos",
+   "camera": "órbita amplia con retroceso",
+   "emphasis": [],
+   "overlays": [
+    {
+     "type": "label",
+     "style": "tag",
+     "text_or_value": "ENVÍASELO",
+     "at_word": "envíaselo",
+     "duration_s": 2.6,
+     "x": 0.5,
+     "y": 0.84
+    }
+   ]
+  }
+ ],
+ "description": "El agua y la grasa no se mezclan; el jabón sí: una cabeza que se lleva bien con el agua y una cola que se lleva bien con la grasa rodean la mancha y la rompen en bolitas que el enjuague se lleva. 🧼 Sígueme y envíaselo a ese amigo que se lava las manos solo con agua.",
+ "hashtags": [
+  "#jabon",
+  "#quimica",
+  "#comofunciona",
+  "#shorts"
+ ],
+ "lens": [
+  "Marketing: objects family, \"¿Por qué…?\" about something everybody does daily (washing hands), false belief in the hook (\"the soap just helps it slip\"), reframe renames the soap (a bridge); the molecular world is the x-ray/inside moment.",
+  "Design: a molecular toy-world look (glossy spheres, mint bonds) on a violet stage, 7 set pieces: palm with falling water; squeeze of the grease; one molecule that multiplies into a ring; a coated drop; the drop breaking into eight; the rinse; the bridge."
+ ],
+ "sources": [
+  "Soap molecules are amphiphiles: a hydrophilic head and a hydrophobic tail; they surround grease as micelles that stay suspended in water and rinse away: standard chemistry.",
+  "Water molecules attract each other (hydrogen bonds), which is why grease is pushed together: drawn as mint bonds."
+ ],
+ "simplifications": [
+  "Heads and tails are balls and sticks, sizes not to scale; real micelles hold hundreds of molecules and are far smaller; the video shows eight droplets for \"miles\".",
+  "The drop breaking when rubbed is a choreographed split, not a simulation.",
+  "\"Se lleva bien\" is plain language for hydrophilic/hydrophobic."
+ ],
+ "departure": "Departure from Coral: the VIOLETA purple stage (#7A4DE8 -> #5B30C2) so the glossy molecular toy-world (pink heads, gold tails, amber grease, cyan water) pops; cream supports and cream plinth #EDE7FF; accent mint #3DFFB0 with emission_gain tuned to 0.12."
+}

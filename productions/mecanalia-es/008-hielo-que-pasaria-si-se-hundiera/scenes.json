@@ -1,0 +1,350 @@
+{
+  "channel": "mecanalia-es",
+  "video": "hielo-que-pasaria-si-se-hundiera",
+  "title": "¿Qué pasaría si el hielo se hundiera? 🧊",
+  "topic_family": "whatif",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: glassware, ice cubes, a molecule lattice and a lake cross-section are rigid or simple translucent solids; the what-if is told by two versions of the same lake, no fluid simulation; counters and labels are Editor overlays.",
+  "hook_question": "¿Qué pasaría si el hielo se hundiera?",
+  "false_belief": "",
+  "closing_reframe": "El hielo no flota porque sí: el agua es de las pocas sustancias que se vuelven más ligeras al congelarse.",
+  "share_archetype": "el amigo que cree que todo se hunde en su propio líquido",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#3F63F2",
+      "description": "COBALTO studio seamless: stage gradient #3F63F2 to #2C47D4, plinth #F4EFE0, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#3F63F2",
+        "name": "stage top"
+      },
+      {
+        "hex": "#2C47D4",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#F4EFE0",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#FFA45C",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#FFA45C",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#FFFFFF",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#FFD0C2",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "cobalto"
+  },
+  "render_style": "ice-set",
+  "scene_script_prefix": "ice",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=cobalto"
+  ],
+  "identity_preset": "cobalto",
+  "caption_draft": "El hielo flota por una rareza del agua: al congelarse se expande y pesa menos. Si se hundiera, muchos lagos se congelarían de abajo hacia arriba. 🧊 Envíaselo a ese amigo que cree que todo se hunde en su propio líquido.",
+  "gate_stills": {
+    "1": [
+      150
+    ],
+    "2": [
+      200
+    ],
+    "3": [
+      100
+    ],
+    "4": [
+      150
+    ],
+    "5": [
+      120
+    ],
+    "6": [
+      120
+    ],
+    "7": [
+      180
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "ice_rig"
+  ],
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Cobalto defaults (cream board/plate, cream plinth #F4EFE0): cream separates from the deep-blue stage; ice and water carry their own pale cyan tones."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "vasos",
+      "prompt": "Escena dibujada con código (cobalto): vasos.",
+      "narration": "¿Qué pasaría si el hielo se hundiera? Casi todo sólido se hunde en su propio líquido, pero el hielo de tu vaso flota.",
+      "target_duration_s": 8,
+      "transformation": "un trozo de aceite congelado cae → se hunde, y un cubo de hielo cae → flota",
+      "camera": "órbita que cruza de un vaso al otro",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "hundiera",
+        "flota"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SE HUNDE",
+          "at_word": "hunde",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.27,
+          "y": 0.76
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "FLOTA",
+          "at_word": "flota.",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.73,
+          "y": 0.76
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "expansion",
+      "prompt": "Escena dibujada con código (cobalto): expansion.",
+      "narration": "Flota porque, al congelarse, el agua se expande: sus moléculas forman una red abierta, y el hielo ocupa un nueve por ciento más de espacio.",
+      "target_duration_s": 8,
+      "transformation": "moléculas apretadas en el líquido → una red abierta que sube el nivel un nueve por ciento",
+      "camera": "empuje hacia las moléculas y retroceso",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "expande",
+        "red",
+        "nueve"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "RED ABIERTA",
+          "at_word": "red",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.3
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "+9 %",
+          "at_word": "nueve",
+          "offset_s": 0.0,
+          "visible_s": 2.2,
+          "x": 0.5,
+          "y": 0.8,
+          "from": 0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "cubos",
+      "prompt": "Escena dibujada con código (cobalto): cubos.",
+      "narration": "Ahora imagina que no: cada cubo cae al fondo, y el hielo nuevo se apila encima del anterior.",
+      "target_duration_s": 8,
+      "transformation": "el vaso vacío → los cubos caen al fondo y se apilan hasta llenarlo",
+      "camera": "empuje y descenso por el vaso",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "fondo",
+        "apila"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SE APILA",
+          "at_word": "apila.",
+          "offset_s": 0.0,
+          "visible_s": 1.4,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "lago",
+      "prompt": "Escena dibujada con código (cobalto): lago.",
+      "narration": "En un lago, el frío formaría hielo en la superficie, que se hundiría, y el lago se iría llenando desde abajo hasta quedar casi sólido.",
+      "target_duration_s": 8,
+      "transformation": "lago de agua → láminas de hielo caen y lo rellenan desde el fondo",
+      "camera": "travelling lateral del corte del lago",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "superficie",
+        "abajo",
+        "sólido"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "HIELO",
+          "at_word": "hielo",
+          "offset_s": 0.0,
+          "visible_s": 1.5,
+          "x": 0.5,
+          "y": 0.28
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LAGO SÓLIDO",
+          "at_word": "sólido.",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "tapa",
+      "prompt": "Escena dibujada con código (cobalto): tapa.",
+      "narration": "Pero hoy el hielo flota, hace de tapa que aísla el agua de abajo, y los peces pasan el invierno en ella.",
+      "target_duration_s": 8,
+      "transformation": "agua abierta en invierno → una tapa de hielo flota y los peces nadan debajo",
+      "camera": "dolly lateral siguiendo a los peces",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tapa",
+        "peces"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "TAPA AISLANTE",
+          "at_word": "tapa",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.3
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "PECES",
+          "at_word": "peces",
+          "offset_s": 0.0,
+          "visible_s": 1.4,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "congelado",
+      "prompt": "Escena dibujada con código (cobalto): congelado.",
+      "narration": "Sin esa rareza del agua, muchos lagos se congelarían hasta el fondo, y casi nada podría vivir en ellos.",
+      "target_duration_s": 8,
+      "transformation": "lago con peces → hielo desde el fondo que atrapa a los peces; el sol apenas derrite la superficie",
+      "camera": "retroceso con elevación",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "fondo",
+        "vivir"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CONGELADO",
+          "at_word": "fondo,",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (cobalto): cierre.",
+      "narration": "Así que el hielo no flota porque sí: el agua es de las pocas sustancias que se vuelven más ligeras al congelarse. Sígueme, y envíaselo a ese amigo que cree que todo se hunde en su propio líquido.",
+      "target_duration_s": 8,
+      "transformation": "un cubo de hielo flotando → muestra su red abierta de moléculas por dentro",
+      "camera": "órbita amplia con acercamiento al cubo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

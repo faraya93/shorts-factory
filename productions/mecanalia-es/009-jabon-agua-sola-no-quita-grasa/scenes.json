@@ -1,0 +1,334 @@
+{
+  "channel": "mecanalia-es",
+  "video": "jabon-agua-sola-no-quita-grasa",
+  "title": "¿Por qué el agua sola no quita la grasa? 🧼",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: a palm plate, a soap bar and a molecular world of spheres (heads, tails, grease, water) are simple rigid solids in swarms; the story is multiplication (one molecule, then many, then micelles) with pull-backs; no fluid simulation, labels are Editor overlays.",
+  "hook_question": "¿Por qué el agua sola no te quita la grasa de las manos?",
+  "false_belief": "El jabón solo ayuda a resbalar y el agua es la que limpia.",
+  "closing_reframe": "El jabón no es un resbalón: es un puente entre el agua y la grasa.",
+  "share_archetype": "el amigo que se lava las manos solo con agua",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#7A4DE8",
+      "description": "VIOLETA studio seamless: stage gradient #7A4DE8 to #5B30C2, plinth #EDE7FF, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#7A4DE8",
+        "name": "stage top"
+      },
+      {
+        "hex": "#5B30C2",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#EDE7FF",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#3DFFB0",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#3DFFB0",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#FFFFFF",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#FFA0B4",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "violeta"
+  },
+  "render_style": "soap-set",
+  "scene_script_prefix": "soap",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=violeta"
+  ],
+  "identity_preset": "violeta",
+  "caption_draft": "El agua y la grasa no se mezclan; el jabón sí: una cabeza que ama el agua y una cola que ama la grasa rodean la mancha y la rompen en bolitas que el agua se lleva. 🧼 Envíaselo a ese amigo que se lava las manos solo con agua.",
+  "gate_stills": {
+    "1": [
+      150
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      120
+    ],
+    "4": [
+      120
+    ],
+    "5": [
+      120
+    ],
+    "6": [
+      100
+    ],
+    "7": [
+      180
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "soap_rig"
+  ],
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Violeta defaults (cream board and plate, plinth #EDE7FF): cream separates from the purple stage; the molecules carry their own colours."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "mano",
+      "prompt": "Escena dibujada con código (violeta): mano.",
+      "narration": "¿Por qué el agua sola no te quita la grasa de las manos? Creemos que el jabón solo ayuda a resbalar, pero hace algo mucho más raro.",
+      "target_duration_s": 8,
+      "transformation": "el agua cae y la grasa se queda → una barra de jabón la arrastra, tachada como falsa explicación",
+      "camera": "órbita baja alrededor de la palma",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "agua",
+        "resbalar"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "GRASA",
+          "at_word": "grasa",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.72
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.5,
+          "y": 0.52,
+          "at_word": "resbalar,",
+          "offset_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "agua-aceite",
+      "prompt": "Escena dibujada con código (violeta): agua-aceite.",
+      "narration": "El agua y el aceite no se mezclan: las moléculas de agua se atraen entre sí y empujan la grasa a un lado.",
+      "target_duration_s": 8,
+      "transformation": "grasa dispersa entre moléculas de agua → el agua se cierra y compacta la grasa en una bola",
+      "camera": "empuje al mundo molecular y órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "no se mezclan",
+        "atraen"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "AGUA",
+          "at_word": "agua",
+          "offset_s": 0.0,
+          "visible_s": 1.4,
+          "x": 0.27,
+          "y": 0.8
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ACEITE",
+          "at_word": "aceite",
+          "offset_s": 0.0,
+          "visible_s": 1.4,
+          "x": 0.73,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "molecula",
+      "prompt": "Escena dibujada con código (violeta): molecula.",
+      "narration": "Cada molécula de jabón tiene dos extremos: una cabeza que se lleva bien con el agua y una cola que se lleva bien con la grasa.",
+      "target_duration_s": 8,
+      "transformation": "una molécula de jabón → se multiplican en un anillo de moléculas",
+      "camera": "acercamiento y órbita, retroceso final",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cabeza",
+        "cola"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CABEZA",
+          "at_word": "cabeza",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.35
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "COLA",
+          "at_word": "cola",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.75
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "rodean",
+      "prompt": "Escena dibujada con código (violeta): rodean.",
+      "narration": "Las colas se clavan en la grasa, las cabezas quedan afuera, hacia el agua, y rodean la mancha.",
+      "target_duration_s": 8,
+      "transformation": "una gota de grasa desnuda → las moléculas llegan y la cubren con las cabezas hacia afuera",
+      "camera": "órbita completa con empuje",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "colas",
+        "cabezas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CABEZAS AFUERA",
+          "at_word": "cabezas",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "bolitas",
+      "prompt": "Escena dibujada con código (violeta): bolitas.",
+      "narration": "Al frotar, la mancha se rompe en miles de bolitas diminutas, cada una cubierta de cabezas de jabón.",
+      "target_duration_s": 8,
+      "transformation": "una mancha grande → se rompe en ocho bolitas pequeñas, cada una cubierta de jabón",
+      "camera": "retroceso amplio mientras estalla",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "rompe",
+        "bolitas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "MILES DE BOLITAS",
+          "at_word": "miles",
+          "offset_s": 0.0,
+          "visible_s": 2.2,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "enjuague",
+      "prompt": "Escena dibujada con código (violeta): enjuague.",
+      "narration": "Cubiertas así, las bolitas sí se mezclan con el agua, y el enjuague se las lleva.",
+      "target_duration_s": 8,
+      "transformation": "las bolitas flotan entre el agua → la corriente se las lleva y la palma queda limpia",
+      "camera": "travelling lateral siguiendo la corriente",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "enjuague"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SE LAS LLEVA",
+          "at_word": "enjuague",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (violeta): cierre.",
+      "narration": "Así que el jabón no es un resbalón: es un puente entre el agua y la grasa. Sígueme, y envíaselo a ese amigo que se lava las manos solo con agua.",
+      "target_duration_s": 8,
+      "transformation": "agua a un lado y grasa al otro → las moléculas forman un puente entre ambos",
+      "camera": "órbita amplia con retroceso",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

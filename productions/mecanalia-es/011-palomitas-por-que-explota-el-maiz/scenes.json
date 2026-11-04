@@ -1,0 +1,358 @@
+{
+  "channel": "mecanalia-es",
+  "video": "palomitas-por-que-explota-el-maiz",
+  "title": "¿Por qué explota un grano de maíz? 🍿",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: a kernel in nested translucent solids (shell, starch, water drop), a pressure dial, shards and cream spheres for the foam are simple rigid forms; the transformation arc (kernel to popcorn) and the pot overflow are choreographed in swarms, no fluid simulation; counters are Editor overlays.",
+  "hook_question": "¿Por qué un grano de maíz explota y se vuelve palomita?",
+  "false_belief": "El aceite caliente es lo que revienta el grano.",
+  "closing_reframe": "Una palomita no es un grano quemado: es un pequeño explosivo de vapor.",
+  "share_archetype": "el amigo que cree que el aceite hace explotar el maíz",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FF9A4A",
+      "description": "MANDARINA studio seamless: stage gradient #FF9A4A to #F26A1D, plinth #1B1410, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FF9A4A",
+        "name": "stage top"
+      },
+      {
+        "hex": "#F26A1D",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1B1410",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#1B3BD6",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#1B3BD6",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1B1410",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "mandarina"
+  },
+  "render_style": "pop-set",
+  "scene_script_prefix": "pop",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=mandarina"
+  ],
+  "identity_preset": "mandarina",
+  "caption_draft": "Dentro de cada grano hay una gotita de agua: al calentarse se vuelve vapor, la presión sube hasta unas 9 atmósferas y la cáscara cede de golpe. 🍿 Envíaselo a ese amigo que cree que el aceite hace explotar el maíz.",
+  "gate_stills": {
+    "1": [
+      150
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      100
+    ],
+    "4": [
+      80
+    ],
+    "5": [
+      120
+    ],
+    "6": [
+      120
+    ],
+    "7": [
+      200
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "pop_rig"
+  ],
+  "support_colours": {
+    "board": "#4A2F26",
+    "plate": "#4A2F26",
+    "reason": "Mandarina's cream supports merged with the cream popcorn foam, so the supports are a dark roasted brown derived from the preset's ink plinth #1B1410; the popcorn stays cream, the kernel a deep gold."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "olla",
+      "prompt": "Escena dibujada con código (mandarina): olla.",
+      "narration": "¿Por qué un grano de maíz explota y se vuelve palomita? Muchos creen que lo revienta el aceite caliente, pero el secreto está adentro.",
+      "target_duration_s": 8,
+      "transformation": "granos y aceite en una olla sobre el fuego → la cámara se mete dentro de un grano",
+      "camera": "órbita a la olla y empuje hacia un grano",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "aceite",
+        "adentro"
+      ],
+      "data_overlays": [
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.5,
+          "y": 0.45,
+          "at_word": "aceite",
+          "offset_s": 0.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "grano",
+      "prompt": "Escena dibujada con código (mandarina): grano.",
+      "narration": "Dentro de cada grano hay una gotita de agua, rodeada de almidón y de una cáscara dura que no deja escapar nada.",
+      "target_duration_s": 8,
+      "transformation": "un grano opaco → se vuelve transparente y muestra su gotita, el almidón y la cáscara",
+      "camera": "empuje y órbita alrededor del grano",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "gotita",
+        "almidón",
+        "cáscara"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "GOTITA",
+          "at_word": "gotita",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.8
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ALMIDÓN",
+          "at_word": "almidón,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.28,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CÁSCARA",
+          "at_word": "cáscara",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.72,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "presion",
+      "prompt": "Escena dibujada con código (mandarina): presion.",
+      "narration": "Al calentarse, el agua hierve, pero la cáscara la deja atrapada, y la presión sube y sube.",
+      "target_duration_s": 8,
+      "transformation": "una gotita → vapor que se agita y hace subir un manómetro, el grano se hincha",
+      "camera": "empuje al grano con vibración lenta",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "hierve",
+        "presión"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "VAPOR",
+          "at_word": "hierve,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.8
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "PRESIÓN",
+          "at_word": "presión",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.28
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "cede",
+      "prompt": "Escena dibujada con código (mandarina): cede.",
+      "narration": "Cuando llega a unas nueve atmósferas y unos ciento ochenta grados, la cáscara cede de golpe.",
+      "target_duration_s": 8,
+      "transformation": "termómetro y manómetro llegan al límite → la cáscara estalla en fragmentos",
+      "camera": "plano fijo-vivo con empuje corto y sacudida",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "nueve",
+        "ciento ochenta"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "9 ATM",
+          "at_word": "nueve",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.3,
+          "y": 0.8,
+          "from": 0
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "180 °C",
+          "at_word": "ciento",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.7,
+          "y": 0.8,
+          "from": 0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "espuma",
+      "prompt": "Escena dibujada con código (mandarina): espuma.",
+      "narration": "El almidón, ya blando como gel, se expande con el vapor, y se enfría y se endurece al instante, hecho espuma.",
+      "target_duration_s": 8,
+      "transformation": "el almidón blando → se infla y se endurece en una espuma blanca irregular",
+      "camera": "órbita rápida con retroceso",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "almidón",
+        "espuma"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ALMIDÓN",
+          "at_word": "almidón,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.8
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ESPUMA",
+          "at_word": "espuma.",
+          "offset_s": 0.0,
+          "visible_s": 1.2,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "olla-llena",
+      "prompt": "Escena dibujada con código (mandarina): olla-llena.",
+      "narration": "En segundos, el grano duro y pequeño se vuelve una nube blanca, decenas de veces más grande.",
+      "target_duration_s": 8,
+      "transformation": "granos pequeños en la olla → palomitas que llenan la olla y la desbordan",
+      "camera": "retroceso con elevación mientras desborda",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "segundos",
+        "decenas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "DECENAS DE VECES MÁS GRANDE",
+          "at_word": "decenas",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (mandarina): cierre.",
+      "narration": "Así que una palomita no es un grano quemado: es un pequeño explosivo de vapor. Sígueme, y envíaselo a ese amigo que cree que el aceite hace explotar el maíz.",
+      "target_duration_s": 8,
+      "transformation": "un grano con mecha encendida → estalla en palomita y llena un tazón",
+      "camera": "órbita amplia con retroceso",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

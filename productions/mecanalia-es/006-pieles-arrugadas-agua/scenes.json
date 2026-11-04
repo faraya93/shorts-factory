@@ -1,0 +1,375 @@
+{
+  "channel": "mecanalia-es",
+  "video": "pieles-arrugadas-agua",
+  "title": "¿Por qué se arrugan tus dedos en el agua? 💧",
+  "topic_family": "body",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: a stylised fingertip (soft rounded solids), a cutaway with tubes and a procedural wrinkle surface share one model language; no fluid simulation, labels and numbers are Editor overlays.",
+  "hook_question": "¿Por qué se te arrugan los dedos en el agua?",
+  "false_belief": "La piel se empapa y se hincha de agua.",
+  "closing_reframe": "No es piel empapada: son llantas de agarre que tu cuerpo activa.",
+  "share_archetype": "el amigo que sale de la piscina con los dedos de pasa",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "wrinkle-set",
+  "scene_script_prefix": "wrinkle",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "No es agua que se mete en la piel: tu sistema nervioso aprieta los vasos de la yema y la piel se pliega en surcos, como las ranuras de una llanta, para que agarres mejor lo mojado. 💧 Envíaselo a ese amigo que sale de la piscina con los dedos de pasa.",
+  "gate_stills": {
+    "1": [
+      60
+    ],
+    "2": [
+      90
+    ],
+    "3": [
+      90
+    ],
+    "4": [
+      90
+    ],
+    "5": [
+      90
+    ],
+    "6": [
+      90
+    ],
+    "7": [
+      150
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "wrinkle_rig"
+  ],
+  "support_colours": {
+    "board": "#D2EAE6",
+    "plate": "#FFF3E0",
+    "reason": "Coral defaults: body-family heroes stand in a cream cutaway plate (skin and organ colours are close to the stage); pale-teal board behind the cutaway; plinth = Coral ink."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Por qué se te arrugan los dedos en el agua? Casi todos creen que la piel se empapa y se hincha, pero no es eso.",
+      "target_duration_s": 8,
+      "transformation": "una esponja se hincha en el agua → el dedo, en el mismo agua, no cambia de tamaño",
+      "camera": "órbita baja que cruza de la esponja al dedo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "hincha"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SE HINCHA",
+          "at_word": "hincha,",
+          "offset_s": 0.0,
+          "visible_s": 1.4,
+          "x": 0.27,
+          "y": 0.7
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "NO CAMBIA",
+          "at_word": "eso.",
+          "offset_s": 0.0,
+          "visible_s": 1.2,
+          "x": 0.73,
+          "y": 0.7
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "orden",
+      "prompt": "Escena dibujada con código (coral): orden.",
+      "narration": "Tras unos minutos mojados, tu sistema nervioso da una orden, y los vasos sanguíneos de la yema se aprietan.",
+      "target_duration_s": 8,
+      "transformation": "corte de la yema: una señal baja por el nervio → los vasos se estrechan",
+      "camera": "empuje hacia dentro del corte",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "nervioso",
+        "vasos"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "NERVIO",
+          "at_word": "nervioso",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.2,
+          "y": 0.33
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "VASOS",
+          "at_word": "vasos",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.6
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "surcos",
+      "prompt": "Escena dibujada con código (coral): surcos.",
+      "narration": "Con menos sangre debajo, la piel pierde volumen y se jala hacia adentro, y se pliega en surcos.",
+      "target_duration_s": 8,
+      "transformation": "la piel lisa → se hunde y se pliega en surcos largos",
+      "camera": "pasada rasante sobre la piel",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "volumen",
+        "surcos"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "MENOS VOLUMEN",
+          "at_word": "volumen",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.42
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SURCOS",
+          "at_word": "surcos.",
+          "offset_s": 0.0,
+          "visible_s": 1.4,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "canales",
+      "prompt": "Escena dibujada con código (coral): canales.",
+      "narration": "Y esos surcos forman canales, como las ranuras de una llanta, que desvían el agua hacia los lados.",
+      "target_duration_s": 8,
+      "transformation": "una yema lisa aplasta una película de agua → una yema con surcos la desvía por los canales",
+      "camera": "travelling lateral y cenital",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "canales",
+        "llanta"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CANALES",
+          "at_word": "canales,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.72,
+          "y": 0.45
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LLANTA",
+          "at_word": "llanta,",
+          "offset_s": 0.0,
+          "visible_s": 1.4,
+          "x": 0.3,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "agarre",
+      "prompt": "Escena dibujada con código (coral): agarre.",
+      "narration": "Por eso agarras mejor lo mojado: en un estudio, los dedos arrugados movieron objetos mojados más rápido, y los secos, igual.",
+      "target_duration_s": 8,
+      "transformation": "la pinza lisa deja escapar la canica mojada → la pinza arrugada la sostiene",
+      "camera": "dolly lateral con paso a plano cenital",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "mojado",
+        "rápido"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LISA",
+          "at_word": "estudio,",
+          "offset_s": 0.0,
+          "visible_s": 1.2,
+          "x": 0.27,
+          "y": 0.8
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ARRUGADA",
+          "at_word": "arrugados",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.73,
+          "y": 0.8
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SECOS: IGUAL",
+          "at_word": "secos,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.8
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "nervio",
+      "prompt": "Escena dibujada con código (coral): nervio.",
+      "narration": "Y es tu cuerpo quien lo decide: si el nervio del dedo está dañado, la piel no se arruga.",
+      "target_duration_s": 8,
+      "transformation": "dos dedos lisos en el agua → el sano se arruga, el del nervio cortado sigue liso",
+      "camera": "órbita entre los dos dedos",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "nervio"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SANO",
+          "at_word": "cuerpo",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.27,
+          "y": 0.83
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "NERVIO DAÑADO",
+          "at_word": "dañado,",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.73,
+          "y": 0.83
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que no es piel empapada: son llantas de agarre que tu cuerpo activa. Sígueme y envíaselo a ese amigo que sale de la piscina con los dedos de pasa.",
+      "target_duration_s": 8,
+      "transformation": "yema arrugada → una llanta con surcos",
+      "camera": "retroceso amplio",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

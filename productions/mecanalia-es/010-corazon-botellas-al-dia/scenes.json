@@ -1,0 +1,333 @@
+{
+  "channel": "mecanalia-es",
+  "video": "corazon-botellas-al-dia",
+  "title": "¿Cuántas botellas bombea tu corazón al día? 🫀",
+  "topic_family": "numbers",
+  "primary_engine": "code3d",
+  "engine_reason": "Drawn route: a stylised pump-heart (chunky solids, no anatomy or realism), bottles, a closed loop and pools are rigid simple forms multiplied in swarms with pull-backs; numbers are Editor counters, no fluid simulation.",
+  "hook_question": "¿Cuántas botellas de refresco llenarías con la sangre que bombea tu corazón en un solo día?",
+  "false_belief": "",
+  "closing_reframe": "Tu corazón no es solo un órgano que late: es la bomba más constante que tendrás.",
+  "share_archetype": "el amigo que dice que hoy no ha hecho nada",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#C21B68",
+      "description": "FRAMBUESA studio seamless: stage gradient #C21B68 to #A31256, plinth #FFF3E0, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#C21B68",
+        "name": "stage top"
+      },
+      {
+        "hex": "#A31256",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#FFF3E0",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#6BFFD8",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#6BFFD8",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#FFFFFF",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#1F0A14",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "frambuesa"
+  },
+  "render_style": "heart-set",
+  "scene_script_prefix": "heart",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=frambuesa"
+  ],
+  "identity_preset": "frambuesa",
+  "caption_draft": "Tu corazón bombea unos 7.000 litros al día: más de 3.000 botellas de dos litros, sin pedirte permiso. 🫀 Envíaselo a ese amigo que dice que hoy no ha hecho nada.",
+  "gate_stills": {
+    "1": [
+      150
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      120
+    ],
+    "4": [
+      120
+    ],
+    "5": [
+      100
+    ],
+    "6": [
+      120
+    ],
+    "7": [
+      200
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "heart_rig"
+  ],
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Frambuesa defaults (cream board and plate, plinth cream): cream separates from the raspberry stage; the heart pump is a deep wine and the bottles carry their own tones."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "botellas",
+      "prompt": "Escena dibujada con código (frambuesa): botellas.",
+      "narration": "¿Cuántas botellas de refresco llenarías con la sangre que bombea tu corazón en un solo día? Más de tres mil.",
+      "target_duration_s": 8,
+      "transformation": "una bomba que late y llena una botella → miles de botellas llenas en filas",
+      "camera": "retroceso que revela la multitud de botellas",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "botellas",
+        "tres mil"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "3.000 BOTELLAS",
+          "at_word": "tres",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.5,
+          "y": 0.8,
+          "from": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "puno",
+      "prompt": "Escena dibujada con código (frambuesa): puno.",
+      "narration": "Tu corazón es un músculo del tamaño de tu puño, y late alrededor de cien mil veces al día, sin pedirte permiso.",
+      "target_duration_s": 8,
+      "transformation": "un puño cerrado → junto a la bomba del mismo tamaño que late y deja anillos de cada latido",
+      "camera": "órbita cercana con empuje",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "puño",
+        "cien mil"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "100.000 LATIDOS",
+          "at_word": "cien",
+          "offset_s": 0.0,
+          "visible_s": 2.8,
+          "x": 0.5,
+          "y": 0.8,
+          "from": 0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "PUÑO",
+          "at_word": "puño,",
+          "offset_s": 0.0,
+          "visible_s": 1.4,
+          "x": 0.3,
+          "y": 0.32
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "latido",
+      "prompt": "Escena dibujada con código (frambuesa): latido.",
+      "narration": "Cada latido empuja unos setenta mililitros de sangre: un par de tragos. Parece poco, pero se suma.",
+      "target_duration_s": 8,
+      "transformation": "una vasija vacía → cada latido la llena un poco más",
+      "camera": "travelling lateral con acercamiento",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "setenta",
+        "suma"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "70 ML",
+          "at_word": "setenta",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.5,
+          "y": 0.8,
+          "from": 0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "minuto",
+      "prompt": "Escena dibujada con código (frambuesa): minuto.",
+      "narration": "En un minuto son unos cinco litros, que es casi toda la sangre de tu cuerpo: da una vuelta completa en cerca de un minuto.",
+      "target_duration_s": 8,
+      "transformation": "un circuito vacío → las cuentas dan una vuelta completa mientras un bidón se llena",
+      "camera": "órbita amplia sobre el circuito",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cinco litros",
+        "minuto"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "5 LITROS",
+          "at_word": "cinco",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.8,
+          "from": 0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "1 MINUTO",
+          "at_word": "minuto,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.3
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "dia",
+      "prompt": "Escena dibujada con código (frambuesa): dia.",
+      "narration": "En un día, unos siete mil litros: más de tres mil botellas de dos litros.",
+      "target_duration_s": 8,
+      "transformation": "una fila de botellas → un bloque enorme de botellas que crece",
+      "camera": "retroceso y elevación sobre el bloque",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "siete mil",
+        "botellas"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "7.000 LITROS",
+          "at_word": "siete",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.8,
+          "from": 0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "vida",
+      "prompt": "Escena dibujada con código (frambuesa): vida.",
+      "narration": "Y en ochenta años, unos doscientos millones de litros, como más de ochenta piscinas olímpicas.",
+      "target_duration_s": 8,
+      "transformation": "una piscina → más de ochenta piscinas en cuadrícula",
+      "camera": "elevación hasta vista cenital",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "ochenta",
+        "piscinas"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "200.000.000 L",
+          "at_word": "doscientos",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.5,
+          "y": 0.8,
+          "from": 0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (frambuesa): cierre.",
+      "narration": "Así que tu corazón no es solo un órgano que late: es la bomba más constante que tendrás. Sígueme, y envíaselo a ese amigo que dice que hoy no ha hecho nada.",
+      "target_duration_s": 8,
+      "transformation": "una persona en el sofá sin hacer nada → la bomba sigue latiendo y llenando botellas a su lado",
+      "camera": "órbita amplia",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}
