@@ -104,7 +104,7 @@ productions/
   README.md
   mecanalia-es/            CURRENT videos, one tree per channel
     INDEX.md               number, slug, family, status, date
-    001-huincha-de-medir-coral/ ... 007-por-que-cuesta-dejar-el-alcohol/
+    001-huincha-de-medir-coral/ ... 005-inodoro-donde-va-todo/ (006-011: the 2026-11-03 batch; the original 006/007 are archived)
   mecanalia-en/            (empty: INDEX.md only)
   _lab/                    experiments and tests, grouped by kind
   _archive/                superseded and frozen productions, grouped by series
@@ -131,7 +131,7 @@ Evidence folders live next to the document that cites them (`design-system-asset
 |---|---|
 | huincha-de-medir-coral, engranajes-coral, reloj-coral | `productions/mecanalia-es/001-huincha-de-medir-coral`, `002-engranajes-coral`, `003-reloj-coral` |
 | imanes, inodoro-donde-va-todo | `mecanalia-es/004-imanes`, `005-inodoro-donde-va-todo` |
-| por-que-no-nos-gusta-lo-mismo, por-que-cuesta-dejar-el-alcohol | `mecanalia-es/006-por-que-no-nos-gusta-lo-mismo`, `007-por-que-cuesta-dejar-el-alcohol` |
+| por-que-no-nos-gusta-lo-mismo, por-que-cuesta-dejar-el-alcohol | `_archive/retired-006-007-2026-11-03/` (archived 2026-11-03 by owner instruction before publication; numbers 006-011 reassigned to the new batch) |
 | puntos-de-sutura, -v2, -v3, -v4-code3d, -v4-code3d-cartoon, -v4-code3d-toon, -v5-drawn, -v6-staged, -v7-cutaway, -v7-drawn, -v7-fal | `productions/_archive/puntos-de-sutura/<same name>` |
 | huincha-de-medir | `_archive/dark-reference-look/huincha-de-medir` |
 | huincha-de-medir-papel, engranajes-papel | `_archive/papel-identity/<same name>` |

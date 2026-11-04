@@ -17,7 +17,9 @@ NUM = re.compile(r"^(\d{3})-")
 
 def used_numbers(channel_id: str) -> list[int]:
     nums = [int(m.group(1)) for d in (PRODUCTIONS / channel_id).glob("*") if (m := NUM.match(d.name))]
-    for d in (PRODUCTIONS / "_archive").glob("*/*"):          # archived productions keep their number
+    for d in (PRODUCTIONS / "_archive").glob("*/*"):          # archived productions keep their number...
+        if d.parent.name.startswith("retired-"):              # ...except a series named retired-*: numbers released by the owner (reassigned)
+            continue
         f = d / "scenes.json"
         if NUM.match(d.name) and f.exists() and json.loads(f.read_text(encoding="utf-8")).get("channel") == channel_id:
             nums.append(int(d.name[:3]))

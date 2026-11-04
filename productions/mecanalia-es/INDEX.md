@@ -10,5 +10,7 @@ Publish package of each video: `final.mp4` + `cover.jpg` + `publish.json` (where
 | 003 | reloj-coral | objects | rendered, Coral | 2026-10-28 | no publish.json yet |
 | 004 | imanes | objects | rendered, gate PASS, closing standard | 2026-10-29 | publish.json |
 | 005 | inodoro-donde-va-todo | objects | rendered, gate PASS | 2026-10-29 | publish.json |
-| 006 | por-que-no-nos-gusta-lo-mismo | body | rendered, gate PASS | 2026-10-30 | publish.json |
-| 007 | por-que-cuesta-dejar-el-alcohol | body | rendered, gate PASS | 2026-10-30 | publish.json; sensitive topic, owner review |
+
+**Archived before publication (2026-11-03, owner instruction):** the ORIGINAL 006 (`por-que-no-nos-gusta-lo-mismo`, food taste) and 007 (`por-que-cuesta-dejar-el-alcohol`, alcohol)
+were moved to `productions/_archive/retired-006-007-2026-11-03/` (never published, never queued; judged "very monotonous, the same scene throughout"). Numbers 006-011 are
+REASSIGNED to the new batch below; any reference to an older "006/007" means the archived pair.

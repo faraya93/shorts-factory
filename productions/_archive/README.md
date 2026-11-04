@@ -7,3 +7,4 @@
 | `papel-identity/` | `huincha-de-medir-papel`, `engranajes-papel` (Papel identity) | Papel is a named preset but no longer the identity; superseded by `mecanalia-es/001` and `002` |
 
 Folder names keep their original names (reports and notes cite them). Numbered productions that are archived later keep their channel number.
+| `retired-006-007-2026-11-03/` | the original mecanalia-es 006 (food taste) and 007 (alcohol) | archived by the owner before publication (2026-11-03): "very monotonous, the same scene throughout". Their numbers were RELEASED and reassigned to the 2026-11-03 batch (`tools/new_production.py` ignores `retired-*` series) |
