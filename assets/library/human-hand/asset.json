@@ -1,0 +1,87 @@
+{
+  "slug": "human-hand",
+  "name": "Human hand",
+  "aliases": [
+    "hand",
+    "fingers",
+    "mano",
+    "dedos"
+  ],
+  "family": "body",
+  "created": "2026-11-04",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a human hand with fingers hanging down, reads as a hand at phone size",
+    "seen_at": "large: hand fills ~40% of frame height in the 006 key scene (fingers entering water)",
+    "moving_parts": [
+      "hand (palm, wrist, fingers, one mesh)",
+      "hand_thumb_tip (separate piece)",
+      "state: material node 'wrinkle_amount' 0 (smooth) to 1 (wrinkled fingertips), masked by vertex group 'fingertips' on both meshes"
+    ],
+    "states": [
+      "dry/smooth fingertips (wrinkle_amount 0)",
+      "wrinkled fingertips (wrinkle_amount 1)"
+    ],
+    "style_notes": "Stylised skin material replaces the source texture (no real skin texture). Fingers are not separate objects: a finger cannot bend independently without rigging (not done). Fingertips at z=0, fingers point down, forearm cut flat."
+  },
+  "source": {
+    "registry_id": "sketchfab",
+    "url": "https://sketchfab.com/3d-models/a43c9c9059b24e2aa4af08d1a76f0916",
+    "asset_id": "a43c9c9059b24e2aa4af08d1a76f0916",
+    "author": "kevinruiz",
+    "retrieved": "2026-11-04"
+  },
+  "licence": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "\"hand\" by kevinruiz (Sketchfab) is licensed under CC Attribution",
+    "note": "Sketchfab listed it as \"CC Attribution\"; version taken as 4.0, to confirm on the model page",
+    "decision": null
+  },
+  "files": {
+    "blend": "human-hand.blend",
+    "sha256": "38f1294bec6c6671d4b566d9e234768495446bff3a14de7726e8da26677c0904",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": [
+    0.129,
+    0.109,
+    0.19
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-04"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-04",
+      "guesses": [
+        "a human hand (3D render, reaching forward, fingers loose)",
+        "a human hand (3D-rendered, bare, with the forearm cut off flat at the top)"
+      ],
+      "confidences": [
+        85,
+        85
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [
+    {
+      "name": "Hand (Madeele) / Hand (Diana123456) / jointed hands BJD",
+      "reason": "1-2M faces, not inspected: too heavy"
+    },
+    {
+      "name": "Stylized Hand (BlenderKit, 3D FLICK)",
+      "reason": "thumbnail fetched, not downloaded; Sketchfab hand already fit"
+    }
+  ],
+  "productions": [
+    "_lab/asset-proof/006-hand-water"
+  ]
+}

@@ -7,5 +7,6 @@
 | `spikes/` | code3d look spikes (`cartoon-concepts-scene2`, `cartoon-model-scene2`, `lace-world-scenes`) |
 | `engine-spike/` | the engine spike whose report fixed the engine selection rules (CLAUDE.md "Engine selection") |
 | `closing-test/` | closing-standard tests (local, gitignored) |
+| `asset-proof/` | cold-run proof of the asset system (2026-11-04): `006-hand-water/` and `011-popcorn/` stills, `proof_scene.py`, `report.md`; `scenes.json` there are lab stubs for the likeness command, not productions |
 
 New experiments: `_lab/<kind>/<name>`; one folder per experiment, with a README or report stating what was tested and the verdict.

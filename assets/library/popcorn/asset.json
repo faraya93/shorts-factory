@@ -1,0 +1,89 @@
+{
+  "slug": "popcorn",
+  "name": "Popcorn",
+  "aliases": [
+    "popcorn",
+    "palomitas",
+    "popped corn"
+  ],
+  "family": "objects",
+  "created": "2026-11-04",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "popcorn (a striped cinema box of popped corn)",
+    "seen_at": "medium: box fills ~40-60% of frame",
+    "moving_parts": [
+      "box (one object)",
+      "popcorn_01..popcorn_86 (86 separate pieces, each its own object and origin)"
+    ],
+    "states": [
+      "full box",
+      "pieces can be removed, scattered or emitted individually (kernel to popped needs a kernel, not in this asset)"
+    ],
+    "style_notes": "Materials in two slots: popcorn_piece (retint per production), box_stripes (textured stripes, no text). Pieces rotated to separate nestled surfaces for QA. No unpopped kernel included: a gap for the 011 remake."
+  },
+  "source": {
+    "registry_id": "sketchfab",
+    "url": "https://sketchfab.com/3d-models/52cede4dd8014bac980cf6c7f2f8ffb4",
+    "asset_id": "52cede4dd8014bac980cf6c7f2f8ffb4",
+    "author": "varun_malhotra1",
+    "retrieved": "2026-11-04"
+  },
+  "licence": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "\"Popcorn\" by varun_malhotra1 (Sketchfab) is licensed under CC Attribution",
+    "note": "Sketchfab listed it as \"CC Attribution\"; version taken as 4.0, to confirm on the model page",
+    "decision": null
+  },
+  "files": {
+    "blend": "popcorn.blend",
+    "sha256": "8f60ccd49114966de0e64ff93b3b51f418c530d08189934e536b98c9b043293b",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": [
+    0.137,
+    0.137,
+    0.201
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-04"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-04",
+      "guesses": [
+        "a popcorn bucket (striped red-and-white cardboard tub filled with popcorn)",
+        "popcorn bucket (a red-and-white striped popcorn box filled with popcorn)"
+      ],
+      "confidences": [
+        90,
+        95
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [
+    {
+      "name": "Popcorn Flake (Geksaedr, c584fcca...)",
+      "reason": "scan shell, about 40% boundary edges, holes; would not read solid"
+    },
+    {
+      "name": "Popcorn (pulsion_one, 903c4805...)",
+      "reason": "printed lettering 'POP..RN' on the bucket: on-screen text risk; not text-free"
+    },
+    {
+      "name": "Poly Haven / BlenderKit 'popcorn'",
+      "reason": "BlenderKit: only 'Popcorn Buckets' (Royalty-Free), not inspected; Poly Haven not searched for popcorn (see report)"
+    }
+  ],
+  "productions": [
+    "_lab/asset-proof/011-popcorn"
+  ]
+}
