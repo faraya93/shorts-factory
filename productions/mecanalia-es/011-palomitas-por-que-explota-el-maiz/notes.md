@@ -2,6 +2,8 @@
 
 **Rejected by owner, 2026-11-04 — likeness failure, do not publish.** The objects are too abstract and do not resemble their subjects. Not available inventory: this folder, including its `final.mp4` and `publish.json`, stays only as a record.
 
+**Likeness gate calibration (2026-11-04):** subject corn and popcorn, named by one of two; misnamed by the other. First guesses: "chocolate-coated egg-shaped candy (a bonbon)" (30); "popcorn in a pot (popcorn popping out of a pot, seen most clearly in view 7)" (45). Gate verdict: FAIL with the confidence floor. See docs/current/reports/likeness-calibration.md.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué explota un grano de maíz? 🍿
 - **Descripción:** Un grano de maíz guarda una gotita de agua: al calentarse se vuelve vapor, la presión sube hasta unas nueve atmósferas y la cáscara cede de golpe. 🍿 Sígueme y envíaselo a ese amigo que cree que el aceite hace explotar el maíz.

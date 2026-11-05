@@ -2,6 +2,8 @@
 
 **Rejected by owner, 2026-11-04 — likeness failure, do not publish.** The objects are too abstract and do not resemble their subjects. Not available inventory: this folder, including its `final.mp4` and `publish.json`, stays only as a record.
 
+**Likeness gate calibration (2026-11-04):** subject heart, misnamed by the first; the second saw no single object, naming a heart only if forced. First guesses: "a blue glass flask with two necks on a stand (abstract, glossy 3D render)" (30); "abstract 3D medical/science animation scene (no single object). If forced to one object: a blue glossy anatomical heart" (35). Gate verdict: FAIL with the confidence floor. See docs/current/reports/likeness-calibration.md.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Cuántas botellas bombea tu corazón al día? 🫀
 - **Descripción:** Tu corazón late unas cien mil veces al día y bombea unos siete mil litros de sangre: más de tres mil botellas de dos litros, sin pedirte permiso. 🫀 Sígueme y envíaselo a ese amigo que dice que hoy no ha hecho nada.

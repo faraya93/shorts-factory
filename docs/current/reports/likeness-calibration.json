@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-04",
+  "note": "Aliases were fixed before any reader ran. First guesses are verbatim; 'first_guess' is what each reader answered first. Replayed by tests/test_asset_library.py.",
+  "rows": [
+    {"production": "006", "subject": "wrinkled fingers in water", "owner": "rejected", "aliases": ["finger", "fingertip", "hand", "dedo", "yema", "mano"],
+     "readers": [{"first_guess": "a screw or threaded peg going into a block (the anchoring diagram)", "confidence": 30},
+                 {"first_guess": "dental implant in a jawbone (screw-shaped post set into a block of bone, shown as a cutaway diagram)", "confidence": 25}]},
+    {"production": "007", "subject": "cloud", "owner": "rejected", "aliases": ["cloud", "nube"],
+     "readers": [{"first_guess": "cluster of blue balls (molecules or particles)", "confidence": 25},
+                 {"first_guess": "a cloud made of water droplets (blue balls as droplets, white puffs as the cloud)", "confidence": 35}]},
+    {"production": "008", "subject": "ice", "owner": "rejected", "aliases": ["ice", "iceberg", "ice cube", "hielo", "ice block"],
+     "readers": [{"first_guess": "glass of ice water", "confidence": 45},
+                 {"first_guess": "glass of water with ice cubes", "confidence": 40}]},
+    {"production": "009", "subject": "soap", "owner": "rejected", "aliases": ["soap", "soap bar", "bar of soap", "jabon"],
+     "readers": [{"first_guess": "colorful molecule / virus particles (orange spheres studded with pink balls, shown among loose balls)", "confidence": 15},
+                 {"first_guess": "abstract science explainer animation with colored balls (no single object)", "confidence": 25}]},
+    {"production": "010", "subject": "heart", "owner": "rejected", "aliases": ["heart", "corazon"],
+     "readers": [{"first_guess": "a blue glass flask with two necks on a stand (abstract, glossy 3D render)", "confidence": 30},
+                 {"first_guess": "abstract 3D medical/science animation scene (no single object). If forced to one object: a blue glossy anatomical heart", "confidence": 35}]},
+    {"production": "011", "subject": "corn and popcorn", "owner": "rejected", "aliases": ["corn", "maize", "popcorn", "kernel", "maiz", "palomita", "palomitas"],
+     "readers": [{"first_guess": "chocolate-coated egg-shaped candy (a bonbon)", "confidence": 30},
+                 {"first_guess": "popcorn in a pot (popcorn popping out of a pot, seen most clearly in view 7)", "confidence": 45}]},
+    {"production": "004", "subject": "magnet", "owner": "accepted (control)", "aliases": ["magnet", "iman"],
+     "readers": [{"first_guess": "bar magnet (blue and yellow block bar)", "confidence": 70},
+                 {"first_guess": "a bar magnet (blue and yellow, attracting a paperclip)", "confidence": 70}]},
+    {"production": "005", "subject": "toilet", "owner": "accepted (control)", "aliases": ["toilet", "inodoro", "wc", "commode"],
+     "readers": [{"first_guess": "cutaway diagram of a toilet (flush toilet cross-section)", "confidence": 95},
+                 {"first_guess": "a toilet (cross-section / cutaway showing the tank, bowl and drain)", "confidence": 95}]}
+  ]
+}

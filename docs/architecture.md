@@ -79,6 +79,7 @@ graph LR
 | scene design | design (Tastemaker, design-taste-frontend) | scriptwriter, marketing | composition gate is the mechanical check |
 | publish package | marketing | | texts come from the channel package (`publish` block) |
 The lenses are the skill packs installed at user level (`~/.claude/skills/`); this repository contains no skills.
+Since 2026-11-04 the lenses hold standing authority over creative and technical matters when all involved lenses approve and the decision is logged (CLAUDE.md "Governance"; `docs/current/reports/lens-decisions.md`). Spending, publishing, creating accounts and the final publish/reject verdict stay with the owner.
 
 ### Decisions (ADR summary)
 | # | decision | alternatives | trade-off |

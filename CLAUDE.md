@@ -6,6 +6,13 @@ maximize views and retention. Every technical choice serves that goal. The
 reference format is Zack D Films' stylized 3D "how it works" explainers —
 we copy the mechanics, never scripts or footage: all scripts are original.
 
+## Governance (owner instruction, 2026-11-04; wins over older text in this file)
+The owner does not want to ban anything for the system, and does not want creative or technical decisions escalated one by one. Standing authority, effective 2026-11-04: **the lenses may decide and execute creative and technical matters on their own**, including installing additional free skills or tools, changing identity elements such as the Coral stage colour, and adjusting doctrine, methods and sources.
+- **The one condition:** ALL involved lenses approve under the existing governance (docs/architecture.md "Multi-lens protocol"), disagreements are settled against measured criteria and written doctrine, never by who argues hardest, and the decision is recorded with its reason in `docs/current/reports/lens-decisions.md` so it can be audited and reverted. If the lenses cannot settle it on those terms, it is not approved: get a measurement, and the current doctrine stands until then.
+- **Owner-only, NOT delegated:** spending any money, publishing anything, creating accounts, and the final publish/reject verdict on a finished video (the owner's eye stays the last gate on output).
+- **Reports** state what the lenses decided and why. A "decisions for you" section is reserved for the owner-only list.
+- Older text in this file that reserves a creative or technical choice for the owner (topics, scripts, beat sheets, voice, music, identity, format exceptions) is read through this section. Spend gates, the publish rule and the no-accounts rule keep their full force.
+
 ## Format doctrine (channel research, Oct 2026; evidence in docs/current/research/reference-channels.md)
 - Vertical 9:16. Duration, by topic family (measured pace of the channel
   voice: ~2.9 words/s on the pilot): standard target 45–60 s of narration
@@ -180,7 +187,7 @@ EVENT, never a static illustration):
 9. Event timing is word-locked (+-0.3 s) to the highlighted subtitle
    word.
 10. Transitions carry meaning (blur wipe / push-through).
-A production brief is a BEAT SHEET approved by the owner BEFORE any
+A production brief is a BEAT SHEET approved by all involved lenses (see "Governance") BEFORE any
 generation: every narration line mapped to an event type with its word
 lock, the hero-rig element ledger, every number with its source (or
 flagged), and the CTA/end card.
@@ -326,7 +333,7 @@ where judgment is involved.
 ## code3d sourcing and optimization (binding, owner 2026-10-25)
 Your job is the FASTEST route to each clip, not the most from-scratch one.
 - (For HERO objects, "Asset library and hero routing" supersedes this list: its source order applies, and
-  no AI-generated mesh is used without the owner's OK. This list still applies to supporting props.)
+  an AI-generated mesh needs a recorded lens decision, and a provider needing an account or credits stays owner-only. This list still applies to supporting props.)
 - SOURCE FIRST: search the libraries before modelling anything; model only
   what no library has. For every element choose in this order and log a
   one-line reason: (1) an existing library asset (BlenderKit, Poly Haven,
@@ -389,8 +396,8 @@ Why: the owner rejected batch 006-011 (too abstract, objects do not resemble the
 - **Whatever the route, the finished object lands in `assets/library/<slug>/`,** and the same object is never solved twice. Check first: `.venv/bin/python factory/asset_library.py find <words>`. To run a job, follow "How to run an asset job" in the manual.
 - **Drawability exceptions (supersedes the old ban for hero objects):** anatomy, hands, animals, cloth and fluids are allowed when the asset route supplies them; without a passing asset they stay off screen, and no abstract stand-in replaces them. Reason: the ban
   treated a tooling limit as a content rule and produced the abstract objects the owner rejected. Still binding: stylised, no real skin texture, no blood, no gore.
-- **Likeness gate (hard block):** a hero must be named correctly by two fresh subagents who see only neutrally named stills, once for the asset and once in the production's gate stills. `gate.py check` refuses the final render otherwise. Never add an alias to make a guess pass. The owner remains the final judge of likeness.
-- **Licences:** CC0 preferred; Royalty-Free acceptable; CC-BY only with the attribution recorded in the asset README and carried in the video's description; anything unclear is not used. Create no accounts: BlenderKit, Sketchfab and Poly Pizza stay owner-step sources until the owner connects them. `generate_3d` is not used.
+- **Likeness gate (hard block):** a hero must be named correctly, with confidence of at least 60, by two fresh subagents who see only neutrally named stills, once for the asset and once in the production's gate stills. `gate.py check` refuses the final render otherwise. Never add an alias to make a guess pass. Calibrated 2026-11-04 on 006-011 plus two accepted controls (docs/current/reports/likeness-calibration.md). The owner's eye remains the last gate on output.
+- **Licences and sources:** CC0 preferred; Royalty-Free acceptable; CC-BY only with the attribution recorded in the asset README and carried in the video's description; anything unclear is not used. BlenderKit anonymous search and download is a connected route (owner 2026-11-04). Sketchfab is approved, pending the owner's free account. Sessions create no accounts. Poly Pizza stays an owner-step source. `generate_3d` is not used: its providers need accounts or credits.
 - **Skill roles:** `docs/current/specs/asset-system.md`, "Skill role map" (installed at user level; inherited, not re-decided).
 - **Operating model:** asset-building is interactive, with Blender open through MCP for Blender; production rendering stays headless.
 
@@ -485,7 +492,8 @@ engines automatically from these rules; the owner is never asked.
   glossy-boot looks of v4-v6 are retired.
 - Report failures and semantically wrong renders plainly; never work
   around them silently.
-- The owner approves topics, scripts, spend and publishing. You cannot
+- Spending, publishing, creating accounts and the final publish/reject verdict are the owner's;
+  topics, scripts and other creative or technical matters are the lenses' ("Governance"). You cannot
   hear audio or watch video: verify mechanically (format, durations,
   extracted frames) and never claim a render looks or sounds right
   beyond that.

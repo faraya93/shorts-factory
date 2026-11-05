@@ -2,6 +2,8 @@
 
 **Rejected by owner, 2026-11-04 — likeness failure, do not publish.** The objects are too abstract and do not resemble their subjects. Not available inventory: this folder, including its `final.mp4` and `publish.json`, stays only as a record.
 
+**Likeness gate calibration (2026-11-04):** subject soap, misnamed by both. First guesses: "colorful molecule / virus particles (orange spheres studded with pink balls, shown among loose balls)" (15); "abstract science explainer animation with colored balls (no single object)" (25). Gate verdict: FAIL with the confidence floor. See docs/current/reports/likeness-calibration.md.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué el agua sola no quita la grasa? 🧼
 - **Descripción:** El agua y la grasa no se mezclan; el jabón sí: una cabeza que se lleva bien con el agua y una cola que se lleva bien con la grasa rodean la mancha y la rompen en bolitas que el enjuague se lleva. 🧼 Sígueme y envíaselo a ese amigo que se lava las manos solo con agua.

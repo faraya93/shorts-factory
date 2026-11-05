@@ -29,11 +29,11 @@ def ready_asset(slug="human-heart", **licence):
     m["status"], m["route"] = "ready", "library"
     m["brief"]["must_read_as"] = "a human heart"
     m["source"] = {"registry_id": "polyhaven", "url": "https://x", "asset_id": "y", "author": "z", "retrieved": "2026-11-04"}
-    m["licence"] = {"id": "CC0-1.0", "url": None, "attribution": None, "note": None, "owner_ok": None, **licence}
+    m["licence"] = {"id": "CC0-1.0", "url": None, "attribution": None, "note": None, "decision": None, **licence}
     m["checks"]["qa"] = {"pass": True, "date": "2026-11-04"}
     al.write_meta(m)
     al.seal(slug)
-    assert al.record_blind(slug, ["a human heart", "un corazón"])
+    assert al.record_blind(slug, ["a human heart", "un corazón"], [80, 75])
     return slug
 
 
@@ -60,7 +60,7 @@ def test_the_same_object_cannot_be_started_twice():
 def test_licence_rule():
     for licence, ok in [({"id": "CC-BY-NC-4.0"}, False), ({"id": "CC-BY-SA-4.0"}, False), ({"id": "unknown"}, False), ({"id": "CC-BY-4.0"}, False),
                         ({"id": "CC-BY-4.0", "attribution": "Model by Ana (CC BY)"}, True), ({"id": "Royalty-Free"}, False),
-                        ({"id": "Royalty-Free", "url": "https://terms"}, True), ({"id": "AGPL-3.0"}, False), ({"id": "AGPL-3.0", "owner_ok": "2026-11-04"}, True)]:
+                        ({"id": "Royalty-Free", "url": "https://terms"}, True), ({"id": "AGPL-3.0"}, False), ({"id": "AGPL-3.0", "decision": "lens-decisions.md 2026-11-04"}, True)]:
         with sandbox():
             assert (errors(ready_asset(**licence)) == []) == ok, licence
 
@@ -78,13 +78,32 @@ def test_ready_needs_qa_blind_naming_and_a_sealed_unchanged_file():
         assert any("qa" in x for x in errors(s))
     with sandbox():
         s = ready_asset()
-        assert not al.record_blind(s, ["an abstract red blob", "a heart"]), "every guess must name the object"
+        assert not al.record_blind(s, ["an abstract red blob", "a heart"], [80, 80]), "every guess must name the object"
         assert any("blind" in x for x in errors(s))
 
 
 def test_one_guess_is_not_enough():
-    assert not al.judge_guesses(["heart"], ["heart"])
-    assert al.judge_guesses(["corazon"], ["Un corazón humano", "corazón"])
+    assert not al.judge_guesses(["heart"], ["heart"], [90])
+    assert al.judge_guesses(["corazon"], ["Un corazón humano", "corazón"], [80, 90])
+    assert not al.judge_guesses(["ice"], ["a device", "a slice of cake"], [90, 90]), "whole words only"
+    assert not al.judge_guesses(["corn"], ["a street corner", "an acorn"], [90, 90]), "whole words only"
+    assert al.judge_guesses(["finger"], ["two fingers", "a finger"], [90, 90]), "plurals count"
+    assert not al.judge_guesses(["ice"], ["ice water", "ice cubes"], [45, 40]), "a low-confidence reader fails it"
+    assert not al.judge_guesses(["ice"], ["ice", "ice"], [90]), "every guess needs its confidence"
+
+
+def test_gate_replays_the_owner_verdicts_on_the_calibration_set():
+    data = json.loads((ROOT / "docs" / "current" / "reports" / "likeness-calibration.json").read_text(encoding="utf-8"))
+    assert {r["production"] for r in data["rows"]} >= {"006", "007", "008", "009", "010", "011", "004", "005"}
+    for r in data["rows"]:
+        got = al.judge_guesses(r["aliases"], [x["first_guess"] for x in r["readers"]], [x["confidence"] for x in r["readers"]])
+        assert got == r["owner"].startswith("accepted"), r["production"]
+
+
+def test_rejected_notes_carry_their_calibration_result():
+    for n in ("006", "007", "008", "009", "010", "011"):
+        text = next((ROOT / "productions" / "mecanalia-es").glob(f"{n}-*/notes.md")).read_text(encoding="utf-8")
+        assert "Rejected by owner" in text and "Likeness gate calibration" in text, n
 
 
 def test_blind_pack_hides_the_name():
@@ -123,9 +142,9 @@ def test_gate_requires_a_ready_asset_and_a_fresh_passing_likeness():
         cfg = {"gate_stills": {}, "rig_libs": ["looks"], "hero_route": "asset", "library_assets": [s]}
         (p / "scenes.json").write_text(json.dumps(cfg))
         assert not gate.check_hero(p)[0], "no likeness record"
-        assert not al.record_likeness(p, s, ["a blob", "a ball"])
+        assert not al.record_likeness(p, s, ["a blob", "a ball"], [90, 90])
         assert not gate.check_hero(p)[0], "failed likeness"
-        assert al.record_likeness(p, s, ["a heart", "human heart"])
+        assert al.record_likeness(p, s, ["a heart", "human heart"], [90, 80])
         assert gate.check_hero(p)[0]
         (al.asset_dir(s) / "x").write_text("")
         m = al.read_meta(s)
@@ -152,7 +171,9 @@ def test_registry_is_ordered_and_marks_accounts():
     assert by["polyhaven"]["priority"] == 1 and by["ambientcg"]["priority"] == 2 and by["mb-lab"]["priority"] == 4
     for s in r["sources"]:
         if s["account_required"]:
-            assert s["status"] == "owner-step", s["id"]
+            assert s["status"] in ("owner-step", "approved-pending-account", "connected"), s["id"]
+    assert by["blenderkit"]["status"] == "connected" and by["blenderkit"]["account_required"] is False, "owner decision 2026-11-04: anonymous route"
+    assert by["sketchfab"]["status"] in ("approved-pending-account", "connected"), "owner decision 2026-11-04"
     assert "agpl_note" in by["mb-lab"]
     doc = (ROOT / "docs" / "current" / "specs" / "asset-system.md").read_text(encoding="utf-8")
     for s in r["sources"]:
@@ -183,6 +204,55 @@ def test_binaries_are_ignored_and_records_are_not():
     for path, ignored in probe.items():
         r = subprocess.run(["git", "check-ignore", "-q", "--no-index", path], cwd=ROOT)
         assert (r.returncode == 0) == ignored, path
+
+
+def _blender_tool():
+    sys.path.insert(0, str(ROOT / "tools"))
+    import asset_blender
+    return asset_blender
+
+
+def test_token_is_read_from_env_file_and_never_printed():
+    ab = _blender_tool()
+    with tempfile.TemporaryDirectory() as t:
+        env = Path(t) / ".env"
+        assert ab.read_token(env) == ""
+        env.write_text("FAL_KEY=x\nSKETCHFAB_API_TOKEN=secret-token-value\n")
+        assert ab.read_token(env) == "secret-token-value"
+    source = (ROOT / "tools" / "asset_blender.py").read_text(encoding="utf-8")
+    assert "print(token" not in source and "{token}" not in source.replace('f"Token {token}"', "")
+
+
+def test_connect_flips_only_the_sketchfab_block():
+    ab = _blender_tool()
+    with tempfile.TemporaryDirectory() as t:
+        reg = Path(t) / "r.yaml"
+        reg.write_text(al.REGISTRY.read_text(encoding="utf-8"), encoding="utf-8")
+        ab.mark_connected("2030-01-01", reg)
+        import yaml
+        by = {s["id"]: s for s in yaml.safe_load(reg.read_text(encoding="utf-8"))["sources"]}
+        assert by["sketchfab"]["status"] == "connected" and str(by["sketchfab"]["verified"]) == "2030-01-01"
+        assert by["polypizza"]["status"] == "owner-step" and str(by["polyhaven"]["verified"]) != "2030-01-01"
+
+
+def test_blenderkit_filter_keeps_only_allowed_licences():
+    ab = _blender_tool()
+    kept = ab.bk_allowed([{"license": "cc_zero"}, {"license": "royalty_free"}, {"license": "editorial"}, {}])
+    assert [k["license"] for k in kept] == ["cc_zero", "royalty_free"]
+
+
+def test_token_cannot_be_committed():
+    r = subprocess.run(["git", "check-ignore", "-q", ".env"], cwd=ROOT)
+    assert r.returncode == 0
+    assert "SKETCHFAB_API_TOKEN=" in (ROOT / ".env.example").read_text(encoding="utf-8")
+
+
+def test_governance_is_recorded():
+    claude = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    assert "## Governance" in claude and "lens-decisions.md" in claude
+    for owner_only in ("spending", "publishing", "creating accounts", "final publish/reject verdict"):
+        assert owner_only in claude, owner_only
+    assert (ROOT / "docs" / "current" / "reports" / "lens-decisions.md").exists()
 
 
 def test_docs_and_doctrine_are_wired():

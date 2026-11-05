@@ -2,6 +2,8 @@
 
 **Rejected by owner, 2026-11-04 — likeness failure, do not publish.** The objects are too abstract and do not resemble their subjects. Not available inventory: this folder, including its `final.mp4` and `publish.json`, stays only as a record.
 
+**Likeness gate calibration (2026-11-04):** subject ice, named by both, with low confidence; carried by one frame. First guesses: "glass of ice water" (45); "glass of water with ice cubes" (40). Gate verdict: FAIL with the confidence floor; the names-only version wrongly passed it. See docs/current/reports/likeness-calibration.md.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Qué pasaría si el hielo se hundiera? 🧊
 - **Descripción:** El hielo flota por una rareza del agua: al congelarse se expande y ocupa un nueve por ciento más de espacio. Si se hundiera, muchos lagos se congelarían desde el fondo y casi nada podría vivir en ellos. 🧊 Sígueme y envíaselo a ese amigo que cree que todo se hunde en su propio líquido.

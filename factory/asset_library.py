@@ -6,8 +6,8 @@
     .venv/bin/python factory/asset_library.py seal <slug>                  hash the .blend, rewrite the README, validate
     .venv/bin/python factory/asset_library.py check [slug]                 validate one asset or the whole library
     .venv/bin/python factory/asset_library.py blind-pack <still> [...]     copy stills to a neutral folder and print the blind-naming prompt
-    .venv/bin/python factory/asset_library.py blind <slug> --guess "..." --guess "..."          record the asset's blind naming
-    .venv/bin/python factory/asset_library.py likeness <production> <slug> --guess "..." --guess "..."   same, for the production's own stills
+    .venv/bin/python factory/asset_library.py blind <slug> --guess "..." --confidence 80 --guess "..." --confidence 75     record the asset's blind naming
+    .venv/bin/python factory/asset_library.py likeness <production> <slug> --guess "..." --confidence 80 --guess "..." --confidence 75     same, for the production's own stills
     .venv/bin/python factory/asset_library.py use <slug> <production>      record a production that used the asset
 
 Inside Blender (no third-party imports at module level, so this file also loads under Blender's Python):
@@ -37,6 +37,7 @@ ROUTES = {"library", "generator", "modelled", "code-primitive"}
 STATUSES = {"in_progress", "ready", "rejected"}
 FAMILIES = {"objects", "body", "numbers", "whatif"}
 MIN_BLIND_GUESSES = 2
+MIN_BLIND_CONFIDENCE = 60
 
 # The global licence rule. Anything not listed here is unclear, and unclear is not used.
 LICENCES = {
@@ -45,7 +46,7 @@ LICENCES = {
     "Royalty-Free": {"needs_url": True},           # a named platform licence: the url of its terms is recorded
     "CC-BY-4.0": {"needs_attribution": True},
     "CC-BY-3.0": {"needs_attribution": True},
-    "AGPL-3.0": {"needs_owner_ok": True},          # MB-Lab output: see its registry note; used only on the owner's dated OK
+    "AGPL-3.0": {"needs_decision": True},          # MB-Lab output: see its registry note; each use needs a recorded lens decision
 }
 
 
@@ -116,7 +117,7 @@ def new(slug: str, name: str, aliases: list[str], family: str) -> Path:
         "route": None,
         "brief": {"must_read_as": "", "seen_at": "", "moving_parts": [], "states": [], "style_notes": ""},
         "source": {"registry_id": None, "url": None, "asset_id": None, "author": None, "retrieved": None},
-        "licence": {"id": None, "url": None, "attribution": None, "note": None, "owner_ok": None},
+        "licence": {"id": None, "url": None, "attribution": None, "note": None, "decision": None},
         "files": {"blend": f"{slug}.blend", "sha256": None, "collection": "asset", "rig_module": None, "build_script": None},
         "real_size_m": None,
         "checks": {"qa": {"pass": None, "date": None}, "blind_naming": {"pass": None, "date": None, "guesses": []}, "fidelity": None},
@@ -188,8 +189,8 @@ def validate(slug: str, known_sources: set[str] | None = None) -> tuple[list[str
             e.append(f"{slug}: {lic_id} needs the attribution text in licence.attribution")
         if rule.get("needs_url") and not lic.get("url"):
             e.append(f"{slug}: {lic_id} needs the url of the licence terms")
-        if rule.get("needs_owner_ok") and not lic.get("owner_ok"):
-            e.append(f"{slug}: {lic_id} needs the owner's dated OK in licence.owner_ok")
+        if rule.get("needs_decision") and not lic.get("decision"):
+            e.append(f"{slug}: {lic_id} needs licence.decision pointing to its entry in docs/current/reports/lens-decisions.md")
     route = m.get("route")
     src = m.get("source") or {}
     if route is None:
@@ -245,10 +246,13 @@ def seal(slug: str) -> None:
     write_readme(m)
 
 
-def judge_guesses(aliases: list[str], guesses: list[str]) -> bool:
-    """Pass only when at least MIN_BLIND_GUESSES independent first guesses each name the object by one of its aliases."""
-    names = [norm(a) for a in aliases]
-    return len(guesses) >= MIN_BLIND_GUESSES and all(any(n in norm(g) for n in names) for g in guesses)
+def judge_guesses(aliases: list[str], guesses: list[str], confidences: list[int]) -> bool:
+    """Pass only when at least MIN_BLIND_GUESSES independent first guesses each name the object by an alias AND each reader is at least MIN_BLIND_CONFIDENCE sure.
+    The floor comes from the 2026-11-04 calibration (docs/current/reports/likeness-calibration.md): naming alone passed 008, carried by one strong frame."""
+    patterns = [re.compile(rf"\b{re.escape(norm(a))}(s|es)?\b") for a in aliases]        # whole words: "ice" must not match "device", plurals count
+    return (len(guesses) >= MIN_BLIND_GUESSES and len(confidences) == len(guesses)
+            and all(any(p.search(norm(g)) for p in patterns) for g in guesses)
+            and all(c >= MIN_BLIND_CONFIDENCE for c in confidences))
 
 
 def blind_pack(stills: list[str]) -> tuple[Path, str]:
@@ -268,23 +272,23 @@ def blind_pack(stills: list[str]) -> tuple[Path, str]:
     return out, prompt
 
 
-def record_blind(slug: str, guesses: list[str]) -> bool:
+def record_blind(slug: str, guesses: list[str], confidences: list[int]) -> bool:
     m = read_meta(slug)
-    ok = judge_guesses(m["aliases"], guesses)
-    m["checks"]["blind_naming"] = {"pass": ok, "date": date.today().isoformat(), "guesses": guesses}
+    ok = judge_guesses(m["aliases"], guesses, confidences)
+    m["checks"]["blind_naming"] = {"pass": ok, "date": date.today().isoformat(), "guesses": guesses, "confidences": confidences}
     write_meta(m)
     write_readme(m)
     return ok
 
 
-def record_likeness(production: Path, slug: str, guesses: list[str]) -> bool:
+def record_likeness(production: Path, slug: str, guesses: list[str], confidences: list[int]) -> bool:
     """The production-side twin of the blind naming: the hero as it appears in this video's own stills, written next to the gate record."""
     sys.path.insert(0, str(ROOT / "factory"))
     import gate
-    ok = judge_guesses(read_meta(slug)["aliases"], guesses)
+    ok = judge_guesses(read_meta(slug)["aliases"], guesses, confidences)
     rec = production / "build" / "gate"
     rec.mkdir(parents=True, exist_ok=True)
-    (rec / "likeness.json").write_text(json.dumps({"pass": ok, "date": date.today().isoformat(), "asset": slug, "guesses": guesses,
+    (rec / "likeness.json").write_text(json.dumps({"pass": ok, "date": date.today().isoformat(), "asset": slug, "guesses": guesses, "confidences": confidences,
                                                    "fingerprint": gate.fingerprint(production)}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return ok
 
@@ -352,8 +356,8 @@ def main() -> int:
     p = sub.add_parser("seal"); p.add_argument("slug")
     p = sub.add_parser("check"); p.add_argument("slug", nargs="?")
     p = sub.add_parser("blind-pack"); p.add_argument("stills", nargs="+")
-    p = sub.add_parser("blind"); p.add_argument("slug"); p.add_argument("--guess", action="append", default=[])
-    p = sub.add_parser("likeness"); p.add_argument("production"); p.add_argument("slug"); p.add_argument("--guess", action="append", default=[])
+    p = sub.add_parser("blind"); p.add_argument("slug"); p.add_argument("--guess", action="append", default=[]); p.add_argument("--confidence", action="append", type=int, default=[])
+    p = sub.add_parser("likeness"); p.add_argument("production"); p.add_argument("slug"); p.add_argument("--guess", action="append", default=[]); p.add_argument("--confidence", action="append", type=int, default=[])
     p = sub.add_parser("use"); p.add_argument("slug"); p.add_argument("production")
     a = ap.parse_args()
 
@@ -384,11 +388,11 @@ def main() -> int:
         out, prompt = blind_pack(a.stills)
         print(f"Neutral stills in {out}. Give this prompt, with no other context, to at least {MIN_BLIND_GUESSES} separate fresh subagents:\n\n{prompt}")
     elif a.cmd == "blind":
-        ok = record_blind(a.slug, a.guess)
-        print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain an alias of {a.slug}")
+        ok = record_blind(a.slug, a.guess, a.confidence)
+        print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain an alias of {a.slug}, each with confidence >= {MIN_BLIND_CONFIDENCE}")
         return 0 if ok else 1
     elif a.cmd == "likeness":
-        ok = record_likeness(Path(a.production), a.slug, a.guess)
+        ok = record_likeness(Path(a.production), a.slug, a.guess, a.confidence)
         print("PASS" if ok else "FAIL: the hero does not read as itself in this production's stills; the final render stays blocked")
         return 0 if ok else 1
     elif a.cmd == "use":

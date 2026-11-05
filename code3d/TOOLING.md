@@ -26,8 +26,11 @@ Scripts, not GUI: `blender -b --python <script> -- <args>` is the primary, deter
 
 ## Update 2026-11-04: MCP verified live; asset jobs moved to docs/current/specs/asset-system.md
 The caveat above is closed: the live-GUI path and Claude Code's own client were exercised end to end (add-on 1.8, protocol 15, Blender 5.2.3: scene operation, scene query, screenshot, Poly Haven search and
-import). Start it with `python3 ~/.claude/skills/blender-kiln/tools/open_blender.py`. Poly Haven is off per session until `scene.blendermcp_use_polyhaven = True`. Content telemetry is off; the anonymous usage record
-(tool name, duration, versions) is on by default; `DISABLE_TELEMETRY=true` in the server's env turns it off. BlenderKit is now an owner-step source for hero objects (assets/registry.yaml).
+import). Start it with `.venv/bin/python tools/asset_blender.py open`, which also switches on the connected libraries.
+- **Telemetry OFF (owner decision 2026-11-04):** the local Claude Code config now sets `DISABLE_TELEMETRY=true` on the `blender` server (`claude mcp add blender -s local -e DISABLE_TELEMETRY=true -- uvx mcp-for-blender`). The package reads that variable in `telemetry.py`. It applies when the server process starts, so a session already running keeps its old process until restarted. The setting lives in `~/.claude.json`, outside the repo: redo it on a new machine.
+- **BlenderKit is a connected anonymous route (owner decision 2026-11-04).** The domain is now www.blendkit.com. Use `tools/asset_blender.py blenderkit-search` and `blenderkit-get`. Search and download both answer 403 to Python's urllib and work with curl.
+- **macOS `open` is avoided when a token must reach Blender,** because `tools/asset_blender.py` starts the binary directly to keep the environment. Tested with a dummy key.
+- **Blender 5.2 segfaults if a Scene goes through `bpy.data.libraries.write`.** `asset_library.save_collection` works around it.
 
 ## Part 2 cost (reported separately from any scene)
 Wall clock 20:13 -> ~20:19 (about 6 min of the 45 min timebox); effort MEDIUM; fal spend $0. Course corrections: GitHub API
