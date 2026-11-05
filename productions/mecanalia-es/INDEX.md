@@ -11,14 +11,8 @@ Publish package of each video: `final.mp4` + `cover.jpg` + `publish.json` (where
 | 004 | imanes | objects | rendered, gate PASS, closing standard | 2026-10-29 | publish.json |
 | 005 | inodoro-donde-va-todo | objects | rendered, gate PASS | 2026-10-29 | publish.json |
 
-| 006 | pieles-arrugadas-agua | body | **REJECTED by owner, 2026-11-04 — likeness failure, do not publish** (was: rendered 47.8 s, gate PASS, Coral) | 2026-11-03 | not inventory; publish.json kept as a record only |
-| 007 | nube-cuantos-autos-pesa | numbers | **REJECTED by owner, 2026-11-04 — likeness failure, do not publish** (was: rendered 50.5 s, gate PASS, departure: sky stage (celeste), violet accent) | 2026-11-03 | not inventory; publish.json kept as a record only |
-| 008 | hielo-que-pasaria-si-se-hundiera | whatif | **REJECTED by owner, 2026-11-04 — likeness failure, do not publish** (was: rendered 54.4 s, gate PASS, departure: deep-blue cold stage (cobalto)) | 2026-11-03 | not inventory; publish.json kept as a record only |
-| 009 | jabon-agua-sola-no-quita-grasa | objects | **REJECTED by owner, 2026-11-04 — likeness failure, do not publish** (was: rendered 47.9 s, gate PASS, departure: purple molecular world (violeta)) | 2026-11-04 | not inventory; publish.json kept as a record only |
-| 010 | corazon-botellas-al-dia | numbers | **REJECTED by owner, 2026-11-04 — likeness failure, do not publish** (was: rendered 48.9 s, gate PASS, departure: raspberry stage (frambuesa), stylised fluid, no anatomy) | 2026-11-04 | not inventory; publish.json kept as a record only |
-| 011 | palomitas-por-que-explota-el-maiz | objects | **REJECTED by owner, 2026-11-04 — likeness failure, do not publish** (was: rendered 49.2 s, gate PASS, departure: orange hot-kitchen stage (mandarina)) | 2026-11-04 | not inventory; publish.json kept as a record only |
 
-**Batch 006-011 rejected (2026-11-04, owner verdict):** nothing from this batch is publishable. The objects are too abstract and do not resemble their subjects (the failure once seen with the needle/sutures piece). No session may treat these as available inventory. The fix is the hero routing in CLAUDE.md, "Asset library and hero routing".
+**Batch 006-011 rejected (2026-11-04, owner verdict) and ARCHIVED the same day** to `productions/_archive/retired-006-011-rejected-2026-11-04/` (kept as the "before" reference; the rejection record is intact in each folder's INDEX row history, `notes.md` and this paragraph; their numbers are released and reassigned to the remake batch below): nothing from this batch is publishable. The objects are too abstract and do not resemble their subjects (the failure once seen with the needle/sutures piece). No session may treat these as available inventory. The fix is the hero routing in CLAUDE.md, "Asset library and hero routing".
 
 **Archived before publication (2026-11-03, owner instruction):** the ORIGINAL 006 (`por-que-no-nos-gusta-lo-mismo`, food taste) and 007 (`por-que-cuesta-dejar-el-alcohol`, alcohol)
 were moved to `productions/_archive/retired-006-007-2026-11-03/` (never published, never queued; judged "very monotonous, the same scene throughout"). Numbers 006-011 are

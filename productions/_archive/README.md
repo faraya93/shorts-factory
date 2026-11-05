@@ -8,3 +8,4 @@
 
 Folder names keep their original names (reports and notes cite them). Numbered productions that are archived later keep their channel number.
 | `retired-006-007-2026-11-03/` | the original mecanalia-es 006 (food taste) and 007 (alcohol) | archived by the owner before publication (2026-11-03): "very monotonous, the same scene throughout". Their numbers were RELEASED and reassigned to the 2026-11-03 batch (`tools/new_production.py` ignores `retired-*` series) |
+| `retired-006-011-rejected-2026-11-04/` | the rejected batch 006-011 (pieles-arrugadas-agua, nube-cuantos-autos-pesa, hielo-que-pasaria-si-se-hundiera, jabon-agua-sola-no-quita-grasa, corazon-botellas-al-dia, palomitas-por-que-explota-el-maiz) | REJECTED by the owner 2026-11-04: objects too abstract, do not resemble their subjects; never publish. Kept as the "before" for the before/after comparison with the asset-route remakes. Numbers released and reassigned (`new_production.py` ignores `retired-*`) |
