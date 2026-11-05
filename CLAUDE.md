@@ -453,6 +453,7 @@ engines automatically from these rules; the owner is never asked.
   If a render is ever launched without it, say so explicitly in the report.
 - Commit and push after each working phase, with a clear message. Never
   commit media files or .env.
+- **A failed sub-step never passes silently (2026-11-04).** The render chains (`tools/chain_render.sh`, `chain_render2.sh`) log `DONE` only when every scene rendered and the editor ran; a scene that fails both attempts writes `build/render-failures.txt`, skips the editor and logs `INCOMPLETE`; a scene that needed its retry makes the DONE line carry a WARNING. Before reporting a production complete, grep its `output/chain-<name>.log` for FAILED/INCOMPLETE/Traceback, not just for DONE (incident: 006-011 logged FAILED on every scene because `code3d_render.py` could not append to a missing `costs.json`; the clips were intact, verified frame-for-frame, and the cause is fixed). `tests/test_render_chain.py` guards this.
 - NO MUSIC (owner decision 2026-11-01; marketing/design/scriptwriter lenses): productions 001-007 ship narration only, `music_file`/`music_credit` null, and no
   publication carries a music credit line; the description template has no credit slot. A future track needs the owner's explicit OK and, if it carries a credit
   condition, the rule below applies again.

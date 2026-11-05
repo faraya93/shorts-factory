@@ -78,7 +78,7 @@ def main() -> int:
                     "-c:v", "libx264", "-crf", "16", "-preset", "medium", "-pix_fmt", "yuv420p", "-an", str(out)], check=True)
 
     costs_path = prod / "costs.json"
-    costs = json.loads(costs_path.read_text())
+    costs = json.loads(costs_path.read_text()) if costs_path.exists() else {"entries": []}   # code3d productions have no fal costs.json until the first render
     costs["entries"].append({"scene": n, "engine": "code3d", "mode": args.mode, "frames": n_frames, "fal_spend_usd": 0.0,
                              "render_seconds": round(render_s, 1) if render_s is not None else None,
                              "clip": str(out.relative_to(prod)), "timestamp": datetime.now(timezone.utc).isoformat(timespec="seconds")})

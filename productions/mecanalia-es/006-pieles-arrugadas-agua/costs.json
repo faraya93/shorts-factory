@@ -1,0 +1,82 @@
+{
+  "note": "Backfilled 2026-11-04: code3d_render.py failed to append here because costs.json did not exist; clips and frame counts were verified against the narration slots. render_seconds unknown. fal spend 0.",
+  "entries": [
+    {
+      "scene": 1,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 210,
+      "fal_spend_usd": 0.0,
+      "render_seconds": null,
+      "clip": "clips/scene-01.mp4",
+      "timestamp": null,
+      "backfilled": true
+    },
+    {
+      "scene": 2,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 196,
+      "fal_spend_usd": 0.0,
+      "render_seconds": null,
+      "clip": "clips/scene-02.mp4",
+      "timestamp": null,
+      "backfilled": true
+    },
+    {
+      "scene": 3,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 178,
+      "fal_spend_usd": 0.0,
+      "render_seconds": null,
+      "clip": "clips/scene-03.mp4",
+      "timestamp": null,
+      "backfilled": true
+    },
+    {
+      "scene": 4,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 183,
+      "fal_spend_usd": 0.0,
+      "render_seconds": null,
+      "clip": "clips/scene-04.mp4",
+      "timestamp": null,
+      "backfilled": true
+    },
+    {
+      "scene": 5,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 232,
+      "fal_spend_usd": 0.0,
+      "render_seconds": null,
+      "clip": "clips/scene-05.mp4",
+      "timestamp": null,
+      "backfilled": true
+    },
+    {
+      "scene": 6,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 163,
+      "fal_spend_usd": 0.0,
+      "render_seconds": null,
+      "clip": "clips/scene-06.mp4",
+      "timestamp": null,
+      "backfilled": true
+    },
+    {
+      "scene": 7,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 273,
+      "fal_spend_usd": 0.0,
+      "render_seconds": null,
+      "clip": "clips/scene-07.mp4",
+      "timestamp": null,
+      "backfilled": true
+    }
+  ]
+}
