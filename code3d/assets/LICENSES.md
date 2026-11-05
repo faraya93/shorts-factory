@@ -5,6 +5,8 @@ gitignored (media); this file is committed. Free tiers only — never subscribe 
 (BlenderKit Full etc.). Rules for sources not used yet: Meshy free-tier models are CC-BY and need an attribution
 line in the video description; Tripo's free tier is non-commercial — never use it.
 
+Hero objects now live in `assets/library/<slug>/`, each with its own README (docs/current/specs/asset-system.md). This file keeps logging supporting materials, HDRIs and props.
+
 | Asset | Source | Licence | Used for |
 |---|---|---|---|
 | studio_small_08 (HDRI, 2k, `hdri/studio_small_08_2k.hdr`) — Sergej Majboroda | Poly Haven (polyhaven.com) | CC0 | studio lighting of all code3d scenes (tagged low contrast, softbox, infinity) |

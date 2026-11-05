@@ -23,3 +23,12 @@ productions/**/spikes/*/*
 docs/current/research/reference/*.[mM][pP]4
 productions/_lab/closing-test/
 /build/
+
+# asset library: binaries are media and stay local; the records are versioned
+assets/library/*/*
+!assets/library/*/README.md
+!assets/library/*/asset.json
+!assets/library/*/build.py
+!assets/library/*/job/
+assets/library/*/job/*
+!assets/library/*/job/report.md

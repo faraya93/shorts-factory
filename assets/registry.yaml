@@ -1,0 +1,115 @@
+# Free asset sources, in search order. Read by factory/asset_library.py; explained in docs/current/specs/asset-system.md.
+# status: connected = usable today with no account | owner-step = needs an account or key only the owner may create | candidate = found, not wired or tested
+# Facts below were checked live on the "verified" date. Re-verify before relying on an old date: these services rename and change terms.
+licence_rule: "CC0 preferred; Royalty-Free acceptable; CC-BY only with the attribution recorded in the asset README; anything unclear is not used."
+sources:
+  - id: polyhaven
+    priority: 1
+    name: Poly Haven
+    url: https://polyhaven.com
+    provides: [hdris, pbr-textures, models]
+    access: "MCP for Blender: search_assets + import_asset, source polyhaven. Public API without MCP: https://api.polyhaven.com/assets?t=models"
+    account_required: false
+    licence: CC0-1.0
+    status: connected
+    verified: 2026-11-04
+    notes: >
+      The library switch is OFF by default in each Blender session; set bpy.context.scene.blendermcp_use_polyhaven = True first.
+      Search is fuzzy and always returns something: "human heart" returned a marble bust and "popcorn" returned a croissant. A hit is not a match; judge it by eye.
+      Realistic scans, often one baked mesh with no separable parts, so check the brief's moving parts before taking one.
+  - id: ambientcg
+    priority: 2
+    name: ambientCG
+    url: https://ambientcg.com
+    provides: [pbr-textures]
+    access: "API: https://ambientcg.com/api/v2/full_json?q=<q>&type=Material ; zip: https://ambientcg.com/get?file=<Id>_2K-JPG.zip"
+    account_required: false
+    licence: CC0-1.0
+    status: connected
+    verified: 2026-11-04
+    notes: Materials only. Downloads go in code3d/assets/materials/ and are logged in code3d/assets/LICENSES.md, like every non-hero asset.
+  - id: blenderkit
+    priority: 3
+    name: BlenderKit free plan (repo renamed BlenderKit/Blendkit)
+    url: https://www.blenderkit.com
+    provides: [models, materials]
+    access: "BlenderKit add-on (installed, v3.21.3), once the owner signs in. Search: https://www.blenderkit.com/api/v1/search/?query=asset_type:model+<q>+is_free:true"
+    account_required: true
+    licence: per asset; accept only cc_zero (CC0-1.0) or royalty_free (Royalty-Free)
+    status: owner-step
+    verified: 2026-11-04
+    notes: >
+      Do not create an account. Owner step. Open question for the owner: anonymous search still answers (2026-11-04), and code3d/TOOLING.md records anonymous downloads
+      working in October, which is how the existing BlenderKit assets were obtained. This registry treats the source as owner-step until the owner decides otherwise.
+  - id: sketchfab
+    priority: 3
+    name: Sketchfab free downloads
+    url: https://sketchfab.com
+    provides: [models]
+    access: "MCP for Blender: search_assets + import_asset, source sketchfab, once the owner pastes an API token into the add-on preferences."
+    account_required: true
+    licence: per model; accept only CC0 or CC Attribution. Refuse NC, ND, SA and Editorial.
+    status: owner-step
+    verified: 2026-11-04
+    notes: Do not create an account. Largest catalogue of specific and organic models, so this is the connection that would most widen coverage.
+  - id: polypizza
+    priority: 3
+    name: Poly Pizza
+    url: https://poly.pizza
+    provides: [models]
+    access: "MCP for Blender: search_assets + import_asset, source polypizza, once the owner pastes a free API key into the add-on preferences."
+    account_required: true
+    licence: per model; CC0 or CC-BY
+    status: owner-step
+    verified: 2026-11-04
+    notes: Stylised low-poly. Not on the owner's original list; added because MCP for Blender has it built in and the look suits simplified heroes.
+  - id: mb-lab
+    priority: 4
+    name: MB-Lab (parametric human anatomy generator)
+    url: https://github.com/animate1978/MB-Lab
+    provides: [human-bodies]
+    access: "Blender add-on from the GitHub release (1_8_1). Not installed."
+    account_required: false
+    licence: AGPL-3.0
+    status: candidate
+    verified: 2026-11-04
+    agpl_note: >
+      FLAG. Per the project's license page, generated MODELS are AGPL-3.0 and "must be distributed under AGPL 3"; 2D RENDERS (images and video) are not considered a derived
+      product, and their author owns them. So videos are fine, but the .blend or mesh itself may not be shared except under AGPL. Library binaries are gitignored and never
+      distributed. Each use needs the owner's dated OK in licence.owner_ok.
+    notes: >
+      The repository is ARCHIVED (last release June 2024, "development has moved onto CharMorph") and states Blender 4.0+. Not tested on our Blender 5.2.3; test before relying on it.
+      Whole bodies only, no internal organs. Keep the stylised, no-real-skin look rule.
+  - id: charmorph
+    priority: 4
+    name: CharMorph (MB-Lab's named successor)
+    url: https://github.com/Upliner/CharMorph
+    provides: [human-bodies]
+    access: "Blender add-on; clone with --recursive. Not installed."
+    account_required: false
+    licence: per base model; secondary sources list Vitruvian CC0, Antonia and Reom CC-BY, MB-Lab base AGPL. Confirm in the project's docs first.
+    status: candidate
+    verified: 2026-11-04
+    notes: Last confirmed target is Blender 4.4 (v0.4.0, March 2025). Not tested on 5.2.3. Prefer it over MB-Lab if it runs, because a CC0 base avoids the AGPL question.
+  - id: smithsonian
+    priority: 5
+    name: Smithsonian 3D Open Access
+    url: https://3d.si.edu/collections/openaccesshighlights
+    provides: [models]
+    access: "Web download; filter on Open Access and confirm the CC0 mark on each model."
+    account_required: false
+    licence: CC0-1.0 where marked; refuse anything unmarked
+    status: candidate
+    verified: 2026-11-04
+    notes: Gap-filler proposed by this build, not on the owner's list. Fossils, animals and artefacts. Coverage evidence is mostly from 2020 coverage; not wired or tested.
+excluded:
+  - id: meshy
+    reason: generate_3d provider; needs an account, may spend credits, free tier output is CC-BY. Not used at $0 without the owner's OK.
+  - id: tripo
+    reason: free tier is non-commercial (CLAUDE.md). Never.
+  - id: hunyuan3d
+    reason: Tencent community licence excludes the EU, UK and South Korea; the channel is global. Not used.
+  - id: trellis2
+    reason: code is MIT, but its RMBG-2.0 dependency is CC BY-NC 4.0 and DINOv3 has its own licence (blender-kiln's own table). Unclear means not used.
+  - id: unimate
+    reason: checkpoints are CC BY-NC 4.0 (non-commercial). Not used.

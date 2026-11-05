@@ -80,6 +80,13 @@ def validate_production(cfg: dict) -> list[str]:
         errors.append("missing production field: engine_reason (one line: why this primary engine)")
     if family not in FAMILIES:
         errors.append(f"topic_family must be one of {FAMILIES}, got {family!r}")
+    route, assets = cfg.get("hero_route"), cfg.get("library_assets")
+    if route is not None and route not in ("code-primitive", "asset"):
+        errors.append(f"hero_route must be 'code-primitive' or 'asset', got {route!r}")
+    if route is not None and not (isinstance(assets, list) and assets):
+        errors.append("hero_route needs library_assets: whatever the route, the hero lands in assets/library and is listed here")
+    if assets and route is None:
+        errors.append("library_assets needs hero_route")
     for field in PRODUCTION_TEXT_FIELDS:
         if not str(cfg.get(field, "")).strip():
             errors.append(f"missing production field: {field}")

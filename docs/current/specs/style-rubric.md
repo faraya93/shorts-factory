@@ -14,6 +14,6 @@ A frame PASSES at >= 8/10 with no failure in items 1, 2 or 10 (the identity-defi
 | 7 | The camera is moving (orbit, push-in or tracking) and no static hold longer than ~1 s | scene gates only |
 | 8 | Top ~25% of the frame left clear for the captions | read |
 | 9 | Hero centred in the lower ~70% with large dark negative space | read |
-| 10 | Drawability law: hard surfaces only, no people, hands, anatomy, cloth, fluids or animals | read |
+| 10 | Hero routing (replaces the Drawability law, 2026-11-04): the hero reads as itself, and anatomy, hands, animals, cloth and fluids appear only when the asset route supplies them; never an abstract stand-in; no real skin texture, blood or gore (docs/current/specs/asset-system.md) | read, plus blind naming |
 
 Honest limits: I judge stills only (I cannot watch motion), and "reads as the pages' look" is my judgement against the three reference videos' frames, not a measurement.

@@ -170,6 +170,9 @@ as the historical record they are.
 8. **Handles are intended, not verified:** creating or checking accounts is the owner's / the orchestrator's job; the repo records `@mecanalia`, `@mecanaliaen` and the fallbacks only.
 9. **English voice** `en-US-AndrewNeural` is a provisional starting value (it exists in edge-tts; not auditioned).
 
+## Asset library (added 2026-11-04)
+`assets/registry.yaml` lists the free sources; `assets/library/<slug>/` stores every hero object (records committed, binaries local). Tool: `factory/asset_library.py`. Manual: `docs/current/specs/asset-system.md`.
+
 ## Left for the owner
 - Gate records of `001` to `003` (tape, gears, clock) were already stale before this reorganization (a later change to shared rigs or identity); `004` to `007` pass. Re-run
   `.venv/bin/python factory/gate.py run productions/mecanalia-es/<NNN-slug>` before any re-render of those three.

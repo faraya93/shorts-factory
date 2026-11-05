@@ -24,6 +24,11 @@ Scripts, not GUI: `blender -b --python <script> -- <args>` is the primary, deter
   N panel -> MCP tab -> Start) and Claude Code's own client connection were not exercised. The MCP is for interactive
   GUI sessions; headless builds use scripts. Its `generate_3d` tool may call third-party services: not used.
 
+## Update 2026-11-04: MCP verified live; asset jobs moved to docs/current/specs/asset-system.md
+The caveat above is closed: the live-GUI path and Claude Code's own client were exercised end to end (add-on 1.8, protocol 15, Blender 5.2.3: scene operation, scene query, screenshot, Poly Haven search and
+import). Start it with `python3 ~/.claude/skills/blender-kiln/tools/open_blender.py`. Poly Haven is off per session until `scene.blendermcp_use_polyhaven = True`. Content telemetry is off; the anonymous usage record
+(tool name, duration, versions) is on by default; `DISABLE_TELEMETRY=true` in the server's env turns it off. BlenderKit is now an owner-step source for hero objects (assets/registry.yaml).
+
 ## Part 2 cost (reported separately from any scene)
 Wall clock 20:13 -> ~20:19 (about 6 min of the 45 min timebox); effort MEDIUM; fal spend $0. Course corrections: GitHub API
 redirect (renamed repos), package rename, missing `uv`, urllib 403, the add-on's background-mode refusal.

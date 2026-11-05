@@ -325,6 +325,8 @@ where judgment is involved.
 
 ## code3d sourcing and optimization (binding, owner 2026-10-25)
 Your job is the FASTEST route to each clip, not the most from-scratch one.
+- (For HERO objects, "Asset library and hero routing" supersedes this list: its source order applies, and
+  no AI-generated mesh is used without the owner's OK. This list still applies to supporting props.)
 - SOURCE FIRST: search the libraries before modelling anything; model only
   what no library has. For every element choose in this order and log a
   one-line reason: (1) an existing library asset (BlenderKit, Poly Haven,
@@ -380,10 +382,24 @@ Your job is the FASTEST route to each clip, not the most from-scratch one.
   AND can sustain its own publishing cadence, or (2) the English-language
   version of the channel.
 
+## Asset library and hero routing (binding, owner 2026-11-04; manual: docs/current/specs/asset-system.md)
+Why: the owner rejected batch 006-011 (too abstract, objects do not resemble their subjects; do not publish). All six were code-primitive builds and all passed the composition gate, which only measures colour.
+- **Routing, per production, before the beat sheet is final:** genuinely geometric hero objects keep the code-primitive route. Anything organic, soft or complex takes the asset route: search `assets/registry.yaml` in priority order (best licence wins);
+  if nothing fits, build it with the modelling skills or a generator, with visual checks through MCP screenshots. In doubt, asset route. Declare `hero_route` and `library_assets` in scenes.json (required from production 012).
+- **Whatever the route, the finished object lands in `assets/library/<slug>/`,** and the same object is never solved twice. Check first: `.venv/bin/python factory/asset_library.py find <words>`. To run a job, follow "How to run an asset job" in the manual.
+- **Drawability exceptions (supersedes the old ban for hero objects):** anatomy, hands, animals, cloth and fluids are allowed when the asset route supplies them; without a passing asset they stay off screen, and no abstract stand-in replaces them. Reason: the ban
+  treated a tooling limit as a content rule and produced the abstract objects the owner rejected. Still binding: stylised, no real skin texture, no blood, no gore.
+- **Likeness gate (hard block):** a hero must be named correctly by two fresh subagents who see only neutrally named stills, once for the asset and once in the production's gate stills. `gate.py check` refuses the final render otherwise. Never add an alias to make a guess pass. The owner remains the final judge of likeness.
+- **Licences:** CC0 preferred; Royalty-Free acceptable; CC-BY only with the attribution recorded in the asset README and carried in the video's description; anything unclear is not used. Create no accounts: BlenderKit, Sketchfab and Poly Pizza stay owner-step sources until the owner connects them. `generate_3d` is not used.
+- **Skill roles:** `docs/current/specs/asset-system.md`, "Skill role map" (installed at user level; inherited, not re-decided).
+- **Operating model:** asset-building is interactive, with Blender open through MCP for Blender; production rendering stays headless.
+
 ## Engine selection (binding; from the 2026-10-25 engine spike)
 Evidence: productions/_lab/engine-spike/report.md. The factory assigns
 engines automatically from these rules; the owner is never asked.
-- (a) Choose ONE primary engine per production from the script's dominant
+- (a) (Read with "Asset library and hero routing": an organic hero supplied by the asset route may
+  stay in code3d; t2v remains available for ambient footage but is not forced.)
+  Choose ONE primary engine per production from the script's dominant
   mechanism type. Ambient/organic transformation and camera travel
   (bodies, tissues, soft or flowing things) → t2v. Rigid geometric hero
   objects and numbers/scale spectacle → code3d (R3 passed, so the route is

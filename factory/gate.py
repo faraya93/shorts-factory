@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / "factory"))
 sys.path.insert(0, str(ROOT / "tools"))
 import identity  # noqa: E402
 import composition_gate  # noqa: E402
+import asset_library  # noqa: E402
 
 SAMPLES = 48
 
@@ -33,6 +34,8 @@ def fingerprint(prod: Path) -> str:
     files = [ROOT / "code3d" / "scenes" / f"{prefix}_{n:02d}.py" for n in ids] + [ROOT / "code3d" / "lib" / f"{x}.py" for x in libs]
     for f in files:
         h.update(f.read_bytes())
+    for slug in cfg.get("library_assets") or []:                                           # absent on older productions: their fingerprints do not change
+        h.update(asset_library.fingerprint(slug).encode())
     return h.hexdigest()[:16]
 
 
@@ -45,7 +48,28 @@ def check(prod: Path) -> tuple[bool, str]:
         return False, "gate record is STALE (identity, support colours, scripts or rigs changed since it passed); re-run the gate"
     if not r.get("pass"):
         return False, "gate record says BLOCKED; fix the colours and re-run the gate (see build/gate/gate.md)"
-    return True, "gate PASS on file"
+    return check_hero(prod)
+
+
+def check_hero(prod: Path) -> tuple[bool, str]:
+    """Colour passing never meant the object looks like itself (the 006-011 batch passed this gate and was rejected for likeness). Productions that declare
+    hero_route must also have a ready library asset and a fresh passing likeness record (docs/current/specs/asset-system.md). Older productions declare none."""
+    cfg = json.loads((prod / "scenes.json").read_text(encoding="utf-8"))
+    if not cfg.get("hero_route"):
+        return True, "gate PASS on file"
+    for slug in cfg.get("library_assets") or []:
+        status = asset_library.read_meta(slug)["status"] if (asset_library.asset_dir(slug) / "asset.json").exists() else "missing"
+        if status != "ready":
+            return False, f"library asset {slug} is {status}, not ready; finish its asset job first"
+    rec = prod / "build" / "gate" / "likeness.json"
+    if not rec.exists():
+        return False, f"no likeness record; blind-name the hero in the gate stills: .venv/bin/python factory/asset_library.py blind-pack, then likeness {prod} <slug>"
+    r = json.loads(rec.read_text(encoding="utf-8"))
+    if r.get("fingerprint") != fingerprint(prod):
+        return False, "likeness record is STALE (the stills, rig or asset changed since it passed); repeat the blind naming"
+    if not r.get("pass"):
+        return False, f"likeness FAILED, the hero does not read as itself (guesses: {r.get('guesses')}); fix the hero, not the threshold"
+    return True, "gate PASS and likeness PASS on file"
 
 
 def run(prod: Path) -> int:
