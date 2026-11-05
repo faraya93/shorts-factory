@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "scene": 1,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 260,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 859.0,
+      "clip": "clips/scene-01.mp4",
+      "timestamp": "2026-11-05T03:53:32+00:00"
+    }
+  ]
+}

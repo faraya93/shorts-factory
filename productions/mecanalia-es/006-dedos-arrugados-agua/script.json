@@ -1,0 +1,218 @@
+{
+  "video": "dedos-arrugados-agua",
+  "title": "¿Por qué se arrugan tus dedos en el agua? 💧",
+  "topic_family": "body",
+  "preset": "esmeralda",
+  "prefix": "dedos",
+  "structure_variant": "chain",
+  "hero_route": "asset",
+  "library_assets": [
+    "human-hand"
+  ],
+  "engine_reason": "Asset route: the hand is a library asset (Sketchfab, CC-BY) because a hand cannot be recognisable from primitives; code3d renders it with the fingertip cutaway, water slab and grip pads, which are geometric supporting props drawn with the set-piece kit. No diffusion footage.",
+  "hook_question": "¿Por qué se te arrugan los dedos en el agua?",
+  "false_belief": "La piel se empapa y se hincha de agua.",
+  "closing_reframe": "No es piel empapada: son llantas de agarre que tu cuerpo enciende.",
+  "share_archetype": "ese amigo que se queda mirando sus dedos de pasa en la bañera",
+  "caption_draft": "Si fuera agua absorbida, tu brazo también se arrugaría. No: tu sistema nervioso aprieta los vasos de la yema y la piel se pliega en surcos, como las ranuras de una llanta, para que agarres mejor lo mojado. 💧 Envíaselo a ese amigo que se queda mirando sus dedos de pasa en la bañera.",
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Esmeralda defaults (cream board and plate, cream plinth). Body-family cutaway stands in the cream plate; hand tone is a light warm peach that the deep-green stage separates by hue and value."
+  },
+  "hero_colours": {
+    "skin": "#C98963"
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "asset_rig"
+  ],
+  "gate_stills": {
+    "1": [
+      200
+    ],
+    "2": [
+      170
+    ],
+    "3": [
+      120
+    ],
+    "4": [
+      110
+    ],
+    "5": [
+      150
+    ],
+    "6": [
+      200
+    ]
+  },
+  "description": "Si fuera agua absorbida, tu brazo también se arrugaría. No: tu sistema nervioso aprieta los vasos de la yema y la piel se pliega en surcos, como las ranuras de una llanta, para que agarres mejor lo mojado. 💧 Sígueme, y envíaselo a ese amigo que se queda mirando sus dedos de pasa en la bañera.\n\nModelo 3D de la mano: \"hand\" de kevinruiz (Sketchfab), licencia CC Attribution.",
+  "hashtags": [
+    "#dedosarrugados",
+    "#piel",
+    "#cuerpohumano",
+    "#shorts"
+  ],
+  "departure": "Departure from Coral: ESMERALDA stage (deep green). Reason: the owner's standing reservation about a skin-toned hand on the Coral stage; a warm hand on a cool green stage separates by hue, not only by value.",
+  "lens": [
+    "Design (lead): responds to the owner's reservation about skin on Coral: cool deep-green stage, light warm peach hand, cream cutaway plate. Measured by the composition gate (stage-hero dE >= 20).",
+    "Scriptwriter: new angle, not a redo. The hook is a CONTRAST on one object (fingers wrinkle, the submerged forearm does not), which disproves 'la piel se empapa' on the spot; the old sponge-vs-finger contrast and the marble pinch are dropped (one hand pose, no rig).",
+    "Marketing: your own fingers in the bath is verifiable on the spot; behaviour archetype ('se queda mirando sus dedos de pasa'); 6 scenes, chain."
+  ],
+  "sources": [
+    "Mechanism: sympathetic nervous system causes vasoconstriction in the digits after prolonged wet exposure; the pulp loses volume and the skin folds. Only glabrous skin (fingers, palms, toes, soles) wrinkles. Denervated fingers do not wrinkle (clinical nerve test).",
+    "Function: Changizi et al. 2011 (drainage-channel pattern); Kareklas, Nettle, Smulders 2013 (wrinkled fingers handled wet objects faster, dry objects no difference). Stated as 'en un estudio'; no figure rendered.",
+    "Hero: Sketchfab 'hand' by kevinruiz, CC Attribution (assets/library/human-hand)."
+  ],
+  "simplifications": [
+    "Wrinkles are a procedural material on the library hand; the real pattern is branching.",
+    "The fingertip cutaway and the grip pads are schematic props, not anatomy.",
+    "The wet-grip race is choreographed, not simulated."
+  ],
+  "status_notes": [],
+  "scenes": [
+    {
+      "name": "contraste",
+      "target_duration_s": 9,
+      "narration": "¿Por qué se te arrugan los dedos en el agua? Dicen que la piel se empapa y se hincha. Pero entonces, ¿por qué tu brazo no se arruga?",
+      "transformation": "mano y antebrazo sumergidos, lisos → solo las yemas se arrugan, el antebrazo sigue liso",
+      "camera": "órbita baja alrededor de la mano en el agua",
+      "emphasis": [
+        "brazo"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SE ARRUGA",
+          "at_word": "arrugan",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LISO",
+          "at_word": "brazo",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.4
+        }
+      ]
+    },
+    {
+      "name": "orden",
+      "target_duration_s": 8,
+      "narration": "Lo decide tu sistema nervioso. Tras unos minutos mojados, manda una orden, y los vasos sanguíneos de la yema se aprietan.",
+      "transformation": "corte de la yema: una señal baja por el nervio → los vasos se estrechan",
+      "camera": "empuje hacia dentro del corte",
+      "emphasis": [
+        "nervioso",
+        "vasos"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "NERVIO",
+          "at_word": "nervioso",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.2,
+          "y": 0.4
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "VASOS",
+          "at_word": "vasos",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "surcos",
+      "target_duration_s": 6,
+      "narration": "Con menos volumen por dentro, la piel se jala hacia adentro y se pliega en surcos.",
+      "transformation": "yema lisa → la piel se hunde y aparecen surcos",
+      "camera": "macro: acercamiento a la yema",
+      "emphasis": [
+        "surcos"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "canales",
+      "target_duration_s": 8,
+      "narration": "Y esos surcos son canales, como las ranuras de una llanta: sacan el agua de en medio, y por eso no resbalas.",
+      "transformation": "una llanta lisa flota sobre el agua → una llanta con ranuras la desvía y toca el suelo",
+      "camera": "travelling lateral, luego plano cenital",
+      "emphasis": [
+        "canales",
+        "llanta"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CANALES",
+          "at_word": "canales",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "agarre",
+      "target_duration_s": 7,
+      "narration": "En un estudio, la gente con dedos arrugados movió objetos mojados más rápido. Con objetos secos, no hubo diferencia.",
+      "transformation": "dos pinzas llevan una canica mojada → la lisa la pierde, la ranurada la lleva hasta la meta",
+      "camera": "dolly lateral siguiendo a las pinzas",
+      "emphasis": [
+        "mojados",
+        "secos"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "MOJADO",
+          "at_word": "mojados",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "cierre",
+      "target_duration_s": 9,
+      "narration": "Así que no es piel empapada: son llantas de agarre que tu cuerpo enciende. Sígueme, y envíaselo a ese amigo que se queda mirando sus dedos de pasa en la bañera.",
+      "transformation": "yema arrugada → una llanta con ranuras crece a su lado",
+      "camera": "retroceso amplio",
+      "emphasis": [],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

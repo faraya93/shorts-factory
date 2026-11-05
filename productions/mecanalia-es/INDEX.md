@@ -17,3 +17,9 @@ Publish package of each video: `final.mp4` + `cover.jpg` + `publish.json` (where
 **Archived before publication (2026-11-03, owner instruction):** the ORIGINAL 006 (`por-que-no-nos-gusta-lo-mismo`, food taste) and 007 (`por-que-cuesta-dejar-el-alcohol`, alcohol)
 were moved to `productions/_archive/retired-006-007-2026-11-03/` (never published, never queued; judged "very monotonous, the same scene throughout"). Numbers 006-011 are
 REASSIGNED to the new batch below; any reference to an older "006/007" means the archived pair.
+| 006 | dedos-arrugados-agua | draft | 2026-11-04 | |
+| 007 | candado-solo-abre-su-llave | draft | 2026-11-04 | |
+| 008 | hielo-que-pasaria-si-se-hundiera | draft | 2026-11-04 | |
+| 009 | termo-por-que-mantiene-el-calor | draft | 2026-11-04 | |
+| 010 | corazon-botellas-al-dia | draft | 2026-11-04 | |
+| 011 | palomitas-por-que-explota-el-maiz | draft | 2026-11-04 | |

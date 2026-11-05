@@ -1,0 +1,222 @@
+{
+  "video": "corazon-botellas-al-dia",
+  "title": "¿Cuántas botellas bombea tu corazón al día? ❤️",
+  "topic_family": "numbers",
+  "preset": "celeste",
+  "prefix": "latido",
+  "structure_variant": "scale",
+  "hero_route": "asset",
+  "library_assets": [
+    "human-heart"
+  ],
+  "engine_reason": "Asset route: the heart is the library asset 'human-heart' (Sketchfab, CC-BY), clean anatomical model look, no gore. Bottles are geometric supporting props (swarms). One unit multiplied with a pull-back at each step (scale).",
+  "hook_question": "¿Cuántas botellas de agua bombea tu corazón en un solo día?",
+  "false_belief": "",
+  "closing_reframe": "No es solo un músculo: es una bomba que nunca descansa.",
+  "share_archetype": "ese amigo que se pone la mano en el pecho después de subir las escaleras",
+  "caption_draft": "Cada latido empuja unos 70 mililitros. En un minuto son cinco litros, en una hora trescientos y en un día más de siete mil: unas 3.600 botellas de dos litros. ❤️ Envíaselo a ese amigo que se pone la mano en el pecho después de subir las escaleras.",
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Celeste defaults (cream board and plate; plinth navy #2B4C70). The red heart separates from the light-blue stage by hue; the accent is deep violet."
+  },
+  "hero_colours": {
+    "heart_skin": "#C8323C"
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "asset_rig",
+    "bottle_rig"
+  ],
+  "gate_stills": {
+    "1": [
+      100
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      100
+    ],
+    "4": [
+      110
+    ],
+    "5": [
+      200
+    ],
+    "6": [
+      260
+    ]
+  },
+  "description": "Cada latido empuja unos 70 mililitros. En un minuto son cinco litros, en una hora trescientos y en un día más de siete mil: unas 3.600 botellas de dos litros. ❤️ Sígueme, y envíaselo a ese amigo que se pone la mano en el pecho después de subir las escaleras.\n\nModelo 3D del corazón: \"Human Heart 3D Model | Anatomy | Medical Project\" de Mesh-Magnet (Sketchfab), licencia CC Attribution.",
+  "hashtags": [
+    "#corazon",
+    "#latidos",
+    "#curiosidades",
+    "#shorts"
+  ],
+  "departure": "Departure from Coral: CELESTE stage (light blue, navy plinth, violet accent). Reason: a red heart on a coral or raspberry stage loses separation (the rejected 010 used raspberry); blue is its complement and keeps the clean, non-gory read.",
+  "lens": [
+    "Design (lead): the owner's input about skin and organ tones on Coral: the heart stands on a cool light-blue stage, retinted a clean saturated red, smooth, no wet tissue; no blood is shown, only water-like bottles carry the volume.",
+    "Scriptwriter: numbers family, `scale`: one unit (a beat, 70 ml) multiplied through minute, hour, day, payoff in bottles of 2 litres (an object everyone has held); the old script's vague 'bottles a day' becomes a countable chain of figures that agree with each other (70 beats x 70 ml = 4.9 L, about 5 L; x 60 = 300 L; x 24 = 7200 L = 3600 bottles).",
+    "Marketing: hook formula '¿Cuántas...?' about a tangible object (a bottle); archetype is a behaviour (hand on chest after the stairs); every number is a counter on the spoken word."
+  ],
+  "sources": [
+    "Heart output at rest about 5 L/min; stroke volume about 70 mL; about 70 beats/min (standard physiology references, e.g. American Heart Association / textbook values). FLAGGED: rounded textbook figures, individual values vary; the video says 'unos' and 'más de'.",
+    "Derived: 5 L x 60 = 300 L per hour; x 24 = 7,200 L per day; 7,200 / 2 = 3,600 two-litre bottles.",
+    "Hero: Sketchfab 'Human Heart 3D Model | Anatomy | Medical Project' by Mesh-Magnet, CC Attribution (assets/library/human-heart)."
+  ],
+  "simplifications": [
+    "The heart beats by a scale pulse; its chambers do not move separately (single-mesh asset).",
+    "Bottles are stylised and drawn at a convenient size relative to the heart.",
+    "No blood is drawn: water-like bottles stand for the volume."
+  ],
+  "status_notes": [],
+  "scenes": [
+    {
+      "name": "hook",
+      "target_duration_s": 8,
+      "narration": "¿Cuántas botellas de agua bombea tu corazón en un solo día? Más de tres mil. Y no se toma ni un descanso, ni siquiera cuando duermes.",
+      "transformation": "un corazón late solo → una primera botella aparece a su lado",
+      "camera": "órbita lenta alrededor del corazón",
+      "emphasis": [
+        "botellas",
+        "tres"
+      ],
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "3600",
+          "from": 0,
+          "at_word": "tres",
+          "offset_s": 0.0,
+          "duration_s": 2.0,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "name": "latido",
+      "target_duration_s": 6,
+      "narration": "Cada latido empuja apenas un vasito de sangre, unos setenta mililitros, y late unas setenta veces cada minuto.",
+      "transformation": "el corazón se contrae → un vasito se llena",
+      "camera": "acercamiento al corazón con cada latido",
+      "emphasis": [
+        "latido",
+        "setenta"
+      ],
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "70 ml",
+          "from": 0,
+          "at_word": "setenta",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "name": "minuto",
+      "target_duration_s": 7,
+      "narration": "En un minuto, ya son cinco litros: dos botellas y media de dos litros, y la cuenta apenas empieza.",
+      "transformation": "un vasito → dos botellas y media",
+      "camera": "retroceso suave",
+      "emphasis": [
+        "minuto",
+        "cinco"
+      ],
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "5 L",
+          "from": 0,
+          "at_word": "cinco",
+          "offset_s": 0.0,
+          "duration_s": 1.0,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "name": "hora",
+      "target_duration_s": 6,
+      "narration": "En una hora, trescientos litros: ciento cincuenta botellas.",
+      "transformation": "dos botellas y media → una pared de ciento cincuenta botellas",
+      "camera": "retroceso amplio",
+      "emphasis": [
+        "hora",
+        "trescientos"
+      ],
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "300 L",
+          "from": 0,
+          "at_word": "trescientos",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "name": "dia",
+      "target_duration_s": 8,
+      "narration": "Y en un día entero, más de siete mil litros: tres mil seiscientas botellas, un edificio de botellas, mientras tú ni lo notas.",
+      "transformation": "una pared de botellas → una torre gigante de tres mil seiscientas botellas",
+      "camera": "retroceso muy amplio hasta ver la torre completa",
+      "emphasis": [
+        "día",
+        "siete"
+      ],
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "7200 L",
+          "from": 0,
+          "at_word": "siete",
+          "offset_s": 0.0,
+          "duration_s": 1.6,
+          "visible_s": 3.4,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "name": "cierre",
+      "target_duration_s": 9,
+      "narration": "Así que no es solo un músculo: es una bomba que nunca descansa. Sígueme, y envíaselo a ese amigo que se pone la mano en el pecho después de subir las escaleras.",
+      "transformation": "la torre de botellas → vuelve el corazón solo, latiendo",
+      "camera": "acercamiento final al corazón",
+      "emphasis": [],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

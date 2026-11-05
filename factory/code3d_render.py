@@ -52,8 +52,10 @@ def main() -> int:
     extra.append(f"identity={identity.export_json(production=prod)}")          # snapshot of channels/mecanalia/brand.yaml for Blender (identity presets + render profiles)
     if cfg.get("identity_preset") and not any(a.startswith("look=") for a in extra):
         extra.append(f"look={cfg['identity_preset']}")
-    if args.samples:
-        extra.append(f"samples={args.samples}")
+    import os
+    samples = args.samples or (int(os.environ["SF_SAMPLES"]) if os.environ.get("SF_SAMPLES") else None)     # batch override (lens decision 2026-11-04): ceiling only, adaptive sampling stops earlier
+    if samples:
+        extra.append(f"samples={samples}")
     script = ROOT / "code3d" / "scenes" / f"{prefix}_{n:02d}.py"       # default 'scene': existing productions unchanged
     frames_dir = prod / "build" / "code3d" / f"{args.mode}-scene-{n:02d}"
     slot = narration_slot_frames(prod, n)

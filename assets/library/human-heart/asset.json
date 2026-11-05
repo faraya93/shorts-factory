@@ -1,0 +1,86 @@
+{
+  "slug": "human-heart",
+  "name": "Human heart",
+  "aliases": [
+    "heart",
+    "corazon",
+    "human heart"
+  ],
+  "family": "body",
+  "created": "2026-11-04",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a human heart (anatomical model)",
+    "seen_at": "large: heart fills ~40-50% of frame",
+    "moving_parts": [
+      "heart (one mesh: it beats by scale pulses, the great vessels do not move separately)"
+    ],
+    "states": [
+      "resting size",
+      "beat pulse by scale"
+    ],
+    "style_notes": "Clean anatomical model look (smooth, no gore, no wet tissue). Retint per production in the one material slot (heart_skin); real size 7.4 x 6.6 x 12 cm."
+  },
+  "source": {
+    "registry_id": "sketchfab",
+    "url": "https://sketchfab.com/3d-models/5da08bb137014f0392c69f9997f777cd",
+    "asset_id": "5da08bb137014f0392c69f9997f777cd",
+    "author": "Mesh-Magnet",
+    "retrieved": "2026-11-04"
+  },
+  "licence": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "\"Human Heart 3D Model | Anatomy | Medical Project\" by Mesh-Magnet (Sketchfab) is licensed under CC Attribution",
+    "note": "Sketchfab listed it as \"CC Attribution\"; version taken as 4.0, to confirm on the model page",
+    "decision": null
+  },
+  "files": {
+    "blend": "human-heart.blend",
+    "sha256": "12e1c6a47ac09e38993ad74db9c9e94dd537640ca5a6556340a3fd2ab06793d2",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": [
+    0.074,
+    0.066,
+    0.12
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-04"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-04",
+      "guesses": [
+        "a human heart (anatomical model, dark red with blue coronary vessels and the large vessels at the top)",
+        "an anatomical human heart (dark red, with blue coronary vessels and the great vessels rising from the top)"
+      ],
+      "confidences": [
+        90,
+        92
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [
+    {
+      "name": "Valentine/stylised heart shapes (komashenn, Lol-pop, SkillArtist, sidca...)",
+      "reason": "love-symbol hearts, not the organ: would read as 'love', not anatomy"
+    },
+    {
+      "name": "VisibleHeartLabs scans, Stylized Human Heart (luizmneto97)",
+      "reason": "CC-BY-NC: refused by the licence rule"
+    },
+    {
+      "name": "Human Heart (vikrama1998)",
+      "reason": "777k faces, too heavy"
+    }
+  ],
+  "productions": []
+}

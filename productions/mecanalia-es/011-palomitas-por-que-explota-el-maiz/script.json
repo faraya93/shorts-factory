@@ -1,0 +1,235 @@
+{
+  "video": "palomitas-por-que-explota-el-maiz",
+  "title": "¿Por qué explotan las palomitas de maíz? 🍿",
+  "topic_family": "objects",
+  "preset": "cobalto",
+  "prefix": "grano",
+  "structure_variant": "journey",
+  "hero_route": "asset",
+  "library_assets": [
+    "popcorn"
+  ],
+  "engine_reason": "Asset route: the popped corn and the striped box are the library asset 'popcorn' (Sketchfab, CC-BY); the unpopped kernel, its cutaway and the steam are geometric supporting props drawn with the set-piece kit. We follow ONE kernel from whole to popped (journey).",
+  "hook_question": "¿Por qué explotan las palomitas de maíz?",
+  "false_belief": "El grano se infla porque se llena de aire caliente.",
+  "closing_reframe": "No es aire caliente: es una gota de agua que revienta una cáscara.",
+  "share_archetype": "ese amigo que siempre se come los granos duros del fondo del tazón",
+  "caption_draft": "No es aire caliente: cada grano guarda una gotita de agua. Cuando llega a unos 180 grados, se vuelve vapor, aprieta la cáscara hasta que cede y el almidón estalla en espuma. 🍿 Envíaselo a ese amigo que siempre se come los granos duros del fondo del tazón.",
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Cobalto defaults (cream board and plate, cream plinth). The cutaway kernel stands in the cream plate; the popcorn is cream-yellow against the deep-blue stage."
+  },
+  "hero_colours": {
+    "popcorn_piece": "#F7E7C2",
+    "kernel_hull": "#E8A21E",
+    "stripes": "#1D1B2E"
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "asset_rig"
+  ],
+  "gate_stills": {
+    "1": [
+      150
+    ],
+    "2": [
+      180
+    ],
+    "3": [
+      150
+    ],
+    "4": [
+      110
+    ],
+    "5": [
+      120
+    ],
+    "6": [
+      200
+    ]
+  },
+  "description": "No es aire caliente: cada grano guarda una gotita de agua. Cuando llega a unos 180 grados, se vuelve vapor, aprieta la cáscara hasta que cede y el almidón estalla en espuma. 🍿 Sígueme, y envíaselo a ese amigo que siempre se come los granos duros del fondo del tazón.\n\nModelo 3D de las palomitas: \"Popcorn\" de varun_malhotra1 (Sketchfab), licencia CC Attribution.",
+  "hashtags": [
+    "#palomitas",
+    "#maiz",
+    "#comofunciona",
+    "#shorts"
+  ],
+  "departure": "Departure from Coral: COBALTO stage (deep blue). Reason: popcorn is cream and the kernel is amber; the complementary blue stage separates them by hue (the old batch used orange, which swallowed the popcorn).",
+  "lens": [
+    "Design (lead): complementary stage (blue) for cream popcorn and an amber kernel, per the owner's standing input on colour choices; the cutaway sits on the cream plate.",
+    "Scriptwriter: new angle. The old script explained the mechanism from outside; this one follows ONE kernel (journey): hook with a false belief (air), a cutaway of the water drop, the number moment, the pop, then the unpopped kernel (cracked hull) as a new fact the old script lacked.",
+    "Marketing: a food everyone has eaten; a testable twist ('los granos duros del fondo'); behaviour archetype; numbers as counters (180 °C, 9 atm), approximate."
+  ],
+  "sources": [
+    "Mechanism: a kernel holds about 14-15 % water inside a hard hull; at about 180 C the water becomes steam, pressure reaches about 9 atm (about 135 psi), the hull ruptures and the starch gelatinises and expands into foam. Source: widely reported (Wikipedia 'Popcorn'; Virginia Tech food science notes). FLAGGED: secondary source, figures rounded and not independently verified here.",
+    "Unpopped kernels ('old maids'): a cracked hull lets steam escape so pressure never builds (same sources).",
+    "Hero: Sketchfab 'Popcorn' by varun_malhotra1, CC Attribution (assets/library/popcorn)."
+  ],
+  "simplifications": [
+    "The kernel and its cutaway are schematic (layers: hull, starch, water drop), not anatomy of corn.",
+    "Steam is drawn as white spheres; the real hull rupture is much faster than one frame at this speed.",
+    "Popped pieces are the library asset's pieces; the mass/volume ratio is exaggerated for legibility."
+  ],
+  "status_notes": [],
+  "scenes": [
+    {
+      "name": "hook",
+      "target_duration_s": 8,
+      "narration": "¿Por qué explotan las palomitas de maíz? Dicen que el grano se llena de aire caliente. Pero lo que lo revienta es una gota de agua.",
+      "transformation": "un grano duro en el centro → una palomita blanca aparece a su lado",
+      "camera": "órbita baja alrededor del grano",
+      "emphasis": [
+        "aire",
+        "agua"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿AIRE?",
+          "at_word": "aire",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.3,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "AGUA",
+          "at_word": "agua.",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.7,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "gota",
+      "target_duration_s": 7,
+      "narration": "Cada grano guarda una gotita de agua, sellada dentro de una cáscara muy dura, como una olla diminuta con tapa.",
+      "transformation": "grano entero → corte: una gota de agua en el centro del almidón",
+      "camera": "empuje hacia dentro del corte",
+      "emphasis": [
+        "agua",
+        "cáscara"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "GOTA",
+          "at_word": "gotita",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CÁSCARA",
+          "at_word": "cáscara",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.82,
+          "y": 0.45
+        }
+      ]
+    },
+    {
+      "name": "presion",
+      "target_duration_s": 8,
+      "narration": "Al calentarse, la gota hierve y se vuelve vapor, y el vapor aprieta por dentro, hasta unas nueve atmósferas.",
+      "transformation": "gota → vapor que llena el grano y aprieta la cáscara",
+      "camera": "empuje lento con vibración creciente",
+      "emphasis": [
+        "vapor"
+      ],
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "180 °C",
+          "from": 20,
+          "at_word": "calentarse,",
+          "offset_s": 0.0,
+          "duration_s": 2.4,
+          "visible_s": 5.0,
+          "x": 0.5,
+          "y": 0.34
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "9 atm",
+          "from": 1,
+          "at_word": "unas",
+          "offset_s": 0.0,
+          "duration_s": 1.8,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "name": "estallido",
+      "target_duration_s": 6,
+      "narration": "Cuando la cáscara cede, pum: el almidón se expande y se vuelve espuma blanca, unas treinta veces más grande.",
+      "transformation": "grano a punto de ceder → estalla y queda una palomita blanca",
+      "camera": "retroceso brusco con el estallido",
+      "emphasis": [
+        "pum",
+        "espuma"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "solterona",
+      "target_duration_s": 8,
+      "narration": "Los granos que no explotan tienen la cáscara rota: el vapor se escapa, y la presión nunca llega.",
+      "transformation": "grano con grieta → el vapor se escapa y el grano sigue duro entre las palomitas",
+      "camera": "travelling lateral sobre las palomitas hasta el grano duro",
+      "emphasis": [
+        "rota",
+        "escapa"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "GRIETA",
+          "at_word": "rota:",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "cierre",
+      "target_duration_s": 9,
+      "narration": "Así que no es aire caliente: es una gota de agua que revienta una cáscara. Sígueme, y envíaselo a ese amigo que siempre se come los granos duros del fondo del tazón.",
+      "transformation": "caja vacía → la caja se llena de palomitas que desbordan",
+      "camera": "retroceso amplio",
+      "emphasis": [],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}
