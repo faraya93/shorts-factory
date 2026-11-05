@@ -1,0 +1,243 @@
+{
+  "channel": "mecanalia-es",
+  "video": "hielo-que-pasaria-si-se-hundiera",
+  "title": "¿Qué pasaría si el hielo se hundiera? 🧊",
+  "topic_family": "whatif",
+  "primary_engine": "code3d",
+  "engine_reason": "Code-primitive route, declared: an ice cube and a glass are genuinely geometric (rounded box, cylinder), and identity survives simplification; translucency is the alpha-blended look, so no transmission-bounce profile is needed. Everything is drawn with the set-piece kit. The likeness gate still applies.",
+  "hook_question": "¿Qué pasaría si el hielo se hundiera en lugar de flotar?",
+  "false_belief": "",
+  "closing_reframe": "No es solo hielo que flota: es una tapa que protege el agua de abajo.",
+  "share_archetype": "ese amigo que siempre saca el hielo del vaso con la mano",
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "ice-cube"
+  ],
+  "structure_variant": "fork",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#D22C84",
+      "description": "FUCSIA studio seamless: stage gradient #D22C84 to #BA1E70, plinth #FFF3E0, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#D22C84",
+        "name": "stage top"
+      },
+      {
+        "hex": "#BA1E70",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#FFF3E0",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#6BFFD8",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#6BFFD8",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#FFFFFF",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#2B0A1C",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "fucsia"
+  },
+  "render_style": "hielo-set",
+  "scene_script_prefix": "hielo",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=fucsia"
+  ],
+  "identity_preset": "fucsia",
+  "caption_draft": "El agua es rara: al congelarse ocupa cerca de un 9 % más de espacio, por eso el hielo flota y forma una tapa sobre los lagos. Si se hundiera, se congelarían de abajo hacia arriba. 🧊 Envíaselo a ese amigo que siempre saca el hielo del vaso con la mano.",
+  "gate_stills": {
+    "1": [
+      120
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      150
+    ],
+    "4": [
+      150
+    ],
+    "5": [
+      100
+    ],
+    "6": [
+      150
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "ice_glass"
+  ],
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Fucsia defaults (cream board and plate, cream plinth); ice and water are pale cyan translucent solids on the deep-magenta stage, the mint accent reads as cold."
+  },
+  "hero_colours": {
+    "ice": "#CFEFFF",
+    "water": "#4FB3E8"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "flota",
+      "prompt": "Escena dibujada con código (fucsia): flota.",
+      "narration": "¿Qué pasaría si el hielo se hundiera en lugar de flotar? Hoy flota, y esa pequeña rareza sostiene la vida en los lagos.",
+      "target_duration_s": 7,
+      "transformation": "tres cubos flotan en un vaso → un cubo se asoma por encima del agua",
+      "camera": "órbita lenta alrededor del vaso",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "hundiera",
+        "flota"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 2,
+      "name": "nueve",
+      "prompt": "Escena dibujada con código (fucsia): nueve.",
+      "narration": "El agua es rara: al congelarse ocupa cerca de un nueve por ciento más de espacio, y por eso el hielo pesa menos y sube.",
+      "target_duration_s": 7,
+      "transformation": "un bloque de agua → se congela y crece por encima de la marca",
+      "camera": "empuje lateral hacia la marca",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "nueve",
+        "sube"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "9 %",
+          "from": 0,
+          "at_word": "nueve",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "hunde",
+      "prompt": "Escena dibujada con código (fucsia): hunde.",
+      "narration": "Imagina que no: cada cubo cae al fondo y se apila, uno encima de otro, hasta llenar el vaso de abajo hacia arriba.",
+      "target_duration_s": 8,
+      "transformation": "los cubos caen al fondo → se apilan hasta llenar el vaso",
+      "camera": "empuje descendente siguiendo la caída",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "fondo",
+        "apila"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 4,
+      "name": "lago",
+      "prompt": "Escena dibujada con código (fucsia): lago.",
+      "narration": "En un lago pasaría igual: el invierno lo congelaría desde el fondo, y el sol de verano solo derretiría la capa de arriba.",
+      "target_duration_s": 9,
+      "transformation": "un lago de agua → se llena de hielo desde el fondo; el sol solo derrite una capa fina arriba",
+      "camera": "retroceso amplio hasta ver el lago entero",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "fondo",
+        "sol"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 5,
+      "name": "tapa",
+      "prompt": "Escena dibujada con código (fucsia): tapa.",
+      "narration": "Así que, ¿qué pasaría si el hielo se hundiera? Los lagos serían bloques de hielo, sin vida debajo.",
+      "target_duration_s": 6,
+      "transformation": "los cubos del fondo suben a la superficie → una tapa de hielo cubre el agua",
+      "camera": "travelling lateral hacia la tapa",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "bloques"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 6,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (fucsia): cierre.",
+      "narration": "No es solo hielo que flota: es una tapa que protege el agua de abajo. Sígueme, y envíaselo a ese amigo que siempre saca el hielo del vaso con la mano.",
+      "target_duration_s": 9,
+      "transformation": "vaso con tapa de hielo → plano general del vaso entero",
+      "camera": "retroceso lento y órbita",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

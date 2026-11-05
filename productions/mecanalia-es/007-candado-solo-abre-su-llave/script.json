@@ -1,0 +1,224 @@
+{
+  "video": "candado-solo-abre-su-llave",
+  "title": "¿Por qué un candado solo abre con su llave? 🔑",
+  "topic_family": "objects",
+  "preset": "violeta",
+  "prefix": "candado",
+  "structure_variant": "chain",
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "padlock"
+  ],
+  "engine_reason": "Code-primitive route, declared: a padlock is a genuinely geometric hero (rounded body, U shackle, keyhole, pin cylinders and springs), identity survives simplification, and the cutaway is a clean section with tiny parts, which is how the reference look draws mechanisms. The likeness gate still applies; a failure moves it to the asset route.",
+  "hook_question": "¿Por qué tu candado se abre solo con su llave?",
+  "false_belief": "La llave empuja un cerrojo.",
+  "closing_reframe": "No es una llave que empuja: es un código de alturas.",
+  "share_archetype": "ese amigo que prueba todas las llaves del llavero antes de encontrar la buena",
+  "caption_draft": "La llave no empuja nada: sus dientes suben cada pino a una altura exacta hasta alinear todos los cortes en la línea donde gira el cilindro. Una llave casi igual deja un solo pino mal, y con eso basta para que no gire. 🔑 Envíaselo a ese amigo que prueba todas las llaves del llavero antes de encontrar la buena.",
+  "support_colours": {
+    "board": "#0D2B26",
+    "plate": "#0D2B26",
+    "reason": "Violeta defaults, with a dark deep-teal cutaway plate (#0D2B26) instead of cream: the pins are cream and white and need a dark ground (cream scored dE 9 against them in earlier batches); near-black purple tones (#2A2140, #0E0C14) rendered within dE 19 of the violet stage because the stage tints them, so the plate takes a teal hue."
+  },
+  "hero_colours": {
+    "body": "#E0A93B",
+    "shackle": "#A9B2BD"
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "lock_rig"
+  ],
+  "gate_stills": {
+    "1": [
+      100
+    ],
+    "2": [
+      175
+    ],
+    "3": [
+      120
+    ],
+    "4": [
+      150
+    ],
+    "5": [
+      150
+    ],
+    "6": [
+      150
+    ],
+    "7": [
+      120
+    ]
+  },
+  "description": "La llave no empuja nada: sus dientes suben cada pino a una altura exacta hasta alinear todos los cortes en la línea donde gira el cilindro. Una llave casi igual deja un solo pino mal, y con eso basta para que no gire. 🔑 Sígueme, y envíaselo a ese amigo que prueba todas las llaves del llavero antes de encontrar la buena.",
+  "hashtags": [
+    "#candado",
+    "#llave",
+    "#comofunciona",
+    "#shorts"
+  ],
+  "departure": "Departure from Coral: VIOLETA stage (purple, light-lavender plinth, mint accent). Reason: a brass padlock on purple separates by hue; steel and brass pins read on a dark cutaway plate.",
+  "lens": [
+    "Design (lead): geometric hero, so the code-primitive route is declared and gated; dark cutaway plate for the cream/gold pins; the accent (mint) marks only the shear line and the aligned pins.",
+    "Scriptwriter: a chain of 7 scenes, one per fact: contrast hook (key does not push a latch), the pin stacks, the split pins and the shear line, the key aligning them, the almost-identical key failing by one pin (the new fact the viewer can feel), the turn, and the reframe ('un código de alturas'). Scene count follows the mechanism: 7, not a template.",
+    "Marketing: everyday tangible object, false belief to bust, a verifiable twist (try a similar key), behaviour archetype (tries every key on the ring)."
+  ],
+  "sources": [
+    "Pin-tumbler lock principle: spring-loaded pin stacks split at the shear line; the correct key lifts each pin pair so the split sits at the shear line and the plug can turn (standard locksmithing references, textbook mechanism). No figures are used."
+  ],
+  "simplifications": [
+    "Five pin stacks, a side-view cut; real padlocks have 5-6 and a plug seen from the side only in cutaways.",
+    "The key teeth heights are chosen so each key pin top meets the shear line; real cuts are in standard depth steps.",
+    "Springs are drawn as simple compressing bars."
+  ],
+  "status_notes": [],
+  "scenes": [
+    {
+      "name": "hook",
+      "target_duration_s": 8,
+      "narration": "¿Por qué tu candado se abre solo con su llave, y no con otra casi idéntica? Dicen que la llave empuja un cerrojo. No: coloca piezas diminutas.",
+      "transformation": "un candado cerrado con su llave al lado → la llave entra en el ojo de la cerradura",
+      "camera": "órbita baja alrededor del candado",
+      "emphasis": [
+        "empuja",
+        "piezas"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿EMPUJA?",
+          "at_word": "empuja",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "pinos",
+      "target_duration_s": 7,
+      "narration": "Dentro del cilindro hay pinos en columnas, empujados hacia abajo por resortes, que bloquean el giro.",
+      "transformation": "corte del candado → cinco columnas de pinos con resortes que bloquean el giro",
+      "camera": "empuje hacia dentro del corte",
+      "emphasis": [
+        "pinos",
+        "resortes"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "PINOS",
+          "at_word": "pinos",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.3,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "RESORTES",
+          "at_word": "resortes,",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.7,
+          "y": 0.4
+        }
+      ]
+    },
+    {
+      "name": "corte",
+      "target_duration_s": 8,
+      "narration": "Cada pino está partido en dos, y el corte tiene que quedar justo en la línea por donde gira el cilindro.",
+      "transformation": "pinos partidos mal colocados → la línea de corte se ilumina",
+      "camera": "travelling lateral a lo largo de la línea",
+      "emphasis": [
+        "partido",
+        "línea"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LÍNEA DE CORTE",
+          "at_word": "línea",
+          "offset_s": 0.0,
+          "visible_s": 2.2,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "llave",
+      "target_duration_s": 8,
+      "narration": "Al meter la llave, sus dientes suben cada pino a una altura distinta, y todos los cortes quedan alineados.",
+      "transformation": "la llave entra → los pinos suben a alturas distintas y los cortes se alinean",
+      "camera": "seguimiento de la llave en el corte",
+      "emphasis": [
+        "dientes",
+        "alineados"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "casi",
+      "target_duration_s": 8,
+      "narration": "Con una llave casi igual, un solo pino queda mal, y ese pino frena todo el giro.",
+      "transformation": "llave casi igual → un pino queda por debajo de la línea y bloquea",
+      "camera": "acercamiento al pino que falla",
+      "emphasis": [
+        "casi",
+        "frena"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "UN PINO MAL",
+          "at_word": "pino",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "giro",
+      "target_duration_s": 7,
+      "narration": "Con la llave correcta, el cilindro gira, y el gancho del candado se suelta.",
+      "transformation": "la llave gira → el gancho sube y el candado se abre",
+      "camera": "órbita corta alrededor del candado",
+      "emphasis": [
+        "gira",
+        "gancho"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "cierre",
+      "target_duration_s": 9,
+      "narration": "Así que no es una llave que empuja: es un código de alturas. Sígueme, y envíaselo a ese amigo que prueba todas las llaves del llavero antes de encontrar la buena.",
+      "transformation": "candado abierto → se cierra otra vez con un clic",
+      "camera": "retroceso amplio",
+      "emphasis": [],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

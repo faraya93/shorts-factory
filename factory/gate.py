@@ -89,10 +89,13 @@ def run(prod: Path) -> int:
     preset = ident["presets"][name]
     for sid, frames in sorted(stills.items(), key=lambda kv: int(kv[0])):
         out = gdir / f"s{int(sid):02d}"
-        subprocess.run(["caffeinate", "-dimsu", "blender", "-b", "--python", str(ROOT / "code3d" / "scenes" / f"{prefix}_{int(sid):02d}.py"), "--",
-                        f"production={prod}", "mode=final", f"samples={SAMPLES}", f"stills={','.join(str(f) for f in frames)}", "mask=1", f"out={out}", *extra],
-                       capture_output=True, text=True)
-        lines, b = composition_gate.gate(out, preset)
+        for _attempt in (1, 2):          # one retry: a still can fail transiently while another render holds the GPU (seen twice, 2026-11-04)
+            subprocess.run(["caffeinate", "-dimsu", "blender", "-b", "--python", str(ROOT / "code3d" / "scenes" / f"{prefix}_{int(sid):02d}.py"), "--",
+                            f"production={prod}", "mode=final", f"samples={SAMPLES}", f"stills={','.join(str(f) for f in frames)}", "mask=1", f"out={out}", *extra],
+                           capture_output=True, text=True)
+            lines, b = composition_gate.gate(out, preset)
+            if lines:
+                break
         md += [f"\n## scene {sid}"] + lines
         blocked |= b or not lines
     verdict = "BLOCKED" if blocked else "PASS"

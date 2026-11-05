@@ -1,0 +1,317 @@
+{
+  "channel": "mecanalia-es",
+  "video": "termo-por-que-mantiene-el-calor",
+  "title": "¿Por qué tu termo mantiene el café caliente? ☕",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Code-primitive route, declared: a vacuum flask is a genuinely geometric hero (a lathe-turned body, a cap, flat wall layers in section) whose identity survives simplification. We FOLLOW THE HEAT out of the coffee (journey) with particle swarms in the set-piece kit. The likeness gate still applies; a failure moves it to the asset route.",
+  "hook_question": "¿Por qué tu termo mantiene el café caliente durante horas?",
+  "false_belief": "Tiene un aislante por dentro, como espuma.",
+  "closing_reframe": "No es un aislante que guarda el calor: es un vacío que le cierra el camino.",
+  "share_archetype": "ese amigo que deja la tapa del termo abierta",
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "thermos"
+  ],
+  "structure_variant": "journey",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#D9F34F",
+      "description": "LIMA studio seamless: stage gradient #D9F34F to #C4E233, plinth #1E2412, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#D9F34F",
+        "name": "stage top"
+      },
+      {
+        "hex": "#C4E233",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1E2412",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#3A2BD0",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#3A2BD0",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#17210A",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#B3261E",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "lima"
+  },
+  "render_style": "termo-set",
+  "scene_script_prefix": "termo",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=lima"
+  ],
+  "identity_preset": "lima",
+  "caption_draft": "El calor sale de tres formas: tocando, moviendo el aire y como luz infrarroja. Entre las dos paredes del termo casi no hay aire, y las paredes son espejos: el calor se queda sin camino. Lo que más se pierde es por la tapa. ☕ Envíaselo a ese amigo que deja la tapa del termo abierta.",
+  "gate_stills": {
+    "1": [
+      250
+    ],
+    "2": [
+      150
+    ],
+    "3": [
+      100
+    ],
+    "4": [
+      130
+    ],
+    "5": [
+      110
+    ],
+    "6": [
+      120
+    ],
+    "7": [
+      40,
+      150
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "flask_rig"
+  ],
+  "support_colours": {
+    "board": "#F2EEFF",
+    "plate": "#F2EEFF",
+    "reason": "Lima's cream plate (#FFF3E0) measured dE 19.5 from the lime stage, so the section plate is near-white lavender #F2EEFF; the steel is a mid steel (#6E7886) so it separates from the plate."
+  },
+  "hero_colours": {
+    "enamel": "#2D6FB7",
+    "steel": "#6E7886",
+    "cap": "#2B2B33",
+    "coffee": "#6B3E1F"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (lima): hook.",
+      "narration": "¿Por qué tu termo mantiene el café caliente durante horas? Dicen que tiene un aislante por dentro, como espuma. Pero lo que tiene es otra cosa.",
+      "target_duration_s": 8,
+      "transformation": "un termo cerrado con vapor saliendo → el vapor se corta y el termo queda sellado",
+      "camera": "órbita lenta alrededor del termo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "aislante",
+        "espuma"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿ESPUMA?",
+          "at_word": "espuma.",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "paredes",
+      "prompt": "Escena dibujada con código (lima): paredes.",
+      "narration": "Por dentro tiene dos paredes, una dentro de la otra, y entre ellas casi no hay aire.",
+      "target_duration_s": 7,
+      "transformation": "corte del termo → dos paredes con un hueco vacío entre ellas",
+      "camera": "empuje hacia dentro del corte",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "paredes",
+        "aire"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "VACÍO",
+          "at_word": "aire.",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "tres",
+      "prompt": "Escena dibujada con código (lima): tres.",
+      "narration": "El calor sabe salir de tres formas: tocando, viajando con el aire, y como luz infrarroja.",
+      "target_duration_s": 8,
+      "transformation": "el café → tres rastros de calor que intentan salir: por contacto, por aire y por luz",
+      "camera": "travelling lateral siguiendo los tres rastros",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tocando",
+        "aire",
+        "luz"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CONTACTO",
+          "at_word": "tocando,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "AIRE",
+          "at_word": "aire,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LUZ",
+          "at_word": "luz",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.38
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "vacio",
+      "prompt": "Escena dibujada con código (lima): vacio.",
+      "narration": "Pero sin aire entre las paredes, ni tocar ni mover aire sirve: el calor se queda sin camino.",
+      "target_duration_s": 8,
+      "transformation": "el calor llega a la pared interior → se detiene en el vacío",
+      "camera": "acercamiento al hueco entre las paredes",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "sin",
+        "camino"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 5,
+      "name": "espejo",
+      "prompt": "Escena dibujada con código (lima): espejo.",
+      "narration": "Y las paredes son espejos: la luz infrarroja rebota de vuelta, y regresa al café.",
+      "target_duration_s": 7,
+      "transformation": "la luz infrarroja sale hacia la pared → rebota y vuelve al café",
+      "camera": "plano lateral sobre el rebote",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "espejos",
+        "rebota"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 6,
+      "name": "tapa",
+      "prompt": "Escena dibujada con código (lima): tapa.",
+      "narration": "Por eso el punto débil es la tapa: por ahí se escapa casi todo el calor que se pierde.",
+      "target_duration_s": 8,
+      "transformation": "el calor sube sin barrera → se escapa por la tapa mal puesta",
+      "camera": "retroceso hacia arriba siguiendo la fuga",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tapa",
+        "escapa"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "FUGA",
+          "at_word": "tapa:",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (lima): cierre.",
+      "narration": "Así que no es un aislante que guarda el calor: es un vacío que le cierra el camino. Sígueme, y envíaselo a ese amigo que deja la tapa del termo abierta.",
+      "target_duration_s": 9,
+      "transformation": "el termo se cierra con la tapa → el vapor deja de salir",
+      "camera": "retroceso amplio",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

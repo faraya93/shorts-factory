@@ -1,0 +1,76 @@
+{
+  "slug": "padlock",
+  "name": "Padlock with key",
+  "aliases": [
+    "padlock",
+    "lock",
+    "candado",
+    "pad lock",
+    "key"
+  ],
+  "family": "objects",
+  "created": "2026-11-04",
+  "status": "ready",
+  "route": "code-primitive",
+  "brief": {
+    "must_read_as": "a brass padlock with a steel shackle and a key",
+    "seen_at": "large: the padlock fills ~45% of frame height",
+    "moving_parts": [
+      "body",
+      "shackle (moves up when unlocked)",
+      "key (slides, turns)",
+      "cutaway: five pin stacks (key pin, driver pin, spring) that the key lifts"
+    ],
+    "states": [
+      "locked",
+      "key inserted",
+      "open (shackle up)",
+      "cutaway: pins blocked, pins aligned, one pin wrong"
+    ],
+    "style_notes": "Brass body, steel shackle on the Violeta stage; the cutaway sits on a dark ink plate."
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": "own-work",
+    "url": null,
+    "attribution": null,
+    "note": "built in this factory with the set-piece kit",
+    "decision": null
+  },
+  "files": {
+    "blend": null,
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": "lock_rig",
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-04"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-04",
+      "guesses": [
+        "a padlock (gold body, steel shackle)",
+        "a padlock (gold body, silver U-shaped shackle, keyhole on the front; in two of the three images a silver key is inserted from the right)"
+      ],
+      "confidences": [
+        95,
+        95
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

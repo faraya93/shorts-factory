@@ -1,0 +1,303 @@
+{
+  "channel": "mecanalia-es",
+  "video": "candado-solo-abre-su-llave",
+  "title": "¿Por qué un candado solo abre con su llave? 🔑",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "Code-primitive route, declared: a padlock is a genuinely geometric hero (rounded body, U shackle, keyhole, pin cylinders and springs), identity survives simplification, and the cutaway is a clean section with tiny parts, which is how the reference look draws mechanisms. The likeness gate still applies; a failure moves it to the asset route.",
+  "hook_question": "¿Por qué tu candado se abre solo con su llave?",
+  "false_belief": "La llave empuja un cerrojo.",
+  "closing_reframe": "No es una llave que empuja: es un código de alturas.",
+  "share_archetype": "ese amigo que prueba todas las llaves del llavero antes de encontrar la buena",
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "padlock"
+  ],
+  "structure_variant": "chain",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#7A4DE8",
+      "description": "VIOLETA studio seamless: stage gradient #7A4DE8 to #5B30C2, plinth #EDE7FF, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#7A4DE8",
+        "name": "stage top"
+      },
+      {
+        "hex": "#5B30C2",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#EDE7FF",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#3DFFB0",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#3DFFB0",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#FFFFFF",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#FFA0B4",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "violeta"
+  },
+  "render_style": "candado-set",
+  "scene_script_prefix": "candado",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=violeta"
+  ],
+  "identity_preset": "violeta",
+  "caption_draft": "La llave no empuja nada: sus dientes suben cada pino a una altura exacta hasta alinear todos los cortes en la línea donde gira el cilindro. Una llave casi igual deja un solo pino mal, y con eso basta para que no gire. 🔑 Envíaselo a ese amigo que prueba todas las llaves del llavero antes de encontrar la buena.",
+  "gate_stills": {
+    "1": [
+      100
+    ],
+    "2": [
+      175
+    ],
+    "3": [
+      120
+    ],
+    "4": [
+      150
+    ],
+    "5": [
+      150
+    ],
+    "6": [
+      150
+    ],
+    "7": [
+      120
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "lock_rig"
+  ],
+  "support_colours": {
+    "board": "#0D2B26",
+    "plate": "#0D2B26",
+    "reason": "Violeta defaults, with a dark deep-teal cutaway plate (#0D2B26) instead of cream: the pins are cream and white and need a dark ground (cream scored dE 9 against them in earlier batches); near-black purple tones (#2A2140, #0E0C14) rendered within dE 19 of the violet stage because the stage tints them, so the plate takes a teal hue."
+  },
+  "hero_colours": {
+    "body": "#E0A93B",
+    "shackle": "#A9B2BD"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (violeta): hook.",
+      "narration": "¿Por qué tu candado se abre solo con su llave, y no con otra casi idéntica? Dicen que la llave empuja un cerrojo. No: coloca piezas diminutas.",
+      "target_duration_s": 8,
+      "transformation": "un candado cerrado con su llave al lado → la llave entra en el ojo de la cerradura",
+      "camera": "órbita baja alrededor del candado",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "empuja",
+        "piezas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿EMPUJA?",
+          "at_word": "empuja",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "pinos",
+      "prompt": "Escena dibujada con código (violeta): pinos.",
+      "narration": "Dentro del cilindro hay pinos en columnas, empujados hacia abajo por resortes, que bloquean el giro.",
+      "target_duration_s": 7,
+      "transformation": "corte del candado → cinco columnas de pinos con resortes que bloquean el giro",
+      "camera": "empuje hacia dentro del corte",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "pinos",
+        "resortes"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "PINOS",
+          "at_word": "pinos",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.3,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "RESORTES",
+          "at_word": "resortes,",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.7,
+          "y": 0.4
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "corte",
+      "prompt": "Escena dibujada con código (violeta): corte.",
+      "narration": "Cada pino está partido en dos, y el corte tiene que quedar justo en la línea por donde gira el cilindro.",
+      "target_duration_s": 8,
+      "transformation": "pinos partidos mal colocados → la línea de corte se ilumina",
+      "camera": "travelling lateral a lo largo de la línea",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "partido",
+        "línea"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LÍNEA DE CORTE",
+          "at_word": "línea",
+          "offset_s": 0.0,
+          "visible_s": 2.2,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "llave",
+      "prompt": "Escena dibujada con código (violeta): llave.",
+      "narration": "Al meter la llave, sus dientes suben cada pino a una altura distinta, y todos los cortes quedan alineados.",
+      "target_duration_s": 8,
+      "transformation": "la llave entra → los pinos suben a alturas distintas y los cortes se alinean",
+      "camera": "seguimiento de la llave en el corte",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "dientes",
+        "alineados"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 5,
+      "name": "casi",
+      "prompt": "Escena dibujada con código (violeta): casi.",
+      "narration": "Con una llave casi igual, un solo pino queda mal, y ese pino frena todo el giro.",
+      "target_duration_s": 8,
+      "transformation": "llave casi igual → un pino queda por debajo de la línea y bloquea",
+      "camera": "acercamiento al pino que falla",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "casi",
+        "frena"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "UN PINO MAL",
+          "at_word": "pino",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "giro",
+      "prompt": "Escena dibujada con código (violeta): giro.",
+      "narration": "Con la llave correcta, el cilindro gira, y el gancho del candado se suelta.",
+      "target_duration_s": 7,
+      "transformation": "la llave gira → el gancho sube y el candado se abre",
+      "camera": "órbita corta alrededor del candado",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "gira",
+        "gancho"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (violeta): cierre.",
+      "narration": "Así que no es una llave que empuja: es un código de alturas. Sígueme, y envíaselo a ese amigo que prueba todas las llaves del llavero antes de encontrar la buena.",
+      "target_duration_s": 9,
+      "transformation": "candado abierto → se cierra otra vez con un clic",
+      "camera": "retroceso amplio",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}

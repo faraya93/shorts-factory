@@ -1,0 +1,77 @@
+{
+  "slug": "thermos",
+  "name": "Thermos (vacuum flask)",
+  "aliases": [
+    "thermos",
+    "flask",
+    "termo",
+    "vacuum flask",
+    "thermos flask"
+  ],
+  "family": "objects",
+  "created": "2026-11-04",
+  "status": "ready",
+  "route": "code-primitive",
+  "brief": {
+    "must_read_as": "a steel thermos (vacuum flask) with a dark cap",
+    "seen_at": "large: the flask fills ~50% of frame height",
+    "moving_parts": [
+      "body (lathe mesh)",
+      "cap (drops on / lifts off)",
+      "section: outer wall, inner wall, vacuum gap, coffee",
+      "heat particles (accent)"
+    ],
+    "states": [
+      "open with steam",
+      "capped",
+      "section",
+      "mirror inner wall",
+      "loose lid with a leak"
+    ],
+    "style_notes": "Painted blue enamel body with steel bands, a dark ribbed cup cap with a knob and a side handle (round 3 after two failed blind reads; see the job report); the section uses mid steel walls, a mirror inner wall and brown coffee on a near-white plate; heat is the violet accent."
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": "own-work",
+    "url": null,
+    "attribution": null,
+    "note": "built in this factory with the set-piece kit",
+    "decision": null
+  },
+  "files": {
+    "blend": null,
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": "flask_rig",
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-04"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-04",
+      "guesses": [
+        "a thermos (termo / vacuum flask), a blue cylindrical flask with a dark grey ridged screw cap and a side handle",
+        "a thermos (vacuum flask)"
+      ],
+      "confidences": [
+        70,
+        70
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

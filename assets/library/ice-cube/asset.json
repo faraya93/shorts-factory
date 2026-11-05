@@ -1,0 +1,74 @@
+{
+  "slug": "ice-cube",
+  "name": "Ice cube in a glass of water",
+  "aliases": [
+    "ice cube",
+    "ice",
+    "hielo",
+    "cubo de hielo",
+    "glass"
+  ],
+  "family": "whatif",
+  "created": "2026-11-04",
+  "status": "ready",
+  "route": "code-primitive",
+  "brief": {
+    "must_read_as": "a glass of water with ice cubes in it",
+    "seen_at": "medium-large: the glass fills ~40% of frame height",
+    "moving_parts": [
+      "glass (cylinder, water, rim)",
+      "ice cubes (separate rounded boxes: float, sink, stack, rise)",
+      "ice lid (cylinder)"
+    ],
+    "states": [
+      "cubes floating",
+      "cubes sunk and stacked",
+      "lid of ice"
+    ],
+    "style_notes": "Alpha-blended translucent solids, no refraction (no transmission-bounce profile needed); pale cyan on the deep magenta Fucsia stage."
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": "own-work",
+    "url": null,
+    "attribution": null,
+    "note": "built in this factory with the set-piece kit",
+    "decision": null
+  },
+  "files": {
+    "blend": null,
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": "ice_glass",
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-04"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-04",
+      "guesses": [
+        "a glass of iced water (vaso con hielo)",
+        "a glass of water with ice cubes (a clear straight-sided tumbler of pale blue liquid with ice floating in it)"
+      ],
+      "confidences": [
+        85,
+        85
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}
