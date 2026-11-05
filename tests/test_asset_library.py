@@ -102,7 +102,7 @@ def test_gate_replays_the_owner_verdicts_on_the_calibration_set():
 
 def test_rejected_notes_carry_their_calibration_result():
     for n in ("006", "007", "008", "009", "010", "011"):
-        text = next((ROOT / "productions" / "mecanalia-es").glob(f"{n}-*/notes.md")).read_text(encoding="utf-8")
+        text = next((ROOT / "productions" / "_archive" / "retired-006-011-rejected-2026-11-04").glob(f"{n}-*/notes.md")).read_text(encoding="utf-8")
         assert "Rejected by owner" in text and "Likeness gate calibration" in text, n
 
 
