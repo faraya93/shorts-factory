@@ -1,5 +1,7 @@
 # nube-cuantos-autos-pesa (celeste) — production notes, written by the 2026-11-03 batch run
 
+**Rejected by owner, 2026-11-04 — likeness failure, do not publish.** The objects are too abstract and do not resemble their subjects. Not available inventory: this folder, including its `final.mp4` and `publish.json`, stays only as a record.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Cuántos autos pesa una nube? ☁️
 - **Descripción:** Parece que no pesa nada, porque flota, pero una nube común pesa como unos trescientos autos: guarda unos quinientos mil kilos de agua en gotitas tan pequeñas que el aire que sube las sostiene. ☁️ Sígueme y envíaselo a ese amigo que cree que las nubes son humo.

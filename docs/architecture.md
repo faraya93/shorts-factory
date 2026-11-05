@@ -104,7 +104,7 @@ productions/
   README.md
   mecanalia-es/            CURRENT videos, one tree per channel
     INDEX.md               number, slug, family, status, date
-    001-huincha-de-medir-coral/ ... 005-inodoro-donde-va-todo/ (006-011: the 2026-11-03 batch; the original 006/007 are archived)
+    001-huincha-de-medir-coral/ ... 005-inodoro-donde-va-todo/ (006-011: the 2026-11-03 batch, REJECTED by the owner 2026-11-04, likeness failure, do not publish; the original 006/007 are archived)
   mecanalia-en/            (empty: INDEX.md only)
   _lab/                    experiments and tests, grouped by kind
   _archive/                superseded and frozen productions, grouped by series

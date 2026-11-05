@@ -1,5 +1,7 @@
 # pieles-arrugadas-agua (coral) — production notes, written by the 2026-11-03 batch run
 
+**Rejected by owner, 2026-11-04 — likeness failure, do not publish.** The objects are too abstract and do not resemble their subjects. Not available inventory: this folder, including its `final.mp4` and `publish.json`, stays only as a record.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué se arrugan tus dedos en el agua? 💧
 - **Descripción:** Tus dedos no se arrugan porque la piel se empape: tu sistema nervioso aprieta los vasos de la yema y la piel se pliega en surcos, como las ranuras de una llanta, para que agarres mejor lo mojado. 💧 Sígueme y envíaselo a ese amigo que sale de la piscina con los dedos de pasa.

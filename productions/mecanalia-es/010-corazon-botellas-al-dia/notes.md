@@ -1,5 +1,7 @@
 # corazon-botellas-al-dia (frambuesa) — production notes, written by the 2026-11-03 batch run
 
+**Rejected by owner, 2026-11-04 — likeness failure, do not publish.** The objects are too abstract and do not resemble their subjects. Not available inventory: this folder, including its `final.mp4` and `publish.json`, stays only as a record.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Cuántas botellas bombea tu corazón al día? 🫀
 - **Descripción:** Tu corazón late unas cien mil veces al día y bombea unos siete mil litros de sangre: más de tres mil botellas de dos litros, sin pedirte permiso. 🫀 Sígueme y envíaselo a ese amigo que dice que hoy no ha hecho nada.

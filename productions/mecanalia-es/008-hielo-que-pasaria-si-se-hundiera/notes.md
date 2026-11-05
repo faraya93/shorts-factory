@@ -1,5 +1,7 @@
 # hielo-que-pasaria-si-se-hundiera (cobalto) — production notes, written by the 2026-11-03 batch run
 
+**Rejected by owner, 2026-11-04 — likeness failure, do not publish.** The objects are too abstract and do not resemble their subjects. Not available inventory: this folder, including its `final.mp4` and `publish.json`, stays only as a record.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Qué pasaría si el hielo se hundiera? 🧊
 - **Descripción:** El hielo flota por una rareza del agua: al congelarse se expande y ocupa un nueve por ciento más de espacio. Si se hundiera, muchos lagos se congelarían desde el fondo y casi nada podría vivir en ellos. 🧊 Sígueme y envíaselo a ese amigo que cree que todo se hunde en su propio líquido.

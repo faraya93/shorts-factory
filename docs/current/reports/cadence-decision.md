@@ -23,6 +23,7 @@ and make the day-30 read-out unattributable. The earliest date to reconsider cad
   inference from the build history (001-007 were rendered 2026-10-28 to 10-30, in bursts, with the first rig builds being the costly ones), not a measurement: the shared Claude Pro
   weekly quota is not visible from this repo, so 14-21 builds a week is unverified and I do not claim it.
 - **Nothing to publish at a higher rate anyway.** 001-002 are live, 003-005 are queued through Nov 4, and 006-007 plus the 008-013 batch are the entire buffer.
+  **Correction, 2026-11-04:** the batch actually built was 006-011, and the owner rejected all six (likeness failure, do not publish; `productions/mecanalia-es/INDEX.md`). There is no buffer.
 - **Platform declaration.** The orchestrator's YouTube API audit declares at most 1 upload a day. Raising cadence would also mean updating that declaration, not just the queue rule.
 
 ## Conditions to revisit (all must hold, then the owner decides; any change needs the owner's separate go and an orchestrator change)
