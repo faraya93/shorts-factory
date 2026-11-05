@@ -49,11 +49,12 @@ sources:
     access: "MCP for Blender: search_assets + import_asset, source sketchfab. Token handed over in .env; tools/asset_blender.py open passes it to Blender."
     account_required: true
     licence: per model; accept only CC0 or CC Attribution. Refuse NC, ND, SA and Editorial.
-    status: approved-pending-account
+    status: connected
     verified: 2026-11-04
     notes: >
-      Approved by the owner 2026-11-04. Only the owner's free account is missing, and sessions never create it. Owner steps: docs/current/specs/asset-system.md, "Connecting Sketchfab". Wiring tested with a dummy key:
-      it reached Blender, the library switched on and Sketchfab answered 401. A real search and download are untested until the account exists. Largest catalogue of specific and organic models.
+      Approved by the owner and connected 2026-11-04 with the owner's free account; the token stays in .env. Verified live: a real search and a real import of a CC Attribution model, through tools/asset_blender.py open.
+      Results mix licences, including NonCommercial ones, and the tools do not filter them: read each result's License line and refuse anything but CC0 or CC Attribution. CC-BY means recording the attribution in the asset and carrying it in the video description.
+      Realistic hearts may look too graphic for the no-gore rule; prefer clean sculpts or retint.
   - id: polypizza
     priority: 3
     name: Poly Pizza

@@ -21,7 +21,7 @@ Owner decisions are listed separately because they are not lens decisions. Owner
 |---|---|
 | BlenderKit anonymous search and download allowed; no account | `assets/registry.yaml`, manual, `tools/asset_blender.py` |
 | MCP telemetry off (`DISABLE_TELEMETRY=true`) | local Claude Code MCP config, `code3d/TOOLING.md` |
-| Sketchfab approved, connection pending the owner's account | `assets/registry.yaml`, manual "Connecting Sketchfab" |
+| Sketchfab approved; connected with the owner's account the same day | `assets/registry.yaml`, manual "Sketchfab connection" |
 | Likeness gate, declared hero route from 012, organic heroes in code3d: all stand | CLAUDE.md, manual |
 | Library `.blend` backup deferred | manual "Open decisions" |
 | Governance directive | CLAUDE.md "Governance" |

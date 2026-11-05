@@ -111,7 +111,7 @@ The registry is `assets/registry.yaml`: how each source is reached, its licence 
 | 1 | Poly Haven | HDRIs, textures, models | CC0 | connected through MCP |
 | 2 | ambientCG | PBR textures | CC0 | connected through API |
 | 3 | BlenderKit free plan | models, materials | per asset, CC0 or Royalty-Free | connected, anonymous, no account |
-| 3 | Sketchfab free downloads | models | per model, CC0 or CC-BY | **approved, connection pending the owner's account** |
+| 3 | Sketchfab free downloads | models | per model, CC0 or CC-BY | connected through MCP, owner's account, token in `.env` |
 | 3 | Poly Pizza | low-poly models | CC0 or CC-BY | **owner step** (API key) |
 | 4 | MB-Lab | human bodies | **AGPL, see the flag** | candidate, not installed, archived project |
 | 4 | CharMorph | human bodies | per base model | candidate, not installed |
@@ -128,17 +128,11 @@ Search BlenderKit too before falling through to modelling; its free catalogue is
 
 Materials and HDRIs that are not hero objects keep their existing home: `code3d/assets/`, logged in `code3d/assets/LICENSES.md`. Check there first.
 
-### Connecting Sketchfab
+### Sketchfab connection
 
-Approved by the owner on 2026-11-04. Everything is wired except the account, which only the owner may create.
+Connected on 2026-11-04 with the owner's free account. The token lives only in the local `.env` as `SKETCHFAB_API_TOKEN`, never in the chat or the repo. `asset_blender.py open` passes it to Blender. To re-verify, or after replacing the token: `.venv/bin/python tools/asset_blender.py connect-sketchfab`. If the token leaks, the owner resets it through Sketchfab's password reset.
 
-**Owner steps:**
-1. Create a free account at https://sketchfab.com.
-2. Copy the 32-character API token from My Settings > Password & API (https://sketchfab.com/settings/password).
-3. Open the local `.env` file at the repo root in an editor, and add the line `SKETCHFAB_API_TOKEN=<the token>`. Never put the token in the chat or the repo: `.env` is gitignored, and anyone holding the token can change the account. If it leaks, reset it through Sketchfab's password reset.
-4. Tell any session "the Sketchfab token is in .env".
-
-**The session then finishes in one step,** without ever seeing the token: `.venv/bin/python tools/asset_blender.py connect-sketchfab`. It verifies the token with Sketchfab, marks the source `connected` and prints the account name. Commit `assets/registry.yaml`. From then on `asset_blender.py open` passes the token to Blender and switches the library on. Run a first real search and import, because that part could only be tested with a dummy key.
+**Search results mix licences, including NonCommercial ones, and nothing filters them for you.** Read each result's License line and refuse anything but CC0 or CC Attribution. Most usable models are CC-BY, so record the attribution in `licence.attribution`; it must also reach the video description.
 
 ## The library
 

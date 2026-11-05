@@ -82,7 +82,7 @@ def connect_sketchfab() -> int:
         print(f"Sketchfab refused the token in .env (HTTP {status}). Copy it again from https://sketchfab.com/settings/password")
         return 1
     mark_connected(time.strftime("%Y-%m-%d"))
-    print(f"Sketchfab connected, account '{user}'. Registry updated: commit assets/registry.yaml. Next `open` switches the library on.")
+    print(f"Sketchfab connected, account '{user}'. Registry status is connected: commit any change. `open` switches the library on.")
     return 0
 
 
