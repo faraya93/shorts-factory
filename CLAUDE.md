@@ -11,7 +11,11 @@ The owner does not want to ban anything for the system, and does not want creati
 - **The one condition:** ALL involved lenses approve under the existing governance (docs/architecture.md "Multi-lens protocol"), disagreements are settled against measured criteria and written doctrine, never by who argues hardest, and the decision is recorded with its reason in `docs/current/reports/lens-decisions.md` so it can be audited and reverted. If the lenses cannot settle it on those terms, it is not approved: get a measurement, and the current doctrine stands until then.
 - **Owner-only, NOT delegated:** spending any money, publishing anything, creating accounts, and the final publish/reject verdict on a finished video (the owner's eye stays the last gate on output).
 - **Reports** state what the lenses decided and why. A "decisions for you" section is reserved for the owner-only list.
+- **Video structure is a lens decision too (owner directive, 2026-11-04):** the scene template, the beat sequence and the closing with its spoken CTA, decided as a channel-level policy. Current policy: "Format policy" below.
 - Older text in this file that reserves a creative or technical choice for the owner (topics, scripts, beat sheets, voice, music, identity, format exceptions) is read through this section. Spend gates, the publish rule and the no-accounts rule keep their full force.
+
+## Format policy (lens decision 2026-11-04, from production 012; full policy, reasons and reversal evidence: docs/current/specs/format-policy.md)
+One fixed signature, four structures. The signature is voice, identity, typography, subtitles, hook formula, one hero or mechanism, dynamics inside the shot, one reframe and the closing slot. There is no fixed scene count (the former 6-7 scene template is retired): the mechanism sets it, 4-10 as a sanity range, and scenes are never padded or merged to hit a number. Each production declares `structure_variant`: `chain`, `journey`, `scale` or `fork`. Never three in a row with the same variant or the same scene count. Closing: reframe, then one sentence containing the fixed word "envíaselo" with its word-locked tag; the sentence around it varies, ends on the person, and the archetype names a behaviour, not a belief; `fork` repeats the opening question. Where older text in this file describes a fixed structure or a fixed closing sentence, this wins. Applies to future productions; published videos are untouched. Earliest review 2026-12-01, against the bars set in the policy.
 
 ## Format doctrine (channel research, Oct 2026; evidence in docs/current/research/reference-channels.md)
 - Vertical 9:16. Duration, by topic family (measured pace of the channel
@@ -107,7 +111,7 @@ Persistent Data on, Fast GI off; EEVEE for drafts; the grain pass stays mandator
 
 ## Closing standard (ratified 2026-10-28, owner; supersedes the CTA-phone / end-card text elsewhere in this file)
 The phone graphic (overlay type `cta`) and the appended end card (`end_card`) are REMOVED from every production (marketing verdict, docs/current/reports/marketing-verdicts.md;
-audit in docs/current/reports/cta-endcard-audit.md). The standard closing for EVERY video: the spoken follow + share ask naming the share_archetype (unchanged), plus ONE
+audit in docs/current/reports/cta-endcard-audit.md). The standard closing for EVERY video (wording per "Format policy"): the spoken follow + share ask naming the share_archetype, plus ONE
 tiny ink "ENVÍASELO" tag (`label`, style `tag`) word-locked (`at_word: "envíaselo"`, ~2.6 s) in the last scene, placed in the cream space beside the hero (C2 in
 docs/current/reports/cta-redesign/). No extra seconds, nothing covers the hero. Where "Reference doctrine" point 8, storytelling rule 8, the Editor v2 `cta` / `end_card`
 bullets or the beat-sheet wording ("the CTA/end card") still mention the phone or the end card, read them through this section: the code for them stays

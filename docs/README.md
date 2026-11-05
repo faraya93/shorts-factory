@@ -4,7 +4,7 @@
 docs/
   architecture.md      the architecture model and the repository organization convention (read first)
   current/             in force
-    specs/             binding specs and rubrics: design-system.md (+ design-system-assets/), reference-format-spec.md, reference-style-spec.md, style-rubric.md, asset-system.md (hero routing, skill role map, sources, how to run an asset job)
+    specs/             binding specs and rubrics: design-system.md (+ design-system-assets/), reference-format-spec.md, reference-style-spec.md, style-rubric.md, asset-system.md (hero routing, skill role map, sources, how to run an asset job), format-policy.md (one signature, four structures, reversal evidence)
     reports/           evidence behind adopted decisions: lens-decisions.md (audit log of decisions under standing authority), likeness-calibration.md (+ .json), marketing-verdicts.md (+ cta-redesign/), cta-endcard-audit.md, render-bench.md (+ render-bench/), render-profile-rider.md
     research/          reference-channels.md, names-general.md, reference/ (reference videos, gitignored media)
   experiments/         proposals, rounds and tests that informed decisions but are not themselves the spec: design-round2, colour-panel, hard-constraints, marketing-review, motion-finalists, runs/

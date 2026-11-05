@@ -206,6 +206,58 @@ def test_binaries_are_ignored_and_records_are_not():
         assert (r.returncode == 0) == ignored, path
 
 
+def _policy():
+    import channel
+    brand = channel.load("mecanalia-es")
+    return brand["formats"]["explainer-short"]
+
+
+def _routed_productions():
+    """Productions the format policy applies to, in production order, per channel."""
+    first = _policy()["applies_from_production"]
+    for tree in sorted((ROOT / "productions").glob("mecanalia-*")):
+        rows = []
+        for cfg in sorted(tree.glob("*/scenes.json")):
+            m = re.match(r"(\d{3})-", cfg.parent.name)
+            if m and int(m.group(1)) >= first:
+                rows.append((cfg.parent.name, json.loads(cfg.read_text(encoding="utf-8"))))
+        yield rows
+
+
+def test_new_productions_follow_the_format_policy():
+    p = _policy()
+    low, high = p["scene_range"]
+    for rows in _routed_productions():
+        for name, c in rows:
+            assert c.get("structure_variant") in p["structure_variants"], f"{name}: declare structure_variant"
+            assert low <= len(c["scenes"]) <= high, f"{name}: scene count outside the sanity range"
+            last = al.norm(c["scenes"][-1]["narration"])
+            assert al.norm(p["closing_word"]) in last, f"{name}: the closing must say the brand word"
+            assert not re.search(r"\b(cree|piensa|jura)\b", al.norm(c["share_archetype"])), f"{name}: the archetype names a behaviour, not a belief"
+            if c["structure_variant"] == "fork":
+                assert "?" in c["scenes"][-1]["narration"], f"{name}: fork repeats the opening question"
+        for key in (lambda c: c["structure_variant"], lambda c: len(c["scenes"])):
+            seq = [key(c) for _, c in rows]
+            run = p["max_in_a_row"] + 1
+            assert not any(len(set(seq[i:i + run])) == 1 for i in range(len(seq) - run + 1)), f"three in a row: {seq}"
+
+
+def test_schema_checks_the_variant():
+    v = scenes_schema.validate_production
+    assert any("structure_variant" in e for e in v({"structure_variant": "seven-scenes"}))
+    assert not any("structure_variant" in e for e in v({"structure_variant": "journey"}))
+    assert not any("structure_variant" in e for e in v({})), "older productions declare none"
+
+
+def test_format_policy_is_recorded():
+    claude = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    assert "format-policy.md" in claude
+    doc = (ROOT / "docs" / "current" / "specs" / "format-policy.md").read_text(encoding="utf-8")
+    for needle in ("What would change this", "Reasoning", "chain", "journey", "scale", "fork"):
+        assert needle in doc, needle
+    assert "format-policy.md" in (ROOT / "docs" / "current" / "reports" / "lens-decisions.md").read_text(encoding="utf-8")
+
+
 def _blender_tool():
     sys.path.insert(0, str(ROOT / "tools"))
     import asset_blender

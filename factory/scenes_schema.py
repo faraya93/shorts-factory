@@ -80,6 +80,9 @@ def validate_production(cfg: dict) -> list[str]:
         errors.append("missing production field: engine_reason (one line: why this primary engine)")
     if family not in FAMILIES:
         errors.append(f"topic_family must be one of {FAMILIES}, got {family!r}")
+    variant = cfg.get("structure_variant")
+    if variant is not None and variant not in ("chain", "journey", "scale", "fork"):
+        errors.append(f"structure_variant must be chain, journey, scale or fork (docs/current/specs/format-policy.md), got {variant!r}")
     route, assets = cfg.get("hero_route"), cfg.get("library_assets")
     if route is not None and route not in ("code-primitive", "asset"):
         errors.append(f"hero_route must be 'code-primitive' or 'asset', got {route!r}")

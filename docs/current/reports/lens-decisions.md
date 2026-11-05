@@ -14,6 +14,7 @@ Owner decisions are listed separately because they are not lens decisions. Owner
 | 2026-11-04 | Add 004 and 005 to the calibration as positive controls | design, marketing (one session) | A gate that fails everything would also catch all six; it needs accepted videos to prove it can pass | `likeness-calibration.json` | Remove the two rows |
 | 2026-11-04 | AGPL use needs a recorded lens decision instead of the owner's dated OK | design, marketing, scriptwriter (one session) | Licence choice is a technical matter under the directive; the licence rule itself is unchanged, and unclear still means not used | `licence.decision` in `asset_library.py`; registry | Restore `owner_ok` |
 | 2026-11-04 | Skill role map, and kiln installed without Studio | design lead, scriptwriter, marketing (one session) | Details and reasons in the manual. Studio auto-registered an MCP server whose worker can bill an API key | `docs/current/specs/asset-system.md` | Reinstall from the pinned commits |
+| 2026-11-04 | Channel format policy: one signature, four structure variants (`chain`, `journey`, `scale`, `fork`), no fixed scene count, one closing slot with varied wording and behaviour archetypes | marketing, scriptwriter, design (one session; no disagreement) | References: hits and flops share a template, and hits' setup counts flex with the process. Our catalogue: 10 of 11 videos have exactly 7 scenes; 8 of 11 archetypes state a belief. No retention data yet; reversal bars set in advance | `docs/current/specs/format-policy.md`; `channels/mecanalia/brand.yaml`; `scenes_schema.py`; `tests/test_asset_library.py` | Restore the template in doctrine and remove the `explainer-short` policy block and its test; published videos are unaffected |
 
 ## Owner decisions (2026-11-04)
 | Decision | Applied in |
@@ -24,3 +25,4 @@ Owner decisions are listed separately because they are not lens decisions. Owner
 | Likeness gate, declared hero route from 012, organic heroes in code3d: all stand | CLAUDE.md, manual |
 | Library `.blend` backup deferred | manual "Open decisions" |
 | Governance directive | CLAUDE.md "Governance" |
+| Video structure becomes a lens decision, as channel-level policy | CLAUDE.md "Governance", "Format policy" |

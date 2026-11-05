@@ -13,6 +13,12 @@ name: Mecanalia
 formats:                               # how a video is made; each format is a module of the factory sharing the core. One channel, one format by default.
   default: explainer-short             # the 9:16 "how things work" short (docs/current/specs/reference-format-spec.md)
   available: [explainer-short]
+  explainer-short:                     # format policy (lens decision 2026-11-04; docs/current/specs/format-policy.md)
+    structure_variants: [chain, journey, scale, fork]
+    scene_range: [4, 10]               # a sanity range, not a target: the mechanism sets the count
+    max_in_a_row: 2                    # the same variant, or the same scene count, never three times running
+    closing_word: "envíaselo"          # the fixed brand word of the closing slot; the sentence around it varies
+    applies_from_production: 12
 assets:                                # shared brand assets, held by the package
   fonts: assets/fonts                  # Montserrat ExtraBold (SIL OFL), licences in assets/fonts/LICENSES.md
   mark: tools/brand_mark.py            # the mark is generated from the identity preset, never stored as a second source

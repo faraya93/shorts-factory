@@ -14,7 +14,7 @@ prod = Path(sys.argv[1])
 s = json.loads((prod / "script.json").read_text(encoding="utf-8"))
 d = {"channel": "mecanalia-es", "video": s["video"], "title": s["title"], "topic_family": s["topic_family"], "primary_engine": "code3d", "engine_reason": s["engine_reason"],
      "hook_question": s["hook_question"], "false_belief": s["false_belief"], "closing_reframe": s["closing_reframe"], "share_archetype": s["share_archetype"],
-     **{k: s[k] for k in ("hero_route", "library_assets") if k in s},
+     **{k: s[k] for k in ("hero_route", "library_assets", "structure_variant") if k in s},
      "model": "blender-5.2.3-cycles", "voice": "es-CL-LorenzoNeural", "resolution": "1080x1920", "aspect_ratio": "9:16",
      "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
      "visual_identity": {}, "render_style": s["prefix"] + "-set", "scene_script_prefix": s["prefix"],
