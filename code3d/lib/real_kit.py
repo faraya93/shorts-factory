@@ -331,7 +331,7 @@ def tumbler(S, name, mat_glass, mat_liquid, r=5.0, h=12.0, wall=0.32, base=1.1, 
     return g, lq
 
 
-def ice_cube(S, name, mat, size=2.6, loc=(0, 0, 0), rot=(0, 0, 0), seed=1, bevel=0.35, **tk):
+def ice_cube(S, name, mat, size=2.6, loc=(0, 0, 0), rot=(0, 0, 0), seed=1, bevel=0.35, bw=0.22, disp=0.07, **tk):
     """A cube of ice: bevelled, then subdivided and noise-displaced so no face is flat, with the cloudy-core material. The object scale carries the size, so the material's
     object-space falloff stays correct."""
     rng = random.Random(seed)
@@ -339,14 +339,14 @@ def ice_cube(S, name, mat, size=2.6, loc=(0, 0, 0), rot=(0, 0, 0), seed=1, bevel
     o = bpy.context.object
     o.name = name
     mod = o.modifiers.new("bevel", "BEVEL")
-    mod.width, mod.segments = 0.22, 4
+    mod.width, mod.segments = bw, 4
     sub = o.modifiers.new("sub", "SUBSURF")
     sub.levels = sub.render_levels = 2
     tex = bpy.data.textures.new(name + "_tex", "CLOUDS")
     tex.noise_scale = 0.9 + 0.4 * rng.random()
     dis = o.modifiers.new("melt", "DISPLACE")
-    dis.texture, dis.strength, dis.mid_level = tex, 0.07, 0.5
-    o.scale = (size / 2, size / 2, size / 2)
+    dis.texture, dis.strength, dis.mid_level = tex, disp, 0.5
+    o.scale = tuple(x / 2 for x in size) if isinstance(size, (tuple, list)) else (size / 2, size / 2, size / 2)
     o.data.materials.append(mat)
     smooth(o)
     noshadow(o)

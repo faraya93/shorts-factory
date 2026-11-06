@@ -1,0 +1,411 @@
+{
+  "video": "hielo-que-pasaria-si-se-hundiera",
+  "title": "¿Qué pasaría si el hielo se hundiera? 🧊",
+  "topic_family": "whatif",
+  "preset": "fucsia",
+  "prefix": "hielo2",
+  "structure_variant": "fork",
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "ice-cube"
+  ],
+  "engine_reason": "Every-element rule (2026-11-05): glass, water and ice are physically based refracting materials (real_kit: IOR 1.31 ice with a cloudy core and frosted surface, IOR 1.333 water, glass tumbler with a thick base), rendered with the `transparent` profile; freezing is a moving front where the water material hands over to the ice material in the same volume; no alpha-blended boxes. The glass and ice cube stay the declared hero (geometric: tumbler profile, bevelled cube) and the library record ice-cube is updated to the real-material rig.",
+  "hook_question": "¿Qué pasaría si el hielo se hundiera en lugar de flotar?",
+  "false_belief": "",
+  "closing_reframe": "No es solo hielo que flota: es una tapa que protege el agua de abajo.",
+  "share_archetype": "ese amigo que siempre saca el hielo del vaso con la mano",
+  "caption_draft": "El agua es rara: al congelarse ocupa cerca de un 9 % más de espacio, por eso el hielo flota y forma una tapa sobre los lagos. Si se hundiera, se congelarían de abajo hacia arriba. 🧊 Envíaselo a ese amigo que siempre saca el hielo del vaso con la mano.",
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Fucsia defaults. Clear materials (glass, water, ice) are classed `other` by the gate (they inherit the stage by refraction); their legibility is carried by the extended likeness gate."
+  },
+  "hero_colours": {},
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit"
+  ],
+  "gate_stills": {
+    "1": [
+      100
+    ],
+    "2": [
+      190
+    ],
+    "3": [
+      200
+    ],
+    "4": [
+      215
+    ],
+    "5": [
+      190
+    ],
+    "6": [
+      120
+    ]
+  },
+  "description": "El agua es rara: al congelarse ocupa cerca de un 9 % más de espacio, por eso el hielo flota y forma una tapa sobre los lagos. Si se hundiera, se congelarían de abajo hacia arriba. 🧊 Sígueme, y envíaselo a ese amigo que siempre saca el hielo del vaso con la mano.",
+  "hashtags": [
+    "#hielo",
+    "#agua",
+    "#quepasaria",
+    "#shorts"
+  ],
+  "departure": "Departure from Coral: FUCSIA stage (deep magenta, cream plinth, mint accent). Reason: pale-cyan translucent ice needs a deep, saturated stage for value separation; the mint accent keeps the 'cold' reading. The rejected 008 used cobalt, where ice and water disappeared.",
+  "lens": [
+    "Design (lead): every element is a refracting material; the blue box of the first version is gone. New: a `transparent` render profile, measured at roughly 7-25 s per 1080x1920 still at 24-48 samples; clear materials sit in the gate's unmeasured class and are judged by blind naming.",
+    "Scriptwriter: the fork structure is kept (normal world, why, changed premise, escalation, opening question, reframe); freezing is now acted by a front inside one volume, and the lake has a sun that only melts the top.",
+    "Marketing: same hook and archetype; the real-ice close-ups are the first-second hook."
+  ],
+  "sources": [
+    "Water expands about 9 % in volume on freezing (ice density about 917 kg/m3 vs 1000 kg/m3 for water at 0 C), so ice floats. Standard physical reference values. Rounded.",
+    "Consequence claim: lakes freezing from the bottom up if ice sank is the standard textbook thought experiment (insulating ice lid on real lakes); it is a hypothetical, stated as such ('pasaría')."
+  ],
+  "simplifications": [
+    "Real refraction, but the motion (freezing front, sinking, stacking) is keyframed, not simulated.",
+    "The water level does not rise as cubes are added in the sinking beat (displacement ignored).",
+    "The lake is a glass box of water: no ecology is drawn.",
+    "Freezing is a front that swaps the water material for the ice material along the height of one volume."
+  ],
+  "status_notes": [],
+  "scenes": [
+    {
+      "name": "flota",
+      "target_duration_s": 7,
+      "narration": "¿Qué pasaría si el hielo se hundiera en lugar de flotar? Hoy flota, y esa pequeña rareza sostiene la vida en los lagos.",
+      "transformation": "un vaso de agua con tres cubos de hielo reales que flotan, asomando por encima del agua",
+      "camera": "órbita lenta alrededor del vaso",
+      "emphasis": [
+        "hundiera",
+        "flota"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "nueve",
+      "target_duration_s": 7,
+      "narration": "El agua es rara: al congelarse ocupa cerca de un nueve por ciento más de espacio, y por eso el hielo pesa menos y sube.",
+      "transformation": "un vaso medidor de agua → se congela de abajo hacia arriba y crece por encima de la marca",
+      "camera": "empuje lateral hacia la marca",
+      "emphasis": [
+        "nueve",
+        "sube"
+      ],
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "9 %",
+          "from": 0,
+          "at_word": "nueve",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "name": "hunde",
+      "target_duration_s": 8,
+      "narration": "Imagina que no: cada cubo cae al fondo y se apila, uno encima de otro, hasta llenar el vaso de abajo hacia arriba.",
+      "transformation": "un vaso de agua → seis cubos caen al fondo y se apilan hasta llenarlo",
+      "camera": "órbita descendente siguiendo la caída",
+      "emphasis": [
+        "fondo",
+        "apila"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "lago",
+      "target_duration_s": 9,
+      "narration": "En un lago pasaría igual: el invierno lo congelaría desde el fondo, y el sol de verano solo derretiría la capa de arriba.",
+      "transformation": "un lago en corte, agua líquida → el hielo crece desde el fondo; el sol solo derrite la capa de arriba",
+      "camera": "travelling lateral y cenital",
+      "emphasis": [
+        "fondo",
+        "sol"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "tapa",
+      "target_duration_s": 6,
+      "narration": "Así que, ¿qué pasaría si el hielo se hundiera? Los lagos serían bloques de hielo, sin vida debajo.",
+      "transformation": "dos lagos en corte lado a lado: con tapa de hielo flotante → bloque de hielo hasta el fondo",
+      "camera": "retroceso que revela los dos lagos",
+      "emphasis": [
+        "bloques"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "cierre",
+      "target_duration_s": 9,
+      "narration": "No es solo hielo que flota: es una tapa que protege el agua de abajo. Sígueme, y envíaselo a ese amigo que siempre saca el hielo del vaso con la mano.",
+      "transformation": "el vaso con una tapa de hielo flotando sobre el agua, en una sola imagen",
+      "camera": "retroceso amplio",
+      "emphasis": [],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ],
+  "scene_elements": {
+    "1": [
+      {
+        "id": "ice",
+        "name": "ice cubes",
+        "aliases": [
+          "ice",
+          "ice cube",
+          "ice cubes",
+          "cube",
+          "cubes",
+          "frozen",
+          "hielo"
+        ],
+        "route": "material",
+        "source": "real_kit.ice_cube + real_kit.ice: IOR 1.31, frosted, cloudy core",
+        "frames": [
+          100,
+          170
+        ]
+      },
+      {
+        "id": "glass",
+        "name": "glass of water",
+        "aliases": [
+          "glass",
+          "glasses",
+          "tumbler",
+          "cup",
+          "water",
+          "drink",
+          "beaker",
+          "vaso"
+        ],
+        "route": "build",
+        "source": "real_kit.tumbler: lathe glass with thick base + physically based water",
+        "frames": [
+          100,
+          170
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "ice",
+        "name": "freezing water",
+        "aliases": [
+          "ice",
+          "ice cube",
+          "ice cubes",
+          "frozen",
+          "hielo"
+        ],
+        "route": "material",
+        "source": "real_kit freezing front: water material hands over to ice material",
+        "frames": [
+          90,
+          190
+        ]
+      },
+      {
+        "id": "glass",
+        "name": "glass of water",
+        "aliases": [
+          "glass",
+          "tumbler",
+          "cup",
+          "water",
+          "drink",
+          "vaso"
+        ],
+        "route": "build",
+        "source": "real_kit.tumbler",
+        "frames": [
+          90,
+          190
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "ice",
+        "name": "sinking ice cubes",
+        "aliases": [
+          "ice",
+          "ice cube",
+          "ice cubes",
+          "cube",
+          "cubes",
+          "frozen",
+          "hielo"
+        ],
+        "route": "material",
+        "source": "real_kit.ice_cube x6",
+        "frames": [
+          110,
+          200
+        ]
+      },
+      {
+        "id": "glass",
+        "name": "glass of water",
+        "aliases": [
+          "glass",
+          "glasses",
+          "tumbler",
+          "cup",
+          "water",
+          "drink",
+          "beaker",
+          "vaso"
+        ],
+        "route": "build",
+        "source": "real_kit.tumbler",
+        "frames": [
+          110,
+          200
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "ice",
+        "name": "sunk ice cubes",
+        "aliases": [
+          "ice",
+          "ice cube",
+          "ice cubes",
+          "cube",
+          "cubes",
+          "frozen",
+          "hielo"
+        ],
+        "route": "material",
+        "source": "real_kit.ice_cube x36",
+        "frames": [
+          130,
+          215
+        ]
+      },
+      {
+        "id": "tank",
+        "name": "lake tank",
+        "aliases": [
+          "tank",
+          "aquarium",
+          "glass box",
+          "glass tank",
+          "water",
+          "container",
+          "box",
+          "lake"
+        ],
+        "route": "build",
+        "source": "glass box of real water",
+        "frames": [
+          130,
+          215
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "ice",
+        "name": "ice cubes in two tanks",
+        "aliases": [
+          "ice",
+          "ice cube",
+          "ice cubes",
+          "cube",
+          "cubes",
+          "frozen",
+          "hielo"
+        ],
+        "route": "material",
+        "source": "real_kit.ice_cube",
+        "frames": [
+          90,
+          190
+        ]
+      },
+      {
+        "id": "tank",
+        "name": "two lake tanks",
+        "aliases": [
+          "tank",
+          "tanks",
+          "aquarium",
+          "glass box",
+          "glass tank",
+          "water",
+          "container",
+          "box",
+          "lake"
+        ],
+        "route": "build",
+        "source": "two glass boxes of real water",
+        "frames": [
+          90,
+          190
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "ice",
+        "name": "ice lid",
+        "aliases": [
+          "ice",
+          "ice cube",
+          "ice cubes",
+          "cube",
+          "cubes",
+          "frozen",
+          "hielo"
+        ],
+        "route": "material",
+        "source": "real_kit.disc with the ice material",
+        "frames": [
+          120,
+          260
+        ]
+      },
+      {
+        "id": "glass",
+        "name": "glass of water",
+        "aliases": [
+          "glass",
+          "glasses",
+          "tumbler",
+          "cup",
+          "water",
+          "drink",
+          "beaker",
+          "vaso"
+        ],
+        "route": "build",
+        "source": "real_kit.tumbler",
+        "frames": [
+          120,
+          260
+        ]
+      }
+    ]
+  }
+}
