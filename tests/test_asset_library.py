@@ -156,6 +156,24 @@ def test_gate_requires_a_ready_asset_and_a_fresh_passing_likeness():
         assert "not ready" in gate.check_hero(p)[1]
 
 
+def test_floor_exception_is_one_off_and_never_touches_the_hero():
+    """Owner 2026-11-06: a production may declare element_floor_exception (006/008/009 resume only); it lowers the floor for secondary elements, never for hero_ids."""
+    with tempfile.TemporaryDirectory() as t:
+        p = Path(t)
+        els = {"1": [{"id": "ice", "name": "ice", "aliases": ["ice"], "route": "build", "source": "x"}, {"id": "glass", "name": "glass", "aliases": ["glass"], "route": "build", "source": "x"}]}
+        cfg = {"scenes": [{"id": 1}], "scene_elements": els, "hero_ids": ["ice"], "element_floor_exception": {"floor": 50, "reason": "r", "authorised": "owner"}}
+        (p / "scenes.json").write_text(json.dumps(cfg))
+        orig = gate.scene_fingerprint
+        gate.scene_fingerprint = lambda prod, sid: "fp"
+        try:
+            assert not al.record_element(p, 1, "ice", ["ice", "ice"], [55, 55]), "hero keeps the 60 floor"
+            assert al.record_element(p, 1, "glass", ["a glass", "glass"], [55, 50]), "secondary element passes at the exception floor"
+            assert not al.record_element(p, 1, "glass", ["a glass", "glass"], [55, 45])
+            assert json.loads((p / "build/gate/elements.json").read_text())["1:glass"]["pass"] is False
+        finally:
+            gate.scene_fingerprint = orig
+
+
 def test_element_gate_blocks_the_scene_whose_key_element_is_not_named():
     """Owner rule 2026-11-05: the key element of EVERY scene is blind-named; a failing scene blocks only itself."""
     with tempfile.TemporaryDirectory() as t:

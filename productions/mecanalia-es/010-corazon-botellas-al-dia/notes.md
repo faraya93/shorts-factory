@@ -37,3 +37,6 @@ Hook formula: ¿Cuántas botellas de agua bombea tu corazón en un solo día? | 
 - Heart size is not to scale with the bottles.
 
 ## Build log
+
+## Owner verdict (2026-11-06)
+OK as a production, but BORING: "the whole video is a heart pumping; nothing HAPPENS". Owner diagnosis: the problem is the SCRIPT, not the staging; camera changes do not fix a flat script. More dynamism than the first 010, still flat. Not queued by this instruction; queue decisions are separate. Recorded as the trigger of the script-flatness rule (CLAUDE.md, lens-decisions 2026-11-06).

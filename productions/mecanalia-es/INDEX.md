@@ -17,7 +17,7 @@ Publish package of each video: `final.mp4` + `cover.jpg` + `publish.json` (where
 **Archived before publication (2026-11-03, owner instruction):** the ORIGINAL 006 (`por-que-no-nos-gusta-lo-mismo`, food taste) and 007 (`por-que-cuesta-dejar-el-alcohol`, alcohol)
 were moved to `productions/_archive/retired-006-007-2026-11-03/` (never published, never queued; judged "very monotonous, the same scene throughout"). Numbers 006-011 are
 REASSIGNED to the new batch below; any reference to an older "006/007" means the archived pair.
-| 006 | dedos-arrugados-agua | REMAKE SKIPPED (extended likeness gate blocks scenes 2 and 5; see notes.md); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
+| 006 | dedos-arrugados-agua | REMAKE SKIPPED (extended likeness gate blocks scenes 2 and 5; see notes.md); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before. OWNER VERDICT 2026-11-06: OK but boring (flat script: the whole video is a heart pumping); not queued by this instruction | 2026-11-05 | |
 | 007 | candado-solo-abre-su-llave | package ready (unpublished; owner review) | 2026-11-04 | |
 | 008 | hielo-que-pasaria-si-se-hundiera | REMAKE SKIPPED (extended likeness gate blocks scene 2; see notes.md); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
 | 009 | termo-por-que-mantiene-el-calor | REMAKE SKIPPED (extended likeness gate blocks scene 2 on its coffee element; 6 of 7 scenes pass; see notes.md); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |

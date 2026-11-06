@@ -247,13 +247,13 @@ def seal(slug: str) -> None:
     write_readme(m)
 
 
-def judge_guesses(aliases: list[str], guesses: list[str], confidences: list[int]) -> bool:
+def judge_guesses(aliases: list[str], guesses: list[str], confidences: list[int], floor: int | None = None) -> bool:
     """Pass only when at least MIN_BLIND_GUESSES independent first guesses each name the object by an alias AND each reader is at least MIN_BLIND_CONFIDENCE sure.
     The floor comes from the 2026-11-04 calibration (docs/current/reports/likeness-calibration.md): naming alone passed 008, carried by one strong frame."""
     patterns = [re.compile(rf"\b{re.escape(norm(a))}(s|es)?\b") for a in aliases]        # whole words: "ice" must not match "device", plurals count
     return (len(guesses) >= MIN_BLIND_GUESSES and len(confidences) == len(guesses)
             and all(any(p.search(norm(g)) for p in patterns) for g in guesses)
-            and all(c >= MIN_BLIND_CONFIDENCE for c in confidences))
+            and all(c >= (MIN_BLIND_CONFIDENCE if floor is None else floor) for c in confidences))
 
 
 def blind_pack(stills: list[str], multi: bool = False) -> tuple[Path, str]:
@@ -307,13 +307,17 @@ def record_element(production: Path, scene: int, element_id: str, guesses: list[
     el = next((e for e in (cfg.get("scene_elements") or {}).get(str(scene), []) if e["id"] == element_id), None)
     if el is None:
         raise SystemExit(f"scene {scene} declares no element '{element_id}' in scenes.json scene_elements")
-    ok = judge_guesses(el["aliases"], guesses, confidences)
+    exc = cfg.get("element_floor_exception") or {}            # ONE-OFF owner exception 2026-11-06 (006/008/009 resume): lower floor for SECONDARY elements only, never the hero
+    floor = int(exc["floor"]) if exc and not el.get("hero") and el["id"] not in (cfg.get("hero_ids") or []) else None
+    ok = judge_guesses(el["aliases"], guesses, confidences, floor)
     rec = production / "build" / "gate"
     rec.mkdir(parents=True, exist_ok=True)
     path = rec / "elements.json"
     data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     data[f"{scene}:{element_id}"] = {"pass": ok, "date": date.today().isoformat(), "element": el["name"], "guesses": guesses, "confidences": confidences,
                                      "fingerprint": gate.scene_fingerprint(production, scene)}
+    if floor is not None:
+        data[f"{scene}:{element_id}"]["floor_exception"] = {"floor": floor, "reason": exc.get("reason"), "authorised": exc.get("authorised")}
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return ok
 
