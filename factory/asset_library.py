@@ -7,6 +7,7 @@
     .venv/bin/python factory/asset_library.py check [slug]                 validate one asset or the whole library
     .venv/bin/python factory/asset_library.py blind-pack <still> [...]     copy stills to a neutral folder and print the blind-naming prompt
     .venv/bin/python factory/asset_library.py blind <slug> --guess "..." --confidence 80 --guess "..." --confidence 75     record the asset's blind naming
+    .venv/bin/python factory/asset_library.py element <production> <scene> <element id> --guess "..." --confidence 80 --guess "..." --confidence 75     extended gate: blind naming of a scene's key element
     .venv/bin/python factory/asset_library.py likeness <production> <slug> --guess "..." --confidence 80 --guess "..." --confidence 75     same, for the production's own stills
     .venv/bin/python factory/asset_library.py use <slug> <production>      record a production that used the asset
 
@@ -293,6 +294,25 @@ def record_likeness(production: Path, slug: str, guesses: list[str], confidences
     return ok
 
 
+def record_element(production: Path, scene: int, element_id: str, guesses: list[str], confidences: list[int]) -> bool:
+    """Extended likeness gate (every scene's key element): blind naming against the aliases declared for that element in scenes.json `scene_elements`."""
+    sys.path.insert(0, str(ROOT / "factory"))
+    import gate
+    cfg = json.loads((production / "scenes.json").read_text(encoding="utf-8"))
+    el = next((e for e in (cfg.get("scene_elements") or {}).get(str(scene), []) if e["id"] == element_id), None)
+    if el is None:
+        raise SystemExit(f"scene {scene} declares no element '{element_id}' in scenes.json scene_elements")
+    ok = judge_guesses(el["aliases"], guesses, confidences)
+    rec = production / "build" / "gate"
+    rec.mkdir(parents=True, exist_ok=True)
+    path = rec / "elements.json"
+    data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    data[f"{scene}:{element_id}"] = {"pass": ok, "date": date.today().isoformat(), "element": el["name"], "guesses": guesses, "confidences": confidences,
+                                     "fingerprint": gate.scene_fingerprint(production, scene)}
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return ok
+
+
 def use(slug: str, production: str) -> None:
     prod = production.split("productions/", 1)[-1].strip("/")
     if not (ROOT / "productions" / prod).is_dir():
@@ -357,6 +377,7 @@ def main() -> int:
     p = sub.add_parser("check"); p.add_argument("slug", nargs="?")
     p = sub.add_parser("blind-pack"); p.add_argument("stills", nargs="+")
     p = sub.add_parser("blind"); p.add_argument("slug"); p.add_argument("--guess", action="append", default=[]); p.add_argument("--confidence", action="append", type=int, default=[])
+    p = sub.add_parser("element"); p.add_argument("production"); p.add_argument("scene", type=int); p.add_argument("element_id"); p.add_argument("--guess", action="append", default=[]); p.add_argument("--confidence", action="append", type=int, default=[])
     p = sub.add_parser("likeness"); p.add_argument("production"); p.add_argument("slug"); p.add_argument("--guess", action="append", default=[]); p.add_argument("--confidence", action="append", type=int, default=[])
     p = sub.add_parser("use"); p.add_argument("slug"); p.add_argument("production")
     a = ap.parse_args()
@@ -390,6 +411,10 @@ def main() -> int:
     elif a.cmd == "blind":
         ok = record_blind(a.slug, a.guess, a.confidence)
         print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain an alias of {a.slug}, each with confidence >= {MIN_BLIND_CONFIDENCE}")
+        return 0 if ok else 1
+    elif a.cmd == "element":
+        ok = record_element(Path(a.production).resolve(), a.scene, a.element_id, a.guess, a.confidence)
+        print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain a declared alias, each with confidence >= {MIN_BLIND_CONFIDENCE}")
         return 0 if ok else 1
     elif a.cmd == "likeness":
         ok = record_likeness(Path(a.production), a.slug, a.guess, a.confidence)

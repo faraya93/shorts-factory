@@ -156,6 +156,41 @@ def test_gate_requires_a_ready_asset_and_a_fresh_passing_likeness():
         assert "not ready" in gate.check_hero(p)[1]
 
 
+def test_element_gate_blocks_the_scene_whose_key_element_is_not_named():
+    """Owner rule 2026-11-05: the key element of EVERY scene is blind-named; a failing scene blocks only itself."""
+    with tempfile.TemporaryDirectory() as t:
+        p = Path(t)
+        cfg = {"gate_stills": {}, "rig_libs": ["looks"], "scene_script_prefix": "dedos", "scenes": [{"id": 1}, {"id": 2}],
+               "scene_elements": {"1": [{"id": "hand", "name": "hand", "aliases": ["hand", "mano"], "route": "asset", "source": "x"}],
+                                  "2": [{"id": "vessel", "name": "blood vessel", "aliases": ["blood vessel", "vena"], "route": "build", "source": "y"}]}}
+        (p / "scenes.json").write_text(json.dumps(cfg))
+        orig = gate.scene_fingerprint
+        gate.scene_fingerprint = lambda prod, sid: "fp"
+        try:
+            assert not gate.check_elements(p, 1)[0], "no record yet"
+            assert not al.record_element(p, 2, "vessel", ["a red tube", "a pipe"], [90, 90])
+            assert al.record_element(p, 1, "hand", ["a hand", "human hand"], [80, 75])
+            assert gate.check_elements(p, 1)[0], "scene 1 passes on its own"
+            assert not gate.check_elements(p, 2)[0], "scene 2 stays blocked"
+            assert not gate.check_elements(p)[0], "the whole production is blocked while one scene fails"
+            assert not al.record_element(p, 2, "vessel", ["a blood vessel", "a vena"], [70, 40]), "confidence floor applies to every element"
+            assert al.record_element(p, 2, "vessel", ["a blood vessel", "a vena"], [70, 65])
+            assert gate.check_elements(p)[0]
+            gate.scene_fingerprint = lambda prod, sid: "changed"
+            assert "STALE" in gate.check_elements(p, 1)[1]
+        finally:
+            gate.scene_fingerprint = orig
+
+
+def test_scene_without_declared_element_is_refused():
+    with tempfile.TemporaryDirectory() as t:
+        p = Path(t)
+        (p / "scenes.json").write_text(json.dumps({"scenes": [{"id": 1}, {"id": 2}], "scene_elements": {"1": [{"id": "a", "name": "a", "aliases": ["a"]}]}}))
+        assert "declare no key element" in gate.check_elements(p, 2)[1]
+        (p / "scenes.json").write_text(json.dumps({"scenes": [{"id": 1}]}))
+        assert gate.check_elements(p, 1)[0], "productions that predate the rule are not affected"
+
+
 def test_older_productions_are_not_affected():
     with tempfile.TemporaryDirectory() as t:
         p = Path(t)

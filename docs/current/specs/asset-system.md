@@ -56,6 +56,20 @@ Blind naming means at least two separate fresh subagents, each shown only neutra
 
 **Calibration (2026-11-04, `docs/current/reports/likeness-calibration.md`):** on the six rejected videos, names alone caught 5 of 6 and wrongly passed 008, carried by one strong frame. The confidence floor was added as a result: it now catches all 6 and passes both accepted controls (004, 005). The floor was fitted on those same eight videos, so that result is not independent evidence. These are models reading stills, not people on a phone, so the owner's eye remains the last gate on output. If the gate passes something the owner rejects, tighten the test; never loosen it to let a hero through.
 
+## Every element (binding, owner 2026-11-05)
+
+The hero rule was too narrow: the remade 006-011 batch had approved heroes next to fake secondary elements (red cylinders for vessels, a capsule and a ball for a grip test, a blue box for ice, a brown block for coffee, flat dots for heat). The routing and the likeness gate now cover **every element that represents a real object or substance, in every scene**.
+
+**Routing per element** (declare it in scenes.json `scene_elements`, one list per scene; `route` is one of `asset`, `material`, `build`, `code-primitive`):
+1. A ready library asset (`asset_library.py find`), or a source asset by the usual registry order and licence rule. The asset then lands in the library like a hero.
+2. A proper material or build: a physically based water, glass or ice material (see the `transparent` profile below), a geometry-nodes or sculpted build, a simulation baked and rendered headless. The finished build is saved to the library when it is reusable.
+3. A code primitive only when the real thing is genuinely geometric and reads instantly. Say why in `source`.
+Flat-colour stand-ins are banned for organic, liquid and real-world elements. Energy and signal graphics (heat, nerve pulses) use a language consistent with the scene's realism (volumetric, emissive or particle based), never flat dots.
+
+**Extended gate.** Per scene: `gate.py stills <prod> [scene]` renders unmasked stills of the declared elements (`frames` per element, default the scene's gate frames); two fresh subagents get `asset_library.py blind-pack <stills>` and nothing else; record with `asset_library.py element <prod> <scene> <element id> --guess ... --confidence ...` (pass: both first guesses contain a declared alias as a whole word, both confidences >= 60). `gate.check(prod, scene)` blocks that scene's final render until every element has a fresh passing record (fingerprint = scene script, rigs, declared elements, assets, hero colours). A scene whose key element fails stays blocked; fix the element, never the threshold or the aliases.
+
+**Transparent profile.** Glass, water and ice need Cycles transmission bounces (measured in the asset proof: 0 renders a glass tray black, 8 renders correctly, about 9 s per still). The profile is `render.profiles.transparent` in `channels/mecanalia/brand.yaml`, used by scene types that declare it; the tuned profile stays the default for everything else.
+
 ## Skill role map
 
 Agreed under the multi-lens protocol (docs/architecture.md), design leading, scriptwriter and marketing consulted. The review was done by one session reasoning through each lens, not by separate agents.

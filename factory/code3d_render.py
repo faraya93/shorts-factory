@@ -43,7 +43,7 @@ def main() -> int:
     prefix = cfg.get("scene_script_prefix", "scene")
     if args.mode == "final" and not args.encode_only:                                  # HARD BLOCK (owner 2026-10-28): no full render without a fresh passing gate record
         import gate
-        ok, msg = gate.check(prod)
+        ok, msg = gate.check(prod, n)
         if not ok:
             print(f"RENDER BLOCKED by the composition gate: {msg}")
             return 2
