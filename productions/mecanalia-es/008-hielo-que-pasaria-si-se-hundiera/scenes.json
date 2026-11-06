@@ -68,9 +68,9 @@
           "hielo"
         ],
         "route": "material",
-        "source": "freezing front (water to ice material) in one glass; real_kit.ice_cube x3 rising in a second glass",
+        "source": "ice-cube tray whose six cells freeze into real_kit.ice_cube cubes that stand above the rim (the 9 % growth); real_kit.ice_cube x3 rising in a glass",
         "frames": [
-          150,
+          90,
           205
         ]
       },
@@ -88,7 +88,7 @@
         "route": "build",
         "source": "real_kit.tumbler",
         "frames": [
-          150,
+          90,
           205
         ]
       }
@@ -481,5 +481,13 @@
         }
       ]
     }
-  ]
+  ],
+  "hero_ids": [
+    "ice"
+  ],
+  "element_floor_exception": {
+    "floor": 50,
+    "reason": "one-off owner exception 2026-11-06 for the 006/008/009 resume: secondary elements only, never the hero; standing floor stays 60",
+    "authorised": "owner, 2026-11-06"
+  }
 }

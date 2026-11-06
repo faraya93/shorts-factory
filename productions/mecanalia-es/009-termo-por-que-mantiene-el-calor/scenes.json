@@ -469,5 +469,13 @@
         }
       ]
     }
-  ]
+  ],
+  "hero_ids": [
+    "thermos"
+  ],
+  "element_floor_exception": {
+    "floor": 50,
+    "reason": "one-off owner exception 2026-11-06 for the 006/008/009 resume: secondary elements only, never the hero; standing floor stays 60",
+    "authorised": "owner, 2026-11-06"
+  }
 }
