@@ -21,5 +21,5 @@ REASSIGNED to the new batch below; any reference to an older "006/007" means the
 | 007 | candado-solo-abre-su-llave | package ready (unpublished; owner review) | 2026-11-04 | |
 | 008 | hielo-que-pasaria-si-se-hundiera | REMAKE SKIPPED (extended likeness gate blocks scene 2; see notes.md); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
 | 009 | termo-por-que-mantiene-el-calor | REMAKE SKIPPED (extended likeness gate blocks scene 2 on its coffee element; 6 of 7 scenes pass; see notes.md); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
-| 010 | corazon-botellas-al-dia | package ready (unpublished; owner review) | 2026-11-04 | |
+| 010 | corazon-botellas-al-dia | package ready (unpublished; owner review): REMAKE under the every-element and dynamism rules, extended gate PASS on all scenes; the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
 | 011 | palomitas-por-que-explota-el-maiz | package ready (unpublished; owner review) | 2026-11-04 | |
