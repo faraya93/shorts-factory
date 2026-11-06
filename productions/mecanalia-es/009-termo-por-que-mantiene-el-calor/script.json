@@ -1,0 +1,401 @@
+{
+  "video": "termo-por-que-mantiene-el-calor",
+  "title": "¿Por qué tu termo mantiene el café caliente? ☕",
+  "topic_family": "objects",
+  "preset": "lima",
+  "prefix": "termo2",
+  "structure_variant": "journey",
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "thermos"
+  ],
+  "engine_reason": "Every-element rule (2026-11-05): the thermos is a hollow double-walled flask from real lathes (enamel shell, polished steel inner flask, steel bands); the coffee is a clear amber refracting liquid with a meniscus (real_kit water + absorption), revealed by a sweeping cut plane through the shells; heat is drawn in the same physical language (glowing steel, tracer air spheres, thin emissive light rays), not flat dots. Transparent render profile.",
+  "hook_question": "¿Por qué tu termo mantiene el café caliente durante horas?",
+  "false_belief": "Tiene un aislante por dentro, como espuma.",
+  "closing_reframe": "No es un aislante que guarda el calor: es un vacío que le cierra el camino.",
+  "share_archetype": "ese amigo que deja la tapa del termo abierta",
+  "caption_draft": "El calor sale de tres formas: tocando, moviendo el aire y como luz infrarroja. Entre las dos paredes del termo casi no hay aire, y las paredes son espejos: el calor se queda sin camino. Lo que más se pierde es por la tapa. ☕ Envíaselo a ese amigo que deja la tapa del termo abierta.",
+  "support_colours": {
+    "board": "#F2EEFF",
+    "plate": "#F2EEFF",
+    "reason": "Lima (as the first version): the cream plate measured dE 19.5 from the lime stage, so supports are near-white lavender; clear materials (glass, coffee) are classed other by the gate."
+  },
+  "hero_colours": {
+    "enamel": "#2D6FB7",
+    "steel": "#9AA3AD"
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "thermos_real"
+  ],
+  "gate_stills": {
+    "1": [
+      200
+    ],
+    "2": [
+      125
+    ],
+    "3": [
+      100
+    ],
+    "4": [
+      60
+    ],
+    "5": [
+      90
+    ],
+    "6": [
+      100
+    ],
+    "7": [
+      60
+    ]
+  },
+  "description": "El calor sale de tres formas: tocando, moviendo el aire y como luz infrarroja. Entre las dos paredes del termo casi no hay aire, y las paredes son espejos: el calor se queda sin camino. Lo que más se pierde es por la tapa. ☕ Sígueme, y envíaselo a ese amigo que deja la tapa del termo abierta.",
+  "hashtags": [
+    "#termo",
+    "#calor",
+    "#comofunciona",
+    "#shorts"
+  ],
+  "departure": "Departure from Coral: LIMA stage (lime green, dark-green plinth, violet accent). Reason: a steel flask and brown coffee need a bright, clean stage; the violet accent for the heat contrasts hard with lime and avoids the usual red/orange 'hot' cliché that would merge with the coffee.",
+  "lens": [
+    "Design (lead): owner rule 2026-11-05. The first version's coffee block and flat blue heat dots are gone; liquid, glass-like air spheres, glowing metal and light rays share one realistic language; the thermos hero is rebuilt as a hollow double-walled flask.",
+    "Scriptwriter: journey structure kept (hook, walls, three ways, vacuum, mirror, lid, reframe) with the same narration; each beat now has a transformation that travels (a cut plane sweeps, spheres leave, rays bounce, the lid opens).",
+    "Marketing: dynamism rule (hard bar): seven distinct camera moves and framings; the cutaway is revealed by motion, not shown as a static diagram."
+  ],
+  "sources": [
+    "Vacuum flask principle (Dewar): double wall with a near-vacuum gap stops conduction and convection; reflective inner surfaces cut radiation; heat loss through the stopper/lid is a main remaining path. Standard physics references. No figures used."
+  ],
+  "simplifications": [
+    "Heat transfer is choreographed, not simulated; air molecules are drawn far larger and fewer than real ones.",
+    "The cut plane is a visual device: a real thermos is sealed.",
+    "Radiation is drawn as a few rays; the vacuum gap is wider than a real one.",
+    "The coffee is a clear amber liquid; real coffee is opaque at this depth."
+  ],
+  "status_notes": [
+    "SKIPPED 2026-11-05 (unattended run): the extended likeness gate blocks scene 2, so no final render was made. Scenes 1, 3, 4, 5, 6, 7 pass blind naming (85/85, 65/60, 70/70, 60/72, 65/65, 85/80); scene 2 passed as a thermos at 80/72 when the cutaway stood alone but its coffee element was never named ('dark amber liquid').",
+    "Scene 2 coffee: readers called the liquid 'amber', 'brown' or 'red-orange liquid', never coffee or a drink. Aliases were not widened (the rule forbids it). A steaming cup of the same coffee beside the flask made both thermos and 'coffee mug' appear in the guesses but the confidences were 55 and 60, five points under the floor on one reader; a version with the cap lifted and steam scored 75/55.",
+    "What passed and is reusable: a hollow double-walled flask from real lathes, a sweeping cut plane that reveals walls, gap and coffee, coffee as a refracting liquid, glowing inner steel, tracer air spheres, light rays, a steam volume; the handle was the key to recognition (without it readers said 'blue cylinder', 55/50).",
+    "Likely fix: pour the coffee into the cap-cup in scene 1 or 2 (a stream and a filling cup are unmistakably coffee) or add crema and a visible steam column over the open neck; then re-run the gate and blind naming for scene 2 only.",
+    "To resume: fix scene 2, `gate.py run`, `gate.py stills`, blind-name scene 2, then tools/chain_render2.sh (SF_SAMPLES=64, caffeinate). Narration audio exists; scenes termo2_01..07, libs thermos_real.py and real_kit.py, scenes.json with scene_elements are committed."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "target_duration_s": 8,
+      "narration": "¿Por qué tu termo mantiene el café caliente durante horas? Dicen que tiene un aislante por dentro, como espuma. Pero lo que tiene es otra cosa.",
+      "transformation": "un termo cerrado → se levanta la tapa y sale vapor de café",
+      "camera": "órbita descendente alrededor del termo",
+      "emphasis": [
+        "aislante",
+        "espuma"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿ESPUMA?",
+          "at_word": "espuma.",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "paredes",
+      "target_duration_s": 7,
+      "narration": "Por dentro tiene dos paredes, una dentro de la otra, y entre ellas casi no hay aire.",
+      "transformation": "el termo entero → un plano de corte barre la pared y revela dos paredes de acero, el hueco y el café líquido",
+      "camera": "empuje a través de la pared hacia el hueco",
+      "emphasis": [
+        "paredes",
+        "aire"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "VACÍO",
+          "at_word": "aire.",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "tres",
+      "target_duration_s": 8,
+      "narration": "El calor sabe salir de tres formas: tocando, viajando con el aire, y como luz infrarroja.",
+      "transformation": "el café cede calor de tres formas: la pared brilla (contacto), esferas de aire suben (aire), rayos de luz cruzan el hueco (luz)",
+      "camera": "travelling lateral y subida siguiendo las tres rutas",
+      "emphasis": [
+        "tocando",
+        "aire",
+        "luz"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CONTACTO",
+          "at_word": "tocando,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "AIRE",
+          "at_word": "aire,",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LUZ",
+          "at_word": "luz",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.38
+        }
+      ]
+    },
+    {
+      "name": "vacio",
+      "target_duration_s": 8,
+      "narration": "Pero sin aire entre las paredes, ni tocar ni mover aire sirve: el calor se queda sin camino.",
+      "transformation": "el aire del hueco es expulsado: las esferas salen y quedan paredes sin nada en medio; la pared interior se enfría",
+      "camera": "plano cenital descendiendo al hueco",
+      "emphasis": [
+        "sin",
+        "camino"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "espejo",
+      "target_duration_s": 7,
+      "narration": "Y las paredes son espejos: la luz infrarroja rebota de vuelta, y regresa al café.",
+      "transformation": "los rayos cruzan el hueco, chocan con la pared espejo y regresan al café",
+      "camera": "órbita alrededor del hueco siguiendo un rayo",
+      "emphasis": [
+        "espejos",
+        "rebota"
+      ],
+      "overlays": []
+    },
+    {
+      "name": "tapa",
+      "target_duration_s": 8,
+      "narration": "Por eso el punto débil es la tapa: por ahí se escapa casi todo el calor que se pierde.",
+      "transformation": "la tapa se abre: una columna de calor sale por arriba mientras las paredes quedan frías",
+      "camera": "inclinación hacia la tapa y retroceso",
+      "emphasis": [
+        "tapa",
+        "escapa"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "FUGA",
+          "at_word": "tapa:",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "name": "cierre",
+      "target_duration_s": 9,
+      "narration": "Así que no es un aislante que guarda el calor: es un vacío que le cierra el camino. Sígueme, y envíaselo a ese amigo que deja la tapa del termo abierta.",
+      "transformation": "el corte se cierra y el termo vuelve a ser una sola pieza, en una sola imagen",
+      "camera": "retroceso amplio",
+      "emphasis": [],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ],
+  "scene_elements": {
+    "1": [
+      {
+        "id": "thermos",
+        "name": "closed thermos and steam",
+        "aliases": [
+          "thermos",
+          "thermos flask",
+          "flask",
+          "vacuum flask",
+          "bottle",
+          "vacuum bottle"
+        ],
+        "route": "build",
+        "source": "thermos_real (enamel shell, steel bands, rubber cap) + volume steam",
+        "frames": [
+          40,
+          200
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "thermos",
+        "name": "thermos cut open",
+        "aliases": [
+          "thermos",
+          "thermos flask",
+          "flask",
+          "vacuum flask",
+          "bottle",
+          "vacuum bottle"
+        ],
+        "route": "build",
+        "source": "thermos_real.thermos: hollow double-walled flask from lathes (enamel shell, steel inner flask), cut plane sweep",
+        "frames": [
+          70,
+          125
+        ]
+      },
+      {
+        "id": "coffee",
+        "name": "coffee inside",
+        "aliases": [
+          "coffee",
+          "tea",
+          "hot drink",
+          "drink"
+        ],
+        "route": "material",
+        "source": "real_kit.water amber liquid with absorption, meniscus",
+        "frames": [
+          70,
+          125
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "thermos",
+        "name": "thermos with glowing wall",
+        "aliases": [
+          "thermos",
+          "thermos flask",
+          "flask",
+          "vacuum flask",
+          "bottle",
+          "vacuum bottle"
+        ],
+        "route": "build",
+        "source": "thermos_real.thermos: hollow double-walled flask from lathes (enamel shell, steel inner flask), cut plane sweep",
+        "frames": [
+          60,
+          140
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "thermos",
+        "name": "thermos with the air pumped out",
+        "aliases": [
+          "thermos",
+          "thermos flask",
+          "flask",
+          "vacuum flask",
+          "bottle",
+          "vacuum bottle"
+        ],
+        "route": "build",
+        "source": "thermos_real.thermos: hollow double-walled flask from lathes (enamel shell, steel inner flask), cut plane sweep",
+        "frames": [
+          50,
+          110
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "thermos",
+        "name": "thermos with light rays",
+        "aliases": [
+          "thermos",
+          "thermos flask",
+          "flask",
+          "vacuum flask",
+          "bottle",
+          "vacuum bottle"
+        ],
+        "route": "build",
+        "source": "thermos_real.thermos: hollow double-walled flask from lathes (enamel shell, steel inner flask), cut plane sweep",
+        "frames": [
+          60,
+          120
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "thermos",
+        "name": "thermos with the lid off",
+        "aliases": [
+          "thermos",
+          "thermos flask",
+          "flask",
+          "vacuum flask",
+          "bottle",
+          "vacuum bottle"
+        ],
+        "route": "build",
+        "source": "thermos_real.thermos: hollow double-walled flask from lathes (enamel shell, steel inner flask), cut plane sweep",
+        "frames": [
+          40,
+          110
+        ]
+      }
+    ],
+    "7": [
+      {
+        "id": "thermos",
+        "name": "closing thermos",
+        "aliases": [
+          "thermos",
+          "thermos flask",
+          "flask",
+          "vacuum flask",
+          "bottle",
+          "vacuum bottle"
+        ],
+        "route": "build",
+        "source": "thermos_real.thermos: hollow double-walled flask from lathes (enamel shell, steel inner flask), cut plane sweep",
+        "frames": [
+          60,
+          240
+        ]
+      }
+    ]
+  }
+}
