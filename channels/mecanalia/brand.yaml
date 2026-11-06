@@ -276,10 +276,14 @@ render:
   profiles:
     tuned: {samples_ceiling: 128, adaptive_threshold: 0.04, min_samples: 24, denoise_gpu: true, transmission_bounces: 0, volume_bounces: 0, diffuse_bounces: 3, glossy_bounces: 4, max_bounces: 8, persistent_data: true,
       fast_gi: false}
+    transparent: {samples_ceiling: 128, adaptive_threshold: 0.04, min_samples: 24, denoise_gpu: true, transmission_bounces: 8, volume_bounces: 2, diffuse_bounces: 3, glossy_bounces: 4, max_bounces: 14,
+      persistent_data: true, fast_gi: false}
     previous: {samples_ceiling: 128, adaptive_threshold: 0.02, min_samples: 0, denoise_gpu: false, transmission_bounces: 12, volume_bounces: 0, diffuse_bounces: 4, glossy_bounces: 4, max_bounces: 6, persistent_data: false,
       fast_gi: false}
-  scene_types: {tape_02: cross_section, tape_05: exploded_housing}
-  scene_type_profiles: {cross_section: tuned, exploded_housing: tuned}
+  # transparent (lens decision 2026-11-05, every-element rule): glass, water and ice need transmission bounces (measured in the asset proof: 0 renders a glass tray black, 8 renders
+  # correctly) and a couple of volume bounces for the cloudy core of ice and the thermal glow; max_bounces is raised so the nested interfaces are not cut off.
+  scene_types: {tape_02: cross_section, tape_05: exploded_housing, hielo2_01: transparent, dedos2_01: transparent, dedos2_04: transparent, dedos2_05: transparent, dedos2_06: transparent}
+  scene_type_profiles: {cross_section: tuned, exploded_housing: tuned, transparent: transparent}
   draft_engine: eevee
 
 audio:                                # starting profile from the pilot; the clip gate keeps music out of the mix

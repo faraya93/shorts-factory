@@ -256,7 +256,7 @@ def judge_guesses(aliases: list[str], guesses: list[str], confidences: list[int]
             and all(c >= MIN_BLIND_CONFIDENCE for c in confidences))
 
 
-def blind_pack(stills: list[str]) -> tuple[Path, str]:
+def blind_pack(stills: list[str], multi: bool = False) -> tuple[Path, str]:
     """Neutral copies: a path or filename that names the object would spoil the test."""
     out = Path(tempfile.mkdtemp(prefix="blind-"))
     copies = []
@@ -267,6 +267,11 @@ def blind_pack(stills: list[str]) -> tuple[Path, str]:
         dst = out / f"view-{i + 1}{p.suffix.lower()}"
         shutil.copyfile(p, dst)
         copies.append(str(dst))
+    if multi:                       # scenes with more than one declared key element (extended gate, 2026-11-05): the reader lists what it sees, most prominent first
+        prompt = ("Look at these images and name the main things they show, as a person scrolling past on a phone would. Answer with up to three short noun phrases, most "
+                  "prominent first, then a confidence from 0 to 100 that you named them correctly. If something does not resemble anything specific, say so plainly; do "
+                  "not try to be polite. Images: " + ", ".join(copies))
+        return out, prompt
     prompt = ("Look at these images and name the single object they show, as a person scrolling past on a phone would. Answer with your first guess in one "
               "short noun phrase, then two alternatives, then a confidence from 0 to 100. If it does not resemble anything specific, say so plainly; do not "
               "try to be polite. Images: " + ", ".join(copies))
@@ -375,7 +380,7 @@ def main() -> int:
     p = sub.add_parser("new"); p.add_argument("slug"); p.add_argument("--name", required=True); p.add_argument("--alias", action="append", default=[]); p.add_argument("--family", required=True)
     p = sub.add_parser("seal"); p.add_argument("slug")
     p = sub.add_parser("check"); p.add_argument("slug", nargs="?")
-    p = sub.add_parser("blind-pack"); p.add_argument("stills", nargs="+")
+    p = sub.add_parser("blind-pack"); p.add_argument("stills", nargs="+"); p.add_argument("--multi", action="store_true")
     p = sub.add_parser("blind"); p.add_argument("slug"); p.add_argument("--guess", action="append", default=[]); p.add_argument("--confidence", action="append", type=int, default=[])
     p = sub.add_parser("element"); p.add_argument("production"); p.add_argument("scene", type=int); p.add_argument("element_id"); p.add_argument("--guess", action="append", default=[]); p.add_argument("--confidence", action="append", type=int, default=[])
     p = sub.add_parser("likeness"); p.add_argument("production"); p.add_argument("slug"); p.add_argument("--guess", action="append", default=[]); p.add_argument("--confidence", action="append", type=int, default=[])
@@ -406,7 +411,7 @@ def main() -> int:
         print(f"{'FAIL' if errors else 'OK'}: {len(errors)} errors, {len(warnings)} warnings")
         return 1 if errors else 0
     elif a.cmd == "blind-pack":
-        out, prompt = blind_pack(a.stills)
+        out, prompt = blind_pack(a.stills, a.multi)
         print(f"Neutral stills in {out}. Give this prompt, with no other context, to at least {MIN_BLIND_GUESSES} separate fresh subagents:\n\n{prompt}")
     elif a.cmd == "blind":
         ok = record_blind(a.slug, a.guess, a.confidence)

@@ -1,0 +1,521 @@
+{
+  "channel": "mecanalia-es",
+  "video": "dedos-arrugados-agua",
+  "title": "¿Por qué se arrugan tus dedos en el agua? 💧",
+  "topic_family": "body",
+  "primary_engine": "code3d",
+  "engine_reason": "Asset route for the hand (library asset, Sketchfab CC-BY), and the every-element rule for everything else: water and glass are physically based refracting materials (transparent render profile), the fingertip is a real wrinkling mesh with a subsurface wet-skin material, the cutaway is a half-revolved layer stack (skin, pulp, bone) with a branching vessel tree and a nerve built as tapering tubes, and the wet-grip beat uses two of those fingertips and a wet stone instead of a capsule and a ball. No diffusion footage.",
+  "hook_question": "¿Por qué se te arrugan los dedos en el agua?",
+  "false_belief": "La piel se empapa y se hincha de agua.",
+  "closing_reframe": "No es piel empapada: son canales de agarre que tu cuerpo enciende.",
+  "share_archetype": "ese amigo que se queda mirando sus dedos de pasa en la bañera",
+  "hero_route": "asset",
+  "library_assets": [
+    "human-hand"
+  ],
+  "structure_variant": "chain",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "hand",
+        "name": "human hand",
+        "aliases": [
+          "hand",
+          "hands",
+          "arm",
+          "fingers",
+          "mano"
+        ],
+        "route": "asset",
+        "source": "library asset human-hand (Sketchfab 'hand' by kevinruiz, CC-BY)",
+        "frames": [
+          150,
+          230
+        ]
+      },
+      {
+        "id": "water",
+        "name": "water tank",
+        "aliases": [
+          "water",
+          "glass tank",
+          "tank",
+          "aquarium",
+          "glass container",
+          "container",
+          "tray",
+          "glass tray"
+        ],
+        "route": "material",
+        "source": "real_kit.water + real_kit.glass: physically based refraction, transparent profile",
+        "frames": [
+          150,
+          230
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "finger",
+        "name": "fingertip x-ray",
+        "aliases": [
+          "finger",
+          "fingers",
+          "fingertip",
+          "fingertips",
+          "dedo",
+          "dedos",
+          "yema",
+          "x-ray",
+          "xray"
+        ],
+        "route": "build",
+        "source": "finger_rig.Fingertip with an x-ray skin window (alpha by height) and an ivory bone lathe inside",
+        "frames": [
+          120,
+          230
+        ]
+      },
+      {
+        "id": "vessels",
+        "name": "blood vessels",
+        "aliases": [
+          "blood vessel",
+          "blood vessels",
+          "vessel",
+          "vessels",
+          "vein",
+          "veins",
+          "artery",
+          "arteries",
+          "capillary",
+          "capillaries",
+          "vena",
+          "venas"
+        ],
+        "route": "build",
+        "source": "real_kit.vessel_tree: branching tapering tubes, wet subsurface material",
+        "frames": [
+          120,
+          230
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "finger",
+        "name": "wrinkled fingertip",
+        "aliases": [
+          "finger",
+          "fingers",
+          "fingertip",
+          "fingertips",
+          "dedo",
+          "dedos",
+          "yema"
+        ],
+        "route": "build",
+        "source": "finger_rig.Fingertip: real mesh deformation, subsurface skin material, nail",
+        "frames": [
+          40,
+          140
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "finger",
+        "name": "fingertips on glass",
+        "aliases": [
+          "finger",
+          "fingers",
+          "fingertip",
+          "fingertips",
+          "dedo",
+          "dedos",
+          "yema"
+        ],
+        "route": "build",
+        "source": "finger_rig.Fingertip (smooth and wrinkled)",
+        "frames": [
+          40,
+          140
+        ]
+      },
+      {
+        "id": "water",
+        "name": "water drops",
+        "aliases": [
+          "water",
+          "drop",
+          "drops",
+          "droplet",
+          "droplets",
+          "glass",
+          "pane",
+          "wet"
+        ],
+        "route": "material",
+        "source": "real_kit.water droplets and film on a real_kit.glass pane, transparent profile",
+        "frames": [
+          40,
+          140
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "finger",
+        "name": "fingertips",
+        "aliases": [
+          "finger",
+          "fingers",
+          "fingertip",
+          "fingertips",
+          "dedo",
+          "dedos",
+          "yema"
+        ],
+        "route": "build",
+        "source": "finger_rig.Fingertip pair, wet and dry",
+        "frames": [
+          50,
+          170
+        ]
+      },
+      {
+        "id": "soap",
+        "name": "bar of soap",
+        "aliases": [
+          "soap",
+          "bar of soap",
+          "soap bar",
+          "bar"
+        ],
+        "route": "build",
+        "source": "geometric (a bevelled bar) with wet subsurface material and foam spheres: a soap bar is genuinely geometric and reads instantly with its suds",
+        "frames": [
+          50,
+          170
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "finger",
+        "name": "wrinkled fingertip",
+        "aliases": [
+          "finger",
+          "fingers",
+          "fingertip",
+          "fingertips",
+          "dedo",
+          "dedos",
+          "yema"
+        ],
+        "route": "build",
+        "source": "finger_rig.Fingertip, wrinkled",
+        "frames": [
+          60,
+          200
+        ]
+      },
+      {
+        "id": "water",
+        "name": "water beads",
+        "aliases": [
+          "water",
+          "drop",
+          "drops",
+          "droplet",
+          "droplets",
+          "bead",
+          "beads"
+        ],
+        "route": "material",
+        "source": "real_kit.water beads on the grooves, transparent profile",
+        "frames": [
+          60,
+          200
+        ]
+      }
+    ]
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#1F8570",
+      "description": "ESMERALDA studio seamless: stage gradient #1F8570 to #1A6E5C, plinth #F4EFE0, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#1F8570",
+        "name": "stage top"
+      },
+      {
+        "hex": "#1A6E5C",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#F4EFE0",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#FFF1B8",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#FFF1B8",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#FFFFFF",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#FF8A7A",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "esmeralda"
+  },
+  "render_style": "dedos2-set",
+  "scene_script_prefix": "dedos2",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=esmeralda"
+  ],
+  "identity_preset": "esmeralda",
+  "caption_draft": "Si fuera agua absorbida, tu brazo también se arrugaría. No: tu sistema nervioso aprieta los vasos de la yema y la piel se pliega en surcos, en canales de drenaje, para que agarres mejor lo mojado. 💧 Envíaselo a ese amigo que se queda mirando sus dedos de pasa en la bañera.",
+  "gate_stills": {
+    "1": [
+      150
+    ],
+    "2": [
+      200
+    ],
+    "3": [
+      100
+    ],
+    "4": [
+      100
+    ],
+    "5": [
+      100
+    ],
+    "6": [
+      150
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "asset_rig",
+    "real_kit",
+    "finger_rig"
+  ],
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#26323A",
+    "reason": "Esmeralda board stays cream; the cutaway plate is a deep slate so pale tissue layers (skin, pulp, ivory bone) read against it and the gate separation holds (plate vs hero >= 20)."
+  },
+  "hero_colours": {
+    "skin": "#C98963"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "contraste",
+      "prompt": "Escena dibujada con código (esmeralda): contraste.",
+      "narration": "¿Por qué se te arrugan los dedos en el agua? Dicen que la piel se empapa y se hincha. Pero entonces, ¿por qué tu brazo no se arruga?",
+      "target_duration_s": 9,
+      "transformation": "mano y antebrazo sumergidos en agua real, lisos → solo las yemas se arrugan, el antebrazo sigue liso",
+      "camera": "órbita baja alrededor de la mano en el agua",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "brazo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SE ARRUGA",
+          "at_word": "arrugan",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "LISO",
+          "at_word": "brazo",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "orden",
+      "prompt": "Escena dibujada con código (esmeralda): orden.",
+      "narration": "Lo decide tu sistema nervioso. Tras unos minutos mojados, manda una orden, y los vasos sanguíneos de la yema se aprietan.",
+      "target_duration_s": 8,
+      "transformation": "corte de la yema con piel, pulpa y hueso: una señal baja por el nervio → los vasos se estrechan",
+      "camera": "empuje hacia dentro del corte",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "nervioso",
+        "vasos"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "NERVIO",
+          "at_word": "nervioso",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.2,
+          "y": 0.4
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "VASOS",
+          "at_word": "vasos",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "surcos",
+      "prompt": "Escena dibujada con código (esmeralda): surcos.",
+      "narration": "Con menos volumen por dentro, la piel se jala hacia adentro y se pliega en surcos.",
+      "target_duration_s": 6,
+      "transformation": "yema lisa → la pulpa pierde volumen y la piel se pliega en surcos",
+      "camera": "macro: acercamiento y giro sobre la yema",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "surcos"
+      ],
+      "data_overlays": []
+    },
+    {
+      "id": 4,
+      "name": "canales",
+      "prompt": "Escena dibujada con código (esmeralda): canales.",
+      "narration": "Y esos surcos son canales de drenaje: sacan el agua de en medio, y por eso no resbalas.",
+      "target_duration_s": 8,
+      "transformation": "una yema lisa flota sobre una película de agua → una yema con surcos expulsa el agua por los canales y toca el vidrio",
+      "camera": "travelling lateral a ras del vidrio mojado",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "canales",
+        "resbalas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CANALES",
+          "at_word": "canales",
+          "offset_s": 0.0,
+          "visible_s": 1.8,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "agarre",
+      "prompt": "Escena dibujada con código (esmeralda): agarre.",
+      "narration": "En un estudio, la gente con dedos arrugados movió objetos mojados más rápido. Con objetos secos, no hubo diferencia.",
+      "target_duration_s": 7,
+      "transformation": "dos yemas lisas dejan escapar una piedra mojada → dos yemas arrugadas la levantan",
+      "camera": "dolly lateral siguiendo la piedra",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "mojados",
+        "secos"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "MOJADO",
+          "at_word": "mojados",
+          "offset_s": 0.0,
+          "visible_s": 1.6,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (esmeralda): cierre.",
+      "narration": "Así que no es piel empapada: son canales de agarre que tu cuerpo enciende. Sígueme, y envíaselo a ese amigo que se queda mirando sus dedos de pasa en la bañera.",
+      "target_duration_s": 9,
+      "transformation": "yema arrugada con agua corriendo por sus canales, en una sola imagen",
+      "camera": "retroceso amplio",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}
