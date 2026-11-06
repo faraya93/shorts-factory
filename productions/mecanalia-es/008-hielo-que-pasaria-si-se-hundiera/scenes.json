@@ -59,7 +59,7 @@
     "2": [
       {
         "id": "ice",
-        "name": "freezing water",
+        "name": "freezing water and rising ice cubes",
         "aliases": [
           "ice",
           "ice cube",
@@ -68,10 +68,10 @@
           "hielo"
         ],
         "route": "material",
-        "source": "real_kit freezing front: water material hands over to ice material",
+        "source": "freezing front (water to ice material) in one glass; real_kit.ice_cube x3 rising in a second glass",
         "frames": [
-          90,
-          190
+          150,
+          205
         ]
       },
       {
@@ -88,8 +88,8 @@
         "route": "build",
         "source": "real_kit.tumbler",
         "frames": [
-          90,
-          190
+          150,
+          205
         ]
       }
     ],
@@ -345,7 +345,7 @@
       100
     ],
     "2": [
-      190
+      200
     ],
     "3": [
       200
@@ -393,8 +393,8 @@
       "prompt": "Escena dibujada con código (fucsia): nueve.",
       "narration": "El agua es rara: al congelarse ocupa cerca de un nueve por ciento más de espacio, y por eso el hielo pesa menos y sube.",
       "target_duration_s": 7,
-      "transformation": "un vaso medidor de agua → se congela de abajo hacia arriba y crece por encima de la marca",
-      "camera": "empuje lateral hacia la marca",
+      "transformation": "un vaso de agua se congela de abajo hacia arriba y crece por encima de la marca → en otro vaso, cubos de hielo suben y flotan",
+      "camera": "empuje al vaso que se congela, luego paneo hacia el segundo vaso y retroceso",
       "shot_type": "establishing",
       "subtitle_emphasis": [
         "nueve",

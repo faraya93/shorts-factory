@@ -19,7 +19,7 @@ were moved to `productions/_archive/retired-006-007-2026-11-03/` (never publishe
 REASSIGNED to the new batch below; any reference to an older "006/007" means the archived pair.
 | 006 | dedos-arrugados-agua | REMAKE SKIPPED (extended likeness gate blocks scenes 2 and 5; see notes.md); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
 | 007 | candado-solo-abre-su-llave | package ready (unpublished; owner review) | 2026-11-04 | |
-| 008 | hielo-que-pasaria-si-se-hundiera | REMAKE in progress (every-element rule, 2026-11-05); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
+| 008 | hielo-que-pasaria-si-se-hundiera | REMAKE SKIPPED (extended likeness gate blocks scene 2; see notes.md); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
 | 009 | termo-por-que-mantiene-el-calor | REMAKE in progress (every-element rule, 2026-11-05); the first version is archived in `_archive/retired-006-008-009-remade-2026-11-05/` as the before | 2026-11-05 | |
 | 010 | corazon-botellas-al-dia | package ready (unpublished; owner review) | 2026-11-04 | |
 | 011 | palomitas-por-que-explota-el-maiz | package ready (unpublished; owner review) | 2026-11-04 | |

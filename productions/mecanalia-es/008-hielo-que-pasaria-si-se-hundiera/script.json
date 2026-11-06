@@ -31,7 +31,7 @@
       100
     ],
     "2": [
-      190
+      200
     ],
     "3": [
       200
@@ -69,7 +69,12 @@
     "The lake is a glass box of water: no ecology is drawn.",
     "Freezing is a front that swaps the water material for the ice material along the height of one volume."
   ],
-  "status_notes": [],
+  "status_notes": [
+    "SKIPPED 2026-11-05 (unattended run): the extended likeness gate blocks scene 2, so no final render was made. Scenes 1, 3, 4, 5, 6 passed blind naming (scene 1: 92/80, 3: 85/85, 4: 85/70 on the cube-pile version, 5: 90/85, 6: 85/85); their stills show real refracting glass, water and ice cubes.",
+    "Scene 2 (water freezes and expands 9 %): five reader rounds across four stagings (a measuring glass with a freezing front; a tumbler with the front; the tumbler plus a second glass of rising cubes, twice). Readers name the glass and pink liquid (70-88) but call the frozen mass 'frosted glass' or 'ice-like texture' at 25-55, below the floor of 60. The frozen glass of water reads as frosted glass, not ice.",
+    "Earlier rounds on scenes 4 and 5 failed (15/25 and 35/50) while the ice was a smooth slab or a cloudy block (read as mist); replacing it by piles of real cubes took both to 70-90. That is the likely fix for scene 2 too: show the 9 % growth with cubes (a tray of cubes standing above the mark) instead of a freezing front.",
+    "Everything needed to resume exists: scene scripts hielo2_01..06, real_kit.py (freezing front, ice cube, tumbler), scenes.json with scene_elements, narration audio. To resume: restage scene 2 with cubes, `gate.py run`, `gate.py stills`, blind-name, then tools/chain_render2.sh. Note the gate records of the other scenes go stale whenever real_kit.py changes; re-name them."
+  ],
   "scenes": [
     {
       "name": "flota",
@@ -87,8 +92,8 @@
       "name": "nueve",
       "target_duration_s": 7,
       "narration": "El agua es rara: al congelarse ocupa cerca de un nueve por ciento más de espacio, y por eso el hielo pesa menos y sube.",
-      "transformation": "un vaso medidor de agua → se congela de abajo hacia arriba y crece por encima de la marca",
-      "camera": "empuje lateral hacia la marca",
+      "transformation": "un vaso de agua se congela de abajo hacia arriba y crece por encima de la marca → en otro vaso, cubos de hielo suben y flotan",
+      "camera": "empuje al vaso que se congela, luego paneo hacia el segundo vaso y retroceso",
       "emphasis": [
         "nueve",
         "sube"
@@ -208,7 +213,7 @@
     "2": [
       {
         "id": "ice",
-        "name": "freezing water",
+        "name": "freezing water and rising ice cubes",
         "aliases": [
           "ice",
           "ice cube",
@@ -217,10 +222,10 @@
           "hielo"
         ],
         "route": "material",
-        "source": "real_kit freezing front: water material hands over to ice material",
+        "source": "freezing front (water to ice material) in one glass; real_kit.ice_cube x3 rising in a second glass",
         "frames": [
-          90,
-          190
+          150,
+          205
         ]
       },
       {
@@ -237,8 +242,8 @@
         "route": "build",
         "source": "real_kit.tumbler",
         "frames": [
-          90,
-          190
+          150,
+          205
         ]
       }
     ],
