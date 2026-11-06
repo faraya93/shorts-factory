@@ -6,9 +6,9 @@
       "mode": "final",
       "frames": 277,
       "fal_spend_usd": 0.0,
-      "render_seconds": 709.6,
+      "render_seconds": 1041.8,
       "clip": "clips/scene-01.mp4",
-      "timestamp": "2026-11-05T08:03:50+00:00"
+      "timestamp": "2026-11-06T06:28:37+00:00"
     },
     {
       "scene": 2,
@@ -16,9 +16,9 @@
       "mode": "final",
       "frames": 206,
       "fal_spend_usd": 0.0,
-      "render_seconds": 532.9,
+      "render_seconds": 847.4,
       "clip": "clips/scene-02.mp4",
-      "timestamp": "2026-11-05T08:12:44+00:00"
+      "timestamp": "2026-11-06T06:42:46+00:00"
     },
     {
       "scene": 3,
@@ -26,9 +26,9 @@
       "mode": "final",
       "frames": 196,
       "fal_spend_usd": 0.0,
-      "render_seconds": 503.9,
+      "render_seconds": 863.9,
       "clip": "clips/scene-03.mp4",
-      "timestamp": "2026-11-05T08:21:09+00:00"
+      "timestamp": "2026-11-06T06:57:11+00:00"
     },
     {
       "scene": 4,
@@ -36,9 +36,9 @@
       "mode": "final",
       "frames": 132,
       "fal_spend_usd": 0.0,
-      "render_seconds": 320.8,
+      "render_seconds": 904.7,
       "clip": "clips/scene-04.mp4",
-      "timestamp": "2026-11-05T08:26:31+00:00"
+      "timestamp": "2026-11-06T07:12:17+00:00"
     },
     {
       "scene": 5,
@@ -46,9 +46,9 @@
       "mode": "final",
       "frames": 237,
       "fal_spend_usd": 0.0,
-      "render_seconds": 601.4,
+      "render_seconds": 1790.6,
       "clip": "clips/scene-05.mp4",
-      "timestamp": "2026-11-05T08:36:33+00:00"
+      "timestamp": "2026-11-06T07:42:10+00:00"
     },
     {
       "scene": 6,
@@ -56,9 +56,9 @@
       "mode": "final",
       "frames": 301,
       "fal_spend_usd": 0.0,
-      "render_seconds": 771.2,
+      "render_seconds": 841.3,
       "clip": "clips/scene-06.mp4",
-      "timestamp": "2026-11-05T08:49:26+00:00"
+      "timestamp": "2026-11-06T07:56:13+00:00"
     }
   ]
 }

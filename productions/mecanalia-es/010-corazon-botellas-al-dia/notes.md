@@ -9,12 +9,12 @@ Modelo 3D del corazón: "Human Heart 3D Model | Anatomy | Medical Project" de Me
 - **Hashtags (description, not title):** #corazon #latidos #curiosidades #shorts
 
 ## Script (6 scenes, family numbers) and visual per line
-1 hook: ¿Cuántas botellas de agua bombea tu corazón en un solo día? Más de tres mil. Y no se toma ni un descanso, ni siquiera cuando duermes.  (un corazón late solo → una primera botella aparece a su lado; camera: órbita lenta alrededor del corazón)
-2 latido: Cada latido empuja apenas un vasito de sangre, unos setenta mililitros, y late unas setenta veces cada minuto.  (el corazón se contrae → un vasito se llena; camera: acercamiento al corazón con cada latido)
-3 minuto: En un minuto, ya son cinco litros: dos botellas y media de dos litros, y la cuenta apenas empieza.  (un vasito → dos botellas y media; camera: retroceso suave)
-4 hora: En una hora, trescientos litros: ciento cincuenta botellas.  (dos botellas y media → una pared de ciento cincuenta botellas; camera: retroceso amplio)
-5 dia: Y en un día entero, más de siete mil litros: tres mil seiscientas botellas, un edificio de botellas, mientras tú ni lo notas.  (una pared de botellas → una torre gigante de tres mil seiscientas botellas; camera: retroceso muy amplio hasta ver la torre completa)
-6 cierre: Así que no es solo un músculo: es una bomba que nunca descansa. Sígueme, y envíaselo a ese amigo que se pone la mano en el pecho después de subir las escaleras.  (la torre de botellas → vuelve el corazón solo, latiendo; camera: acercamiento final al corazón)
+1 hook: ¿Cuántas botellas de agua bombea tu corazón en un solo día? Más de tres mil. Y no se toma ni un descanso, ni siquiera cuando duermes.  (un corazón late y, por un tubo, una gota de sangre sube a una botella que empieza a llenarse; camera: órbita desde el corazón hacia la botella)
+2 latido: Cada latido empuja apenas un vasito de sangre, unos setenta mililitros, y late unas setenta veces cada minuto.  (el corazón se contrae → un chorro llena un vasito hasta la marca de setenta mililitros; camera: empuje al corazón y paneo al vasito)
+3 minuto: En un minuto, ya son cinco litros: dos botellas y media de dos litros, y la cuenta apenas empieza.  (un vasito → dos botellas y media se llenan una tras otra; camera: retroceso suave subiendo)
+4 hora: En una hora, trescientos litros: ciento cincuenta botellas.  (dos botellas y media → una pared de ciento cincuenta botellas crece alrededor del corazón; camera: travelling a lo largo de la pared que crece)
+5 dia: Y en un día entero, más de siete mil litros: tres mil seiscientas botellas, un edificio de botellas, mientras tú ni lo notas.  (la pared → una torre de botellas que sube por encima del corazón; camera: ascenso vertical a lo largo de la torre)
+6 cierre: Así que no es solo un músculo: es una bomba que nunca descansa. Sígueme, y envíaselo a ese amigo que se pone la mano en el pecho después de subir las escaleras.  (la torre se disuelve y vuelve el corazón solo, latiendo; camera: acercamiento final con órbita)
 Hook formula: ¿Cuántas botellas de agua bombea tu corazón en un solo día? | false belief: (none: numbers/what-if) | reframe: No es solo un músculo: es una bomba que nunca descansa. | share archetype: ese amigo que se pone la mano en el pecho después de subir las escaleras
 
 ## Identity
@@ -22,9 +22,9 @@ Hook formula: ¿Cuántas botellas de agua bombea tu corazón en un solo día? | 
 - Support colours: {"board": "#FFF3E0", "plate": "#FFF3E0"}: Celeste defaults (cream board and plate; plinth navy #2B4C70). The red heart separates from the light-blue stage by hue; the accent is deep violet.
 
 ## Lens decisions
-- Design (lead): the owner's input about skin and organ tones on Coral: the heart stands on a cool light-blue stage, retinted a clean saturated red, smooth, no wet tissue; no blood is shown, only water-like bottles carry the volume.
-- Scriptwriter: numbers family, `scale`: one unit (a beat, 70 ml) multiplied through minute, hour, day, payoff in bottles of 2 litres (an object everyone has held); the old script's vague 'bottles a day' becomes a countable chain of figures that agree with each other (70 beats x 70 ml = 4.9 L, about 5 L; x 60 = 300 L; x 24 = 7200 L = 3600 bottles).
-- Marketing: hook formula '¿Cuántas...?' about a tangible object (a bottle); archetype is a behaviour (hand on chest after the stairs); every number is a counter on the spoken word.
+- Design (lead): owner rules 2026-11-05. The heart stays (approved); bottles and the liquid are real refracting materials; the heart gets a visible pumping tube.
+- Scriptwriter: same narration and numbers; the escalation is a thing the viewer travels along (wall, tower), not a number rising.
+- Marketing: dynamism hard bar; six distinct framings; archetype unchanged.
 
 ## Sources and numbers (no number is invented; none is rendered as a source on screen)
 - Heart output at rest about 5 L/min; stroke volume about 70 mL; about 70 beats/min (standard physiology references, e.g. American Heart Association / textbook values). FLAGGED: rounded textbook figures, individual values vary; the video says 'unos' and 'más de'.
@@ -32,8 +32,8 @@ Hook formula: ¿Cuántas botellas de agua bombea tu corazón en un solo día? | 
 - Hero: Sketchfab 'Human Heart 3D Model | Anatomy | Medical Project' by Mesh-Magnet, CC Attribution (assets/library/human-heart).
 
 ## Scientific simplifications and deviations (stated plainly)
-- The heart beats by a scale pulse; its chambers do not move separately (single-mesh asset).
-- Bottles are stylised and drawn at a convenient size relative to the heart.
-- No blood is drawn: water-like bottles stand for the volume.
+- The tower draws about 1,000 bottles, not 3,600 (cost); the number is spoken and shown as a counter.
+- The pumping is choreographed with slugs along a tube, not a fluid simulation; blood volume is shown as red liquid in clear bottles, stylised.
+- Heart size is not to scale with the bottles.
 
 ## Build log

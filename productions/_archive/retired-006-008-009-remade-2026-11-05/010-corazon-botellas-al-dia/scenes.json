@@ -1,0 +1,296 @@
+{
+  "channel": "mecanalia-es",
+  "video": "corazon-botellas-al-dia",
+  "title": "¿Cuántas botellas bombea tu corazón al día? ❤️",
+  "topic_family": "numbers",
+  "primary_engine": "code3d",
+  "engine_reason": "Asset route: the heart is the library asset 'human-heart' (Sketchfab, CC-BY), clean anatomical model look, no gore. Bottles are geometric supporting props (swarms). One unit multiplied with a pull-back at each step (scale).",
+  "hook_question": "¿Cuántas botellas de agua bombea tu corazón en un solo día?",
+  "false_belief": "",
+  "closing_reframe": "No es solo un músculo: es una bomba que nunca descansa.",
+  "share_archetype": "ese amigo que se pone la mano en el pecho después de subir las escaleras",
+  "hero_route": "asset",
+  "library_assets": [
+    "human-heart"
+  ],
+  "structure_variant": "scale",
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#8FD6F2",
+      "description": "CELESTE (round-1 proposal) studio seamless: stage gradient #8FD6F2 to #62B4DC, plinth #2B4C70, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#8FD6F2",
+        "name": "stage top"
+      },
+      {
+        "hex": "#62B4DC",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#2B4C70",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#5A1AA0",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#5A1AA0",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#0B2540",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#C92A2A",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "celeste"
+  },
+  "render_style": "latido-set",
+  "scene_script_prefix": "latido",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=celeste"
+  ],
+  "identity_preset": "celeste",
+  "caption_draft": "Cada latido empuja unos 70 mililitros. En un minuto son cinco litros, en una hora trescientos y en un día más de siete mil: unas 3.600 botellas de dos litros. ❤️ Envíaselo a ese amigo que se pone la mano en el pecho después de subir las escaleras.",
+  "gate_stills": {
+    "1": [
+      100
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      100
+    ],
+    "4": [
+      110
+    ],
+    "5": [
+      200
+    ],
+    "6": [
+      260
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "asset_rig",
+    "bottle_rig"
+  ],
+  "support_colours": {
+    "board": "#FFF3E0",
+    "plate": "#FFF3E0",
+    "reason": "Celeste defaults (cream board and plate; plinth navy #2B4C70). The red heart separates from the light-blue stage by hue; the accent is deep violet."
+  },
+  "hero_colours": {
+    "heart_skin": "#C8323C"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (celeste): hook.",
+      "narration": "¿Cuántas botellas de agua bombea tu corazón en un solo día? Más de tres mil. Y no se toma ni un descanso, ni siquiera cuando duermes.",
+      "target_duration_s": 8,
+      "transformation": "un corazón late solo → una primera botella aparece a su lado",
+      "camera": "órbita lenta alrededor del corazón",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "botellas",
+        "tres"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "3600",
+          "from": 0,
+          "at_word": "tres",
+          "offset_s": 0.0,
+          "duration_s": 2.0,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "latido",
+      "prompt": "Escena dibujada con código (celeste): latido.",
+      "narration": "Cada latido empuja apenas un vasito de sangre, unos setenta mililitros, y late unas setenta veces cada minuto.",
+      "target_duration_s": 6,
+      "transformation": "el corazón se contrae → un vasito se llena",
+      "camera": "acercamiento al corazón con cada latido",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "latido",
+        "setenta"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "70 ml",
+          "from": 0,
+          "at_word": "setenta",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "minuto",
+      "prompt": "Escena dibujada con código (celeste): minuto.",
+      "narration": "En un minuto, ya son cinco litros: dos botellas y media de dos litros, y la cuenta apenas empieza.",
+      "target_duration_s": 7,
+      "transformation": "un vasito → dos botellas y media",
+      "camera": "retroceso suave",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "minuto",
+        "cinco"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "5 L",
+          "from": 0,
+          "at_word": "cinco",
+          "offset_s": 0.0,
+          "duration_s": 1.0,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "hora",
+      "prompt": "Escena dibujada con código (celeste): hora.",
+      "narration": "En una hora, trescientos litros: ciento cincuenta botellas.",
+      "target_duration_s": 6,
+      "transformation": "dos botellas y media → una pared de ciento cincuenta botellas",
+      "camera": "retroceso amplio",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "hora",
+        "trescientos"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "300 L",
+          "from": 0,
+          "at_word": "trescientos",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "dia",
+      "prompt": "Escena dibujada con código (celeste): dia.",
+      "narration": "Y en un día entero, más de siete mil litros: tres mil seiscientas botellas, un edificio de botellas, mientras tú ni lo notas.",
+      "target_duration_s": 8,
+      "transformation": "una pared de botellas → una torre gigante de tres mil seiscientas botellas",
+      "camera": "retroceso muy amplio hasta ver la torre completa",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "día",
+        "siete"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "7200 L",
+          "from": 0,
+          "at_word": "siete",
+          "offset_s": 0.0,
+          "duration_s": 1.6,
+          "visible_s": 3.4,
+          "x": 0.5,
+          "y": 0.42
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (celeste): cierre.",
+      "narration": "Así que no es solo un músculo: es una bomba que nunca descansa. Sígueme, y envíaselo a ese amigo que se pone la mano en el pecho después de subir las escaleras.",
+      "target_duration_s": 9,
+      "transformation": "la torre de botellas → vuelve el corazón solo, latiendo",
+      "camera": "acercamiento final al corazón",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "envíaselo",
+          "duration_s": 2.6,
+          "x": 0.5,
+          "y": 0.84
+        }
+      ]
+    }
+  ]
+}
