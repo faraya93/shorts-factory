@@ -74,7 +74,7 @@ graph LR
 ### Multi-lens protocol (one lead per stage; no artefact is approved by a single lens)
 | stage | lead | consulted | note |
 |---|---|---|---|
-| topic | marketing (marketingskills + social-media-skills) | scriptwriter | criterion: maximise expected views on recorded evidence within the channel's family mix; design vetoes only on feasibility |
+| topic | marketing (marketingskills + social-media-skills) | scriptwriter | criterion: maximise expected views on recorded evidence within the channel's family mix; every proposal passes the curiosity test and the one-line hook test (CLAUDE.md "Topic selection", owner 2026-11-07); design vetoes only on feasibility |
 | script | scriptwriter (yt-* kit, short-form-video-script, hook-writer) | marketing, design | |
 | scene design | design (Tastemaker, design-taste-frontend) | scriptwriter, marketing | composition gate is the mechanical check |
 | publish package | marketing | | texts come from the channel package (`publish` block) |
