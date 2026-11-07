@@ -277,7 +277,7 @@
         "source": "thermos_real.thermos: hollow double-walled flask from lathes (enamel shell, steel inner flask), cut plane sweep",
         "frames": [
           70,
-          125
+          85
         ]
       },
       {
@@ -292,8 +292,8 @@
         "route": "material",
         "source": "real_kit.water amber liquid with absorption, meniscus",
         "frames": [
-          70,
-          125
+          135,
+          155
         ]
       }
     ],

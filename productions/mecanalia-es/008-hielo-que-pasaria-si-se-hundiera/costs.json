@@ -1,0 +1,64 @@
+{
+  "entries": [
+    {
+      "scene": 1,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 230,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 3613.8,
+      "clip": "clips/scene-01.mp4",
+      "timestamp": "2026-11-06T16:29:05+00:00"
+    },
+    {
+      "scene": 2,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 214,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 1796.3,
+      "clip": "clips/scene-02.mp4",
+      "timestamp": "2026-11-06T16:59:03+00:00"
+    },
+    {
+      "scene": 3,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 213,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 4079.1,
+      "clip": "clips/scene-03.mp4",
+      "timestamp": "2026-11-06T18:07:03+00:00"
+    },
+    {
+      "scene": 4,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 217,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 12664.7,
+      "clip": "clips/scene-04.mp4",
+      "timestamp": "2026-11-06T21:38:10+00:00"
+    },
+    {
+      "scene": 5,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 206,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 5348.9,
+      "clip": "clips/scene-05.mp4",
+      "timestamp": "2026-11-06T23:07:21+00:00"
+    },
+    {
+      "scene": 6,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 283,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 3055.2,
+      "clip": "clips/scene-06.mp4",
+      "timestamp": "2026-11-06T23:58:18+00:00"
+    }
+  ]
+}
