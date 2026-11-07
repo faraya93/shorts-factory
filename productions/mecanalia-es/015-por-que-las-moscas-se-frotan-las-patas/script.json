@@ -1,0 +1,162 @@
+{
+  "video": "por-que-las-moscas-se-frotan-las-patas",
+  "status": "script stage (topic slate 2026-11-07). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (stage colour = complement of the hero's hue, composition gate), as in 006-011.",
+  "slate": "docs/current/reports/topic-slate-2026-11-07.md",
+  "title": "¿Por qué las moscas se frotan las patas? 🤢",
+  "topic_family": "objects",
+  "structure_variant": "journey",
+  "curiosity_score": 9,
+  "curiosity_reason": "Everyone has watched a fly rub its legs on their food and joked it is 'planning something'; the answer (taste with the feet, spit to eat) is gross and hidden.",
+  "hook_question": "¿Por qué las moscas se frotan las patas?",
+  "false_belief": "Se están lavando las manos antes de comer, así que no ensucian.",
+  "turn": "Scene 5: the rubbing was never hygiene for you; a study found hundreds of bacterial species on flies, the most on the legs.",
+  "closing_reframe": "No se está lavando las manos: es una catadora que viene de la basura y escupe en tu plato.",
+  "share_archetype": "ese amigo que espanta la mosca con la mano y sigue comiendo como si nada",
+  "engine_reason": "code3d on the asset route: a housefly asset (animals are allowed when the asset route supplies them), food and trash props from libraries. Family: objects (a thing the viewer sees every day; marketing judgement, the brand promise is 'the things you see and use every day').",
+  "library_assets": [
+    "housefly (to search: Sketchfab, check licence per model; legs detail needed for macro)",
+    "bread or a plate of food (to search)",
+    "trash bag / bin with a fruit peel (to search)"
+  ],
+  "description": "Las moscas sienten el sabor con las patas, por eso se las frotan: limpian sus sensores, no tu comida. Y como no pueden masticar, escupen un jugo que deshace lo que van a comer. 🤢 Envíaselo a ese amigo que espanta la mosca con la mano y sigue comiendo como si nada.",
+  "hashtags": [
+    "#moscas",
+    "#insectos",
+    "#comofunciona",
+    "#shorts"
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué las moscas se frotan las patas? Parece que se lavan las manos antes de comer, como tú. Pero mira de dónde viene esta.",
+      "what_changes": "A fly on the rim of a plate rubs its front legs; on 'de dónde viene' the shot rewinds out of the kitchen.",
+      "transformation": "mosca quieta en el plato → se frota las patas → la escena se rebobina",
+      "camera": "macro que orbita a la mosca y sale en barrido rápido",
+      "overlays_plan": [
+        "tag ¿LAVÁNDOSE? at 'lavan'"
+      ],
+      "elements": [
+        {
+          "name": "housefly",
+          "route": "asset search",
+          "risk": "low: flies read instantly"
+        },
+        {
+          "name": "plate of food",
+          "route": "library",
+          "risk": "low"
+        }
+      ],
+      "est_duration_s": 8.6
+    },
+    {
+      "name": "basura",
+      "narration": "Hace un minuto estaba en la basura. Sus patas tienen pelitos y almohadillas pegajosas, y casi todo lo que pisa se le queda pegado.",
+      "what_changes": "The fly walks across a rotting peel in an open trash bag; particles stick to its leg hairs and pads, which go from clean to coated.",
+      "transformation": "patas limpias → patas cubiertas de partículas al caminar sobre la basura",
+      "camera": "travelling a ras de suelo junto a las patas",
+      "overlays_plan": [
+        "tag ALMOHADILLAS with leader line at 'almohadillas'"
+      ],
+      "elements": [
+        {
+          "name": "trash bag with peel",
+          "route": "library",
+          "risk": "low"
+        },
+        {
+          "name": "fly leg macro (hairs, pads)",
+          "route": "asset detail or a built leg",
+          "risk": "medium: asset legs may be low detail"
+        }
+      ],
+      "est_duration_s": 8.3
+    },
+    {
+      "name": "sensores",
+      "narration": "Y con esas patas saborea: tiene sensores de sabor en los pies. Si se ensucian, no siente nada. Por eso se las frota: no es higiene, está afinando su paladar.",
+      "what_changes": "X-ray of the leg: taste sensors light up in the accent colour, go dark when coated, then the fly rubs and they relight.",
+      "transformation": "sensores encendidos → se apagan cubiertos de suciedad → la mosca se frota y se vuelven a encender",
+      "camera": "empuje dentro de la pata y retroceso al frotarse",
+      "elements": [
+        {
+          "name": "sensors in the leg",
+          "route": "emissive points on the leg asset (energy graphic in the scene's realism)",
+          "risk": "low with the leg in frame"
+        }
+      ],
+      "est_duration_s": 10.3
+    },
+    {
+      "name": "escupe",
+      "narration": "Aterriza en tu comida y la prueba con los pies. Como no puede masticar, le escupe encima un jugo que la deshace.",
+      "what_changes": "The fly lands on your bread, taps it, and a drop of saliva comes out and melts a small patch of the crumb.",
+      "transformation": "pan firme → una gota cae y deshace una mancha del pan",
+      "camera": "picado que baja desde la ventana hasta el pan siguiendo el aterrizaje",
+      "elements": [
+        {
+          "name": "saliva drop on bread",
+          "route": "liquid material, tiny volume",
+          "risk": "medium: must read as a drop, context = fly mouth on bread"
+        }
+      ],
+      "est_duration_s": 7.6
+    },
+    {
+      "name": "giro",
+      "narration": "Luego lo sorbe con una boca que funciona como esponja. Y en las moscas, un estudio encontró más de seiscientos tipos de bacterias, y las patas eran donde más había.",
+      "what_changes": "The turn: the sponge mouth sucks up the melted patch; then the camera drops to the legs, and the particles from the trash are now on your food.",
+      "transformation": "mancha deshecha → la mosca la sorbe → quedan en el pan las partículas que traía en las patas",
+      "camera": "primer plano de la boca que baja hasta las patas sobre el pan",
+      "overlays_plan": [
+        "counter 600+ at 'seiscientos'"
+      ],
+      "elements": [
+        {
+          "name": "sponging mouthparts",
+          "route": "asset detail or built",
+          "risk": "medium"
+        }
+      ],
+      "est_duration_s": 10.3
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que no se está lavando las manos: es una catadora que viene de la basura y escupe en tu plato. Envíaselo a ese amigo que espanta la mosca con la mano y sigue comiendo como si nada.",
+      "what_changes": "Single reframe image: the fly takes off, and its whole route traces back from your plate to the trash bag in one line as the camera pulls out of the kitchen.",
+      "transformation": "mosca en el plato → despega y su ruta queda trazada desde la basura hasta tu plato",
+      "camera": "retroceso amplio desde el plato hasta la cocina entera",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 13.1
+    }
+  ],
+  "sources": [
+    "Taste sensors on the tarsi (feet), grooming to keep sensory hairs clean, sponging mouthparts and regurgitating saliva onto solid food: standard insect physiology for Musca domestica; FLAGGED, not yet verified live in this session; cite an entomology source before the beat sheet is final.",
+    "Bacteria: Junqueira et al. 2017, Scientific Reports 7:16324, 'The microbiomes of blowflies and houseflies as bacterial transmission reservoirs': 116 flies on three continents, more than 600 bacterial species reported; legs and wings showed the highest microbial diversity. Verified (abstract and Phys.org coverage). Covers blowflies and houseflies together; the narration says 'en las moscas'."
+  ],
+  "simplifications": [
+    "Sensors are drawn as glowing points; real taste sensilla are hairs.",
+    "The fly is enlarged; saliva volume is exaggerated."
+  ],
+  "narration_words": 169,
+  "est_duration_s": 58.3,
+  "duration_band_s": [
+    45,
+    60
+  ],
+  "flatness_test": [
+    "1. hook: A fly on the rim of a plate rubs its front legs; on 'de dónde viene' the shot rewinds out of the kitchen.",
+    "2. basura: The fly walks across a rotting peel in an open trash bag; particles stick to its leg hairs and pads, which go from clean to coated.",
+    "3. sensores: X-ray of the leg: taste sensors light up in the accent colour, go dark when coated, then the fly rubs and they relight.",
+    "4. escupe: The fly lands on your bread, taps it, and a drop of saliva comes out and melts a small patch of the crumb.",
+    "5. giro: The turn: the sponge mouth sucks up the melted patch; then the camera drops to the legs, and the particles from the trash are now on your food.",
+    "6. cierre: Single reframe image: the fly takes off, and its whole route traces back from your plate to the trash bag in one line as the camera pulls out of the kitchen."
+  ]
+}

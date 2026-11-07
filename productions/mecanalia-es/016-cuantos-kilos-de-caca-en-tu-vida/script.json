@@ -1,0 +1,166 @@
+{
+  "video": "cuantos-kilos-de-caca-en-tu-vida",
+  "status": "script stage (topic slate 2026-11-07). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (stage colour = complement of the hero's hue, composition gate), as in 006-011.",
+  "slate": "docs/current/reports/topic-slate-2026-11-07.md",
+  "title": "¿Cuántos kilos de caca haces en toda tu vida? 😳",
+  "topic_family": "numbers",
+  "structure_variant": "scale",
+  "curiosity_score": 9,
+  "curiosity_reason": "Gross plus enormous, the two strongest tensions; the sequel in spirit to 005, and nobody has done the arithmetic.",
+  "hook_question": "¿Cuántos kilos de caca haces en toda tu vida?",
+  "false_belief": "Es poca cosa, y es comida que no digeriste.",
+  "turn": "Scene 5: the pile is not food leftovers; three quarters is water and up to half of the solid part is gut bacteria.",
+  "closing_reframe": "Tu caca no es basura de comida: es agua y bacterias, más que dos autos en toda una vida.",
+  "share_archetype": "ese amigo que entra al baño con el celular y sale media hora después",
+  "engine_reason": "code3d: numbers/scale spectacle. The stool unit is a stylised smooth log instanced into piles (matte, no wet texture: the gross stays conceptual); the toilet stays in frame in every scale step as the context cue; comparison objects (suitcases, horse, cars) from libraries.",
+  "library_assets": [
+    "toilet (005 toilet_rig or CC0)",
+    "kitchen scale (to search)",
+    "two suitcases (to search)",
+    "horse (to search: animal via asset route)",
+    "two cars (to search)"
+  ],
+  "description": "En un día, unos 128 gramos. En un año, como dos maletas de avión. En toda una vida, más que dos autos juntos. Y casi nada es comida: tres cuartas partes son agua, y de lo sólido, hasta la mitad son bacterias. 😳 Envíaselo a ese amigo que entra al baño con el celular y sale media hora después.",
+  "hashtags": [
+    "#caca",
+    "#cuerpohumano",
+    "#curiosidades",
+    "#shorts"
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Cuántos kilos de caca haces en toda tu vida? Parece poca cosa: en un día, en promedio, unos ciento veintiocho gramos. Ahora súmalo.",
+      "what_changes": "One stylised stool log appears on a kitchen scale next to a toilet; the scale reads 128 g.",
+      "transformation": "báscula vacía junto al inodoro → aparece una pieza y la báscula marca",
+      "camera": "primer plano a la altura de la báscula con leve órbita",
+      "overlays_plan": [
+        "counter 128 g (mono, from 0) at 'ciento'"
+      ],
+      "elements": [
+        {
+          "name": "stool unit on a scale beside a toilet",
+          "route": "built stylised unit; toilet as context cue",
+          "risk": "medium: stylised log must read as poop; the toilet carries it"
+        }
+      ],
+      "est_duration_s": 7.9
+    },
+    {
+      "name": "anio",
+      "narration": "Pero no para nunca. En un año ya son cerca de cuarenta y siete kilos: como dos maletas llenas para un viaje en avión.",
+      "what_changes": "Days flip by and units rain onto the scale until it is buried; two packed suitcases slide in beside the pile for comparison.",
+      "transformation": "una pieza → un montón que entierra la báscula, junto a dos maletas",
+      "camera": "retroceso con subida mientras crece el montón",
+      "overlays_plan": [
+        "counter 47 kg at 'cuarenta'",
+        "chip 2 × 23 kg at 'maletas'"
+      ],
+      "elements": [
+        {
+          "name": "suitcases",
+          "route": "library",
+          "risk": "low"
+        }
+      ],
+      "est_duration_s": 8.3
+    },
+    {
+      "name": "decada",
+      "narration": "En diez años, ya es casi media tonelada: lo mismo que pesa un caballo.",
+      "what_changes": "The pile swells into a mound next to the toilet; a horse walks in and stands beside it, the mound matching its size.",
+      "transformation": "montón de 47 kg → montículo de media tonelada junto a un caballo",
+      "camera": "travelling lateral a lo largo del montículo hasta el caballo",
+      "overlays_plan": [
+        "counter 470 kg at 'media'"
+      ],
+      "elements": [
+        {
+          "name": "horse",
+          "route": "asset search",
+          "risk": "low"
+        }
+      ],
+      "est_duration_s": 4.8
+    },
+    {
+      "name": "vida",
+      "narration": "Y en una vida de unos setenta y cinco años, más de tres toneladas y media de caca: más que dos autos juntos.",
+      "what_changes": "The mound becomes a hill that dwarfs the toilet; two cars roll up and are outweighed on a giant balance.",
+      "transformation": "montículo → colina que supera a dos autos en una balanza gigante",
+      "camera": "grúa que sube hasta un plano cenital del conjunto",
+      "overlays_plan": [
+        "counter 3.500 kg at 'tres'",
+        "chip 75 AÑOS at 'setenta'"
+      ],
+      "elements": [
+        {
+          "name": "two cars on a giant balance",
+          "route": "library cars + geometric balance",
+          "risk": "low"
+        }
+      ],
+      "est_duration_s": 7.9
+    },
+    {
+      "name": "giro",
+      "narration": "Pero ojo: no es comida que sobró. Tres cuartas partes son agua. Y de lo sólido, hasta la mitad son bacterias que vivían en tu intestino.",
+      "what_changes": "The turn: the hill splits: three quarters drains away as water into a tank; the solid remainder separates and half of it turns yellow-green (biology colour) for bacteria.",
+      "transformation": "colina marrón → se separa en un gran tanque de agua y un bloque sólido, la mitad teñida de verde amarillento",
+      "camera": "órbita a media altura alrededor de la separación",
+      "overlays_plan": [
+        "bar 75 % AGUA at 'agua'",
+        "bar HASTA 50 % BACTERIAS at 'bacterias'"
+      ],
+      "elements": [
+        {
+          "name": "water tank",
+          "route": "geometric tank + water material (minimal transmission)",
+          "risk": "low"
+        }
+      ],
+      "est_duration_s": 9.0
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que tu caca no es basura de comida: es agua y bacterias, más que dos autos en toda una vida. Envíaselo a ese amigo que entra al baño con el celular y sale media hora después.",
+      "what_changes": "Single reframe image: the camera pulls back from the toilet to show the water tank, the bacteria block and the cars as one tableau.",
+      "transformation": "primer plano del inodoro → el inodoro diminuto frente al tanque, el bloque y los autos",
+      "camera": "retroceso amplio y lento desde el inodoro",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 12.8
+    }
+  ],
+  "sources": [
+    "128 g per day (median wet mass) and about 75 % water; bacterial biomass 25-54 % of dry solids: Rose, Parker, Jefferson & Cartmell 2015, Critical Reviews in Environmental Science and Technology 45:1827-1879, 'The Characterization of Feces and Urine'. Verified (PMC4500995 abstract). Note: median, not mean (a popular video used the mean, 149 g).",
+    "Arithmetic (ours, stated as approximate): 128 g x 365 = 46.7 kg/year; x 10 = 467 kg; x 75 years = 3,504 kg. 75 years is an assumed lifespan, said in the narration.",
+    "Comparisons, FLAGGED as general reference values to confirm: airline checked bag limit 23 kg (2 bags = 46 kg); adult horse about 400-550 kg; compact car about 1.1-1.4 t, so two cars < 3.5 t.",
+    "'Tres cuartas partes son agua': Rose et al. 2015 (median water content ~75 %)."
+  ],
+  "simplifications": [
+    "Daily output varies widely with diet; the median is used.",
+    "The stool is a stylised matte unit, deliberately not realistic.",
+    "Water drains out as a separate volume for illustration; it is not literally separable."
+  ],
+  "narration_words": 147,
+  "est_duration_s": 50.7,
+  "duration_band_s": [
+    50,
+    60
+  ],
+  "flatness_test": [
+    "1. hook: One stylised stool log appears on a kitchen scale next to a toilet; the scale reads 128 g.",
+    "2. anio: Days flip by and units rain onto the scale until it is buried; two packed suitcases slide in beside the pile for comparison.",
+    "3. decada: The pile swells into a mound next to the toilet; a horse walks in and stands beside it, the mound matching its size.",
+    "4. vida: The mound becomes a hill that dwarfs the toilet; two cars roll up and are outweighed on a giant balance.",
+    "5. giro: The turn: the hill splits: three quarters drains away as water into a tank; the solid remainder separates and half of it turns yellow-green (biology colour) for bacteria.",
+    "6. cierre: Single reframe image: the camera pulls back from the toilet to show the water tank, the bacteria block and the cars as one tableau."
+  ]
+}
