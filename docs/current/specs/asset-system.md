@@ -66,7 +66,7 @@ The hero rule was too narrow: the remade 006-011 batch had approved heroes next 
 3. A code primitive only when the real thing is genuinely geometric and reads instantly. Say why in `source`.
 Flat-colour stand-ins are banned for organic, liquid and real-world elements. Energy and signal graphics (heat, nerve pulses) use a language consistent with the scene's realism (volumetric, emissive or particle based), never flat dots.
 
-**Extended gate.** Per scene: `gate.py stills <prod> [scene]` renders unmasked stills of the declared elements (`frames` per element, default the scene's gate frames); two fresh subagents get `asset_library.py blind-pack <stills>` and nothing else; record with `asset_library.py element <prod> <scene> <element id> --guess ... --confidence ...` (pass: both first guesses contain a declared alias as a whole word, both confidences >= 60). `gate.check(prod, scene)` blocks that scene's final render until every element has a fresh passing record (fingerprint = scene script, rigs, declared elements, assets, hero colours). A scene whose key element fails stays blocked; fix the element, never the threshold or the aliases.
+**Extended gate.** Per scene: `gate.py stills <prod> [scene]` renders unmasked stills of the declared elements (`frames` per element, default the scene's gate frames); three fresh subagents get `asset_library.py blind-pack <stills>` and nothing else; record with `asset_library.py element <prod> <scene> <element id> --guess ... --confidence ...` (pass, owner 2026-11-07: all three first guesses contain a declared alias as a whole word, mean confidence >= 60, no reader under 45). Gate rounds judge cheap DRAFT stills; the full-quality final of a scene renders once, after it passes; Blender jobs run one at a time. `gate.check(prod, scene)` blocks that scene's final render until every element has a fresh passing record (fingerprint = scene script, rigs, declared elements, assets, hero colours). A scene whose key element fails stays blocked; fix the element, never the threshold or the aliases.
 
 **Transparent profile.** Glass, water and ice need Cycles transmission bounces (measured in the asset proof: 0 renders a glass tray black, 8 renders correctly, about 9 s per still). The profile is `render.profiles.transparent` in `channels/mecanalia/brand.yaml`, used by scene types that declare it; the tuned profile stays the default for everything else.
 
@@ -78,7 +78,7 @@ Future sessions inherit this map. Changing it is a lens decision: record it in `
 - **Design (lead):** likeness needs a measured check and a proper modelling toolset. Factory looks and render profiles stay authoritative, so skills that would compete with them stay out.
 - **Scriptwriter:** a mesh that cannot act out the beats is useless. The brief must list moving parts and states from the beat sheet before any search. (Precedent: Poly Haven's tape measure
   was one baked mesh, so it could not extend or cut away.)
-- **Marketing:** the hero must read at phone size in the first 2 seconds, so blind naming also runs on the production's own stills. CC-BY credits must reach the description.
+- **Marketing:** the hero must read at phone size in the first 2 seconds, so blind naming also runs on the production's own stills. CC-BY credits stay in the asset record only; they never go in the description (owner 2026-11-07).
 
 | Role | Skill | Use |
 |---|---|---|
@@ -138,7 +138,7 @@ Search BlenderKit too before falling through to modelling; its free catalogue is
 
 **MB-Lab flag:** generated models are AGPL-3.0, and may only be shared under AGPL. Renders and videos are not considered derived work, per its licence page. The project is archived and untested on Blender 5.2.3. Each use needs a recorded lens decision, referenced in `licence.decision`. It makes whole bodies, not organs.
 
-**Licence rule:** CC0 preferred; Royalty-Free acceptable; CC-BY only with the attribution recorded in the asset README; anything unclear is not used. NC, ND and SA are refused. `factory/asset_library.py` enforces this. A CC-BY asset's credit must also appear in the description of every production that uses it: put it in the `notes.md` Publish package text, and `check` fails if a `publish.json` lacks it.
+**Licence rule:** CC0 FIRST; Royalty-Free acceptable; a CC-BY asset is used when no CC0 asset serves, without asking the owner (owner 2026-11-07), with the attribution recorded in the asset README only; anything unclear is not used. NC, ND and SA are refused. `factory/asset_library.py` enforces this. Credits NEVER go in the description: `publish_package.py check` rejects an asset credit there.
 
 Materials and HDRIs that are not hero objects keep their existing home: `code3d/assets/`, logged in `code3d/assets/LICENSES.md`. Check there first.
 
@@ -146,7 +146,7 @@ Materials and HDRIs that are not hero objects keep their existing home: `code3d/
 
 Connected on 2026-11-04 with the owner's free account. The token lives only in the local `.env` as `SKETCHFAB_API_TOKEN`, never in the chat or the repo. `asset_blender.py open` passes it to Blender. To re-verify, or after replacing the token: `.venv/bin/python tools/asset_blender.py connect-sketchfab`. If the token leaks, the owner resets it through Sketchfab's password reset.
 
-**Search results mix licences, including NonCommercial ones, and nothing filters them for you.** Read each result's License line and refuse anything but CC0 or CC Attribution. Most usable models are CC-BY, so record the attribution in `licence.attribution`; it must also reach the video description.
+**Search results mix licences, including NonCommercial ones, and nothing filters them for you.** Read each result's License line and refuse anything but CC0 or CC Attribution. Most usable models are CC-BY, so record the attribution in `licence.attribution` (internal record only; it does not go in the video description, owner 2026-11-07).
 
 ## The library
 
@@ -253,7 +253,7 @@ Record their words verbatim. On FAIL, go back to step 6. Never add an alias to m
 2. In the scene script: `sys.path.insert(0, str(ROOT / "factory")); import asset_library as al; hero = al.load_hero("human-heart")`. Retint the parts with the production's `hero_colours`.
 3. Run `gate.py run` as usual. It now hashes the asset into the fingerprint, so changing the asset makes the record stale.
 4. Blind-name the hero in the gate stills: `blind-pack build/gate/<stills>`, then `likeness <production> <slug> --guess ... --confidence N --guess ... --confidence N`. Do this after the last change to the stills or rig: any change makes the record stale.
-5. `.venv/bin/python factory/asset_library.py use <slug> productions/<channel>/<video>`. It prints any attribution the description must carry.
+5. `.venv/bin/python factory/asset_library.py use <slug> productions/<channel>/<video>`. It prints the licence note for the internal record (nothing goes in the description).
 
 ## Governance
 

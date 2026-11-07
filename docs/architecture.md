@@ -59,8 +59,8 @@ graph LR
 - **Request:** the orchestrator asks for `format=<name>, channel=<channel-id>` (`factory.channel.load(<id>)` resolves it); it never copies palette, voice or texts.
 - **Factory -> orchestrator contract (the publish package):** in the production folder `productions/<channel>/<NNN-slug>/`: `final.mp4`, `cover.jpg` and
   `publish.json` `{channel, title, description, music_credit, hashtags, video, cover}`. `tools/publish_package.py build|check` writes and validates it;
-  `music_credit` is copied from `scenes.json audio.music_credit` and must reach the platform description (today it is null everywhere: productions ship without music, owner 2026-11-01). Productions 004 to 007 have one; 001 to 003 predate
-  it (see "Left for the owner").
+  `music_credit` is copied from `scenes.json audio.music_credit` and must reach the platform description if a credited track is ever approved (today it is null everywhere: productions ship without music, owner 2026-11-01). Productions 004 to 007 have one; 001 to 003 predate
+  it (see "Left for the owner"). Asset credits (CC-BY) are never part of the description (owner 2026-11-07); `check` rejects them.
 - **Hashtag policy (marketing lead, 2026-11-01; rule in `brand.yaml publish.hashtags`, tags in each variant's `publish.hashtags`, enforced by `publish_package.py check`):**
   3-5 hashtags per video (the count varies), in the description, never the title. Slot order: 1-3 TOPICAL tags first (the object, then the phenomenon: what a viewer
   searches; YouTube shows only the first three above the title), then ONE family tag fixed per `topic_family` (es: objects #comofunciona, body #cuerpohumano, numbers

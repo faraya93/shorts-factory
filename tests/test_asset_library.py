@@ -33,7 +33,7 @@ def ready_asset(slug="human-heart", **licence):
     m["checks"]["qa"] = {"pass": True, "date": "2026-11-04"}
     al.write_meta(m)
     al.seal(slug)
-    assert al.record_blind(slug, ["a human heart", "un corazón"], [80, 75])
+    assert al.record_blind(slug, ["a human heart", "un corazón", "a heart"], [80, 75, 70])
     return slug
 
 
@@ -78,25 +78,30 @@ def test_ready_needs_qa_blind_naming_and_a_sealed_unchanged_file():
         assert any("qa" in x for x in errors(s))
     with sandbox():
         s = ready_asset()
-        assert not al.record_blind(s, ["an abstract red blob", "a heart"], [80, 80]), "every guess must name the object"
+        assert not al.record_blind(s, ["an abstract red blob", "a heart", "a heart"], [80, 80, 80]), "every guess must name the object"
         assert any("blind" in x for x in errors(s))
 
 
-def test_one_guess_is_not_enough():
+def test_three_readers_mean_floor_and_reader_minimum():
     assert not al.judge_guesses(["heart"], ["heart"], [90])
-    assert al.judge_guesses(["corazon"], ["Un corazón humano", "corazón"], [80, 90])
-    assert not al.judge_guesses(["ice"], ["a device", "a slice of cake"], [90, 90]), "whole words only"
-    assert not al.judge_guesses(["corn"], ["a street corner", "an acorn"], [90, 90]), "whole words only"
-    assert al.judge_guesses(["finger"], ["two fingers", "a finger"], [90, 90]), "plurals count"
-    assert not al.judge_guesses(["ice"], ["ice water", "ice cubes"], [45, 40]), "a low-confidence reader fails it"
-    assert not al.judge_guesses(["ice"], ["ice", "ice"], [90]), "every guess needs its confidence"
+    assert not al.judge_guesses(["corazon"], ["Un corazón humano", "corazón"], [80, 90]), "a pair is no longer enough"
+    assert al.judge_guesses(["corazon"], ["Un corazón humano", "corazón", "un corazon"], [80, 90, 70])
+    assert not al.judge_guesses(["ice"], ["a device", "a slice of cake", "ice"], [90, 90, 90]), "whole words only"
+    assert not al.judge_guesses(["corn"], ["a street corner", "an acorn", "corn"], [90, 90, 90]), "whole words only"
+    assert al.judge_guesses(["finger"], ["two fingers", "a finger", "finger"], [90, 90, 90]), "plurals count"
+    assert not al.judge_guesses(["ice"], ["ice water", "ice cubes", "ice"], [55, 55, 55]), "mean below the floor fails"
+    assert al.judge_guesses(["ice"], ["ice water", "ice cubes", "ice"], [90, 60, 50]), "mean 66.7, lowest 50: passes"
+    assert not al.judge_guesses(["ice"], ["ice water", "ice cubes", "ice"], [95, 90, 40]), "a reader under 45 fails even with a high mean"
+    assert al.judge_guesses(["ice"], ["ice", "ice", "ice"], [60, 60, 60]), "mean exactly at the floor passes"
+    assert not al.judge_guesses(["ice"], ["ice", "ice", "ice"], [90, 90]), "every guess needs its confidence"
+    assert not al.judge_guesses(["ice"], ["ice", "cube", "ice"], [90, 90, 90]), "every reader must name it"
 
 
 def test_gate_replays_the_owner_verdicts_on_the_calibration_set():
     data = json.loads((ROOT / "docs" / "current" / "reports" / "likeness-calibration.json").read_text(encoding="utf-8"))
     assert {r["production"] for r in data["rows"]} >= {"006", "007", "008", "009", "010", "011", "004", "005"}
     for r in data["rows"]:
-        got = al.judge_guesses(r["aliases"], [x["first_guess"] for x in r["readers"]], [x["confidence"] for x in r["readers"]])
+        got = al.judge_guesses(r["aliases"], [x["first_guess"] for x in r["readers"]], [x["confidence"] for x in r["readers"]], min_readers=2)   # historical set was read in pairs
         assert got == r["owner"].startswith("accepted"), r["production"]
 
 
@@ -142,9 +147,9 @@ def test_gate_requires_a_ready_asset_and_a_fresh_passing_likeness():
         cfg = {"gate_stills": {}, "rig_libs": ["looks"], "hero_route": "asset", "library_assets": [s]}
         (p / "scenes.json").write_text(json.dumps(cfg))
         assert not gate.check_hero(p)[0], "no likeness record"
-        assert not al.record_likeness(p, s, ["a blob", "a ball"], [90, 90])
+        assert not al.record_likeness(p, s, ["a blob", "a ball", "a sphere"], [90, 90, 90])
         assert not gate.check_hero(p)[0], "failed likeness"
-        assert al.record_likeness(p, s, ["a heart", "human heart"], [90, 80])
+        assert al.record_likeness(p, s, ["a heart", "human heart", "a heart"], [90, 80, 85])
         assert gate.check_hero(p)[0]
         (al.asset_dir(s) / "x").write_text("")
         m = al.read_meta(s)
@@ -166,9 +171,9 @@ def test_floor_exception_is_one_off_and_never_touches_the_hero():
         orig = gate.scene_fingerprint
         gate.scene_fingerprint = lambda prod, sid: "fp"
         try:
-            assert not al.record_element(p, 1, "ice", ["ice", "ice"], [55, 55]), "hero keeps the 60 floor"
-            assert al.record_element(p, 1, "glass", ["a glass", "glass"], [55, 50]), "secondary element passes at the exception floor"
-            assert not al.record_element(p, 1, "glass", ["a glass", "glass"], [55, 45])
+            assert not al.record_element(p, 1, "ice", ["ice", "ice", "ice"], [55, 55, 55]), "hero keeps the 60 floor"
+            assert al.record_element(p, 1, "glass", ["a glass", "glass", "a glass"], [55, 50, 50]), "secondary element passes at the exception floor"
+            assert not al.record_element(p, 1, "glass", ["a glass", "glass", "a glass"], [55, 45, 45])
             assert json.loads((p / "build/gate/elements.json").read_text())["1:glass"]["pass"] is False
         finally:
             gate.scene_fingerprint = orig
@@ -186,13 +191,13 @@ def test_element_gate_blocks_the_scene_whose_key_element_is_not_named():
         gate.scene_fingerprint = lambda prod, sid: "fp"
         try:
             assert not gate.check_elements(p, 1)[0], "no record yet"
-            assert not al.record_element(p, 2, "vessel", ["a red tube", "a pipe"], [90, 90])
-            assert al.record_element(p, 1, "hand", ["a hand", "human hand"], [80, 75])
+            assert not al.record_element(p, 2, "vessel", ["a red tube", "a pipe", "a straw"], [90, 90, 90])
+            assert al.record_element(p, 1, "hand", ["a hand", "human hand", "a hand"], [80, 75, 70])
             assert gate.check_elements(p, 1)[0], "scene 1 passes on its own"
             assert not gate.check_elements(p, 2)[0], "scene 2 stays blocked"
             assert not gate.check_elements(p)[0], "the whole production is blocked while one scene fails"
-            assert not al.record_element(p, 2, "vessel", ["a blood vessel", "a vena"], [70, 40]), "confidence floor applies to every element"
-            assert al.record_element(p, 2, "vessel", ["a blood vessel", "a vena"], [70, 65])
+            assert not al.record_element(p, 2, "vessel", ["a blood vessel", "a vena", "a blood vessel"], [70, 40, 70]), "confidence floor applies to every element"
+            assert al.record_element(p, 2, "vessel", ["a blood vessel", "a vena", "a blood vessel"], [70, 65, 60])
             assert gate.check_elements(p)[0]
             gate.scene_fingerprint = lambda prod, sid: "changed"
             assert "STALE" in gate.check_elements(p, 1)[1]

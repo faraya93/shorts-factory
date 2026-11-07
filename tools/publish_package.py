@@ -64,7 +64,9 @@ def check(prod: Path) -> list[str]:
         errs.append("title must carry exactly ONE trailing emoji")
     cfg = json.loads((prod / "scenes.json").read_text(encoding="utf-8"))
     if (cfg.get("audio") or {}).get("music_credit") and pkg.get("music_credit") != cfg["audio"]["music_credit"]:
-        errs.append("music_credit differs from scenes.json audio.music_credit (it must be copied into the description at publish time)")
+        errs.append("music_credit differs from scenes.json audio.music_credit (a music credit still applies if a credited track is ever approved)")
+    if re.search(r"\blicencia\b|\bCC[ -]?(BY|0|Attribution)\b|Sketchfab|\bModelo 3D\b", pkg.get("description") or "", re.I):
+        errs.append("description carries an asset credit; attribution credits never go in descriptions (owner 2026-11-07)")
     errs += hashtag_errors(pkg.get("hashtags") or [], pkg["channel"], cfg["topic_family"])
     return errs
 

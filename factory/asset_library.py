@@ -37,8 +37,9 @@ SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 ROUTES = {"library", "generator", "modelled", "code-primitive"}
 STATUSES = {"in_progress", "ready", "rejected"}
 FAMILIES = {"objects", "body", "numbers", "whatif"}
-MIN_BLIND_GUESSES = 2
-MIN_BLIND_CONFIDENCE = 60
+MIN_BLIND_GUESSES = 3        # owner 2026-11-07: three readers replace pair readings everywhere
+MIN_BLIND_CONFIDENCE = 60    # the floor, applied to the MEAN confidence of the readers
+MIN_READER_CONFIDENCE = 45   # no single reader may sit below this
 
 # The global licence rule. Anything not listed here is unclear, and unclear is not used.
 LICENCES = {
@@ -227,12 +228,7 @@ def validate(slug: str, known_sources: set[str] | None = None) -> tuple[list[str
     readme = asset_dir(slug) / "README.md"
     if not readme.exists() or "**Licence:**" not in readme.read_text(encoding="utf-8"):
         e.append(f"{slug}: README.md missing or not generated (run seal)")
-    # A CC-BY credit has to reach the viewer: the description of every published package that used the asset must carry it.
-    if rule and rule.get("needs_attribution") and lic.get("attribution"):
-        for prod in m.get("productions") or []:
-            pub = ROOT / "productions" / prod / "publish.json"
-            if pub.exists() and lic["attribution"] not in pub.read_text(encoding="utf-8"):
-                e.append(f"{slug}: {prod}/publish.json does not carry the attribution '{lic['attribution']}'")
+    # Owner 2026-11-07: attribution credits NEVER go in video descriptions; the licence and source stay in this record only.
     return e, w
 
 
@@ -247,13 +243,18 @@ def seal(slug: str) -> None:
     write_readme(m)
 
 
-def judge_guesses(aliases: list[str], guesses: list[str], confidences: list[int], floor: int | None = None) -> bool:
-    """Pass only when at least MIN_BLIND_GUESSES independent first guesses each name the object by an alias AND each reader is at least MIN_BLIND_CONFIDENCE sure.
-    The floor comes from the 2026-11-04 calibration (docs/current/reports/likeness-calibration.md): naming alone passed 008, carried by one strong frame."""
+def judge_guesses(aliases: list[str], guesses: list[str], confidences: list[int], floor: int | None = None, min_readers: int | None = None) -> bool:
+    """Owner 2026-11-07: THREE readers; the scene passes on a mean confidence of at least the floor (MIN_BLIND_CONFIDENCE, 60) with no reader under
+    MIN_READER_CONFIDENCE (45), and every reader must name the object by an alias. The floor itself is not lowered. `min_readers` exists only to replay the
+    historical two-reader calibration set (docs/current/reports/likeness-calibration.md); every live gate uses the default."""
     patterns = [re.compile(rf"\b{re.escape(norm(a))}(s|es)?\b") for a in aliases]        # whole words: "ice" must not match "device", plurals count
-    return (len(guesses) >= MIN_BLIND_GUESSES and len(confidences) == len(guesses)
-            and all(any(p.search(norm(g)) for p in patterns) for g in guesses)
-            and all(c >= (MIN_BLIND_CONFIDENCE if floor is None else floor) for c in confidences))
+    need = MIN_BLIND_GUESSES if min_readers is None else min_readers
+    fl = MIN_BLIND_CONFIDENCE if floor is None else floor
+    if len(guesses) < need or len(confidences) != len(guesses):
+        return False
+    if not all(any(p.search(norm(g)) for p in patterns) for g in guesses):
+        return False
+    return sum(confidences) / len(confidences) >= fl and min(confidences) >= min(MIN_READER_CONFIDENCE, fl)
 
 
 def blind_pack(stills: list[str], multi: bool = False) -> tuple[Path, str]:
@@ -334,7 +335,7 @@ def use(slug: str, production: str) -> None:
     write_meta(m)
     write_readme(m)
     if m["licence"].get("attribution"):
-        print(f"ATTRIBUTION REQUIRED in the description of {prod}: {m['licence']['attribution']}")
+        print(f"Licence note (internal record only; credits never go in the description, owner 2026-11-07): {m['licence']['attribution']}")
 
 
 def fingerprint(slug: str) -> str:
@@ -416,14 +417,14 @@ def main() -> int:
         return 1 if errors else 0
     elif a.cmd == "blind-pack":
         out, prompt = blind_pack(a.stills, a.multi)
-        print(f"Neutral stills in {out}. Give this prompt, with no other context, to at least {MIN_BLIND_GUESSES} separate fresh subagents:\n\n{prompt}")
+        print(f"Neutral stills in {out}. Give this prompt, with no other context, to {MIN_BLIND_GUESSES} separate fresh subagents:\n\n{prompt}")
     elif a.cmd == "blind":
         ok = record_blind(a.slug, a.guess, a.confidence)
-        print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain an alias of {a.slug}, each with confidence >= {MIN_BLIND_CONFIDENCE}")
+        print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain an alias of {a.slug}, mean confidence >= {MIN_BLIND_CONFIDENCE}, no reader under {MIN_READER_CONFIDENCE}")
         return 0 if ok else 1
     elif a.cmd == "element":
         ok = record_element(Path(a.production).resolve(), a.scene, a.element_id, a.guess, a.confidence)
-        print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain a declared alias, each with confidence >= {MIN_BLIND_CONFIDENCE}")
+        print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain a declared alias, mean confidence >= {MIN_BLIND_CONFIDENCE}, no reader under {MIN_READER_CONFIDENCE}")
         return 0 if ok else 1
     elif a.cmd == "likeness":
         ok = record_likeness(Path(a.production), a.slug, a.guess, a.confidence)

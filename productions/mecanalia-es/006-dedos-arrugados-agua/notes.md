@@ -3,8 +3,6 @@
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué se arrugan tus dedos en el agua? 💧
 - **Descripción:** Si fuera agua absorbida, tu brazo también se arrugaría. No: tu sistema nervioso aprieta los vasos de la yema y la piel se pliega en surcos, en canales de drenaje, para que agarres mejor lo mojado. 💧 Sígueme, y envíaselo a ese amigo que se queda mirando sus dedos de pasa en la bañera.
-
-Modelo 3D de la mano: "hand" de kevinruiz (Sketchfab), licencia CC Attribution.
   Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
 - **Hashtags (description, not title):** #dedosarrugados #piel #cuerpohumano #shorts
 

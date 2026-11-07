@@ -3,8 +3,6 @@
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué explotan las palomitas de maíz? 🍿
 - **Descripción:** No es aire caliente: cada grano guarda una gotita de agua. Cuando llega a unos 180 grados, se vuelve vapor, aprieta la cáscara hasta que cede y el almidón estalla en espuma. 🍿 Sígueme, y envíaselo a ese amigo que siempre se come los granos duros del fondo del tazón.
-
-Modelo 3D de las palomitas: "Popcorn" de varun_malhotra1 (Sketchfab), licencia CC Attribution.
   Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
 - **Hashtags (description, not title):** #palomitas #maiz #comofunciona #shorts
 

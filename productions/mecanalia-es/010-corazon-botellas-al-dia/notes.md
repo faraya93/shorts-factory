@@ -3,8 +3,6 @@
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Cuántas botellas bombea tu corazón al día? ❤️
 - **Descripción:** Cada latido empuja unos 70 mililitros. En un minuto son cinco litros, en una hora trescientos y en un día más de siete mil: unas 3.600 botellas de dos litros. ❤️ Sígueme, y envíaselo a ese amigo que se pone la mano en el pecho después de subir las escaleras.
-
-Modelo 3D del corazón: "Human Heart 3D Model | Anatomy | Medical Project" de Mesh-Magnet (Sketchfab), licencia CC Attribution.
   Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
 - **Hashtags (description, not title):** #corazon #latidos #curiosidades #shorts
 
