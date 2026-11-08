@@ -30,6 +30,8 @@ KNOWN STALE after the last colour run: the element records of scene 1 (toilet) a
 Reshapes applied: scene 3 rung 1 then rung 2 + rung 3 (narration line above; 167 words, narration 57.8 s, inside the band); description drops "con láseres". Toothbrush colour moved blue to magenta (composition gate: 18.8 against the teal wall; logged unfreeze). Water, scene-6 and scene-5 stills re-staged at rung 1 before any reader saw them.
 Actuals: spend $0. Wall time was not measured, so no estimate-vs-actual table is claimed. Render class of all scenes is `glass_water_sss` on paper; no final measured it.
 
+Runner callback 2026-11-08 (after the ladder stop): the verifier reports 17 failures, all consequences of the stop above: no chain log, clips, final, cover or publish.json, because no final was queued; scenes 3 and 4 FAILED blind naming; scenes 1, 2, 5 and 6 records stale (the last colour run re-rendered their stills, or the scene script changed). No new reading, render or alias was made on this callback: more readers on the same stills would be a re-roll, and an alias added now would follow the guesses. Needs a new staging against the unchanged aliases, or a logged lens decision on the alias list, then one colour run and fresh readers.
+
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Por qué tu cepillo de dientes no debe estar junto al inodoro? 🤢
 - **Descripción:** Cada vez que tiras la cadena, el agua lanza al aire una nube de gotitas que no ves: en un experimento subió metro y medio en ocho segundos. Y bajar la tapa ayuda menos de lo que crees. 🤢 Envíaselo a esa persona que guarda su cepillo de dientes al lado del inodoro.
