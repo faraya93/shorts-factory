@@ -9,5 +9,5 @@ mp3="$prod/audio/scene-$(printf %02d $n).mp3"
 slot=300; [ -f "$mp3" ] && slot=$(.venv/bin/python -c "import subprocess,math;d=float(subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0','$mp3'],capture_output=True,text=True).stdout);print(math.ceil(d*30-1e-6))")
 out="$prod/build/stills-final/s$(printf %02d $n)"
 t0=$(date +%s)
-caffeinate -dimsu blender -b --python code3d/scenes/${prefix}_$(printf %02d $n).py -- production=$PWD/$prod mode=final slot=$slot samples=$samples stills=$frames out=$PWD/$out identity=$ident look=$look "$@" 2>&1 | grep -E "Traceback|Error|error|render profile" | head -20
+.venv/bin/python tools/blender_run.py -- -b --python code3d/scenes/${prefix}_$(printf %02d $n).py -- production=$PWD/$prod mode=final slot=$slot samples=$samples stills=$frames out=$PWD/$out identity=$ident look=$look "$@" 2>&1 | grep -E "Traceback|Error|error|render profile" | head -20
 echo "done in $(( $(date +%s)-t0 )) s -> $out"

@@ -2,12 +2,12 @@
   .venv/bin/python factory/gate.py run productions/<ch>/<video>     # renders the production's gate stills (mask=1, under caffeinate) and writes the record
   .venv/bin/python factory/gate.py stills productions/<ch>/<video> [scene ...]   # unmasked stills of each scene's key elements for blind naming (build/gate/likeness/sNN)
   .venv/bin/python factory/gate.py check productions/<ch>/<video> [scene]   # exit 1 unless a fresh PASS record exists (what the render driver calls)
+  .venv/bin/python factory/gate.py check-colour productions/<ch>/<video>   # only the colour record (what the chain asks before re-rendering masked stills)
 The production's scenes.json declares `gate_stills`: {"<scene id>": [frame, ...]} (representative frames). The record build/gate/gate.json holds the
 verdict, the distance table (gate.md), the stills, and a fingerprint of everything that moves the in-frame colours (identity preset + support
 colours + render scripts and rigs); changing any of them makes the record stale and the driver refuses a full render until the gate is re-run."""
 import hashlib
 import json
-import subprocess
 import sys
 from pathlib import Path
 
@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import identity  # noqa: E402
 import composition_gate  # noqa: E402
 import asset_library  # noqa: E402
+import blender_run  # noqa: E402
 
 SAMPLES = 48
 
@@ -82,7 +83,8 @@ def check_elements(prod: Path, scene: int | None = None) -> tuple[bool, str]:
     return True, "every declared scene element passed blind naming"
 
 
-def check(prod: Path, scene: int | None = None) -> tuple[bool, str]:
+def check_colour(prod: Path) -> tuple[bool, str]:
+    """Only the colour record: what decides whether the masked stills must be re-rendered."""
     rec = prod / "build" / "gate" / "gate.json"
     if not rec.exists():
         return False, f"no gate record ({rec.relative_to(prod)}); run: .venv/bin/python factory/gate.py run {prod}"
@@ -91,6 +93,13 @@ def check(prod: Path, scene: int | None = None) -> tuple[bool, str]:
         return False, "gate record is STALE (identity, support colours, scripts or rigs changed since it passed); re-run the gate"
     if not r.get("pass"):
         return False, "gate record says BLOCKED; fix the colours and re-run the gate (see build/gate/gate.md)"
+    return True, "colour gate PASS on file"
+
+
+def check(prod: Path, scene: int | None = None) -> tuple[bool, str]:
+    ok, msg = check_colour(prod)
+    if not ok:
+        return ok, msg
     ok, msg = check_hero(prod)
     if not ok:
         return ok, msg
@@ -136,7 +145,7 @@ def run(prod: Path) -> int:
     for sid, frames in sorted(stills.items(), key=lambda kv: int(kv[0])):
         out = gdir / f"s{int(sid):02d}"
         for _attempt in (1, 2):          # one retry: a still can fail transiently while another render holds the GPU (seen twice, 2026-11-04)
-            subprocess.run(["caffeinate", "-dimsu", "blender", "-b", "--python", str(ROOT / "code3d" / "scenes" / f"{prefix}_{int(sid):02d}.py"), "--",
+            blender_run.blender(["-b", "--python", str(ROOT / "code3d" / "scenes" / f"{prefix}_{int(sid):02d}.py"), "--",
                             f"production={prod}", "mode=final", f"samples={SAMPLES}", f"stills={','.join(str(f) for f in frames)}", "mask=1", f"out={out}", *extra],
                            capture_output=True, text=True)
             lines, b = composition_gate.gate(out, preset)
@@ -171,7 +180,7 @@ def stills(prod: Path, only: list[int]) -> int:
         frames = sorted({f for el in decl[str(sid)] for f in (el.get("frames") or (cfg.get("gate_stills") or {}).get(str(sid)) or [])})
         out = gdir / "likeness" / f"s{sid:02d}"
         for _attempt in (1, 2):
-            subprocess.run(["caffeinate", "-dimsu", "blender", "-b", "--python", str(ROOT / "code3d" / "scenes" / f"{prefix}_{sid:02d}.py"), "--", f"production={prod}",
+            blender_run.blender(["-b", "--python", str(ROOT / "code3d" / "scenes" / f"{prefix}_{sid:02d}.py"), "--", f"production={prod}",
                             "mode=final", f"samples={SAMPLES}", f"stills={','.join(str(f) for f in frames)}", f"out={out}", *extra], capture_output=True, text=True)
             if list(out.glob("*.png")):
                 break
@@ -188,6 +197,6 @@ if __name__ == "__main__":
         sys.exit(run(p))
     if cmd == "stills":
         sys.exit(stills(p, [int(x) for x in sys.argv[3:]]))
-    ok, msg = check(p, int(sys.argv[3]) if len(sys.argv) > 3 else None)
+    ok, msg = check_colour(p) if cmd == "check-colour" else check(p, int(sys.argv[3]) if len(sys.argv) > 3 else None)
     print(msg)
     sys.exit(0 if ok else 1)

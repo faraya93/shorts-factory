@@ -1,12 +1,14 @@
 #!/bin/bash
-# Overnight chain: for each production given, render every scene THROUGH the driver (hard gate check + caffeinate -dimsu inside), retry a scene once, then assemble.
-# usage: tools/chain_render.sh productions/pilot/a productions/pilot/b ...   (log: output/chain-<name>.log)
+# THE chain (merged 2026-11-08, chain_render2.sh is now a shim): for each production given, render every scene THROUGH the driver (hard gate check; tools/blender_run.py owns the GPU lock + caffeinate), retry a scene once, then assemble.
+# Colour stills are re-rendered only when their record is not fresh. Only one chain runs at a time: a second one waits on the chain lock.
+# usage: tools/chain_render.sh productions/<ch>/a productions/<ch>/b ...   (log: output/chain-<name>.log)
 cd "$(dirname "$0")/.."
+[ -n "$SF_CHAIN_HELD" ] || exec .venv/bin/python tools/blender_run.py --chain -- tools/chain_render.sh "$@"
 for prod in "$@"; do
   name=$(basename "$prod"); log=output/chain-$name.log
   n=$(.venv/bin/python -c "import json,sys;print(len(json.load(open('$prod/scenes.json'))['scenes']))")
   echo "$(date +%T) START $name ($n scenes)" | tee -a "$log"
-  .venv/bin/python factory/gate.py run "$prod" >> "$log" 2>&1 || { echo "$(date +%T) GATE BLOCKED $name, production skipped" | tee -a "$log"; continue; }
+  .venv/bin/python factory/gate.py check-colour "$prod" >> "$log" 2>&1 || .venv/bin/python factory/gate.py run "$prod" >> "$log" 2>&1 || { echo "$(date +%T) GATE BLOCKED $name, production skipped" | tee -a "$log"; continue; }
   failed=""; retried=""; rm -f "$prod/build/render-failures.txt"
   for i in $(seq 1 "$n"); do
     [ -f "$prod/clips/scene-$(printf %02d $i).mp4" ] && { echo "scene $i exists, skipped" >> "$log"; continue; }

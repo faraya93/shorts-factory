@@ -16,9 +16,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "factory"))
+sys.path.insert(0, str(ROOT / "tools"))
+import blender_run  # noqa: E402   the one launcher: GPU lock + caffeinate -dimsu (standing rules)
 FPS = 30
-import shutil
-CAFFEINATE = ["caffeinate", "-dimsu"] if shutil.which("caffeinate") else []     # standing rule (owner 2026-10-28): every render runs under caffeinate -dimsu
 
 
 def narration_slot_frames(prod: Path, scene_id: int) -> int:
@@ -63,7 +63,7 @@ def main() -> int:
     render_s = None
     if not args.encode_only:
         t0 = time.time()
-        r = subprocess.run([*CAFFEINATE, "blender", "-b", "--python", str(script), "--", f"production={prod}", f"mode={args.mode}",
+        r = blender_run.blender(["-b", "--python", str(script), "--", f"production={prod}", f"mode={args.mode}",
                             f"slot={slot}", f"frames=1-{slot}", f"out={frames_dir}", *extra], capture_output=True, text=True)
         render_s = time.time() - t0
         if r.returncode != 0 or "Traceback" in r.stdout + r.stderr:

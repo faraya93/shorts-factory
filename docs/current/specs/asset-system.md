@@ -224,12 +224,12 @@ python3 ~/.claude/skills/blender-core/scripts/run_in_blender.py --blend assets/l
 
 **10. Render review stills** to `job/stills/`. Read them yourself.
 ```
-caffeinate -dimsu blender -b --factory-startup --python-exit-code 1 --python ~/.claude/skills/blender-kiln/tools/review_renders.py -- assets/library/<slug>/<slug>.blend --out assets/library/<slug>/job/stills --views q1,q3,front --mode both --res 800
+.venv/bin/python tools/blender_run.py -- -b --factory-startup --python-exit-code 1 --python ~/.claude/skills/blender-kiln/tools/review_renders.py -- assets/library/<slug>/<slug>.blend --out assets/library/<slug>/job/stills --views q1,q3,front --mode both --res 800
 ```
 
 **11. If there is a reference photo, measure it.** The reference must have a transparent background (`tools/cutout.swift` cuts one out). The photo is for measuring only and is never stored in the library unless its licence allows it. Differences of a few percent are noise; large ones are the fix list. Record the result in `checks.fidelity`.
 ```
-caffeinate -dimsu blender -b --factory-startup --python-exit-code 1 --python ~/.claude/skills/blender-kiln/tools/fidelity_check.py -- --reference ref.png --model assets/library/<slug>/<slug>.blend --hdri code3d/assets/hdri/studio_small_08_2k.hdr --out assets/library/<slug>/job/fidelity
+.venv/bin/python tools/blender_run.py -- -b --factory-startup --python-exit-code 1 --python ~/.claude/skills/blender-kiln/tools/fidelity_check.py -- --reference ref.png --model assets/library/<slug>/<slug>.blend --hdri code3d/assets/hdri/studio_small_08_2k.hdr --out assets/library/<slug>/job/fidelity
 ```
 
 **12. Blind-name it.** Use colour stills. Run this, then give the printed prompt to at least two separate fresh subagents with no other context. Never tell them what the object is.

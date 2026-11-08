@@ -108,6 +108,9 @@ def open_blender() -> int:
     if token:
         env["BLENDERMCP_SKETCHFAB_API_KEY"] = token     # macOS `open` would drop the environment, hence the direct launch below
     switches = "import bpy, os; s = bpy.context.scene; s.blendermcp_use_polyhaven = True; s.blendermcp_use_sketchfab = bool(os.environ.get('BLENDERMCP_SKETCHFAB_API_KEY'))"
+    import blender_run                                     # GUI Blender holds GPU memory: never open it during a headless render (one Blender at a time, 2026-11-08)
+    if blender_run.busy():
+        sys.exit("REFUSED: a headless Blender job is running (tools/blender_run.py --status). Wait for it before opening the GUI.")
     subprocess.Popen([str(BLENDER_BIN), "--python", str(START_SCRIPT), "--python-expr", switches], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
     for _ in range(90):
         if port_open():
