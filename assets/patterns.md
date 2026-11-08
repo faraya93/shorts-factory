@@ -16,3 +16,9 @@ Written for production sessions: read this before staging an element, so the fir
 | Finger x-ray | whole hand | hand identifies the finger | PASS (85/75) | SSS |
 | Finger close-up | bare finger, no hand or nail | none | Isolated re-read low (35/35/90): "flesh-toned cylinder" | SSS |
 | Bottle tower | stacked PET bottles, far camera | none | Isolated re-read low (40/55/55); keep a near bottle in frame | glass |
+| Droplet spray | glowing round white beads in a laser sheet | toilet below | FAIL, "white particles" (85/85/85; right idea, undeclared word) | glass/water |
+| Droplet spray | glossy streaked pale drops | toilet below | FAIL, read as foam (88/85/85): elongated pale drops look like suds | glass/water |
+| Droplet spray | blue drops speckling a white tile | toilet below | FAIL, "blue paint splatter" (75/60/70): a flat white tile says paint | glass/water |
+| Bowl water | shallow transmissive sheet over a pale floor, foam beads at the rim | seat and bowl | PASS (85/88/85); without the floor the refraction sees the unlit trap and goes dark | glass/water |
+| Toilet brush | lifted, head above the rim, holder empty nearby | toilet | PASS (90/88/90); head hidden in the bowl gives only a stick | opaque |
+| Toothbrushes | whole cup filling the frame | cup, taps, tile | PASS (96/96/95); the same cup small in a wide bathroom was missed | opaque |

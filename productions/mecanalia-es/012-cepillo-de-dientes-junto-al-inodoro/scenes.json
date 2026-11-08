@@ -1,0 +1,428 @@
+{
+  "channel": "mecanalia-es",
+  "video": "cepillo-de-dientes-junto-al-inodoro",
+  "title": "¿Por qué tu cepillo de dientes no debe estar junto al inodoro? 🤢",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d: rigid bathroom objects (toilet, toothbrush, cup) on the asset route; the droplets are a single rewritten mesh of beads, genuinely geometric, made visible by coloured water (reshape rung 2, the laser sheet read as foam).",
+  "hook_question": "¿Por qué no deberías tener tu cepillo de dientes cerca del inodoro?",
+  "false_belief": "Al tirar la cadena, todo se va por el desagüe.",
+  "closing_reframe": "Tu inodoro no solo se traga las cosas: también las estornuda.",
+  "share_archetype": "esa persona que guarda su cepillo de dientes al lado del inodoro",
+  "hero_route": "asset",
+  "library_assets": [
+    "toilet",
+    "toothbrush-in-cup",
+    "toilet-brush",
+    "bathroom-sink"
+  ],
+  "structure_variant": "chain",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "toilet",
+        "name": "toilet",
+        "aliases": [
+          "toilet",
+          "inodoro",
+          "wc"
+        ],
+        "route": "asset",
+        "source": "library toilet",
+        "frames": [
+          230
+        ]
+      },
+      {
+        "id": "toothbrush",
+        "name": "toothbrushes in a cup",
+        "aliases": [
+          "toothbrush",
+          "toothbrushes",
+          "cepillo"
+        ],
+        "route": "asset",
+        "source": "library toothbrush-in-cup",
+        "frames": [
+          30
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "bowl-water",
+        "name": "water in a toilet bowl",
+        "aliases": [
+          "water",
+          "toilet",
+          "flush",
+          "flushing"
+        ],
+        "route": "material",
+        "source": "real_kit.water on an animated sheet, shallow, one transmission layer"
+      }
+    ],
+    "3": [
+      {
+        "id": "plume",
+        "name": "blue droplet spray",
+        "aliases": [
+          "spray",
+          "droplets",
+          "droplet",
+          "splash",
+          "mist",
+          "aerosol"
+        ],
+        "route": "build",
+        "source": "one mesh of glossy blue beads rewritten per frame; coloured bowl water"
+      }
+    ],
+    "4": [
+      {
+        "id": "tinted-droplets",
+        "name": "suspended tinted droplets",
+        "aliases": [
+          "spray",
+          "droplets",
+          "droplet",
+          "splash",
+          "mist",
+          "aerosol"
+        ],
+        "route": "build",
+        "source": "same blue beads, part turning yellow-green; microbes not drawn"
+      }
+    ],
+    "5": [
+      {
+        "id": "toothbrush-head",
+        "name": "toothbrush",
+        "aliases": [
+          "toothbrush",
+          "toothbrushes",
+          "toothbrush head",
+          "cepillo"
+        ],
+        "route": "asset",
+        "source": "library toothbrush-in-cup, macro keeps head, neck and cup rim"
+      }
+    ],
+    "6": [
+      {
+        "id": "toilet-brush",
+        "name": "toilet brush",
+        "aliases": [
+          "toilet brush",
+          "escobilla"
+        ],
+        "route": "asset",
+        "source": "library toilet-brush"
+      }
+    ],
+    "7": [
+      {
+        "id": "toilet-sneeze",
+        "name": "toilet",
+        "aliases": [
+          "toilet",
+          "inodoro",
+          "wc"
+        ],
+        "route": "asset",
+        "source": "library toilet"
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "cepillo_rig.bathroom",
+    "cepillo_rig.retint"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      230
+    ]
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "cepillo-set",
+  "scene_script_prefix": "cepillo",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "Cada vez que tiras la cadena, el agua lanza al aire una nube de gotitas que no ves: en un experimento subió metro y medio en ocho segundos. Y bajar la tapa ayuda menos de lo que crees. 🤢 Envíaselo a esa persona que guarda su cepillo de dientes al lado del inodoro.",
+  "gate_stills": {
+    "1": [
+      230
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      240
+    ],
+    "4": [
+      120
+    ],
+    "5": [
+      170
+    ],
+    "6": [
+      214
+    ],
+    "7": [
+      180
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "cepillo_rig"
+  ],
+  "support_colours": {
+    "board": "#3F7C85",
+    "plate": "#FFF3E0",
+    "reason": "Teal tile wall derived from the Coral accent family: the white toilet must separate from it (a pale wall measured too close to white ceramic on paper)."
+  },
+  "hero_colours": {
+    "ceramic": "#F5F2EC",
+    "seat": "#E9E2D6",
+    "cup": "#E8B23A",
+    "toothbrush": "#B8327E",
+    "brush": "#2B3442"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Por qué no deberías tener tu cepillo de dientes cerca del inodoro? Crees que, al tirar la cadena, todo se va por el desagüe. No todo.",
+      "target_duration_s": 9,
+      "transformation": "baño quieto, cepillo en su vaso junto al inodoro → se tira la cadena y una neblina tenue sube hacia el cepillo",
+      "camera": "travelling lateral desde el cepillo hasta el inodoro, a la altura del lavamanos",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "desagüe."
+      ],
+      "data_overlays": [],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 2,
+      "name": "descarga",
+      "prompt": "Escena dibujada con código (coral): descarga.",
+      "narration": "Al tirar la cadena, el agua entra con fuerza por el borde y choca contra lo que hay en la taza.",
+      "target_duration_s": 7,
+      "transformation": "agua quieta en la taza → chorros desde el borde que chocan y la revuelven",
+      "camera": "picado cenital que baja hacia el interior de la taza",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "fuerza",
+        "choca"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 3,
+      "name": "nube",
+      "prompt": "Escena dibujada con código (coral): nube.",
+      "narration": "Ese choque lanza al aire miles de gotitas. Si el agua tuviera color, las verías: en un inodoro público sin tapa, subieron metro y medio en ocho segundos.",
+      "target_duration_s": 9,
+      "transformation": "agua incolora en la taza → el agua se tiñe de azul y una columna de gotitas azules sube hasta manchar un azulejo blanco a la altura de la cara",
+      "camera": "grúa ascendente que sigue la columna desde la taza hasta la altura de la cara",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "gotitas.",
+        "color,"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "1.5 m",
+          "from": 0,
+          "at_word": "metro",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 3.2,
+          "x": 0.25,
+          "y": 0.5
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "8 s",
+          "from": 0,
+          "at_word": "ocho",
+          "offset_s": 0.0,
+          "duration_s": 0.9,
+          "visible_s": 2.0,
+          "x": 0.75,
+          "y": 0.5
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 4,
+      "name": "carga",
+      "prompt": "Escena dibujada con código (coral): carga.",
+      "narration": "Las más finas siguen flotando en el aire. Y si en la taza había caca, viajan con sus bacterias.",
+      "target_duration_s": 7,
+      "transformation": "gotitas que suben → quedan suspendidas y una parte se tiñe de verde amarillento",
+      "camera": "órbita lenta alrededor de la nube suspendida",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "flotando",
+        "bacterias."
+      ],
+      "data_overlays": [],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 5,
+      "name": "aterrizaje",
+      "prompt": "Escena dibujada con código (coral): aterrizaje.",
+      "narration": "Después bajan y se posan: en el asiento, en el suelo y, si está cerca, en tu cepillo.",
+      "target_duration_s": 6,
+      "transformation": "nube suspendida → gotitas que se posan una a una sobre el asiento, el suelo y las cerdas del cepillo",
+      "camera": "seguimiento de una gotita desde la nube hasta un primer plano de las cerdas",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cepillo."
+      ],
+      "data_overlays": [],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 6,
+      "name": "giro",
+      "prompt": "Escena dibujada con código (coral): giro.",
+      "narration": "¿Y si bajas la tapa? En otro estudio, casi no cambió lo que quedaba en las superficies. Lo que funcionó fue desinfectar la taza. Y aleja el cepillo.",
+      "target_duration_s": 10,
+      "transformation": "tapa abierta → la tapa baja, las marcas siguen ahí → la taza se limpia y el vaso del cepillo se aleja",
+      "camera": "plano medio frontal que se abre a plano general del baño",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tapa?",
+        "desinfectar"
+      ],
+      "data_overlays": [
+        {
+          "type": "mark",
+          "kind": "x",
+          "text_or_value": "x",
+          "at_word": "casi",
+          "offset_s": 0.0,
+          "visible_s": 1.5,
+          "x": 0.5,
+          "y": 0.58
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que tu inodoro no solo se traga las cosas: también las estornuda. Envíaselo a esa persona que guarda su cepillo de dientes al lado del inodoro.",
+      "target_duration_s": 9,
+      "transformation": "inodoro quieto → una última descarga, la nube se abre como un estornudo",
+      "camera": "retroceso amplio desde la taza hasta el baño completo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "estornuda."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
+    }
+  ]
+}

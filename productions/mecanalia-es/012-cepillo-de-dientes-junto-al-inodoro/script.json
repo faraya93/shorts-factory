@@ -1,9 +1,9 @@
 {
   "video": "cepillo-de-dientes-junto-al-inodoro",
-  "status": "script stage (topic slate 2026-11-07). Not scene-designed, not rendered, not queued, not published.",
+  "status": "beat sheet (2026-11-08). Not published.",
   "primary_engine": "code3d",
   "hero_route": "asset",
-  "preset": null,
+  "preset": "coral",
   "preset_note": "Chosen by the design lens at scene design (stage colour = complement of the hero's hue, composition gate), as in 006-011.",
   "slate": "docs/current/reports/topic-slate-2026-11-07.md",
   "title": "¿Por qué tu cepillo de dientes no debe estar junto al inodoro? 🤢",
@@ -16,12 +16,14 @@
   "turn": "Scene 6: bajar la tapa, the obvious fix, barely changed surface contamination in a 2024 study; cleaning the bowl did.",
   "closing_reframe": "Tu inodoro no solo se traga las cosas: también las estornuda.",
   "share_archetype": "esa persona que guarda su cepillo de dientes al lado del inodoro",
-  "engine_reason": "code3d: rigid bathroom objects (toilet, toothbrush, cup) on the asset route; the plume is thousands of tiny droplets, genuinely geometric, lit by a laser sheet as in the study.",
+  "engine_reason": "code3d: rigid bathroom objects (toilet, toothbrush, cup) on the asset route; the droplets are a single rewritten mesh of beads, genuinely geometric, made visible by coloured water (reshape rung 2, the laser sheet read as foam).",
   "library_assets": [
-    "toilet (005 toilet_rig, re-measured) or a CC0 library toilet",
-    "toothbrush + cup (to search)"
+    "toilet",
+    "toothbrush-in-cup",
+    "toilet-brush",
+    "bathroom-sink"
   ],
-  "description": "Cada vez que tiras la cadena, el agua lanza al aire una nube de gotitas que no ves: en un experimento con láseres subió metro y medio en ocho segundos. Y bajar la tapa ayuda menos de lo que crees. 🤢 Envíaselo a esa persona que guarda su cepillo de dientes al lado del inodoro.",
+  "description": "Cada vez que tiras la cadena, el agua lanza al aire una nube de gotitas que no ves: en un experimento subió metro y medio en ocho segundos. Y bajar la tapa ayuda menos de lo que crees. 🤢 Envíaselo a esa persona que guarda su cepillo de dientes al lado del inodoro.",
   "hashtags": [
     "#inodoro",
     "#cepillodedientes",
@@ -47,7 +49,13 @@
           "risk": "low"
         }
       ],
-      "est_duration_s": 9.0
+      "est_duration_s": 9.0,
+      "emphasis": [
+        "desagüe."
+      ],
+      "overlays": [],
+      "target_duration_s": 9,
+      "render_cost_class": "glass_water_sss"
     },
     {
       "name": "descarga",
@@ -62,13 +70,20 @@
           "risk": "medium: render cost"
         }
       ],
-      "est_duration_s": 7.2
+      "est_duration_s": 7.2,
+      "emphasis": [
+        "fuerza",
+        "choca"
+      ],
+      "overlays": [],
+      "target_duration_s": 7,
+      "render_cost_class": "glass_water_sss"
     },
     {
       "name": "nube",
-      "narration": "Ese choque lanza al aire miles de gotitas invisibles. Con láseres, en un inodoro público sin tapa, la nube subió metro y medio en ocho segundos.",
-      "what_changes": "The x-ray moment: a green laser sheet switches on and reveals the invisible plume erupting and climbing past the seat.",
-      "transformation": "aire vacío sobre la taza → una lámina de láser verde revela una columna de gotitas que sube como un cohete",
+      "narration": "Ese choque lanza al aire miles de gotitas. Si el agua tuviera color, las verías: en un inodoro público sin tapa, subieron metro y medio en ocho segundos.",
+      "what_changes": "The bowl water turns blue, so the invisible droplets become visible: they erupt past the seat, climb to face height and speckle a white tile.",
+      "transformation": "agua incolora en la taza → el agua se tiñe de azul y una columna de gotitas azules sube hasta manchar un azulejo blanco a la altura de la cara",
       "camera": "grúa ascendente que sigue la columna desde la taza hasta la altura de la cara",
       "overlays_plan": [
         "counter 1,5 m at 'metro' (bracket alongside the plume)",
@@ -81,7 +96,39 @@
           "risk": "medium: must read as spray, not smoke; aliases decided before reading"
         }
       ],
-      "est_duration_s": 9.0
+      "est_duration_s": 9.0,
+      "emphasis": [
+        "gotitas.",
+        "color,"
+      ],
+      "target_duration_s": 9,
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "1.5 m",
+          "from": 0,
+          "at_word": "metro",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 3.2,
+          "x": 0.25,
+          "y": 0.5
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "8 s",
+          "from": 0,
+          "at_word": "ocho",
+          "offset_s": 0.0,
+          "duration_s": 0.9,
+          "visible_s": 2.0,
+          "x": 0.75,
+          "y": 0.5
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
     },
     {
       "name": "carga",
@@ -96,7 +143,14 @@
           "risk": "low"
         }
       ],
-      "est_duration_s": 6.6
+      "est_duration_s": 6.6,
+      "emphasis": [
+        "flotando",
+        "bacterias."
+      ],
+      "overlays": [],
+      "target_duration_s": 7,
+      "render_cost_class": "glass_water_sss"
     },
     {
       "name": "aterrizaje",
@@ -111,7 +165,13 @@
           "risk": "low"
         }
       ],
-      "est_duration_s": 6.2
+      "est_duration_s": 6.2,
+      "emphasis": [
+        "cepillo."
+      ],
+      "overlays": [],
+      "target_duration_s": 6,
+      "render_cost_class": "glass_water_sss"
     },
     {
       "name": "giro",
@@ -129,7 +189,25 @@
           "risk": "low"
         }
       ],
-      "est_duration_s": 9.7
+      "est_duration_s": 9.7,
+      "emphasis": [
+        "tapa?",
+        "desinfectar"
+      ],
+      "target_duration_s": 10,
+      "overlays": [
+        {
+          "type": "mark",
+          "kind": "x",
+          "text_or_value": "x",
+          "at_word": "casi",
+          "offset_s": 0.0,
+          "visible_s": 1.5,
+          "x": 0.5,
+          "y": 0.58
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
     },
     {
       "name": "cierre",
@@ -141,13 +219,30 @@
         "ENVÍASELO tag (label, style tag) at_word 'envíaselo', ~2.6 s, in the free space beside the toilet"
       ],
       "elements": [],
-      "est_duration_s": 9.3
+      "est_duration_s": 9.3,
+      "emphasis": [
+        "estornuda."
+      ],
+      "target_duration_s": 9,
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
     }
   ],
   "sources": [
     "Plume: Crimaldi et al. 2022, Scientific Reports, 'Commercial toilets emit energetic and rapidly spreading aerosol plumes' (University of Colorado Boulder): lidless commercial flushometer toilet, clean tap water, laser visualisation; particles reached about 1.5 m above the bowl within 8 s. Verified through secondary coverage (The Conversation / TechXplore 2022-12), original paper not opened. Narration states 'inodoro público sin tapa' because home tank toilets were NOT tested.",
     "Lid: Goforth et al. 2024, American Journal of Infection Control, 'Impacts of lid closure during toilet flushing and of toilet bowl cleaning on viral contamination of surfaces in United States restrooms': surface contamination did not depend on lid position; disinfectant plus brush cleaning reduced bowl contamination by more than 99.99 %. Verified through news coverage (EurekAlert, HealthDay, 2024-01).",
-    "Droplets carry faecal bacteria: Gerba et al. 1975 (household toilets) is the classic source; recalled, FLAGGED for verification before the beat sheet is final. The Crimaldi study used clean water.",
+    "Droplets carry faecal bacteria: Gerba, Wallis, Melnick 1975, Applied Microbiology 30(2):229-237 (PMID 169732; abstract verified 2026-11-08): flushing produced droplets carrying seeded bacteria and viruses. No illness is claimed.",
     "Toothbrush landing: an inference from the above (droplets settle on nearby surfaces), worded 'si está cerca'; no toothbrush study is cited on screen or in narration."
   ],
   "simplifications": [
@@ -163,10 +258,182 @@
   "flatness_test": [
     "1. hook: A clean bathroom; the flush starts and a faint haze rises toward the toothbrush on the sink.",
     "2. descarga: Water bursts in from the rim and crashes into the bowl water: a calm pool becomes a turbulent swirl.",
-    "3. nube: The x-ray moment: a green laser sheet switches on and reveals the invisible plume erupting and climbing past the seat.",
+    "3. nube: The bowl water turns blue, revealing the droplets: they erupt past the seat, climb to face height and speckle a white tile.",
     "4. carga: The plume stops rising and hangs; a fraction of the droplets turn yellow-green (biology colour), carrying what was in the bowl.",
     "5. aterrizaje: The cloud drifts and settles: droplets land on the seat, the floor and finally the bristles of the toothbrush.",
     "6. giro: The turn: the lid drops and the plume is squashed, but the seat and floor marks stay; then a brush scrubs the bowl clean and the toothbrush cup slides away.",
     "7. cierre: Single reframe image: one last flush, the plume blooms like a sneeze from the open bowl; the camera pulls back to the whole bathroom."
-  ]
+  ],
+  "prefix": "cepillo",
+  "gate_version": 2,
+  "hero_rig": [
+    "cepillo_rig.bathroom",
+    "cepillo_rig.retint"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      230
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "cepillo_rig"
+  ],
+  "support_colours": {
+    "board": "#3F7C85",
+    "plate": "#FFF3E0",
+    "reason": "Teal tile wall derived from the Coral accent family: the white toilet must separate from it (a pale wall measured too close to white ceramic on paper)."
+  },
+  "hero_colours": {
+    "ceramic": "#F5F2EC",
+    "seat": "#E9E2D6",
+    "cup": "#E8B23A",
+    "toothbrush": "#B8327E",
+    "brush": "#2B3442"
+  },
+  "caption_draft": "Cada vez que tiras la cadena, el agua lanza al aire una nube de gotitas que no ves: en un experimento subió metro y medio en ocho segundos. Y bajar la tapa ayuda menos de lo que crees. 🤢 Envíaselo a esa persona que guarda su cepillo de dientes al lado del inodoro.",
+  "gate_stills": {
+    "1": [
+      230
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      240
+    ],
+    "4": [
+      120
+    ],
+    "5": [
+      170
+    ],
+    "6": [
+      214
+    ],
+    "7": [
+      180
+    ]
+  },
+  "scene_elements": {
+    "1": [
+      {
+        "id": "toilet",
+        "name": "toilet",
+        "aliases": [
+          "toilet",
+          "inodoro",
+          "wc"
+        ],
+        "route": "asset",
+        "source": "library toilet",
+        "frames": [
+          230
+        ]
+      },
+      {
+        "id": "toothbrush",
+        "name": "toothbrushes in a cup",
+        "aliases": [
+          "toothbrush",
+          "toothbrushes",
+          "cepillo"
+        ],
+        "route": "asset",
+        "source": "library toothbrush-in-cup",
+        "frames": [
+          30
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "bowl-water",
+        "name": "water in a toilet bowl",
+        "aliases": [
+          "water",
+          "toilet",
+          "flush",
+          "flushing"
+        ],
+        "route": "material",
+        "source": "real_kit.water on an animated sheet, shallow, one transmission layer"
+      }
+    ],
+    "3": [
+      {
+        "id": "plume",
+        "name": "blue droplet spray",
+        "aliases": [
+          "spray",
+          "droplets",
+          "droplet",
+          "splash",
+          "mist",
+          "aerosol"
+        ],
+        "route": "build",
+        "source": "one mesh of glossy blue beads rewritten per frame; coloured bowl water"
+      }
+    ],
+    "4": [
+      {
+        "id": "tinted-droplets",
+        "name": "suspended tinted droplets",
+        "aliases": [
+          "spray",
+          "droplets",
+          "droplet",
+          "splash",
+          "mist",
+          "aerosol"
+        ],
+        "route": "build",
+        "source": "same blue beads, part turning yellow-green; microbes not drawn"
+      }
+    ],
+    "5": [
+      {
+        "id": "toothbrush-head",
+        "name": "toothbrush",
+        "aliases": [
+          "toothbrush",
+          "toothbrushes",
+          "toothbrush head",
+          "cepillo"
+        ],
+        "route": "asset",
+        "source": "library toothbrush-in-cup, macro keeps head, neck and cup rim"
+      }
+    ],
+    "6": [
+      {
+        "id": "toilet-brush",
+        "name": "toilet brush",
+        "aliases": [
+          "toilet brush",
+          "escobilla"
+        ],
+        "route": "asset",
+        "source": "library toilet-brush"
+      }
+    ],
+    "7": [
+      {
+        "id": "toilet-sneeze",
+        "name": "toilet",
+        "aliases": [
+          "toilet",
+          "inodoro",
+          "wc"
+        ],
+        "route": "asset",
+        "source": "library toilet"
+      }
+    ]
+  },
+  "cost_note": "All scenes: real water or droplets over opaque ceramic, one transmission layer. The cup is restaged as opaque glazed ceramic so no nested glass appears (playbook: fewer transparent layers on paper first)."
 }
