@@ -25,7 +25,9 @@ One fixed signature, four structures. The signature is voice, identity, typograp
   impossible numbers/scale 50–60 s (~145–170 words). This supersedes the
   earlier 30–35 s target: the reference accounts run 36–95 s.
 - Title: short question or "How X works", second person when natural,
-  exactly ONE trailing emoji as an emotion label. No hashtags.
+  exactly ONE trailing emoji as an emotion label. No hashtags. Forward SEO
+  rules (marketing lens, 2026-11-08; "Search and packaging" below) refine
+  the title and description of future productions.
 - Hook formula: the first sentence is a question (¿…?) about a TANGIBLE
   EVERYDAY OBJECT the viewer has already seen, plus an explicit FALSE
   BELIEF to bust. Approved openings by topic family: objects and body
@@ -97,6 +99,9 @@ One fixed signature, four structures. The signature is voice, identity, typograp
   with diffusion footage: a code3d production is code3d in every scene.
   scenes_schema.py rejects violations before any spend. The binding
   selection rules are in "Engine selection" below.
+
+## Search and packaging (lens decision 2026-11-08, forward-only; full rules and reasons: docs/architecture.md "Search and packaging policy")
+Applies to productions packaged after 2026-11-08; published videos and their packages are never edited. **Title:** the query a viewer types, in the approved question form, object or mechanism word in the first words, plain neutral Spanish, short enough to show whole, one trailing emoji, no hashtags. **Description:** line 1 restates the question and gives the answer in one clause; line 2 the twist; then the share line; hashtags follow the standing hashtag policy unchanged. **Playlists:** the channel is structured as four family playlists (objects, body, numbers, what-if); they are created on the platform by the owner, never from this repo.
 
 ## Channel identity (ADOPTED 2026-10-28, owner; provisional): CORAL — parameters, not code
 The channel's colour identity is PARAMETERS in ONE place: `channels/mecanalia/brand.yaml`, blocks `identity` (active preset + named presets) and
