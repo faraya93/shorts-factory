@@ -81,6 +81,20 @@ Sequence: hero rig or asset, neutral still, one production still (`hero_still`),
 
 `gate.py stills` reuses the beauty frames the colour run already rendered. Record elements with `tools/blind_read.py --record element <prod> <scene> <id> [--multi] <stills>`. A GUI Blender must be closed or idle before a headless job; `SF_ALLOW_GUI=1` is for small asset-job stills only, never a final.
 
+## Advance assets: recurring element classes are built once, ahead of the productions (binding, owner statement 2026-11-08; lens-recorded; rule only, built nothing)
+
+Why: a class of element that keeps coming back gets improvised inside each production, under the render timebox, and the improvisation is paid again every time (or the production leans on a fixed-pose asset that cannot do what the script needs). The rule moves that cost out of the production: build the class once, in advance, as a sealed library asset that carries the poses, states and motion controls its scripts demand. This lives in the asset system and extends the library; there is no parallel system, and the routing, licence and gate rules above apply unchanged.
+
+**(a) Recurrence test.** A class qualifies when it appears in at least TWO committed scripts or idea-bank entries (`docs/current/idea-bank.md`, banked or reserve), or when ONE finished production already paid the cost of improvising it. Every advance build logs the evidence it qualified on (which scripts, which bank ranks, which production and what it cost) in its job report `assets/library/<slug>/job/report.md` and as a row in `docs/current/reports/lens-decisions.md`. A class that fails the test is built inside its production as before.
+
+**(b) Sealing.** The asset is sealed only when it passes the likeness gate (three isolated readers, mean >= 60, none under 45, no alias added to pass) IN EVERY pose and state its class's scripts demand, not in one hero pose: the pose list comes from those scripts and bank entries and is written in the asset's `brief`. The licence rules are unchanged (CC0 first, CC-BY without credit, unclear is not used) and so is the routing (library asset > proper build > primitive). A pose or state that does not pass is not sealed; the asset is recorded as sealed for the poses that passed and nothing else.
+
+**(c) Inside a production, a sealed asset is an INPUT to the reshape ladder, never a substitute for it.** The ladder (re-stage, rewrite the beat, adjust the narration) still runs on any scene that trips its trigger; a sealed asset can be the tool a rung uses (a different pose or a different cutaway of the same element), and it never lets a production skip a gate, a reader round or a ladder step.
+
+**(d) No retroactive effect on commissioned runs.** A sealed asset never alters a run already commissioned: productions under way keep the fallbacks written in their notes.md and are not rewired to the new asset mid-run. It applies to productions started after the seal.
+
+**First instance, when its trigger fires: hands and fingers.** Motivating evidence recorded now: the library hand `human-hand` (`assets/library/human-hand/`) is one fixed pose with no rig (its brief: "a finger cannot bend independently without rigging (not done)"); production 006 improvised around it and the asset stayed a single pose and one wrinkle state. Production 013 (knuckle cracking) carries a rig build as an in-production fallback in its notes.md ("Rig (trigger: rigging passes the timebox)"). The class also appears in production 013 (committed script) and in banked idea-bank entries ranked 2 (a hand on the cabin door handle), 5 (a driver's hands on the wheel), 9 (a hand on the car door), 25 (a hand on the knife and tomato) and 27 (passengers' hands on the oxygen masks), so the recurrence test is met on three counts. Nothing is built by this amendment: the rig, poses and states are to be scoped when the first build is commissioned, and 013 keeps its fallbacks (rule d).
+
 ## Skill role map
 
 Agreed under the multi-lens protocol (docs/architecture.md), design leading, scriptwriter and marketing consulted. The review was done by one session reasoning through each lens, not by separate agents.
