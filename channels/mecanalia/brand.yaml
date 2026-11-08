@@ -36,7 +36,7 @@ publish:                               # language-independent publish rules (cha
     # slot order: topical tags first (what a viewer searches: the object, then the phenomenon), then the topic-family tag, then the fixed base LAST.
     # The first slots are the ones YouTube displays, so they must be topical, never the base.
 
-topic_families:                       # STARTING mix, percent of the publishing slate; to be re-weighted by performance data
+topic_families:                       # DESCRIPTIVE proportions of the portfolio, percent; an outcome, never a quota (CLAUDE.md "Topic selection", owner 2026-11-07)
   objects: 40                         # everyday objects with a hidden mechanism
   body: 25                            # body / medical how-it-works
   numbers: 20                         # impossible numbers / scale
