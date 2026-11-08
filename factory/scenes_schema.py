@@ -66,6 +66,10 @@ def effective_engine(cfg: dict, scene: dict) -> str:
     return scene.get("engine_override") or cfg.get("primary_engine", "")
 
 
+RENDER_COST_CLASSES = {"opaque": 3, "glass_water_sss": 6, "volumetric": 8, "nested_transmission": 8, "nested_transmission_volumes": 25}     # measured s/frame ceiling per class (playbook)
+COST_RESTAGE_S = 15
+
+
 def validate_production(cfg: dict) -> list[str]:
     """Return every schema violation (empty list = valid)."""
     errors = []
@@ -80,6 +84,13 @@ def validate_production(cfg: dict) -> list[str]:
         errors.append("missing production field: engine_reason (one line: why this primary engine)")
     if family not in FAMILIES:
         errors.append(f"topic_family must be one of {FAMILIES}, got {family!r}")
+    if cfg.get("gate_version") == 2:                                         # render-cost class per scene (docs/current/specs/render-cost-playbook.md), from production 012
+        for sc in cfg.get("scenes") or []:
+            k = sc.get("render_cost_class")
+            if k not in RENDER_COST_CLASSES:
+                errors.append(f"scene {sc.get('id')}: render_cost_class must be one of {sorted(RENDER_COST_CLASSES)}, got {k!r}")
+            elif RENDER_COST_CLASSES[k] > COST_RESTAGE_S and not sc.get("cost_restage"):
+                errors.append(f"scene {sc.get('id')}: class {k} is predicted above {COST_RESTAGE_S} s/frame; record the cost restage on paper in cost_restage (playbook) before modelling")
     variant = cfg.get("structure_variant")
     if variant is not None and variant not in ("chain", "journey", "scale", "fork"):
         errors.append(f"structure_variant must be chain, journey, scale or fork (docs/current/specs/format-policy.md), got {variant!r}")

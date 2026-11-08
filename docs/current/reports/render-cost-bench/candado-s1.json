@@ -1,0 +1,16 @@
+{
+ "baseline": {
+  "render_s": null,
+  "wall_s": 3.7,
+  "ok": true,
+  "variant": {}
+ },
+ "res75": {
+  "render_s": null,
+  "wall_s": 2.6,
+  "ok": true,
+  "variant": {
+   "res": 75
+  }
+ }
+}

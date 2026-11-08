@@ -294,6 +294,15 @@ class Stage:
         cy.diffuse_bounces, cy.glossy_bounces, cy.max_bounces = int(pr["diffuse_bounces"]), int(pr["glossy_bounces"]), int(pr["max_bounces"])
         cy.use_fast_gi = bool(pr["fast_gi"])
         sc.render.use_persistent_data = bool(pr["persistent_data"])
+        # SF-EXT-BEGIN additive profile keys (2026-11-08, docs/current/specs/render-cost-playbook.md)
+        if "volume_biased" in pr:
+            cy.volume_biased = bool(pr["volume_biased"])
+        if "volume_step_rate" in pr:
+            cy.volume_step_rate = float(pr["volume_step_rate"])
+        pct = args.get("res") or (None if "stills" in args else pr.get("resolution_percentage"))      # finals at the profile's percentage (the editor scales to 1080x1920); stills at 100 unless the gate asks
+        if pct:
+            sc.render.resolution_percentage = int(pct)
+        # SF-EXT-END
         print(f"[render profile] {name}: {pr}")
 
     def _halo(self):

@@ -275,11 +275,12 @@ render:
   default_profile: tuned
   profiles:
     tuned: {samples_ceiling: 128, adaptive_threshold: 0.04, min_samples: 24, denoise_gpu: true, transmission_bounces: 0, volume_bounces: 0, diffuse_bounces: 3, glossy_bounces: 4, max_bounces: 8, persistent_data: true,
-      fast_gi: false}
-    transparent: {samples_ceiling: 128, adaptive_threshold: 0.04, min_samples: 24, denoise_gpu: true, transmission_bounces: 8, volume_bounces: 2, diffuse_bounces: 3, glossy_bounces: 4, max_bounces: 14,
-      persistent_data: true, fast_gi: false}
+      fast_gi: false, resolution_percentage: 75}
+    transparent: {samples_ceiling: 128, adaptive_threshold: 0.08, min_samples: 24, denoise_gpu: true, transmission_bounces: 8, volume_bounces: 2, diffuse_bounces: 3, glossy_bounces: 4, max_bounces: 14,
+      persistent_data: true, fast_gi: false, volume_biased: true, volume_step_rate: 2.0, resolution_percentage: 75}
     previous: {samples_ceiling: 128, adaptive_threshold: 0.02, min_samples: 0, denoise_gpu: false, transmission_bounces: 12, volume_bounces: 0, diffuse_bounces: 4, glossy_bounces: 4, max_bounces: 6, persistent_data: false,
       fast_gi: false}
+  # 2026-11-08 (docs/current/reports/render-cost-bench-2026-11-08.md): resolution_percentage 75 on both finals (the editor upscales with Lanczos before subtitles); transparent adds biased volumes at step 2 and adaptive 0.08.
   # transparent (lens decision 2026-11-05, every-element rule): glass, water and ice need transmission bounces (measured in the asset proof: 0 renders a glass tray black, 8 renders
   # correctly) and a couple of volume bounces for the cloudy core of ice and the thermal glow; max_bounces is raised so the nested interfaces are not cut off.
   scene_types: {tape_02: cross_section, tape_05: exploded_housing, hielo2_01: transparent, dedos2_01: transparent, dedos2_04: transparent, dedos2_05: transparent, dedos2_06: transparent, hielo2_02: transparent, hielo2_03: transparent, hielo2_04: transparent, hielo2_05: transparent, hielo2_06: transparent, termo2_01: transparent, termo2_02: transparent, termo2_03: transparent, termo2_04: transparent, termo2_05: transparent, termo2_06: transparent, termo2_07: transparent, latido2_01: transparent, latido2_02: transparent, latido2_03: transparent, latido2_04: transparent, latido2_05: transparent, latido2_06: transparent}

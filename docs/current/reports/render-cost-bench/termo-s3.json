@@ -1,0 +1,44 @@
+{
+ "reference": {
+  "render_s": null,
+  "wall_s": 19.4,
+  "ok": true,
+  "variant": {
+   "samples": 256,
+   "cy": {
+    "adaptive_threshold": 0.02
+   }
+  },
+  "rmse_vs_ref": 0.0
+ },
+ "baseline": {
+  "render_s": null,
+  "wall_s": 7.3,
+  "ok": true,
+  "variant": {},
+  "rmse_vs_ref": 1.49
+ },
+ "biased1": {
+  "render_s": null,
+  "wall_s": 7.3,
+  "ok": true,
+  "variant": {
+   "cy": {
+    "volume_biased": true
+   }
+  },
+  "rmse_vs_ref": 1.49
+ },
+ "biased2": {
+  "render_s": null,
+  "wall_s": 7.1,
+  "ok": true,
+  "variant": {
+   "cy": {
+    "volume_biased": true,
+    "volume_step_rate": 2.0
+   }
+  },
+  "rmse_vs_ref": 1.49
+ }
+}

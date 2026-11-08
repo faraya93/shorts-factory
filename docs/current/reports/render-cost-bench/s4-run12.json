@@ -1,0 +1,33 @@
+{
+ "baseline12": {
+  "render_s": null,
+  "wall_s": 869.5,
+  "ok": true,
+  "variant": {}
+ },
+ "fast12": {
+  "render_s": null,
+  "wall_s": 290.7,
+  "ok": true,
+  "variant": {
+   "cy": {
+    "volume_biased": true,
+    "volume_step_rate": 2.0,
+    "adaptive_threshold": 0.08
+   }
+  }
+ },
+ "fast12_res75": {
+  "render_s": null,
+  "wall_s": 164.7,
+  "ok": true,
+  "variant": {
+   "cy": {
+    "volume_biased": true,
+    "volume_step_rate": 2.0,
+    "adaptive_threshold": 0.08
+   },
+   "res": 75
+  }
+ }
+}
