@@ -53,3 +53,15 @@ Hook: ¿Por qué las moscas se frotan las patas? | false belief: Se están lavan
 ## Scientific simplifications (stated plainly)
 - Sensors are drawn as glowing points; real taste sensilla are hairs.
 - The fly is enlarged; saliva volume is exaggerated.
+
+## Modellability audit and pre-written fallbacks (2026-11-07, `docs/current/reports/modellability-audit-012-016.md`)
+Ladder fallbacks pre-approved by the scriptwriter, design and marketing lenses in the audit (one session), so a production run applies them WITHOUT stopping when a scene trips its trigger. The script is unchanged until a rung is applied. When one is: update `script.json` (beat, `what_changes`, narration if rung 3), re-run the flatness swap test, log the reshape here and as a row in `lens-decisions.md` (what changed, rung, why). Aliases listed below are decided NOW, before any reading; none may be added after a guess.
+
+**Verdict: MODELABLE WITH THE WRITTEN FALLBACKS.** Riskiest element: the fly's mouthparts and leg macro (scenes 2, 3, 5); the fly itself reads instantly.
+
+Routes (searched live 2026-11-07): fly = Sketchfab "Musca domestica" by disc3d (15790094, CC0, a DISC3D scan of a real 5 mm housefly, 96k faces): CC0 first. It is a realistic scan: restyle its material to the channel look; it is not rigged, so the front-leg rub needs a two-chain rig (build). Alternatives: Sketchfab "Housefly" by Schmoldt5000 (5fe7cbd2, CC-BY, 6k polys); BlenderKit "Housefly-exotic rigged" (1fd6b0b2, RF, rigged but a colourful blowfly look: retint before use). Trash = Poly Haven "Trashbag" (55b37f22, CC0) and Poly Haven / BlenderKit "Banana" (CC0) aged by material, the peel cut from it. Bread = BlenderKit "Slice Bread" (d9812418, RF). Plate = BlenderKit "Fine Dining Ceramic Plate" (b9315514, RF). Kitchen for the closing = BlenderKit "Kitchen set" by Blaž Mraz (8a3fb1a2, RF).
+
+- **Scene 2 basura (trigger: leg hairs and pads absent from the scan, or the leg reads as a twig).** Rung 1: hairs and two pad lobes are built onto the scan's lower leg; the framing keeps the fly's body in soft focus behind the foot on the peel. Aliases: fly leg, insect leg, fly foot.
+- **Scene 3 sensores (trigger: the x-ray of an isolated leg fails).** Rung 1: the leg stays attached and only its lower segment goes x-ray. Rung 2: no x-ray; the sensors are glowing points on the outside of the foot that dim under the coating and relight after the rub. Narration unchanged.
+- **Scene 4 escupe (trigger: the drop does not read).** Rung 1: the drop hangs from the mouthparts touching the bread, then the bread patch turns dark and glossy (wet).
+- **Scene 5 giro (trigger: the sponging mouthparts are missing or do not read).** Rung 1: build a labellum (a stalk with a two-lobed pad) on the scan's head. Rung 2: the beat is carried by the melted patch shrinking under the bobbing head, with no mouthpart close-up. Rung 3 narration (-4 words, ~56.9 s): "Luego lo sorbe, como una esponja."

@@ -59,3 +59,14 @@ Hook: ¿Cuántos kilos de caca haces en toda tu vida? | false belief: Es poca co
 - Daily output varies widely with diet; the median is used.
 - The stool is a stylised matte unit, deliberately not realistic.
 - Water drains out as a separate volume for illustration; it is not literally separable.
+
+## Modellability audit and pre-written fallbacks (2026-11-07, `docs/current/reports/modellability-audit-012-016.md`)
+Ladder fallbacks pre-approved by the scriptwriter, design and marketing lenses in the audit (one session), so a production run applies them WITHOUT stopping when a scene trips its trigger. The script is unchanged until a rung is applied. When one is: update `script.json` (beat, `what_changes`, narration if rung 3), re-run the flatness swap test, log the reshape here and as a row in `lens-decisions.md` (what changed, rung, why). Aliases listed below are decided NOW, before any reading; none may be added after a guess.
+
+**Verdict: MODELABLE WITH THE WRITTEN FALLBACKS.** Riskiest element: the pile at scale (scenes 2-4), which can read as dirt, chocolate or firewood away from the single unit.
+
+Routes (searched live 2026-11-07): toilet = the same library toilet as 012 (one asset job serves both). Stool unit = a build (stylised matte log); alternative Sketchfab "Poop" by bilgehan.korkmaz (5b80e6a0, CC-BY, 994 faces); the emoji swirl is refused (emoji tone, not a stylised object). Kitchen scale = BlenderKit "kitchen scale" by Michal Stetina (1cb533b1, RF). Suitcases = BlenderKit "Black suitcase" (ebbe0d72, RF). Horse = BlenderKit "Draft horse" by Irena Aidlin Moonin (f844b8ab, RF) or Sketchfab "Horse" by icenvain (791844e9, CC-BY); the CC0 Poly Haven horse is a statue and reads as one. Cars = BlenderKit "80's Cartoon Car" by Jordi Se-Cam (d93bc35f, RF, stylised). Balance and tank = builds; tank water at minimal transmission volume.
+
+- **Scenes 2-4 anio / decada / vida (trigger: the pile, mound or hill fails the gate).** Rung 1: the units visibly fall from the toilet onto the pile (the motion links them to the toilet), every pile surface is made of distinct instanced units, and the toilet stands at its foot in every frame. Aliases: poop, feces, stool, poo. Rung 2: the pile lives inside an ever larger toilet bowl, scaled up at each step; in scene 4 the giant toilet sits on the balance against the two cars. Narration unchanged (it never names a hill).
+- **Scene 3 decada (trigger: the horse has no walk rig).** Rung 1: the horse is revealed standing by the lateral travel; no walk cycle. Narration unchanged.
+- **Scene 5 giro (trigger: the solid remainder becomes a block, a banned flat stand-in).** Rung 1, applied by default: the solids stay a smaller pile of units, half of them tint yellow-green; the water drains into the glass tank. `transformation` reads "colina → un tanque de agua y una pila pequeña, la mitad de sus piezas teñidas de verde amarillento".
