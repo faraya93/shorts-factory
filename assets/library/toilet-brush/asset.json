@@ -1,0 +1,74 @@
+{
+  "slug": "toilet-brush",
+  "name": "Toilet brush",
+  "aliases": [
+    "toilet brush",
+    "escobilla"
+  ],
+  "family": "objects",
+  "created": "2026-11-08",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a toilet brush",
+    "seen_at": "whole brush while it scrubs the bowl",
+    "moving_parts": [
+      "brush lifts out of holder"
+    ],
+    "states": [
+      "in holder",
+      "scrubbing"
+    ],
+    "style_notes": "hair baked to tubes"
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/3bec0994-b2f2-45c0-944f-02f73421bb59/",
+    "asset_id": "283b619f-9b99-4834-93a1-5f1a799a6ff6",
+    "author": "FriskyTater",
+    "retrieved": "2026-11-08"
+  },
+  "licence": {
+    "id": "Royalty-Free",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": "BlenderKit Royalty-Free, free plan, anonymous download",
+    "decision": null
+  },
+  "files": {
+    "blend": "toilet-brush.blend",
+    "sha256": "7d0eea7cba257d69d5274d693bf9686e06d85f5209a0aed199c9d26ed72c2558",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": "build.py"
+  },
+  "real_size_m": [
+    0.12,
+    0.12,
+    0.37
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-08"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-08",
+      "guesses": [
+        "toilet brush in holder",
+        "toilet brush in a holder; alternatives: plunger, cleaning caddy",
+        "toilet brush with holder; alternatives: plunger, bottle brush"
+      ],
+      "confidences": [
+        88,
+        88,
+        90
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

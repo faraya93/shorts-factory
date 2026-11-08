@@ -1,0 +1,74 @@
+{
+  "slug": "toothbrush-in-cup",
+  "name": "Toothbrushes in a cup",
+  "aliases": [
+    "toothbrush",
+    "toothbrushes",
+    "cepillo"
+  ],
+  "family": "objects",
+  "created": "2026-11-08",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "toothbrushes in a cup",
+    "seen_at": "whole cup, and one brush head in macro",
+    "moving_parts": [
+      "cup and brushes move as a group"
+    ],
+    "states": [
+      "in place"
+    ],
+    "style_notes": "source hair rebuilt as solid tufts; printed decals removed; three copies of one clean handle"
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/9cdf14af-8814-4647-9911-8706d54ce282/",
+    "asset_id": "f70efd3c-0e7e-4d42-b4f0-3549dceba3fd",
+    "author": "Cenek Studio",
+    "retrieved": "2026-11-08"
+  },
+  "licence": {
+    "id": "Royalty-Free",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": "BlenderKit Royalty-Free, free plan, anonymous download",
+    "decision": null
+  },
+  "files": {
+    "blend": "toothbrush-in-cup.blend",
+    "sha256": "1634184d1eb2bb8809136b79ec2bcb49e485d352ee94298e558e8231ed184dcf",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": "build.py"
+  },
+  "real_size_m": [
+    0.11,
+    0.11,
+    0.23
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-08"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-08",
+      "guesses": [
+        "toothbrush holder (a cup with toothbrushes standing in it)",
+        "toothbrush holder cup with three toothbrushes",
+        "toothbrush holder cup with toothbrushes"
+      ],
+      "confidences": [
+        90,
+        92,
+        92
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

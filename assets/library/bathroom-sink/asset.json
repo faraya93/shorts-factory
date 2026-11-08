@@ -1,0 +1,73 @@
+{
+  "slug": "bathroom-sink",
+  "name": "Bathroom sink",
+  "aliases": [
+    "sink",
+    "washbasin",
+    "basin",
+    "lavamanos"
+  ],
+  "family": "objects",
+  "created": "2026-11-08",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a bathroom sink",
+    "seen_at": "context beside the toilet",
+    "moving_parts": [],
+    "states": [
+      "static"
+    ],
+    "style_notes": "context prop"
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/e77946ac-f9ad-4520-a9a6-3f02def11d68/",
+    "asset_id": "f12eb8ca-8e10-46c4-ba16-e673ec726f59",
+    "author": "matt pontacole",
+    "retrieved": "2026-11-08"
+  },
+  "licence": {
+    "id": "Royalty-Free",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": "BlenderKit Royalty-Free, free plan, anonymous download",
+    "decision": null
+  },
+  "files": {
+    "blend": "bathroom-sink.blend",
+    "sha256": "1d52ef4dc7236d7b1d55944fde2cbec290146e32f6d66bba254aca64da7b2388",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": [
+    0.49,
+    0.37,
+    0.82
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-08"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-08",
+      "guesses": [
+        "pedestal bathroom sink (basin on a floor-standing column with two cross-handle taps)",
+        "pedestal sink (bathroom basin with two cross-handle taps)",
+        "pedestal sink (bathroom washbasin with faucets)"
+      ],
+      "confidences": [
+        97,
+        96,
+        95
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}
