@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": ["Read", "Write", "Edit", "Glob", "Grep", "WebSearch", "WebFetch", "Skill", "ToolSearch", "mcp__blender__*",
+      "Bash(.venv/bin/python:*)", "Bash(tools/:*)", "Bash(nohup tools/queue_chain.sh:*)", "Bash(git add:*)", "Bash(git commit:*)", "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git mv:*)", "Bash(git push origin main:*)",
+      "Bash(ls:*)", "Bash(cat:*)", "Bash(head:*)", "Bash(tail:*)", "Bash(wc:*)", "Bash(grep:*)", "Bash(find:*)", "Bash(sed:*)", "Bash(cut:*)", "Bash(sort:*)", "Bash(mkdir:*)", "Bash(cp:*)", "Bash(mv:*)", "Bash(ffmpeg:*)", "Bash(ffprobe:*)", "Bash(sleep:*)", "Bash(echo:*)", "Bash(date:*)", "Bash(pgrep:*)", "Bash(cd:*)"],
+    "deny": ["Bash(.venv/bin/python factory/producer.py:*)", "Bash(git push --force:*)", "Bash(git reset --hard:*)", "Bash(rm -rf:*)", "mcp__blender__generate_3d", "Bash(curl:*)"]
+  }
+}
