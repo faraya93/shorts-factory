@@ -35,15 +35,16 @@ cap = tr.cap(S, CAPM, (0, 0, tr.H + 3.2))
 # a cup of the same coffee beside the flask: a glossy dark surface with steam, so the liquid reads as coffee at a glance
 import math as _m
 CUP = rk.wet_tissue("g_pin", "#B8432F", sss=0.0, rough=0.3, coat=0.8)          # a red glazed mug: a pale mug blew out to a flat white icon in the blind reading
-cup = rk.lathe("cup", [(0.0, 0.0), (2.0, 0.0), (2.5, 0.3), (3.0, 4.2), (3.1, 5.4), (2.85, 5.45), (2.7, 4.3), (2.3, 0.9), (0.0, 0.9)], CUP, loc=(11.5, -5.0, 0.0), seg=64)
+K = 1.45                                                           # a bigger mug: the dark coffee surface must be a readable share of the frame
+cup = rk.lathe("cup", [(a * K, b * K) for a, b in [(0.0, 0.0), (2.0, 0.0), (2.5, 0.3), (3.0, 4.2), (3.1, 5.4), (2.85, 5.45), (2.7, 4.3), (2.3, 0.9), (0.0, 0.9)]], CUP, loc=(10.4, -5.0, 0.0), seg=64)
 S.reg(cup)
-cof = rk.lathe("cup_coffee", [(0.0, 4.35), (2.72, 4.35), (2.72, 4.42), (0.0, 4.42)], rk.coffee("shell_y"), loc=(11.5, -5.0, 0.0), seg=64)
+cof = rk.lathe("cup_coffee", [(0.0, 4.35 * K), (2.72 * K, 4.35 * K), (2.72 * K, 4.42 * K), (0.0, 4.42 * K)], rk.coffee("shell_y"), loc=(10.4, -5.0, 0.0), seg=64)
 S.reg(cof)
-hdl = S.torus("cup_handle", 1.4, 0.3, (11.5 + 3.4, -5.0, 3.1), CUP, rot=(_m.pi / 2, 0, 0))
-sv, sw = rk.heat_volume(S, "cup_steam", (5, 5, 12), (11.5, -5.0, 11.0), "#FFFFFF", density=0.05, strength=0.05, scale=0.7)
-S.every_frame(lambda t: setattr(sw, "default_value", t * 0.6))
+hdl = S.torus("cup_handle", 1.4 * K, 0.3 * K, (10.4 + 3.4 * K, -5.0, 3.1 * K), CUP, rot=(_m.pi / 2, 0, 0))
+sv, sw = tr.steam_column(S, "cup_steam", (6, 6, 14), (10.4, -5.0, 14.0), density=0.45, scale=1.0)   # soft, tapered, density-masked: no box edge
+S.every_frame(lambda t: setattr(sw, "default_value", t * 0.9))
 t_cup = 3.0                                                     # the cup slides in AFTER the cut has shown the flask alone: the flask is named on its own frames, the coffee on the cup frames
-for o, base in ((cup, (11.5, -5.0, 0.0)), (cof, (11.5, -5.0, 0.0)), (hdl, (11.5 + 3.4, -5.0, 3.1)), (sv, (11.5, -5.0, 11.0))):
+for o, base in ((cup, (10.4, -5.0, 0.0)), (cof, (10.4, -5.0, 0.0)), (hdl, (10.4 + 3.4 * K, -5.0, 3.1 * K)), (sv, (10.4, -5.0, 14.0))):
     S.move(o, [(0, (base[0] + 60, base[1], base[2])), (t_cup, (base[0] + 60, base[1], base[2])), (t_cup + 0.55, base)])
 tw = S.t("paredes", default=1.0)
 def cut(t):

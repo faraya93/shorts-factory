@@ -106,11 +106,13 @@ def set_cut(P, y):
 
 
 def cap(S, mat, loc=(0, 0, H + 3.2)):
+    """The stopper-cup of a vacuum flask (redesigned 2026-11-07, after blind readers called the ribbed grey disc with a knob a battery / flashlight): a steel CUP, flared wider toward its open
+    top like a drinking cup, a dark rubber seal band at the bottom and a small rim, no knob; the dark `mat` is only the seal."""
     root = S.empty("cap", loc)
-    S.cyl("cap_cup", 4.6, 6.2, (0, 0, 0), mat, axis="Z", verts=64, bevel=0.5, parent=root)
-    for i, dz in enumerate((-1.8, 0.0, 1.8)):
-        S.torus(f"cap_rib{i}", 4.65, 0.22, (0, 0, dz), mat, parent=root)
-    S.cyl("cap_knob", 1.1, 1.2, (0, 0, 3.6), rk.steel("g_pin", "#9AA3AD"), axis="Z", verts=32, bevel=0.2, parent=root)
+    cup_m = rk.wet_tissue("g_big", "#E2563B", sss=0.0, rough=0.3, coat=0.6)       # a red drinking-cup stopper: the colour break from the blue body says "cup", not "lamp head"
+    S.cyl("cap_cup", 4.55, 6.0, (0, 0, 0.2), cup_m, axis="Z", verts=64, bevel=1.6, parent=root)
+    S.torus("cap_rim", 4.5, 0.28, (0, 0, -1.6), rk.steel("g_pin", "#C8CED6", rough=0.25), parent=root)
+    S.cyl("cap_seal", 4.3, 0.9, (0, 0, -3.0), mat, axis="Z", verts=64, bevel=0.25, parent=root)
     return root
 
 
@@ -125,3 +127,77 @@ def front_light(strength=3.5):
     o.visible_camera = False
     o.visible_shadow = False
     return o
+
+
+def steam_column(S, name, size, loc, density=0.45, scale=1.0):
+    """Soft steam: a box whose DENSITY (not only emission) is noise-masked, tapered radially and faded at both ends, so no box edge shows. Returns (object, w_input)."""
+    bpy.ops.mesh.primitive_cube_add(size=1.0, location=loc)
+    o = bpy.context.object
+    o.name = name
+    o.scale = size
+    m = bpy.data.materials.new(name + "_mat")
+    m.use_nodes = True
+    nt = m.node_tree
+    nt.nodes.clear()
+    N = nt.nodes.new
+    out = N("ShaderNodeOutputMaterial")
+    tc = N("ShaderNodeTexCoord")
+    sep = N("ShaderNodeSeparateXYZ")
+    nt.links.new(tc.outputs["Object"], sep.inputs["Vector"])
+    nz = N("ShaderNodeTexNoise")
+    nz.noise_dimensions = "4D"
+    nz.inputs["Scale"].default_value = scale * 4.0
+    nz.inputs["Detail"].default_value = 4.0
+    nt.links.new(tc.outputs["Object"], nz.inputs["Vector"])
+    cr = N("ShaderNodeMapRange")
+    cr.inputs["From Min"].default_value, cr.inputs["From Max"].default_value = 0.35, 0.7
+    nt.links.new(nz.outputs["Fac"], cr.inputs["Value"])
+    xy = N("ShaderNodeCombineXYZ")
+    nt.links.new(sep.outputs["X"], xy.inputs["X"])
+    nt.links.new(sep.outputs["Y"], xy.inputs["Y"])
+    ln = N("ShaderNodeVectorMath")
+    ln.operation = "LENGTH"
+    nt.links.new(xy.outputs[0], ln.inputs[0])
+    zn = N("ShaderNodeMapRange")
+    zn.inputs["From Min"].default_value, zn.inputs["From Max"].default_value = -0.5, 0.5
+    zn.inputs["To Min"].default_value, zn.inputs["To Max"].default_value = 0.12, 0.48
+    nt.links.new(sep.outputs["Z"], zn.inputs["Value"])
+    rr = N("ShaderNodeMath")
+    rr.operation = "DIVIDE"
+    nt.links.new(ln.outputs["Value"], rr.inputs[0])
+    nt.links.new(zn.outputs["Result"], rr.inputs[1])
+    rf = N("ShaderNodeMapRange")
+    rf.inputs["To Min"].default_value, rf.inputs["To Max"].default_value = 1.0, 0.0
+    nt.links.new(rr.outputs["Value"], rf.inputs["Value"])
+    pw = N("ShaderNodeMath")
+    pw.operation = "POWER"
+    pw.inputs[1].default_value = 1.6
+    nt.links.new(rf.outputs["Result"], pw.inputs[0])
+    vz = N("ShaderNodeMapRange")
+    vz.inputs["From Min"].default_value, vz.inputs["From Max"].default_value = -0.5, 0.5
+    nt.links.new(sep.outputs["Z"], vz.inputs["Value"])
+    mp = N("ShaderNodeMath")
+    mp.operation = "MULTIPLY"
+    mp.inputs[1].default_value = math.pi
+    nt.links.new(vz.outputs["Result"], mp.inputs[0])
+    bell = N("ShaderNodeMath")
+    bell.operation = "SINE"
+    nt.links.new(mp.outputs["Value"], bell.inputs[0])
+    m1 = N("ShaderNodeMath")
+    m1.operation = "MULTIPLY"
+    nt.links.new(pw.outputs["Value"], m1.inputs[0])
+    nt.links.new(bell.outputs["Value"], m1.inputs[1])
+    m2 = N("ShaderNodeMath")
+    m2.operation = "MULTIPLY"
+    nt.links.new(m1.outputs["Value"], m2.inputs[0])
+    nt.links.new(cr.outputs["Result"], m2.inputs[1])
+    dens = N("ShaderNodeMath")
+    dens.operation = "MULTIPLY"
+    dens.inputs[1].default_value = density
+    nt.links.new(m2.outputs["Value"], dens.inputs[0])
+    sc = N("ShaderNodeVolumeScatter")
+    nt.links.new(dens.outputs["Value"], sc.inputs["Density"])
+    nt.links.new(sc.outputs[0], out.inputs["Volume"])
+    o.data.materials.append(m)
+    o.visible_shadow = False
+    return S.reg(o), nz.inputs["W"]
