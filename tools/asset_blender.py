@@ -96,6 +96,21 @@ def blender_running() -> bool:
     return subprocess.run(["pgrep", "-x", "Blender"], capture_output=True).returncode == 0
 
 
+GUI_PID = ROOT / "output" / ".gui-blender.pid"
+
+
+def close_blender() -> int:
+    """Close the GUI this tool opened, and only that one (recorded pid): a headless final needs it gone, and a Blender the owner opened is not ours to close."""
+    if not GUI_PID.exists():
+        print("No GUI Blender was opened by this tool; nothing closed.")
+        return 1
+    pid = GUI_PID.read_text().strip()
+    subprocess.run(["kill", "-TERM", pid])
+    GUI_PID.unlink()
+    print(f"Closed GUI Blender pid {pid}.")
+    return 0
+
+
 def open_blender() -> int:
     if port_open():
         print(f"Blender already answers on port {PORT}. Library switches and the token are set at launch: close it and re-run if they are off.")
@@ -111,7 +126,8 @@ def open_blender() -> int:
     import blender_run                                     # GUI Blender holds GPU memory: never open it during a headless render (one Blender at a time, 2026-11-08)
     if blender_run.busy():
         sys.exit("REFUSED: a headless Blender job is running (tools/blender_run.py --status). Wait for it before opening the GUI.")
-    subprocess.Popen([str(BLENDER_BIN), "--python", str(START_SCRIPT), "--python-expr", switches], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+    gui = subprocess.Popen([str(BLENDER_BIN), "--python", str(START_SCRIPT), "--python-expr", switches], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+    GUI_PID.write_text(str(gui.pid))
     for _ in range(90):
         if port_open():
             print(f"Blender open, MCP on port {PORT}. Libraries on: polyhaven{', sketchfab' if token else ''}.")
@@ -173,6 +189,8 @@ def blenderkit_get(base_id: str, folder: str) -> int:
 
 def main() -> int:
     args = sys.argv[1:]
+    if args[:1] == ["close"]:
+        return close_blender()
     if args[:1] == ["open"]:
         return open_blender()
     if args[:1] == ["connect-sketchfab"]:
