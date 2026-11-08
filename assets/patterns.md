@@ -22,3 +22,5 @@ Written for production sessions: read this before staging an element, so the fir
 | Bowl water | shallow transmissive sheet over a pale floor, foam beads at the rim | seat and bowl | PASS (85/88/85); without the floor the refraction sees the unlit trap and goes dark | glass/water |
 | Toilet brush | lifted, head above the rim, holder empty nearby | toilet | PASS (90/88/90); head hidden in the bowl gives only a stick | opaque |
 | Toothbrushes | whole cup filling the frame | cup, taps, tile | PASS (96/96/95); the same cup small in a wide bathroom was missed | opaque |
+| Toilet aerosol droplets | white beads in a green laser sheet; glossy streaked drops; blue drops on a white tile | toilet, tile | FAIL on every rung in 012: read as "white particle spray", "white foam", "blue paint splatter" (85/85/85, 88/85/85, 75/60/70) | |
+

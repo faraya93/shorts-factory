@@ -27,7 +27,7 @@ import gate_deps  # noqa: E402
 
 SAMPLES = 48
 STILL_POLICY = {"engine": "CYCLES", "res": 50, "samples": SAMPLES}           # v2 tier 2 (readers + colour): half-resolution Cycles with the GPU denoiser, the final engine; part of every v2 fingerprint
-CARRY_THRESHOLD = 1e-4                                                       # mean absolute pixel difference (0..1): at or below it a re-rendered still IS the still the readers saw
+CARRY_THRESHOLD = 3e-4                                                       # mean absolute pixel difference (0..1): Cycles noise: two identical renders differ by 0.7e-4 (measured 2026-11-08, production 012); a real change measured 9.7e-4
 EXT = re.compile(rb"[ \t]*# SF-EXT-BEGIN.*?# SF-EXT-END[^\n]*\n", re.S)      # additive profile keys in hashed libs (inert for earlier profiles): v1 records stay fresh
 
 
@@ -316,8 +316,17 @@ def run(prod: Path) -> int:
     md, blocked = [], False
     ident = json.loads(Path(exp).read_text())
     preset = ident["presets"][name]
+    previous = json.loads((gdir / "gate.json").read_text()).get("scene_fps", {}) if (gdir / "gate.json").exists() else {}
+    scene_fps = {}
     for sid, frames in sorted(stills.items(), key=lambda kv: int(kv[0])):
         out = gdir / f"s{int(sid):02d}"
+        scene_fps[sid] = hashlib.sha256(json.dumps([scene_fingerprint(prod, int(sid)), frames]).encode()).hexdigest()[:16] if cfg.get("gate_version") == 2 else None
+        if scene_fps[sid] and previous.get(sid) == scene_fps[sid] and list(out.glob("mask-*.png")):     # v2: an unchanged scene keeps its stills, so its readings stay valid
+            lines, b = composition_gate.gate(out, preset)
+            if lines:
+                md += [f"\n## scene {sid}"] + lines
+                blocked |= b
+                continue
         for _attempt in (1, 2):          # one retry: a still can fail transiently while another render holds the GPU (seen twice, 2026-11-04)
             blender_run.blender(["-b", "--python", str(ROOT / "code3d" / "scenes" / f"{prefix}_{int(sid):02d}.py"), "--",
                             f"production={prod}", "mode=final", f"samples={SAMPLES}", f"stills={','.join(str(f) for f in frames)}", "mask=1", f"out={out}", *extra, *_res_arg(cfg)],
@@ -330,7 +339,7 @@ def run(prod: Path) -> int:
     verdict = "BLOCKED" if blocked else "PASS"
     (gdir / "gate.md").write_text(f"# Composition gate: {prod.name}, preset {name}, board {preset['support_board']} plate {preset['support_plate']} panel {preset['support_panel']}\n"
                                   + "\n".join(md) + f"\n\nGATE: {verdict}\n", encoding="utf-8")
-    (gdir / "gate.json").write_text(json.dumps({"pass": not blocked, "preset": name, "fingerprint": fingerprint(prod), "stills": {k: v for k, v in stills.items()},
+    (gdir / "gate.json").write_text(json.dumps({"pass": not blocked, "preset": name, "fingerprint": fingerprint(prod), "stills": {k: v for k, v in stills.items()}, "scene_fps": scene_fps,
                                                 "table": "build/gate/gate.md"}, indent=1))
     print(f"GATE {verdict}  (table: {gdir / 'gate.md'})")
     return 1 if blocked else 0
