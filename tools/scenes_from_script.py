@@ -14,7 +14,7 @@ prod = Path(sys.argv[1])
 s = json.loads((prod / "script.json").read_text(encoding="utf-8"))
 d = {"channel": "mecanalia-es", "video": s["video"], "title": s["title"], "topic_family": s["topic_family"], "primary_engine": "code3d", "engine_reason": s["engine_reason"],
      "hook_question": s["hook_question"], "false_belief": s["false_belief"], "closing_reframe": s["closing_reframe"], "share_archetype": s["share_archetype"],
-     **{k: s[k] for k in ("hero_route", "library_assets", "structure_variant", "scene_elements", "element_floor_exception", "hero_ids") if k in s},
+     **{k: s[k] for k in ("hero_route", "library_assets", "structure_variant", "scene_elements", "element_floor_exception", "hero_ids", "gate_version", "hero_rig", "hero_still", "rig_budget") if k in s},
      "model": "blender-5.2.3-cycles", "voice": "es-CL-LorenzoNeural", "resolution": "1080x1920", "aspect_ratio": "9:16",
      "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
      "visual_identity": {}, "render_style": s["prefix"] + "-set", "scene_script_prefix": s["prefix"],
@@ -24,7 +24,8 @@ d = {"channel": "mecanalia-es", "video": s["video"], "title": s["title"], "topic
 for i, sc in enumerate(s["scenes"], 1):
     d["scenes"].append({"id": i, "name": sc["name"], "prompt": f"Escena dibujada con código ({s['preset']}): {sc['name']}.", "narration": sc["narration"],
                         "target_duration_s": sc.get("target_duration_s", 8), "transformation": sc["transformation"], "camera": sc["camera"], "shot_type": "establishing",
-                        "subtitle_emphasis": sc.get("emphasis", []), "data_overlays": sc.get("overlays", [])})
+                        "subtitle_emphasis": sc.get("emphasis", []), "data_overlays": sc.get("overlays", []),
+                        **{k: sc[k] for k in ("render_cost_class", "cost_restage") if k in sc}})
 (prod / "scenes.json").write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
 identity.apply_to_scenes(prod / "scenes.json", s["preset"])
 print("scenes.json written:", len(d["scenes"]), "scenes,", sum(len(x["narration"].split()) for x in d["scenes"]), "words")

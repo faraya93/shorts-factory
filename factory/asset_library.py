@@ -288,7 +288,20 @@ def record_blind(slug: str, guesses: list[str], confidences: list[int]) -> bool:
     return ok
 
 
-def record_likeness(production: Path, slug: str, guesses: list[str], confidences: list[int]) -> bool:
+def _save_read(production: Path, key: str, stills: list[str]) -> dict:
+    """Keep the exact stills the readers judged (v2 gate): the evidence for staleness and carry-over."""
+    keep = production / "build" / "gate" / "read" / key.replace(":", "-")
+    keep.mkdir(parents=True, exist_ok=True)
+    out = {}
+    for s in stills:
+        p = Path(s).resolve()
+        dst = keep / p.name
+        shutil.copyfile(p, dst)
+        out[str(p.relative_to(production.resolve()))] = str(dst.relative_to(production.resolve()))
+    return out
+
+
+def record_likeness(production: Path, slug: str, guesses: list[str], confidences: list[int], stills: list[str] | None = None, isolation: str | None = None) -> bool:
     """The production-side twin of the blind naming: the hero as it appears in this video's own stills, written next to the gate record."""
     sys.path.insert(0, str(ROOT / "factory"))
     import gate
@@ -296,11 +309,13 @@ def record_likeness(production: Path, slug: str, guesses: list[str], confidences
     rec = production / "build" / "gate"
     rec.mkdir(parents=True, exist_ok=True)
     (rec / "likeness.json").write_text(json.dumps({"pass": ok, "date": date.today().isoformat(), "asset": slug, "guesses": guesses, "confidences": confidences,
-                                                   "fingerprint": gate.fingerprint(production)}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+                                                   "fingerprint": gate.hero_fingerprint(production) if gate.v2(production) else gate.fingerprint(production),
+                                                   **({"reader_isolation": isolation} if isolation else {}), **({"read_stills": _save_read(production, "hero", stills)} if stills else {})},
+                                                  indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return ok
 
 
-def record_element(production: Path, scene: int, element_id: str, guesses: list[str], confidences: list[int]) -> bool:
+def record_element(production: Path, scene: int, element_id: str, guesses: list[str], confidences: list[int], stills: list[str] | None = None, isolation: str | None = None) -> bool:
     """Extended likeness gate (every scene's key element): blind naming against the aliases declared for that element in scenes.json `scene_elements`."""
     sys.path.insert(0, str(ROOT / "factory"))
     import gate
@@ -316,7 +331,8 @@ def record_element(production: Path, scene: int, element_id: str, guesses: list[
     path = rec / "elements.json"
     data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     data[f"{scene}:{element_id}"] = {"pass": ok, "date": date.today().isoformat(), "element": el["name"], "guesses": guesses, "confidences": confidences,
-                                     "fingerprint": gate.scene_fingerprint(production, scene)}
+                                     "fingerprint": gate.scene_fingerprint(production, scene), **({"reader_isolation": isolation} if isolation else {}),
+                                     **({"read_stills": _save_read(production, f"{scene}:{element_id}", stills)} if stills else {})}
     if floor is not None:
         data[f"{scene}:{element_id}"]["floor_exception"] = {"floor": floor, "reason": exc.get("reason"), "authorised": exc.get("authorised")}
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -417,7 +433,7 @@ def main() -> int:
         return 1 if errors else 0
     elif a.cmd == "blind-pack":
         out, prompt = blind_pack(a.stills, a.multi)
-        print(f"Neutral stills in {out}. Give this prompt, with no other context, to {MIN_BLIND_GUESSES} separate fresh subagents:\n\n{prompt}")
+        print(f"Neutral stills in {out}. Prefer tools/blind_read.py (isolated readers). Otherwise give this prompt, with no other context, to {MIN_BLIND_GUESSES} separate fresh subagents:\n\n{prompt}")
     elif a.cmd == "blind":
         ok = record_blind(a.slug, a.guess, a.confidence)
         print("PASS" if ok else f"FAIL: needs {MIN_BLIND_GUESSES}+ first guesses that each contain an alias of {a.slug}, mean confidence >= {MIN_BLIND_CONFIDENCE}, no reader under {MIN_READER_CONFIDENCE}")

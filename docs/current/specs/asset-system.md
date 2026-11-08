@@ -70,6 +70,17 @@ Flat-colour stand-ins are banned for organic, liquid and real-world elements. En
 
 **Transparent profile.** Glass, water and ice need Cycles transmission bounces (measured in the asset proof: 0 renders a glass tray black, 8 renders correctly, about 9 s per still). The profile is `render.profiles.transparent` in `channels/mecanalia/brand.yaml`, used by scene types that declare it; the tuned profile stays the default for everything else.
 
+## Gate v2 (from production 012)
+
+Sequence: hero rig or asset, neutral still, one production still (`hero_still`), `tools/blind_read.py --record likeness <prod> <slug> <stills>`, then `gate.py freeze`. Shared elements are read in their first scene and carried by their own scene records. Then the riskiest scene.
+
+| Tier | Tool | Who judges | Engine |
+|---|---|---|---|
+| 1 advisory | `tools/draft_still.py`, contact sheets | the session | EEVEE |
+| 2 decisive | `gate.py run`, `gate.py stills` | colour gate and isolated readers | Cycles, 540x960, 48 samples, GPU denoiser |
+
+`gate.py stills` reuses the beauty frames the colour run already rendered. Record elements with `tools/blind_read.py --record element <prod> <scene> <id> [--multi] <stills>`. A GUI Blender must be closed or idle before a headless job; `SF_ALLOW_GUI=1` is for small asset-job stills only, never a final.
+
 ## Skill role map
 
 Agreed under the multi-lens protocol (docs/architecture.md), design leading, scriptwriter and marketing consulted. The review was done by one session reasoning through each lens, not by separate agents.

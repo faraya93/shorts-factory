@@ -1,0 +1,772 @@
+{
+ "006:1": {
+  "readers": [
+   {
+    "guess": "3D-rendered hand; partly submerged in water; glass tank on teal background",
+    "confidence": 88
+   },
+   {
+    "guess": "3D-rendered hand, submerged in glass tank, teal background",
+    "confidence": 85
+   },
+   {
+    "guess": "3D-rendered hand, partly submerged; glass tank of water; teal background",
+    "confidence": 85
+   }
+  ],
+  "elements": {
+   "hand": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     60,
+     70
+    ],
+    "recorded_pass": true
+   },
+   "water": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     60,
+     70
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "006:2": {
+  "readers": [
+   {
+    "guess": "3D cutaway of a fingertip; fingernail; red blood vessels inside the finger",
+    "confidence": 80
+   },
+   {
+    "guess": "3D rendered fingertips with nails; red blood vessels inside a finger; a yellow nerve or tendon strand",
+    "confidence": 60
+   },
+   {
+    "guess": "cutaway finger anatomy, 3D rendered fingers, red blood vessels",
+    "confidence": 80
+   }
+  ],
+  "elements": {
+   "finger": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     75
+    ],
+    "recorded_pass": true
+   },
+   "vessels": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     75
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "006:3": {
+  "readers": [
+   {
+    "guess": "3D-rendered flesh-toned cylinder with a rounded end, like a soft tube or sausage-shaped prop",
+    "confidence": 35
+   },
+   {
+    "guess": "a rendered skin-toned fingertip with a nail, or an elongated thumb; alternatives: a sausage-shaped or cylindrical object, or a finger-like soft toy",
+    "confidence": 35
+   },
+   {
+    "guess": "a 3D-rendered phallic object, likely an anatomical model or sex toy",
+    "confidence": 90
+   }
+  ],
+  "elements": {
+   "finger": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     60,
+     72
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "006:4": {
+  "readers": [
+   {
+    "guess": "3D-rendered fingers; glass surface; water droplets",
+    "confidence": 60
+   },
+   {
+    "guess": "3D-rendered fingertips; water droplets on a glass surface; teal background",
+    "confidence": 60
+   },
+   {
+    "guess": "3D-rendered peach fingers, glass plate, water droplets",
+    "confidence": 45
+   }
+  ],
+  "elements": {
+   "finger": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     65,
+     85
+    ],
+    "recorded_pass": true
+   },
+   "water": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     65,
+     85
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "006:5": {
+  "readers": [
+   {
+    "guess": "pink soap bar, peach fingers pinching it, teal background",
+    "confidence": 80
+   },
+   {
+    "guess": "Pink rounded block (soap or eraser-like bar), Two peach 3D fingers pinching it, Teal background",
+    "confidence": 72
+   },
+   {
+    "guess": "pink soap bar, peach fingers, teal background",
+    "confidence": 60
+   }
+  ],
+  "elements": {
+   "finger": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     55,
+     65
+    ],
+    "recorded_pass": true
+   },
+   "soap": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     55,
+     65
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "006:6": {
+  "readers": [
+   {
+    "guess": "peach-colored 3D-rendered cylindrical object with rounded end; teal background; water droplets (view 2)",
+    "confidence": 60
+   },
+   {
+    "guess": "3D-rendered skin-toned finger with nail; water droplets; teal background",
+    "confidence": 55
+   },
+   {
+    "guess": "smooth peach-colored 3D-rendered cylinder with a rounded tip; teal background; water droplets (view 2 only)",
+    "confidence": 85
+   }
+  ],
+  "elements": {
+   "finger": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     80,
+     85
+    ],
+    "recorded_pass": true
+   },
+   "water": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     80,
+     85
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "008:1": {
+  "readers": [
+   {
+    "guess": "glass of pink drink, ice cubes, magenta background",
+    "confidence": 92
+   },
+   {
+    "guess": "pink drink in a glass; ice cubes; magenta background",
+    "confidence": 88
+   },
+   {
+    "guess": "glass of pink drink, ice cubes, magenta background",
+    "confidence": 85
+   }
+  ],
+  "elements": {
+   "ice": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     92,
+     80
+    ],
+    "recorded_pass": true
+   },
+   "glass": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     92,
+     80
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "008:2": {
+  "readers": [
+   {
+    "guess": "blue ice cube tray; glass of pink drink with ice; magenta background",
+    "confidence": 90
+   },
+   {
+    "guess": "blue ice cube tray; glass of pink drink with ice cubes; magenta background",
+    "confidence": 90
+   },
+   {
+    "guess": "Blue ice cube tray; glass of pink drink with ice; magenta background",
+    "confidence": 90
+   }
+  ],
+  "elements": {
+   "ice": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     80
+    ],
+    "recorded_pass": true
+   },
+   "glass": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     80
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "008:3": {
+  "readers": [
+   {
+    "guess": "glass of pink drink; ice cubes; pink background",
+    "confidence": 85
+   },
+   {
+    "guess": "glass of pink drink; ice cubes; magenta background",
+    "confidence": 90
+   },
+   {
+    "guess": "glass of pink drink; ice cubes; magenta background",
+    "confidence": 85
+   }
+  ],
+  "elements": {
+   "ice": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     85
+    ],
+    "recorded_pass": true
+   },
+   "glass": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     85
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "008:4": {
+  "readers": [
+   {
+    "guess": "ice cubes; clear container; pink background",
+    "confidence": 88
+   },
+   {
+    "guess": "ice cubes, clear glass container, magenta background",
+    "confidence": 85
+   },
+   {
+    "guess": "ice cubes; clear tray or container; magenta background",
+    "confidence": 88
+   }
+  ],
+  "elements": {
+   "ice": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     70
+    ],
+    "recorded_pass": true
+   },
+   "tank": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     70
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "008:5": {
+  "readers": [
+   {
+    "guess": "ice cubes, glass containers, magenta background",
+    "confidence": 90
+   },
+   {
+    "guess": "glass containers with ice cubes, magenta background",
+    "confidence": 92
+   },
+   {
+    "guess": "ice cubes; glass containers; magenta background",
+    "confidence": 88
+   }
+  ],
+  "elements": {
+   "ice": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     90,
+     85
+    ],
+    "recorded_pass": true
+   },
+   "tank": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     90,
+     85
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "008:6": {
+  "readers": [
+   {
+    "guess": "glass of pink drink, ice cubes, magenta background",
+    "confidence": 92
+   },
+   {
+    "guess": "glass of pink drink, ice cubes, magenta background",
+    "confidence": 88
+   },
+   {
+    "guess": "glass of pink drink, ice cubes, magenta background",
+    "confidence": 92
+   }
+  ],
+  "elements": {
+   "ice": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     85
+    ],
+    "recorded_pass": true
+   },
+   "glass": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     85
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "009:1": {
+  "readers": [
+   {
+    "guess": "thermos flask (vacuum bottle with side handle)",
+    "confidence": 88
+   },
+   {
+    "guess": "thermos flask (vacuum bottle) with side handle and red cap",
+    "confidence": 90
+   },
+   {
+    "guess": "thermos flask (vacuum bottle with side handle); alternatives: travel mug, insulated water bottle",
+    "confidence": 90
+   }
+  ],
+  "elements": {
+   "thermos": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     72,
+     72,
+     72
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "009:2": {
+  "readers": [
+   {
+    "guess": "blue thermos flask with orange cap; orange mug with steam; lime-green background",
+    "confidence": 85
+   },
+   {
+    "guess": "blue thermos flask with coral cap, orange mug with steam, lime-green backdrop",
+    "confidence": 85
+   },
+   {
+    "guess": "blue thermos flask with orange cap; orange mug with steam; lime-green background",
+    "confidence": 85
+   }
+  ],
+  "elements": {
+   "thermos": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     72,
+     70,
+     55
+    ],
+    "recorded_pass": true
+   },
+   "coffee": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     80,
+     80,
+     80
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "009:3": {
+  "readers": [
+   {
+    "guess": "cutaway thermos flask with side handle (alternatives: travel mug, vacuum bottle)",
+    "confidence": 72
+   },
+   {
+    "guess": "thermos flask with side handle, cut open (alternatives: travel mug, flashlight)",
+    "confidence": 80
+   },
+   {
+    "guess": "thermos flask with side handle (cutaway view)",
+    "confidence": 80
+   }
+  ],
+  "elements": {
+   "thermos": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     55,
+     55,
+     70
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "009:4": {
+  "readers": [
+   {
+    "guess": "stylized travel thermos or water bottle with a side loop handle",
+    "confidence": 55
+   },
+   {
+    "guess": "thermos flask with a see-through window",
+    "confidence": 55
+   },
+   {
+    "guess": "thermos water bottle with a side ring handle",
+    "confidence": 40
+   }
+  ],
+  "elements": {
+   "thermos": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     55,
+     70,
+     55
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "009:5": {
+  "readers": [
+   {
+    "guess": "thermos flask with a side window",
+    "confidence": 72
+   },
+   {
+    "guess": "thermos flask (alternatives: travel coffee mug, water bottle)",
+    "confidence": 70
+   },
+   {
+    "guess": "travel French press mug (alternatives: thermos flask, glass-tube water bottle)",
+    "confidence": 65
+   }
+  ],
+  "elements": {
+   "thermos": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     62,
+     55,
+     72
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "009:6": {
+  "readers": [
+   {
+    "guess": "thermos flask with an orange cap",
+    "confidence": 72
+   },
+   {
+    "guess": "thermos flask with an orange lid and loop handle",
+    "confidence": 72
+   },
+   {
+    "guess": "thermos flask; alternatives: travel mug, flashlight",
+    "confidence": 80
+   }
+  ],
+  "elements": {
+   "thermos": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     72,
+     72,
+     55
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "009:7": {
+  "readers": [
+   {
+    "guess": "thermos flask (alternatives: vacuum bottle, insulated travel mug)",
+    "confidence": 90
+   },
+   {
+    "guess": "thermos flask (vacuum bottle); alternatives: travel mug, cordless power drill",
+    "confidence": 85
+   },
+   {
+    "guess": "thermos flask (vacuum bottle with a cup handle)",
+    "confidence": 92
+   }
+  ],
+  "elements": {
+   "thermos": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     80,
+     80,
+     80
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "010:1": {
+  "readers": [
+   {
+    "guess": "anatomical human heart, glass IV fluid bottle, clear connecting tube on blue background",
+    "confidence": 85
+   },
+   {
+    "guess": "anatomical human heart; clear IV fluid bottle with tubing; blue background",
+    "confidence": 88
+   },
+   {
+    "guess": "anatomical heart; glass IV fluid bottle; clear connecting tube",
+    "confidence": 85
+   }
+  ],
+  "elements": {
+   "heart": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     88
+    ],
+    "recorded_pass": true
+   },
+   "bottle": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     85,
+     88
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "010:2": {
+  "readers": [
+   {
+    "guess": "3D anatomical heart, glossy curved tube with red ball, glass cylinder of liquid",
+    "confidence": 85
+   },
+   {
+    "guess": "anatomical human heart, chrome tube with red ball, glass cup of water",
+    "confidence": 88
+   },
+   {
+    "guess": "anatomical 3D heart, curved chrome tube, glass cylinder with liquid",
+    "confidence": 85
+   }
+  ],
+  "elements": {
+   "heart": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     88,
+     75
+    ],
+    "recorded_pass": true
+   },
+   "glass": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     88,
+     75
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "010:3": {
+  "readers": [
+   {
+    "guess": "anatomical heart; alternatives: bottles with tubing, IV infusion setup",
+    "confidence": 80
+   },
+   {
+    "guess": "anatomical heart with tubing",
+    "confidence": 72
+   },
+   {
+    "guess": "human heart (alternatives: glass bottles with tubing; heart-lung bypass setup)",
+    "confidence": 70
+   }
+  ],
+  "elements": {
+   "bottle": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     80,
+     80
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "010:4": {
+  "readers": [
+   {
+    "guess": "anatomical human heart (alternatives: glass medicine vial, plastic bottle)",
+    "confidence": 90
+   },
+   {
+    "guess": "anatomical human heart (red, lower corner, among rows of glass vials)",
+    "confidence": 88
+   },
+   {
+    "guess": "anatomical heart (red, lower corner, among a grid of bottles)",
+    "confidence": 60
+   }
+  ],
+  "elements": {
+   "bottle": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     85,
+     90
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "010:5": {
+  "readers": [
+   {
+    "guess": "tower of stacked plastic bottles (alternatives: skyscraper; bottle-filled display column)",
+    "confidence": 40
+   },
+   {
+    "guess": "a tall stack of plastic bottles with white caps (alternatives: a bottle tower, a bottle pyramid)",
+    "confidence": 55
+   },
+   {
+    "guess": "bottle tower",
+    "confidence": 55
+   }
+  ],
+  "elements": {
+   "bottle": {
+    "pass_isolated": false,
+    "recorded_confidences": [
+     70,
+     80
+    ],
+    "recorded_pass": true
+   }
+  }
+ },
+ "010:6": {
+  "readers": [
+   {
+    "guess": "a 3D-rendered anatomical human heart",
+    "confidence": 97
+   },
+   {
+    "guess": "anatomical human heart (3D model, red with blue coronary vessels, on blue background)",
+    "confidence": 97
+   },
+   {
+    "guess": "anatomical human heart, pink with blue vessels, on blue background",
+    "confidence": 96
+   }
+  ],
+  "elements": {
+   "heart": {
+    "pass_isolated": true,
+    "recorded_confidences": [
+     95,
+     96
+    ],
+    "recorded_pass": true
+   }
+  }
+ }
+}
