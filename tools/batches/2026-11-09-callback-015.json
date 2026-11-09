@@ -1,0 +1,5 @@
+{
+ "name": "2026-11-09-callback-015",
+ "purpose": "Live proof of the stability hardening (2026-11-09): 015's final already rendered (chain DONE 10:52:10, queued.json 09:58:12) and no session built its package. The runner must take the post-render callback path, with no re-render, and end verified. Not queued in the orchestrator.",
+ "units": ["productions/mecanalia-es/015-por-que-las-moscas-se-frotan-las-patas"]
+}
