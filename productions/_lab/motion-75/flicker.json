@@ -1,0 +1,22 @@
+{
+  "frames": 150,
+  "still_px_pct": 65.94,
+  "edge_px_pct": 13.8,
+  "r75_upscaled": {
+    "F1_still": 0.0501,
+    "F2_still": 0.0953,
+    "F1_edge": 2.6407,
+    "F2_edge": 2.3103,
+    "F2_edge_p99": 34.0
+  },
+  "r100": {
+    "F1_still": 0.0387,
+    "F2_still": 0.0749,
+    "F1_edge": 2.622,
+    "F2_edge": 2.3807,
+    "F2_edge_p99": 36.0
+  },
+  "pixel_diff_75_vs_100_mean_edge": 1.167,
+  "ratio_F2_edge_75_over_100": 0.97,
+  "ratio_F1_still_75_over_100": 1.295
+}

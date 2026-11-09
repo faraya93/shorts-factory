@@ -33,4 +33,25 @@ A class above 15 s/frame needs a `cost_restage` note before modelling (`scenes_s
 
 **On paper first:** fewer volumetric objects in frame, volumes only near the camera, a context cue in place of a transmissive container (`assets/patterns.md`).
 
-**Not measured:** SSS skin alone (006 at 3-6 s/frame was not an outlier). Thin-structure shimmer at 75% over moving frames: the readers judge stills, so a tower or spring is for the contact sheet and the owner's eye.
+**Not measured:** SSS skin alone (006 at 3-6 s/frame was not an outlier). Thin-structure shimmer for classes other than the one tested in section 3 (spokes, bottle necks, fingers, spring towers, and anything on the `transparent` profile).
+
+## 3. The 75% motion test (2026-11-08; lab: `productions/_lab/motion-75/`, numbers in `flicker.json`)
+
+**Scene:** 007 candado, scene 6 (`code3d/scenes/candado_06.py`, 150 frames): the key turns, the shackle, a thin steel arch, pops 2.6 units out of the body, and the camera travels and tilts throughout. It represents the thin-structure class because the shackle is a slim curved bar with long high-contrast edges against the stage, and it MOVES in relation to a travelling camera: the exact case where under-resolved edges crawl or shimmer. Tuned profile (the default). Not covered: spokes and spring coils (denser thin structure), fingers, and anything on the `transparent` profile.
+
+**Method:** the same shot rendered twice through `tools/blender_run.py` (`render_pair.py`): once at the profile's 75% (810x1440) and once with `res=100` (1080x1920), same frames, same samples. Both encoded as the pipeline encodes clips (libx264 crf 16); the 75% clip then scaled with the editor's own filter (`scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop`), both decoded to 8-bit gray (`flicker.py`). Regions: STILL = pixels the 100% render never changes by more than 2 levels (65.9% of the frame); EDGE = Sobel edges of the 100% frames dilated 3 px, minus still (13.8%, the shackle and body outlines). F1 = mean |f[t+1]-f[t]|; F2 = mean |f[t+1]-2f[t]+f[t-1]| (smooth motion cancels, flicker does not). Gray levels, 0-255.
+
+| Measure | 75% upscaled | 100% | Ratio 75/100 |
+|---|---|---|---|
+| F1 in the still region (literal flicker) | 0.0501 | 0.0387 | 1.30 |
+| F2 in the still region | 0.0953 | 0.0749 | 1.27 |
+| F2 on thin-structure edges | 2.310 | 2.381 | 0.97 |
+| F2 on edges, 99th percentile | 34 | 36 | 0.94 |
+| F1 on edges | 2.641 | 2.622 | 1.01 |
+| Mean pixel difference 75 vs 100 on edges | 1.17 | | |
+
+Render time: 75% 312 s (2.08 s/frame), 100% 527 s (3.51 s/frame): -41%, as in section 2.
+
+**Verdict: 75% STANDS for the default tuned-profile finals, including the thin-structure class as tested.** On the shackle's edges the shimmer is indistinguishable from the 100% render (0.97, p99 34 against 36). The still region shows the only gap: 75% flickers 1.3x more, but the absolute difference is 0.011 gray levels per frame, two orders of magnitude below one visible level, and the editor's grain pass adds far more than that. No restriction is written.
+
+**Limits, stated plainly:** one scene, one thin object; the edge F2 is dominated by real motion (about 2.3 levels on both), so it can only show that 75% adds NO shimmer on top of it, not detect a small one; the still-region number is the sensitive one. The verdict is for the `tuned` profile. It does not extend to the `transparent` profile (denoised volumes and transmission have their own noise), to spoke or coil densities, or to what the owner's eye sees; a production whose owner review reports crawling edges reopens this with that scene as the next test.
