@@ -4,6 +4,7 @@
   .venv/bin/python factory/gate.py freeze|unfreeze <prod> [reason]   # v2 freeze point after the hero passes; a later change is an explicit, logged unfreeze
   .venv/bin/python factory/gate.py carry <prod> [scene ...]   # v2: stale records whose re-rendered stills match what the readers saw keep their reading
   .venv/bin/python factory/gate.py check productions/<ch>/<video> [scene]   # exit 1 unless a fresh PASS record exists (what the render driver calls)
+  (visibility records: tools/visibility_check.py --record; `check` refuses without them on gate_version 2)
   .venv/bin/python factory/gate.py check-colour productions/<ch>/<video>   # only the colour record (what the chain asks before re-rendering masked stills)
 The production's scenes.json declares `gate_stills`: {"<scene id>": [frame, ...]} (representative frames). The record build/gate/gate.json holds the
 verdict, the distance table (gate.md), the stills, and a fingerprint of everything that moves the in-frame colours (identity preset + support
@@ -24,6 +25,7 @@ import composition_gate  # noqa: E402
 import asset_library  # noqa: E402
 import blender_run  # noqa: E402
 import gate_deps  # noqa: E402
+import visibility_check  # noqa: E402
 
 SAMPLES = 48
 STILL_POLICY = {"engine": "CYCLES", "res": 50, "samples": SAMPLES}           # v2 tier 2 (readers + colour): half-resolution Cycles with the GPU denoiser, the final engine; part of every v2 fingerprint
@@ -197,6 +199,40 @@ def check_elements(prod: Path, scene: int | None = None) -> tuple[bool, str]:
     return True, "every declared scene element passed blind naming"
 
 
+def visibility_fingerprint(prod: Path, sid: int, eid: str) -> str:
+    """What a visibility record depends on: everything the scene's element record depends on, the element's entry, and the check's own thresholds."""
+    v = visibility_check
+    entry = ((_cfg(prod).get("visibility") or {}).get(str(sid)) or {}).get(eid)
+    return hashlib.sha256(json.dumps([scene_fingerprint(prod, sid), entry, v.VERSION, v.GRID, v.FOOTPRINT_DE, v.VISIBLE_DE, v.MIN_VISIBLE_AREA_PCT, v.MIN_P90_DE], sort_keys=True).encode()).hexdigest()[:16]
+
+
+def check_visibility(prod: Path, scene: int | None = None) -> tuple[bool, str]:
+    """VISIBILITY CHECK (owner finding 2026-11-08, docs/current/specs/asset-system.md "Visibility check"): every declared element must measurably change the rendered frame against what sits behind it.
+    Required for gate_version 2 productions; an earlier production is held to it only if it declares `visibility`. Records come only from tools/visibility_check.py --record."""
+    cfg = _cfg(prod)
+    vis = cfg.get("visibility")
+    if vis is None and cfg.get("gate_version") != 2:
+        return True, "no visibility declared (production predates the check)"
+    vis, decl = vis or {}, cfg.get("scene_elements") or {}
+    rec_path = prod / "build" / "gate" / "visibility.json"
+    recs = json.loads(rec_path.read_text(encoding="utf-8")) if rec_path.exists() else {}
+    for i in ([str(scene)] if scene is not None else sorted(set(decl) | set(vis), key=int)):
+        missing = [e["id"] for e in decl.get(i, []) if e["id"] not in vis.get(i, {})]
+        if missing:
+            return False, f"scene {i}: element(s) {', '.join(missing)} have no entry in scenes.json `visibility` (objects, frames)"
+        for eid in vis.get(i, {}):
+            r = recs.get(f"{i}:{eid}")
+            if not r:
+                return False, f"scene {i}: no visibility record for '{eid}'; run: .venv/bin/python tools/visibility_check.py --record {prod} {i}"
+            if r.get("isolation") != "headless":
+                return False, f"scene {i}: visibility of '{eid}' was not measured through tools/visibility_check.py"
+            if r.get("fingerprint") != visibility_fingerprint(prod, int(i), eid):
+                return False, f"scene {i}: visibility record of '{eid}' is STALE; measure again"
+            if not r.get("pass"):
+                return False, f"scene {i}: '{eid}' FAILED the visibility check ({r.get('frames')}); fix the element, not the threshold"
+    return True, "every declared element is visible in its rendered frames"
+
+
 def check_colour(prod: Path) -> tuple[bool, str]:
     """Only the colour record: what decides whether the masked stills must be re-rendered."""
     rec = prod / "build" / "gate" / "gate.json"
@@ -217,7 +253,10 @@ def check(prod: Path, scene: int | None = None) -> tuple[bool, str]:
     ok, msg = check_hero(prod)
     if not ok:
         return ok, msg
-    return check_elements(prod, scene)
+    ok, msg = check_elements(prod, scene)
+    if not ok:
+        return ok, msg
+    return check_visibility(prod, scene)
 
 
 def check_hero(prod: Path) -> tuple[bool, str]:

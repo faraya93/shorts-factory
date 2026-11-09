@@ -1,0 +1,15 @@
+{
+ "009-*": {"6": {"__control__": {"objects": [], "frames": [130]}, "plume": {"objects": ["plume"], "frames": [100, 130, 150]}, "thermos": {"objects": ["outer", "inner", "liq", "band_*", "cap_*", "handle", "front_panel"], "frames": [110]}},
+           "1": {"steam": {"objects": ["steam"], "frames": [200, 260]}, "thermos": {"objects": ["outer", "inner", "liq", "band_*", "cap_*", "handle", "front_panel"], "frames": [40]}},
+           "7": {"thermos": {"objects": ["outer", "inner", "liq", "band_*", "cap_*", "handle", "front_panel"], "frames": [60]}}},
+ "006-*": {"1": {"__control__": {"objects": [], "frames": [120]}, "hand": {"objects": ["hand", "hand_thumb_tip"], "frames": [120]}, "water": {"objects": ["tray_water"], "frames": [120]}}},
+ "008-*": {"1": {"__control__": {"objects": [], "frames": [120]}, "ice": {"objects": ["cube*"], "frames": [120]}, "glass": {"objects": ["glass", "glass_liquid"], "frames": [120]}},
+           "2": {"ice": {"objects": ["cube*", "cellice*"], "frames": [120]}, "glass": {"objects": ["glass2", "glass2_liquid"], "frames": [120]}},
+           "3": {"ice": {"objects": ["cube*"], "frames": [120]}, "glass": {"objects": ["glass", "glass_liquid"], "frames": [120]}},
+           "4": {"ice": {"objects": ["cube*"], "frames": [120]}, "tank": {"objects": ["tank_*", "lake_water"], "frames": [120]}},
+           "5": {"ice": {"objects": ["pile*", "raft*"], "frames": [120]}, "tank": {"objects": ["wb*", "wf*", "wl*", "wr*", "water*"], "frames": [120]}},
+           "6": {"ice": {"objects": ["lid"], "frames": [120]}, "glass": {"objects": ["glass", "glass_liquid"], "frames": [120]}}},
+ "010-*": {"1": {"heart": {"objects": ["heart", "pump_tube"], "frames": [120]}, "bottle": {"objects": ["bottle_*"], "frames": [120]}},
+           "2": {"heart": {"objects": ["heart", "pump_tube"], "frames": [120]}, "glass": {"objects": ["cup", "cup_liquid"], "frames": [120]}},
+           "6": {"heart": {"objects": ["heart"], "frames": [120]}}}
+}

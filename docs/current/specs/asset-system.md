@@ -81,6 +81,28 @@ Sequence: hero rig or asset, neutral still, one production still (`hero_still`),
 
 `gate.py stills` reuses the beauty frames the colour run already rendered. Record elements with `tools/blind_read.py --record element <prod> <scene> <id> [--multi] <stills>`. A GUI Blender must be closed or idle before a headless job; `SF_ALLOW_GUI=1` is for small asset-job stills only, never a final.
 
+## Visibility check (binding for gate_version 2, lens decision 2026-11-08; evidence: docs/current/reports/visibility-calibration/)
+
+Why: the owner found 009's steam / heat column barely visible on the lime stage, and nothing had caught it. The likeness gate asks whether a reader can name an element, the colour gate compares declared or opaque colours. For a translucent volume the deciding quantity is its blended colour against what is really behind it.
+
+**Measurement.** For every declared element, at the final profile and the narration slot: the frame WITH the element against the SAME frame rendered WITHOUT it (the plate). `tools/visibility_hide_hook.py` hides the element's objects at render time, so no scene script or hashed library changes. Both images are box-averaged to 270x480 (grain and render noise out, about phone resolution) and compared per cell in CIEDE2000.
+
+| Quantity | Definition | Pass |
+|---|---|---|
+| footprint | cells with dE >= 3 (below it counts as unchanged) | not a bar |
+| `p90_de` | 90th percentile of dE inside the footprint | >= 17 |
+| `area_pct_de10` | % of the frame with dE >= 10 | >= 0.8 |
+
+An element passes only when both hold at every declared frame. Thresholds are set from measurement: `p90_de` is the midpoint of the gap between the worst passing strong element (23.2) and the best failing 009 effect (11.2); the area bar sits under the smallest strong element (1.07). Never move a threshold to pass an element: fix the element.
+
+**Declaration.** scenes.json `visibility`: `{"<scene>": {"<element id>": {"objects": ["glob", ...], "frames": [n, ...]}}}`, with frames where the element should be seen. Every element of `scene_elements` needs an entry; an effect not named in `scene_elements` may be added too.
+
+**Route.** `tools/visibility_check.py --record <prod> [scene ...]` is the only way to make a record (`build/gate/visibility.json`). As with `tools/blind_read.py`, the measurement runs as a fresh process in an empty folder on neutrally named copies, and the record is stamped `isolation: headless`; every result counts. `gate.check` refuses a final render on a missing, unstamped, stale or failing record. The fingerprint is the scene's own plus the element entry and the thresholds. Required on `gate_version: 2`; an earlier production is held to it only if it declares `visibility`.
+
+**Audit of a finished video.** `--audit-final <prod> <scene> <objects> <frames...>` measures the frames of final.mp4 against plates graded with the editor's shared pass; cells where final.mp4 differs from its own clip frame (subtitles, overlays) are left out.
+
+What it does not measure: shape. A hard-edged box passes if it is strong enough; shape stays with the lenses' contact sheet and the owner's eye.
+
 ## Advance assets: recurring element classes are built once, ahead of the productions (binding, owner statement 2026-11-08; lens-recorded; rule only, built nothing)
 
 Why: a class of element that keeps coming back gets improvised inside each production, under the render timebox, and the improvisation is paid again every time (or the production leans on a fixed-pose asset that cannot do what the script needs). The rule moves that cost out of the production: build the class once, in advance, as a sealed library asset that carries the poses, states and motion controls its scripts demand. This lives in the asset system and extends the library; there is no parallel system, and the routing, licence and gate rules above apply unchanged.
