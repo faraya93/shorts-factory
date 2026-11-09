@@ -25,21 +25,14 @@ wet = S.ball("wet_patch", S.hero("rubber_k", "#8A6A43", rough=0.12, coat=0.9), 1
 S.size(wet, [(0, 1.0), (ts + 0.3, 1.0), (tp - 1.0, 1e-4)])
 S.move(F.root, [(0, L), (ts, L), (ts + 0.3, (L[0], L[1], L[2] - 0.4)), (ts + 0.8, (L[0], L[1], L[2] - 0.1)), (ts + 1.3, (L[0], L[1], L[2] - 0.4)), (ts + 1.8, (L[0], L[1], L[2] - 0.1)),
                   (ts + 2.3, (L[0], L[1], L[2] - 0.4)), (tp - 1.0, (L[0], L[1], L[2] - 0.1)), (S.T, L)])
-specs = []
 for i in range(10):
-    leg = "legA" if i % 2 == 0 else "legB"
-    b = S.ball(f"grime_{i}", S.hero("g_mark", "#4A2E14", rough=0.9, coat=0.0), 0.3, (0, 0, 0), seg=10)
-    S.size(b, [(0, 1e-4), (tp - 0.5 + 0.12 * i, 1e-4), (tp + 0.1 + 0.12 * i, 1.0)])
-    specs.append((b, leg, i))
+    b = S.ball(f"grime_{i}", S.hero("g_mark", "#4A2E14", rough=0.9, coat=0.0), 0.22, (m[0] + 2.2 * math.cos(i * 1.3), m[1] + 1.8 * math.sin(i * 1.3), TOP + 0.15), seg=14)
+    S.size(b, [(0, 1e-4), (tp + 0.1 * i, 1e-4), (tp + 0.1 * i + 0.5, 1.0)])
 
 
 def upd(t):
     mr.rub(F, 0.0, 0.0)
-    for b, leg, i in specs:
-        tip = mr.tarsus(F, leg)
-        k = min(1.0, max(0.0, (t - tp - 0.3 - 0.1 * i) / 1.4))
-        tx, ty = m[0] + 1.6 * math.cos(i * 1.2), m[1] + 1.6 * math.sin(i * 1.2)
-        b.location = tuple(p + (q - p) * k for p, q in zip(tip, (tx, ty, TOP + 0.2)))
+    mr.feet(F, coat=1.0)
 
 
 S.every_frame(upd)

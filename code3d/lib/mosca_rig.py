@@ -1,4 +1,5 @@
 """Rig of production 015 (why flies rub their legs): the housefly asset with its two front-leg bones, a revolved plate and the library props (trash bag, banana, bread slice). Runs inside Blender. Scene units are centimetres; the fly is enlarged (the asset is 9.6 cm at K=100, a real fly is under 1 cm)."""
+import heapq
 import math
 import sys
 from pathlib import Path
@@ -36,7 +37,95 @@ def fly(S, loc=(0.0, 0.0, 0.0), yaw=0.0, size=1.0, pop=None):
     arm.scale = (K * size,) * 3
     for n in ("legA", "legB"):
         arm.pose.bones[n].rotation_mode = "QUATERNION"
-    return Fly(root, arm, body)
+    F = Fly(root, arm, body)
+    foot_material(F)
+    return F
+
+
+GRIME = "#4A2E14"
+GLOW = "#1FB6C9"
+TIPS = (31766, 16272)                                                           # the two front-leg tip vertices of the housefly scan (legA, legB)
+TARSUS_LEN = 0.014                                                              # metres on the asset: the foot
+
+
+def foot_material(F):
+    """Per-vertex mask of the two front feet (from the leg weights) and two controls in the fly's own material: `coat` browns the feet (trash grime), `glow` lights them teal
+    (taste sensors). Nothing floats beside the leg, so the effect stays attached under any pose or camera."""
+    me = F.body.data
+    legs = {F.body.vertex_groups[n].index for n in ("legA", "legB")}
+    mask = me.attributes.get("foot") or me.attributes.new("foot", "FLOAT", "POINT")
+    vals = [0.0] * len(me.vertices)
+    for v in me.vertices:
+        vals[v.index] = max((g.weight for g in v.groups if g.group in legs), default=0.0)
+    mask.data.foreach_set("value", vals)
+    tars = me.attributes.get("tarsus") or me.attributes.new("tarsus", "FLOAT", "POINT")                    # the last ~1.5 cm of each leg: where the taste sensors sit
+    adj = [[] for _ in me.vertices]
+    for e in me.edges:
+        a, b = e.vertices
+        d = (me.vertices[a].co - me.vertices[b].co).length
+        adj[a].append((b, d))
+        adj[b].append((a, d))
+    tv = [0.0] * len(me.vertices)
+    for tip in TIPS:
+        dist = {tip: 0.0}
+        heap = [(0.0, tip)]
+        while heap:
+            d, a = heapq.heappop(heap)
+            if d > dist.get(a, 9.0) or d > TARSUS_LEN:
+                continue
+            for b, w in adj[a]:
+                nd = d + w
+                if nd < dist.get(b, 9.0):
+                    dist[b] = nd
+                    heapq.heappush(heap, (nd, b))
+        for i, d in dist.items():
+            tv[i] = max(tv[i], max(0.0, 1.0 - d / TARSUS_LEN))
+    tars.data.foreach_set("value", tv)
+    nt = me.materials[0].node_tree
+    b = next(n for n in nt.nodes if n.type == "BSDF_PRINCIPLED")
+    base = b.inputs["Base Color"]
+    src = base.links[0].from_socket if base.links else None
+    at = nt.nodes.new("ShaderNodeAttribute")
+    at.attribute_name = "foot"
+    ramp = nt.nodes.new("ShaderNodeMapRange")                                  # weights ramp 0..1 along the leg; keep the feet only
+    ramp.inputs["From Min"].default_value, ramp.inputs["From Max"].default_value = 0.55, 0.95
+    nt.links.new(at.outputs["Fac"], ramp.inputs["Value"])
+    coat = nt.nodes.new("ShaderNodeValue")
+    coat.name = "coat"
+    glow = nt.nodes.new("ShaderNodeValue")
+    glow.name = "glow"
+    m1 = nt.nodes.new("ShaderNodeMath")
+    m1.operation = "MULTIPLY"
+    nt.links.new(ramp.outputs["Result"], m1.inputs[0])
+    nt.links.new(coat.outputs["Value"], m1.inputs[1])
+    mix = nt.nodes.new("ShaderNodeMixRGB")
+    mix.inputs["Color2"].default_value = c.linear(GRIME)
+    if src is not None:
+        nt.links.new(src, mix.inputs["Color1"])
+    else:
+        mix.inputs["Color1"].default_value = base.default_value
+    nt.links.new(m1.outputs["Value"], mix.inputs["Fac"])
+    nt.links.new(mix.outputs["Color"], base)
+    at2 = nt.nodes.new("ShaderNodeAttribute")
+    at2.attribute_name = "tarsus"
+    m2 = nt.nodes.new("ShaderNodeMath")
+    m2.operation = "MULTIPLY"
+    nt.links.new(at2.outputs["Fac"], m2.inputs[0])
+    nt.links.new(glow.outputs["Value"], m2.inputs[1])
+    m3 = nt.nodes.new("ShaderNodeMath")
+    m3.operation = "MULTIPLY"
+    m3.inputs[1].default_value = 3.0
+    nt.links.new(m2.outputs["Value"], m3.inputs[0])
+    b.inputs["Emission Color"].default_value = c.linear(GLOW)
+    nt.links.new(m3.outputs["Value"], b.inputs["Emission Strength"])
+    F.mat = me.materials[0]
+
+
+def feet(F, coat=0.0, glow=0.0):
+    """coat 0..1 browns the feet; glow 0..1 lights them teal (a covered foot does not glow)."""
+    nt = F.mat.node_tree
+    nt.nodes["coat"].outputs[0].default_value = coat
+    nt.nodes["glow"].outputs[0].default_value = glow * (1.0 - coat)
 
 
 def _rot(arm, name, axis, deg):

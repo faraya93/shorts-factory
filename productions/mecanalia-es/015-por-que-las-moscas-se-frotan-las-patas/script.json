@@ -39,22 +39,119 @@
       130
     ],
     "2": [
-      120
+      20,
+      145
     ],
     "3": [
-      150
+      105
     ],
     "4": [
-      110
+      110,
+      150
     ],
     "5": [
       150
     ],
     "6": [
+      80,
       200
     ]
   },
   "caption_draft": "Las moscas sienten el sabor con las patas, por eso se las frotan: limpian sus sensores, no tu comida. Y como no pueden masticar, escupen un jugo que deshace lo que van a comer. 🤢 Envíaselo a ese amigo que espanta la mosca con la mano y sigue comiendo como si nada.",
+  "visibility": {
+    "1": {
+      "fly": {
+        "objects": [
+          "fly_body*"
+        ],
+        "frames": [
+          130
+        ]
+      },
+      "plate": {
+        "objects": [
+          "plate*"
+        ],
+        "frames": [
+          130
+        ]
+      }
+    },
+    "2": {
+      "trash-bag": {
+        "objects": [
+          "trash_bag*"
+        ],
+        "frames": [
+          20
+        ]
+      },
+      "fly-on-peel": {
+        "objects": [
+          "fly_body*"
+        ],
+        "frames": [
+          145
+        ]
+      },
+      "banana-peel": {
+        "objects": [
+          "banana*"
+        ],
+        "frames": [
+          20
+        ]
+      }
+    },
+    "3": {
+      "fly-lit-feet": {
+        "objects": [
+          "fly_body*"
+        ],
+        "frames": [
+          105
+        ]
+      }
+    },
+    "4": {
+      "bread": {
+        "objects": [
+          "bread_slice*"
+        ],
+        "frames": [
+          110
+        ]
+      },
+      "saliva-drop": {
+        "objects": [
+          "drop*"
+        ],
+        "frames": [
+          150
+        ]
+      }
+    },
+    "5": {
+      "fly-mouth": {
+        "objects": [
+          "fly_body*"
+        ],
+        "frames": [
+          150
+        ]
+      }
+    },
+    "6": {
+      "fly-takeoff": {
+        "objects": [
+          "fly_body*"
+        ],
+        "frames": [
+          80
+        ]
+      }
+    }
+  },
   "scene_elements": {
     "1": [
       {
@@ -95,33 +192,51 @@
           "bolsa"
         ],
         "route": "asset",
-        "source": "library trash-bag"
+        "source": "library trash-bag; read in the wide opening frame (the bag cropped by a macro read as a shoe, 55/80/60 FAIL; rung 1 re-stage)",
+        "frames": [
+          20
+        ]
       },
       {
-        "id": "fly-leg",
-        "name": "fly leg on a peel",
+        "id": "fly-on-peel",
+        "name": "housefly walking on a banana",
         "aliases": [
-          "fly leg",
-          "insect leg",
-          "fly foot",
-          "leg"
+          "fly",
+          "housefly",
+          "mosca"
+        ],
+        "frames": [
+          145
         ],
         "route": "asset",
-        "source": "library housefly front leg, hairs and pad lobes built on (fallback rung 1 of the audit if the bare scan leg reads as a twig)"
+        "source": "library housefly with its front feet coating brown (foot_material), walking over the library banana; REWRITE 2026-11-09: the leg-only macro 'fly leg on a peel' read 40/60/45 (FAIL) and was replaced by the whole walking fly"
+      },
+      {
+        "id": "banana-peel",
+        "name": "banana",
+        "aliases": [
+          "banana",
+          "peel",
+          "plantain"
+        ],
+        "route": "asset",
+        "source": "library banana",
+        "frames": [
+          20
+        ]
       }
     ],
     "3": [
       {
-        "id": "taste-sensors",
-        "name": "fly foot with glowing sensors",
+        "id": "fly-lit-feet",
+        "name": "housefly with glowing feet",
         "aliases": [
-          "fly leg",
-          "insect leg",
-          "fly foot",
-          "leg"
+          "fly",
+          "housefly",
+          "mosca"
         ],
         "route": "asset",
-        "source": "library housefly leg, emissive points on the outside of the tarsus (audit fallback rung 2 staging, chosen from the start for cost)"
+        "source": "library housefly, emissive tarsi (foot_material glow) that go dark under grime and relight after the rub; REWRITE 2026-11-09: the foot macros 'taste-sensors' (fly leg) read 40/35/40 and 45/35/55 (FAIL twice), replaced by the whole fly with lit feet"
       }
     ],
     "4": [
@@ -135,7 +250,10 @@
           "pan"
         ],
         "route": "asset",
-        "source": "library bread-slice"
+        "source": "library bread-slice",
+        "frames": [
+          110
+        ]
       },
       {
         "id": "saliva-drop",
@@ -147,7 +265,10 @@
           "liquid"
         ],
         "route": "material",
-        "source": "glossy transmissive bead from the fly mouth onto the bread, one transmission layer"
+        "source": "glossy transmissive teardrop hanging from the fly mouth over the bread, one transmission layer",
+        "frames": [
+          150
+        ]
       }
     ],
     "5": [
@@ -173,7 +294,10 @@
           "mosca"
         ],
         "route": "asset",
-        "source": "library housefly"
+        "source": "library housefly; read at the takeoff frame (the fly as a speck in the wide closing frame read as bread 60/70/70 FAIL; rung 1 re-stage of the reading frame)",
+        "frames": [
+          80
+        ]
       }
     ]
   },

@@ -23,7 +23,7 @@ F.root.location = L
 import bpy  # noqa: E402
 bpy.context.view_layer.update()
 m = mr.mouth(F)
-drop = S.ball("drop", S.glass("#CFE8F0", alpha=0.55, name="water"), 0.55, m, seg=16)
+drop = S.ball("drop", S.glass("#6FB4D6", alpha=0.5, rough=0.02, name="water"), 0.5, m, shape=(0.8, 0.8, 1.15), seg=48)
 S.move(drop, [(0, m), (te, m), (te + 0.7, (m[0], m[1], TOP + 0.4))])
 S.size(drop, [(0, 1e-4), (te - 0.3, 1e-4), (te, 1.0), (te + 0.75, 1.0), (te + 0.85, 1e-4)])
 wet = S.ball("wet_patch", S.hero("rubber_k", "#8A6A43", rough=0.12, coat=0.9), 1.0, (m[0], m[1], TOP + 0.05), shape=(1.5, 1.2, 0.12), seg=20)
