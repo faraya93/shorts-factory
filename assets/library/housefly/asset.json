@@ -1,0 +1,70 @@
+{
+  "slug": "housefly",
+  "name": "Housefly",
+  "aliases": [
+    "fly",
+    "housefly",
+    "mosca"
+  ],
+  "family": "objects",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a housefly",
+    "seen_at": "macro close-up to mid frame; body fills 30-60% of the frame height",
+    "moving_parts": [
+      "front legs (rub), wings, proboscis: NOT separated in the scan; a production-level build (two-chain leg rig, labellum) is required before scenes 2, 3, 5"
+    ],
+    "states": [
+      "resting on the surface"
+    ],
+    "style_notes": "realistic scan, single mesh and one material; restyle the material to the channel look per production"
+  },
+  "source": {
+    "registry_id": "sketchfab",
+    "url": "https://sketchfab.com/3d-models/musca-domestica-157900941156422fbd9dcdfc38a3be19",
+    "asset_id": "157900941156422fbd9dcdfc38a3be19",
+    "author": "disc3d",
+    "retrieved": "2026-11-09"
+  },
+  "licence": {
+    "id": "CC0-1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": null,
+    "note": "CC0 public domain scan of a real 5 mm housefly",
+    "decision": "CC0 first (CLAUDE.md asset routing)"
+  },
+  "files": {
+    "blend": "housefly.blend",
+    "sha256": "02250a7868f6dcf8730474eb76f50184d590ae7859b65b6ddcd17b5b58e078f7",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": 0.0959,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "a house fly (dark, dead-looking insect on grey background); alternatives: blow fly, robber fly",
+        "a housefly (dark, dead-looking fly, 3D render)",
+        "housefly (alternatives: blow fly, horse fly)"
+      ],
+      "confidences": [
+        85,
+        80,
+        85
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}
