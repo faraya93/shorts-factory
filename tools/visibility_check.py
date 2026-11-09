@@ -112,6 +112,8 @@ def render(prod: Path, cfg: dict, script: Path, frames: list[int], out: Path, hi
     out.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, SF_VIS_HIDE=",".join(hide))
     env.pop("SF_VIS_DUMP", None)
+    for f in frames:                                                          # a stale still must never pass for a fresh render
+        (out / f"still-{f:04d}.png").unlink(missing_ok=True)
     for _attempt in (1, 2):                                                   # one retry: Metal can fail transiently at kernel load (seen 2026-11-08)
         r = blender_run.blender(["-b", "--python-expr", HOOK, "--python", str(script), "--", f"production={prod}", "mode=final", f"slot={_slot_frames(prod, int(script.stem.rsplit('_', 1)[-1]))}", f"stills={','.join(map(str, frames))}", f"out={out}", *extra], capture_output=True, text=True, env=env)
         if all((out / f"still-{f:04d}.png").exists() for f in frames):

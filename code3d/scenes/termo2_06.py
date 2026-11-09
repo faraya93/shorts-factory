@@ -8,7 +8,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import setpiece as sp  # noqa: E402
 import real_kit as rk  # noqa: E402
 import thermos_real as tr  # noqa: E402
-from termo2_common import grow_ray, window  # noqa: E402
+from termo2_common import grow_ray, window, wisp_steam  # noqa: E402
+from common import linear as c_lin  # noqa: E402
 
 S = sp.Shot(139, floor_z=0.0)
 P = tr.thermos(S)
@@ -36,7 +37,7 @@ tl = S.t("tapa:", default=1.4)
 S.move(cap, [(0, (0, 0, tr.H + 3.2)), (tl, (0, 0, tr.H + 3.2)), (tl + 0.8, (5, 0, tr.H + 10)), (T, (5, 0, tr.H + 10))])
 tr.set_cut(P, 0.25)
 S.every_frame(lambda t: setattr(P["hot"], "default_value", 0.0))
-pv, pw = rk.heat_volume(S, "plume", (9, 9, 30), (0, 0, 300), "#FF7A2A", density=0.01, strength=1.2, scale=0.5)
-S.every_frame(lambda t: (setattr(pv, "location", (0, 0, tr.H + 14) if t > tl + 0.2 else (0, 0, 300)), setattr(pw, "default_value", t * 0.7)))
+pv, pw = wisp_steam(S, "plume", (14, 14, 34), (0, 0, 300), density=2.8, warp=0.3, gain=3.0, scatter=(0.02, 0.02, 0.05, 1.0), emit=c_lin(S.p["accent"]), seed=5.7)   # absorbing and self-lit: additive emission washes out on bright lime, and no light can draw a step across it (2026-11-08)
+S.every_frame(lambda t: (setattr(pv, "location", (0, 0, tr.H + 16) if t > tl + 0.2 else (0, 0, 300)), setattr(pw, "default_value", t * 0.7)))
 S.cam([(0, (0, 0, 14), 96, 4, -20), (tl, (0, 0, 18), 88, 14, -8), (T, (0, 0, 22), 96, 20, 16)])
 S.go()

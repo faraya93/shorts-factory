@@ -33,6 +33,25 @@
      40,
      200
     ]
+   },
+   {
+    "id": "steam",
+    "name": "steam rising from the open thermos",
+    "aliases": [
+     "steam",
+     "vapor",
+     "vapour",
+     "heat",
+     "hot air",
+     "smoke",
+     "plume"
+    ],
+    "route": "material",
+    "source": "thermos_real.steam_column, density-driven white volume",
+    "frames": [
+     200,
+     260
+    ]
    }
   ],
   "2": [
@@ -148,6 +167,25 @@
     "frames": [
      40,
      110
+    ]
+   },
+   {
+    "id": "heat_column",
+    "name": "heat column leaving the open thermos",
+    "aliases": [
+     "steam",
+     "vapor",
+     "vapour",
+     "heat",
+     "hot air",
+     "smoke",
+     "plume"
+    ],
+    "route": "material",
+    "source": "thermos_real.steam_column tinted with the violet accent",
+    "frames": [
+     100,
+     130
     ]
    }
   ],
@@ -477,5 +515,157 @@
   "floor": 50,
   "reason": "one-off owner exception 2026-11-06 for the 006/008/009 resume: secondary elements only, never the hero; standing floor stays 60",
   "authorised": "owner, 2026-11-06"
+ },
+ "visibility": {
+  "1": {
+   "thermos": {
+    "objects": [
+     "outer",
+     "inner",
+     "liq",
+     "band_*",
+     "cap_*",
+     "handle",
+     "front_panel"
+    ],
+    "frames": [
+     40
+    ]
+   },
+   "steam": {
+    "objects": [
+     "steam"
+    ],
+    "frames": [
+     200,
+     260
+    ]
+   }
+  },
+  "2": {
+   "thermos": {
+    "objects": [
+     "outer",
+     "inner",
+     "liq",
+     "band_*",
+     "cap_*",
+     "handle",
+     "front_panel"
+    ],
+    "frames": [
+     70
+    ]
+   },
+   "coffee": {
+    "objects": [
+     "cup",
+     "cup_coffee",
+     "cup_handle"
+    ],
+    "frames": [
+     135
+    ]
+   },
+   "cup_steam": {
+    "objects": [
+     "cup_steam"
+    ],
+    "frames": [
+     135,
+     155
+    ]
+   }
+  },
+  "3": {
+   "thermos": {
+    "objects": [
+     "outer",
+     "inner",
+     "liq",
+     "band_*",
+     "cap_*",
+     "handle",
+     "front_panel"
+    ],
+    "frames": [
+     60
+    ]
+   }
+  },
+  "4": {
+   "thermos": {
+    "objects": [
+     "outer",
+     "inner",
+     "liq",
+     "band_*",
+     "cap_*",
+     "handle",
+     "front_panel"
+    ],
+    "frames": [
+     150
+    ]
+   }
+  },
+  "5": {
+   "thermos": {
+    "objects": [
+     "outer",
+     "inner",
+     "liq",
+     "band_*",
+     "cap_*",
+     "handle",
+     "front_panel"
+    ],
+    "frames": [
+     150
+    ]
+   }
+  },
+  "6": {
+   "thermos": {
+    "objects": [
+     "outer",
+     "inner",
+     "liq",
+     "band_*",
+     "cap_*",
+     "handle",
+     "front_panel"
+    ],
+    "frames": [
+     110
+    ]
+   },
+   "heat_column": {
+    "objects": [
+     "plume"
+    ],
+    "frames": [
+     100,
+     130,
+     150
+    ]
+   }
+  },
+  "7": {
+   "thermos": {
+    "objects": [
+     "outer",
+     "inner",
+     "liq",
+     "band_*",
+     "cap_*",
+     "handle",
+     "front_panel"
+    ],
+    "frames": [
+     60
+    ]
+   }
+  }
  }
 }
