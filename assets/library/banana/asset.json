@@ -1,0 +1,68 @@
+{
+  "slug": "banana",
+  "name": "Banana",
+  "aliases": [
+    "banana",
+    "banana peel",
+    "plátano"
+  ],
+  "family": "objects",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a banana",
+    "seen_at": "close to mid frame",
+    "moving_parts": [],
+    "states": [
+      "whole banana"
+    ],
+    "style_notes": "photoscan single banana; the production ages it by material (brown, spotted) for the rotting peel"
+  },
+  "source": {
+    "registry_id": "polyhaven",
+    "url": "https://polyhaven.com/a/bananas",
+    "asset_id": "bananas",
+    "author": "Alexander Shulha",
+    "retrieved": "2026-11-09"
+  },
+  "licence": {
+    "id": "CC0-1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": null,
+    "note": "Poly Haven CC0",
+    "decision": "CC0 first"
+  },
+  "files": {
+    "blend": "banana.blend",
+    "sha256": "757000a8cf282fb6157b721133bb8dc6742dc4c1d8598fca5d02b88993279966",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": 0.177,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "a banana (curved yellow banana fruit with brown-speckled peel)",
+        "a banana",
+        "a banana (curved yellow fruit with stem and dark blossom end)"
+      ],
+      "confidences": [
+        97,
+        98,
+        97
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

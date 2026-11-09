@@ -1,0 +1,72 @@
+{
+  "slug": "bread-bun",
+  "name": "Bread bun",
+  "aliases": [
+    "bread",
+    "bun",
+    "roll",
+    "pan"
+  ],
+  "family": "objects",
+  "created": "2026-11-09",
+  "status": "rejected",
+  "route": "library",
+  "brief": {
+    "must_read_as": "",
+    "seen_at": "",
+    "moving_parts": [],
+    "states": [],
+    "style_notes": ""
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "bread-bun.blend",
+    "sha256": "7d1064f0fb78dac8d51ecb1d55d2f4ef4d1ba3526373768b72ab7e468d3ca977",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": false,
+      "date": "2026-11-09",
+      "guesses": [
+        "bread roll (a bun with a crease across the top)",
+        "bread roll or bun",
+        "bread roll (a gray, seam-folded dinner bun or loaf)"
+      ],
+      "confidences": [
+        45,
+        35,
+        35
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [
+    {
+      "id": "polyhaven hamburger_buns (one bun)",
+      "reason": "isolated blind naming FAILED at neutral stills: right name (bread roll / bun) but confidence 45/35/35, floor 60. Grey, seam-folded look reads weakly. Not re-rolled, no alias added. Next candidate: a sliced-bread or loaf asset (Sketchfab CC0), or the croissant (Poly Haven) only if the narration noun is adjusted by the scriptwriter lens."
+    }
+  ],
+  "productions": []
+}

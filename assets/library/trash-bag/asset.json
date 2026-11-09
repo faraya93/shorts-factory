@@ -1,0 +1,69 @@
+{
+  "slug": "trash-bag",
+  "name": "Trash bag",
+  "aliases": [
+    "trash bag",
+    "garbage bag",
+    "bag",
+    "bolsa"
+  ],
+  "family": "objects",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a black plastic trash bag",
+    "seen_at": "mid to wide frame, about 40% of the frame",
+    "moving_parts": [],
+    "states": [
+      "static prop"
+    ],
+    "style_notes": "photoscan; retint or restyle per production"
+  },
+  "source": {
+    "registry_id": "polyhaven",
+    "url": "https://polyhaven.com/a/trashbag",
+    "asset_id": "trashbag",
+    "author": "Benny Weimer",
+    "retrieved": "2026-11-09"
+  },
+  "licence": {
+    "id": "CC0-1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": null,
+    "note": "Poly Haven CC0",
+    "decision": "CC0 first"
+  },
+  "files": {
+    "blend": "trash-bag.blend",
+    "sha256": "1b32788628ac93334bbc4cd14fccfc99376ffec8931eab24efe2a404372f59ad",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": 0.575,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "black plastic garbage bag (tied trash bag)",
+        "black plastic trash bag (garbage bag), tied at the top",
+        "black plastic garbage bag (trash bag, tied at the top)"
+      ],
+      "confidences": [
+        92,
+        92,
+        92
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}
