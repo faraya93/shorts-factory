@@ -102,3 +102,11 @@ Three runner sessions on this date found the production still at script stage (o
 Resume from: asset search/import for the fly (Sketchfab 15790094, CC0) and props per the fallbacks above, then scenes.json (gate_version 2, hero_rig, hero_still, render_cost_class per scene), beat sheet and lens-decisions row, hero gate and freeze, riskiest scene (leg/mouthparts) next. Needs a session that is allowed to run the Python factory tools and Blender.
 
 - UNFREEZE 2026-11-09: mosca_rig.fly gained the foot_material coat/glow controls (no change to scene 1's picture: coat and glow are 0); hero re-read
+
+## REPORT 2026-11-09: FINISHED, VERIFIED, PACKAGED (awaiting the owner's verdict; nothing published)
+- Final render: chain log `output/chain-015-por-que-las-moscas-se-frotan-las-patas.log` ends `DONE` (10:52:10); grep for FAILED/INCOMPLETE/Traceback/WARNING finds nothing. Six code3d scenes, $0 fal spend.
+- `final.mp4` 56.2 s (inside the 45-60 s band), 149.3 MB, 1080x1920; `cover.jpg` 202 KB. Subtitles: 50 phrases / 169 word states. Word-locked overlays: scene 1 label @lavan, scene 2 label @almohadillas, scene 5 counter @seiscientos, scene 6 ENVÍASELO tag @Envíaselo.
+- Visual QA (backdrop dE, advisory review marks): scene 04 19.7 and scene 06 57.5 flagged for review (scene 6 is the takeoff frame, intentionally not the stage backdrop); scenes 1-3, 5 ok-range or 14.0.
+- `tools/verify_production.py`: PASS. `publish_package.py build` + `check`: OK. Title "¿Por qué las moscas se frotan las patas? 🤢"; no asset credit in the description.
+- Disclosures for the owner's eye (from the gate record): no foot close-up in the video (scenes 2-3 show the whole fly with brown or lit feet); scene 5 shows the melted patch shrinking under the bobbing head, with no mouthpart close-up. Not audited by ear or eye: I cannot watch or hear the video.
+- Decisions for you: publish or reject verdict on the finished video (owner-only). Bank: no refill action from this session.

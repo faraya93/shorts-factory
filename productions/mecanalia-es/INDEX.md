@@ -26,6 +26,6 @@ REASSIGNED to the new batch below; any reference to an older "006/007" means the
 | 012 | cepillo-de-dientes-junto-al-inodoro | objects | build stage, blocked (chain, 7 scenes; topic slate 2026-11-07): assets, scenes.json, scene scripts and gate records exist; scenes 3 and 4 fail blind naming; no clips or final | 2026-11-07 | script.json + notes.md |
 | 013 | por-que-suenan-los-dedos | body | RETURNED 2026-11-09: scene-2 finger-joint cutaway failed the likeness pre-check on rungs 1 and 2 (see notes.md); replaced by 017; nothing rendered | 2026-11-07 | script.json + notes.md |
 | 014 | que-pasa-si-tragas-un-chicle | whatif | script stage (journey, 7 scenes; topic slate 2026-11-07); nothing modelled or rendered | 2026-11-07 | script.json + notes.md |
-| 015 | por-que-las-moscas-se-frotan-las-patas | objects | script stage (journey, 6 scenes; topic slate 2026-11-07); nothing modelled or rendered | 2026-11-07 | script.json + notes.md |
+| 015 | por-que-las-moscas-se-frotan-las-patas | objects | finished 2026-11-09 (journey, 6 scenes, code3d, 56.2 s); verified, packaged, awaiting owner verdict | 2026-11-07 | final.mp4 + cover.jpg + publish.json |
 | 016 | cuantos-kilos-de-caca-en-tu-vida | numbers | script stage (scale, 6 scenes; topic slate 2026-11-07); nothing modelled or rendered | 2026-11-07 | script.json + notes.md |
 | 017 | que-pasaria-si-se-corta-el-cable-del-ascensor | whatif | draft (fork; replacement for returned 013; script written at production time) | 2026-11-09 | notes.md |
