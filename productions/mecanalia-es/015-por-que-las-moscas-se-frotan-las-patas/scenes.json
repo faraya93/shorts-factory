@@ -1,0 +1,409 @@
+{
+  "channel": "mecanalia-es",
+  "video": "por-que-las-moscas-se-frotan-las-patas",
+  "title": "¿Por qué las moscas se frotan las patas? 🤢",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d on the asset route: a housefly asset (animals are allowed when the asset route supplies them), food and trash props from libraries. Family: objects (a thing the viewer sees every day; marketing judgement, the brand promise is 'the things you see and use every day').",
+  "hook_question": "¿Por qué las moscas se frotan las patas?",
+  "false_belief": "Se están lavando las manos antes de comer, así que no ensucian.",
+  "closing_reframe": "No se está lavando las manos: es una catadora que viene de la basura y escupe en tu plato.",
+  "share_archetype": "ese amigo que espanta la mosca con la mano y sigue comiendo como si nada",
+  "hero_route": "asset",
+  "library_assets": [
+    "housefly",
+    "trash-bag",
+    "banana",
+    "bread-slice"
+  ],
+  "structure_variant": "journey",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "fly",
+        "name": "housefly",
+        "aliases": [
+          "fly",
+          "housefly",
+          "mosca"
+        ],
+        "route": "asset",
+        "source": "library housefly (CC0 scan, leg armature)",
+        "frames": [
+          130
+        ]
+      },
+      {
+        "id": "plate",
+        "name": "dinner plate",
+        "aliases": [
+          "plate",
+          "dish",
+          "dinner plate",
+          "plato"
+        ],
+        "route": "code-primitive",
+        "source": "revolved plate profile: a plate is genuinely geometric and reads instantly (CLAUDE.md every-element rule allows geometric primitives)"
+      }
+    ],
+    "2": [
+      {
+        "id": "trash-bag",
+        "name": "trash bag",
+        "aliases": [
+          "trash bag",
+          "garbage bag",
+          "bag",
+          "bolsa"
+        ],
+        "route": "asset",
+        "source": "library trash-bag"
+      },
+      {
+        "id": "fly-leg",
+        "name": "fly leg on a peel",
+        "aliases": [
+          "fly leg",
+          "insect leg",
+          "fly foot",
+          "leg"
+        ],
+        "route": "asset",
+        "source": "library housefly front leg, hairs and pad lobes built on (fallback rung 1 of the audit if the bare scan leg reads as a twig)"
+      }
+    ],
+    "3": [
+      {
+        "id": "taste-sensors",
+        "name": "fly foot with glowing sensors",
+        "aliases": [
+          "fly leg",
+          "insect leg",
+          "fly foot",
+          "leg"
+        ],
+        "route": "asset",
+        "source": "library housefly leg, emissive points on the outside of the tarsus (audit fallback rung 2 staging, chosen from the start for cost)"
+      }
+    ],
+    "4": [
+      {
+        "id": "bread",
+        "name": "slice of bread",
+        "aliases": [
+          "bread",
+          "slice of bread",
+          "toast",
+          "pan"
+        ],
+        "route": "asset",
+        "source": "library bread-slice"
+      },
+      {
+        "id": "saliva-drop",
+        "name": "drop on bread",
+        "aliases": [
+          "drop",
+          "droplet",
+          "water",
+          "liquid"
+        ],
+        "route": "material",
+        "source": "glossy transmissive bead from the fly mouth onto the bread, one transmission layer"
+      }
+    ],
+    "5": [
+      {
+        "id": "fly-mouth",
+        "name": "fly head on bread",
+        "aliases": [
+          "fly",
+          "housefly",
+          "mosca"
+        ],
+        "route": "asset",
+        "source": "library housefly head macro; labellum built if the scan lacks it (audit rung 1)"
+      }
+    ],
+    "6": [
+      {
+        "id": "fly-takeoff",
+        "name": "housefly",
+        "aliases": [
+          "fly",
+          "housefly",
+          "mosca"
+        ],
+        "route": "asset",
+        "source": "library housefly"
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "mosca_rig.fly",
+    "mosca_rig.rub"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      130
+    ]
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "mosca-set",
+  "scene_script_prefix": "mosca",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "Las moscas sienten el sabor con las patas, por eso se las frotan: limpian sus sensores, no tu comida. Y como no pueden masticar, escupen un jugo que deshace lo que van a comer. 🤢 Envíaselo a ese amigo que espanta la mosca con la mano y sigue comiendo como si nada.",
+  "gate_stills": {
+    "1": [
+      130
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      150
+    ],
+    "4": [
+      110
+    ],
+    "5": [
+      150
+    ],
+    "6": [
+      200
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "mosca_rig"
+  ],
+  "support_colours": {
+    "board": "#3F7C85",
+    "plate": "#FFF3E0",
+    "reason": "Teal counter derived from the Coral accent family (as 012): the near-black fly and the cream plate both separate from it; to be confirmed by gate.py run."
+  },
+  "hero_colours": {
+    "plate": "#FFF3E0",
+    "peel": "#6B4A1E",
+    "bag": "#23212B",
+    "trash_glow": "#7A0019"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Por qué las moscas se frotan las patas? Parece que se lavan las manos antes de comer, como tú. Pero mira de dónde viene esta.",
+      "target_duration_s": 9,
+      "transformation": "mosca quieta en el plato → se frota las patas → la escena se rebobina",
+      "camera": "macro que orbita a la mosca y sale en barrido rápido",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "lavan"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿LAVÁNDOSE?",
+          "at_word": "lavan",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "basura",
+      "prompt": "Escena dibujada con código (coral): basura.",
+      "narration": "Hace un minuto estaba en la basura. Sus patas tienen pelitos y almohadillas pegajosas, y casi todo lo que pisa se le queda pegado.",
+      "target_duration_s": 8,
+      "transformation": "patas limpias → patas cubiertas de partículas al caminar sobre la basura",
+      "camera": "travelling a ras de suelo junto a las patas",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "almohadillas"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ALMOHADILLAS",
+          "at_word": "almohadillas",
+          "offset_s": 0.0,
+          "visible_s": 2.2,
+          "x": 0.7,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "sensores",
+      "prompt": "Escena dibujada con código (coral): sensores.",
+      "narration": "Y con esas patas saborea: tiene sensores de sabor en los pies. Si se ensucian, no siente nada. Por eso se las frota: no es higiene, está afinando su paladar.",
+      "target_duration_s": 10,
+      "transformation": "sensores encendidos → se apagan cubiertos de suciedad → la mosca se frota y se vuelven a encender",
+      "camera": "empuje dentro de la pata y retroceso al frotarse",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "saborea:"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "escupe",
+      "prompt": "Escena dibujada con código (coral): escupe.",
+      "narration": "Aterriza en tu comida y la prueba con los pies. Como no puede masticar, le escupe encima un jugo que la deshace.",
+      "target_duration_s": 8,
+      "transformation": "pan firme → una gota cae y deshace una mancha del pan",
+      "camera": "picado que baja desde la ventana hasta el pan siguiendo el aterrizaje",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "escupe"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 5,
+      "name": "giro",
+      "prompt": "Escena dibujada con código (coral): giro.",
+      "narration": "Luego lo sorbe con una boca que funciona como esponja. Y en las moscas, un estudio encontró más de seiscientos tipos de bacterias, y las patas eran donde más había.",
+      "target_duration_s": 10,
+      "transformation": "mancha deshecha → la mosca la sorbe → quedan en el pan las partículas que traía en las patas",
+      "camera": "primer plano de la boca que baja hasta las patas sobre el pan",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "esponja."
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "600+",
+          "from": 0,
+          "at_word": "seiscientos",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.6
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 6,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que no se está lavando las manos: es una catadora que viene de la basura y escupe en tu plato. Envíaselo a ese amigo que espanta la mosca con la mano y sigue comiendo como si nada.",
+      "target_duration_s": 13,
+      "transformation": "mosca en el plato → despega y su ruta queda trazada desde la basura hasta tu plato",
+      "camera": "retroceso amplio desde el plato hasta la cocina entera",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "catadora"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

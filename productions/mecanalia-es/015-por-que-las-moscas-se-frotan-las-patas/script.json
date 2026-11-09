@@ -1,10 +1,182 @@
 {
   "video": "por-que-las-moscas-se-frotan-las-patas",
-  "status": "script stage (topic slate 2026-11-07). Not scene-designed, not rendered, not queued, not published.",
+  "status": "scene design (2026-11-09). Assets sealed; scenes not yet built, not rendered, not queued, not published.",
   "primary_engine": "code3d",
   "hero_route": "asset",
-  "preset": null,
-  "preset_note": "Chosen by the design lens at scene design (stage colour = complement of the hero's hue, composition gate), as in 006-011.",
+  "preset": "coral",
+  "preset_note": "Coral is the adopted channel identity (CLAUDE.md). The dark fly and the cream plate separate from the coral stage; support colours are checked by the composition gate.",
+  "prefix": "mosca",
+  "gate_version": 2,
+  "hero_rig": [
+    "mosca_rig.fly",
+    "mosca_rig.rub"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      130
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "mosca_rig"
+  ],
+  "support_colours": {
+    "board": "#3F7C85",
+    "plate": "#FFF3E0",
+    "reason": "Teal counter derived from the Coral accent family (as 012): the near-black fly and the cream plate both separate from it; to be confirmed by gate.py run."
+  },
+  "hero_colours": {
+    "plate": "#FFF3E0",
+    "peel": "#6B4A1E",
+    "bag": "#23212B",
+    "trash_glow": "#7A0019"
+  },
+  "gate_stills": {
+    "1": [
+      130
+    ],
+    "2": [
+      120
+    ],
+    "3": [
+      150
+    ],
+    "4": [
+      110
+    ],
+    "5": [
+      150
+    ],
+    "6": [
+      200
+    ]
+  },
+  "caption_draft": "Las moscas sienten el sabor con las patas, por eso se las frotan: limpian sus sensores, no tu comida. Y como no pueden masticar, escupen un jugo que deshace lo que van a comer. 🤢 Envíaselo a ese amigo que espanta la mosca con la mano y sigue comiendo como si nada.",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "fly",
+        "name": "housefly",
+        "aliases": [
+          "fly",
+          "housefly",
+          "mosca"
+        ],
+        "route": "asset",
+        "source": "library housefly (CC0 scan, leg armature)",
+        "frames": [
+          130
+        ]
+      },
+      {
+        "id": "plate",
+        "name": "dinner plate",
+        "aliases": [
+          "plate",
+          "dish",
+          "dinner plate",
+          "plato"
+        ],
+        "route": "code-primitive",
+        "source": "revolved plate profile: a plate is genuinely geometric and reads instantly (CLAUDE.md every-element rule allows geometric primitives)"
+      }
+    ],
+    "2": [
+      {
+        "id": "trash-bag",
+        "name": "trash bag",
+        "aliases": [
+          "trash bag",
+          "garbage bag",
+          "bag",
+          "bolsa"
+        ],
+        "route": "asset",
+        "source": "library trash-bag"
+      },
+      {
+        "id": "fly-leg",
+        "name": "fly leg on a peel",
+        "aliases": [
+          "fly leg",
+          "insect leg",
+          "fly foot",
+          "leg"
+        ],
+        "route": "asset",
+        "source": "library housefly front leg, hairs and pad lobes built on (fallback rung 1 of the audit if the bare scan leg reads as a twig)"
+      }
+    ],
+    "3": [
+      {
+        "id": "taste-sensors",
+        "name": "fly foot with glowing sensors",
+        "aliases": [
+          "fly leg",
+          "insect leg",
+          "fly foot",
+          "leg"
+        ],
+        "route": "asset",
+        "source": "library housefly leg, emissive points on the outside of the tarsus (audit fallback rung 2 staging, chosen from the start for cost)"
+      }
+    ],
+    "4": [
+      {
+        "id": "bread",
+        "name": "slice of bread",
+        "aliases": [
+          "bread",
+          "slice of bread",
+          "toast",
+          "pan"
+        ],
+        "route": "asset",
+        "source": "library bread-slice"
+      },
+      {
+        "id": "saliva-drop",
+        "name": "drop on bread",
+        "aliases": [
+          "drop",
+          "droplet",
+          "water",
+          "liquid"
+        ],
+        "route": "material",
+        "source": "glossy transmissive bead from the fly mouth onto the bread, one transmission layer"
+      }
+    ],
+    "5": [
+      {
+        "id": "fly-mouth",
+        "name": "fly head on bread",
+        "aliases": [
+          "fly",
+          "housefly",
+          "mosca"
+        ],
+        "route": "asset",
+        "source": "library housefly head macro; labellum built if the scan lacks it (audit rung 1)"
+      }
+    ],
+    "6": [
+      {
+        "id": "fly-takeoff",
+        "name": "housefly",
+        "aliases": [
+          "fly",
+          "housefly",
+          "mosca"
+        ],
+        "route": "asset",
+        "source": "library housefly"
+      }
+    ]
+  },
   "slate": "docs/current/reports/topic-slate-2026-11-07.md",
   "title": "¿Por qué las moscas se frotan las patas? 🤢",
   "topic_family": "objects",
@@ -18,9 +190,10 @@
   "share_archetype": "ese amigo que espanta la mosca con la mano y sigue comiendo como si nada",
   "engine_reason": "code3d on the asset route: a housefly asset (animals are allowed when the asset route supplies them), food and trash props from libraries. Family: objects (a thing the viewer sees every day; marketing judgement, the brand promise is 'the things you see and use every day').",
   "library_assets": [
-    "housefly (to search: Sketchfab, check licence per model; legs detail needed for macro)",
-    "bread or a plate of food (to search)",
-    "trash bag / bin with a fruit peel (to search)"
+    "housefly",
+    "trash-bag",
+    "banana",
+    "bread-slice"
   ],
   "description": "Las moscas sienten el sabor con las patas, por eso se las frotan: limpian sus sensores, no tu comida. Y como no pueden masticar, escupen un jugo que deshace lo que van a comer. 🤢 Envíaselo a ese amigo que espanta la mosca con la mano y sigue comiendo como si nada.",
   "hashtags": [
@@ -51,7 +224,24 @@
           "risk": "low"
         }
       ],
-      "est_duration_s": 8.6
+      "est_duration_s": 8.6,
+      "target_duration_s": 9,
+      "render_cost_class": "opaque",
+      "emphasis": [
+        "lavan"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿LAVÁNDOSE?",
+          "at_word": "lavan",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ]
     },
     {
       "name": "basura",
@@ -74,7 +264,24 @@
           "risk": "medium: asset legs may be low detail"
         }
       ],
-      "est_duration_s": 8.3
+      "est_duration_s": 8.3,
+      "target_duration_s": 8,
+      "render_cost_class": "opaque",
+      "emphasis": [
+        "almohadillas"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ALMOHADILLAS",
+          "at_word": "almohadillas",
+          "offset_s": 0.0,
+          "visible_s": 2.2,
+          "x": 0.7,
+          "y": 0.62
+        }
+      ]
     },
     {
       "name": "sensores",
@@ -89,7 +296,13 @@
           "risk": "low with the leg in frame"
         }
       ],
-      "est_duration_s": 10.3
+      "est_duration_s": 10.3,
+      "target_duration_s": 10,
+      "render_cost_class": "opaque",
+      "emphasis": [
+        "saborea:"
+      ],
+      "overlays": []
     },
     {
       "name": "escupe",
@@ -104,7 +317,13 @@
           "risk": "medium: must read as a drop, context = fly mouth on bread"
         }
       ],
-      "est_duration_s": 7.6
+      "est_duration_s": 7.6,
+      "target_duration_s": 8,
+      "render_cost_class": "glass_water_sss",
+      "emphasis": [
+        "escupe"
+      ],
+      "overlays": []
     },
     {
       "name": "giro",
@@ -122,7 +341,26 @@
           "risk": "medium"
         }
       ],
-      "est_duration_s": 10.3
+      "est_duration_s": 10.3,
+      "target_duration_s": 10,
+      "render_cost_class": "opaque",
+      "emphasis": [
+        "esponja."
+      ],
+      "overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "600+",
+          "from": 0,
+          "at_word": "seiscientos",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.6
+        }
+      ]
     },
     {
       "name": "cierre",
@@ -134,7 +372,24 @@
         "ENVÍASELO tag at_word 'envíaselo'"
       ],
       "elements": [],
-      "est_duration_s": 13.1
+      "est_duration_s": 13.1,
+      "target_duration_s": 13,
+      "render_cost_class": "opaque",
+      "emphasis": [
+        "catadora"
+      ],
+      "overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ]
     }
   ],
   "sources": [
