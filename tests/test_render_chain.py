@@ -95,6 +95,32 @@ def test_hook_denies_direct_blender_only():
     assert not d("brew info blender")
 
 
+def test_hook_routes_skill_helpers_through_the_launcher():
+    """2026-11-09: asset QA ran blender-core's run_in_blender.py directly, skipping the GPU lock and the GUI rule (canary 015, five calls, the asset GUI open)."""
+    import sys
+    sys.path.insert(0, str(ROOT / "tools"))
+    from hook_blender_guard import direct_blender as d
+    h = "/Users/x/.claude/skills/blender-core/scripts/run_in_blender.py"
+    for cmd in (f"python3 {h} --blend a.blend q.py -- --objects A", f".venv/bin/python {h} --blend a.blend q.py", f"python3 -I {h} --expr 'x'", f"{h} --blend a.blend q.py", f"cd x && python3 {h} q.py"):
+        assert d(cmd), cmd
+    for cmd in (f".venv/bin/python tools/blender_run.py --skill -- {h} --blend a.blend q.py -- --objects A", f"SF_ALLOW_GUI=1 .venv/bin/python tools/blender_run.py --skill -- {h} q.py",
+                f"python3 {h} --which", "grep -n run_in_blender.py docs/current/specs/asset-system.md", f"cat {h}"):
+        assert not d(cmd), cmd
+
+
+def test_skill_mode_takes_the_lock_pins_blender_and_refuses_beside_a_gui():
+    import subprocess, sys, tempfile
+    with tempfile.TemporaryDirectory() as t:
+        helper = Path(t) / "helper.py"
+        helper.write_text("import os, sys, fcntl\nfd = os.open(sys.argv[1], os.O_RDWR)\ntry:\n    fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB); print('LOCK FREE')\nexcept BlockingIOError:\n    print('LOCK HELD')\nprint('EXE', os.environ.get('BLENDER_EXE'))\n")
+        code = f"import sys;sys.path.insert(0,'tools');import blender_run as b;from pathlib import Path;b.LOCK=Path({t!r})/'l';b.gui_pids=lambda:[];b.headless_pids=lambda:[];sys.exit(b.skill([{str(helper)!r}, str(b.LOCK)]))"
+        r = subprocess.run([sys.executable, "-c", code], cwd=ROOT, capture_output=True, text=True)
+        assert r.returncode == 0 and "LOCK HELD" in r.stdout and "EXE " in r.stdout and "EXE None" not in r.stdout, (r.stdout, r.stderr)
+        code = code.replace("b.gui_pids=lambda:[]", "b.gui_pids=lambda:[123]")
+        r = subprocess.run([sys.executable, "-c", code], cwd=ROOT, capture_output=True, text=True, env={"PATH": "/usr/bin:/bin"})
+        assert r.returncode == 3 and "REFUSED" in r.stdout, (r.stdout, r.stderr)
+
+
 if __name__ == "__main__":
     n = 0
     for k, v in sorted(globals().items()):

@@ -3,6 +3,9 @@ Library:  blender_run.blender(["-b", "--python", script, "--", ...], capture_out
 CLI:      .venv/bin/python tools/blender_run.py -- -b --python script.py -- args...     (exit code = Blender's; 3 = refused)
           .venv/bin/python tools/blender_run.py --chain -- tools/chain_render.sh prod   (holds the chain lock for the whole command; how queues are kept from interleaving)
           .venv/bin/python tools/blender_run.py --status
+          .venv/bin/python tools/blender_run.py --skill -- ~/.claude/skills/blender-core/scripts/run_in_blender.py --blend f.blend qa_check.py -- ...
+                    a skill helper that starts Blender ITSELF (run_in_blender.py) runs under the same GPU lock, GUI rule and caffeinate, with BLENDER_EXE pinned (2026-11-09: asset QA
+                    had been starting Blender directly, beside an open GUI; tools/hook_blender_guard.py now denies run_in_blender.py outside this form)
 The locks are fcntl.flock on output/.blender.lock and output/.chain.lock: the kernel releases them when the holders die, so a crash leaves nothing to clean up. Blender inherits the lock
 descriptor, so a Blender that outlives its launcher still holds the lock. A second job WAITS. A live GUI Blender (MCP asset job) cannot take the lock and holds GPU memory: a headless job
 REFUSES (exit 3) while one is open, unless SF_ALLOW_GUI=1 (explicit override, for small asset-job stills only, never a final). tools/asset_blender.py refuses to open the GUI during a render."""
@@ -84,6 +87,27 @@ def blender(args: list[str], **kw) -> subprocess.CompletedProcess:
         os.close(fd)
 
 
+def skill(args: list[str]) -> int:
+    """Runs a Python helper that launches Blender by itself, holding the GPU lock for its whole life. Its Blender is a grandchild that does not inherit the lock descriptor,
+    so the helper (which waits on it) holds the lock; an orphaned Blender is still caught by the headless_pids() wait of the next job."""
+    if not args or not args[0].endswith(".py"):
+        print("[blender_run] --skill needs: -- <helper.py> [helper args]", flush=True)
+        return 2
+    if gui_pids() and os.environ.get("SF_ALLOW_GUI") != "1":
+        print(f"[blender_run] REFUSED: a GUI Blender is open (pid {gui_pids()}) and holds GPU memory. Close it, or set SF_ALLOW_GUI=1 for a small asset-job check.", flush=True)
+        return EXIT_REFUSED
+    exe = shutil.which(_bin()) or _bin()
+    fd = _acquire(LOCK, "GPU lock")
+    try:
+        while headless_pids():
+            print(f"[blender_run] waiting for headless Blender {headless_pids()} started outside the launcher", flush=True)
+            time.sleep(10)
+        caff = ["caffeinate", "-dimsu"] if shutil.which("caffeinate") else []
+        return subprocess.run([*caff, sys.executable, *args], pass_fds=(fd,), env={**os.environ, "BLENDER_EXE": exe}).returncode
+    finally:
+        os.close(fd)
+
+
 def main() -> int:
     a = sys.argv[1:]
     if a[:1] == ["--status"]:
@@ -93,6 +117,8 @@ def main() -> int:
         fd = _acquire(CHAIN_LOCK, "chain lock")
         cmd = a[2:] if a[1:2] == ["--"] else a[1:]
         return subprocess.run(cmd, pass_fds=(fd,), env={**os.environ, "SF_CHAIN_HELD": "1"}).returncode
+    if a[:1] == ["--skill"]:
+        return skill(a[2:] if a[1:2] == ["--"] else a[1:])
     if a[:1] == ["--"]:
         a = a[1:]
     return blender(a).returncode

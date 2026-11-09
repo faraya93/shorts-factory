@@ -266,8 +266,9 @@ This packs the textures and writes only that collection, in its own scene, so st
 
 **9. Run mesh QA** on the saved file; after any fix, save again. Fix errors, then set `checks.qa` to `{"pass": true, "date": "YYYY-MM-DD"}`.
 ```
-python3 ~/.claude/skills/blender-core/scripts/run_in_blender.py --blend assets/library/<slug>/<slug>.blend ~/.claude/skills/blender-asset-qa/scripts/qa_check.py -- --objects <names> --profile render
+SF_ALLOW_GUI=1 .venv/bin/python tools/blender_run.py --skill -- ~/.claude/skills/blender-core/scripts/run_in_blender.py --blend assets/library/<slug>/<slug>.blend ~/.claude/skills/blender-asset-qa/scripts/qa_check.py -- --objects <names> --profile render
 ```
+The `--skill` form runs the helper under the GPU lock and caffeinate with `BLENDER_EXE` pinned (2026-11-09: calling `run_in_blender.py` directly skipped both, and the Bash hook now denies it). Drop `SF_ALLOW_GUI=1` when no asset GUI is open. Any other blender-core helper that starts Blender itself takes the same form.
 
 **10. Render review stills** to `job/stills/`. Read them yourself.
 ```

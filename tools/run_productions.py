@@ -5,7 +5,9 @@ usage: .venv/bin/python tools/run_productions.py --batch tools/batches/<name>.js
        .venv/bin/python tools/run_productions.py --replay                             apply the stop rules to the records of the 2026-11-09 batch
        .venv/bin/python tools/run_productions.py --reset UNIT [--state FILE]          forget one unit's state
 Never --bare (it drops CLAUDE.md, hooks and the subscription login). Wall-clock limit per session in place of --max-turns (SF_RUN_HOURS, default 6). Permissions come from tools/runner-settings.json, never --dangerously-skip-permissions.
-A PREFLIGHT runs before any unit: any denied command class halts the batch. State and streams: output/runner/<batch>/. Outcomes: verified or returned (next unit), stopped (next unit, the production's own merits), infra (HALT.json, the batch stops, no fix round spent)."""
+A PREFLIGHT runs before any unit: any denied command class halts the batch. State and streams: output/runner/<batch>/. Outcomes: verified or returned (next unit), stopped (next unit, the production's own merits), infra or budget (HALT.json + a desktop alert, the batch stops).
+Stability hardening 2026-11-09 (docs/current/reports/lens-decisions.md): a fix round is charged only to a session that made NO progress (production files and verifier output both unchanged); a queued final (build/queued.json) always gets exactly
+one callback session after its render ends, exempt from the session cap; every unit has a budget (SF_UNIT_MAX_SESSIONS, SF_UNIT_MAX_HOURS of active time, usage-limit waits excluded) whose exhaustion halts the batch loudly."""
 import argparse
 import fcntl
 import json
@@ -24,18 +26,30 @@ HOURS = float(os.environ.get("SF_RUN_HOURS", "6"))
 POLL_LIMIT_S = float(os.environ.get("SF_LIMIT_POLL_S", "1200"))     # usage window: try again every 20 min
 MAX_LIMIT_WAIT_S = float(os.environ.get("SF_LIMIT_MAX_WAIT_S", str(36 * 3600)))
 RENDER_MAX_S = float(os.environ.get("SF_RENDER_MAX_HOURS", "24")) * 3600
-FIX_ROUNDS = int(os.environ.get("SF_FIX_ROUNDS", "3"))
+RENDER_POLL_S = 15.0
+FIX_ROUNDS = int(os.environ.get("SF_FIX_ROUNDS", "2"))              # sessions launched after a session that made no progress; one more no-progress session stops the unit
+UNIT_MAX_SESSIONS = int(os.environ.get("SF_UNIT_MAX_SESSIONS", "12"))  # per unit, usage-limit resumes included; the post-render callback is exempt
+UNIT_MAX_HOURS = float(os.environ.get("SF_UNIT_MAX_HOURS", "14"))     # per unit, active time: sessions + render waits, usage-limit waits excluded
+CALLBACK_MIN_HOURS = 1.0                                            # the post-render callback always gets at least this much session time
 SHORT_TURNS = 10                                                    # a denial in a session this short that changed nothing is the infrastructure signature (from the 2026-11-08/09 records; judgement)
 OUT = ROOT / "output" / "runner"
 LIMIT = re.compile(r"(usage|session|weekly|hourly|rate)[ -]?limit|hit your .*limit|limit (reached|will reset)|resets? (at )?\d|\b429\b", re.I)
 API_FAILURE = re.compile(r"classifier gave no verdict|API Error|overloaded_error|Internal server error", re.I)
 MODEL = os.environ.get("SF_RUN_MODEL", "sonnet")                    # pinned so a settings change cannot silently alter a batch; "Drawing" doctrine: production sessions are Sonnet
 STANDING = ("Headless session, don't-ask mode. One purpose per Bash call. The working directory is the repo root: never cd. Run Python tools as .venv/bin/python tools/x.py. Change files with Write or Edit, never with shell redirection. "
-            "Repeat a command by making one call per item or with a .venv/bin/python heredoc, never a for loop. Never background with &. A denial applies to that command form only: rewrite it in an allowed form and continue; never conclude that Bash is unavailable.")
+            "Repeat a command by making one call per item or with a .venv/bin/python heredoc, never a for loop. Never background with &. A denial applies to that command form only: rewrite it in an allowed form and continue; never conclude that Bash is unavailable. "
+            "Keep working until one of these is true: queue_final.py printed QUEUED, the production verifies, the topic is returned, or a blocker remains that you cannot clear under CLAUDE.md. Multi-hour builds are expected and there is no time pressure: "
+            "never end the session to report partial progress or because the remaining work is long. Skill helper scripts that start Blender (blender-core run_in_blender.py) run only as .venv/bin/python tools/blender_run.py --skill -- <script> <args>.")
 PROMPT = ("Use the produce skill to run production {prod} from its current state, under CLAUDE.md. Do not publish, spend money or create accounts. Queue the final with .venv/bin/python tools/queue_final.py <prod> and stop when it prints QUEUED; "
           "this runner waits for the render and calls you back to finish the package. When you are blocked on a standing bar, follow the Reshape ladder; if it is exhausted, return the topic with .venv/bin/python tools/return_topic.py <prod> --reason \"...\" and stop. "
           "That command replaces any older note asking for hand-written RETURNED or REPLACEMENT lines and bank marks.")
-FIX_PROMPT = ("The non-model verifier says this production is not complete. Continue the build from its current state under CLAUDE.md (produce skill), or finish the package if a render has completed. If the ladder is exhausted, return the topic with .venv/bin/python tools/return_topic.py <prod> --reason \"...\" and stop.\n")
+CONTINUE_PROMPT = ("Your previous session ended before the production was complete. Continue the build of {prod} from its current state under CLAUDE.md (produce skill) and do not stop until the final is QUEUED, the topic is returned, or a blocker remains. "
+                   "If the ladder is exhausted, return the topic with .venv/bin/python tools/return_topic.py <prod> --reason \"...\" and stop. The verifier currently says:\n")
+FIX_PROMPT = ("Your previous session ended WITHOUT CHANGING ANYTHING in {prod} (fix round {k} of {n}; one more session with no progress stops this production). Find what blocks the build, clear it under CLAUDE.md (produce skill), and continue. "
+              "If it cannot be cleared, return the topic with .venv/bin/python tools/return_topic.py <prod> --reason \"...\" and stop. The verifier currently says:\n")
+CALLBACK_PROMPT = ("The final render of {prod} that you queued has ended (chain log output/chain-{name}.log). Do not re-render. Finish the production from produce skill step 11: read the chain log, run .venv/bin/python tools/verify_production.py {prod}, "
+                   "build the package with .venv/bin/python tools/publish_package.py build {prod} and check it with .venv/bin/python tools/publish_package.py check {prod}, then step 12 (report in notes.md, INDEX.md, commit). "
+                   "If the render failed, say so plainly in notes.md and fix what the chain log shows. The verifier currently says:\n")
 SKILL = Path.home() / ".claude" / "skills" / "produce" / "SKILL.md"
 
 
@@ -48,14 +62,14 @@ def session_cmd(prompt: str, resume: str | None) -> list[str]:
     return cmd + ["--resume", resume] if resume else cmd
 
 
-def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str | None) -> dict:
+def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str | None, hours: float | None = None) -> dict:
     """One headless session, to its end or the wall-clock limit."""
     OUT.mkdir(parents=True, exist_ok=True)
     log = OUT / f"{name}-{n}.jsonl"
     cmd = session_cmd(prompt, resume)
     p = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, text=True, env={k: v for k, v in os.environ.items() if not k.startswith("CLAUDECODE")})
     out = {"session_id": resume, "limited": False, "timed_out": False, "result": "", "is_error": False, "denials": [], "turns": 0, "saw_result": False}
-    deadline = time.time() + HOURS * 3600
+    deadline = time.time() + (HOURS if hours is None else hours) * 3600
 
     def watchdog():
         while p.poll() is None:
@@ -130,23 +144,51 @@ def fingerprint(prod: Path) -> str:
     return "\n".join(sorted(x for t in trees if t.exists() for x in _walk(t)))
 
 
-def wait_for_render() -> None:
-    """The chain lock is held for a chain's whole life. Returns when no chain is running; a chain stuck past SF_RENDER_MAX_HOURS is an infrastructure failure."""
-    path = ROOT / "output" / ".chain.lock"
-    path.parent.mkdir(exist_ok=True)
-    fd = os.open(path, os.O_RDWR | os.O_CREAT, 0o644)
-    deadline = time.time() + RENDER_MAX_S
+def queued_marker(prod: Path) -> dict | None:
+    """build/queued.json, written by tools/queue_final.py once the chain is confirmed running; its 'at' identifies one queued final."""
     try:
-        while True:
-            try:
-                fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-                return
-            except BlockingIOError:
-                if time.time() > deadline:
-                    raise InfraFailure(f"render chain still holds the lock after {RENDER_MAX_S / 3600:.0f} h")
-                time.sleep(15)
+        q = json.loads((prod / "build" / "queued.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return q if q.get("at") else None
+
+
+def pending_callback(prod: Path, st: dict) -> dict | None:
+    """A queued final that has not had its post-render callback yet (survives a runner restart: the record is in state)."""
+    q = queued_marker(prod)
+    return q if q and q["at"] not in st.get("callbacks", []) else None
+
+
+def chain_alive(pid) -> bool:
+    """The queued chain's own process (queue_final launches tools/queue_chain.sh); a reused pid running something else does not count."""
+    if not isinstance(pid, int) or pid <= 0:
+        return False
+    out = subprocess.run(["ps", "-p", str(pid), "-o", "command="], capture_output=True, text=True).stdout
+    return "queue_chain" in out or "chain_render" in out
+
+
+def chain_lock_free() -> bool:
+    path = ROOT / "output" / ".chain.lock"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(path, os.O_RDWR | os.O_CREAT, 0o644)
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fcntl.flock(fd, fcntl.LOCK_UN)
+        return True
+    except BlockingIOError:
+        return False
     finally:
         os.close(fd)
+
+
+def wait_for_render(q: dict | None = None) -> None:
+    """Returns when the queued chain (q's pid) has exited and no chain holds the lock. The pid matters: a chain queued BEHIND another one is not finished when the first releases the lock.
+    A chain stuck past SF_RENDER_MAX_HOURS is an infrastructure failure."""
+    deadline = time.time() + RENDER_MAX_S
+    while (q and chain_alive(q.get("pid"))) or not chain_lock_free():
+        if time.time() > deadline:
+            raise InfraFailure(f"render chain still running after {RENDER_MAX_S / 3600:.0f} h")
+        time.sleep(RENDER_POLL_S)
 
 
 def verify(prod: Path) -> tuple[bool, str]:
@@ -169,6 +211,22 @@ def log(msg: str) -> None:
         f.write(line + "\n")
 
 
+def alert(title: str, msg: str) -> None:
+    """Loud and cheap: a desktop notification on top of HALT.json and the batch log. Never fails the runner."""
+    try:
+        subprocess.run(["osascript", "-e", f"display notification {json.dumps(msg[:200])} with title {json.dumps(title)}"], capture_output=True, timeout=10)
+    except Exception:
+        pass
+
+
+def over_budget(st: dict) -> str | None:
+    if st["sessions"] >= UNIT_MAX_SESSIONS:
+        return f"session budget spent: {st['sessions']} of {UNIT_MAX_SESSIONS} sessions without a verified, returned or stopped outcome"
+    if st["active_s"] >= UNIT_MAX_HOURS * 3600:
+        return f"time budget spent: {st['active_s'] / 3600:.1f} h of {UNIT_MAX_HOURS} h active"
+    return None
+
+
 def finish(st: dict, state: dict, outcome: str, status: str) -> str:
     st["outcome"], st["status"] = outcome, status
     save(state)
@@ -176,57 +234,103 @@ def finish(st: dict, state: dict, outcome: str, status: str) -> str:
 
 
 def run_unit(prod: Path, state: dict) -> str:
-    """Runs one unit to an outcome: verified | returned | stopped | infra."""
-    name = prod.name
+    """Runs one unit to an outcome: verified | returned | stopped | infra | budget.
+    Progress rule: a session made progress when the production fingerprint or the verifier output changed. Only a session WITHOUT progress is charged a fix round; after FIX_ROUNDS of them the next no-progress session stops the unit.
+    Callback rule: a final queued by a session (build/queued.json) gets exactly one callback session once its chain has ended, exempt from the session cap and with at least CALLBACK_MIN_HOURS."""
+    name, rel = prod.name, str(prod.relative_to(ROOT))
     st = state.setdefault(name, {"session": None, "sessions": 0, "fix_rounds": 0, "status": "running"})
-    prompt, n = PROMPT.format(prod=prod.relative_to(ROOT)), st["sessions"]
+    st.setdefault("active_s", 0.0)
+    st.setdefault("callbacks", [])
+    st.setdefault("fix_rounds", 0)
+    prompt = PROMPT.format(prod=rel)
     waited = 0.0
-    in_fix_round = False
+    resumed_after_limit = False
     while True:
-        n += 1
-        st["sessions"] = n
+        callback = False
+        q = None if resumed_after_limit else pending_callback(prod, st)
+        if q:                                                                # the render of a queued final: wait, then call back once
+            st["status"] = f"waiting for the queued final ({q['at']})"
+            save(state)
+            t0 = time.time()
+            try:
+                wait_for_render(q)
+            except InfraFailure as e:
+                return finish(st, state, "infra", f"infrastructure failure: {e}")
+            finally:
+                st["active_s"] += time.time() - t0
+            st["callbacks"].append(q["at"])
+            try:
+                ok, text = verify(prod)
+            except InfraFailure as e:
+                return finish(st, state, "infra", f"infrastructure failure: {e}")
+            if ok:
+                return finish(st, state, "verified", "verified")
+            st["last_verifier"] = text
+            prompt, callback = CALLBACK_PROMPT.format(prod=rel, name=name) + text, True
+            log(f"CALLBACK {rel}: render of the final queued at {q['at']} ended")
+        elif not resumed_after_limit:
+            why = over_budget(st)
+            if why:
+                return finish(st, state, "budget", f"budget: {why}")
+        resumed_after_limit = False
+        st["sessions"] += 1
+        n = st["sessions"]
+        st["status"] = "post-render callback" if callback else st["status"]
         save(state)
+        left_h = max(0.0, UNIT_MAX_HOURS - st["active_s"] / 3600)
+        hours = max(min(HOURS, left_h), CALLBACK_MIN_HOURS if callback else 0.05)
         before = fingerprint(prod)
-        r = run_session(prod, name, n, prompt, st["session"])
+        t0 = time.time()
+        r = run_session(prod, name, n, prompt, st["session"], hours)
         st["session"] = r["session_id"]
         st["last_denials"] = len(r.get("denials", []))
-        if r["limited"]:                                                     # resume the SAME session after the reset: no paying twice
+        if r["limited"]:                                                     # resume the SAME session after the reset: no paying twice; the wait is not active time
+            st["active_s"] += time.time() - t0
             if waited >= MAX_LIMIT_WAIT_S:
                 return finish(st, state, "infra", "stopped: usage limit did not reset")
             st["status"] = "waiting for usage limit reset"
             save(state)
             time.sleep(POLL_LIMIT_S)
             waited += POLL_LIMIT_S
-            prompt = "The usage limit has reset. Continue where you stopped."
+            prompt, resumed_after_limit = "The usage limit has reset. Continue where you stopped.", True
             continue
+        st["active_s"] += time.time() - t0
         waited = 0.0
-        why = infra_signature(r, fingerprint(prod) != before)
+        changed = fingerprint(prod) != before
+        why = infra_signature(r, changed)
         if why:
             return finish(st, state, "infra", f"infrastructure failure: {why}")
         if r["timed_out"]:
-            return finish(st, state, "stopped", f"stopped: wall-clock limit of {HOURS} h reached")
+            return finish(st, state, "stopped" if not over_budget(st) else "budget", f"stopped: session wall-clock limit of {hours:.1f} h reached")
+        side = prod / "returned.json"
+        if side.exists():                                                    # a returned topic is a completed unit, before the verifier, costing no fix round
+            rec = json.loads(side.read_text(encoding="utf-8"))
+            st["replacement"], st["refill_due"] = rec.get("replacement"), rec.get("refill_due")
+            return finish(st, state, "returned", f"returned: {rec.get('reason', '')[:200]}")
+        if pending_callback(prod, st):                                       # this session queued a final: the loop waits for it and calls back
+            st["status"] = "final queued"
+            continue
         try:
-            wait_for_render()
-            side = prod / "returned.json"
-            if side.exists():                                                # a returned topic is a completed unit, before the verifier, costing no fix round
-                rec = json.loads(side.read_text(encoding="utf-8"))
-                st["replacement"], st["refill_due"] = rec.get("replacement"), rec.get("refill_due")
-                return finish(st, state, "returned", f"returned: {rec.get('reason', '')[:200]}")
+            if not callback:
+                t1 = time.time()
+                wait_for_render()                                            # a chain started some other way must end before the verifier reads its outputs
+                st["active_s"] += time.time() - t1
             ok, text = verify(prod)
         except InfraFailure as e:
             return finish(st, state, "infra", f"infrastructure failure: {e}")
         if ok:
             return finish(st, state, "verified", "verified")
-        if in_fix_round and fingerprint(prod) == before and text == st.get("last_verifier"):
-            return finish(st, state, "stopped", "stopped: fix round made no progress on the verifier")
-        if st["fix_rounds"] >= FIX_ROUNDS:
-            st["last_verifier"] = text
-            return finish(st, state, "stopped", "stopped: verifier still failing after fix rounds")
-        st["fix_rounds"] += 1
+        progress = changed or (st.get("last_verifier") is not None and text != st["last_verifier"])
         st["last_verifier"] = text
-        st["status"] = f"fix round {st['fix_rounds']}"
-        in_fix_round = True
-        prompt = FIX_PROMPT + text
+        if progress:
+            st["status"] = f"session {n} made progress; continuing"
+            prompt = CONTINUE_PROMPT.format(prod=rel) + text
+            continue
+        if st["fix_rounds"] >= FIX_ROUNDS:
+            return finish(st, state, "stopped", f"stopped: no progress in session {n} after {FIX_ROUNDS} fix round(s) without progress")
+        st["fix_rounds"] += 1
+        st["status"] = f"fix round {st['fix_rounds']} (session {n} made no progress)"
+        prompt = FIX_PROMPT.format(prod=rel, k=st["fix_rounds"], n=FIX_ROUNDS) + text
 
 
 def run_queue(queue: list[str], state: dict) -> int:
@@ -244,9 +348,10 @@ def run_queue(queue: list[str], state: dict) -> int:
         outcome = run_unit(prod, state)
         st = units[prod.name]
         log(f"END {rel}: {outcome}: {st['status']}")
-        if outcome == "infra":
-            (OUT / "HALT.json").write_text(json.dumps({"at": datetime.now().isoformat(timespec="seconds"), "unit": rel, "status": st["status"]}, indent=1))
-            log("BATCH HALTED (infrastructure); see HALT.json")
+        if outcome in ("infra", "budget"):
+            (OUT / "HALT.json").write_text(json.dumps({"at": datetime.now().isoformat(timespec="seconds"), "unit": rel, "outcome": outcome, "status": st["status"]}, indent=1))
+            log(f"BATCH HALTED ({outcome}); see HALT.json")
+            alert("shorts-factory runner HALTED", f"{prod.name}: {st['status']}")
             return 3
         if outcome == "returned":
             if st.get("replacement"):
@@ -290,9 +395,11 @@ EXPECTED_DENIED = ("curl --version",)                                # the negat
 
 
 def skill_gaps(text: str | None = None) -> list[str]:
-    """Forms the produce skill prints that do not pass (a bare .py tool, nohup, a backgrounded command)."""
+    """Forms the produce skill prints that do not pass (a bare .py tool, nohup, a backgrounded command) or that the Blender hook denies (a direct Blender or skill-helper call)."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    from hook_blender_guard import direct_blender
     text = SKILL.read_text(encoding="utf-8") if text is None else text
-    return [c for c in re.findall(r"`([^`\n]+)`", text) if re.match(r"(tools|factory)/\S+\.py", c) or c.startswith("nohup") or c.rstrip().endswith(" &")]
+    return [c for c in re.findall(r"`([^`\n]+)`", text) if re.match(r"(tools|factory)/\S+\.py", c) or c.startswith("nohup") or c.rstrip().endswith(" &") or direct_blender(c)]
 
 
 def preflight(prod: str) -> list[str]:
@@ -365,8 +472,9 @@ def replay(root: Path) -> dict:
         why = infra_signature(f, f["changed"])
         if why and not out["halt"]:
             out["halt"] = {"session": p.stem, "after_s": round(p.stat().st_mtime - start), "why": why}
-    for unit, fs in per.items():
-        out["units"][unit] = next((f"no progress: stops after fix round {i}" for i, f in enumerate(fs[1:], 1) if not f["changed"]), f"ran {len(fs)} sessions")
+    for unit, fs in per.items():                                           # the run_unit rule: only a session without progress is charged; the one after FIX_ROUNDS charges stops the unit
+        idle = [i for i, f in enumerate(fs, 1) if not f["changed"]]
+        out["units"][unit] = f"no progress: stops at session {idle[FIX_ROUNDS]}" if len(idle) > FIX_ROUNDS else f"ran {len(fs)} sessions"
     return out
 
 
@@ -431,6 +539,7 @@ def main(argv: list[str] | None = None) -> int:
     if bad:
         (OUT / "HALT.json").write_text(json.dumps({"at": datetime.now().isoformat(timespec="seconds"), "unit": "preflight", "status": bad}, indent=1))
         log("PREFLIGHT FAILED; nothing started:\n  " + "\n  ".join(bad))
+        alert("shorts-factory runner: preflight failed", bad[0])
         return 3
     state = json.loads((OUT / "state.json").read_text()) if (OUT / "state.json").exists() else {}
     return run_queue(resolved, state)
