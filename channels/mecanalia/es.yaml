@@ -33,9 +33,6 @@ publish:                               # texts the marketing lens uses to build 
   hashtags:                            # tags only; the counts and slot order are the brand rule (brand.yaml publish.hashtags)
     base: ["#shorts"]                  # fixed, minimal, always LAST: a repeated big base wastes the visible slots and dilutes topical signal
     family: {objects: "#comofunciona", body: "#cuerpohumano", numbers: "#curiosidades", whatif: "#quepasaria"}  # one per topic_family, always present
-  playlists:                           # FORWARD-ONLY (2026-11-08, docs/architecture.md "Search and packaging policy"): created BY THE OWNER on the platform, in this order; a new video joins the playlist of its topic_family
-    - {family: objects, name: "Cómo funcionan las cosas de todos los días"}
-    - {family: body, name: "Cómo funciona tu cuerpo"}
-    - {family: numbers, name: "Números imposibles"}
-    - {family: whatif, name: "¿Qué pasaría si…?"}
+  playlists:                           # OWNER 2026-11-08 (supersedes the four family playlists of commit 09df8fc): ONE public playlist; the families are internal taxonomy, never public structure. Created BY THE OWNER on the platform.
+    - {name: "Empieza aquí", contents: "the channel's published videos, strongest performers first, as measured by the channel's analytics"}
   share_cta: "Sígueme, y envíaselo a {share_archetype}."
