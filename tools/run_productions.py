@@ -19,14 +19,17 @@ MAX_LIMIT_WAIT_S = float(os.environ.get("SF_LIMIT_MAX_WAIT_S", str(36 * 3600)))
 FIX_ROUNDS = int(os.environ.get("SF_FIX_ROUNDS", "3"))
 OUT = ROOT / "output" / "runner"
 LIMIT = re.compile(r"(usage|session|weekly|hourly|rate)[ -]?limit|hit your .*limit|limit (reached|will reset)|resets? (at )?\d|\b429\b", re.I)
-PROMPT = ("Use the produce skill to run production {prod} from its current state, under CLAUDE.md. Do not publish, spend money or create accounts. Queue the final with tools/queue_chain.sh and stop when it is queued; "
-          "this runner waits for the render and calls you back to finish the package. When you are blocked on a standing bar, follow the Reshape ladder; if it is exhausted, write the reason in notes.md and stop.")
+MODEL = os.environ.get("SF_RUN_MODEL", "sonnet")                    # pinned so a settings change cannot silently alter a batch; "Drawing" doctrine: production sessions are Sonnet
+STANDING = ("Headless session, don't-ask mode. One purpose per Bash call. The working directory is the repo root: never cd. Run Python tools as .venv/bin/python tools/x.py. Change files with Write or Edit, never with shell redirection. "
+            "Repeat a command by making one call per item or with a .venv/bin/python heredoc, never a for loop. Never background with &. A denial applies to that command form only: rewrite it in an allowed form and continue; never conclude that Bash is unavailable.")
+PROMPT = ("Use the produce skill to run production {prod} from its current state, under CLAUDE.md. Do not publish, spend money or create accounts. Queue the final with .venv/bin/python tools/queue_final.py <prod> and stop when it prints QUEUED; "
+          "this runner waits for the render and calls you back to finish the package. When you are blocked on a standing bar, follow the Reshape ladder; if it is exhausted, return the topic with .venv/bin/python tools/return_topic.py <prod> --reason \"...\" and stop.")
 
 
 def run_session(prod: Path, name: str, n: int, prompt: str, resume: str | None) -> dict:
     """One headless session, to its end or the wall-clock limit. Returns {"session_id", "limited", "timed_out", "rc", "result"}."""
     OUT.mkdir(parents=True, exist_ok=True)
-    cmd = [CLAUDE, "-p", prompt, "--output-format", "stream-json", "--verbose", "--permission-mode", "dontAsk", "--settings", str(ROOT / "tools" / "runner-settings.json")]
+    cmd = [CLAUDE, "-p", prompt, "--output-format", "stream-json", "--verbose", "--permission-mode", "dontAsk", "--settings", str(ROOT / "tools" / "runner-settings.json"), "--model", MODEL, "--append-system-prompt", STANDING]
     if resume:
         cmd += ["--resume", resume]
     log = OUT / f"{name}-{n}.jsonl"
