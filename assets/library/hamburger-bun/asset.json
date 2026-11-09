@@ -1,11 +1,9 @@
 {
-  "slug": "bread-bun",
-  "name": "Bread bun",
+  "slug": "hamburger-bun",
+  "name": "Hamburger bun (rejected)",
   "aliases": [
-    "bread",
     "bun",
-    "roll",
-    "pan"
+    "roll"
   ],
   "family": "objects",
   "created": "2026-11-09",

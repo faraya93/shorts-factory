@@ -1,0 +1,78 @@
+{
+  "slug": "bread-slice",
+  "name": "Slice of bread",
+  "aliases": [
+    "bread",
+    "slice of bread",
+    "toast",
+    "pan"
+  ],
+  "family": "objects",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a slice of bread",
+    "seen_at": "close to mid frame, about 25% of the frame",
+    "moving_parts": [],
+    "states": [
+      "dry slice"
+    ],
+    "style_notes": "960-face PBR slice with a scanned crumb texture; the production adds the melted patch by material (darker, glossy, wet)"
+  },
+  "source": {
+    "registry_id": "sketchfab",
+    "url": "https://sketchfab.com/3d-models/4a13c0429e35454391c9c79a1361caa1",
+    "asset_id": "4a13c0429e35454391c9c79a1361caa1",
+    "author": "meerschaumdigital",
+    "retrieved": "2026-11-09"
+  },
+  "licence": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "\"Sliced Bread\" by meerschaumdigital (Sketchfab), CC BY 4.0",
+    "note": "No CC0 sliced bread existed in the Sketchfab or Poly Haven searches (2026-11-09); the Poly Haven hamburger bun failed blind naming (hamburger-bun). CC-BY used under the standing rule: not asked, not credited in the description.",
+    "decision": "CC0 first, then CC-BY without asking (CLAUDE.md asset routing, owner 2026-11-07)"
+  },
+  "files": {
+    "blend": "bread-slice.blend",
+    "sha256": "18d495f21298eaacfdb1c8f0cbac65b506a37317100fe7547ea55085ac8bb041",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": 0.12,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "slice of bread (sourdough or artisan loaf), alternatives: a cheese wedge or a sponge",
+        "a slice of bread (sandwich bread, toasted crust)",
+        "a slice of bread (sourdough or toast slice, 3D render)"
+      ],
+      "confidences": [
+        85,
+        90,
+        90
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [
+    {
+      "id": "sketchfab fd1fb94a (RealityScan sliced bread, alban)",
+      "reason": "slices fanned on a board in one mesh with torn board fragments; not separable cleanly"
+    },
+    {
+      "id": "polyhaven hamburger_buns",
+      "reason": "failed blind naming, see assets/library/hamburger-bun"
+    }
+  ],
+  "productions": []
+}
