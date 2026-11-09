@@ -1,0 +1,9 @@
+{
+ "name": "2026-11-09-batch-014-016-017",
+ "purpose": "Unattended batch after a clean canary. 012 is not in it (its own interactive session later, owner decision); 013 stays returned. A replacement drawn by a returned unit joins this queue in the same run.",
+ "units": [
+  "productions/mecanalia-es/014-que-pasa-si-tragas-un-chicle",
+  "productions/mecanalia-es/016-cuantos-kilos-de-caca-en-tu-vida",
+  "productions/mecanalia-es/017-que-pasaria-si-se-corta-el-cable-del-ascensor"
+ ]
+}

@@ -1,0 +1,5 @@
+{
+ "name": "2026-11-09-canary-015",
+ "purpose": "Runner canary after the permissions fix: production 015 alone, watched to the end including the queued final. Owner decision, docs/current/reports/runner-diagnosis-2026-11-09.md section (c).",
+ "units": ["productions/mecanalia-es/015-por-que-las-moscas-se-frotan-las-patas"]
+}

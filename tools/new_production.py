@@ -26,7 +26,7 @@ def used_numbers(channel_id: str) -> list[int]:
     return nums
 
 
-def create(channel_id: str, slug: str) -> Path:
+def create(channel_id: str, slug: str, family: str = "") -> Path:
     channel.path_of(channel_id)                                   # raises KeyError for an unknown channel
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
         raise SystemExit("slug: lowercase ascii words joined by '-' (Spanish accents dropped), e.g. por-que-el-cielo-es-azul")
@@ -35,8 +35,9 @@ def create(channel_id: str, slug: str) -> Path:
     path = folder / f"{max(used_numbers(channel_id), default=0) + 1:03d}-{slug}"
     path.mkdir()
     index = folder / "INDEX.md"
-    row = f"| {path.name[:3]} | {slug} | draft | {date.today().isoformat()} | |\n"
-    index.write_text((index.read_text(encoding="utf-8") if index.exists() else "| # | slug | status | created | notes |\n|---|---|---|---|---|\n") + row, encoding="utf-8")
+    head = index.read_text(encoding="utf-8") if index.exists() else "| # | slug | family | status | created | notes |\n|---|---|---|---|---|---|\n"
+    row = f"| {path.name[:3]} | {slug} | {family} | draft | {date.today().isoformat()} | |\n" if "| family |" in head else f"| {path.name[:3]} | {slug} | draft | {date.today().isoformat()} | |\n"
+    index.write_text(head + row, encoding="utf-8")
     return path
 
 
