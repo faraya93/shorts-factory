@@ -1,0 +1,54 @@
+{
+  "entries": [
+    {
+      "scene": 1,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 211,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 518.4,
+      "clip": "clips/scene-01.mp4",
+      "timestamp": "2026-11-10T19:12:43+00:00"
+    },
+    {
+      "scene": 2,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 279,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 698.5,
+      "clip": "clips/scene-02.mp4",
+      "timestamp": "2026-11-10T19:24:24+00:00"
+    },
+    {
+      "scene": 3,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 278,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 659.1,
+      "clip": "clips/scene-03.mp4",
+      "timestamp": "2026-11-10T19:35:25+00:00"
+    },
+    {
+      "scene": 4,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 251,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 597.7,
+      "clip": "clips/scene-04.mp4",
+      "timestamp": "2026-11-10T19:45:24+00:00"
+    },
+    {
+      "scene": 5,
+      "engine": "code3d",
+      "mode": "final",
+      "frames": 281,
+      "fal_spend_usd": 0.0,
+      "render_seconds": 687.6,
+      "clip": "clips/scene-05.mp4",
+      "timestamp": "2026-11-10T19:56:54+00:00"
+    }
+  ]
+}

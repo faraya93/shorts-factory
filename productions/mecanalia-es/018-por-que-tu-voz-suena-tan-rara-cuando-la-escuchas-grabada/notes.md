@@ -1,6 +1,6 @@
 # 018-por-que-tu-voz-suena-tan-rara-cuando-la-escuchas-grabada: production notes
 
-Status: SCRIPTED, rig and drafts built (2026-11-10); gate in progress. DRAWN from the banked tier (rank 3, replacement for returned 014, 2026-11-09). Topic: body, chain, theme voice, main tension hidden. Hook and hero route: docs/current/idea-bank.md rank 3.
+Status: RENDERED, VERIFIED (PASS), PACKAGE BUILT AND CHECKED (2026-11-10); the owner's publish/reject verdict is pending. DRAWN from the banked tier (rank 3, replacement for returned 014, 2026-11-09). Topic: body, chain, theme voice, main tension hidden. Hook and hero route: docs/current/idea-bank.md rank 3.
 
 ## Script (5 scenes, family body, variant chain, 131 words, 43.3 s narrated; band 40-50 s)
 Hook: ¿Por qué tu voz suena tan rara cuando la escuchas grabada? | false belief: el celular o el micrófono la deforman | turn: scene 4 (the bone path exists only inside your own head; a listener and the phone receive only the air) | reframe: tu voz grabada no es la rara: es la única que conocen los demás | closing: "envíaselo" with the archetype ese amigo que nunca manda audios porque no soporta escucharse. Structure rotation: 015 journey, 016 scale, 017 fork (6 scenes), 018 chain (5 scenes).
@@ -53,6 +53,14 @@ Colour gate PASS after four support-colour tries (cream plate, mint, slate blue 
 
 ## Draft log (EEVEE, advisory)
 - First draft: bone glow as a full emission mix flooded the skull to a flat silhouette; replaced by a colour tint toward the accent plus 30% emission. Cameras were far too tight (the 9:16 frame at radius 100 holds about 55 units across); widened, with a non-zero azimuth so the rings read as ellipses rather than slits. Ring shadows removed (rings no longer cast shadows).
+
+## REPORT 2026-11-10 (finish after the queued final)
+- **Render:** chain log `output/chain-018-por-que-tu-voz-suena-tan-rara-cuando-la-escuchas-grabada.log`: START 14:04:03, DONE 14:57:07 (53 min wall, five scenes), no FAILED / INCOMPLETE / Traceback and no retry warning. `final.mp4` 1080x1920 H.264/AAC, 30 fps, 43.33 s, plus `cover.jpg`. $0 fal spend (code3d). Launched through `tools/queue_final.py` (under caffeinate via the chain).
+- **Verify:** `tools/verify_production.py` PASS. `publish_package.py build` and `check` OK (hashtags `#voz #cuerpohumano #shorts`). Nothing published.
+- **Estimate vs actual:** all five scenes were predicted `opaque` (2-3 s/frame, no cost_restage); the chain took 53 min wall including the encode, for about 1,300 frames. The session itself was long mainly because of the colour gate (four support-colour tries) and the scene 4 and 5 re-stagings, not render cost. Asset job (skull): about 15 min, $0.
+- **Dynamism audit (mechanical, from drafts and gate stills; I cannot watch the video):** each scene stages a visible change and a travelling camera: orbit as rings cross and the zigzag grows (1), tracking from the phone to the mouth and back to a phone close-up as it wakes (2), push in to the skull as the bone turns teal and rings climb (3), pull-back as the listener enters and the glow fades (4), a wave crossing the row with a pull-back and rise (5). Scene 5 is the quietest. The lenses' contact-sheet check and the owner's eye remain the last gate.
+- **Flags:** the phone passes in scenes 1, 4 and 5 with the readers naming the skull first and the phone as an alternative (the tool counts the alias); scene 5 passed with its lowest reader exactly at the 45 floor (60/45/88); the bone-conduction citation (Maurer and Landis 1990) is from memory and **to confirm**; the skull stands for the whole head and the vocal cords are not drawn (simplifications above); the ring streams are stylised energy graphics, not to scale. Owner-only: the publish/reject verdict.
+- **Not done:** no idea-bank change (the draw was marked 2026-11-09); the bank sits below working depth, a refill is due and is not run by a production session. The asset is Royalty-Free (no CC0 stylised skull exists), with no credit in the description.
 
 ## BATCH DIRECTIVE 2026-11-09 (runner)
 Write the script at production time under the standing flatness check, then produce under standing doctrine, measuring the riskiest element first; a figure with no source comes out of the script. If this topic fails beyond the Reshape ladder, return it only with `.venv/bin/python tools/return_topic.py <prod> --reason "..."`. Under gate_version 2 including the visibility check. No publishing, no spend, no accounts.
