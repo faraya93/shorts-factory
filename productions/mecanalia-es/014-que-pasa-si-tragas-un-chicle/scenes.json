@@ -1,0 +1,527 @@
+{
+  "channel": "mecanalia-es",
+  "video": "que-pasa-si-tragas-un-chicle",
+  "title": "¿Qué pasa si te tragas un chicle? 😳",
+  "topic_family": "whatif",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d on the asset route: a stylised digestive-system asset (body family, cream cutaway plate) is the stage; the gum stick and wrapper are geometric; the chewed piece is read through its wrapper and the gut around it. Variant journey (follow one piece); the family default is fork, but the mechanism is a route, so journey.",
+  "hook_question": "¿Qué pasaría si te tragas un chicle?",
+  "false_belief": "Se queda pegado siete años en tu estómago.",
+  "closing_reframe": "Un chicle no se queda siete años: es un pasajero que no digieres, pero que igual sale.",
+  "share_archetype": "ese amigo que se traga el chicle cada vez que tiene que hablar",
+  "hero_route": "asset",
+  "library_assets": [
+    "digestive-system",
+    "bread-slice"
+  ],
+  "structure_variant": "chain",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "gum-threads",
+        "name": "chewed gum wad pulled off a sole in stretched threads",
+        "aliases": [
+          "chewing gum",
+          "gum",
+          "bubble gum",
+          "wad of gum",
+          "chicle"
+        ],
+        "route": "build",
+        "source": "a lumpy chewed pink wad lifted off a dark sole, four stretched hourglass threads between it and the squashed piece stuck below; REWRITE 2026-11-09 (rung 2, second staging): the foil-wrapped stick read as a lipstick tube (55/40/40, FAIL) and the pink bubble as a lollipop or balloon (45/45/45, FAIL); library has no gum, BlenderKit 0 results",
+        "frames": [
+          36
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "esophagus",
+        "name": "oesophagus with a gum piece",
+        "aliases": [
+          "esophagus",
+          "gullet",
+          "throat",
+          "digestive tract",
+          "digestive system"
+        ],
+        "route": "asset",
+        "source": "library digestive-system in x-ray; the squeeze ring is a torus on the tube",
+        "frames": [
+          80
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "stomach",
+        "name": "stomach with acid and a gum piece",
+        "aliases": [
+          "stomach",
+          "digestive tract",
+          "digestive system"
+        ],
+        "route": "asset",
+        "source": "library digestive-system x-ray, stomach region, transmissive acid pool built inside it",
+        "frames": [
+          150
+        ]
+      },
+      {
+        "id": "food",
+        "name": "food pieces in the stomach",
+        "aliases": [
+          "bread",
+          "food",
+          "toast",
+          "crumbs",
+          "pan"
+        ],
+        "route": "asset",
+        "source": "library bread-slice pieces in the acid",
+        "frames": [
+          66
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "corn",
+        "name": "corn kernels beside the gum",
+        "aliases": [
+          "corn",
+          "kernel",
+          "corn kernel",
+          "maize",
+          "maiz"
+        ],
+        "route": "code-primitive",
+        "source": "011 corn_rig whole kernel (teardrop with tip); audit rung 1 + 3: whole kernels in place of hull flakes",
+        "frames": [
+          170
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "intestines",
+        "name": "intestines",
+        "aliases": [
+          "intestines",
+          "intestine",
+          "bowel",
+          "guts",
+          "digestive tract",
+          "digestive system"
+        ],
+        "route": "asset",
+        "source": "library digestive-system x-ray, whole tract pulled back",
+        "frames": [
+          200
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "gum-ball",
+        "name": "gum ball in the bowel",
+        "aliases": [
+          "gum ball",
+          "wad of gum",
+          "chewing gum",
+          "gum",
+          "blockage"
+        ],
+        "route": "build",
+        "source": "pink chewed pieces (the same blob as scene 1 onwards) arriving one at a time and piled into a ball inside the large intestine x-ray",
+        "frames": [
+          235
+        ]
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "chicle_rig.tract",
+    "chicle_rig.gum_piece"
+  ],
+  "hero_still": {
+    "scene": 5,
+    "frames": [
+      200
+    ]
+  },
+  "visibility": {
+    "1": {
+      "gum-threads": {
+        "objects": [
+          "gum*"
+        ],
+        "frames": [
+          36
+        ]
+      }
+    },
+    "2": {
+      "esophagus": {
+        "objects": [
+          "digestive_system*"
+        ],
+        "frames": [
+          80
+        ]
+      }
+    },
+    "3": {
+      "stomach": {
+        "objects": [
+          "digestive_system*"
+        ],
+        "frames": [
+          150
+        ]
+      },
+      "food": {
+        "objects": [
+          "bread_slice*"
+        ],
+        "frames": [
+          66
+        ]
+      }
+    },
+    "4": {
+      "corn": {
+        "objects": [
+          "kernel*"
+        ],
+        "frames": [
+          170
+        ]
+      }
+    },
+    "5": {
+      "intestines": {
+        "objects": [
+          "digestive_system*"
+        ],
+        "frames": [
+          200
+        ]
+      }
+    },
+    "6": {
+      "gum-ball": {
+        "objects": [
+          "gum*"
+        ],
+        "frames": [
+          235
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "chicle-set",
+  "scene_script_prefix": "chicle",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "No se queda siete años: el ácido del estómago se lleva el azúcar y el sabor, pero la goma no se digiere, y aun así el intestino la empuja hasta afuera en pocos días. El problema es tragarse muchos, todos los días. 😳 Envíaselo a ese amigo que se traga el chicle cada vez que tiene que hablar.",
+  "gate_stills": {
+    "1": [
+      36
+    ],
+    "2": [
+      80
+    ],
+    "3": [
+      66,
+      150
+    ],
+    "4": [
+      170
+    ],
+    "5": [
+      200
+    ],
+    "6": [
+      235
+    ],
+    "7": [
+      130,
+      300
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "chicle_rig",
+    "corn_rig"
+  ],
+  "support_colours": {
+    "board": "#3F7C85",
+    "plate": "#FFF3E0",
+    "reason": "Teal board derived from the Coral accent family (as 012 and 015): the cream-pink x-ray tract and the pink gum both separate from it; to be confirmed by gate.py run."
+  },
+  "hero_colours": {
+    "plate": "#FFF3E0",
+    "tract": "#F6D5C4",
+    "gum": "#F58FB5",
+    "core": "#8D8A93",
+    "acid": "#C6E36B"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Qué pasaría si te tragas un chicle? Dicen que se queda pegado siete años en tu estómago. Sigámoslo.",
+      "target_duration_s": 7,
+      "transformation": "chicle estirado en hilos → se despega y cae dentro del tubo digestivo",
+      "camera": "primer plano del chicle estirado que retrocede hasta el tubo digestivo entero",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "siete"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿7 AÑOS?",
+          "at_word": "siete",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 2,
+      "name": "esofago",
+      "prompt": "Escena dibujada con código (coral): esofago.",
+      "narration": "Primero baja por el esófago, empujado por una ola de músculo que lo aprieta por detrás.",
+      "target_duration_s": 6,
+      "transformation": "chicle detenido arriba del tubo → una ola de músculo lo empuja hasta abajo",
+      "camera": "seguimiento vertical que baja con el chicle",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "esófago,"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 3,
+      "name": "estomago",
+      "prompt": "Escena dibujada con código (coral): estomago.",
+      "narration": "Llega al estómago, a un ácido que deshace la comida. El azúcar y el sabor se disuelven. Pero la goma no: es casi como plástico, y tu cuerpo no puede digerirla.",
+      "target_duration_s": 11,
+      "transformation": "chicle de color en el ácido → la capa de color se disuelve y queda un núcleo gris intacto",
+      "camera": "empuje dentro del estómago y órbita alrededor del chicle",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "ácido"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "AZÚCAR",
+          "at_word": "azúcar",
+          "offset_s": 0.0,
+          "visible_s": 2.2,
+          "x": 0.28,
+          "y": 0.58
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "GOMA",
+          "at_word": "goma",
+          "offset_s": 0.0,
+          "visible_s": 3.4,
+          "x": 0.72,
+          "y": 0.58
+        }
+      ],
+      "render_cost_class": "nested_transmission"
+    },
+    {
+      "id": 4,
+      "name": "intestino",
+      "prompt": "Escena dibujada con código (coral): intestino.",
+      "narration": "Aun así, no se pega: el estómago lo amasa y lo manda al intestino, como los granos de maíz que tampoco digieres.",
+      "target_duration_s": 8,
+      "transformation": "estómago que se contrae → el chicle y unos granos de maíz salen juntos al intestino",
+      "camera": "travelling lateral siguiendo la salida del estómago",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "maíz"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 5,
+      "name": "salida",
+      "prompt": "Escena dibujada con código (coral): salida.",
+      "narration": "Recorre metros de intestino y en pocos días sale entero, sin digerir. Siete años, no: unos días.",
+      "target_duration_s": 6,
+      "transformation": "chicle dentro del intestino → recorre todo el intestino y llega al final",
+      "camera": "retroceso grande que revela el intestino completo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "días."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿7 AÑOS?",
+          "at_offset_seconds": 0.0,
+          "visible_s": 3.6,
+          "x": 0.5,
+          "y": 0.62
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "x": 0.5,
+          "y": 0.62,
+          "at_word": "no:",
+          "offset_s": 0.0
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "DÍAS",
+          "at_word": "unos",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.5,
+          "y": 0.7
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 6,
+      "name": "giro",
+      "prompt": "Escena dibujada con código (coral): giro.",
+      "narration": "Pero sí hay casos reales: médicos describieron niños que se tragaban varios chicles al día, y la goma formó una bola que les tapó el intestino.",
+      "target_duration_s": 9,
+      "transformation": "un chicle → muchos chicles que llegan y se pegan en una bola que tapa el paso",
+      "camera": "primer plano fijo en el tramo final con empuje a medida que crece la bola",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "bola"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que un chicle no se queda siete años: es un pasajero que no digieres, pero que igual sale. Envíaselo a ese amigo que se traga el chicle cada vez que tiene que hablar.",
+      "target_duration_s": 12,
+      "transformation": "cuerpo en corte → el recorrido completo del chicle queda trazado como una ruta",
+      "camera": "retroceso amplio hasta el cuerpo entero en corte",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "pasajero"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "glass_water_sss"
+    }
+  ]
+}

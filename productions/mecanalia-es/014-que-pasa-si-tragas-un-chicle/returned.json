@@ -1,0 +1,7 @@
+{
+ "reason": "Reshape ladder exhausted on the protagonist: the swallowed gum cannot be named by isolated blind readers in any staging. Scene 1 (element gum): foil-wrapped stick pack read as a lipstick tube 55/40/40 (rung 1 re-stage), pink gum bubble read as a lollipop or balloon 45/45/45 (rung 2), stretched threads read as a pink slime jellyfish 30/35/35 (rung 2, second staging). Scene 6 (gum ball in the colon): smooth merged ball read as a brain or tumour 35/35/25, pile of separate pieces with foil packs read as pink pills in a dark box 35/60/60 (mean 51.7), pile with small bubbles read as pink berries 30/30/25. Library route tried: Sketchfab chewed-gum scans are smooth pink or white lumps (same look as the built wad), others are branded packaging (refused) or Free Standard licence (unclear, not used); BlenderKit has no gum. The hero asset (digestive system x-ray) passed 92/90/92 and the colour gate passed, so the failure is the unreadable protagonist, not the stage: without a passing gum no abstract stand-in may replace it (drawability rule), and replacing the gum would replace the topic's hero mechanism and promise. The floor was not lowered and no alias was added.",
+ "at": "2026-11-09",
+ "replacement": "productions/mecanalia-es/018-por-que-tu-voz-suena-tan-rara-cuando-la-escuchas-grabada",
+ "refill_due": true,
+ "undrawn": 8
+}

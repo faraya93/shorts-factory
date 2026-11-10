@@ -1,0 +1,74 @@
+{
+  "slug": "digestive-system",
+  "name": "Human digestive system",
+  "aliases": [
+    "digestive system",
+    "digestive tract",
+    "intestines",
+    "guts",
+    "organs",
+    "sistema digestivo",
+    "intestino"
+  ],
+  "family": "body",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a human digestive system (oesophagus, stomach, intestines)",
+    "seen_at": "whole tract filling 50-80% of the frame height; the stomach alone in close-up",
+    "moving_parts": [
+      "none: one mesh, one island; the gum travels along a path through it (x-ray material), the squeeze ring and the acid are production-level builds"
+    ],
+    "states": [
+      "whole tract, opaque or x-ray (material swapped per production)"
+    ],
+    "style_notes": "stylised sculpt with a painted texture; retint or replace the material per production; no blood, no skin texture"
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/3d2f2de7-6323-4c51-bc48-fcb3d34a846b/",
+    "asset_id": "313d76be-a32a-44b5-8920-9bc04808cd86",
+    "author": "danes_dysfunction",
+    "retrieved": "2026-11-09"
+  },
+  "licence": {
+    "id": "Royalty-Free",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": "BlenderKit Royalty-Free, anonymous download",
+    "decision": "no CC0 digestive system found; Royalty-Free is acceptable (CLAUDE.md licences)"
+  },
+  "files": {
+    "blend": "digestive-system.blend",
+    "sha256": "fa29d76b1a57d106f2c0cce97aef4f77f57000f524a9a1b7e3a7a0492cfb5d25",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": 0.406,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "human digestive system (3D anatomical model of stomach, intestines, and colon); alternatives: anatomical torso organ model, sea anemone-like tangle",
+        "human digestive system (stomach, intestines, colon) 3D anatomical model",
+        "human digestive system (alternatives: anatomical gut model; stomach with intestines)"
+      ],
+      "confidences": [
+        90,
+        92,
+        90
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}
