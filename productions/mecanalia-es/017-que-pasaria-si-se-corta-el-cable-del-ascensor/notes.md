@@ -1,13 +1,13 @@
 # que-pasaria-si-se-corta-el-cable-del-ascensor: production notes
 
-Status: SCRIPTED, BUILT AND GATED (2026-11-10). DRAWN from the banked tier (rank 1, replacement for returned 013, 2026-11-09). Topic: whatif, fork, theme elevators, main tension dangerous. Hook and hero route: docs/current/idea-bank.md rank 1. Final render to be queued with `tools/queue_final.py`.
+Status: RENDERED, VERIFIED (PASS), PACKAGE BUILT AND CHECKED (2026-11-10); the owner's publish/reject verdict is pending. DRAWN from the banked tier (rank 1, replacement for returned 013, 2026-11-09). Topic: whatif, fork, theme elevators, main tension dangerous. Hook and hero route: docs/current/idea-bank.md rank 1. Final render to be queued with `tools/queue_final.py`.
 
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Qué pasaría si se corta el cable de un ascensor? 😱
 - **Descripción:** ¿Qué pasa si se corta el cable de un ascensor? Nada: cuelga de varios cables y, si todos fallaran, un freno lo agarra de los rieles.
   Y saltar no te salva: tu salto frena unos 10 km/h y la caída desde diez pisos llega a casi 90. 😱 Envíaselo a ese amigo que sube por las escaleras porque le da miedo el ascensor.
   Música: ninguna (sin pista y sin crédito; decisión del dueño 2026-11-01)
-- **Hashtags (description, not title):** #ascensor #curiosidades #fisica #shorts
+- **Hashtags (description, not title):** #ascensor #quepasaria #curiosidades #shorts
 
 ## Script (6 scenes, family whatif, variant fork, 160 words, 57.8 s narrated; band 45-60 s)
 Hook: ¿Qué pasaría si se cortara el cable de un ascensor? | false belief: caerías al vacío, y solo te salvaría saltar justo antes del golpe | turn: scene 5 (even if everything failed there is a buffer, and a woman survived a 75-storey fall in 1945) | reframe: un ascensor no cuelga de un cable: está agarrado a sus rieles | closing repeats the opening question (fork), then "envíaselo" with the archetype: ese amigo que sube por las escaleras porque le da miedo el ascensor.
@@ -39,6 +39,14 @@ What changes in the world, per scene (flatness test: swapping any two breaks the
 
 ## Gate record
 Colour gate PASS (stage plate set to a dark slate #3B4553 after two BLOCKs measured on steel parts, see the support colours reason in script.json), hero `elevator-car` frozen (neutral 85/85/88, production still 90/90/85), every element read and carried, visibility PASS (p90 dE 41-53, area 1.06-13.8 %). The hero was unfrozen and re-read three times (library_assets declared; hero still changed by the scene 3 reshape; Cab class edited for the interior lamp), every reading kept.
+
+## REPORT 2026-11-10 (finish after the queued final)
+- **Render:** chain log `output/chain-017-que-pasaria-si-se-corta-el-cable-del-ascensor.log`: START 12:40:55, DONE 13:28:26 (47.5 min wall, six scenes), no FAILED / INCOMPLETE / Traceback and no retry warning. `final.mp4` 1080x1920 H.264/AAC, 57.93 s, 24.9 MB, plus `cover.jpg`. $0 fal spend (code3d). Launched through `tools/queue_final.py`.
+- **Verify:** `tools/verify_production.py` PASS. `publish_package.py build` first refused two hashtag sets (the whatif family tag #quepasaria was missing; then the first slot must be topical), fixed in the notes: `#ascensor #quepasaria #curiosidades #shorts`; build and check then OK. Nothing published.
+- **Estimate vs actual:** every scene was predicted `opaque` (2-3 s/frame), none above 15 s/frame, no cost_restage. Per-scene render times were not broken out; the chain took 47.5 min for 1,737 frames (about 1.6 s/frame including encode). The session itself was long mainly because of scene 3 (seven failed readings of the brake hardware, two of the governor wheel) and three hero re-reads after rig fingerprint moves.
+- **Dynamism audit (mechanical, from stills and the scripts; I cannot watch the video):** every scene stages a visible change and a travelling camera: tracking fall to the pit (1), pull-back and up to the sheave as ropes appear and are cut (2), orbiting fall that widens as the rails light (3), travelling beside a cut-away car in free fall (4), crane up the shaft then a tracked fall onto the buffer (5), close-up on a lit rail pulling back to the whole shaft (6). The lenses' contact-sheet check and the owner's eye remain the last gate.
+- **Flags:** the narration's "con unos pocos basta" rests on lecture notes only (to confirm); the scene 4 phone passed with one reader naming the car and listing the phone as an alternative; the brake is shown only as the rails lighting up (hardware failed the likeness gate, see the reshape log); the fall speeds on screen are not to scale. Owner-only: the publish/reject verdict.
+- **Not done:** no idea-bank change (the draw was marked 2026-11-09); the bank sits at 8 undrawn banked entries, a refill was already flagged by 013 and 014 and is not run by a production session.
 
 ## Cost classes
 All six scenes `opaque` (no glass, water or volumes): predicted 2-3 s/frame, none above 15, no cost_restage.
