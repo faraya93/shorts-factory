@@ -1,0 +1,506 @@
+{
+  "channel": "mecanalia-es",
+  "video": "que-pasaria-si-se-corta-el-cable-del-ascensor",
+  "title": "¿Qué pasaría si se corta el cable de un ascensor? 😱",
+  "topic_family": "whatif",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d: a rigid, genuinely geometric mechanism (cabin, shaft, steel ropes, guide rails, safety wedges, governor wheel, buffer piston, a phone slab); every part reads from its shape and its context, no organic hero is needed, so no library asset. The passenger is never drawn (a phone stands in for the jump).",
+  "hook_question": "¿Qué pasaría si se cortara el cable de un ascensor?",
+  "false_belief": "Caerías al vacío, y solo te salvaría saltar justo antes del golpe.",
+  "closing_reframe": "Un ascensor no cuelga de un cable: está agarrado a sus rieles.",
+  "share_archetype": "ese amigo que sube por las escaleras porque le da miedo el ascensor",
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "elevator-car"
+  ],
+  "structure_variant": "fork",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "cabin",
+        "name": "elevator car hanging in its shaft",
+        "aliases": [
+          "elevator",
+          "lift",
+          "ascensor"
+        ],
+        "route": "code-primitive",
+        "source": "asc_rig.cabin: rigid box with sliding doors, button strip and floor display, hung from one rope inside a shaft with landings: genuinely geometric, the shaft and landings are the context cue",
+        "frames": [
+          60
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "ropes",
+        "name": "bundle of steel ropes holding an elevator car",
+        "aliases": [
+          "cable",
+          "cables",
+          "rope",
+          "ropes",
+          "wire",
+          "wires",
+          "cord",
+          "cords"
+        ],
+        "route": "code-primitive",
+        "source": "asc_rig.ropes: parallel dark steel ropes from the car roof over a sheave: genuinely geometric lines; the car below is the context cue",
+        "frames": [
+          108
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "cabin-braking",
+        "name": "elevator car stopped in its shaft with the rails lit around its base",
+        "aliases": [
+          "elevator",
+          "lift",
+          "ascensor"
+        ],
+        "route": "code-primitive",
+        "source": "asc_rig.cabin and rails; asc_rig.safety_gear: accent sleeves lighting the rails where the car is gripped (rung 2 of the reshape: the clamp hardware stays off screen after seven failed readings, and so does the governor wheel after two)",
+        "frames": [
+          215
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "phone",
+        "name": "phone floating inside the falling car",
+        "aliases": [
+          "phone",
+          "smartphone",
+          "cellphone",
+          "mobile",
+          "celular",
+          "telephone"
+        ],
+        "route": "code-primitive",
+        "source": "asc_rig.phone: rounded slab with a dark screen, a camera dot and a thin bezel, exaggerated size; the open cabin is the context cue: genuinely geometric",
+        "frames": [
+          125
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "buffer",
+        "name": "buffer piston in the pit under the car",
+        "aliases": [
+          "buffer",
+          "shock",
+          "absorber",
+          "piston",
+          "damper",
+          "spring",
+          "hydraulic"
+        ],
+        "route": "code-primitive",
+        "source": "asc_rig.buffer: pit slab, sleeve, rod and cap plate with the car's underside arriving: genuinely geometric",
+        "frames": [
+          45
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "cabin-close",
+        "name": "elevator car held by its rails",
+        "aliases": [
+          "elevator",
+          "lift",
+          "ascensor"
+        ],
+        "route": "code-primitive",
+        "source": "asc_rig.cabin in the full tableau with six ropes, rails and the clamped wedges",
+        "frames": [
+          230
+        ]
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "asc_rig.shaft",
+    "asc_rig.Cab",
+    "asc_rig.Ropes",
+    "asc_rig.fall_z",
+    "asc_rig.CAB_W"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      60
+    ]
+  },
+  "visibility": {
+    "1": {
+      "cabin": {
+        "objects": [
+          "cab_*"
+        ],
+        "frames": [
+          60
+        ]
+      }
+    },
+    "2": {
+      "ropes": {
+        "objects": [
+          "rope_*"
+        ],
+        "frames": [
+          108
+        ]
+      }
+    },
+    "3": {
+      "cabin-braking": {
+        "objects": [
+          "cab_*"
+        ],
+        "frames": [
+          215
+        ]
+      },
+      "rail-grip": {
+        "objects": [
+          "grip_*"
+        ],
+        "frames": [
+          215
+        ]
+      }
+    },
+    "4": {
+      "phone": {
+        "objects": [
+          "phone_*"
+        ],
+        "frames": [
+          125
+        ]
+      }
+    },
+    "5": {
+      "buffer": {
+        "objects": [
+          "buf_*"
+        ],
+        "frames": [
+          45
+        ]
+      }
+    },
+    "6": {
+      "cabin-close": {
+        "objects": [
+          "cab_*"
+        ],
+        "frames": [
+          230
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "asc-set",
+  "scene_script_prefix": "asc",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "¿Qué pasa si se corta el cable de un ascensor? Nada: cuelga de varios cables y, si todos fallaran, un freno lo agarra de los rieles. Y saltar no te salva: el salto frena unos 10 km/h y la caída desde diez pisos llega a casi 90. 😱 Envíaselo a ese amigo que sube por las escaleras porque le da miedo el ascensor.",
+  "gate_stills": {
+    "1": [
+      10,
+      60,
+      200
+    ],
+    "2": [
+      10,
+      108,
+      215
+    ],
+    "3": [
+      10,
+      120,
+      215
+    ],
+    "4": [
+      10,
+      125,
+      280
+    ],
+    "5": [
+      45,
+      160,
+      300
+    ],
+    "6": [
+      10,
+      230,
+      390
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "asc_rig"
+  ],
+  "support_colours": {
+    "board": "#4B3A5A",
+    "plate": "#3B4553",
+    "reason": "The shaft's back wall is a dark slate plate derived from the ink plinth family (cooler, lighter: ink #1D1B2E to slate), so the light steel hero (car, rails, ropes) stands out against it; the first try (mid slate #5F6C7A) measured 13-20 against the hero greys and BLOCKED, the cream plate would have fallen on the white car. Landing doors take the plum board; landings and pit slab take the ink plinth colour."
+  },
+  "hero_colours": {
+    "cabin": "#E3E0DC",
+    "doors": "#B9BEC4",
+    "rails": "#D6DADF",
+    "rope": "#E4E7EA",
+    "phone": "#2D2A2B"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Qué pasaría si se cortara el cable de un ascensor? Dicen que caerías al vacío, y que solo te salvaría saltar justo antes del golpe.",
+      "target_duration_s": 8,
+      "transformation": "cabina colgada de un solo cable → el cable se parte y la cabina cae piso a piso",
+      "camera": "plano medio frontal que baja siguiendo la caída",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cable",
+        "caerías"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "cables",
+      "prompt": "Escena dibujada con código (coral): cables.",
+      "narration": "Pero un ascensor no cuelga de un solo cable: cuelga de varios cables de acero, y con unos pocos basta para sostener la cabina.",
+      "target_duration_s": 8,
+      "transformation": "un cable que se parte → seis cables, tres se parten y la cabina sigue colgada",
+      "camera": "retroceso con subida hasta la polea del techo del hueco",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "varios",
+        "acero,"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "frenos",
+      "prompt": "Escena dibujada con código (coral): frenos.",
+      "narration": "Y si se cortaran todos, entra el verdadero freno: si la cabina baja demasiado rápido, la agarra de los rieles y la clava en seco.",
+      "target_duration_s": 10,
+      "transformation": "cabina que acelera sin cables → los rieles se iluminan donde la agarran y la cabina se detiene",
+      "camera": "órbita lateral que baja con la cabina y se abre a un plano amplio donde se agarra al riel",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "freno:",
+        "rieles"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "FRENO",
+          "at_word": "agarra",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.78,
+          "y": 0.55
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "salto",
+      "prompt": "Escena dibujada con código (coral): salto.",
+      "narration": "¿Y saltar? Un salto te da unos diez kilómetros por hora. Una caída desde diez pisos llega a casi noventa. No alcanza.",
+      "target_duration_s": 8,
+      "transformation": "teléfono sobre el piso de la cabina → flota hacia el techo mientras la cabina cae a toda velocidad",
+      "camera": "primer plano de la cabina abierta que cae, con travelling lateral",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "saltar?",
+        "noventa."
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "≈ 10 km/h",
+          "from": 0,
+          "at_word": "kilómetros",
+          "offset_s": 0.0,
+          "duration_s": 1.0,
+          "visible_s": 3.4,
+          "x": 0.3,
+          "y": 0.86
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "≈ 87 km/h",
+          "from": 0,
+          "at_word": "noventa.",
+          "offset_s": 0.0,
+          "duration_s": 1.4,
+          "visible_s": 3.0,
+          "x": 0.7,
+          "y": 0.86
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 5,
+      "name": "colchon",
+      "prompt": "Escena dibujada con código (coral): colchon.",
+      "narration": "Y si todo fallara, abajo hay un amortiguador. En 1945, cuando un bombardero chocó con el Empire State, una ascensorista cayó setenta y cinco pisos y sobrevivió.",
+      "target_duration_s": 10,
+      "transformation": "cabina que cae por un hueco altísimo → aterriza en el amortiguador, que se hunde y la detiene",
+      "camera": "grúa que baja de un plano cenital hasta el foso",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "amortiguador.",
+        "sobrevivió."
+      ],
+      "data_overlays": [
+        {
+          "type": "chip",
+          "text_or_value": "1945",
+          "at_word": "bombardero",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.72,
+          "y": 0.45
+        },
+        {
+          "type": "chip",
+          "text_or_value": "75 PISOS",
+          "at_word": "setenta",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.72,
+          "y": 0.52
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 6,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que un ascensor no cuelga de un cable: está agarrado a sus rieles. ¿Qué pasaría si se cortara el cable? Nada. Envíaselo a ese amigo que sube por las escaleras porque le da miedo el ascensor.",
+      "target_duration_s": 13,
+      "transformation": "primer plano de la cuña en el riel → plano amplio del hueco completo con la cabina sostenida",
+      "camera": "retroceso amplio y lento con subida",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "rieles.",
+        "Nada."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

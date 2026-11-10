@@ -1,0 +1,78 @@
+{
+  "slug": "elevator-car",
+  "name": "Elevator car in its shaft",
+  "aliases": [
+    "elevator",
+    "lift",
+    "ascensor"
+  ],
+  "family": "whatif",
+  "created": "2026-11-10",
+  "status": "ready",
+  "route": "code-primitive",
+  "brief": {
+    "must_read_as": "an elevator car hanging in its shaft: a box with a pair of sliding doors, a button strip and a floor display, riding two guide rails past floor landings",
+    "seen_at": "medium: the car fills about 35% of frame width in the hook, close-ups in scenes 3 and 4",
+    "moving_parts": [
+      "car root: falls, stops, sinks onto a buffer",
+      "hoist ropes: grow in, are cut one by one (upper part recoils, stub stays on the roof)",
+      "safety wedges: slide up and clamp the rail",
+      "car-mounted governor wheel: spins with the fall, weights swing out",
+      "phone floating inside the cut-away car"
+    ],
+    "states": [
+      "closed car hanging on one rope",
+      "closed car hanging on six ropes, some cut",
+      "closed car falling, wedges bitten",
+      "cut-away car in free fall with a phone",
+      "car landing on the pit buffer"
+    ],
+    "style_notes": "Rigid, genuinely geometric: code primitives (asc_rig). The shaft with its landings is the context cue. Alias list decided 2026-11-10 before any reading; never extended after a guess."
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": "own-work",
+    "url": null,
+    "attribution": null,
+    "note": "built in this factory (asc_rig)",
+    "decision": null
+  },
+  "files": {
+    "blend": null,
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": "asc_rig",
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-10"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-10",
+      "guesses": [
+        "elevator car on guide rails",
+        "elevator car in a shaft (lift cabin on rails)",
+        "elevator car on guide rails in a shaft"
+      ],
+      "confidences": [
+        85,
+        85,
+        88
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

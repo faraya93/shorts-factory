@@ -1,0 +1,158 @@
+{
+  "video": "que-pasaria-si-se-corta-el-cable-del-ascensor",
+  "title": "¿Qué pasaría si se corta el cable de un ascensor? 😱",
+  "preset": "coral",
+  "prefix": "asc",
+  "topic_family": "whatif",
+  "structure_variant": "fork",
+  "curiosity_score": 10,
+  "hook_question": "¿Qué pasaría si se cortara el cable de un ascensor?",
+  "false_belief": "Caerías al vacío, y solo te salvaría saltar justo antes del golpe.",
+  "turn": "Scene 5: even if every safeguard failed, the pit buffer is still there, and in 1945 a woman survived a 75-storey fall in an Empire State elevator.",
+  "closing_reframe": "Un ascensor no cuelga de un cable: está agarrado a sus rieles.",
+  "share_archetype": "ese amigo que sube por las escaleras porque le da miedo el ascensor",
+  "engine_reason": "code3d: a rigid, genuinely geometric mechanism (cabin, shaft, steel ropes, guide rails, safety wedges, governor wheel, buffer piston, a phone slab); every part reads from its shape and its context, no organic hero is needed, so no library asset. The passenger is never drawn (a phone stands in for the jump).",
+  "hero_route": "code-primitive",
+  "library_assets": ["elevator-car"],
+  "gate_version": 2,
+  "hero_rig": [
+    "asc_rig.shaft",
+    "asc_rig.Cab",
+    "asc_rig.Ropes",
+    "asc_rig.fall_z",
+    "asc_rig.CAB_W"
+  ],
+  "hero_still": {"scene": 1, "frames": [60]},
+  "hero_colours": {
+    "cabin": "#E3E0DC",
+    "doors": "#B9BEC4",
+    "rails": "#D6DADF",
+    "rope": "#E4E7EA",
+    "phone": "#2D2A2B"
+  },
+  "support_colours": {
+    "board": "#4B3A5A",
+    "plate": "#3B4553",
+    "reason": "The shaft's back wall is a dark slate plate derived from the ink plinth family (cooler, lighter: ink #1D1B2E to slate), so the light steel hero (car, rails, ropes) stands out against it; the first try (mid slate #5F6C7A) measured 13-20 against the hero greys and BLOCKED, the cream plate would have fallen on the white car. Landing doors take the plum board; landings and pit slab take the ink plinth colour."
+  },
+  "caption_draft": "¿Qué pasa si se corta el cable de un ascensor? Nada: cuelga de varios cables y, si todos fallaran, un freno lo agarra de los rieles. Y saltar no te salva: el salto frena unos 10 km/h y la caída desde diez pisos llega a casi 90. 😱 Envíaselo a ese amigo que sube por las escaleras porque le da miedo el ascensor.",
+  "rig_libs": ["tape_rig", "setpiece", "real_kit", "asc_rig"],
+  "gate_stills": {"1": [10, 60, 200], "2": [10, 108, 215], "3": [10, 120, 215], "4": [10, 125, 280], "5": [45, 160, 300], "6": [10, 230, 390]},
+  "scene_elements": {
+    "1": [
+      {"id": "cabin", "name": "elevator car hanging in its shaft", "aliases": ["elevator", "lift", "ascensor"], "route": "code-primitive", "source": "asc_rig.cabin: rigid box with sliding doors, button strip and floor display, hung from one rope inside a shaft with landings: genuinely geometric, the shaft and landings are the context cue", "frames": [60]}
+    ],
+    "2": [
+      {"id": "ropes", "name": "bundle of steel ropes holding an elevator car", "aliases": ["cable", "cables", "rope", "ropes", "wire", "wires", "cord", "cords"], "route": "code-primitive", "source": "asc_rig.ropes: parallel dark steel ropes from the car roof over a sheave: genuinely geometric lines; the car below is the context cue", "frames": [108]}
+    ],
+    "3": [
+      {"id": "cabin-braking", "name": "elevator car stopped in its shaft with the rails lit around its base", "aliases": ["elevator", "lift", "ascensor"], "route": "code-primitive", "source": "asc_rig.cabin and rails; asc_rig.safety_gear: accent sleeves lighting the rails where the car is gripped (rung 2 of the reshape: the clamp hardware stays off screen after seven failed readings, and so does the governor wheel after two)", "frames": [215]}
+    ],
+    "4": [
+      {"id": "phone", "name": "phone floating inside the falling car", "aliases": ["phone", "smartphone", "cellphone", "mobile", "celular", "telephone"], "route": "code-primitive", "source": "asc_rig.phone: rounded slab with a dark screen, a camera dot and a thin bezel, exaggerated size; the open cabin is the context cue: genuinely geometric", "frames": [125]}
+    ],
+    "5": [
+      {"id": "buffer", "name": "buffer piston in the pit under the car", "aliases": ["buffer", "shock", "absorber", "piston", "damper", "spring", "hydraulic"], "route": "code-primitive", "source": "asc_rig.buffer: pit slab, sleeve, rod and cap plate with the car's underside arriving: genuinely geometric", "frames": [45]}
+    ],
+    "6": [
+      {"id": "cabin-close", "name": "elevator car held by its rails", "aliases": ["elevator", "lift", "ascensor"], "route": "code-primitive", "source": "asc_rig.cabin in the full tableau with six ropes, rails and the clamped wedges", "frames": [230]}
+    ]
+  },
+  "visibility": {
+    "1": {"cabin": {"objects": ["cab_*"], "frames": [60]}},
+    "2": {"ropes": {"objects": ["rope_*"], "frames": [108]}},
+    "3": {"cabin-braking": {"objects": ["cab_*"], "frames": [215]}, "rail-grip": {"objects": ["grip_*"], "frames": [215]}},
+    "4": {"phone": {"objects": ["phone_*"], "frames": [125]}},
+    "5": {"buffer": {"objects": ["buf_*"], "frames": [45]}},
+    "6": {"cabin-close": {"objects": ["cab_*"], "frames": [230]}}
+  },
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Qué pasaría si se cortara el cable de un ascensor? Dicen que caerías al vacío, y que solo te salvaría saltar justo antes del golpe.",
+      "what_changes": "The belief staged: a car hangs by ONE thin rope in a tall shaft; the rope snaps and the car drops floor by floor with the camera tracking it down.",
+      "transformation": "cabina colgada de un solo cable → el cable se parte y la cabina cae piso a piso",
+      "camera": "plano medio frontal que baja siguiendo la caída",
+      "emphasis": ["cable", "caerías"],
+      "overlays": [],
+      "target_duration_s": 8,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "cables",
+      "narration": "Pero un ascensor no cuelga de un solo cable: cuelga de varios cables de acero, y con unos pocos basta para sostener la cabina.",
+      "what_changes": "The same car, pulled back to the top: six ropes over the sheave; one snaps and the car does not move; two more snap and it still hangs.",
+      "transformation": "un cable que se parte → seis cables, tres se parten y la cabina sigue colgada",
+      "camera": "retroceso con subida hasta la polea del techo del hueco",
+      "emphasis": ["varios", "acero,"],
+      "overlays": [],
+      "target_duration_s": 8,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "frenos",
+      "narration": "Y si se cortaran todos, entra el verdadero freno: si la cabina baja demasiado rápido, la agarra de los rieles y la clava en seco.",
+      "what_changes": "Every rope is cut: the car accelerates down the shaft, the landings streaming past faster and faster, then the rails light up in the accent around the car's base and the car stops dead.",
+      "transformation": "cabina que acelera sin cables → los rieles se iluminan donde la agarran y la cabina se detiene",
+      "camera": "órbita lateral que baja con la cabina y se abre a un plano amplio donde se agarra al riel",
+      "emphasis": ["freno:", "rieles"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "FRENO", "at_word": "agarra", "offset_s": 0.0, "visible_s": 2.4, "x": 0.78, "y": 0.55}
+      ],
+      "target_duration_s": 10,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "salto",
+      "narration": "¿Y saltar? Un salto te da unos diez kilómetros por hora. Una caída desde diez pisos llega a casi noventa. No alcanza.",
+      "what_changes": "A cutaway of the car in free fall down a very tall shaft: a phone drifts up off the floor (all that a jump gives you inside a falling car) while the landings stream past and two counters set the jump's speed against the fall's.",
+      "transformation": "teléfono sobre el piso de la cabina → flota hacia el techo mientras la cabina cae a toda velocidad",
+      "camera": "primer plano de la cabina abierta que cae, con travelling lateral",
+      "emphasis": ["saltar?", "noventa."],
+      "overlays": [
+        {"type": "counter", "style": "mono", "text_or_value": "≈ 10 km/h", "from": 0, "at_word": "kilómetros", "offset_s": 0.0, "duration_s": 1.0, "visible_s": 3.4, "x": 0.3, "y": 0.86},
+        {"type": "counter", "style": "mono", "text_or_value": "≈ 87 km/h", "from": 0, "at_word": "noventa.", "offset_s": 0.0, "duration_s": 1.4, "visible_s": 3.0, "x": 0.7, "y": 0.86}
+      ],
+      "target_duration_s": 8,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "colchon",
+      "narration": "Y si todo fallara, abajo hay un amortiguador. En 1945, cuando un bombardero chocó con el Empire State, una ascensorista cayó setenta y cinco pisos y sobrevivió.",
+      "what_changes": "The turn: the car falls the whole height of a very tall shaft and lands on the piston buffer in the pit, which sinks and stops it.",
+      "transformation": "cabina que cae por un hueco altísimo → aterriza en el amortiguador, que se hunde y la detiene",
+      "camera": "grúa que baja de un plano cenital hasta el foso",
+      "emphasis": ["amortiguador.", "sobrevivió."],
+      "overlays": [
+        {"type": "chip", "text_or_value": "1945", "at_word": "bombardero", "offset_s": 0.0, "visible_s": 2.6, "x": 0.72, "y": 0.45},
+        {"type": "chip", "text_or_value": "75 PISOS", "at_word": "setenta", "offset_s": 0.0, "visible_s": 2.6, "x": 0.72, "y": 0.52}
+      ],
+      "target_duration_s": 10,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que un ascensor no cuelga de un cable: está agarrado a sus rieles. ¿Qué pasaría si se cortara el cable? Nada. Envíaselo a ese amigo que sube por las escaleras porque le da miedo el ascensor.",
+      "what_changes": "Single reframe image: the car hangs on its six ropes with the wedges holding the rails; the camera pulls back and up to the whole shaft, the rails the only bright line.",
+      "transformation": "primer plano de la cuña en el riel → plano amplio del hueco completo con la cabina sostenida",
+      "camera": "retroceso amplio y lento con subida",
+      "emphasis": ["rieles.", "Nada."],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "ENVÍASELO", "at_word": "Envíaselo", "offset_s": 0.0, "visible_s": 2.6, "x": 0.8, "y": 0.62}
+      ],
+      "target_duration_s": 13,
+      "render_cost_class": "opaque"
+    }
+  ],
+  "sources": [
+    "Hoist: several steel ropes, each rated to carry the car alone (elevator engineering lecture notes; general reference, to confirm against a standard before relying on the exact wording 'con unos pocos basta').",
+    "Overspeed governor trips the safety gear: wedges clamp the guide rails. Fly-ball overspeed governor, Cooper, Lift and Escalator Library paper; Elisha Otis safety gear (Crystal Palace 1854, The Elevator Museum).",
+    "1945 Empire State Building B-25 crash: Betty Lou Oliver survived a 75-storey elevator fall; Guinness World Records 'longest fall survived in a lift'; Wikipedia credits the air cushion in the shaft. Not named on screen; the narration says 'una ascensorista'.",
+    "Arithmetic (ours): v = sqrt(2 g h): h = 10 floors x 3 m = 30 m gives 24.3 m/s = 87 km/h; a standing jump of 0.5 m gives 3.1 m/s = 11 km/h, said as 'unos diez'. Floor height of 3 m and a 0.5 m jump are assumptions, stated as approximate."
+  ],
+  "simplifications": [
+    "The passenger is never drawn; a phone stands in for the jump.",
+    "Real cars run on guide shoes and a counterweight; the counterweight is left out so the mechanism stays legible.",
+    "The governor rope loop is reduced to a wheel at the pit that spins with the car's speed."
+  ]
+}
