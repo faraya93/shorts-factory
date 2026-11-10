@@ -1,0 +1,74 @@
+{
+  "slug": "horse",
+  "name": "Draft horse",
+  "aliases": [
+    "horse",
+    "caballo",
+    "pony"
+  ],
+  "family": "objects",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a horse",
+    "seen_at": "full body, standing beside a mound",
+    "moving_parts": [
+      "armature 'rig' (standing pose only used)"
+    ],
+    "states": [
+      "standing"
+    ],
+    "style_notes": "Retinted per production; the rig widget shapes (WGT-*) were deleted. Hair-curve objects are hidden."
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/01fb9092-58da-498c-a762-04d93d08caea/",
+    "asset_id": "f844b8ab-524e-4c34-906b-97d9d86b1f2a",
+    "author": "Irena Aidlin Moonin",
+    "retrieved": "2026-11-09"
+  },
+  "licence": {
+    "id": "Royalty-Free",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "horse.blend",
+    "sha256": "a252be3545dd9e98ad8bccb028a4c83796e27b38763a4b5fd80f58995351f541",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": [
+    0.62,
+    1.88,
+    1.82
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "a grey 3D-rendered horse figurine (untextured clay-style model)",
+        "a grey 3D-rendered horse figurine (untextured clay model)",
+        "a grey 3D-rendered horse figurine"
+      ],
+      "confidences": [
+        90,
+        90,
+        90
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

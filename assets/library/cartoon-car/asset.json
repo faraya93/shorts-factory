@@ -1,0 +1,75 @@
+{
+  "slug": "cartoon-car",
+  "name": "80s cartoon car",
+  "aliases": [
+    "car",
+    "auto",
+    "coche",
+    "carro"
+  ],
+  "family": "objects",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a sedan car",
+    "seen_at": "full body, two copies side by side on a balance",
+    "moving_parts": [
+      "wheels (separate objects)"
+    ],
+    "states": [
+      "static"
+    ],
+    "style_notes": "Retinted per production. Root sits 0.238 m above z=0 (wheels): lower it when placing."
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/966308e1-e9e9-4d0f-9597-e10f05f453dd/",
+    "asset_id": "d93bc35f-f0d0-4854-841d-23f9f20c0d74",
+    "author": "Jordi Se-Cam",
+    "retrieved": "2026-11-09"
+  },
+  "licence": {
+    "id": "Royalty-Free",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "cartoon-car.blend",
+    "sha256": "898faa97d28a41addbfb531a3833df6d64524fe969d24d91a5fb7a52bc8364b6",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": [
+    0.93,
+    4.21,
+    1.62
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "boxy four-door sedan car, untextured grey 3D model; alternatives: hatchback, van",
+        "untextured gray 3D model of a boxy four-door sedan (classic Soviet-style car like a Lada/Zhiguli), clay render",
+        "boxy sedan car (Lada-style 3D model)"
+      ],
+      "confidences": [
+        90,
+        85,
+        85
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

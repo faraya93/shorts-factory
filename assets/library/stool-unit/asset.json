@@ -1,0 +1,80 @@
+{
+  "slug": "stool-unit",
+  "name": "Stylised stool unit on a kitchen scale",
+  "aliases": [
+    "poop",
+    "feces",
+    "stool",
+    "poo",
+    "caca"
+  ],
+  "family": "numbers",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "code-primitive",
+  "brief": {
+    "must_read_as": "a pile of poop (a stylised matte brown coiled swirl) lying on a kitchen scale beside a toilet",
+    "seen_at": "medium: the unit fills ~10% of frame height beside the toilet; in piles it is instanced hundreds of times",
+    "moving_parts": [
+      "single unit drops onto the scale platter",
+      "pile: one mesh of many units, rewritten per frame (grows, drains, tints)"
+    ],
+    "states": [
+      "single unit on a scale",
+      "growing pile",
+      "pile split into water and solids, half the units tinted yellow-green"
+    ],
+    "style_notes": "Matte brown, never wet, no real texture; the toilet in frame is the context cue. Alias list decided 2026-11-09 before any reading; never extended after a guess."
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": "own-work",
+    "url": null,
+    "attribution": null,
+    "note": "built in this factory (caca_rig.unit_template)",
+    "decision": null
+  },
+  "files": {
+    "blend": null,
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": "caca_rig",
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "coiled brown swirl (pile of dung/poop emoji); alternatives: cinnamon roll, coiled rope",
+        "coiled pile of dung, like the poop emoji (alternatives: chocolate soft-serve swirl; cinnamon roll)",
+        "coiled pile of poop (poop emoji-style 3D render); alternatives: cinnamon roll, coiled rope"
+      ],
+      "confidences": [
+        85,
+        85,
+        80
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [
+    {
+      "id": "lumpy-log",
+      "reason": "own build caca_rig.unit_template: smooth lumpy log read as 'chocolate nugget / chicken nugget / potato' by three isolated readers (35/35/35), 2026-11-09. Replaced by the coiled swirl (swirl_template), which read as poop 85/85/80."
+    }
+  ],
+  "productions": []
+}

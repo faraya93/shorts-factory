@@ -1,0 +1,72 @@
+{
+  "slug": "suitcase",
+  "name": "Black suitcase",
+  "aliases": [
+    "suitcase",
+    "luggage",
+    "maleta"
+  ],
+  "family": "objects",
+  "created": "2026-11-09",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a suitcase",
+    "seen_at": "small beside a pile; two copies side by side as a weight comparison",
+    "moving_parts": [],
+    "states": [
+      "closed, standing or lying"
+    ],
+    "style_notes": "Retinted per production. The first candidate (BlenderKit ebbe0d72, wheeled carry-on) was refused: 693 coplanar triangle pairs from embossed lettering."
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/4074e865-e8d3-4bc9-b493-f2a8ed403045/",
+    "asset_id": "05678a43-b5dc-4c2f-b545-1ed650c52c19",
+    "author": "Mad Lobster Workshop Dolzall",
+    "retrieved": "2026-11-09"
+  },
+  "licence": {
+    "id": "Royalty-Free",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": "mesh QA: 2 coplanar triangle pairs (0.02% of tris), invisible; waiver recorded in docs/current/reports/lens-decisions.md 2026-11-09",
+    "decision": null
+  },
+  "files": {
+    "blend": "suitcase.blend",
+    "sha256": "3df8773439225a00362ce16efe44246414e598246ca46e69819376cdbcae7387",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": [
+    0.6,
+    0.38,
+    0.18
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-09"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-09",
+      "guesses": [
+        "suitcase (a closed hard-shell carry-on luggage case with a handle)",
+        "suitcase (a vintage hard-shell luggage case with a carry handle and corner caps)",
+        "a closed vintage suitcase with a carry handle and metal corner protectors"
+      ],
+      "confidences": [
+        92,
+        93,
+        93
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}
