@@ -1,0 +1,136 @@
+{
+  "video": "por-que-tu-voz-suena-tan-rara-cuando-la-escuchas-grabada",
+  "title": "¿Por qué tu voz suena tan rara cuando la escuchas grabada? 🎙️",
+  "preset": "coral",
+  "prefix": "voz",
+  "topic_family": "body",
+  "structure_variant": "chain",
+  "curiosity_score": 10,
+  "hook_question": "¿Por qué tu voz suena tan rara cuando la escuchas grabada?",
+  "false_belief": "El celular o el micrófono la deforman.",
+  "turn": "Scene 4: the bone path exists only inside the speaker's own head. A second skull (a listener) appears: it and the phone receive only the air path, so the recording is the voice everyone else has always heard.",
+  "closing_reframe": "Tu voz grabada no es la rara: es la única que conocen los demás.",
+  "share_archetype": "ese amigo que nunca manda audios porque no soporta escucharse",
+  "engine_reason": "code3d: the hero is a stylised skull from the asset route (library human-skull, blind-named 96/96/97), the phone is a genuinely geometric slab, and sound is the doctrine's emissive-ring energy language; no organic soft tissue, no fluids, so nothing needs a diffusion engine and every scene stays opaque (2-3 s/frame).",
+  "hero_route": "asset",
+  "library_assets": ["human-skull"],
+  "gate_version": 2,
+  "hero_rig": [
+    "voz_rig.load_skull",
+    "voz_rig.skull_material",
+    "voz_rig.EAR",
+    "voz_rig.MOUTH"
+  ],
+  "hero_still": {"scene": 1, "frames": [95]},
+  "hero_colours": {
+    "bone": "#EAE0B8",
+    "phone": "#2D2A2B",
+    "phone_trim": "#EDE6D3"
+  },
+  "support_colours": {
+    "board": "#4A3B5C",
+    "plate": "#86B7E3",
+    "reason": "The cutaway plate behind the cast is a mid sky-blue (#86B7E3): cool and saturated where the stage is warm, and mid-light so the dark-teal accent rings (L about 35) read strongly on it by value and the pale, low-chroma heroes (ivory bone, near-white phone trim) stand out by chroma and value. Tries that BLOCKED: a slate blue #9DB4C9 (phone trim 15-17 against it, the plate being too grey); the Coral body-family cream (#F2E8D8) measured 9.5-12 against the ivory bone and the silver phone trim (all pale and warm); a pale mint (#D2EAE4) rendered almost neutral white under the coral light and measured 8.6-17 against the bone. Bone is a yellowish ivory (#EAE0B8) so it clears the coral stage (the first bone #CDB890 measured 17.5-20.4); the phone body is ivory (#EDE6D3, the bone family) with a lit screen in the plate colour (a dark slate body #262B38 rendered 15-19 against the brown plinth, the rendered plinth being mid-dark): a near-white trim #F4F1EC with the sky plate measured 15-19 where the phone is small in frame, and a mid slate trim #5C6470 measured 17-19 against the plinth. The board colour (plum #4A3B5C, ink plinth family) is a secondary support."
+  },
+  "caption_draft": "¿Por qué tu voz suena tan rara en una grabación? Porque el celular no la deforma: tú te oyes por el aire y también por el hueso del cráneo, que añade graves. Los demás nunca oyen esa parte, y la grabación tampoco. 🎙️ Envíaselo a ese amigo que nunca manda audios porque no soporta escucharse.",
+  "rig_libs": ["tape_rig", "setpiece", "real_kit", "asset_rig", "voz_rig"],
+  "gate_stills": {"1": [10, 95, 190], "2": [10, 120, 230], "3": [10, 130, 240], "4": [10, 130, 200], "5": [10, 120, 230]},
+  "scene_elements": {
+    "1": [
+      {"id": "skull", "name": "skull beside a phone", "aliases": ["skull", "cranium", "head", "calavera", "craneo"], "route": "asset", "source": "library human-skull (BlenderKit Royalty-Free, danes_dysfunction); retinted to the production bone colour", "frames": [95]},
+      {"id": "phone", "name": "phone standing beside a skull", "aliases": ["phone", "smartphone", "cellphone", "mobile", "celular", "telephone", "cell"], "route": "code-primitive", "source": "voz_rig.phone: chunky rounded slab with a dark screen, a camera dot and a trim ring; genuinely geometric", "frames": [95]}
+    ],
+    "2": [
+      {"id": "phone-recording", "name": "phone recording a voice, screen showing a record dot and bars", "aliases": ["phone", "smartphone", "cellphone", "mobile", "celular", "telephone", "cell"], "route": "code-primitive", "source": "voz_rig.phone with its record dot and level bars lit: genuinely geometric", "frames": [230]}
+    ],
+    "3": [
+      {"id": "skull-vibrating", "name": "skull with its bone glowing and rings climbing it", "aliases": ["skull", "cranium", "head", "calavera", "craneo"], "route": "asset", "source": "library human-skull with the bone-conduction glow (material emission driven per frame) and accent rings", "frames": [130]}
+    ],
+    "4": [
+      {"id": "two-skulls", "name": "two skulls facing each other with a phone between them", "aliases": ["skull", "skulls", "cranium", "head", "heads", "calavera", "craneo"], "route": "asset", "source": "library human-skull twice (the second is a linked copy with its own material), a phone between them", "frames": [130]}
+    ],
+    "5": [
+      {"id": "skull-trio", "name": "skulls and a phone in a row, one wave reaching all", "aliases": ["skull", "skulls", "cranium", "head", "heads", "calavera", "craneo"], "route": "asset", "source": "same cast as scene 4, glow off, one ring wave across all", "frames": [120]}
+    ]
+  },
+  "visibility": {
+    "1": {"skull": {"objects": ["skull*"], "frames": [95]}, "phone": {"objects": ["phone_*"], "frames": [95]}, "rings": {"objects": ["ring_*"], "frames": [95]}},
+    "2": {"phone-recording": {"objects": ["phone_*"], "frames": [230]}, "rings": {"objects": ["ring_*"], "frames": [120]}},
+    "3": {"skull-vibrating": {"objects": ["skull*"], "frames": [130]}, "bone-rings": {"objects": ["bone_*"], "frames": [130]}},
+    "4": {"two-skulls": {"objects": ["skull*"], "frames": [130]}, "rings": {"objects": ["ring_*", "ear_*"], "frames": [200]}},
+    "5": {"skull-trio": {"objects": ["skull*"], "frames": [120]}, "rings": {"objects": ["ring_*", "ear_*"], "frames": [120]}}
+  },
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué tu voz suena tan rara cuando la escuchas grabada? Seguro piensas que el celular o el micrófono la deforman.",
+      "what_changes": "The belief staged as a contrast: the skull speaks and clean rings cross to the phone; the phone sends back a jagged red zigzag at the skull, as if it were distorting the voice.",
+      "transformation": "anillos limpios que salen de la boca → llegan al celular, que devuelve un zigzag rojo y roto",
+      "camera": "órbita lenta desde un tres cuartos frontal hasta un perfil que abre el plano",
+      "emphasis": ["rara", "deforman."],
+      "overlays": [],
+      "target_duration_s": 8,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "aire",
+      "narration": "Pero el celular no inventa nada: cuando hablas, el sonido sale por tu boca, cruza el aire y llega al micrófono. Solo graba eso, nada más.",
+      "what_changes": "The zigzag dies; the same clean rings leave the mouth, cross the gap and reach the phone, whose screen wakes up (record dot and level bars) and bars rise with each ring.",
+      "transformation": "celular dormido y un zigzag roto → anillos limpios cruzan el aire y el celular enciende su punto de grabación y sus barras",
+      "camera": "travelling lateral que acompaña a los anillos desde la boca hasta el celular",
+      "emphasis": ["aire", "micrófono."],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "AIRE", "at_word": "aire", "offset_s": 0.0, "visible_s": 2.4, "x": 0.5, "y": 0.62}
+      ],
+      "target_duration_s": 9,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "hueso",
+      "narration": "Tú, en cambio, te oyes por dentro: tus cuerdas vocales hacen vibrar el cráneo, y el hueso lleva los tonos graves directo a tu oído, sin pasar por el aire.",
+      "what_changes": "The camera leaves the phone and goes into the skull: the bone lights up in the accent from the jaw upward, rings climb it, and a pulse reaches the ear canal directly, with no air gap.",
+      "transformation": "cráneo de hueso claro → el hueso se enciende en el acento, anillos suben desde la mandíbula y un pulso llega al oído",
+      "camera": "empuje y órbita hasta el costado del cráneo, cerrando en el oído",
+      "emphasis": ["hueso", "oído,"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "HUESO", "at_word": "hueso", "offset_s": 0.0, "visible_s": 2.4, "x": 0.5, "y": 0.62}
+      ],
+      "target_duration_s": 10,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "giro",
+      "narration": "Por eso te oyes más grave y más llena. Pero los demás nunca oyen esa parte de hueso: solo oyen el aire, igual que la grabación.",
+      "what_changes": "The turn: a second skull (a listener) enters facing the first, the phone between them. The glow stays inside the speaker; only air rings reach the listener and the phone, and both receive the very same thing.",
+      "transformation": "un solo cráneo que brilla → entra un segundo cráneo que escucha; el brillo se queda dentro del primero y solo los anillos de aire llegan al oyente y al celular",
+      "camera": "retroceso con grúa que abre desde el oído hasta los dos cráneos y el celular",
+      "emphasis": ["demás", "aire,"],
+      "overlays": [],
+      "target_duration_s": 9,
+      "render_cost_class": "opaque"
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que tu voz grabada no es la rara: es la única que conocen los demás. Envíaselo a ese amigo que nunca manda audios porque no soporta escucharse.",
+      "what_changes": "The reframe as one image: one ring wave crosses the whole row (speaker, phone, listener) and every ear lights at once; the camera pulls back and up to the full row.",
+      "transformation": "la fila de cráneos y celular a oscuras → una sola onda de aire los enciende a todos",
+      "camera": "retroceso amplio y lento con subida hasta ver toda la fila",
+      "emphasis": ["rara:", "demás."],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "ENVÍASELO", "at_word": "Envíaselo", "offset_s": 0.0, "visible_s": 2.6, "x": 0.8, "y": 0.62}
+      ],
+      "target_duration_s": 10,
+      "render_cost_class": "opaque"
+    }
+  ],
+  "sources": [
+    "Bone conduction as part of hearing your own voice: when you speak, vibration from the vocal apparatus travels through the skull to the cochlea in addition to the airborne sound (Wikipedia 'Bone conduction', 'Hearing'; Maurer and Landis 1990, 'Role of bone conduction in the self-perception of speech', Folia Phoniatrica; the citation is from memory: flagged to confirm before relying on it).",
+    "Bone conduction emphasises low frequencies, so one's own voice is heard lower and fuller than it is to others and to a microphone (same references). The narration says 'más grave y más llena', no number.",
+    "A microphone records the air-conducted sound only; no figure is stated or shown, so nothing here is an invented number."
+  ],
+  "simplifications": [
+    "The vocal cords sit in the throat, not in the skull; the sound rings start at the mouth and the bone glow rises from the jaw to stand for the vibration the skull carries.",
+    "Real bone conduction travels through the whole head (skull, jaw, soft tissue) to the cochlea; the ear pulse stands for that, drawn as one pulse to the ear canal.",
+    "The skull stands for the whole head (a stylised skull with no skin, hair or face)."
+  ]
+}

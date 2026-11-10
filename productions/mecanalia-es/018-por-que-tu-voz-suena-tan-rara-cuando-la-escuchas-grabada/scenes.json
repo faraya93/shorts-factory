@@ -1,0 +1,488 @@
+{
+  "channel": "mecanalia-es",
+  "video": "por-que-tu-voz-suena-tan-rara-cuando-la-escuchas-grabada",
+  "title": "¿Por qué tu voz suena tan rara cuando la escuchas grabada? 🎙️",
+  "topic_family": "body",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d: the hero is a stylised skull from the asset route (library human-skull, blind-named 96/96/97), the phone is a genuinely geometric slab, and sound is the doctrine's emissive-ring energy language; no organic soft tissue, no fluids, so nothing needs a diffusion engine and every scene stays opaque (2-3 s/frame).",
+  "hook_question": "¿Por qué tu voz suena tan rara cuando la escuchas grabada?",
+  "false_belief": "El celular o el micrófono la deforman.",
+  "closing_reframe": "Tu voz grabada no es la rara: es la única que conocen los demás.",
+  "share_archetype": "ese amigo que nunca manda audios porque no soporta escucharse",
+  "hero_route": "asset",
+  "library_assets": [
+    "human-skull"
+  ],
+  "structure_variant": "chain",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "skull",
+        "name": "skull beside a phone",
+        "aliases": [
+          "skull",
+          "cranium",
+          "head",
+          "calavera",
+          "craneo"
+        ],
+        "route": "asset",
+        "source": "library human-skull (BlenderKit Royalty-Free, danes_dysfunction); retinted to the production bone colour",
+        "frames": [
+          95
+        ]
+      },
+      {
+        "id": "phone",
+        "name": "phone standing beside a skull",
+        "aliases": [
+          "phone",
+          "smartphone",
+          "cellphone",
+          "mobile",
+          "celular",
+          "telephone",
+          "cell"
+        ],
+        "route": "code-primitive",
+        "source": "voz_rig.phone: chunky rounded slab with a dark screen, a camera dot and a trim ring; genuinely geometric",
+        "frames": [
+          95
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "phone-recording",
+        "name": "phone recording a voice, screen showing a record dot and bars",
+        "aliases": [
+          "phone",
+          "smartphone",
+          "cellphone",
+          "mobile",
+          "celular",
+          "telephone",
+          "cell"
+        ],
+        "route": "code-primitive",
+        "source": "voz_rig.phone with its record dot and level bars lit: genuinely geometric",
+        "frames": [
+          230
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "skull-vibrating",
+        "name": "skull with its bone glowing and rings climbing it",
+        "aliases": [
+          "skull",
+          "cranium",
+          "head",
+          "calavera",
+          "craneo"
+        ],
+        "route": "asset",
+        "source": "library human-skull with the bone-conduction glow (material emission driven per frame) and accent rings",
+        "frames": [
+          130
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "two-skulls",
+        "name": "two skulls facing each other with a phone between them",
+        "aliases": [
+          "skull",
+          "skulls",
+          "cranium",
+          "head",
+          "heads",
+          "calavera",
+          "craneo"
+        ],
+        "route": "asset",
+        "source": "library human-skull twice (the second is a linked copy with its own material), a phone between them",
+        "frames": [
+          130
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "skull-trio",
+        "name": "skulls and a phone in a row, one wave reaching all",
+        "aliases": [
+          "skull",
+          "skulls",
+          "cranium",
+          "head",
+          "heads",
+          "calavera",
+          "craneo"
+        ],
+        "route": "asset",
+        "source": "same cast as scene 4, glow off, one ring wave across all",
+        "frames": [
+          120
+        ]
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "voz_rig.load_skull",
+    "voz_rig.skull_material",
+    "voz_rig.EAR",
+    "voz_rig.MOUTH"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      95
+    ]
+  },
+  "visibility": {
+    "1": {
+      "skull": {
+        "objects": [
+          "skull*"
+        ],
+        "frames": [
+          95
+        ]
+      },
+      "phone": {
+        "objects": [
+          "phone_*"
+        ],
+        "frames": [
+          95
+        ]
+      },
+      "rings": {
+        "objects": [
+          "ring_*"
+        ],
+        "frames": [
+          95
+        ]
+      }
+    },
+    "2": {
+      "phone-recording": {
+        "objects": [
+          "phone_*"
+        ],
+        "frames": [
+          230
+        ]
+      },
+      "rings": {
+        "objects": [
+          "ring_*"
+        ],
+        "frames": [
+          120
+        ]
+      }
+    },
+    "3": {
+      "skull-vibrating": {
+        "objects": [
+          "skull*"
+        ],
+        "frames": [
+          130
+        ]
+      },
+      "bone-rings": {
+        "objects": [
+          "bone_*"
+        ],
+        "frames": [
+          130
+        ]
+      }
+    },
+    "4": {
+      "two-skulls": {
+        "objects": [
+          "skull*"
+        ],
+        "frames": [
+          130
+        ]
+      },
+      "rings": {
+        "objects": [
+          "ring_*",
+          "ear_*"
+        ],
+        "frames": [
+          200
+        ]
+      }
+    },
+    "5": {
+      "skull-trio": {
+        "objects": [
+          "skull*"
+        ],
+        "frames": [
+          120
+        ]
+      },
+      "rings": {
+        "objects": [
+          "ring_*",
+          "ear_*"
+        ],
+        "frames": [
+          120
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "voz-set",
+  "scene_script_prefix": "voz",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "¿Por qué tu voz suena tan rara en una grabación? Porque el celular no la deforma: tú te oyes por el aire y también por el hueso del cráneo, que añade graves. Los demás nunca oyen esa parte, y la grabación tampoco. 🎙️ Envíaselo a ese amigo que nunca manda audios porque no soporta escucharse.",
+  "gate_stills": {
+    "1": [
+      10,
+      95,
+      190
+    ],
+    "2": [
+      10,
+      120,
+      230
+    ],
+    "3": [
+      10,
+      130,
+      240
+    ],
+    "4": [
+      10,
+      130,
+      200
+    ],
+    "5": [
+      10,
+      120,
+      230
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "asset_rig",
+    "voz_rig"
+  ],
+  "support_colours": {
+    "board": "#4A3B5C",
+    "plate": "#86B7E3",
+    "reason": "The cutaway plate behind the cast is a mid sky-blue (#86B7E3): cool and saturated where the stage is warm, and mid-light so the dark-teal accent rings (L about 35) read strongly on it by value and the pale, low-chroma heroes (ivory bone, near-white phone trim) stand out by chroma and value. Tries that BLOCKED: a slate blue #9DB4C9 (phone trim 15-17 against it, the plate being too grey); the Coral body-family cream (#F2E8D8) measured 9.5-12 against the ivory bone and the silver phone trim (all pale and warm); a pale mint (#D2EAE4) rendered almost neutral white under the coral light and measured 8.6-17 against the bone. Bone is a yellowish ivory (#EAE0B8) so it clears the coral stage (the first bone #CDB890 measured 17.5-20.4); the phone body is ivory (#EDE6D3, the bone family) with a lit screen in the plate colour (a dark slate body #262B38 rendered 15-19 against the brown plinth, the rendered plinth being mid-dark): a near-white trim #F4F1EC with the sky plate measured 15-19 where the phone is small in frame, and a mid slate trim #5C6470 measured 17-19 against the plinth. The board colour (plum #4A3B5C, ink plinth family) is a secondary support."
+  },
+  "hero_colours": {
+    "bone": "#EAE0B8",
+    "phone": "#2D2A2B",
+    "phone_trim": "#EDE6D3"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Por qué tu voz suena tan rara cuando la escuchas grabada? Seguro piensas que el celular o el micrófono la deforman.",
+      "target_duration_s": 8,
+      "transformation": "anillos limpios que salen de la boca → llegan al celular, que devuelve un zigzag rojo y roto",
+      "camera": "órbita lenta desde un tres cuartos frontal hasta un perfil que abre el plano",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "rara",
+        "deforman."
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "aire",
+      "prompt": "Escena dibujada con código (coral): aire.",
+      "narration": "Pero el celular no inventa nada: cuando hablas, el sonido sale por tu boca, cruza el aire y llega al micrófono. Solo graba eso, nada más.",
+      "target_duration_s": 9,
+      "transformation": "celular dormido y un zigzag roto → anillos limpios cruzan el aire y el celular enciende su punto de grabación y sus barras",
+      "camera": "travelling lateral que acompaña a los anillos desde la boca hasta el celular",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "aire",
+        "micrófono."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "AIRE",
+          "at_word": "aire",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "hueso",
+      "prompt": "Escena dibujada con código (coral): hueso.",
+      "narration": "Tú, en cambio, te oyes por dentro: tus cuerdas vocales hacen vibrar el cráneo, y el hueso lleva los tonos graves directo a tu oído, sin pasar por el aire.",
+      "target_duration_s": 10,
+      "transformation": "cráneo de hueso claro → el hueso se enciende en el acento, anillos suben desde la mandíbula y un pulso llega al oído",
+      "camera": "empuje y órbita hasta el costado del cráneo, cerrando en el oído",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "hueso",
+        "oído,"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "HUESO",
+          "at_word": "hueso",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "giro",
+      "prompt": "Escena dibujada con código (coral): giro.",
+      "narration": "Por eso te oyes más grave y más llena. Pero los demás nunca oyen esa parte de hueso: solo oyen el aire, igual que la grabación.",
+      "target_duration_s": 9,
+      "transformation": "un solo cráneo que brilla → entra un segundo cráneo que escucha; el brillo se queda dentro del primero y solo los anillos de aire llegan al oyente y al celular",
+      "camera": "retroceso con grúa que abre desde el oído hasta los dos cráneos y el celular",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "demás",
+        "aire,"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 5,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que tu voz grabada no es la rara: es la única que conocen los demás. Envíaselo a ese amigo que nunca manda audios porque no soporta escucharse.",
+      "target_duration_s": 10,
+      "transformation": "la fila de cráneos y celular a oscuras → una sola onda de aire los enciende a todos",
+      "camera": "retroceso amplio y lento con subida hasta ver toda la fila",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "rara:",
+        "demás."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.8,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

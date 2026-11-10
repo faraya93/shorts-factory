@@ -36,5 +36,9 @@ Written for production sessions: read this before staging an element, so the fir
 | Elevator governor wheel (017) | spoked wheel with two weights rolling on a rail, beside the car | car | FAIL ("wall safe", "valve wheel", 35-45); stays off screen | opaque |
 | Phone in a cut-away car (017) | phone slab floating in an open-front car, wide | car interior | Mixed (80/85/65): the third reader named the car; closer, larger phone and an interior lamp: 80/85/70 | opaque |
 | Pit buffer (017) | coil spring around a rod, cap plate, car landing on it | rails, landings | FAIL while the car sits on it (55/55/55, named the car); PASS alone at the start of the scene (60/60/72, "coil spring on a post") | opaque |
+| Skull (018) | library human-skull, side/three-quarter, ivory flat bone colour | none (phone beside it) | PASS (neutral 96/96/97; production still 92-95); tinted teal by the bone-conduction glow also PASS (96/96/97) | opaque |
+| Phone (018) | chunky phone, ivory body, plate-coloured screen with record dot and teal bars, close-up | none | PASS (88/85/88); the same phone beside a skull is named only as an alternative (skull first) | opaque |
+| Two skulls + small phone (018) | skulls facing each other, phone 62% scale between them, camera near | skulls | PASS 70/70/70; with the phone full size and dead centre, readers named the phone first (90/60/60, 55/80/85) | opaque |
+| Sound rings (018) | thick teal tori seen edge-on and overlapping | skulls, phone | FAIL, read as "a teal key" (55/45/60); one slim ring or an arch seen at an oblique azimuth passes | opaque |
 | Toilet aerosol droplets | white beads in a green laser sheet; glossy streaked drops; blue drops on a white tile | toilet, tile | FAIL on every rung in 012: read as "white particle spray", "white foam", "blue paint splatter" (85/85/85, 88/85/85, 75/60/70) | |
 

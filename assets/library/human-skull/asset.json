@@ -1,0 +1,73 @@
+{
+  "slug": "human-skull",
+  "name": "Human skull",
+  "aliases": [
+    "skull",
+    "cranium",
+    "craneo",
+    "calavera"
+  ],
+  "family": "body",
+  "created": "2026-11-10",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a human skull",
+    "seen_at": "filling 40-70% of the frame height; front, side and three-quarter",
+    "moving_parts": [
+      "none: one mesh with the jaw attached; sound rings are production-level builds"
+    ],
+    "states": [
+      "opaque stylised skull, retinted per production"
+    ],
+    "style_notes": "stylised sculpt with painted bone texture, no skin, no blood; faces -Y, sits on z=0, about 0.14 m tall"
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/4269fc1f-0bfe-4a1d-a96b-ce648f32bfdd/",
+    "asset_id": "1a12b22f-3e13-4fb8-a848-6ab2daac1d24",
+    "author": "danes_dysfunction",
+    "retrieved": "2026-11-10"
+  },
+  "licence": {
+    "id": "Royalty-Free",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": "BlenderKit Royalty-Free, anonymous download",
+    "decision": "no CC0 stylised human skull found (the CC0 hits were animal skulls); Royalty-Free is acceptable (CLAUDE.md licences)"
+  },
+  "files": {
+    "blend": "human-skull.blend",
+    "sha256": "4c974d9edb6e801b353ff0b282f711d683a79a6d0640f400cfded43672ae33ed",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": 0.144,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-10"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-10",
+      "guesses": [
+        "human skull; 3D rendered skull model; dark gray background",
+        "human skull; skull side profile; skull front view",
+        "human skull, 3D render, dark background"
+      ],
+      "confidences": [
+        96,
+        96,
+        97
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": [
+    "mecanalia-es/018-por-que-tu-voz-suena-tan-rara-cuando-la-escuchas-grabada"
+  ]
+}
