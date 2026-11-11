@@ -73,3 +73,5 @@ N = 8, chosen to restore 10 drawable undrawn entries. The six draws left only ra
 **Not commissioned (one entry each):** fuel pump (023), ear section (024), watermelon, iceberg, rock strata and capsule, clock (013), and a swimming pose (reserve 11 only). The duplicate guard refused "ocean" for `sea-surface` because it sits inside `ocean-liner`. It was dropped, not worked around.
 
 **Batch:** `tools/batches/2026-11-11-batch-019-024.json`, units 019-024 in production order. The launch record is in the lens-decisions row "Batch 2026-11-11 launched".
+
+**Launch (2026-11-11 08:48):** both preflights PASS; runner pid 36781, detached (parent pid 1), log `output/runner/batch-019-024-launch.log`. START 019 logged at 08:48:36; the first session invoked the produce skill and was reading 019's notes.md. Pre-existing test failures, reported and not caused here: three 6-scene productions in a row (015, 016, 017) in `test_asset_library`, and colour literals in rig files in `test_identity`.
