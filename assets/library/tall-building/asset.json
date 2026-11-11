@@ -1,0 +1,76 @@
+{
+  "slug": "tall-building",
+  "name": "Tall building",
+  "aliases": [
+    "building",
+    "skyscraper",
+    "tower",
+    "edificio",
+    "rascacielos"
+  ],
+  "family": "objects",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "a tall building",
+    "seen_at": "whole building, from small landmark to frame-filling",
+    "moving_parts": [
+      "interior core separable for a cutaway"
+    ],
+    "states": [
+      "whole",
+      "cutaway"
+    ],
+    "style_notes": "No real landmark.",
+    "commission": {
+      "priority": 8,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "three entries, one banked",
+      "evidence": [
+        "banked rank 7 (height landmark)",
+        "reserve 15 (tower with a pendulum damper)",
+        "reserve 23 (buildings)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "a separate tower per topic"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "tall-building.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

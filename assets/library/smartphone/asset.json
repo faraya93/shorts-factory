@@ -1,0 +1,78 @@
+{
+  "slug": "smartphone",
+  "name": "Smartphone",
+  "aliases": [
+    "phone",
+    "smartphone",
+    "mobile phone",
+    "cell phone",
+    "celular",
+    "telefono"
+  ],
+  "family": "objects",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "a smartphone",
+    "seen_at": "close-up to small prop",
+    "moving_parts": [
+      "screen material slot"
+    ],
+    "states": [
+      "screen dark",
+      "screen recording (dot and level bars)"
+    ],
+    "style_notes": "Route code-primitive is expected; genuinely geometric. No branding.",
+    "commission": {
+      "priority": 9,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "two committed scripts; each built its own, with no bank entry waiting",
+      "evidence": [
+        "committed script 017 (`asc_rig.phone`)",
+        "committed script 018 (`voz_rig` phone)"
+      ],
+      "improvisation_paid": [
+        "built twice in two production rigs, the failure the library exists to prevent"
+      ],
+      "replaces": "per-production phone rigs; a cheap consolidation of `voz_rig`'s phone (read 88/85/88)"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "smartphone.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

@@ -1,0 +1,80 @@
+{
+  "slug": "electric-arc",
+  "name": "Electric arc",
+  "aliases": [
+    "electric arc",
+    "spark",
+    "lightning",
+    "lightning bolt",
+    "chispa",
+    "rayo"
+  ],
+  "family": "objects",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "an electric spark or lightning bolt",
+    "seen_at": "small arc in macro to a full bolt across the frame",
+    "moving_parts": [
+      "path control between two points",
+      "branching",
+      "flicker over time"
+    ],
+    "states": [
+      "small arc between two points",
+      "single spark",
+      "full branching bolt"
+    ],
+    "style_notes": "Emissive with bloom, in the channel accent. Stops at the spark: no fire, the fire route is unmeasured.",
+    "commission": {
+      "priority": 4,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "three banked entries",
+      "evidence": [
+        "banked rank 4 (arcs at the fork tines)",
+        "banked rank 5 (the bolt on the car)",
+        "banked rank 9 (the spark from the car door)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "an emissive tube built from scratch in each video; rank 6's current along a wire is annotation language and was not counted"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "electric-arc.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

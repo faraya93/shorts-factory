@@ -15,15 +15,25 @@ The owner does not want to ban anything for the system, and does not want creati
 - **Video structure is a lens decision too (owner directive, 2026-11-04):** the scene template, the beat sequence and the closing with its spoken CTA, decided as a channel-level policy. Current policy: "Format policy" below.
 - Older text in this file that reserves a creative or technical choice for the owner (topics, scripts, beat sheets, voice, music, identity, format exceptions) is read through this section. Spend gates, the publish rule and the no-accounts rule keep their full force.
 
+## Amending doctrine (standing procedure, owner 2026-11-10)
+Every change to doctrine follows this procedure; later instructions invoke it by name instead of restating it.
+1. **One canonical home per rule.** Other places point to it or summarise it.
+2. **Align every live restatement:** this file, specs, skills, brand packages, and any other text read as current.
+3. **Never rewrite historical or dated records** (decision rows, dated reports, production notes, archives). Add a new dated entry instead.
+4. **Every amendment carries a "what did not change" section and a precedence line.**
+5. **Check the amendment against standing doctrine** and list the checks in its report.
+6. **Record it** in `docs/current/reports/lens-decisions.md`.
+
 ## Format policy (lens decision 2026-11-04, from production 012; full policy, reasons and reversal evidence: docs/current/specs/format-policy.md)
-One fixed signature, four structures. The signature is voice, identity, typography, subtitles, hook formula, one hero or mechanism, dynamics inside the shot, one reframe and the closing slot. There is no fixed scene count (the former 6-7 scene template is retired): the mechanism sets it, 4-10 as a sanity range, and scenes are never padded or merged to hit a number. Each production declares `structure_variant`: `chain`, `journey`, `scale` or `fork`. Never three in a row with the same variant or the same scene count. Closing: reframe, then one sentence containing the fixed word "envíaselo" with its word-locked tag; the sentence around it varies, ends on the person, and the archetype names a behaviour, not a belief; `fork` repeats the opening question. Where older text in this file describes a fixed structure or a fixed closing sentence, this wins. Applies to future productions; published videos are untouched. Earliest review 2026-12-01, against the bars set in the policy.
+One fixed signature, five structures, three staging modes. The signature is voice, identity, typography, subtitles, hook formula, one hero or mechanism, dynamics inside the shot, one reframe and the closing slot. There is no fixed scene count (the former 6-7 scene template is retired): the mechanism sets it, 4-10 as a sanity range, and scenes are never padded or merged to hit a number. Each production declares `structure_variant`: `chain`, `journey`, `scale`, `fork` or, from production 019, `story` (Historia: ONE complete real story with a mechanism heart, sourced fact by fact, never serialized). From 019 the design lens also records a staging mode, `stage`, `world` or `cutaway`; in any five consecutive productions no mode appears more than three times, and the mode changes no gate. Never three in a row with the same variant or the same scene count. Closing: reframe, then one sentence containing the fixed word "envíaselo" with its word-locked tag; the sentence around it varies, ends on the person, and the archetype names a behaviour, not a belief; `fork` repeats the opening question. Where older text in this file describes a fixed structure or a fixed closing sentence, this wins. Applies to future productions; published videos are untouched. Earliest review 2026-12-01, against the bars set in the policy. **Precedence (widening of 2026-11-10):** from production 019, where older live text and the widened format policy disagree, the widened policy governs; productions 015-018 stay exactly as armed.
 
 ## Format doctrine (channel research, Oct 2026; evidence in docs/current/research/reference-channels.md)
 - Vertical 9:16. Duration, by topic family (measured pace of the channel
   voice: ~2.9 words/s on the pilot): standard target 45–60 s of narration
   (~130–170 words); body/medical may run 40–50 s (~115–145 words);
   impossible numbers/scale 50–60 s (~145–170 words). This supersedes the
-  earlier 30–35 s target: the reference accounts run 36–95 s.
+  earlier 30–35 s target: the reference accounts run 36–95 s. Historia
+  (`story`, from production 019) runs 55–75 s (~160–215 words).
 - Title: short question or "How X works", second person when natural,
   exactly ONE trailing emoji as an emotion label. No hashtags. Forward SEO
   rules (marketing lens, 2026-11-08; "Search and packaging" below) refine
@@ -111,7 +121,7 @@ Full spec: `docs/current/specs/design-system.md`. Active values: stage gradient 
 ink subtitle theme (ink words, white outline, spoken word in an ink box). Coral's production rules: (1) body-family heroes stand in a cream cutaway
 plate (skin/organ colours are close to the stage); (2) the accent is dark, so it reads by hue and shape, never by glow or text colour. Papel and the
 other directions are kept as presets. **Where this section and the "Reference doctrine" palette points below (dark stage, gold accent, teal
-annotation, near-black void, vignette) disagree, THIS section wins**; the doctrine's storytelling rules are unchanged. No CTA phone and no appended
+annotation, near-black void, vignette) disagree, THIS section wins**; the doctrine's storytelling rules are unchanged. From production 019 a `world`-mode production replaces the stage with its modelled environment (format-policy.md "Staging mode"). No CTA phone and no appended
 end card (owner 2026-10-28). Render default: the tuned Cycles profile (`render.profiles.tuned`: GPU denoise, adaptive 0.04, min 24, ceiling 128,
 Persistent Data on, Fast GI off; EEVEE for drafts; the grain pass stays mandatory); per-scene-type exceptions live in `render.scene_type_profiles`.
 
@@ -180,7 +190,7 @@ EVENT, never a static illustration):
 4. "Each / all / many" = multiplication with a pull-back.
 5. EVERY NUMBER IS A SCREEN OBJECT (counter, chip, bar, year) that
    appears on the spoken word. A number is NEVER invented: an unsourced
-   figure is flagged to the owner in the report. SOURCES ARE NOT RENDERED
+   figure is flagged to the owner in the report (in a Historia production this covers every load-bearing story fact: format-policy.md). SOURCES ARE NOT RENDERED
    ON SCREEN (owner rule 2026-10-27, binding for every future production):
    no citation lines, no "ficha técnica / fuente" chips, no brand-name
    credit cards. Numbers stay as counters/chips/bars and are understood
@@ -410,6 +420,7 @@ Why: the owner rejected batch 006-011 (too abstract, objects do not resemble the
 - **Licences and sources:** **CC0 FIRST:** when a CC0 asset serves the production, use it. Royalty-Free acceptable. If no CC0 asset serves and a CC-BY asset is needed, use it: do NOT ask the owner and do NOT credit it in the description (owner 2026-11-07, decided with the licence terms in view; see "No credits in descriptions"). The licence, source and attribution text are still logged in the asset README and `licence.attribution`. Anything unclear (NC, ND, SA, unknown) is not used. BlenderKit anonymous search and download is a connected route (owner 2026-11-04). Sketchfab is connected with the owner's free account (token only in `.env`; read each result's licence, because NonCommercial models appear in results). Sessions create no accounts. Poly Pizza stays an owner-step source. `generate_3d` is not used: its providers need accounts or credits.
 - **Skill roles:** `docs/current/specs/asset-system.md`, "Skill role map" (installed at user level; inherited, not re-decided).
 - **Operating model:** asset-building is interactive, with Blender open through MCP for Blender; production rendering stays headless.
+- **Advance assets have an owner (owner 2026-11-10; rule and scan: asset-system.md "Advance assets"):** the owner does not commission individual assets. Every idea-bank fill or other creative session ends with the commissioning scan and opens the qualifying jobs, ordered by evidence. A production session that improvises around a missing element class leaves an `Asset need:` line in its notes.md. Builds are separate later sessions, one per asset.
 
 ## Every element at hero standard (binding, owner 2026-11-05; supersedes the hero-only scope of "Asset library and hero routing" and of the likeness gate)
 Why: the owner watched the remade 006-011 batch: heroes reached the new standard while secondary elements (blood vessels as glossy red cylinders, a capsule and a ball as a grip comparison, ice as a translucent blue box, coffee as a brown block, heat as flat blue dots) were still flat-colour primitives. The standard is the best possible modelling in EVERY scene.
@@ -452,6 +463,7 @@ Why: a short owner instruction ("produce the next N videos") must inherit the wh
   6. *Pool and rank:* the pool is the fresh survivors PLUS every current reserve entry (re-scored) PLUS every held-for-balance candidate whose theme balance now allows (re-scored). Rank the pool together on ONE rubric: curiosity score, the lenses breaking ties on modellability confidence (as conceived above reshaped).
   7. *Cut, balance-aware (owner amendment 2026-11-07):* fill the banked tier from the top of the pooled ranking until it holds N drawable entries, but SKIP a candidate that would leave the banked tier unable to satisfy TOPIC BALANCE across its next draws, judged against the most recent productions (the rolling window) and the tier's own composition, in favour of the next candidate that keeps the tier drawable. Rank governs inside that constraint. A skipped candidate goes to the reserve tier with the reason "balance at the cut" recorded; as a reserve entry it is re-pooled at every fill. Existing undrawn banked entries count toward N and are never demoted by a fill (they may be re-scored on the same rubric, which can reorder the banked tier but never moves an entry to the reserve). A reserve entry that makes the cut is PROMOTED into the banked tier. Pool entries that miss the cut, fresh or previously reserved, sit in the reserve tier. Preliminary-screen discards and ladder-check failures stay out of both tiers, recorded with their reasons.
   8. *Depth:* the banked tier's working depth is at least TEN undrawn entries. A refill is due when a draw would leave fewer; a fill asked for N below ten is done as asked and its report says the bank sits below working depth. Generation aims wide across themes and tensions so that the balance-aware cut (step 7) can fill N without running short; if it cannot, the report says how many drawable entries balance allowed.
+  9. *Commissioning scan:* the fill ends with the scan in asset-system.md "Advance assets" (e), opening the job of every element class that qualifies.
 - **Drawing (a production session; Sonnet):** for "produce N videos", take the N highest-ranked undrawn entries of the BANKED tier (never the reserve) that keep the rolling window inside TOPIC BALANCE (skip, never reorder the ranking for any other reason), mark them drawn in the bank (production number and date), and produce them under standing doctrine, applying the "Reshape ladder" live whenever a scene complicates. If fewer than N entries are eligible, produce the eligible ones and report the shortfall; NEVER fill the gap with an unbanked topic. If a draw leaves fewer than ten undrawn banked entries, the report says a refill is due (the production session does not refill). A drawn topic that fails beyond the ladder (it would need a new hero mechanism or promise, or fails script flatness and cannot be reshaped under "Script flatness") is marked returned in the bank with its reason, and the session may draw the next eligible banked entry in its place.
 
 ## Reshape ladder (binding, owner 2026-11-07; integration recorded in docs/current/reports/lens-decisions.md)

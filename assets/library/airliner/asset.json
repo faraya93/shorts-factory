@@ -1,0 +1,78 @@
+{
+  "slug": "airliner",
+  "name": "Airliner with cabin section",
+  "aliases": [
+    "airplane",
+    "plane",
+    "airliner",
+    "airplane cabin",
+    "avion"
+  ],
+  "family": "objects",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "an airplane; the section must read as an airplane cabin",
+    "seen_at": "wide exterior, and an interior section filling the frame",
+    "moving_parts": [
+      "fuselage section separable from the airframe",
+      "seat row as its own object"
+    ],
+    "states": [
+      "whole exterior",
+      "fuselage cutaway with seats"
+    ],
+    "style_notes": "No airline branding. Also serves WORLD-mode aircraft scenes.",
+    "commission": {
+      "priority": 5,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "four entries, two of them banked",
+      "evidence": [
+        "banked rank 2 (airliner wide shot, fuselage cutaway with door)",
+        "banked rank 7 (airliner as a height landmark)",
+        "reserve 12 (fuselage curve and seats)",
+        "reserve 27 (cabin seats)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "a separate source and cutaway per aircraft topic"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "airliner.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

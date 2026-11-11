@@ -1,0 +1,75 @@
+{
+  "slug": "car-interior",
+  "name": "Car interior with door",
+  "aliases": [
+    "car interior",
+    "steering wheel",
+    "car seat",
+    "volante"
+  ],
+  "family": "objects",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "the inside of a car",
+    "seen_at": "interior filling the frame",
+    "moving_parts": [
+      "door on a hinge",
+      "steering wheel that can turn"
+    ],
+    "states": [
+      "door closed",
+      "door open"
+    ],
+    "style_notes": "Must match a metal shell for rank 5's current path. No branding.",
+    "commission": {
+      "priority": 6,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "two banked entries; `cartoon-car` is static and has no interior",
+      "evidence": [
+        "banked rank 5 (driver's hands on the wheel)",
+        "banked rank 9 (car seat, door, passenger)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "the exterior-only `cartoon-car` for any scene set inside a car"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "car-interior.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

@@ -1,0 +1,75 @@
+{
+  "slug": "microwave-oven",
+  "name": "Microwave oven",
+  "aliases": [
+    "microwave",
+    "microwave oven",
+    "microondas"
+  ],
+  "family": "objects",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "a microwave oven",
+    "seen_at": "whole object, and interior through a cutaway",
+    "moving_parts": [
+      "door on a hinge",
+      "turntable that rotates"
+    ],
+    "states": [
+      "door closed",
+      "door open",
+      "cutaway showing metal walls"
+    ],
+    "style_notes": "No branding.",
+    "commission": {
+      "priority": 7,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "two entries, one banked",
+      "evidence": [
+        "banked rank 4 (door cutaway, fork and spoon)",
+        "reserve 24 (egg inside)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "a separate oven per topic"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "microwave-oven.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

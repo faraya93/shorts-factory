@@ -1,0 +1,76 @@
+{
+  "slug": "earth-globe",
+  "name": "Earth globe with layers",
+  "aliases": [
+    "earth",
+    "globe",
+    "planet",
+    "tierra",
+    "planeta"
+  ],
+  "family": "whatif",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "the planet Earth",
+    "seen_at": "whole globe filling the frame",
+    "moving_parts": [
+      "rotation",
+      "core and mantle layers separable for a cutaway"
+    ],
+    "states": [
+      "whole globe",
+      "cutaway to the core"
+    ],
+    "style_notes": "Stylised; CC0 textures first.",
+    "commission": {
+      "priority": 11,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "two reserve entries",
+      "evidence": [
+        "reserve 16 (Earth cutaway with its layer stack)",
+        "reserve 23 (globe, atmosphere and oceans)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "nothing yet: neither topic has been drawn"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "earth-globe.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

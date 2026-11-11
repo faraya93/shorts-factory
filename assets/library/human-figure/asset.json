@@ -1,0 +1,88 @@
+{
+  "slug": "human-figure",
+  "name": "Stylised human figure",
+  "aliases": [
+    "person",
+    "human figure",
+    "figure",
+    "humanoid",
+    "mannequin",
+    "woman",
+    "persona",
+    "figura",
+    "hombre",
+    "mujer"
+  ],
+  "family": "body",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "a person, at phone size, in each pose below",
+    "seen_at": "from a small unit of scale to a figure filling half the frame",
+    "moving_parts": [
+      "full armature: spine, arms, legs, head",
+      "separate material slots for skin tone and clothing"
+    ],
+    "states": [
+      "standing",
+      "jumping, mid-air",
+      "falling, limbs spread and tumbling",
+      "seated (passenger or driver)",
+      "sunk to the waist, legs and boots visible through a cutaway"
+    ],
+    "style_notes": "Stylised and chunky, no real skin texture, no identifiable real person. Manual step 6: try CharMorph first, then MB-Lab with its logged lens decision.",
+    "commission": {
+      "priority": 2,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "both: a finished production paid for its absence, and bank entries prescribe it",
+      "evidence": [
+        "banked rank 1, drawn as 017 (passenger as a stylised figure)",
+        "reserve 16 (stylised falling figure)",
+        "reserve 21 (one person as the unit of scale)",
+        "banked rank 9 and reserve 17 are reshaped around the missing figure (hand, sleeve and seat; legs and boots)"
+      ],
+      "improvisation_paid": [
+        "017: \"the passenger is never drawn; a phone stands in for the jump\"; the phone stand-in needed a re-stage and one of three readers still named the car first"
+      ],
+      "replaces": "phone-for-a-person and body-part framings; without this asset people stay off screen (drawability rule)"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "human-figure.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

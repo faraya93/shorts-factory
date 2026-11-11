@@ -1,0 +1,79 @@
+{
+  "slug": "water-droplets",
+  "name": "Water droplets",
+  "aliases": [
+    "droplets",
+    "water drops",
+    "spray",
+    "splash",
+    "gotas"
+  ],
+  "family": "objects",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "drops of water, clearly liquid",
+    "seen_at": "macro bead to a cloud of hundreds",
+    "moving_parts": [
+      "instancing control for count, size and spread"
+    ],
+    "states": [
+      "single bead on a surface",
+      "spray burst with a splash crown",
+      "suspended cloud of droplets"
+    ],
+    "style_notes": "Glossy water-drop shading with visible surface tension. Check transmission cost against the render-cost playbook. 012 keeps its own aliases and fallbacks (rule d).",
+    "commission": {
+      "priority": 3,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "two committed scripts, plus one entry; 012 has paid and is still blocked",
+      "evidence": [
+        "committed script 006 (water drops and beads)",
+        "committed script 012 (droplet plume, tinted droplets)",
+        "reserve 28 (shower spray, droplet streaks)"
+      ],
+      "improvisation_paid": [
+        "012: scenes 3 and 4 failed blind naming across the ladder (read as \"white foam\" and \"white particles\"); the production has no final"
+      ],
+      "replaces": "instanced spheres that read as particles or foam"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "water-droplets.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

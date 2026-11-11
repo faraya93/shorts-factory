@@ -1,0 +1,87 @@
+{
+  "slug": "hand-articulated",
+  "name": "Articulated human hand",
+  "aliases": [
+    "articulated hand",
+    "open hand",
+    "gripping hand",
+    "hands",
+    "fist",
+    "puño"
+  ],
+  "family": "body",
+  "created": "2026-11-10",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "a human hand, at phone size, in each grip and reach below",
+    "seen_at": "large: 25-40% of frame height, usually with the object it holds in frame",
+    "moving_parts": [
+      "armature with independent finger and thumb joints",
+      "wrist"
+    ],
+    "states": [
+      "open and relaxed",
+      "gripping a lever or door handle",
+      "gripping a steering wheel",
+      "reaching and touching a car door",
+      "holding a knife handle",
+      "fumbling with a mask (fingers moving)"
+    ],
+    "style_notes": "Stylised skin material, no real skin texture. A NEW asset: `human-hand` stays as sealed because finished productions depend on its hash (rule d).",
+    "commission": {
+      "priority": 1,
+      "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
+      "trigger": "both: five undrawn bank entries, and two productions that paid for the missing rig",
+      "evidence": [
+        "banked rank 2 (hand on the cabin door handle)",
+        "banked rank 5 (driver's hands on the wheel)",
+        "banked rank 9 (hand on the car door)",
+        "reserve 25 (hand on the knife and tomato)",
+        "reserve 27 (passengers' hands fumbling with oxygen masks)"
+      ],
+      "improvisation_paid": [
+        "006: `human-hand` is one fixed pose with no rig, so the video was staged around fingers that cannot bend",
+        "013 (returned 2026-11-09): carried a rig build as an in-production fallback and failed on the finger-joint cutaway"
+      ],
+      "replaces": "the fixed-pose `human-hand`, which cannot grip, reach or fumble"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "hand-articulated.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

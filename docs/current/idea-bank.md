@@ -9,7 +9,7 @@ The standing pool of production-ready topics in two tiers (CLAUDE.md "Idea bank"
 **Figures inside hooks and notes are from memory at concept level.** No live searches were run (fill step 4 runs no searches). Every figure is flagged until the production session sources it at the beat sheet. A figure that cannot be sourced comes out of the script.
 
 ## Banked tier (drawable; undrawn first, by rank)
-Status values: `banked`, `promoted <date>` (from reserve), `drawn <NNN> <date>`, `produced <NNN>`, `returned <date>: <reason>`.
+Status values: `banked`, `promoted <date>` (from reserve), `drawn <NNN> <date>`, `produced <NNN>`, `returned <date>: <reason>`. Structure values: `chain`, `journey`, `scale`, `fork`, and from 2026-11-10 `story` (Historia; entries arrive only through a normal fill, `docs/current/specs/format-policy.md`).
 
 | Rank | Status | Hook (question + false belief) | Family | Structure | Curiosity (1-10, reason) | Hero + route note | Concept-level reshape | Theme | Main tension |
 |---|---|---|---|---|---|---|---|---|---|
