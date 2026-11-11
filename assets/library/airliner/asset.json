@@ -10,8 +10,8 @@
   ],
   "family": "objects",
   "created": "2026-11-10",
-  "status": "in_progress",
-  "route": null,
+  "status": "ready",
+  "route": "code-primitive",
   "brief": {
     "must_read_as": "an airplane; the section must read as an airplane cabin",
     "seen_at": "wide exterior, and an interior section filling the frame",
@@ -23,7 +23,7 @@
       "whole exterior",
       "fuselage cutaway with seats"
     ],
-    "style_notes": "No airline branding. Also serves WORLD-mode aircraft scenes.",
+    "style_notes": "No airline branding. Also serves WORLD-mode aircraft scenes. Built by production 019 under asset-system (g) (avion_rig.airliner: tube fuselage with nose and tail taper, swept wings, engines, fin, window row; avion_rig.cabin: the cut-away cabin with seat rows). SEALED FOR THE WHOLE EXTERIOR ONLY (read 96/97/95, wide three-quarter, neutral still job/stills/neutral); the cut-away cabin state was not read as an asset and is read per scene in its production.",
     "commission": {
       "priority": 5,
       "source": "commissioning scan 2026-11-10 (docs/current/reports/format-widening-2026-11-10.md)",
@@ -46,33 +46,44 @@
     "retrieved": null
   },
   "licence": {
-    "id": null,
+    "id": "own-work",
     "url": null,
     "attribution": null,
-    "note": null,
+    "note": "built in this factory (avion_rig)",
     "decision": null
   },
   "files": {
-    "blend": "airliner.blend",
+    "blend": null,
     "sha256": null,
     "collection": "asset",
-    "rig_module": null,
+    "rig_module": "avion_rig",
     "build_script": null
   },
   "real_size_m": null,
   "checks": {
     "qa": {
-      "pass": null,
-      "date": null
+      "pass": true,
+      "date": "2026-11-11"
     },
     "blind_naming": {
-      "pass": null,
-      "date": null,
-      "guesses": []
+      "pass": true,
+      "date": "2026-11-11",
+      "guesses": [
+        "white passenger airplane (jet)",
+        "airplane (low-poly passenger jet on an orange background)",
+        "toy airplane (white passenger jet model)"
+      ],
+      "confidences": [
+        96,
+        97,
+        95
+      ]
     },
     "fidelity": null
   },
   "owner_verdict": "pending",
   "rejected_candidates": [],
-  "productions": []
+  "productions": [
+    "mecanalia-es/019-por-que-nadie-puede-abrir-la-puerta-de-un-avion-en-pleno-vuelo"
+  ]
 }

@@ -40,5 +40,12 @@ Written for production sessions: read this before staging an element, so the fir
 | Phone (018) | chunky phone, ivory body, plate-coloured screen with record dot and teal bars, close-up | none | PASS (88/85/88); the same phone beside a skull is named only as an alternative (skull first) | opaque |
 | Two skulls + small phone (018) | skulls facing each other, phone 62% scale between them, camera near | skulls | PASS 70/70/70; with the phone full size and dead centre, readers named the phone first (90/60/60, 55/80/85) | opaque |
 | Sound rings (018) | thick teal tori seen edge-on and overlapping | skulls, phone | FAIL, read as "a teal key" (55/45/60); one slim ring or an arch seen at an oblique azimuth passes | opaque |
+| Airliner exterior (019) | whole jet, three-quarter, wide, clouds | none | PASS (neutral 96/97/95; production still 95-97) | opaque |
+| Airplane door (019) | door in a curved fuselage section, any distance, with or without a hand | oval windows | FAIL in 6 readings: "fuselage", "control panel", "light switch", "robot torso", "grey door" (15-92 but never the door as the subject); the same door read as an airliner's boarding door only inside a whole-plane frame, which names the plane | opaque |
+| Airplane door (019) | door at the end of a cabin aisle, wider than its hole, accent stops, seat rows and bins around it, camera close | seats, bins, windows | PASS only at the closer framing (60/60/60 "airplane cabin door"); at a wider framing readers named the cabin (90/85/85) and the alias was missed | opaque |
+| Airplane cabin (019) | side-on cut-away, passengers in profile | seats, windows | FAIL, "train carriage" (60/72/60); overhead bins and cloud windows did not fix it | opaque |
+| Airplane cabin (019) | aisle view down five seat rows, bins, oval windows, passengers' heads over the seat backs | seats, bins | PASS (80/90/85, 85/80/85); a closed tube needs ceiling lamps in Cycles (the stage lights do not reach in) | opaque |
+| Hand on a door handle (019) | sealed hand gripping a bar, 15-50 cm camera | door | FAIL in 4 readings: readers name "door handle" / "light switch", not the hand; stays off screen | opaque |
+| Cars stacked (019) | five sealed sedans dropping onto a flat door on a teal pad | pad | PASS (60/60/60, then 90/85/90) | opaque |
 | Toilet aerosol droplets | white beads in a green laser sheet; glossy streaked drops; blue drops on a white tile | toilet, tile | FAIL on every rung in 012: read as "white particle spray", "white foam", "blue paint splatter" (85/85/85, 88/85/85, 75/60/70) | |
 

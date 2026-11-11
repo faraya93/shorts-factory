@@ -5,7 +5,7 @@ Status: DEVELOPED SCRIPT ON FILE (developed set of the 2026-11-11 creative sessi
 ## Publish package draft (Spanish; the owner publishes)
 - **Título:** ¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? ✈️
 - **Descripción:**
-  ¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? Porque el aire a presión de la cabina la aprieta contra su marco con unas siete toneladas.
+  ¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? Porque el aire a presión de la cabina la aprieta contra su marco con la fuerza de varios autos.
   Y esa misma fuerza, en 2024, le arrancó a un avión un panel al que le faltaban sus cuatro pernos. ✈️
   Envíaselo a ese amigo que siempre pide el asiento junto a la salida de emergencia.
 - **Hashtags (description, not title):** #avion #aviones #ciencia #shorts
@@ -85,3 +85,33 @@ Routes: Sealed: hand-articulated (lever), human-figure (seated), cartoon-car. Bu
 - Scene 5 airliner (trigger: the airliner build or import fails the gate, or the job passes the timebox). Rung 1: the same event from INSIDE the cabin (sealed seated figures, the empty two seats, the panel lifting off its stops and a rectangle of sky opening). Rung 3 is not needed: the narration does not name the outside view. Rung 4: the opened hole read inside the cabin context.
 
 Unresolved fallbacks: none. Batch: cleared for the 2026-11-11 batch.
+
+## PRODUCTION LOG 2026-11-11 (runner session; the script above is the developed one, changed only as logged here)
+Staging mode: cutaway. The mechanism is carried by cabin cutaways (the door seen from inside the cabin, the aisle set) and one exterior airliner; no modelled environment replaces the stage (rotation check: the first production under the staging-mode rule, nothing to rotate against).
+Cost classes: all six scenes `opaque` (no glass, water or volumes), predicted 2-3 s/frame, none above 15 s/frame, no cost_restage. Gate stills were rendered by Cycles at gate resolution; the interior scenes needed ceiling lamps (the closed tube shuts the stage lights out).
+Code: `code3d/lib/avion_rig.py`, scene scripts `code3d/scenes/avion_01..06.py` (avion_00.py is the asset-job still of the airliner). Support colours: plate darkened to #2B3441 after scene 2 measured 18.0 against the shaded door; hero colours: skin #E1E6EE, door #B0B7C2, panel #BFC4CC, seat #A9AEB8 (each moved by a measured BLOCK, never by hand).
+
+### Sources confirmed or removed at the beat sheet (live search 2026-11-11)
+- Door area (0.8 m x 1.8 m): NOT confirmed (the Boeing ACAP door-clearance table did not come back). So the pre-written rung 3 for scene 4 was applied (below): no tonne figure is spoken or shown.
+- Five cars: the "five" is on screen as a stack only; no count is spoken. A mid-size sedan kerb weight was found at about 1,150-1,430 kg (Corolla sedans, autotijd.be and manufacturer pages), which does not make "five cars = seven tonnes" safe, another reason the number is gone.
+- Alaska 1282: the four missing bolts are confirmed by NTSB (investigation page and the June 2025 findings coverage: the four bolts that secure the left MED plug against upward movement were missing before delivery; the plug moved gradually over 154 flights). The two empty seats were reported by only one source, so they are NOT staged. "Unos siete toneladas" and "cinco autos" left the script.
+
+### Ladder log (every rung logged here and as one row in lens-decisions.md, 2026-11-11)
+- **Scene 4, rung 3 (narration), pre-approved in the audit:** the door area could not be sourced. Narration now "Ese aire empuja la puerta hacia afuera, contra su marco, con la fuerza de varios autos encima." The counter and the x5 chip are removed. The beat is unchanged (cars drop onto the door laid flat on a pad of accent air).
+- **Scene 1, hero reroute and rung 2 (beat rewritten):** the first hero was a code-primitive record `airplane-door` (door in a fuselage section). Asset readings: wide barrel section 88/85/85 "airplane fuselage ... with a door" (alias phrase not literal: FAIL); tight door 40/60/40; hand-free barrel 30/35/35 "robot torso". The record is kept as `rejected`. The hero became the open job `airliner` under asset-system (g): whole exterior, sealed 96/97/95 (exterior only; the cabin was read per scene). Scene 1 element 'airplane door' (aliases fixed before any reading) failed four readings across three stagings: exterior 92/90/92 and 90/90/95 named the fuselage; the close-up read 'control panel' or 'light switch'; rung 4 (the door in its cabin setting, beside a seated passenger) read 'grey door with a black lever' 60/60/45. Rung 2: the beat is rewritten so the key element of the hook is the airliner, the same hero as scene 5; its aliases were already in this script (scene 5) before any reading, none added. PASS 90/90/90. **For the owner's eye:** the viewer sees two airliners and the ground one's boarding door swing open while the flight one stays shut; the door is a feature of the key element, not a separately gated element.
+- **Scene 1, the hand (element declared, then off screen):** the sealed hand (92/92/85 alone) failed four readings in the door close-ups (the readers named the door handle, light switch, fridge door handle first, 60-85 but never 'hand' on all three). The drawability rule applies: without a passing reading it stays off screen. The grip bar is pulled by an unseen hand (rung 2). The hand is also off screen in scene 6. The sealed asset is not touched.
+- **Scene 2, rungs 1 and 2:** top-down cut read 'skateboard' (20/25/25); oblique cut read 'card terminal', 'robot head', 'kitchen appliance' (35/35/40, 30/25/25). Re-staged as the aisle view: the door at the far end of the cabin, wider than its hole (28 vs 20), the accent stops overlapped, seat rows and bins around it; first reading 90/85/85 named the cabin, not the door (alias miss, FAIL); closer camera: 'airplane cabin door' / 'airplane cabin bulkhead door' 60/60/60, PASS.
+- **Scene 3, rung 1 three times:** side-on cabin read 'train carriage' (55/40/35, then 60/72/60, none naming the plane first); re-staged down the aisle, camera pulling out of the open end: 80/90/85 PASS.
+- **Scene 6, rung 1:** the barrel section read 'train or subway car door' (45/45/40); re-staged in the aisle set with the door held by the accent glow and packed beads: 85/80/85 PASS ("airplane cabin interior ... closed door").
+- Scene 4 (cars, 60/60/60 then 90/85/90) and scene 5 (airliner, 96/96/93) passed at the first staging. Hero reread three times after fingerprint moves (library_assets, plate colour, skin colour), all 95-97, every reading kept; no alias was ever added.
+- Context staging (rung 4) was used once (scene 1, the door in its cabin setting) and did NOT pass; the element that finally passed passed by rung 2, not rung 4.
+
+### Gate record
+Colour gate PASS; hero `airliner` frozen (neutral 96/97/95; production still 95-97); every declared element read and carried; visibility PASS (scene 1 p90 32.3, scene 2 35.1, scene 3 29.2, scene 4 54.2, scene 5 31.7, scene 6 42.4; area 7-39 %, 12.0 for scene 6).
+
+### Flags for the owner's eye (I cannot watch the video)
+1. Scene 1 has no hand, no door-only close-up: two airliners, the ground door opens, the flight door does not (rung 2 above).
+2. The passengers are the sealed stylised mannequin in its seated pose, arms forward (the pose is the asset's own).
+3. The cars are the sealed cartoon sedan, dark violet by the asset's own material.
+4. Science simplified: accent beads stand for pressurised air; the plug door shown moving inward 26 cm, turning and exiting edge-first is a legibility drawing, the door stops are drawn larger than real; the 2024 panel is shown on an airliner without a door. The empty-seat detail of the incident is not staged.
+Asset need: seat-row cabin interior (aisle view with overhead bins). Improvised inside this production in `avion_rig.aisle`; it cost most of the session (six cabin and door stagings) before the aisle view read, and it recurs (reserve 12 and 27 per the `airliner` job evidence).

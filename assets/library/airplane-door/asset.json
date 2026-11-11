@@ -1,0 +1,73 @@
+{
+  "slug": "airplane-door",
+  "name": "Airplane door in a fuselage section",
+  "aliases": [
+    "airplane door",
+    "aircraft door",
+    "plane door",
+    "cabin door"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "rejected",
+  "route": "code-primitive",
+  "brief": {
+    "must_read_as": "an airplane door in the side of a fuselage: a rectangular plug door with a porthole and a grip bar, set in a curved white skin with a row of oval windows either side",
+    "seen_at": "medium: the section fills about 60% of frame width",
+    "moving_parts": [
+      "door hinge: swings outward",
+      "handle grip bar (a sealed hand wraps it)"
+    ],
+    "states": [
+      "closed in flight (sky in the windows)",
+      "open on the ground (apron light in the windows)"
+    ],
+    "style_notes": "Rigid, geometric: code primitives (avion_rig.Section). The oval window row and the curved skin are the context cue. Alias list decided 2026-11-11 before any reading; never extended after a guess."
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": "own-work",
+    "url": null,
+    "attribution": null,
+    "note": "built in this factory (avion_rig)",
+    "decision": null
+  },
+  "files": {
+    "blend": null,
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": "avion_rig",
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": false,
+      "date": "2026-11-11",
+      "guesses": [
+        "wall-mounted electrical control panel (alternatives: airplane cabin wall unit, vending machine)",
+        "Wall-mounted control panel or power strip with a row of blue buttons and a toggle switch (alternatives: a white toaster-style appliance; a stylized airplane cabin light panel)",
+        "wall-mounted power strip"
+      ],
+      "confidences": [
+        15,
+        20,
+        25
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

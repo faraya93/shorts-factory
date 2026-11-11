@@ -5,6 +5,44 @@
   "hero_route": "asset",
   "preset": null,
   "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "preset": "coral",
+  "prefix": "avion",
+  "gate_version": 2,
+  "hero_rig": ["avion_rig.airliner", "avion_rig._jet_radius", "avion_rig.JET_R", "avion_rig.Mats", "avion_rig.tube", "avion_rig.grid_surface"],
+  "hero_still": {"scene": 5, "frames": [10]},
+  "rig_libs": ["tape_rig", "setpiece", "real_kit", "asset_rig", "avion_rig"],
+  "hero_colours": {"skin": "#E1E6EE", "door": "#B0B7C2", "pane_ground": "#F4E6BE", "pane_sky": "#28477F", "seat": "#A9AEB8", "panel": "#BFC4CC"},
+  "support_colours": {"board": "#4B3A5A", "plate": "#2B3441", "reason": "Darkened from the 017 slate (#3B4553) after scene 2 measured 18.0 against the shaded door; originally reused from production 017, which measured the same light steel-white heroes against this pairing: a dark slate plate (ink plinth family, cooler and lighter) and the plum board, both far from the coral stage ends; the white fuselage and light-grey door stand out against them."},
+  "caption_draft": "¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? Porque el aire a presión de la cabina la aprieta contra su marco, y además es un tapón que primero tiene que entrar. ✈️ Envíaselo a ese amigo que siempre pide el asiento junto a la salida de emergencia.",
+  "gate_stills": {"1": [10, 100, 150, 230], "2": [10, 100, 160], "3": [10, 120, 200], "4": [10, 100, 170], "5": [10, 160, 290], "6": [10, 150, 330]},
+  "scene_elements": {
+    "1": [
+      {"id": "airliner-door-open", "name": "airliner on the ground with its boarding door open", "aliases": ["airplane", "aircraft", "plane", "airliner", "jet", "fuselage"], "route": "build", "source": "library airliner (code-primitive, sealed exterior) with avion_rig.jet_door: the boarding door near the nose, open on the ground airliner. Rung 2 of the reshape (beat rewritten so the key element of the hook is the airliner, the same hero as scene 5, not the door alone): the original element 'airplane door' (aliases airplane door, aircraft door, plane door, cabin door, fixed before any reading) failed four readings: exterior 92/90/92 and 90/90/95 named the fuselage, the door close-up read 'control panel' 15/20/25, the door in its cabin setting read 'grey door with a black lever' 60/60/45. The airliner aliases below were fixed in this script before any reading", "frames": [100]}
+    ],
+    "2": [
+      {"id": "plug-door", "name": "plug door in its frame (top-down cutaway)", "aliases": ["airplane door", "aircraft door", "plane door", "cabin door", "door"], "route": "build", "source": "avion_rig.plug_cutaway: door slab with edge stops, wall with matching stops, curved wall in frame", "frames": [100]}
+    ],
+    "3": [
+      {"id": "cabin", "name": "airplane cabin with seated passengers", "aliases": ["airplane cabin", "aircraft cabin", "plane cabin", "airplane interior", "airplane", "aircraft", "plane", "airliner"], "route": "build", "source": "avion_rig.cabin: seat rows, oval windows, curved ceiling; library human-figure seated x4 recoloured", "frames": [120]}
+    ],
+    "4": [
+      {"id": "cars", "name": "cars stacked on the door", "aliases": ["car", "cars", "sedan", "automobile", "auto"], "route": "asset", "source": "library cartoon-car (sealed, static), five instances", "frames": [170]}
+    ],
+    "5": [
+      {"id": "airliner", "name": "airliner with a blown-out side panel", "aliases": ["airplane", "aircraft", "plane", "airliner", "jet", "fuselage"], "route": "build", "source": "library airliner (code-primitive, avion_rig.airliner, sealed for the whole exterior 96/97/95): fuselage tube, nose and tail cones, fin, swept wings, engines; panel and bolt points geometric", "frames": [10]}
+    ],
+    "6": [
+      {"id": "door-held", "name": "airplane door held in its frame by the air", "aliases": ["airplane door", "aircraft door", "plane door", "cabin door", "airplane", "aircraft", "plane"], "route": "build", "source": "avion_rig.section in the closing pull-back", "frames": [150]}
+    ]
+  },
+  "visibility": {
+    "1": {"airliner-door-open": {"objects": ["jet_*"], "frames": [100]}},
+    "2": {"plug-door": {"objects": ["door_*"], "frames": [100]}},
+    "3": {"cabin": {"objects": ["seat_*"], "frames": [120]}},
+    "4": {"cars": {"objects": ["car_*"], "frames": [170]}},
+    "5": {"airliner": {"objects": ["jet_*"], "frames": [160]}},
+    "6": {"door-held": {"objects": ["door_*"], "frames": [150]}}
+  },
   "source": "docs/current/idea-bank.md banked rank 2 (fill 1), drawn 2026-11-11 for the developed set",
   "title": "¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? ✈️",
   "topic_family": "objects",
@@ -20,13 +58,8 @@
   "theme": "cabin pressure",
   "main_tension": "dangerous",
   "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
-  "library_assets": [
-    "airliner class: open job `airliner` (exterior) built under its brief by the production (asset-system (g)) or the CC0/CC-BY library candidates above",
-    "build: plug door",
-    "library cartoon-car (sealed",
-    "library hand-articulated"
-  ],
-  "description": "¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? Porque el aire a presión de la cabina la aprieta contra su marco con unas siete toneladas.\nY esa misma fuerza, en 2024, le arrancó a un avión un panel al que le faltaban sus cuatro pernos. ✈️\nEnvíaselo a ese amigo que siempre pide el asiento junto a la salida de emergencia.",
+  "library_assets": ["airliner", "human-figure", "cartoon-car"],
+  "description": "¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? Porque el aire a presión de la cabina la aprieta contra su marco con la fuerza de varios autos.\nY esa misma fuerza, en 2024, le arrancó a un avión un panel al que le faltaban sus cuatro pernos. ✈️\nEnvíaselo a ese amigo que siempre pide el asiento junto a la salida de emergencia.",
   "hashtags": [
     "#avion",
     "#aviones",
@@ -71,6 +104,13 @@
           ]
         }
       ],
+      "emphasis": ["llave.", "ninguna"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "¿LLAVE?", "at_word": "llave.", "offset_s": 0.0, "visible_s": 3.2, "x": 0.5, "y": 0.5},
+        {"type": "mark", "kind": "x", "text_or_value": "x", "at_word": "ninguna", "offset_s": 0.0, "visible_s": 1.8, "x": 0.5, "y": 0.5}
+      ],
+      "target_duration_s": 9,
+      "render_cost_class": "opaque",
       "est_duration_s": 8.3
     },
     {
@@ -96,6 +136,12 @@
           ]
         }
       ],
+      "emphasis": ["grande", "tapón."],
+      "overlays": [
+        {"type": "bracket", "from": [0.34, 0.5], "to": [0.66, 0.5], "at_word": "grande", "offset_s": 0.0, "visible_s": 2.6}
+      ],
+      "target_duration_s": 7,
+      "render_cost_class": "opaque",
       "est_duration_s": 6.6
     },
     {
@@ -122,12 +168,16 @@
           ]
         }
       ],
+      "emphasis": ["presión,", "delgado."],
+      "overlays": [],
+      "target_duration_s": 8,
+      "render_cost_class": "opaque",
       "est_duration_s": 7.2
     },
     {
       "name": "empuje",
-      "narration": "Ese aire empuja la puerta hacia afuera, contra su marco, con unas siete toneladas: como cinco autos encima.",
-      "what_changes": "Escalation as movement: the door is pressed outward into its stops by the accent air; beside it the push is made physical: five cars drop one by one onto the door's outline laid flat, and the camera pulls back to take in the stack.",
+      "narration": "Ese aire empuja la puerta hacia afuera, contra su marco, con la fuerza de varios autos encima.",
+      "what_changes": "Escalation as movement (rung 3 applied: the door area could not be sourced, so no tonne figure is spoken or shown): the door is pressed outward into its stops by the accent air; beside it the push is made physical: cars drop one by one onto the door's outline laid flat, and the camera pulls back to take in the stack.",
       "transformation": "una puerta apretada por el aire → cinco autos apilados sobre ella, uno por uno",
       "camera": "retroceso y subida a medida que cae cada auto",
       "overlays_plan": [
@@ -148,12 +198,16 @@
           ]
         }
       ],
+      "emphasis": ["empuja", "autos"],
+      "overlays": [],
+      "target_duration_s": 6,
+      "render_cost_class": "opaque",
       "est_duration_s": 6.2
     },
     {
       "name": "giro",
       "narration": "Y cuando esa fuerza no está bien sujeta, gana. En 2024, a un avión se le soltó en pleno vuelo un panel tapón: le faltaban los cuatro pernos que lo trababan.",
-      "what_changes": "The turn: wide exterior of the fuselage in the sky; a door-plug panel aft of the wing, with its four bolt points empty (red), creeps up off its stops and blows outward; the cabin air rushes after it; the two seats beside the hole are empty while passengers sit further along the row.",
+      "what_changes": "The turn: wide exterior of the fuselage in the sky; a door-plug panel aft of the wing, with its four bolt points empty (red), creeps up off its stops and blows outward; the cabin air rushes after it (the empty-seat detail is not staged: only one source for it).",
       "transformation": "panel en su sitio sin pernos → sube, se suelta y sale volando",
       "camera": "seguimiento exterior a lo largo del fuselaje, de la cola hacia el panel",
       "overlays_plan": [
@@ -175,6 +229,13 @@
           ]
         }
       ],
+      "emphasis": ["2024", "pernos"],
+      "overlays": [
+        {"type": "chip", "text_or_value": "2024", "at_word": "2024,", "offset_s": 0.0, "visible_s": 2.6, "x": 0.75, "y": 0.4},
+        {"type": "chip", "text_or_value": "0/4 PERNOS", "at_word": "pernos", "offset_s": 0.0, "visible_s": 2.6, "x": 0.72, "y": 0.48}
+      ],
+      "target_duration_s": 11,
+      "render_cost_class": "opaque",
       "est_duration_s": 10.7
     },
     {
@@ -187,6 +248,12 @@
         "ENVÍASELO tag at_word 'envíaselo'"
       ],
       "elements": [],
+      "emphasis": ["llave:", "aire"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "ENVÍASELO", "at_word": "Envíaselo", "offset_s": 0.0, "visible_s": 2.6, "x": 0.78, "y": 0.62}
+      ],
+      "target_duration_s": 12,
+      "render_cost_class": "opaque",
       "est_duration_s": 11.4
     }
   ],
