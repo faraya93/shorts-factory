@@ -1,0 +1,74 @@
+{
+  "slug": "cotton-swab",
+  "name": "cotton swab",
+  "aliases": [
+    "cotton swab",
+    "swab",
+    "q-tip",
+    "cotton bud",
+    "hisopo",
+    "cotonete",
+    "bastoncillo"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a double-ended cotton swab",
+    "seen_at": "close, filling 30-70% of the frame width; side and three-quarter",
+    "moving_parts": [
+      "none: one rigid swab lying along the x axis, centred on x=0, base at z=0"
+    ],
+    "states": [
+      "white cotton tips on a pale blue-grey stick"
+    ],
+    "style_notes": "retinted flat (cotton #F6F3EE, stick #D5E2E8); 75 mm long"
+  },
+  "source": {
+    "registry_id": "sketchfab",
+    "url": "https://sketchfab.com/3d-models/cotton-swab-55e6fe762271427a8d2dfc277a50adef",
+    "asset_id": "55e6fe762271427a8d2dfc277a50adef",
+    "author": "amhyde",
+    "retrieved": "2026-11-11"
+  },
+  "licence": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Cotton Swab by amhyde (Sketchfab), CC BY 4.0; retinted",
+    "note": "Sketchfab 'CC Attribution'; no credit goes in video descriptions (owner 2026-11-07)",
+    "decision": "no CC0 swab found; CC-BY accepted without asking per CLAUDE.md licences"
+  },
+  "files": {
+    "blend": "cotton-swab.blend",
+    "sha256": "d6f45c34d617cc155af5b342085cea75cd11d8aa9a33ad67097d0adc6286f468",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": 0.075,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-11"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-11",
+      "guesses": [
+        "Cotton swab (double-ended, white tips, light blue plastic stick); plain gray background; no other objects",
+        "Cotton swab (double-ended, light blue plastic stick with white tips); grey background; no other objects",
+        "double-ended cotton swab; white oval cotton tips; light blue plastic stick on gray background"
+      ],
+      "confidences": [
+        92,
+        92,
+        90
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

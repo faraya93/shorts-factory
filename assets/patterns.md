@@ -55,4 +55,9 @@ Written for production sessions: read this before staging an element, so the fir
 | Red bolt into an open car (020) | top-down push-in on the cabin | none | FAIL, "car with a red crash mark" (85/85/85) | opaque |
 | Red bolt into an open car (020) | wide frame, cloud high, red bolt to the open cabin | cloud, car | PASS (85/85/92) | opaque |
 | Toilet aerosol droplets | white beads in a green laser sheet; glossy streaked drops; blue drops on a white tile | toilet, tile | FAIL on every rung in 012: read as "white particle spray", "white foam", "blue paint splatter" (85/85/85, 88/85/85, 75/60/70) | |
+| Ear with canal section (024) | scan pinna in pale peach/white, tight frame, swab and wax in front | none | FAIL, "cotton swab cleaning earwax" (70/35/50): a pale pinna renders as a white blob | opaque |
+| Ear with canal section (024) | scan pinna in mid-dark brown (#6F4A3A), whole ear and block in frame, swab not yet in view | outer ear | PASS (72/72/85; also named "ear against a wall socket"); brown is needed to clear 20 from the coral stage | opaque |
+| Canal contents: wax, swab, bands (024) | tight frame on the canal trough only, ear out of frame | none | FAIL x4: "toaster with cheese", "toothbrush", "pink slinky and yellow sponge", "sandwich in a takeout box" (30-60) | opaque |
+| Canal contents: wax, swab, plug, bands (024) | same beats with the pinna in the read frame (whole ear 40-60% of the frame width) | outer ear | PASS x4 (85/85/88, 92/85/72, 88/85/85, 45/80/85); the ear is the context cue, so keep it in the read frame; in the plug frame readers name the swab first | opaque |
+| Cotton swab (024) | sealed `cotton-swab`, white tips on a blue-grey stick, along the canal axis | canal | PASS inside the ear frames; named first even when the plug is the declared element | opaque |
 

@@ -1,0 +1,468 @@
+{
+  "channel": "mecanalia-es",
+  "video": "por-que-no-limpiarte-los-oidos-con-un-palito-de-algodon",
+  "title": "¿Por qué no deberías limpiarte los oídos con un palito de algodón? 👂",
+  "topic_family": "body",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets (ear-canal, cotton-swab) and geometric builds for wax, bands and rings.",
+  "hook_question": "¿Por qué no deberías limpiarte los oídos con un palito de algodón?",
+  "false_belief": "La cera es suciedad y hay que sacarla.",
+  "closing_reframe": "La cera no es mugre: es una cinta que se limpia sola, y el palito la atasca.",
+  "share_archetype": "ese amigo que se limpia los oídos con un palito apenas sale de la ducha",
+  "hero_route": "asset",
+  "library_assets": [
+    "ear-canal",
+    "cotton-swab"
+  ],
+  "structure_variant": "journey",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "ear-wax",
+        "name": "ear with its canal in section and wax lining the canal",
+        "aliases": [
+          "ear",
+          "ear canal",
+          "ear anatomy",
+          "ear cross-section",
+          "inner ear",
+          "oído",
+          "oreja"
+        ],
+        "route": "asset",
+        "source": "library ear-canal (sealed) with the wax lining built in oido_rig",
+        "frames": [
+          110
+        ]
+      },
+      {
+        "id": "swab-hook",
+        "name": "cotton swab approaching the ear",
+        "aliases": [
+          "cotton swab",
+          "swab",
+          "q-tip",
+          "cotton bud",
+          "hisopo",
+          "cotonete",
+          "bastoncillo"
+        ],
+        "route": "asset",
+        "source": "library cotton-swab (sealed)",
+        "frames": [
+          200
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "wax-flow",
+        "name": "wax moving out along the ear canal",
+        "aliases": [
+          "ear",
+          "ear canal",
+          "ear anatomy",
+          "ear cross-section",
+          "earwax",
+          "wax"
+        ],
+        "route": "asset",
+        "source": "library ear-canal (sealed) with wax lining, skin bands and flakes riding outward (oido_rig)",
+        "frames": [
+          235
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "swab-canal",
+        "name": "cotton swab inside the ear canal pushing wax",
+        "aliases": [
+          "cotton swab",
+          "swab",
+          "q-tip",
+          "cotton bud",
+          "ear",
+          "hisopo"
+        ],
+        "route": "asset",
+        "source": "library cotton-swab (sealed) inside the library ear-canal",
+        "frames": [
+          120
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "wax-plug",
+        "name": "earwax plug against the eardrum",
+        "aliases": [
+          "earwax",
+          "ear wax",
+          "wax plug",
+          "earwax plug",
+          "ear canal",
+          "ear",
+          "blockage",
+          "cerumen"
+        ],
+        "route": "material",
+        "source": "amber wax plug built in oido_rig, in the library ear-canal against the drum wall",
+        "frames": [
+          200
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "ear-reframe",
+        "name": "ear with the wax riding out of the canal on its own",
+        "aliases": [
+          "ear",
+          "ear canal",
+          "ear anatomy",
+          "ear cross-section",
+          "inner ear",
+          "oído",
+          "oreja"
+        ],
+        "route": "asset",
+        "source": "library ear-canal (sealed) with the wax lining and flakes carried outward by the skin bands (oido_rig)",
+        "frames": [
+          150
+        ]
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "oido_rig.Ear",
+    "oido_rig.Mats",
+    "oido_rig.lights",
+    "oido_rig.look"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      110
+    ]
+  },
+  "visibility": {
+    "1": {
+      "ear-wax": {
+        "objects": [
+          "wax_*"
+        ],
+        "frames": [
+          110
+        ]
+      },
+      "swab-hook": {
+        "objects": [
+          "swab_*"
+        ],
+        "frames": [
+          200
+        ]
+      }
+    },
+    "2": {
+      "wax-flow": {
+        "objects": [
+          "wax_*",
+          "band_*",
+          "flake_*"
+        ],
+        "frames": [
+          235
+        ]
+      }
+    },
+    "3": {
+      "swab-canal": {
+        "objects": [
+          "swab_*"
+        ],
+        "frames": [
+          120
+        ]
+      }
+    },
+    "4": {
+      "wax-plug": {
+        "objects": [
+          "plug_*"
+        ],
+        "frames": [
+          200
+        ]
+      }
+    },
+    "5": {
+      "ear-reframe": {
+        "objects": [
+          "wax_*",
+          "band_*",
+          "flake_*"
+        ],
+        "frames": [
+          150
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "oido-set",
+  "scene_script_prefix": "oido",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "¿Por qué no deberías limpiarte los oídos con un palito de algodón? Porque la cera sale sola, y el palito la empuja hacia adentro. 👂 Envíaselo a ese amigo que se limpia los oídos con un palito apenas sale de la ducha.",
+  "gate_stills": {
+    "1": [
+      10,
+      110,
+      200
+    ],
+    "2": [
+      10,
+      130,
+      235
+    ],
+    "3": [
+      10,
+      120,
+      235
+    ],
+    "4": [
+      10,
+      100,
+      200
+    ],
+    "5": [
+      10,
+      150,
+      299
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "asset_rig",
+    "avion_rig",
+    "oido_rig"
+  ],
+  "support_colours": {
+    "board": "#4A3B5C",
+    "plate": "#0E6F68",
+    "reason": "Round 1 used the 018 sky-blue plate #86B7E3: it rendered lavender-grey (#BCB3C4) and BLOCKED pale heroes against it (swab 11-19, skin 19, block 19.7) while skin and canal lining (pink) BLOCKED against the coral stage (15.7-18.8 and 8-12). Round 2: a dark blue plate (#3F6E9A, cool and mid-dark where every hero is pale and warm), a paler skin (#F6E3D8), a deep-rose canal lining (#8A4B52) with lighter rose bands, and a yellower wax (#F0BE3F, the amber one sat 19-21 from the coral stage). Measured in notes.md."
+  },
+  "hero_colours": {
+    "skin": "#6F4A3A",
+    "bone": "#F1E6C8",
+    "canal": "#8A4B52",
+    "band": "#B85C63",
+    "wax": "#F0BE3F",
+    "drum": "#8F7A86"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Por qué no deberías limpiarte los oídos con un palito de algodón? Parece que la cera es mugre que hay que sacar.",
+      "target_duration_s": 7.6,
+      "transformation": "oído tranquilo con cera → se acerca el palito a sacarla",
+      "camera": "órbita desde la oreja hacia la entrada del conducto",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "mugre"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿MUGRE?",
+          "at_word": "mugre",
+          "offset_s": 0.0,
+          "visible_s": 3.0,
+          "x": 0.72,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "cinta",
+      "prompt": "Escena dibujada con código (coral): cinta.",
+      "narration": "Pero la cera te protege: atrapa el polvo en la entrada, y sale sola, porque la piel del oído crece hacia afuera, como una cinta lenta.",
+      "target_duration_s": 9.0,
+      "transformation": "polvo que entra → queda pegado en la cera y la piel lo saca hacia afuera",
+      "camera": "travelling a lo largo del conducto, del tímpano hacia la salida",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "protege:",
+        "cinta"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "CINTA",
+          "at_word": "cinta",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.72,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "palito",
+      "prompt": "Escena dibujada con código (coral): palito.",
+      "narration": "Ahora entra el palito. Saca un poco de la orilla, pero empuja el resto hacia adentro, donde la piel ya no lo puede sacar.",
+      "target_duration_s": 8.3,
+      "transformation": "cera cerca de la salida → el palito la empuja hacia el fondo",
+      "camera": "seguimiento del palito entrando por el conducto",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "palito.",
+        "adentro,"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "tapon",
+      "prompt": "Escena dibujada con código (coral): tapon.",
+      "narration": "Vuelta tras vuelta, se forma un tapón contra el tímpano. Por eso los médicos piden no meter nada en el oído.",
+      "target_duration_s": 7.2,
+      "transformation": "cera suelta → un tapón compacto contra el tímpano que frena el sonido",
+      "camera": "empuje hasta el tímpano y retroceso cuando rebota el sonido",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tapón",
+        "tímpano."
+      ],
+      "data_overlays": [
+        {
+          "type": "mark",
+          "kind": "x",
+          "text_or_value": "x",
+          "at_word": "tapón",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.7,
+          "y": 0.58
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 5,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que la cera no es mugre: es una cinta que se limpia sola, y el palito la atasca. Envíaselo a ese amigo que se limpia los oídos con un palito apenas sale de la ducha.",
+      "target_duration_s": 12.4,
+      "transformation": "tapón → la cera vuelve a salir sola por la cinta de piel",
+      "camera": "retroceso desde el conducto hasta la oreja entera",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cinta",
+        "envíaselo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.76,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

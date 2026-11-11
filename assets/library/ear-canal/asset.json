@@ -1,0 +1,74 @@
+{
+  "slug": "ear-canal",
+  "name": "ear canal cross-section with outer ear",
+  "aliases": [
+    "ear",
+    "ear canal",
+    "ear anatomy",
+    "ear cross-section",
+    "inner ear",
+    "oído",
+    "oreja"
+  ],
+  "family": "body",
+  "created": "2026-11-11",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a human ear with its canal shown in section",
+    "seen_at": "filling 40-70% of the frame; three-quarter from the -Y side, orbiting a little",
+    "moving_parts": [
+      "none: pinna mesh plus a cream block with a half-open canal trough (x axis, open toward -Y) ending in an eardrum wall; wax, swab and sound rings are production-level builds"
+    ],
+    "states": [
+      "bare canal in section, stylised flat colours (skin, cream bone, canal lining, drum)"
+    ],
+    "style_notes": "pinna cropped from a scan and retinted flat (no skin texture, no blood); canal enlarged (radius 9.5 mm, drum at x=50 mm); canal opens toward -Y, entrance at x=0, sits on z=0, about 0.07 m tall"
+  },
+  "source": {
+    "registry_id": "sketchfab",
+    "url": "https://sketchfab.com/3d-models/ear-anatomy-da5b25e8ef0245658d573f3e44fc8eba",
+    "asset_id": "da5b25e8ef0245658d573f3e44fc8eba",
+    "author": "maryswet9",
+    "retrieved": "2026-11-11"
+  },
+  "licence": {
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Ear anatomy by maryswet9 (Sketchfab), CC BY 4.0; pinna cropped and retinted, canal block built in this factory",
+    "note": "Sketchfab 'CC Attribution'; no credit goes in video descriptions (owner 2026-11-07)",
+    "decision": "no CC0 ear found; CC-BY accepted without asking per CLAUDE.md licences. The planned brianj.seely model did not appear in search; this one was seen and imported instead"
+  },
+  "files": {
+    "blend": "ear-canal.blend",
+    "sha256": "d421883c9b6b3f5d7a5d90196c80405b0e20f680cd6029b12e72153452fbb47b",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": 0.07,
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-11"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-11",
+      "guesses": [
+        "human ear (3D render); white rectangular block/socket attached to ear; grey background",
+        "3D-rendered human ear; white rectangular block with a slot; plain gray background",
+        "human ear model, white rectangular block attached, grey background"
+      ],
+      "confidences": [
+        90,
+        85,
+        90
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}
