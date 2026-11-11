@@ -15,8 +15,8 @@
   ],
   "family": "body",
   "created": "2026-11-10",
-  "status": "in_progress",
-  "route": null,
+  "status": "ready",
+  "route": "library",
   "brief": {
     "must_read_as": "a human hand, at phone size, in each grip and reach below",
     "seen_at": "large: 25-40% of frame height, usually with the object it holds in frame",
@@ -30,7 +30,8 @@
       "gripping a steering wheel",
       "reaching and touching a car door",
       "holding a knife handle",
-      "fumbling with a mask (fingers moving)"
+      "fumbling with a mask (fingers moving)",
+      "fist with the thumb on the index finger (knuckle-cracking family)"
     ],
     "style_notes": "Stylised skin material, no real skin texture. A NEW asset: `human-hand` stays as sealed because finished productions depend on its hash (rule d).",
     "commission": {
@@ -52,36 +53,233 @@
     }
   },
   "source": {
-    "registry_id": null,
-    "url": null,
-    "asset_id": null,
-    "author": null,
-    "retrieved": null
+    "registry_id": "sketchfab",
+    "url": "https://sketchfab.com/3d-models/b3b8309e59c748e3956531c8f57dd233",
+    "asset_id": "b3b8309e59c748e3956531c8f57dd233",
+    "author": "polyone",
+    "retrieved": "2026-11-11"
   },
   "licence": {
-    "id": null,
-    "url": null,
-    "attribution": null,
-    "note": null,
+    "id": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "\"Free Pack - VR Hands (Rigged)\" by polyone (Sketchfab) is licensed under CC Attribution",
+    "note": "Sketchfab listed it as \"CC Attribution\"; version taken as 4.0 (same convention as human-hand). Only the right hand is kept; mesh retinted flat, texture removed, 5 rig-driven poses added.",
     "decision": null
   },
   "files": {
     "blend": "hand-articulated.blend",
-    "sha256": null,
+    "sha256": "ef9a3ab4c4df51b39803d51a1e65a34bfef55b6d5e5a4fa8d4a50eb9a04db0bf",
     "collection": "asset",
     "rig_module": null,
-    "build_script": null
+    "build_script": "build.py"
   },
-  "real_size_m": null,
+  "real_size_m": [
+    0.06,
+    0.136,
+    0.19
+  ],
   "checks": {
     "qa": {
-      "pass": null,
-      "date": null
+      "pass": true,
+      "date": "2026-11-11"
     },
     "blind_naming": {
-      "pass": null,
-      "date": null,
-      "guesses": []
+      "pass": true,
+      "date": "2026-11-11",
+      "scope": "per pose: every sealed pose passed on its own three isolated readers (tools/blind_read.py, headless); poses not listed in sealed_poses are NOT sealed",
+      "sealed_poses": [
+        "open",
+        "lever",
+        "wheel",
+        "door",
+        "knife",
+        "mask",
+        "mask_b",
+        "crack"
+      ],
+      "unsealed_poses": [
+        "press"
+      ],
+      "poses": {
+        "open": {
+          "pass": true,
+          "reading": "open",
+          "guesses": [
+            "a 3D-rendered human hand, like a mannequin or prosthetic hand",
+            "a 3D-rendered human hand, like a mannequin or CGI hand model",
+            "a 3D-rendered human hand (disembodied, cut off at the wrist, like a mannequin or CGI hand model)"
+          ],
+          "confidences": [
+            95,
+            96,
+            96
+          ]
+        },
+        "lever": {
+          "pass": true,
+          "reading": "lever-r3",
+          "guesses": [
+            "a 3D-rendered human hand (wrist cut off, fingers curled)",
+            "a 3D-rendered human hand (cut-off wrist, fingers curled)",
+            "3D-rendered human hand with curled fingers and cut-off wrist; alternatives: mannequin hand, prosthetic hand"
+          ],
+          "confidences": [
+            92,
+            92,
+            85
+          ]
+        },
+        "wheel": {
+          "pass": true,
+          "reading": "wheel-r3",
+          "guesses": [
+            "a 3D-rendered human hand, cupped or pinching; alternatives: a mannequin hand, a detached prosthetic hand",
+            "a 3D-rendered pale human hand with a cut-off wrist and curled fingers; alternatives: a plastic mannequin hand, a claw-shaped grabber tool",
+            "a 3D-rendered human hand, curled as if gripping something. Alternatives: a cupped paw, a bent wooden mannequin hand"
+          ],
+          "confidences": [
+            90,
+            90,
+            85
+          ]
+        },
+        "door": {
+          "pass": true,
+          "reading": "door",
+          "guesses": [
+            "a disembodied 3D-rendered flesh-toned hand (alternatives: mannequin hand, prosthetic hand)",
+            "a disembodied 3D-rendered human hand (fingers pointing down)",
+            "3D-rendered human hand (alternatives: mannequin hand, prosthetic hand)"
+          ],
+          "confidences": [
+            60,
+            92,
+            70
+          ]
+        },
+        "knife": {
+          "pass": true,
+          "reading": "knife-r3",
+          "guesses": [
+            "a human hand (3D render); alternatives: mannequin hand, prosthetic hand",
+            "a 3D-rendered human hand with curled fingers (alternatives: a plaster mannequin hand, a glove-like prosthetic)",
+            "a human hand (3D render, bare pale skin, curled fingers); alternatives: a mannequin hand, a foot"
+          ],
+          "confidences": [
+            88,
+            90,
+            90
+          ]
+        },
+        "mask": {
+          "pass": true,
+          "reading": "mask-r3",
+          "guesses": [
+            "a 3D-rendered human hand, wrist cut off, fingers curled; alternatives: a mannequin hand, a claw-grip tool",
+            "3D-rendered human hand, cut off at the wrist",
+            "a 3D-rendered human hand (cut off at the wrist, fingers curled)"
+          ],
+          "confidences": [
+            85,
+            92,
+            90
+          ]
+        },
+        "mask_b": {
+          "pass": true,
+          "reading": "mask_b-r3",
+          "guesses": [
+            "a 3D-rendered human hand with a flat cylindrical wrist stump (first guess); alternatives: mannequin hand, prosthetic hand",
+            "a severed/mannequin human hand (3D-rendered hand model with a flat cut-off wrist)",
+            "a 3D-rendered human hand, cut off at the wrist"
+          ],
+          "confidences": [
+            85,
+            90,
+            88
+          ]
+        },
+        "crack": {
+          "pass": true,
+          "reading": "crack",
+          "guesses": [
+            "a 3D-rendered human hand with curled fingers (alternatives: a plastic mannequin hand, a glove)",
+            "3D-rendered human hand with curled fingers",
+            "a 3D-rendered human hand with fingers curled, like a pinch or grasp; alternatives: a claw, a bent glove"
+          ],
+          "confidences": [
+            90,
+            85,
+            75
+          ]
+        },
+        "press": {
+          "pass": false,
+          "reading": "press-r3",
+          "guesses": [
+            "3D cartoon hand pointing down (alternatives: Thing from The Addams Family; disembodied glove)",
+            "3D cartoon hand pointing down (alternatives: Thing from The Addams Family; a hand gesture icon)",
+            "disembodied 3D cartoon hand pointing downward (like The Thing)"
+          ],
+          "confidences": [
+            55,
+            55,
+            60
+          ]
+        }
+      },
+      "guesses": [
+        "a 3D-rendered human hand, like a mannequin or prosthetic hand",
+        "a 3D-rendered human hand, like a mannequin or CGI hand model",
+        "a 3D-rendered human hand (disembodied, cut off at the wrist, like a mannequin or CGI hand model)",
+        "a 3D-rendered human hand (wrist cut off, fingers curled)",
+        "a 3D-rendered human hand (cut-off wrist, fingers curled)",
+        "3D-rendered human hand with curled fingers and cut-off wrist; alternatives: mannequin hand, prosthetic hand",
+        "a 3D-rendered human hand, cupped or pinching; alternatives: a mannequin hand, a detached prosthetic hand",
+        "a 3D-rendered pale human hand with a cut-off wrist and curled fingers; alternatives: a plastic mannequin hand, a claw-shaped grabber tool",
+        "a 3D-rendered human hand, curled as if gripping something. Alternatives: a cupped paw, a bent wooden mannequin hand",
+        "a disembodied 3D-rendered flesh-toned hand (alternatives: mannequin hand, prosthetic hand)",
+        "a disembodied 3D-rendered human hand (fingers pointing down)",
+        "3D-rendered human hand (alternatives: mannequin hand, prosthetic hand)",
+        "a human hand (3D render); alternatives: mannequin hand, prosthetic hand",
+        "a 3D-rendered human hand with curled fingers (alternatives: a plaster mannequin hand, a glove-like prosthetic)",
+        "a human hand (3D render, bare pale skin, curled fingers); alternatives: a mannequin hand, a foot",
+        "a 3D-rendered human hand, wrist cut off, fingers curled; alternatives: a mannequin hand, a claw-grip tool",
+        "3D-rendered human hand, cut off at the wrist",
+        "a 3D-rendered human hand (cut off at the wrist, fingers curled)",
+        "a 3D-rendered human hand with a flat cylindrical wrist stump (first guess); alternatives: mannequin hand, prosthetic hand",
+        "a severed/mannequin human hand (3D-rendered hand model with a flat cut-off wrist)",
+        "a 3D-rendered human hand, cut off at the wrist",
+        "a 3D-rendered human hand with curled fingers (alternatives: a plastic mannequin hand, a glove)",
+        "3D-rendered human hand with curled fingers",
+        "a 3D-rendered human hand with fingers curled, like a pinch or grasp; alternatives: a claw, a bent glove"
+      ],
+      "confidences": [
+        95,
+        96,
+        96,
+        92,
+        92,
+        85,
+        90,
+        90,
+        85,
+        60,
+        92,
+        70,
+        88,
+        90,
+        90,
+        85,
+        92,
+        90,
+        85,
+        90,
+        88,
+        90,
+        85,
+        75
+      ]
     },
     "fidelity": null
   },
