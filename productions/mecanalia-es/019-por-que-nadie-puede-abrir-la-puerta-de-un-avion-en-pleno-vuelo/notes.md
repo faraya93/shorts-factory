@@ -1,6 +1,6 @@
 # por-que-nadie-puede-abrir-la-puerta-de-un-avion-en-pleno-vuelo: production notes (developed script, 2026-11-11)
 
-Status: DEVELOPED SCRIPT ON FILE (developed set of the 2026-11-11 creative session; lens-decisions row "Developed set 019-024"). Nothing modelled, rendered, queued or published. The production proceeds FROM THIS SCRIPT (produce skill step 1), starting at step 3 (render-cost classes) and the beat sheet; the script may change only through the Reshape ladder, logged here and in lens-decisions.
+Status: RENDERED, VERIFIED (PASS), PACKAGE BUILT AND CHECKED (2026-11-11); the owner's publish/reject verdict is pending. Nothing published. (Original status line: DEVELOPED SCRIPT ON FILE, developed set of the 2026-11-11 creative session; lens-decisions row "Developed set 019-024".) The production proceeds FROM THIS SCRIPT (produce skill step 1), starting at step 3 (render-cost classes) and the beat sheet; the script may change only through the Reshape ladder, logged here and in lens-decisions.
 
 ## Publish package draft (Spanish; the owner publishes)
 - **Título:** ¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? ✈️
@@ -8,7 +8,7 @@ Status: DEVELOPED SCRIPT ON FILE (developed set of the 2026-11-11 creative sessi
   ¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? Porque el aire a presión de la cabina la aprieta contra su marco con la fuerza de varios autos.
   Y esa misma fuerza, en 2024, le arrancó a un avión un panel al que le faltaban sus cuatro pernos. ✈️
   Envíaselo a ese amigo que siempre pide el asiento junto a la salida de emergencia.
-- **Hashtags (description, not title):** #avion #aviones #ciencia #shorts
+- **Hashtags (description, not title):** #avion #comofunciona #aviones #shorts
 
 ## Script (6 scenes, family objects, variant chain, 146 words, ~50.3 s at 2.9 w/s; band 45-60 s)
 Hook: ¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? | false belief: La puerta va trabada con llave y solo la tripulación puede abrirla. | turn: Scene 5: the same push that seals the door blew out a door-plug panel whose four bolts were missing (Alaska Airlines 1282, 2024). | reframe: La puerta de un avión no la cierra una llave: la cierra el aire de adentro. | share archetype: ese amigo que siempre pide el asiento junto a la salida de emergencia
@@ -108,6 +108,14 @@ Code: `code3d/lib/avion_rig.py`, scene scripts `code3d/scenes/avion_01..06.py` (
 
 ### Gate record
 Colour gate PASS; hero `airliner` frozen (neutral 96/97/95; production still 95-97); every declared element read and carried; visibility PASS (scene 1 p90 32.3, scene 2 35.1, scene 3 29.2, scene 4 54.2, scene 5 31.7, scene 6 42.4; area 7-39 %, 12.0 for scene 6).
+
+## REPORT 2026-11-11 (finish after the queued final)
+- **Render:** chain log `output/chain-019-por-que-nadie-puede-abrir-la-puerta-de-un-avion-en-pleno-vuelo.log`: START 09:29:00, DONE 10:24:29 (55.5 min wall). No FAILED / INCOMPLETE / Traceback and no retry warning. `final.mp4` 1080x1920 H.264/AAC, 49.10 s, 19.3 MB, plus `cover.jpg`. $0 fal spend (code3d). Launched through `tools/queue_final.py`.
+- **Estimate vs actual:** every scene was predicted `opaque` (2-3 s/frame). Measured: scene 1 2.02, scene 2 3.47, scene 3 2.65, scene 4 1.90, scene 5 0.96, scene 6 2.79 s/frame; none above 15, no cost_restage. The session itself was long because of the likeness gate (scenes 1, 2, 3, 6: see the ladder log), not the renders.
+- **Verify:** `tools/verify_production.py` PASS. `publish_package.py build` first refused the hashtags (the objects family tag #comofunciona was missing); notes now read `#avion #comofunciona #aviones #shorts`; build and check then OK. Nothing published.
+- **Dynamism audit (mechanical, from stills and the scripts; I cannot watch the video):** every scene stages a visible change and a travelling camera: a close pull on the grip bar out to two planes, the ground door opening and the flight door not moving (1); the aisle view with the plug door sliding inward, turning and leaving (2); the aisle with accent air filling the cabin, then the camera pulling out of the open end to sparse pale beads outside (3); cars dropping one by one while the camera pulls back and climbs (4); a wide airliner, the camera closing on the panel as it lifts and blows off (5); the door glowing in its frame, then a pull-out of the whole cabin section (6). Framings vary (close, medium, wide, interior and exterior); no two consecutive scenes share a move and distance. The lenses' contact-sheet check and the owner's eye remain the last gate.
+- **Background QA:** scenes 2, 3 and 6 are marked `review` (dE 38-51 against the stage) because they are interior sets with no stage backdrop in frame: a signal, not a defect.
+- **Not done:** no idea-bank change (the draw predates this session); `tests/test_asset_library.py` still fails `test_new_productions_follow_the_format_policy` on a scene-count run (`[7, 7, 6, 6, 6, 5, 6]`) that predates 019; not investigated.
 
 ### Flags for the owner's eye (I cannot watch the video)
 1. Scene 1 has no hand, no door-only close-up: two airliners, the ground door opens, the flight door does not (rung 2 above).
