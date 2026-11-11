@@ -47,5 +47,12 @@ Written for production sessions: read this before staging an element, so the fir
 | Airplane cabin (019) | aisle view down five seat rows, bins, oval windows, passengers' heads over the seat backs | seats, bins | PASS (80/90/85, 85/80/85); a closed tube needs ceiling lamps in Cycles (the stage lights do not reach in) | opaque |
 | Hand on a door handle (019) | sealed hand gripping a bar, 15-50 cm camera | door | FAIL in 4 readings: readers name "door handle" / "light switch", not the hand; stays off screen | opaque |
 | Cars stacked (019) | five sealed sedans dropping onto a flat door on a teal pad | pad | PASS (60/60/60, then 90/85/90) | opaque |
+| Car on a wet road (020) | sealed cartoon-car, side view, driver seated inside, ink storm cloud above | road, cloud | PASS (hero 60/90/75, scene 70/85/88); with the roof split off to a convertible 93/90/92 | opaque |
+| Lightning bolt on a car (020) | thick accent zigzag from an ink cloud low over the car, car large | cloud, car | FAIL x2, readers name the car (96/85/92, 88/85/55) | opaque |
+| Lightning bolt on a car (020) | cloud raised so the bolt is a tall picture, very wide frame, car small below | cloud, car | PASS (85/88/90); readers still name the car beside the bolt | opaque |
+| Arc from a wheel to the road (020) | thin or thick arc on a tight tyre frame, with or without a glow pool | tyre, road | FAIL x2, "navy cartoon car", "teal puddle" (92/88/90, 93/92/92) | opaque |
+| Arc from a wheel to the road (020) | whole bolt from the cloud plus the arc at the wheel, wide | cloud, car | PASS (90/90/90, "car struck by lightning") | opaque |
+| Red bolt into an open car (020) | top-down push-in on the cabin | none | FAIL, "car with a red crash mark" (85/85/85) | opaque |
+| Red bolt into an open car (020) | wide frame, cloud high, red bolt to the open cabin | cloud, car | PASS (85/85/92) | opaque |
 | Toilet aerosol droplets | white beads in a green laser sheet; glossy streaked drops; blue drops on a white tile | toilet, tile | FAIL on every rung in 012: read as "white particle spray", "white foam", "blue paint splatter" (85/85/85, 88/85/85, 75/60/70) | |
 

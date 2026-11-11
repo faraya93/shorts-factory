@@ -1,0 +1,560 @@
+{
+  "channel": "mecanalia-es",
+  "video": "que-pasaria-si-te-cae-un-rayo-dentro-de-un-auto",
+  "title": "¿Qué pasaría si te cae un rayo dentro de un auto? ⚡",
+  "topic_family": "whatif",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
+  "hook_question": "¿Qué pasaría si te cae un rayo mientras vas dentro de un auto?",
+  "false_belief": "Te salvan los neumáticos de goma, porque aíslan el auto del suelo.",
+  "closing_reframe": "Con techo de metal, estás a salvo: te salva la caja, no la goma.",
+  "share_archetype": "ese amigo que en plena tormenta se baja del auto para correr a su casa",
+  "hero_route": "asset",
+  "library_assets": [
+    "cartoon-car",
+    "human-figure"
+  ],
+  "structure_variant": "fork",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "car-road",
+        "name": "car on a wet road under a storm sky",
+        "aliases": [
+          "car",
+          "sedan",
+          "automobile",
+          "auto"
+        ],
+        "route": "asset",
+        "source": "library cartoon-car (sealed, static) on a wet road, ink storm cloud above",
+        "frames": [
+          100
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "bolt-strike",
+        "name": "lightning bolt striking a car",
+        "aliases": [
+          "lightning",
+          "lightning bolt",
+          "lightning strike",
+          "rayo",
+          "thunderbolt"
+        ],
+        "route": "build",
+        "source": "rayo_rig.bolt: branching accent tube from the storm cloud to the roof",
+        "frames": [
+          40
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "arc-wheel",
+        "name": "arc jumping from a car wheel to the road",
+        "aliases": [
+          "lightning",
+          "electric arc",
+          "spark",
+          "electricity",
+          "arc"
+        ],
+        "route": "build",
+        "source": "rayo_rig.bolt small arc at the wheel; wheel from the sealed cartoon-car",
+        "frames": [
+          240
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "car-cage",
+        "name": "car shell as a glowing cage around a seated driver",
+        "aliases": [
+          "car",
+          "sedan",
+          "automobile",
+          "cage",
+          "auto"
+        ],
+        "route": "asset",
+        "source": "cartoon-car with accent cage lines; human-figure seated",
+        "frames": [
+          100
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "car-convertible",
+        "name": "convertible car with the driver exposed",
+        "aliases": [
+          "car",
+          "convertible",
+          "sedan",
+          "automobile",
+          "auto"
+        ],
+        "route": "asset",
+        "source": "cartoon-car with the roof faces split off and slid away (rayo_rig.split_roof)",
+        "frames": [
+          70
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "bolt-red",
+        "name": "red lightning path into an open car",
+        "aliases": [
+          "lightning",
+          "lightning bolt",
+          "rayo",
+          "lightning strike"
+        ],
+        "route": "build",
+        "source": "rayo_rig.bolt in the error colour into the open cabin",
+        "frames": [
+          105
+        ]
+      }
+    ],
+    "7": [
+      {
+        "id": "car-closing",
+        "name": "roofed car under the storm with its cage lit around the driver",
+        "aliases": [
+          "car",
+          "sedan",
+          "automobile",
+          "auto"
+        ],
+        "route": "asset",
+        "source": "library cartoon-car (sealed) with the roof back on, accent cage and bolt, wide pull-back",
+        "frames": [
+          400
+        ]
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "rayo_rig.car",
+    "rayo_rig.Mats",
+    "rayo_rig.road",
+    "rayo_rig.lights",
+    "rayo_rig.look"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      100
+    ]
+  },
+  "visibility": {
+    "1": {
+      "car-road": {
+        "objects": [
+          "car_*"
+        ],
+        "frames": [
+          100
+        ]
+      }
+    },
+    "2": {
+      "bolt-strike": {
+        "objects": [
+          "bolt_*"
+        ],
+        "frames": [
+          40
+        ]
+      }
+    },
+    "3": {
+      "arc-wheel": {
+        "objects": [
+          "bolt_*",
+          "arc_*",
+          "spark_pop*",
+          "road_glow*"
+        ],
+        "frames": [
+          240
+        ]
+      }
+    },
+    "4": {
+      "car-cage": {
+        "objects": [
+          "car_*"
+        ],
+        "frames": [
+          100
+        ]
+      }
+    },
+    "5": {
+      "car-convertible": {
+        "objects": [
+          "car_*"
+        ],
+        "frames": [
+          70
+        ]
+      }
+    },
+    "6": {
+      "bolt-red": {
+        "objects": [
+          "bolt_red*"
+        ],
+        "frames": [
+          105
+        ]
+      }
+    },
+    "7": {
+      "car-closing": {
+        "objects": [
+          "car_*"
+        ],
+        "frames": [
+          400
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "rayo-set",
+  "scene_script_prefix": "rayo",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "¿Qué pasaría si te cae un rayo dentro de un auto? Te salva la carrocería de metal, no la goma. ⚡ Envíaselo a ese amigo que en plena tormenta se baja del auto para correr a su casa.",
+  "gate_stills": {
+    "1": [
+      10,
+      100,
+      190
+    ],
+    "2": [
+      10,
+      40,
+      190
+    ],
+    "3": [
+      10,
+      120,
+      240
+    ],
+    "4": [
+      10,
+      100,
+      185
+    ],
+    "5": [
+      10,
+      70,
+      120
+    ],
+    "6": [
+      10,
+      105,
+      170
+    ],
+    "7": [
+      10,
+      150,
+      400
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "asset_rig",
+    "rayo_rig"
+  ],
+  "support_colours": {
+    "board": "#4B3A5A",
+    "plate": "#2B3441",
+    "reason": "Reused from 019 (measured there against the same coral stage and light-grey heroes); re-measured by this production's gate."
+  },
+  "hero_colours": {
+    "skin": "#E1E6EE"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Qué pasaría si te cae un rayo mientras vas dentro de un auto? Dicen que te salvan los neumáticos de goma.",
+      "target_duration_s": 8,
+      "transformation": "auto en marcha bajo la tormenta → el cielo se carga y parpadea sobre él",
+      "camera": "travelling lateral junto al auto que avanza",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "goma."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿GOMA?",
+          "at_word": "goma.",
+          "offset_s": 0.0,
+          "visible_s": 3.4,
+          "x": 0.74,
+          "y": 0.66
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "golpe",
+      "prompt": "Escena dibujada con código (coral): golpe.",
+      "narration": "El rayo cae sobre el techo, con unos treinta mil amperes. Pero no entra: corre por fuera, por el metal.",
+      "target_duration_s": 8,
+      "transformation": "techo oscuro → el rayo pega y la carrocería entera se enciende por fuera",
+      "camera": "caída en picado siguiendo el rayo hasta el techo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "rayo",
+        "metal."
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "30 000 A",
+          "from": 0,
+          "at_word": "treinta",
+          "offset_s": 0.0,
+          "duration_s": 1.4,
+          "visible_s": 3.6,
+          "x": 0.3,
+          "y": 0.55
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "neumaticos",
+      "prompt": "Escena dibujada con código (coral): neumaticos.",
+      "narration": "¿Y la goma? Ese rayo ya cruzó todo el cielo. Unos centímetros de neumático no lo frenan: salta al suelo igual.",
+      "target_duration_s": 8,
+      "transformation": "neumático en primer plano → el arco salta del aro al suelo pasando por encima de la goma",
+      "camera": "gran retroceso vertical hasta las nubes y descenso rápido a la rueda",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "goma",
+        "frenan:"
+      ],
+      "data_overlays": [
+        {
+          "type": "bracket",
+          "from": [
+            0.2,
+            0.3
+          ],
+          "to": [
+            0.2,
+            0.56
+          ],
+          "at_word": "cielo.",
+          "offset_s": 0.0,
+          "visible_s": 2.2
+        },
+        {
+          "type": "mark",
+          "kind": "x",
+          "text_or_value": "x",
+          "at_word": "frenan:",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.74,
+          "y": 0.66
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "jaula",
+      "prompt": "Escena dibujada con código (coral): jaula.",
+      "narration": "Lo que te protege es la carrocería: una caja de metal que lleva la corriente a su alrededor, como una jaula.",
+      "target_duration_s": 8,
+      "transformation": "carrocería normal → se vuelve una jaula de luz que rodea al conductor",
+      "camera": "órbita completa alrededor del auto",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "carrocería",
+        "jaula."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "JAULA",
+          "at_word": "jaula.",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.76,
+          "y": 0.6
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 5,
+      "name": "sin_techo",
+      "prompt": "Escena dibujada con código (coral): sin_techo.",
+      "narration": "Ahora cambia una sola cosa: un auto descapotable, sin techo de metal.",
+      "target_duration_s": 8,
+      "transformation": "auto con techo → el techo desaparece y el conductor queda al aire",
+      "camera": "subida en grúa sobre el auto mientras se va el techo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "descapotable,",
+        "techo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "SIN TECHO",
+          "at_word": "descapotable,",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.74,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 6,
+      "name": "consecuencia",
+      "prompt": "Escena dibujada con código (coral): consecuencia.",
+      "narration": "El rayo ya no tiene una caja por donde rodearte. El camino más corto pasa por ti.",
+      "target_duration_s": 8,
+      "transformation": "segundo rayo → su camino se vuelve rojo y apunta al asiento del conductor",
+      "camera": "empuje rápido desde arriba hacia el asiento",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "caja",
+        "ti."
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 7,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que, ¿qué pasaría si te cae un rayo dentro de un auto? Con techo de metal, estás a salvo: te salva la caja, no la goma. Envíaselo a ese amigo que en plena tormenta se baja del auto para correr a su casa.",
+      "target_duration_s": 8,
+      "transformation": "descapotable → vuelve el auto con techo y su jaula se enciende alrededor del conductor",
+      "camera": "retroceso amplio hasta el auto bajo la tormenta",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "goma.",
+        "envíaselo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.78,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

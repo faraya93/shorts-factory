@@ -8,7 +8,7 @@ Status: DEVELOPED SCRIPT ON FILE (developed set of the 2026-11-11 creative sessi
   ¿Qué pasaría si te cae un rayo dentro de un auto? Te salva la carrocería de metal, que lleva la corriente por fuera, no los neumáticos.
   En un descapotable, en cambio, esa caja ya no existe. ⚡
   Envíaselo a ese amigo que en plena tormenta se baja del auto para correr a su casa.
-- **Hashtags (description, not title):** #rayos #tormenta #ciencia #shorts
+- **Hashtags (description, not title):** #rayos #quepasaria #tormenta #shorts
 
 ## Script (7 scenes, family whatif, variant fork, 156 words, ~53.8 s at 2.9 w/s; band 45-60 s)
 Hook: ¿Qué pasaría si te cae un rayo mientras vas dentro de un auto? | false belief: Te salvan los neumáticos de goma, porque aíslan el auto del suelo. | turn: Scene 5: the premise changes on the same stage: the roof is gone (a convertible), so the shell can no longer carry the current around the driver. | reframe: Con techo de metal, estás a salvo: te salva la caja, no la goma. | share archetype: ese amigo que en plena tormenta se baja del auto para correr a su casa
@@ -24,7 +24,7 @@ Theme / main tension (TOPIC BALANCE): electricity / dangerous.
    - Transformation: techo oscuro → el rayo pega y la carrocería entera se enciende por fuera; camera: caída en picado siguiendo el rayo hasta el techo
    - Overlay: counter 30 000 A (mono, from 0) at 'treinta'
    - Element: lightning bolt striking a car: route build: branching emissive bolt in the doctrine's energy language, under the open job `electric-arc` brief (state 'full branching bolt'); library alternatives seen in search only: BlenderKit 'Lightning' (a9fab929, RF); risk medium: an unsealed class; a branching bolt above a car at night is an iconic read; aliases (fixed now, before any reading): lightning, lightning bolt, lightning strike, rayo, thunderbolt
-3. **neumaticos** (~7.2 s): ¿Y la goma? Ese rayo ya cruzó kilómetros de aire. Unos centímetros de neumático no lo frenan: salta al suelo igual.
+3. **neumaticos** (~7.2 s): ¿Y la goma? Ese rayo ya cruzó todo el cielo. Unos centímetros de neumático no lo frenan: salta al suelo igual.
    - What changes in the world: Pull-back from a tyre to the whole bolt reaching up into the cloud base (the kilometres it crossed), then back down: an arc leaps from the rim past the rubber to the wet road; the ¿GOMA? tag takes a red X.
    - Transformation: neumático en primer plano → el arco salta del aro al suelo pasando por encima de la goma; camera: gran retroceso vertical hasta las nubes y descenso rápido a la rueda
    - Overlay: bracket 'km' along the bolt at 'kilómetros'
@@ -83,3 +83,36 @@ Routes: Sealed: cartoon-car, human-figure (seated). Builds: road (material), bol
 - `world` cost (trigger: the night environment class predicts over 15 s/frame). Format policy: the design lens moves the production to `stage` (the car on the Coral stage under a dark cloud slab), re-checked against the rotation (019-023 would then hold one `world`).
 
 Unresolved fallbacks: none. Batch: cleared for the 2026-11-11 batch.
+
+## PRODUCTION LOG 2026-11-11 (runner session; the script above is the developed one, changed only as logged here)
+Staging mode: stage. The `world` proposal is not taken: the night environment is unmeasured in cost, "Cadence wins" (format-policy.md), and the Coral stage with an ink storm-cloud slab and a wet road plate keeps the accent (dark teal) readable against a light backdrop, where it would be lost in a dark night sky. Rotation check: 019 cutaway, 020 stage; nothing above three in five. Production notes also record that the hero road/cloud are plates on the stage, not a modelled environment.
+Cost classes: all seven scenes `opaque` (sealed car with its glass left as the asset's own material, accent tubes, ink puffs), predicted 2-4 s/frame, none above 15, no cost_restage. Code: `code3d/lib/rayo_rig.py`, scene scripts `code3d/scenes/rayo_01..07.py`. Support colours reused from 019 (plate #2B3441, board #4B3A5A) and re-measured by the colour gate (PASS every run).
+Rig facts learned (patterns.md): the sealed car's body is one half plus a Mirror modifier (the roof split must copy modifiers); its wheels sit 0.034 m below the root; its body is about 19 units wide in scene units, not the 0.93 m of its dimensions; the driver seats at (+1, -2.6, +5.4) with the car at K=10.
+
+### Sources confirmed or removed at the beat sheet (live search 2026-11-11)
+- "Kilómetros de aire": NOT sourced (NOAA/NSSL pages give 50 m leader steps and about 50 ms, no total channel length). Pre-written rung 3 applied: narration now "Ese rayo ya cruzó todo el cielo." (word count unchanged at 156); the km bracket is now a figure-less bracket at 'cielo.'. 30,000 A stays sourced (NWS).
+
+### Ladder log (every rung logged here and as one row in lens-decisions.md)
+- **Hero cartoon-car (scene 1, hook_still):** sealed asset; production still 60/90/75 PASS (the first launch, with the neutral asset still added from outside the production folder, read 85/85/88 but the record step failed on the path, so that reading is not recorded; the recorded one is the production still alone). Frozen.
+- **Scene 2 bolt (rung 1, three rounds):** frame 120 dive-to-roof 96/85/92 named the car ("car struck by lightning bolt") FAIL; mid-wide at frame 40 with a thicker trunk 88/85/55 (two readers named the car) FAIL; cloud raised to z 96 so the bolt is a tall picture of its own, very wide frame, 85/88/90 PASS (reader 3 still lists the car first, then "a lightning bolt, a storm cloud").
+- **Scene 3 arc (rung 1 twice, rung 2 once):** thin arc at the front tyre, whole car in frame: 92/88/90 "navy blue cartoon car" FAIL; tight on the arc and the road with a glow pool: "purple cartoon car with a teal puddle" 93/92/92 FAIL (rung 1 failed twice, so the step down). Rung 2 (beat rewritten, same narrative job and narration): the camera climbs the bolt to the cloud and returns to a wide frame that holds the whole bolt and the arc leaping from the wheel to the road: 90/90/90 PASS ("sedan car being struck by lightning from a dark storm cloud"). The element's visibility objects are the whole lightning (bolt, arc, spark, pool): the arc alone measured area 0.143 % (< 0.8), the lightning as a whole 53.1 / 2.42 PASS. No bar moved.
+- **Scene 6 red path (rung 1):** top-down push-in 85/85/85 "car with a red zigzag crash mark" FAIL; wide frame (cloud at z 96, red bolt from cloud to the open cabin, push-in after) 85/85/92 PASS.
+- Scene 4 (cage) 95/95/96, scene 5 (convertible; the roof is a split of the sealed mesh and slides away) 93/90/92, scene 1 (car on road) 70/85/88 and scene 7 (declared late: closing frame, aliases fixed before the reading) 90/95/92 all PASS at the first staging. No alias was ever added.
+- Context staging (rung 4) was not needed.
+
+### Gate record
+Colour gate PASS (every run); hero `cartoon-car` frozen; every declared element read and passing; visibility PASS (scene 1 34.4 / 26.1, scene 2 53.0 / 1.9, scene 3 53.1 / 2.4, scene 4 27.4 / 8.3, scene 5 29.8 / 20.6, scene 6 51.7 / 2.2, scene 7 43.0 / 6.4).
+
+## REPORT 2026-11-11 (finish after the queued final)
+- **Render:** chain log `output/chain-020-que-pasaria-si-te-cae-un-rayo-dentro-de-un-auto.log`: START 10:43:26, DONE 11:23:15 (39.8 min wall). No FAILED / INCOMPLETE / Traceback / WARNING. `final.mp4` 53.77 s plus `cover.jpg`. $0 fal spend (code3d). Launched through `tools/queue_final.py`, under caffeinate via the chain.
+- **Estimate vs actual:** all scenes predicted `opaque`, 2-4 s/frame, none above 15; the session's time went to the likeness gate (bolt, arc and red-path rounds), not the render.
+- **Verify:** `tools/verify_production.py` PASS. `publish_package.py build` first refused the hashtags (the whatif family tag #quepasaria was missing); notes now read `#rayos #quepasaria #tormenta #shorts`; build and check then OK. Nothing published.
+- **Dynamism audit (mechanical, from stills and scripts; I cannot watch the video):** each scene stages a change and a travelling camera: road dashes scrolling and a drifting track under a charging cloud (1); a dive down the bolt to the roof as the cage draws in (2); a climb up the bolt to the cloud and back to a wide frame as the arc leaps (3); a full orbit as the cage and current beads appear (4); a crane up as the roof slides away (5); a wide frame as the bolt turns red, then a push-in to the seat (6); the roof returning, strike, cage and a long pull-back (7). Framings vary; no two consecutive scenes share a move and distance.
+- **Not done:** `electric-arc` job report evidence not updated; the two pre-existing test failures were not investigated.
+
+### Flags for the owner's eye (I cannot watch the video)
+1. Staging mode is `stage` (Coral), not the proposed `world`.
+2. The bolt and the arc are thick accent tubes (dark teal), not a glowing bright bolt: by the Coral rules the accent reads by hue and shape. Several readers name the car before the bolt.
+3. Two scenes (2, 3, 6) put the storm cloud far above the car so the bolt is its own picture; scene 1 keeps it close.
+4. The road is a plate on the stage, not a modelled night environment; the driver is the sealed mannequin through the car's glass.
+Asset need: lightning bolt and arc (`electric-arc`). Improvised inside this production as accent tubes with a wide-framing trick; it cost most of the gate session (three rounds on the bolt, three on the arc, two on the red path).
