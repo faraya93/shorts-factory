@@ -80,6 +80,18 @@ The figure was the owner's expected first case. On the rule's evidence the hand 
 2. **`factory/asset_library.py` `new` refuses aliases that blind naming needs.** Its duplicate guard rejected `hand`, `mano`, `fingers` and `dedos` for `hand-articulated`, and `man` for `human-figure` (a substring hit on "human"). Blind naming matches whole words, so a reader's "a hand" cannot pass as those jobs stand. Either the guard changes or the lenses approve adding those aliases to `asset.json` before the first reading. The jobs were opened with what the CLI accepts, and nothing was edited around the guard.
 3. **Optional:** `tools/verify_production.py` caps finals at 75 s. A Historia longer than that needs it raised. `tools/scenes_from_script.py` would need `staging_mode` added if the mode should live in scenes.json.
 
+## Follow-up, same day: code changes made at the owner's instruction
+
+The section above is left as written. Items 1 and 2 were then made in a separate commit:
+
+1. `factory/scenes_schema.py` accepts `story`. Historia can now validate.
+2. **The alias collision was two defects, so it got two fixes.** `man` was a false positive: the guard searched by substring and found it inside "human". The guard now compares whole words. `hand`, `mano`, `fingers` and `dedos` were true overlaps with `human-hand`, which no guard fix should wave through, so sharing is now sanctioned and recorded: `--variant-of <slug>` names the one asset whose names may be shared. A new `aliases` command completes an open job and refuses once a reading exists, which puts "never add an alias to make a guess pass" in code.
+   - Refused: removing the guard (it protects "never solve the same object twice"); hand-editing `asset.json` (no record, no refusal after a reading); re-opening `human-hand` (a new `.blend` would change the hash finished productions depend on).
+
+Item 3 (the verifier's 75 s cap, `staging_mode` in scenes.json) stays optional and unmade.
+
+The committed-batches test failure was the finished batch `2026-11-09-batch-014-016-017.json` still naming 014's pre-archive path. The file moved unchanged to `tools/batches/archive/`, outside the live queue the test checks; 014 stays archived. The failures for 015-017 scene counts and for hard-coded rig colours remain, as instructed for the first and as found for the second.
+
 ## How to revert
 
 Revert the amendment commit. That removes the doctrine edits and the 11 `in_progress` job records together. The produce skill lives outside the repository, so remove its three added sentences by hand.

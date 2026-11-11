@@ -31,6 +31,8 @@ Advance asset, commissioned by the commissioning scan 2026-11-10 (docs/current/r
 
 **Open before the first reading:** Aliases the CLI refused: `hand`, `mano`, `fingers`, `dedos` (its duplicate guard matches `human-hand`). Blind naming matches whole words, so a reader's "a hand" cannot pass until this is resolved. Resolve it before the first reading; see the report.
 
+**Resolved:** `hand`, `mano`, `fingers` and `dedos` added on 2026-11-10 through `asset_library.py aliases --variant-of human-hand`, before any reading.
+
 ## Sources searched (query, result, why taken or refused)
 
 ## Steps and visual checks

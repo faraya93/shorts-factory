@@ -92,8 +92,8 @@ def validate_production(cfg: dict) -> list[str]:
             elif RENDER_COST_CLASSES[k] > COST_RESTAGE_S and not sc.get("cost_restage"):
                 errors.append(f"scene {sc.get('id')}: class {k} is predicted above {COST_RESTAGE_S} s/frame; record the cost restage on paper in cost_restage (playbook) before modelling")
     variant = cfg.get("structure_variant")
-    if variant is not None and variant not in ("chain", "journey", "scale", "fork"):
-        errors.append(f"structure_variant must be chain, journey, scale or fork (docs/current/specs/format-policy.md), got {variant!r}")
+    if variant is not None and variant not in ("chain", "journey", "scale", "fork", "story"):
+        errors.append(f"structure_variant must be chain, journey, scale, fork or story (docs/current/specs/format-policy.md), got {variant!r}")
     route, assets = cfg.get("hero_route"), cfg.get("library_assets")
     if route is not None and route not in ("code-primitive", "asset"):
         errors.append(f"hero_route must be 'code-primitive' or 'asset', got {route!r}")

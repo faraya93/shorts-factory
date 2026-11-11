@@ -2,7 +2,8 @@
 """The factory asset library: every hero object, stored once, reused forever (docs/current/specs/asset-system.md).
 
     .venv/bin/python factory/asset_library.py find <words>                 is this object already solved? (no words: list everything)
-    .venv/bin/python factory/asset_library.py new <slug> --name "..." --alias a --alias b --family objects
+    .venv/bin/python factory/asset_library.py new <slug> --name "..." --alias a --alias b --family objects [--variant-of <slug>]
+    .venv/bin/python factory/asset_library.py aliases <slug> --add a --add b [--variant-of <slug>]     complete an open job's aliases, only before any reading
     .venv/bin/python factory/asset_library.py seal <slug>                  hash the .blend, rewrite the README, validate
     .venv/bin/python factory/asset_library.py check [slug]                 validate one asset or the whole library
     .venv/bin/python factory/asset_library.py blind-pack <still> [...]     copy stills to a neutral folder and print the blind-naming prompt
@@ -100,7 +101,39 @@ def find(words: str = "") -> list[dict]:
     return hits
 
 
-def new(slug: str, name: str, aliases: list[str], family: str) -> Path:
+def _words(text: str) -> set[str]:
+    return set(re.findall(r"[a-z0-9]+", norm(text)))
+
+
+def check_alias_clash(names: list[str], slug: str, variant_of: str | None = None) -> None:
+    """The duplicate guard: refuses a name whose every word is a whole word of another asset's names ("man" is not a word of "human").
+    `variant_of` names the one asset whose names may be shared: a new build of the same object that the original's hash must survive (asset-system.md "Advance assets")."""
+    if variant_of is not None and (variant_of == slug or variant_of not in slugs()):
+        raise SystemExit(f"--variant-of: '{variant_of}' is not another asset in the library")
+    others = {s: read_meta(s) for s in slugs() if s not in (slug, variant_of)}
+    for alias in names:
+        terms = _words(alias)
+        for s, m in others.items():
+            blob = _words(" ".join([m["slug"], m.get("name", "")] + list(m.get("aliases", []))))
+            if terms and terms <= blob:
+                raise SystemExit(f"'{alias}' already matches library asset '{s}' (status {m['status']}): reuse or update it")
+
+
+def add_aliases(slug: str, aliases: list[str], variant_of: str | None = None) -> None:
+    """Complete an open job's aliases. Refused once anyone has read the asset: an alias is never added to make a guess pass."""
+    m = read_meta(slug)
+    if m["status"] != "in_progress" or m["checks"]["blind_naming"]["guesses"]:
+        raise SystemExit(f"{slug}: aliases can only be added to an in_progress asset with no blind reading recorded")
+    variant_of = variant_of or m.get("variant_of")
+    check_alias_clash(aliases, slug, variant_of)
+    if variant_of:
+        m["variant_of"] = variant_of
+    m["aliases"] += [a for a in aliases if a not in m["aliases"]]
+    write_meta(m)
+    write_readme(m)
+
+
+def new(slug: str, name: str, aliases: list[str], family: str, variant_of: str | None = None) -> Path:
     if not SLUG.match(slug):
         raise SystemExit("slug: lowercase ascii words joined by '-', e.g. human-heart")
     if family not in FAMILIES:
@@ -110,9 +143,7 @@ def new(slug: str, name: str, aliases: list[str], family: str) -> Path:
     d = asset_dir(slug)
     if d.exists():
         raise SystemExit(f"{slug} already exists: reuse or update it, never solve the same object twice")
-    for alias in [name] + aliases:
-        for hit in find(alias):
-            raise SystemExit(f"'{alias}' already matches library asset '{hit['slug']}' (status {hit['status']}): reuse or update it")
+    check_alias_clash([name] + aliases, slug, variant_of)
     (d / "job" / "stills").mkdir(parents=True)
     meta = {
         "slug": slug, "name": name, "aliases": aliases, "family": family, "created": date.today().isoformat(), "status": "in_progress",
@@ -126,6 +157,7 @@ def new(slug: str, name: str, aliases: list[str], family: str) -> Path:
         "owner_verdict": "pending",
         "rejected_candidates": [],
         "productions": [],
+        **({"variant_of": variant_of} if variant_of else {}),
     }
     write_meta(meta)
     (d / "job" / "report.md").write_text(
@@ -174,6 +206,8 @@ def validate(slug: str, known_sources: set[str] | None = None) -> tuple[list[str
         e.append(f"{slug}: slug does not match its folder")
     if m.get("status") not in STATUSES:
         e.append(f"{slug}: status must be one of {sorted(STATUSES)}")
+    if m.get("variant_of") and m["variant_of"] not in slugs():
+        e.append(f"{slug}: variant_of '{m['variant_of']}' is not in the library")
     if m.get("route") is not None and m.get("route") not in ROUTES:
         e.append(f"{slug}: route must be one of {sorted(ROUTES)}")
     lic = m.get("licence") or {}
@@ -398,7 +432,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("find"); p.add_argument("words", nargs="*")
-    p = sub.add_parser("new"); p.add_argument("slug"); p.add_argument("--name", required=True); p.add_argument("--alias", action="append", default=[]); p.add_argument("--family", required=True)
+    p = sub.add_parser("new"); p.add_argument("slug"); p.add_argument("--name", required=True); p.add_argument("--alias", action="append", default=[]); p.add_argument("--family", required=True); p.add_argument("--variant-of")
+    p = sub.add_parser("aliases"); p.add_argument("slug"); p.add_argument("--add", action="append", required=True); p.add_argument("--variant-of")
     p = sub.add_parser("seal"); p.add_argument("slug")
     p = sub.add_parser("check"); p.add_argument("slug", nargs="?")
     p = sub.add_parser("blind-pack"); p.add_argument("stills", nargs="+"); p.add_argument("--multi", action="store_true")
@@ -415,7 +450,10 @@ def main() -> int:
         if not hits:
             print("no match in the library: run an asset job (docs/current/specs/asset-system.md)")
     elif a.cmd == "new":
-        print(new(a.slug, a.name, a.alias, a.family))
+        print(new(a.slug, a.name, a.alias, a.family, a.variant_of))
+    elif a.cmd == "aliases":
+        add_aliases(a.slug, a.add, a.variant_of)
+        print(", ".join(read_meta(a.slug)["aliases"]))
     elif a.cmd in ("seal", "check"):
         if a.cmd == "seal":
             seal(a.slug)

@@ -7,7 +7,11 @@
     "gripping hand",
     "hands",
     "fist",
-    "puño"
+    "puño",
+    "hand",
+    "mano",
+    "fingers",
+    "dedos"
   ],
   "family": "body",
   "created": "2026-11-10",
@@ -83,5 +87,6 @@
   },
   "owner_verdict": "pending",
   "rejected_candidates": [],
-  "productions": []
+  "productions": [],
+  "variant_of": "human-hand"
 }

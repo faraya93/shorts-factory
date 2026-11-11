@@ -9,7 +9,7 @@ Generated from `asset.json` by `factory/asset_library.py`; edit `asset.json` and
 - **Attribution required:** none
 - **Date retrieved or built:** 2026-11-10
 - **Productions that used it:** none yet
-- **Reads as:** articulated hand, open hand, gripping hand, hands, fist, puño
+- **Reads as:** articulated hand, open hand, gripping hand, hands, fist, puño, hand, mano, fingers, dedos
 - **Checks:** QA None; blind naming None (no guesses yet); owner verdict pending
 - **Job record:** `job/report.md`; stills in `job/stills/` (local, gitignored)
 

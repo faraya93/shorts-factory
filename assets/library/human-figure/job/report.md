@@ -28,6 +28,8 @@ Advance asset, commissioned by the commissioning scan 2026-11-10 (docs/current/r
 
 **Open before the first reading:** Alias the CLI refused: `man` (a substring hit on `human`). Readers often say "a man". Resolve it before the first reading; see the report.
 
+**Resolved:** `man` added on 2026-11-10 through `asset_library.py aliases`, before any reading, after the guard moved to whole words.
+
 ## Sources searched (query, result, why taken or refused)
 
 ## Steps and visual checks

@@ -65,7 +65,7 @@ A Historia production tells ONE complete real story, beginning to end. It is nev
 - **People.** Real people are shown stylised, never as a likeness. Without a sealed `human-figure` they stay off screen, as the drawability rule requires. No gore, no blood, no real skin texture: a story that needs injury on screen is staged without it or dropped.
 - **Closing.** The standard slot: reframe, then the sentence with "envíaselo".
 
-**Not yet producible.** `factory/scenes_schema.py` accepts only the first four variants, so a `story` production fails validation until that list gains `story`. A session that reaches this stops and reports it. It never labels a Historia as another variant to get past validation.
+**Declare it honestly.** `factory/scenes_schema.py` accepts `story`. A Historia is never labelled as another variant.
 
 ## How standing doctrine applies to the new options
 

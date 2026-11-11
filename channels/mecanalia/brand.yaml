@@ -14,7 +14,7 @@ formats:                               # how a video is made; each format is a m
   default: explainer-short             # the 9:16 "how things work" short (docs/current/specs/reference-format-spec.md)
   available: [explainer-short]
   explainer-short:                     # format policy (lens decision 2026-11-04; docs/current/specs/format-policy.md)
-    structure_variants: [chain, journey, scale, fork, story]   # story (Historia) from production 019; factory/scenes_schema.py does not accept it yet
+    structure_variants: [chain, journey, scale, fork, story]   # story (Historia) from production 019
     staging_modes: [stage, world, cutaway]   # from production 019; the design lens records one per production in notes.md
     staging_mode_max_in_five: 3        # in any five consecutive productions from 019, no single mode more than three times
     scene_range: [4, 10]               # a sanity range, not a target: the mechanism sets the count

@@ -57,6 +57,43 @@ def test_the_same_object_cannot_be_started_twice():
             raise AssertionError(f"{slug} should have been refused")
 
 
+def refused(fn, *args, **kw):
+    try:
+        fn(*args, **kw)
+    except SystemExit:
+        return True
+    return False
+
+
+def test_the_guard_matches_whole_words_only():
+    with sandbox():
+        ready_asset()                                  # names: human-heart, Human heart, heart, corazon
+        al.new("figure", "Figure", ["man"], "body")    # "man" is inside "human", but is not one of its words
+        assert refused(al.new, "heart-3", "Other", ["heart"], "body")
+
+
+def test_a_variant_shares_names_with_its_original_only():
+    with sandbox():
+        ready_asset()
+        al.new("other", "Other thing", ["widget"], "objects")
+        assert refused(al.new, "heart-rig", "Rigged", ["heart"], "body", "no-such-asset")
+        assert refused(al.new, "heart-rig", "Rigged", ["widget"], "body", "human-heart")
+        al.new("heart-rig", "Rigged", ["heart"], "body", "human-heart")
+        assert al.read_meta("heart-rig")["variant_of"] == "human-heart" and errors("heart-rig") == []
+
+
+def test_aliases_complete_an_open_job_only_before_any_reading():
+    with sandbox():
+        s = ready_asset()
+        al.new("heart-rig", "Rigged", ["rigged organ"], "body")
+        assert refused(al.add_aliases, "heart-rig", ["heart"]), "without variant_of the guard still holds"
+        al.add_aliases("heart-rig", ["heart"], s)
+        assert "heart" in al.read_meta("heart-rig")["aliases"] and al.read_meta("heart-rig")["variant_of"] == s
+        assert refused(al.add_aliases, s, ["pump"]), "a ready asset is closed"
+        al.record_blind("heart-rig", ["a pump", "a pump", "a pump"], [80, 80, 80])
+        assert refused(al.add_aliases, "heart-rig", ["pump"]), "an alias is never added to make a guess pass"
+
+
 def test_licence_rule():
     for licence, ok in [({"id": "CC-BY-NC-4.0"}, False), ({"id": "CC-BY-SA-4.0"}, False), ({"id": "unknown"}, False), ({"id": "CC-BY-4.0"}, False),
                         ({"id": "CC-BY-4.0", "attribution": "Model by Ana (CC BY)"}, True), ({"id": "Royalty-Free"}, False),
@@ -304,6 +341,7 @@ def test_schema_checks_the_variant():
     v = scenes_schema.validate_production
     assert any("structure_variant" in e for e in v({"structure_variant": "seven-scenes"}))
     assert not any("structure_variant" in e for e in v({"structure_variant": "journey"}))
+    assert not any("structure_variant" in e for e in v({"structure_variant": "story"})), "Historia, from production 019"
     assert not any("structure_variant" in e for e in v({})), "older productions declare none"
 
 
