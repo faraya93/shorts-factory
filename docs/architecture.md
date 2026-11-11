@@ -79,11 +79,11 @@ graph LR
 ### Multi-lens protocol (one lead per stage; no artefact is approved by a single lens)
 | stage | lead | consulted | note |
 |---|---|---|---|
-| topic | marketing (marketingskills + social-media-skills) | scriptwriter | criterion: maximise expected views on recorded evidence (family proportions are an outcome, never a quota); every proposal passes the curiosity test and the one-line hook test, and a slate stays balanced across tensions and themes (CLAUDE.md "Topic selection", owner 2026-11-07); a modellability failure gets one reshape attempt before rejection (CLAUDE.md "Reshape ladder"); topics are supplied through the standing pool `docs/current/idea-bank.md` (CLAUDE.md "Idea bank"): an Opus session fills it, production sessions only draw from it; design vetoes only on feasibility |
-| script | scriptwriter (yt-* kit, short-form-video-script, hook-writer) | marketing, design | |
-| scene design | design (Tastemaker, design-taste-frontend) | scriptwriter, marketing | composition gate is the mechanical check |
+| topic | marketing (`yt-seo`, `youtube-shorts`, `social-seo`, `thumbnail-design`, `hook-writer`) | scriptwriter | criterion: maximise expected views on recorded evidence (family proportions are an outcome, never a quota); every proposal passes the curiosity test and the one-line hook test, and a slate stays balanced across tensions and themes (CLAUDE.md "Topic selection", owner 2026-11-07); a modellability failure gets one reshape attempt before rejection (CLAUDE.md "Reshape ladder"); topics are supplied through the standing pool `docs/current/idea-bank.md` (CLAUDE.md "Idea bank"): an Opus session fills it, production sessions only draw from it; design vetoes only on feasibility |
+| script | scriptwriter (`yt-script`, `short-form-video-script`, `hook-writer`) | marketing, design | |
+| scene design | design (`tastemaker`, `design-taste-frontend`, and the asset-job skills of the Skill role map) | scriptwriter, marketing | composition gate is the mechanical check |
 | publish package | marketing | | texts come from the channel package (`publish` block) |
-The lenses are the skill packs installed at user level (`~/.claude/skills/`); this repository contains no skills.
+The lenses are the skill packs installed at user level (`~/.claude/skills/`); this repository contains no skills, and only the skills in CLAUDE.md "Project skills" are used.
 Since 2026-11-04 the lenses hold standing authority over creative and technical matters when all involved lenses approve and the decision is logged (CLAUDE.md "Governance"; `docs/current/reports/lens-decisions.md`). Spending, publishing, creating accounts and the final publish/reject verdict stay with the owner.
 
 ### Decisions (ADR summary)

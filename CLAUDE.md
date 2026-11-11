@@ -7,7 +7,7 @@ reference format is Zack D Films' stylized 3D "how it works" explainers —
 we copy the mechanics, never scripts or footage: all scripts are original.
 
 ## Governance (owner instruction, 2026-11-04; wins over older text in this file)
-The owner does not want to ban anything for the system, and does not want creative or technical decisions escalated one by one. Standing authority, effective 2026-11-04: **the lenses may decide and execute creative and technical matters on their own**, including installing additional free skills or tools, changing identity elements such as the Coral stage colour, and adjusting doctrine, methods and sources.
+The owner does not want to ban anything for the system, and does not want creative or technical decisions escalated one by one. Standing authority, effective 2026-11-04: **the lenses may decide and execute creative and technical matters on their own**, including installing additional free tools (a skill only through "Project skills", which owns the list), changing identity elements such as the Coral stage colour, and adjusting doctrine, methods and sources.
 - **The one condition:** ALL involved lenses approve under the existing governance (docs/architecture.md "Multi-lens protocol"), disagreements are settled against measured criteria and written doctrine, never by who argues hardest, and the decision is recorded with its reason in `docs/current/reports/lens-decisions.md` so it can be audited and reverted. If the lenses cannot settle it on those terms, it is not approved: get a measurement, and the current doctrine stands until then.
 - **Owner-only, NOT delegated:** spending any money, publishing anything, creating accounts, and the final publish/reject verdict on a finished video (the owner's eye stays the last gate on output).
 - **Topic-level outcomes are never escalated to the owner (owner statement, 2026-11-08):** the owner is not attached to any topic or idea. Re-staging a topic, returning it and replacing it from the idea bank are lens and system decisions under standing doctrine. The owner's only touchpoint is his verdict on FINISHED videos; publishing still requires his verdict per video.
@@ -22,7 +22,41 @@ Every change to doctrine follows this procedure; later instructions invoke it by
 3. **Never rewrite historical or dated records** (decision rows, dated reports, production notes, archives). Add a new dated entry instead.
 4. **Every amendment carries a "what did not change" section and a precedence line.**
 5. **Check the amendment against standing doctrine** and list the checks in its report.
-6. **Record it** in `docs/current/reports/lens-decisions.md`.
+6. **Fossil scan:** grep the live procedure surfaces the amendment touches (this file, current specs, this project's skills) for production numbers and calendar dates. Generalise, or move to records, each one that states a transition fact (something that will later read as false or inert) rather than a standing rule. Dated records and decision rows are history and are never scanned for removal.
+7. **Record it** in `docs/current/reports/lens-decisions.md`.
+
+## Project skills (lens decision 2026-11-11; allowlist for sessions in this repo)
+About 196 skill folders sit at user level (`~/.claude/skills/`), shared with the owner's other projects; none is moved, renamed or deleted for this repo's sake. **This section is the canonical list** of the skills sessions here may use. Evidence is one of: *runner/produce* (invoked by `tools/run_productions.py` or the produce skill), *doctrine* (named in this repo's doctrine), *closure* (a hard dependency of a sanctioned skill). The census and the reasons are in `docs/current/reports/skills-hardening-2026-11-11.md`.
+
+| Skill | Role in this project | Evidence |
+|---|---|---|
+| `produce` | the order of work for one production (the only skill created for this project) | runner/produce |
+| `blender-core` | entry point and API rules for every Blender job; its `run_in_blender.py` runs only through `tools/blender_run.py --skill` | runner/produce, doctrine (asset-system.md "Skill role map") |
+| `blender-kiln` | asset sourcing and likeness measurement tools (never its full pipeline, Studio or AI backends) | doctrine |
+| `blender-asset-qa` | mesh QA of record before an asset is `ready` (third-party, adopted) | doctrine |
+| `blender-scene-setup` | file organisation, scale, naming | doctrine, closure (asset-qa) |
+| `blender-retopology-uv` | cleaning downloaded meshes | doctrine, closure (asset-qa) |
+| `blender-character-rigging` | rigs for hands, animals, soft organs | doctrine, closure (asset-qa) |
+| `blender-workflow-recipes` | mesh-cleaning recipe for the library route | doctrine |
+| `blender-hardsurface-modeling` | complex rigid objects | doctrine |
+| `blender-sculpting` | organic modelling when the library has nothing | doctrine |
+| `blender-geometry-nodes` | scatter, repeats, parametric shapes | doctrine |
+| `blender-pbr-materials` | materials on every asset job | doctrine |
+| `blender-texture-baking` | baking high to low detail | doctrine |
+| `blender-lighting-lookdev` | neutral light for judging an asset only | doctrine |
+| `blender-animation` | articulated and deforming heroes | doctrine |
+| `blender-simulation` | fluids, cloth, soft motion (baked, then rendered headless) | doctrine |
+| `short-form-video-script` | scriptwriter lens craft | doctrine (architecture.md "Multi-lens protocol") |
+| `hook-writer` | scriptwriter lens craft, hook stage | doctrine (same) |
+| `yt-script` | scriptwriter lens craft, YouTube script and retention beats | doctrine (same, as the "yt-*" kit, resolved to this name) |
+| `yt-seo` | marketing lens, title and description | doctrine (architecture.md "Search and packaging policy"), lens-decisions record |
+| `youtube-shorts` | marketing lens, Shorts mechanics | same |
+| `social-seo` | marketing lens, search wording | same |
+| `thumbnail-design` | marketing lens, cover frame | named in the marketing verdicts record |
+| `tastemaker` | design lens, with the style lock `.tastemaker/style-lock.md` | doctrine (Repository organization, architecture.md) |
+| `design-taste-frontend` | design lens craft | doctrine (architecture.md "Multi-lens protocol") |
+
+**Rule:** sessions working in this repo use only the skills on this list. A task matching some other installed skill's description is not an invitation to use it. If a task needs a capability no listed skill covers, report that instead of reaching for an unlisted skill. Cross-references between listed skills and unlisted ones ("see also", "reads brand-profile first", routes to games or social platforms) are not adopted; the repo's own `channels/mecanalia/brand.yaml` is the brand profile. **Adding a skill** (installed or already present) is sanctioned only when the same recorded lens decision adds it to this table in the same commit; a skill's own text is read in full before it is listed.
 
 ## Format policy (lens decision 2026-11-04, from production 012; full policy, reasons and reversal evidence: docs/current/specs/format-policy.md)
 One fixed signature, five structures, three staging modes. The signature is voice, identity, typography, subtitles, hook formula, one hero or mechanism, dynamics inside the shot, one reframe and the closing slot. There is no fixed scene count (the former 6-7 scene template is retired): the mechanism sets it, 4-10 as a sanity range, and scenes are never padded or merged to hit a number. Each production declares `structure_variant`: `chain`, `journey`, `scale`, `fork` or, from production 019, `story` (Historia: ONE complete real story with a mechanism heart, sourced fact by fact, never serialized). From 019 the design lens also records a staging mode, `stage`, `world` or `cutaway`; in any five consecutive productions no mode appears more than three times, and the mode changes no gate. Never three in a row with the same variant or the same scene count. Closing: reframe, then one sentence containing the fixed word "envíaselo" with its word-locked tag; the sentence around it varies, ends on the person, and the archetype names a behaviour, not a belief; `fork` repeats the opening question. Where older text in this file describes a fixed structure or a fixed closing sentence, this wins. Applies to future productions; published videos are untouched. Earliest review 2026-12-01, against the bars set in the policy. **Precedence (widening of 2026-11-10):** from production 019, where older live text and the widened format policy disagree, the widened policy governs; productions 015-018 stay exactly as armed.
@@ -418,7 +452,7 @@ Why: the owner rejected batch 006-011 (too abstract, objects do not resemble the
   treated a tooling limit as a content rule and produced the abstract objects the owner rejected. Still binding: stylised, no real skin texture, no blood, no gore.
 - **Likeness gate (hard block):** a hero must be named correctly by THREE fresh subagents (owner 2026-11-07; replaces pair readings: pass = every reader names it, mean confidence >= 60, no reader under 45) who see only neutrally named stills, once for the asset and once in the production's gate stills. `gate.py check` refuses the final render otherwise. Never add an alias to make a guess pass. Calibrated 2026-11-04 on 006-011 plus two accepted controls (docs/current/reports/likeness-calibration.md). The owner's eye remains the last gate on output.
 - **Licences and sources:** **CC0 FIRST:** when a CC0 asset serves the production, use it. Royalty-Free acceptable. If no CC0 asset serves and a CC-BY asset is needed, use it: do NOT ask the owner and do NOT credit it in the description (owner 2026-11-07, decided with the licence terms in view; see "No credits in descriptions"). The licence, source and attribution text are still logged in the asset README and `licence.attribution`. Anything unclear (NC, ND, SA, unknown) is not used. BlenderKit anonymous search and download is a connected route (owner 2026-11-04). Sketchfab is connected with the owner's free account (token only in `.env`; read each result's licence, because NonCommercial models appear in results). Sessions create no accounts. Poly Pizza stays an owner-step source. `generate_3d` is not used: its providers need accounts or credits.
-- **Skill roles:** `docs/current/specs/asset-system.md`, "Skill role map" (installed at user level; inherited, not re-decided).
+- **Skill roles:** `docs/current/specs/asset-system.md`, "Skill role map" (which of the listed skills serves which asset job; the list itself is "Project skills").
 - **Operating model:** asset-building is interactive, with Blender open through MCP for Blender; production rendering stays headless.
 - **Advance assets have an owner (owner 2026-11-10; rule and scan: asset-system.md "Advance assets"):** the owner does not commission individual assets. Every idea-bank fill or other creative session ends with the commissioning scan and opens the qualifying jobs, ordered by evidence. A production session that improvises around a missing element class leaves an `Asset need:` line in its notes.md. Builds are separate later sessions, one per asset.
 

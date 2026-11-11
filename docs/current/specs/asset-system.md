@@ -162,12 +162,12 @@ Future sessions inherit this map. Changing it is a lens decision: record it in `
 **Do not use from kiln:** the full `/kiln` CONFIG-to-EXPORT pipeline (it targets GLB export for games, web and AR; the factory stores `.blend`), Kiln Studio (its worker can bill an API key, and its AR link opens to
 the local network; removed from the installed copy, see below), AI backends (`assets/registry.yaml` `excluded`), `/kiln setup` (not run; `gltf-transform` needs Node, which this Mac lacks, and the factory does not need it).
 
-Installing more free skills is within lens authority (CLAUDE.md "Governance"); log it.
+Adding a skill needs a recorded lens decision that also adds it to CLAUDE.md "Project skills" in the same commit; that section owns the list.
 
 **Installed** in `~/.claude/skills/` by folder copy, no installer: 14 skills from `EL4CTEO/blender-skills` (MIT, commit `fb92cfb`, v1.2.0) and kiln from `elithril/blender-kiln` `plugin/` (MIT, commit `e9a4214`, v3.0.0). The kiln copy deliberately omits `.mcp.json`, `.claude-plugin/` and `studio/`: left in place, Claude Code auto-registers them as a `kiln-studio` MCP server. Repeat that removal on any kiln update.
 **Not installed**, because they serve games or conflict with factory rules: `blender-rendering` (factory render profiles), `blender-stylized-npr` (toon look retired), `blender-game-optimization`, `blender-export-pipelines`,
 `blender-environment-kits`, `blender-video-editing`, `blender-time-of-day`, `blender-addon-development`, `blender-pipeline-automation`, `blender-texturing`, `blender-facial-shapekeys`, `blender-clothing`, `blender-hair-grooming`,
-`blender-weather-fx`. `blender-core` and `blender-workflow-recipes` still mention some of these; ignore those routes. If a hero truly needs one (fur: `blender-hair-grooming`), clone the repo to a scratch folder, read the skill, copy the folder over, and add it to this list.
+`blender-weather-fx`. `blender-core` and `blender-workflow-recipes` still mention some of these; ignore those routes. If a hero truly needs one (fur: `blender-hair-grooming`), clone the repo to a scratch folder, read the skill, copy the folder over, and add it to CLAUDE.md "Project skills" under the rule there.
 
 ## Operating model
 
