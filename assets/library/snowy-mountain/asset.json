@@ -1,0 +1,76 @@
+{
+  "slug": "snowy-mountain",
+  "name": "Snowy mountain",
+  "aliases": [
+    "mountain",
+    "snowy mountain",
+    "mountain peak",
+    "peak",
+    "montaña"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "a snow-capped mountain",
+    "seen_at": "a peak the camera climbs past, and a snowy slope under a wreck",
+    "moving_parts": [
+      "peak and slope as separable pieces",
+      "snow cap as its own material"
+    ],
+    "states": [
+      "peak in profile with clouds at its waist",
+      "snowy slope (ground plane) for a world scene"
+    ],
+    "style_notes": "Stylised, chunky rock and snow; not a photoscan (BlenderKit RF terrains are 400-700 MB).",
+    "commission": {
+      "priority": 12,
+      "source": "commissioning scan 2026-11-11 (docs/current/reports/creative-session-2026-11-11.md)",
+      "trigger": "one committed script and one banked entry",
+      "evidence": [
+        "committed script 021 scene 4 (Everest step; the stack climbs past the summit)",
+        "banked rank 35 (Andes: the slope and the snow around the fuselage)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "a terrain photoscan too heavy to render, or a cone primitive"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "snowy-mountain.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

@@ -1,0 +1,263 @@
+{
+  "video": "cuantas-veces-doblar-una-hoja-para-llegar-a-la-luna",
+  "status": "developed script (developed set, 2026-11-11 creative session). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 7 (fill 1), drawn 2026-11-11 for the developed set",
+  "title": "¿Cuántas veces tendrías que doblar una hoja para llegar a la Luna? 🌕",
+  "topic_family": "numbers",
+  "structure_variant": "scale",
+  "staging_mode_proposal": "world: the payoff is height: the stack climbs out of a landscape, past a mountain, through the sky into black space to the Moon; only a modelled world gives the camera something to climb past (reference objects, format policy 'Dynamism')",
+  "curiosity_score": 9,
+  "curiosity_reason": "The 'you can't fold it more than seven times' challenge is a playground classic; enormous; testable on the spot.",
+  "hook_question": "¿Cuántas veces tendrías que doblar una hoja de papel para llegar a la Luna?",
+  "false_belief": "Harían falta miles o millones de dobleces.",
+  "turn": "Scene 7: on paper it takes 42 folds, but in real life nobody has passed 12 (Britney Gallivan, 2002, with a strip more than a kilometre long).",
+  "closing_reframe": "No hacen falta millones de dobleces: cada uno duplica todo lo anterior.",
+  "share_archetype": "ese amigo que, cuando le cuentas esto, saca una hoja para intentarlo",
+  "theme": "paper folding",
+  "main_tension": "enormous",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
+  "library_assets": [
+    "library BlenderKit 'Moon' by Cyberking 42 (4611d12e",
+    "library human-figure",
+    "library terrain (BlenderKit RF mountain terrains"
+  ],
+  "description": "¿Cuántas veces tendrías que doblar una hoja para llegar a la Luna? Solo 42, porque cada doblez duplica el grosor.\nPero en la vida real, nadie ha pasado de 12. 🌕\nEnvíaselo a ese amigo que, cuando le cuentas esto, saca una hoja para intentarlo.",
+  "hashtags": [
+    "#matematicas",
+    "#luna",
+    "#curiosidades",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "Scene 3 (a generic person, the viewer's stand-in): default outfit (skin #D99E7A, shirt #2973CC blue, pants #2E3347 grey, boots #59331A): a lone figure keeps the recurring character.",
+    "Scene 7 (the student, clearly a different person): fig_skin #C68A62, fig_shirt #D9483B red, fig_pants #3A3F5C navy, fig_boots #EDEDED white."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Cuántas veces tendrías que doblar una hoja de papel para llegar a la Luna? Seguro piensas que miles. Son muchísimas menos.",
+      "what_changes": "A single white sheet lies on flat ground at dusk with the Moon low on the horizon; tag ¿MILES? appears; the sheet folds in half once.",
+      "transformation": "hoja extendida en el suelo → se dobla por primera vez",
+      "camera": "empuje bajo desde la Luna en el horizonte hasta la hoja",
+      "overlays_plan": [
+        "tag ¿MILES? at 'miles.'"
+      ],
+      "elements": [
+        {
+          "name": "sheet of paper",
+          "route": "build, geometric (thin white slab with a soft fold)",
+          "risk": "low",
+          "aliases": [
+            "paper",
+            "sheet of paper",
+            "paper sheet",
+            "hoja",
+            "page"
+          ]
+        }
+      ],
+      "est_duration_s": 7.2
+    },
+    {
+      "name": "duplica",
+      "narration": "Una hoja mide una décima de milímetro. Cada vez que la doblas, su grosor se duplica: dos hojas, cuatro, ocho.",
+      "what_changes": "Macro on the edge of the stack: one layer becomes two, four, eight as each fold lands; a counter doubles in step.",
+      "transformation": "una capa → dos → cuatro → ocho capas",
+      "camera": "primer plano lateral del canto que sube con cada doblez",
+      "overlays_plan": [
+        "counter 0,1 mm (mono) at 'décima'",
+        "counter ×2 at 'duplica:'"
+      ],
+      "elements": [
+        {
+          "name": "stack of paper",
+          "route": "build, geometric (layered slabs)",
+          "risk": "low",
+          "aliases": [
+            "paper",
+            "stack of paper",
+            "paper stack",
+            "ream",
+            "papers"
+          ]
+        }
+      ],
+      "est_duration_s": 6.9
+    },
+    {
+      "name": "persona",
+      "narration": "Al doblez catorce, la pila ya es más alta que una persona.",
+      "what_changes": "Pull-back: the stack shoots up to 1.6 m and stands beside a person, who looks up at it.",
+      "transformation": "pila pequeña → pila más alta que una persona",
+      "camera": "retroceso a plano medio junto a la persona",
+      "overlays_plan": [
+        "counter 14 DOBLECES at 'catorce,'",
+        "counter 1,6 m at 'persona.'"
+      ],
+      "elements": [
+        {
+          "name": "person standing beside a stack of paper",
+          "route": "library human-figure, sealed pose standing (lone figure: default outfit)",
+          "risk": "low (sealed standing 85/85/60)",
+          "aliases": [
+            "person",
+            "human figure",
+            "figure",
+            "mannequin",
+            "man",
+            "woman"
+          ]
+        }
+      ],
+      "est_duration_s": 4.1
+    },
+    {
+      "name": "montana",
+      "narration": "Al doblez veintisiete, pasa la cima del Everest, la montaña más alta del mundo.",
+      "what_changes": "The stack keeps growing; the camera climbs alongside it past a snow-capped mountain until the column rises above the summit and the clouds.",
+      "transformation": "pila a ras de suelo → la pila supera la cima nevada",
+      "camera": "subida vertical pegada a la pila, la montaña pasa de lado",
+      "overlays_plan": [
+        "counter 27 at 'veintisiete,'",
+        "counter 13 km at 'cima'"
+      ],
+      "elements": [
+        {
+          "name": "snow-capped mountain",
+          "route": "library terrain (BlenderKit RF mountain terrains, 400-700 MB; judged heavy) or a stylised build: rock peak with a snow cap material",
+          "risk": "medium: a stylised peak is iconic but organic; context = clouds and the stack beside it",
+          "aliases": [
+            "mountain",
+            "mountain peak",
+            "Everest",
+            "peak",
+            "montaña"
+          ]
+        }
+      ],
+      "est_duration_s": 4.8
+    },
+    {
+      "name": "espacio",
+      "narration": "Al doblez treinta y dos, ya está en el espacio, más arriba de donde orbitan los astronautas.",
+      "what_changes": "The sky darkens from blue to black and stars appear while the column keeps climbing; the curve of the horizon falls away below.",
+      "transformation": "cielo azul → cielo negro con estrellas mientras la pila sigue subiendo",
+      "camera": "retroceso lateral amplio que muestra la columna entera atravesando el cielo hasta el negro",
+      "overlays_plan": [
+        "counter 32 at 'treinta'",
+        "counter 430 km at 'espacio,'"
+      ],
+      "elements": [
+        {
+          "name": "paper column rising into space",
+          "route": "stack build + world sky gradient and star field (shader)",
+          "risk": "medium: the column must still read as paper; its layered edge stays in frame",
+          "aliases": [
+            "paper",
+            "stack of paper",
+            "paper stack",
+            "column of paper"
+          ]
+        }
+      ],
+      "est_duration_s": 5.9
+    },
+    {
+      "name": "luna",
+      "narration": "Y al doblez cuarenta y dos, supera los trescientos ochenta mil kilómetros: llega a la Luna.",
+      "what_changes": "The Moon grows in frame as the column's tip reaches it and passes its distance; the camera swings around the Moon to look back down the thin column.",
+      "transformation": "Luna lejana → la punta de la pila llega a la Luna",
+      "camera": "órbita alrededor de la Luna mirando hacia la pila",
+      "overlays_plan": [
+        "counter 42 at 'cuarenta'",
+        "counter 384 400 km at 'kilómetros:'"
+      ],
+      "elements": [
+        {
+          "name": "the Moon",
+          "route": "library BlenderKit 'Moon' by Cyberking 42 (4611d12e, CC0, 50.7 MB; thumbnail not viewable from search, judge at the asset step) or a build: grey sphere with a crater material",
+          "risk": "low-medium: a grey cratered sphere in black space is iconic",
+          "aliases": [
+            "moon",
+            "the moon",
+            "luna",
+            "lunar"
+          ]
+        }
+      ],
+      "est_duration_s": 5.5
+    },
+    {
+      "name": "giro",
+      "narration": "Pero en la vida real, nadie ha pasado de doce. En 2002, una estudiante lo logró con una tira de papel de más de un kilómetro.",
+      "what_changes": "The turn: the column collapses back to the ground; a very long paper strip runs to the horizon and a student, at its end, finishes the twelfth fold of a small thick wad.",
+      "transformation": "columna hasta la Luna → se desploma y queda una tira larguísima doblada doce veces",
+      "camera": "travelling largo a lo largo de la tira hasta la estudiante",
+      "overlays_plan": [
+        "counter 12 at 'doce.'",
+        "chip 2002 at '2002,'",
+        "chip 1,2 km at 'kilómetro.'"
+      ],
+      "elements": [
+        {
+          "name": "person beside a long strip of folded paper",
+          "route": "library human-figure, sealed pose standing (a different person: distinct wardrobe); strip geometric",
+          "risk": "low-medium: the strip must read as paper; the wad is the cue",
+          "aliases": [
+            "person",
+            "human figure",
+            "figure",
+            "mannequin",
+            "woman",
+            "man"
+          ]
+        }
+      ],
+      "est_duration_s": 9.0
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que no hacen falta millones de dobleces: cada uno duplica todo lo anterior. Envíaselo a ese amigo que, cuando le cuentas esto, saca una hoja para intentarlo.",
+      "what_changes": "Single reframe image: one sheet folds once more and the doubling replays as a quick climb from the ground to the Moon in one continuous move.",
+      "transformation": "una hoja → un doblez más y la pila vuelve a subir hasta la Luna",
+      "camera": "subida continua de la hoja a la Luna",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 9.7
+    }
+  ],
+  "sources": [
+    "Paper thickness about 0.1 mm for ordinary office paper (80 g/m2). FLAGGED: cite a paper-standard or manufacturer spec at the beat sheet; the arithmetic below holds for 0.1 mm.",
+    "Arithmetic: 0.1 mm x 2^14 = 1.64 m (taller than a person); 2^26 = 6.7 km < Everest, 2^27 = 13.4 km > Everest; 2^32 = 429.5 km; 2^41 = 219,902 km < Moon, 2^42 = 439,805 km > Moon.",
+    "Everest 8,848.86 m (joint China-Nepal survey, 2020). FLAGGED to cite at the beat sheet (widely published).",
+    "International Space Station orbit about 400-420 km (NASA). FLAGGED to cite at the beat sheet; 2^32 = 430 km clears it.",
+    "Mean Earth-Moon distance 384,400 km (NASA). FLAGGED to cite at the beat sheet; 'supera los trescientos ochenta mil kilómetros' holds.",
+    "Record: Britney Gallivan (USA), a high-school student, folded a single piece of paper in half 12 times, using tissue paper 4,000 ft (1,219 m) long; Guinness World Records 'Most times to fold a piece of paper' (record dated 27 January 2002) and GWR news, 22 October 2025 (live search 2026-11-11). The narration says 'una tira de papel de más de un kilómetro' and does not name the paper type."
+  ],
+  "simplifications": [
+    "Folding is idealised: real paper cannot be folded past about a dozen times, which is the turn.",
+    "The column is drawn as a thin straight tower; it would really be a wad as wide as the last fold allows."
+  ],
+  "narration_words": 154,
+  "est_duration_s": 53.1,
+  "duration_band_s": [
+    50,
+    60
+  ],
+  "flatness_test": [
+    "1. hook: A single white sheet lies on flat ground at dusk with the Moon low on the horizon; tag ¿MILES? appears; the sheet folds in half once.",
+    "2. duplica: Macro on the edge of the stack: one layer becomes two, four, eight as each fold lands; a counter doubles in step.",
+    "3. persona: Pull-back: the stack shoots up to 1.6 m and stands beside a person, who looks up at it.",
+    "4. montana: The stack keeps growing; the camera climbs alongside it past a snow-capped mountain until the column rises above the summit and the clouds.",
+    "5. espacio: The sky darkens from blue to black and stars appear while the column keeps climbing; the curve of the horizon falls away below.",
+    "6. luna: The Moon grows in frame as the column's tip reaches it and passes its distance; the camera swings around the Moon to look back down the thin column.",
+    "7. giro: The turn: the column collapses back to the ground; a very long paper strip runs to the horizon and a student, at its end, finishes the twelfth fold of a small thick wad.",
+    "8. cierre: Single reframe image: one sheet folds once more and the doubling replays as a quick climb from the ground to the Moon in one continuous move."
+  ]
+}

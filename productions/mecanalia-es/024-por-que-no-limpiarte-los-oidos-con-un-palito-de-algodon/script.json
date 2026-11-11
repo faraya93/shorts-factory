@@ -1,0 +1,193 @@
+{
+  "video": "por-que-no-limpiarte-los-oidos-con-un-palito-de-algodon",
+  "status": "developed script (developed set, 2026-11-11 creative session). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 10 (fill 1), drawn 2026-11-11 for the developed set",
+  "title": "¿Por qué no deberías limpiarte los oídos con un palito de algodón? 👂",
+  "topic_family": "body",
+  "structure_variant": "journey",
+  "staging_mode_proposal": "cutaway: the two routes (the wax out, the swab in) both run along the ear canal: a cross-section of the canal in the cream body-family plate shows both journeys",
+  "curiosity_score": 9,
+  "curiosity_reason": "A near-universal habit, with the warning printed on the box; gross and bodily.",
+  "hook_question": "¿Por qué no deberías limpiarte los oídos con un palito de algodón?",
+  "false_belief": "La cera es suciedad y hay que sacarla.",
+  "turn": "Scene 4: pass after pass, the swab packs a plug against the eardrum, and sound stops reaching it.",
+  "closing_reframe": "La cera no es mugre: es una cinta que se limpia sola, y el palito la atasca.",
+  "share_archetype": "ese amigo que se limpia los oídos con un palito apenas sale de la ducha",
+  "theme": "earwax",
+  "main_tension": "gross",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
+  "library_assets": [
+    "library Sketchfab 'Cotton Swab' by amhyde (55e6fe76",
+    "library candidate: Sketchfab 'Ear Anatomy' by brianj.seely (a6a44a28"
+  ],
+  "description": "¿Por qué no deberías limpiarte los oídos con un palito de algodón? Porque la cera sale sola, y el palito la empuja hacia adentro.\nVuelta tras vuelta, arma un tapón contra el tímpano. 👂\nEnvíaselo a ese amigo que se limpia los oídos con un palito apenas sale de la ducha.",
+  "hashtags": [
+    "#oidos",
+    "#cuerpohumano",
+    "#salud",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "No figure on screen."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué no deberías limpiarte los oídos con un palito de algodón? Parece que la cera es mugre que hay que sacar.",
+      "what_changes": "A stylised outer ear with its canal shown in section on the cream plate; amber wax lines the canal near the opening; a cotton swab approaches; tag ¿MUGRE? hangs on the wax.",
+      "transformation": "oído tranquilo con cera → se acerca el palito a sacarla",
+      "camera": "órbita desde la oreja hacia la entrada del conducto",
+      "overlays_plan": [
+        "tag ¿MUGRE? at 'mugre'"
+      ],
+      "elements": [
+        {
+          "name": "ear canal cross-section with wax",
+          "route": "library candidate: Sketchfab 'Ear Anatomy' by brianj.seely (a6a44a28, CC-BY, 48k faces, a section through outer ear, canal and eardrum; thumbnail seen 2026-11-11; textures realistic: retint stylised, no skin texture; check for a brand watermark in the model); wax as an amber waxy material",
+          "risk": "medium: a canal section reads as 'ear anatomy'; the outer ear is the cue",
+          "aliases": [
+            "ear",
+            "ear canal",
+            "ear anatomy",
+            "ear cross-section",
+            "inner ear",
+            "oído",
+            "oreja"
+          ]
+        },
+        {
+          "name": "cotton swab",
+          "route": "library Sketchfab 'Cotton Swab' by amhyde (55e6fe76, CC-BY, 1.5k faces; thumbnail seen) or a geometric build",
+          "risk": "low",
+          "aliases": [
+            "cotton swab",
+            "swab",
+            "q-tip",
+            "cotton bud",
+            "hisopo",
+            "cotonete",
+            "bastoncillo"
+          ]
+        }
+      ],
+      "est_duration_s": 7.6
+    },
+    {
+      "name": "cinta",
+      "narration": "Pero la cera te protege: atrapa el polvo en la entrada, y sale sola, porque la piel del oído crece hacia afuera, como una cinta lenta.",
+      "what_changes": "Push-through into the canal: dust specks drifting in stick to the wax at the entrance; then the canal skin moves outward like a slow conveyor, carrying the wax and the trapped dust to the opening, where it falls away.",
+      "transformation": "polvo que entra → queda pegado en la cera y la piel lo saca hacia afuera",
+      "camera": "travelling a lo largo del conducto, del tímpano hacia la salida",
+      "overlays_plan": [
+        "label CINTA tag with leader at 'cinta'"
+      ],
+      "elements": [
+        {
+          "name": "wax moving out along the ear canal",
+          "route": "ear asset section + wax material on a moving skin layer (UV scroll)",
+          "risk": "medium",
+          "aliases": [
+            "ear",
+            "ear canal",
+            "ear anatomy",
+            "ear cross-section",
+            "earwax",
+            "wax"
+          ]
+        }
+      ],
+      "est_duration_s": 9.0
+    },
+    {
+      "name": "palito",
+      "narration": "Ahora entra el palito. Saca un poco de la orilla, pero empuja el resto hacia adentro, donde la piel ya no lo puede sacar.",
+      "what_changes": "The swab goes in: its cotton tip skims a little wax from the edge and pushes the rest deeper, packing it toward the eardrum against the outward flow.",
+      "transformation": "cera cerca de la salida → el palito la empuja hacia el fondo",
+      "camera": "seguimiento del palito entrando por el conducto",
+      "overlays_plan": [],
+      "elements": [
+        {
+          "name": "cotton swab inside the ear canal",
+          "route": "swab asset/build inside the ear section",
+          "risk": "low-medium: the swab is the cue; the canal is the context",
+          "aliases": [
+            "cotton swab",
+            "swab",
+            "q-tip",
+            "cotton bud",
+            "ear",
+            "hisopo"
+          ]
+        }
+      ],
+      "est_duration_s": 8.3
+    },
+    {
+      "name": "tapon",
+      "narration": "Vuelta tras vuelta, se forma un tapón contra el tímpano. Por eso los médicos piden no meter nada en el oído.",
+      "what_changes": "The turn: repeated swab passes build a dense amber plug pressed against the eardrum; sound rings arriving from outside now hit the plug and stop before the eardrum, which stays dark; the plug takes a red mark.",
+      "transformation": "cera suelta → un tapón compacto contra el tímpano que frena el sonido",
+      "camera": "empuje hasta el tímpano y retroceso cuando rebota el sonido",
+      "overlays_plan": [
+        "mark red X at 'tapón'"
+      ],
+      "elements": [
+        {
+          "name": "earwax plug against the eardrum",
+          "route": "wax material packed as a plug in the ear section; sound as emissive rings (doctrine energy language, as in 018)",
+          "risk": "medium-high: a plug in a canal may read as an abstract blob; the eardrum and canal are the cue",
+          "aliases": [
+            "earwax",
+            "ear wax",
+            "wax plug",
+            "earwax plug",
+            "ear canal",
+            "ear",
+            "blockage",
+            "cerumen"
+          ]
+        }
+      ],
+      "est_duration_s": 7.2
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que la cera no es mugre: es una cinta que se limpia sola, y el palito la atasca. Envíaselo a ese amigo que se limpia los oídos con un palito apenas sale de la ducha.",
+      "what_changes": "Single reframe image: the plug dissolves back into a thin layer and the canal's slow conveyor carries the wax out again on its own, while the swab withdraws.",
+      "transformation": "tapón → la cera vuelve a salir sola por la cinta de piel",
+      "camera": "retroceso desde el conducto hasta la oreja entera",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 12.4
+    }
+  ],
+  "sources": [
+    "Earwax protects the canal (traps dust and debris, lubricates) and the ear is self-cleaning: AAO-HNSF Clinical Practice Guideline (Update): Earwax (Cerumen Impaction), Schwartz et al., Otolaryngol Head Neck Surg 2017;156(1_suppl):S1-S29, and its press release / fact sheet (live search 2026-11-11). FLAGGED: quote the guideline's protective-role sentence at the beat sheet.",
+    "Self-cleaning by epithelial migration outward, helped by jaw movement: ink-dot study, 'Epithelial migration on the external ear canal wall in normal and pathologic ears', Otology & Neurotology 2011;32:504-507 (normal ears 42-205 µm/day); jaw-movement aid per clinician summaries (live search 2026-11-11). No rate is spoken or shown.",
+    "Cotton-tipped swabs push wax deeper and are advised against; not inserting objects is advised: same 2017 guideline (verified via its chair's statements and the guideline summary).",
+    "No number is spoken or rendered in this script."
+  ],
+  "simplifications": [
+    "The canal is a stylised section; wax and the skin's migration are enlarged and sped up.",
+    "Sound is drawn as rings, as in 018; it is invisible."
+  ],
+  "narration_words": 129,
+  "est_duration_s": 44.5,
+  "duration_band_s": [
+    40,
+    50
+  ],
+  "flatness_test": [
+    "1. hook: A stylised outer ear with its canal shown in section on the cream plate; amber wax lines the canal near the opening; a cotton swab approaches; tag ¿MUGRE? hangs on the wax.",
+    "2. cinta: Push-through into the canal: dust specks drifting in stick to the wax at the entrance; then the canal skin moves outward like a slow conveyor, carrying the wax and the trapped dust to the opening, where it falls away.",
+    "3. palito: The swab goes in: its cotton tip skims a little wax from the edge and pushes the rest deeper, packing it toward the eardrum against the outward flow.",
+    "4. tapon: The turn: repeated swab passes build a dense amber plug pressed against the eardrum; sound rings arriving from outside now hit the plug and stop before the eardrum, which stays dark; the plug takes a red mark.",
+    "5. cierre: Single reframe image: the plug dissolves back into a thin layer and the canal's slow conveyor carries the wax out again on its own, while the swab withdraws."
+  ]
+}

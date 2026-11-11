@@ -1,6 +1,6 @@
 {
   "video": "por-que-suenan-los-dedos",
-  "status": "script stage (topic slate 2026-11-07). Not scene-designed, not rendered, not queued, not published.",
+  "status": "script stage, REVIVED 2026-11-11 (revival review; re-checked under the format policy as widened 2026-11-10). Not scene-designed, not rendered, not queued, not published.",
   "primary_engine": "code3d",
   "hero_route": "asset",
   "preset": null,
@@ -16,10 +16,10 @@
   "turn": "Scene 5: the arthritis warning meets a doctor who cracked only one hand for more than fifty years and compared both.",
   "closing_reframe": "No son huesos que chocan: es una burbuja que nace en tu dedo.",
   "share_archetype": "ese amigo que se hace crujir los dedos antes de escribir cada mensaje",
-  "engine_reason": "code3d on the asset route: the hand is library asset 'human-hand' (blind 85/85); the finger bones come from a CC0/CC-BY hand-skeleton asset; the joint capsule, fluid and bubble are simple geometry read through the bones' context.",
+  "engine_reason": "code3d on the asset route: the hand is the sealed library asset 'hand-articulated' in its sealed poses open and crack (2026-11-11); the finger bones come from the CC-BY hand skeleton aligned in the 2026-11-09 pre-check; the joint capsule, fluid and bubble are simple geometry read through the cracking hand's context.",
   "library_assets": [
-    "human-hand",
-    "hand skeleton (to search; 006 scene 2 x-ray hand to check first)",
+    "hand-articulated (sealed poses used: open, crack)",
+    "hand skeleton (Sketchfab Novaky e24e96b6, CC-BY; aligned in the 2026-11-09 pre-check)",
     "wall clock (to search)"
   ],
   "description": "No son tus huesos chocando: al estirar el dedo, la presión cae y el gas del líquido de la articulación forma una burbuja de golpe. Por eso no puedes repetirlo hasta unos veinte minutos después. 😮 Envíaselo a ese amigo que se hace crujir los dedos antes de escribir cada mensaje.",
@@ -33,8 +33,8 @@
     {
       "name": "hook",
       "narration": "¿Por qué te suenan los dedos cuando los haces crujir? Parece que los huesos chocan. Pero ese ruido es una burbuja que nace.",
-      "what_changes": "Contrast: two hands on stage; one finger is pulled and cracks; tags ¿HUESOS? then BURBUJA.",
-      "transformation": "dos manos quietas → un dedo se estira y cruje",
+      "what_changes": "Contrast: two hands on stage; one closes from the open pose into the knuckle-cracking fist (sealed crack pose) and cracks, the other stays open; tags ¿HUESOS? then BURBUJA.",
+      "transformation": "dos manos abiertas → una se cierra en el puño de hacer crujir los dedos y cruje",
       "camera": "órbita baja alrededor de las dos manos",
       "overlays_plan": [
         "tag ¿HUESOS? at 'huesos'",
@@ -43,8 +43,8 @@
       "elements": [
         {
           "name": "hand",
-          "route": "library human-hand",
-          "risk": "low (85/85)"
+          "route": "library hand-articulated, sealed poses open and crack",
+          "risk": "low (sealed: open 95/96/96, crack read as a hand)"
         }
       ],
       "est_duration_s": 7.9
@@ -58,8 +58,8 @@
       "elements": [
         {
           "name": "finger joint cutaway (bones + capsule)",
-          "route": "hand-skeleton asset + capsule geometry, cream cutaway plate",
-          "risk": "medium: cutaways of fingers read 55 in 006; the bones are the context cue, measure early"
+          "route": "hand skeleton asset inside the hand-articulated crack pose (x-ray skin), capsule geometry, cream cutaway plate",
+          "risk": "HIGH, measured: failed the 2026-11-09 pre-check on rungs 1-2 (capsule read as a clip; the bottle won the frame). Next attempt is ladder rung 4, context staging (notes.md, REVIVED section)"
         }
       ],
       "est_duration_s": 6.6
@@ -85,8 +85,8 @@
     {
       "name": "espera",
       "narration": "Por eso no puedes repetirlo enseguida: el gas tarda unos veinte minutos en volver a disolverse.",
-      "what_changes": "The finger is pulled again: no crack; a clock face runs and the bubble shrinks back into the fluid.",
-      "transformation": "segundo tirón sin ruido → la burbuja se encoge mientras corre un reloj",
+      "what_changes": "The fist presses again: no crack; a clock face runs and the bubble shrinks back into the fluid.",
+      "transformation": "segundo apretón sin ruido → la burbuja se encoge mientras corre un reloj",
       "camera": "travelling lateral desde el dedo hasta el reloj",
       "overlays_plan": [
         "counter 20 min (mono, from 0) at 'veinte'"
@@ -113,7 +113,7 @@
       "elements": [
         {
           "name": "two hands, mirrored",
-          "route": "library human-hand mirrored",
+          "route": "library hand-articulated mirrored (left cracks in the crack pose, right stays in the open pose)",
           "risk": "low"
         }
       ],
@@ -122,7 +122,7 @@
     {
       "name": "cierre",
       "narration": "Así que no son huesos que chocan: es una burbuja que nace en tu dedo. Envíaselo a ese amigo que se hace crujir los dedos antes de escribir cada mensaje.",
-      "what_changes": "Single reframe image: the hand closes, and one bubble glows inside each knuckle as all five crack in sequence.",
+      "what_changes": "Single reframe image: the open hand closes into the cracking fist, and one bubble glows inside each knuckle as the knuckles crack in sequence.",
       "transformation": "mano abierta → los cinco nudillos crujen en fila y en cada uno se enciende una burbuja",
       "camera": "retroceso desde un nudillo hasta la mano entera",
       "overlays_plan": [
@@ -149,11 +149,12 @@
     50
   ],
   "flatness_test": [
-    "1. hook: Contrast: two hands on stage; one finger is pulled and cracks; tags ¿HUESOS? then BURBUJA.",
+    "1. hook: Contrast: two hands; one closes into the cracking fist and cracks; tags ¿HUESOS? then BURBUJA.",
     "2. capsula: Push-through: the skin goes x-ray, the knuckle opens into a cutaway: two bones, a sealed capsule, fluid with faint dissolved gas.",
     "3. chasquido: The bones pull apart, the capsule stretches, and a bubble snaps into existence with the crack; an MRI-style frame flashes the same moment.",
-    "4. espera: The finger is pulled again: no crack; a clock face runs and the bubble shrinks back into the fluid.",
+    "4. espera: The fist presses again: no crack; a clock face runs and the bubble shrinks back into the fluid.",
     "5. giro: The turn, a named-person micro-scene: left hand cracks, right hand never; years tick by; the two x-rays slide side by side, both clean.",
-    "6. cierre: Single reframe image: the hand closes, and one bubble glows inside each knuckle as all five crack in sequence."
-  ]
+    "6. cierre: Single reframe image: the hand closes into the cracking fist, a bubble glows inside each knuckle as they crack in sequence."
+  ],
+  "staging_mode_proposal": "cutaway: the x-ray knuckle inside the whole hand is the video's centre; the design lens confirms it at the beat sheet against the rotation"
 }

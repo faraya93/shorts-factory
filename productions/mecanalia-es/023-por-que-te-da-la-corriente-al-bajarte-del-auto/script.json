@@ -1,0 +1,204 @@
+{
+  "video": "por-que-te-da-la-corriente-al-bajarte-del-auto",
+  "status": "developed script (developed set, 2026-11-11 creative session). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 9 (fill 1), drawn 2026-11-11 for the developed set",
+  "title": "¿Por qué te da la corriente cuando te bajas del auto? ⚡",
+  "topic_family": "objects",
+  "structure_variant": "chain",
+  "staging_mode_proposal": "stage: a person, a car seat, a car and a fuel pump are each read best on the clean Coral stage; the charge glow on the figure needs a calm background; it also keeps the rotation (019-023 would otherwise hold three cutaways or three worlds)",
+  "curiosity_score": 9,
+  "curiosity_reason": "A common, startling daily experience; testable today.",
+  "hook_question": "¿Por qué te da la corriente cuando te bajas del auto?",
+  "false_belief": "El auto acumula electricidad y te la pasa.",
+  "turn": "Scene 5: that same spark, not the phone, is the real hazard at a filling station (PEI).",
+  "closing_reframe": "El auto no te da la corriente: se la das tú a él.",
+  "share_archetype": "ese amigo que cierra la puerta del auto con el codo para que no le dé la corriente",
+  "theme": "electricity",
+  "main_tension": "hidden",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
+  "library_assets": [
+    "library hand-articulated",
+    "library human-figure",
+    "library human-figure (standing"
+  ],
+  "description": "¿Por qué te da la corriente cuando te bajas del auto? Porque al deslizarte por el asiento te cargas tú, y la carga salta cuando tocas el metal.\nEsa misma chispa, y no el celular, es la que preocupa en una estación de servicio. ⚡\nEnvíaselo a ese amigo que cierra la puerta del auto con el codo para que no le dé la corriente.",
+  "hashtags": [
+    "#electricidad",
+    "#autos",
+    "#ciencia",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "One person throughout (the viewer, the same person in every scene): default outfit (skin #D99E7A, shirt #2973CC blue, pants #2E3347 grey, boots #59331A): a lone figure keeps the recurring character."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué te da la corriente cuando te bajas del auto? Parece que el auto está cargado y te la pasa. Pero la carga la llevas tú.",
+      "what_changes": "Contrast, two actors: a person beside a closed car reaches for the door; a spark snaps between hand and door; the tag ¿EL AUTO? hangs over the car, then TÚ lights over the person, whose body glows faintly.",
+      "transformation": "persona junto al auto → la mano se acerca y salta la chispa; la etiqueta pasa del auto a la persona",
+      "camera": "órbita baja entre el auto y la persona",
+      "overlays_plan": [
+        "tag ¿EL AUTO? at 'auto'",
+        "tag TÚ at 'tú.'"
+      ],
+      "elements": [
+        {
+          "name": "person beside a car",
+          "route": "library human-figure (standing, sealed) + cartoon-car (sealed)",
+          "risk": "low",
+          "aliases": [
+            "person",
+            "human figure",
+            "figure",
+            "mannequin",
+            "man",
+            "woman",
+            "car"
+          ]
+        }
+      ],
+      "est_duration_s": 9.3
+    },
+    {
+      "name": "asiento",
+      "narration": "Al bajarte, tu ropa se frota contra el asiento y se despegan. Ese roce te roba cargas: el asiento queda con unas y tú con otras.",
+      "what_changes": "The person rises from a car seat (seated to standing); where clothes and seat part, the accent glow builds over the body while a faint opposite glow stays on the seat.",
+      "transformation": "sentado en el asiento → se levanta y el cuerpo se carga de luz al despegarse",
+      "camera": "travelling lateral bajo, siguiendo al cuerpo al levantarse",
+      "overlays_plan": [],
+      "elements": [
+        {
+          "name": "person getting up from a car seat",
+          "route": "library human-figure, sealed poses seated then standing; car seat from the library (BlenderKit 'Generic Car Seat PL', 823261c4, RF, search result only) or the open job `car-interior`",
+          "risk": "medium: the in-between frames are interpolation; the gate reads the sealed key poses; the seat must read as a CAR seat",
+          "aliases": [
+            "person",
+            "human figure",
+            "figure",
+            "mannequin",
+            "car seat",
+            "seat"
+          ]
+        }
+      ],
+      "est_duration_s": 9.0
+    },
+    {
+      "name": "voltaje",
+      "narration": "Así, tu cuerpo puede llegar a miles de voltios. Ni lo sientes, mientras no toques nada.",
+      "what_changes": "The person walks away from the seat toward the car; the glow on the body keeps climbing step by step while nothing happens.",
+      "transformation": "cuerpo apenas cargado → camina y la carga sube con cada paso",
+      "camera": "seguimiento de frente que retrocede delante de la persona",
+      "overlays_plan": [
+        "counter 3 000+ V (mono, from 0) at 'miles'"
+      ],
+      "elements": [
+        {
+          "name": "person walking, glowing with charge",
+          "route": "library human-figure, sealed pose walking, emissive overlay",
+          "risk": "low (sealed walking 92/90/85)",
+          "aliases": [
+            "person",
+            "human figure",
+            "figure",
+            "mannequin",
+            "man",
+            "woman"
+          ]
+        }
+      ],
+      "est_duration_s": 5.5
+    },
+    {
+      "name": "chispa",
+      "narration": "Cuando tu mano se acerca a la puerta de metal, toda esa carga salta de golpe por el aire: esa es la chispa.",
+      "what_changes": "Close-up: the hand nears the car door; at a finger's width a spark jumps from the fingertip to the door, and the glow drains out of the body at once.",
+      "transformation": "mano cargada cerca de la puerta → salta la chispa y el cuerpo se apaga",
+      "camera": "empuje lento hacia la mano que se acerca a la puerta",
+      "overlays_plan": [
+        "ring dotted at the gap at 'chispa.'"
+      ],
+      "elements": [
+        {
+          "name": "hand touching a car door with a spark",
+          "route": "library hand-articulated, sealed pose door; door of the sealed cartoon-car; spark under the open job `electric-arc` brief (state 'single spark')",
+          "risk": "medium: the spark is an unsealed class; the hand and the door are the context",
+          "aliases": [
+            "spark",
+            "static spark",
+            "electric spark",
+            "static electricity",
+            "chispa"
+          ]
+        }
+      ],
+      "est_duration_s": 7.9
+    },
+    {
+      "name": "giro",
+      "narration": "Esa misma chispa es la que de verdad preocupa en una estación de servicio, no el celular. Por eso piden no volver a subirte al auto mientras cargas combustible.",
+      "what_changes": "The turn: the person, at a fuel pump with the nozzle in the car, gets back in and out of the car; the glow builds again, and as the hand returns to the nozzle a small spark jumps; the beat stops at the spark (no fire).",
+      "transformation": "persona en el surtidor → se sube y se baja del auto y la chispa salta en la manguera",
+      "camera": "travelling desde el surtidor hasta la mano en la pistola",
+      "overlays_plan": [
+        "tag ¡NO EL CELULAR! at 'celular.'"
+      ],
+      "elements": [
+        {
+          "name": "fuel pump with the nozzle in a car",
+          "route": "build: fuel dispenser (box, hose, nozzle; geometric) beside the sealed cartoon-car; person human-figure standing",
+          "risk": "medium-high: no library pump searched; a dispenser box must read as a FUEL pump (hose and nozzle are the cue)",
+          "aliases": [
+            "fuel pump",
+            "gas pump",
+            "petrol pump",
+            "gas station",
+            "fuel dispenser",
+            "gasoline pump"
+          ]
+        }
+      ],
+      "est_duration_s": 10.0
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que el auto no te da la corriente: se la das tú a él. Envíaselo a ese amigo que cierra la puerta del auto con el codo para que no le dé la corriente.",
+      "what_changes": "Single reframe image: the person glows, touches the door, and the charge visibly flows from the person INTO the car, which flickers once and goes dark.",
+      "transformation": "persona cargada → la carga pasa de la persona al auto",
+      "camera": "retroceso desde la mano hasta la persona y el auto enteros",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 12.1
+    }
+  ],
+  "sources": [
+    "Mechanism: sliding off the seat separates charge between clothing and upholstery; the person carries the charge away; the car is usually not the charged body; touching metal discharges the person: Car Talk community, caraudio.com and electricvehicleforums explainers (informal) and Motor magazine 2000 ESD article (motor.com/magazine/pdfs/072000_07.pdf) (live search 2026-11-11). FLAGGED: add an electrostatics reference at the beat sheet.",
+    "'Miles de voltios' and the 3,000 V counter: a shock is felt from about 3,000 V (Motor magazine 2000, about 3,000 V; Mike Holt forum 3,000-3,500 V); body voltages after leaving a car of 7,000-21,000 V by fabric were reported in a 1998 UK study cited by a dealership article (FLAGGED: secondary; find the study or keep only '3 000+ V').",
+    "Filling stations: static electricity can ignite fuel vapours at the pump; PEI has documented no incident caused by a mobile phone; documented static fires are mostly linked to re-entering the vehicle during refuelling; PEI advises never re-entering the vehicle while refuelling: Petroleum Equipment Institute 'Stop Static' pages (pei.org) and archived PEI-derived guidance (live search 2026-11-11)."
+  ],
+  "simplifications": [
+    "Charge is drawn as a glow on the body; static charge is invisible.",
+    "The filling-station beat stops at the spark: no fire is shown."
+  ],
+  "narration_words": 156,
+  "est_duration_s": 53.8,
+  "duration_band_s": [
+    45,
+    60
+  ],
+  "flatness_test": [
+    "1. hook: Contrast, two actors: a person beside a closed car reaches for the door; a spark snaps between hand and door; the tag ¿EL AUTO? hangs over the car, then TÚ lights over the person, whose body glows faintly.",
+    "2. asiento: The person rises from a car seat (seated to standing); where clothes and seat part, the accent glow builds over the body while a faint opposite glow stays on the seat.",
+    "3. voltaje: The person walks away from the seat toward the car; the glow on the body keeps climbing step by step while nothing happens.",
+    "4. chispa: Close-up: the hand nears the car door; at a finger's width a spark jumps from the fingertip to the door, and the glow drains out of the body at once.",
+    "5. giro: The turn: the person, at a fuel pump with the nozzle in the car, gets back in and out of the car; the glow builds again, and as the hand returns to the nozzle a small spark jumps; the beat stops at the spark (no fire).",
+    "6. cierre: Single reframe image: the person glows, touches the door, and the charge visibly flows from the person INTO the car, which flickers once and goes dark."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "slug": "sea-surface",
+  "name": "Sea surface",
+  "aliases": [
+    "sea",
+    "waves",
+    "sea surface",
+    "mar"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "the surface of the sea (or a river), clearly water",
+    "seen_at": "from a close wave to a horizon, and from above",
+    "moving_parts": [
+      "displacement and shading controls for calm to rough",
+      "foam line control"
+    ],
+    "states": [
+      "calm open sea at night and day",
+      "river surface",
+      "shore break seen from above"
+    ],
+    "style_notes": "A physically based water material and surface; check the transmission cost against the render-cost playbook. Distinct from `water-droplets` (drops).",
+    "commission": {
+      "priority": 15,
+      "source": "commissioning scan 2026-11-11 (docs/current/reports/creative-session-2026-11-11.md)",
+      "trigger": "one banked entry and three reserve entries",
+      "evidence": [
+        "banked rank 31 (Titanic at sea)",
+        "reserve 8 (Hudson: the river ditching)",
+        "reserve 11 (rip currents: the shore from above)",
+        "reserve 14 (steel ships: displaced water)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "a flat blue plane"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "sea-surface.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

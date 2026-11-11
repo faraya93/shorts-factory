@@ -1,0 +1,220 @@
+{
+  "video": "por-que-nadie-puede-abrir-la-puerta-de-un-avion-en-pleno-vuelo",
+  "status": "developed script (developed set, 2026-11-11 creative session). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 2 (fill 1), drawn 2026-11-11 for the developed set",
+  "title": "¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? ✈️",
+  "topic_family": "objects",
+  "structure_variant": "chain",
+  "staging_mode_proposal": "cutaway: the mechanism is a plug door seen in a fuselage section, from above and from inside; a cutaway of the cabin wall carries every step, and the sky only needs to show through the windows",
+  "curiosity_score": 10,
+  "curiosity_reason": "The 'someone opens the door' fear rides on every flight and keeps making the news; dangerous.",
+  "hook_question": "¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo?",
+  "false_belief": "La puerta va trabada con llave y solo la tripulación puede abrirla.",
+  "turn": "Scene 5: the same push that seals the door blew out a door-plug panel whose four bolts were missing (Alaska Airlines 1282, 2024).",
+  "closing_reframe": "La puerta de un avión no la cierra una llave: la cierra el aire de adentro.",
+  "share_archetype": "ese amigo que siempre pide el asiento junto a la salida de emergencia",
+  "theme": "cabin pressure",
+  "main_tension": "dangerous",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
+  "library_assets": [
+    "airliner class: open job `airliner` (exterior) built under its brief by the production (asset-system (g)) or the CC0/CC-BY library candidates above",
+    "build: plug door",
+    "library cartoon-car (sealed",
+    "library hand-articulated"
+  ],
+  "description": "¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? Porque el aire a presión de la cabina la aprieta contra su marco con unas siete toneladas.\nY esa misma fuerza, en 2024, le arrancó a un avión un panel al que le faltaban sus cuatro pernos. ✈️\nEnvíaselo a ese amigo que siempre pide el asiento junto a la salida de emergencia.",
+  "hashtags": [
+    "#avion",
+    "#aviones",
+    "#ciencia",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "Scene 3 passengers (four figures, clearly different people; recolour slots fig_skin / fig_shirt / fig_pants / fig_boots): P1 #D99E7A / #2973CC / #2E3347 / #59331A (the default outfit); P2 #8D5A3B / #C8553D terracotta / #3B4A3A olive / #2A2A2A; P3 #F0C8A8 / #E8B931 mustard / #5A5F6B slate / #6B4A2B; P4 #B07A55 / #3E8E6E green / #22252E / #4A2E1C.",
+    "Scene 5: two or three seated passengers further along the row reuse P2-P4; the two seats beside the panel stay empty (true to the event).",
+    "The design lens may shift any slot value to clear the composition gate, keeping the four combinations distinct."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué nadie puede abrir la puerta de un avión en pleno vuelo? Parece que va cerrada con llave. Pero no hay ninguna llave.",
+      "what_changes": "Contrast, two actors on one stage: two identical fuselage sections side by side, one on the ground (bright apron light in its windows), one in flight (dark-blue sky in its windows). The same hand grips the door handle of each: the ground door swings open, the flight door does not move; tag ¿LLAVE? appears, then takes a red X.",
+      "transformation": "dos puertas cerradas → la del suelo se abre, la del vuelo no se mueve",
+      "camera": "órbita baja desde la puerta en tierra hasta la puerta en vuelo",
+      "overlays_plan": [
+        "tag ¿LLAVE? at 'llave.'",
+        "mark red X on ¿LLAVE? at 'ninguna'"
+      ],
+      "elements": [
+        {
+          "name": "airplane door in a fuselage section",
+          "route": "build: plug door, frame and curved fuselage section with oval windows (geometric); exterior and cabin context from the airliner class (open job `airliner`; library candidates: Sketchfab CC0 Boeing 737-200 by mgg8 e3224d0a, CC-BY Airbus A320 by Kyaie 757aa190)",
+          "risk": "medium: a door in a curved wall must read as an AIRPLANE door; the oval windows are the context cue",
+          "aliases": [
+            "airplane door",
+            "aircraft door",
+            "plane door",
+            "cabin door"
+          ]
+        },
+        {
+          "name": "hand",
+          "route": "library hand-articulated, sealed pose lever",
+          "risk": "low (sealed lever 92/92/85)",
+          "aliases": [
+            "hand",
+            "mano"
+          ]
+        }
+      ],
+      "est_duration_s": 8.3
+    },
+    {
+      "name": "tapon",
+      "narration": "La puerta es más grande que su hueco. Para salir, primero tiene que moverse hacia adentro, como un tapón.",
+      "what_changes": "Push-through into a top-down cutaway of the door in its frame: the door is wider than the opening, its edge stops overlap the frame stops (both light in the accent); the door slides inward, turns, and only then swings out through the hole.",
+      "transformation": "puerta encajada en el marco → se mete hacia adentro, gira y recién sale",
+      "camera": "empuje a través del fuselaje hasta una vista cenital del marco",
+      "overlays_plan": [
+        "bracket over the overlap at 'grande'"
+      ],
+      "elements": [
+        {
+          "name": "plug door in its frame (top-down cutaway)",
+          "route": "build, geometric: door slab with edge stops, frame with matching stops",
+          "risk": "medium: a top-down section can read as a plain hinge; the curved fuselage wall stays in frame as the cue",
+          "aliases": [
+            "airplane door",
+            "aircraft door",
+            "plane door",
+            "cabin door",
+            "door"
+          ]
+        }
+      ],
+      "est_duration_s": 6.6
+    },
+    {
+      "name": "presion",
+      "narration": "En vuelo, la cabina se llena de aire a presión, para que puedas respirar. Afuera, el aire es mucho más delgado.",
+      "what_changes": "The fuselage section climbs into a dark sky; inside, warm accent air streams from the vents and packs the cabin around four seated passengers, while outside the sparse air thins out as the section rises.",
+      "transformation": "cabina con aire normal → cabina repleta de aire y afuera aire cada vez más ralo",
+      "camera": "travelling lateral a lo largo de la fila de asientos, saliendo por la ventana",
+      "overlays_plan": [],
+      "elements": [
+        {
+          "name": "airplane cabin with seated passengers",
+          "route": "build: seat rows (geometric) + human-figure, sealed pose seated, four passengers with distinct wardrobes (staging notes); cabin wall from the door build",
+          "risk": "medium: rows of seats plus oval windows are the cabin cue; seated figure is sealed (85/80/72)",
+          "aliases": [
+            "airplane cabin",
+            "aircraft cabin",
+            "plane cabin",
+            "airplane interior",
+            "airplane",
+            "aircraft",
+            "plane",
+            "airliner"
+          ]
+        }
+      ],
+      "est_duration_s": 7.2
+    },
+    {
+      "name": "empuje",
+      "narration": "Ese aire empuja la puerta hacia afuera, contra su marco, con unas siete toneladas: como cinco autos encima.",
+      "what_changes": "Escalation as movement: the door is pressed outward into its stops by the accent air; beside it the push is made physical: five cars drop one by one onto the door's outline laid flat, and the camera pulls back to take in the stack.",
+      "transformation": "una puerta apretada por el aire → cinco autos apilados sobre ella, uno por uno",
+      "camera": "retroceso y subida a medida que cae cada auto",
+      "overlays_plan": [
+        "counter ≈7 t (mono, from 0) at 'siete'",
+        "chip ×5 at 'cinco'"
+      ],
+      "elements": [
+        {
+          "name": "cars stacked on the door",
+          "route": "library cartoon-car (sealed, static), five instances",
+          "risk": "low (sealed sedan)",
+          "aliases": [
+            "car",
+            "cars",
+            "sedan",
+            "automobile",
+            "auto"
+          ]
+        }
+      ],
+      "est_duration_s": 6.2
+    },
+    {
+      "name": "giro",
+      "narration": "Y cuando esa fuerza no está bien sujeta, gana. En 2024, a un avión se le soltó en pleno vuelo un panel tapón: le faltaban los cuatro pernos que lo trababan.",
+      "what_changes": "The turn: wide exterior of the fuselage in the sky; a door-plug panel aft of the wing, with its four bolt points empty (red), creeps up off its stops and blows outward; the cabin air rushes after it; the two seats beside the hole are empty while passengers sit further along the row.",
+      "transformation": "panel en su sitio sin pernos → sube, se suelta y sale volando",
+      "camera": "seguimiento exterior a lo largo del fuselaje, de la cola hacia el panel",
+      "overlays_plan": [
+        "chip 2024 at '2024,'",
+        "chip 0/4 PERNOS at 'pernos'"
+      ],
+      "elements": [
+        {
+          "name": "airliner with a blown-out side panel",
+          "route": "airliner class: open job `airliner` (exterior) built under its brief by the production (asset-system (g)) or the CC0/CC-BY library candidates above; panel and bolt points are geometric",
+          "risk": "medium-high: the airliner exterior is an unsealed class; written fallbacks below",
+          "aliases": [
+            "airplane",
+            "aircraft",
+            "plane",
+            "airliner",
+            "jet",
+            "fuselage"
+          ]
+        }
+      ],
+      "est_duration_s": 10.7
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que la puerta de un avión no la cierra una llave: la cierra el aire de adentro. Envíaselo a ese amigo que siempre pide el asiento junto a la salida de emergencia.",
+      "what_changes": "Single reframe image: back inside, the door glows held in its frame by the packed accent air while the hand rests on the handle, doing nothing; pull-back to the whole section in the sky.",
+      "transformation": "mano en la manilla → la puerta queda sellada solo por el aire, que brilla alrededor",
+      "camera": "retroceso desde la manilla hasta la sección entera del fuselaje",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 11.4
+    }
+  ],
+  "sources": [
+    "Plug-type passenger doors are larger than their opening; cabin pressure presses them into the frame, and opening needs an inward move first: TravelPulse 'Why an airplane door won't open in mid-flight'; Business Insider 2020 (same explanation); A320 door description (plug-type, opening upward, outward and forward). FLAGGED: confirm against a manufacturer or regulator text at the beat sheet.",
+    "Cabin pressurisation exists so occupants can breathe at cruise altitude: SKYbrary 'Aircraft Pressurisation Systems'.",
+    "Differential pressure: Boeing 737 MAX FCOM schedule, 7.45 psid at or below 28,000 ft, 7.80 psid from 28,000 to 37,000 ft, 8.35 psid above 37,000 ft (live search 2026-11-11). 7.45 psid = 51.4 kPa.",
+    "Door area about 0.8 m x 1.8 m = 1.44 m2 (FLAGGED: confirm in Boeing 737 ACAP 'Door clearances, forward main entry door' or Airbus A320 Aircraft Characteristics 'Forward passenger/crew doors'). Arithmetic: 51.4 kPa x 1.44 m2 = 74 kN = about 7.5 t-force (8.35 psid gives about 8.5 t). Narration says 'unas siete toneladas', the low end. If the area cannot be sourced, rung 3 below removes the number.",
+    "Five cars: 7.5 t / about 1.4-1.5 t per mid-size car = 5. FLAGGED: source one common sedan's kerb weight at the beat sheet.",
+    "Turn: Alaska Airlines flight 1282, 5 January 2024, Boeing 737-9: the left mid-exit door plug separated about six minutes after take-off from Portland; the four bolts that secure it were missing when the aircraft left the factory (NTSB final report, press release NR20250624, 24 June 2025; AvWeb and Airline Geeks coverage, July 2025). The two seats beside the plug were unoccupied (widely reported; FLAGGED to confirm in the NTSB report before staging empty seats)."
+  ],
+  "simplifications": [
+    "The door's stops are drawn larger than real for legibility.",
+    "Air under pressure is drawn as glowing accent air; real air is invisible.",
+    "The 'panel tapón' is a plug fitted where an optional emergency exit can go, not a passenger door; the narration calls it a panel, not a door."
+  ],
+  "narration_words": 146,
+  "est_duration_s": 50.3,
+  "duration_band_s": [
+    45,
+    60
+  ],
+  "flatness_test": [
+    "1. hook: Contrast, two actors on one stage: two identical fuselage sections side by side, one on the ground (bright apron light in its windows), one in flight (dark-blue sky in its windows). The same hand grips the door handle of each: the ground door swings open, the flight door does not move; tag ¿LLAVE? appears, then takes a red X.",
+    "2. tapon: Push-through into a top-down cutaway of the door in its frame: the door is wider than the opening, its edge stops overlap the frame stops (both light in the accent); the door slides inward, turns, and only then swings out through the hole.",
+    "3. presion: The fuselage section climbs into a dark sky; inside, warm accent air streams from the vents and packs the cabin around four seated passengers, while outside the sparse air thins out as the section rises.",
+    "4. empuje: Escalation as movement: the door is pressed outward into its stops by the accent air; beside it the push is made physical: five cars drop one by one onto the door's outline laid flat, and the camera pulls back to take in the stack.",
+    "5. giro: The turn: wide exterior of the fuselage in the sky; a door-plug panel aft of the wing, with its four bolt points empty (red), creeps up off its stops and blows outward; the cabin air rushes after it; the two seats beside the hole are empty while passengers sit further along the row.",
+    "6. cierre: Single reframe image: back inside, the door glows held in its frame by the packed accent air while the hand rests on the handle, doing nothing; pull-back to the whole section in the sky."
+  ]
+}

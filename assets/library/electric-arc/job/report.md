@@ -30,3 +30,10 @@ Advance asset, commissioned by the commissioning scan 2026-11-10 (docs/current/r
 ## Checks (QA, blind naming, fidelity)
 
 ## Wall time, spend ($0 expected), anything skipped
+
+## Evidence added by the commissioning scan 2026-11-11
+
+The job stays open; asset.json is unchanged (the brief's states are completed by the build session where noted). New demand since 2026-11-10:
+- committed script 020 (scenes 2, 3, 6: full branching bolt; arc from wheel to road)
+- committed script 022 (scene 4: small arcs between fork tines)
+- committed script 023 (scenes 4-5: single spark from fingertip to door and at the nozzle)

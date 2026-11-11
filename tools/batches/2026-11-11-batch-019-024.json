@@ -1,0 +1,12 @@
+{
+ "name": "2026-11-11-batch-019-024",
+ "purpose": "Supply from 2026-11-15 onward (the publish queue is armed through 018). The developed set of the 2026-11-11 creative session: every unit has its complete script and pre-approved ladder fallbacks on file (notes.md) and proceeds FROM that script (CLAUDE.md 'Who writes the script'). All six cleared the modellability audit (docs/current/reports/modellability-audit-019-024.md). Packages only: no arming, no publishing. A replacement drawn by a returned unit joins this queue in the same run (raw-bank draw: its production writes its script).",
+ "units": [
+  "productions/mecanalia-es/019-por-que-nadie-puede-abrir-la-puerta-de-un-avion-en-pleno-vuelo",
+  "productions/mecanalia-es/020-que-pasaria-si-te-cae-un-rayo-dentro-de-un-auto",
+  "productions/mecanalia-es/021-cuantas-veces-doblar-una-hoja-para-llegar-a-la-luna",
+  "productions/mecanalia-es/022-por-que-un-tenedor-saca-chispas-en-el-microondas",
+  "productions/mecanalia-es/023-por-que-te-da-la-corriente-al-bajarte-del-auto",
+  "productions/mecanalia-es/024-por-que-no-limpiarte-los-oidos-con-un-palito-de-algodon"
+ ]
+}

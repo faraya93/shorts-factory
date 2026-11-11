@@ -1,0 +1,77 @@
+{
+  "slug": "ocean-liner",
+  "name": "Ocean liner with compartment cutaway",
+  "aliases": [
+    "ship",
+    "ocean liner",
+    "liner",
+    "passenger ship",
+    "barco"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "a large passenger ship (an ocean liner)",
+    "seen_at": "whole ship at sea, and a lengthwise cutaway of its hull",
+    "moving_parts": [
+      "hull with separable compartments and bulkheads open at the top",
+      "funnels"
+    ],
+    "states": [
+      "whole ship afloat",
+      "lengthwise hull cutaway with compartments",
+      "bow down, flooding compartment by compartment"
+    ],
+    "style_notes": "No real line's livery or name on the hull; stylised. Serves a historic liner and a generic steel ship.",
+    "commission": {
+      "priority": 14,
+      "source": "commissioning scan 2026-11-11 (docs/current/reports/creative-session-2026-11-11.md)",
+      "trigger": "one banked entry and one reserve entry",
+      "evidence": [
+        "banked rank 31 (Titanic: the hull, compartments and bulkheads)",
+        "reserve 14 (steel ships: the hull that floats)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "a box hull primitive"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "ocean-liner.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

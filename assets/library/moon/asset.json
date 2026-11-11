@@ -1,0 +1,75 @@
+{
+  "slug": "moon",
+  "name": "The Moon",
+  "aliases": [
+    "moon",
+    "the moon",
+    "luna",
+    "lunar"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "the Moon",
+    "seen_at": "from a small disc on the horizon to a sphere filling the frame",
+    "moving_parts": [
+      "sphere with a crater material",
+      "terminator lighting control"
+    ],
+    "states": [
+      "full Moon in black space",
+      "low on a dusk horizon"
+    ],
+    "style_notes": "Grey cratered sphere, stylised; library candidate BlenderKit 'Moon' (4611d12e, CC0) to judge first.",
+    "commission": {
+      "priority": 13,
+      "source": "commissioning scan 2026-11-11 (docs/current/reports/creative-session-2026-11-11.md)",
+      "trigger": "one committed script and one reserve entry",
+      "evidence": [
+        "committed script 021 scenes 1 and 6 (the Moon on the horizon; the column reaches it)",
+        "reserve 15 (Apollo 13: the Moon on screen)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "a plain grey sphere"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "moon.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

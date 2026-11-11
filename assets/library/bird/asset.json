@@ -1,0 +1,75 @@
+{
+  "slug": "bird",
+  "name": "Bird (perched and flying)",
+  "aliases": [
+    "bird",
+    "birds",
+    "goose",
+    "pájaro",
+    "ave"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "a bird",
+    "seen_at": "perched on a wire, and a flock in flight",
+    "moving_parts": [
+      "armature for a perched pose and a flapping cycle"
+    ],
+    "states": [
+      "perched on a wire",
+      "flying, wings spread"
+    ],
+    "style_notes": "Stylised, generic (pigeon or goose silhouette); no species detail needed.",
+    "commission": {
+      "priority": 16,
+      "source": "commissioning scan 2026-11-11 (docs/current/reports/creative-session-2026-11-11.md)",
+      "trigger": "one banked entry and one reserve entry",
+      "evidence": [
+        "banked rank 6 (birds on power lines: a perched bird and a larger bird with spread wings)",
+        "reserve 8 (Hudson: geese in flight)"
+      ],
+      "improvisation_paid": [],
+      "replaces": "nothing yet: without it the birds stay off screen"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "bird.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

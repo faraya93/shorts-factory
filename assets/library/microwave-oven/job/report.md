@@ -29,3 +29,8 @@ Advance asset, commissioned by the commissioning scan 2026-11-10 (docs/current/r
 ## Checks (QA, blind naming, fidelity)
 
 ## Wall time, spend ($0 expected), anything skipped
+
+## Evidence added by the commissioning scan 2026-11-11
+
+The job stays open; asset.json is unchanged (the brief's states are completed by the build session where noted). New demand since 2026-11-10:
+- committed script 022 (every scene: closed oven, side cutaway, door with its metal screen)

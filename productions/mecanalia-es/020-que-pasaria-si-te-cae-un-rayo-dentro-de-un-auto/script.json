@@ -1,0 +1,224 @@
+{
+  "video": "que-pasaria-si-te-cae-un-rayo-dentro-de-un-auto",
+  "status": "developed script (developed set, 2026-11-11 creative session). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 5 (fill 1), drawn 2026-11-11 for the developed set",
+  "title": "¿Qué pasaría si te cae un rayo dentro de un auto? ⚡",
+  "topic_family": "whatif",
+  "structure_variant": "fork",
+  "staging_mode_proposal": "world: the premise is a car in a storm: the camera rides a wet road at night under the storm, so the bolt has kilometres of sky to cross on screen (the tyres-vs-kilometres beat needs that height); the first `world` production measures its riskiest environment first (format policy)",
+  "curiosity_score": 9,
+  "curiosity_reason": "The rubber-tyre myth is everywhere; dangerous.",
+  "hook_question": "¿Qué pasaría si te cae un rayo mientras vas dentro de un auto?",
+  "false_belief": "Te salvan los neumáticos de goma, porque aíslan el auto del suelo.",
+  "turn": "Scene 5: the premise changes on the same stage: the roof is gone (a convertible), so the shell can no longer carry the current around the driver.",
+  "closing_reframe": "Con techo de metal, estás a salvo: te salva la caja, no la goma.",
+  "share_archetype": "ese amigo que en plena tormenta se baja del auto para correr a su casa",
+  "theme": "electricity",
+  "main_tension": "dangerous",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
+  "library_assets": [
+    "build: branching emissive bolt in the doctrine's energy language",
+    "library cartoon-car (sealed"
+  ],
+  "description": "¿Qué pasaría si te cae un rayo dentro de un auto? Te salva la carrocería de metal, que lleva la corriente por fuera, no los neumáticos.\nEn un descapotable, en cambio, esa caja ya no existe. ⚡\nEnvíaselo a ese amigo que en plena tormenta se baja del auto para correr a su casa.",
+  "hashtags": [
+    "#rayos",
+    "#tormenta",
+    "#ciencia",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "One driver throughout (the same person): default outfit (skin #D99E7A, shirt #2973CC blue, pants #2E3347 grey, boots #59331A): a lone figure keeps the recurring character."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Qué pasaría si te cae un rayo mientras vas dentro de un auto? Dicen que te salvan los neumáticos de goma.",
+      "what_changes": "A car drives along a wet road at night under a storm sky; through the windows a driver sits at the wheel; the sky above flickers as charge gathers; tag ¿GOMA? pops beside a tyre.",
+      "transformation": "auto en marcha bajo la tormenta → el cielo se carga y parpadea sobre él",
+      "camera": "travelling lateral junto al auto que avanza",
+      "overlays_plan": [
+        "tag ¿GOMA? at 'goma.'"
+      ],
+      "elements": [
+        {
+          "name": "car on a wet road at night",
+          "route": "library cartoon-car (sealed, static); road and wet asphalt as a material (no water simulation); driver = human-figure seated (sealed)",
+          "risk": "low-medium: the car is sealed; night lighting must keep it readable",
+          "aliases": [
+            "car",
+            "sedan",
+            "automobile",
+            "auto"
+          ]
+        }
+      ],
+      "est_duration_s": 7.2
+    },
+    {
+      "name": "golpe",
+      "narration": "El rayo cae sobre el techo, con unos treinta mil amperes. Pero no entra: corre por fuera, por el metal.",
+      "what_changes": "The bolt strikes the roof; the car's metal shell lights in the accent and the current sweeps over roof, pillars and doors, while the driver inside stays dark and untouched.",
+      "transformation": "techo oscuro → el rayo pega y la carrocería entera se enciende por fuera",
+      "camera": "caída en picado siguiendo el rayo hasta el techo",
+      "overlays_plan": [
+        "counter 30 000 A (mono, from 0) at 'treinta'"
+      ],
+      "elements": [
+        {
+          "name": "lightning bolt striking a car",
+          "route": "build: branching emissive bolt in the doctrine's energy language, under the open job `electric-arc` brief (state 'full branching bolt'); library alternatives seen in search only: BlenderKit 'Lightning' (a9fab929, RF)",
+          "risk": "medium: an unsealed class; a branching bolt above a car at night is an iconic read",
+          "aliases": [
+            "lightning",
+            "lightning bolt",
+            "lightning strike",
+            "rayo",
+            "thunderbolt"
+          ]
+        }
+      ],
+      "est_duration_s": 6.9
+    },
+    {
+      "name": "neumaticos",
+      "narration": "¿Y la goma? Ese rayo ya cruzó kilómetros de aire. Unos centímetros de neumático no lo frenan: salta al suelo igual.",
+      "what_changes": "Pull-back from a tyre to the whole bolt reaching up into the cloud base (the kilometres it crossed), then back down: an arc leaps from the rim past the rubber to the wet road; the ¿GOMA? tag takes a red X.",
+      "transformation": "neumático en primer plano → el arco salta del aro al suelo pasando por encima de la goma",
+      "camera": "gran retroceso vertical hasta las nubes y descenso rápido a la rueda",
+      "overlays_plan": [
+        "bracket 'km' along the bolt at 'kilómetros'",
+        "mark red X on ¿GOMA? at 'frenan:'"
+      ],
+      "elements": [
+        {
+          "name": "arc jumping from a car wheel to the road",
+          "route": "build: short emissive arc (open job `electric-arc`, state 'small arc between two points'); wheel from the sealed cartoon-car",
+          "risk": "medium: the arc must not read as a laser; the wheel and road are the cue",
+          "aliases": [
+            "lightning",
+            "electric arc",
+            "spark",
+            "electricity",
+            "arc"
+          ]
+        }
+      ],
+      "est_duration_s": 7.2
+    },
+    {
+      "name": "jaula",
+      "narration": "Lo que te protege es la carrocería: una caja de metal que lleva la corriente a su alrededor, como una jaula.",
+      "what_changes": "Reveal: the car body turns into a glowing cage of accent lines around the seated driver; the current flows around the cage and drains into the road; the driver stays dark in the middle.",
+      "transformation": "carrocería normal → se vuelve una jaula de luz que rodea al conductor",
+      "camera": "órbita completa alrededor del auto",
+      "overlays_plan": [
+        "label JAULA tag at 'jaula.'"
+      ],
+      "elements": [
+        {
+          "name": "car shell as a glowing cage around a seated driver",
+          "route": "cartoon-car with an emissive wire overlay (edges of the sealed mesh); driver human-figure seated",
+          "risk": "low-medium",
+          "aliases": [
+            "car",
+            "sedan",
+            "automobile",
+            "cage",
+            "auto"
+          ]
+        }
+      ],
+      "est_duration_s": 7.2
+    },
+    {
+      "name": "sin_techo",
+      "narration": "Ahora cambia una sola cosa: un auto descapotable, sin techo de metal.",
+      "what_changes": "The premise changes on the same stage: the roof slides away and is gone; rain-darkened air now falls straight onto the driver's seat.",
+      "transformation": "auto con techo → el techo desaparece y el conductor queda al aire",
+      "camera": "subida en grúa sobre el auto mientras se va el techo",
+      "overlays_plan": [
+        "tag SIN TECHO at 'descapotable,'"
+      ],
+      "elements": [
+        {
+          "name": "convertible car with the driver exposed",
+          "route": "cartoon-car with the roof faces removed (a production edit of the sealed mesh: the gate reads the edited car as usual)",
+          "risk": "medium: an edited library mesh; a roofless sedan reads as a convertible",
+          "aliases": [
+            "car",
+            "convertible",
+            "sedan",
+            "automobile",
+            "auto"
+          ]
+        }
+      ],
+      "est_duration_s": 4.1
+    },
+    {
+      "name": "consecuencia",
+      "narration": "El rayo ya no tiene una caja por donde rodearte. El camino más corto pasa por ti.",
+      "what_changes": "A second bolt comes down; with no shell, its path turns error-red and heads through the open cabin toward the seat; the beat ends on the red path reaching the seat, with no harm shown.",
+      "transformation": "segundo rayo → su camino se vuelve rojo y apunta al asiento del conductor",
+      "camera": "empuje rápido desde arriba hacia el asiento",
+      "overlays_plan": [],
+      "elements": [
+        {
+          "name": "red lightning path into an open car",
+          "route": "same bolt build in the error colour",
+          "risk": "medium",
+          "aliases": [
+            "lightning",
+            "lightning bolt",
+            "rayo",
+            "lightning strike"
+          ]
+        }
+      ],
+      "est_duration_s": 5.9
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que, ¿qué pasaría si te cae un rayo dentro de un auto? Con techo de metal, estás a salvo: te salva la caja, no la goma. Envíaselo a ese amigo que en plena tormenta se baja del auto para correr a su casa.",
+      "what_changes": "Single reframe image: the roofed car returns, the cage glows once more around the driver and the bolt's current flows around it into the road; the opening question is repeated over it.",
+      "transformation": "descapotable → vuelve el auto con techo y su jaula se enciende alrededor del conductor",
+      "camera": "retroceso amplio hasta el auto bajo la tormenta",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 15.2
+    }
+  ],
+  "sources": [
+    "Hard-topped metal vehicles protect occupants because the metal roof and sides carry the current around them to the ground; rubber tyres provide no protection; convertibles and open vehicles are not safe: US National Weather Service, 'Lightning safety: cars' (weather.gov/safety/lightning-cars) and NWS lightning myths page (verified by live search 2026-11-11).",
+    "Typical flash about 30,000 A and about 300 million volts: NWS 'Lightning power' (weather.gov/safety/lightning-power) and NOAA FAQ (live search 2026-11-11). Narration uses only the amperes.",
+    "'Kilómetros de aire': a cloud-to-ground channel is several kilometres long. FLAGGED: cite NOAA/NSSL lightning basics at the beat sheet; if not sourced, rung 3 says 'todo el cielo' instead of 'kilómetros de aire' (same word count minus one).",
+    "Current can arc from the vehicle frame to the ground and can damage tyres and electronics: NWS 'Lightning safety: cars' (verified)."
+  ],
+  "simplifications": [
+    "The current is drawn as glowing accent lines on the outside of the body; the real current is invisible.",
+    "Arcing to the ground happens through and around the tyres; the arc is drawn past the rubber for legibility.",
+    "NWS also advises not touching metal parts inside the car; the closing's 'estás a salvo' refers to a hard-topped car with the windows closed."
+  ],
+  "narration_words": 156,
+  "est_duration_s": 53.8,
+  "duration_band_s": [
+    45,
+    60
+  ],
+  "flatness_test": [
+    "1. hook: A car drives along a wet road at night under a storm sky; through the windows a driver sits at the wheel; the sky above flickers as charge gathers; tag ¿GOMA? pops beside a tyre.",
+    "2. golpe: The bolt strikes the roof; the car's metal shell lights in the accent and the current sweeps over roof, pillars and doors, while the driver inside stays dark and untouched.",
+    "3. neumaticos: Pull-back from a tyre to the whole bolt reaching up into the cloud base (the kilometres it crossed), then back down: an arc leaps from the rim past the rubber to the wet road; the ¿GOMA? tag takes a red X.",
+    "4. jaula: Reveal: the car body turns into a glowing cage of accent lines around the seated driver; the current flows around the cage and drains into the road; the driver stays dark in the middle.",
+    "5. sin_techo: The premise changes on the same stage: the roof slides away and is gone; rain-darkened air now falls straight onto the driver's seat.",
+    "6. consecuencia: A second bolt comes down; with no shell, its path turns error-red and heads through the open cabin toward the seat; the beat ends on the red path reaching the seat, with no harm shown.",
+    "7. cierre: Single reframe image: the roofed car returns, the cage glows once more around the driver and the bolt's current flows around it into the road; the opening question is repeated over it."
+  ]
+}

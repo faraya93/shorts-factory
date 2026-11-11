@@ -28,3 +28,9 @@ Advance asset, commissioned by the commissioning scan 2026-11-10 (docs/current/r
 ## Checks (QA, blind naming, fidelity)
 
 ## Wall time, spend ($0 expected), anything skipped
+
+## Evidence added by the commissioning scan 2026-11-11
+
+The job stays open; asset.json is unchanged (the brief's states are completed by the build session where noted). New demand since 2026-11-10:
+- committed script 023 (scene 2: car seat; library candidate BlenderKit 'Generic Car Seat PL', 823261c4, RF)
+- banked rank 36 (hot car: the interior heating up, a seated occupant)
