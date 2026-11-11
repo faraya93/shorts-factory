@@ -16,8 +16,8 @@
   ],
   "family": "body",
   "created": "2026-11-10",
-  "status": "in_progress",
-  "route": null,
+  "status": "ready",
+  "route": "modelled",
   "brief": {
     "must_read_as": "a person, at phone size, in each pose below",
     "seen_at": "from a small unit of scale to a figure filling half the frame",
@@ -57,29 +57,191 @@
     "retrieved": null
   },
   "licence": {
-    "id": null,
+    "id": "own-work",
     "url": null,
     "attribution": null,
-    "note": null,
+    "note": "Modelled from lofted capsules in build.py; no sourced mesh",
     "decision": null
   },
   "files": {
     "blend": "human-figure.blend",
-    "sha256": null,
+    "sha256": "d91e2750b08011ab1fa176dbaba1112209b1cc675ab5f834fecdbfee8986c0fd",
     "collection": "asset",
     "rig_module": null,
-    "build_script": null
+    "build_script": "build.py"
   },
-  "real_size_m": null,
+  "real_size_m": [
+    0.55,
+    0.28,
+    1.85
+  ],
   "checks": {
     "qa": {
-      "pass": null,
-      "date": null
+      "pass": true,
+      "date": "2026-11-11"
     },
     "blind_naming": {
-      "pass": null,
-      "date": null,
-      "guesses": []
+      "pass": true,
+      "date": "2026-11-11",
+      "scope": "per pose: every sealed pose passed on its own three isolated readers (tools/blind_read.py, headless); poses not in sealed_poses are NOT sealed",
+      "sealed_poses": [
+        "standing",
+        "walking",
+        "jumping",
+        "falling",
+        "seated"
+      ],
+      "unsealed_poses": [
+        "sunk"
+      ],
+      "poses": {
+        "standing": {
+          "pass": true,
+          "reading": "standing",
+          "guesses": [
+            "a standing 3D artist's mannequin or toy figure in a blue shirt and grey pants; alternatives: a low-poly human character model, a wooden artist's doll",
+            "a blue-shirted artist's mannequin figure",
+            "low-poly toy figure (a blue-shirted, grey-trousered mannequin)"
+          ],
+          "confidences": [
+            85,
+            85,
+            60
+          ]
+        },
+        "walking": {
+          "pass": true,
+          "reading": "walking",
+          "guesses": [
+            "a walking 3D artist's mannequin figure (blue shirt, grey pants, brown shoes)",
+            "walking artist's mannequin figure",
+            "a walking 3D human figure or mannequin in a blue shirt and gray pants (alternatives: a stylized toy doll, a wooden artist's figure)"
+          ],
+          "confidences": [
+            92,
+            90,
+            85
+          ]
+        },
+        "jumping": {
+          "pass": true,
+          "reading": "jumping",
+          "guesses": [
+            "a jointed 3D mannequin figure jumping with arms raised",
+            "jumping toy figure (blue shirt, gray pants, arms raised); alternatives: ragdoll, artist's mannequin",
+            "jointed toy figure (alternatives: artist mannequin, ragdoll)"
+          ],
+          "confidences": [
+            80,
+            72,
+            55
+          ]
+        },
+        "falling": {
+          "pass": true,
+          "reading": "falling",
+          "guesses": [
+            "a 3D mannequin figure in a blue shirt and grey pants, mid-jump",
+            "a wooden artist's mannequin figure in a mid-air kick pose",
+            "a posed articulated mannequin figure in a blue shirt and gray pants, mid-air"
+          ],
+          "confidences": [
+            90,
+            85,
+            85
+          ]
+        },
+        "seated": {
+          "pass": true,
+          "reading": "seated-r2",
+          "guesses": [
+            "seated artist's wooden mannequin figure on a chair (alternatives: a toy action figure on a chair; a crash-test dummy)",
+            "seated wooden mannequin figure on a chair; alternatives: sitting artist's dummy, wooden chair with a doll",
+            "seated wooden artist's mannequin on a chair"
+          ],
+          "confidences": [
+            85,
+            80,
+            72
+          ],
+          "round1_failed": [
+            {
+              "guess": "seated mannequin figure on a gray chair; alternatives: seated toy doll, seated wooden artist's figure",
+              "confidence": 70
+            },
+            {
+              "guess": "toilet (alternatives: armchair, bench)",
+              "confidence": 45
+            },
+            {
+              "guess": "seated mannequin figure",
+              "confidence": 40
+            }
+          ]
+        },
+        "sunk": {
+          "pass": false,
+          "reading": "sunk-r2",
+          "guesses": [
+            "articulated mannequin figure in a blue shirt sitting on a tan ledge",
+            "ragdoll figure rising out of a barrel",
+            "blue-shirted artist's mannequin figure with raised arms"
+          ],
+          "confidences": [
+            55,
+            40,
+            60
+          ],
+          "round1_failed": [
+            {
+              "guess": "blue-shirted mannequin figure rising through a table",
+              "confidence": 60
+            },
+            {
+              "guess": "toy mannequin figure",
+              "confidence": 72
+            },
+            {
+              "guess": "blue-shirted mannequin figure rising through a table",
+              "confidence": 45
+            }
+          ]
+        }
+      },
+      "guesses": [
+        "a standing 3D artist's mannequin or toy figure in a blue shirt and grey pants; alternatives: a low-poly human character model, a wooden artist's doll",
+        "a blue-shirted artist's mannequin figure",
+        "low-poly toy figure (a blue-shirted, grey-trousered mannequin)",
+        "a walking 3D artist's mannequin figure (blue shirt, grey pants, brown shoes)",
+        "walking artist's mannequin figure",
+        "a walking 3D human figure or mannequin in a blue shirt and gray pants (alternatives: a stylized toy doll, a wooden artist's figure)",
+        "a jointed 3D mannequin figure jumping with arms raised",
+        "jumping toy figure (blue shirt, gray pants, arms raised); alternatives: ragdoll, artist's mannequin",
+        "jointed toy figure (alternatives: artist mannequin, ragdoll)",
+        "a 3D mannequin figure in a blue shirt and grey pants, mid-jump",
+        "a wooden artist's mannequin figure in a mid-air kick pose",
+        "a posed articulated mannequin figure in a blue shirt and gray pants, mid-air",
+        "seated artist's wooden mannequin figure on a chair (alternatives: a toy action figure on a chair; a crash-test dummy)",
+        "seated wooden mannequin figure on a chair; alternatives: sitting artist's dummy, wooden chair with a doll",
+        "seated wooden artist's mannequin on a chair"
+      ],
+      "confidences": [
+        85,
+        85,
+        60,
+        92,
+        90,
+        85,
+        80,
+        72,
+        55,
+        90,
+        85,
+        85,
+        85,
+        80,
+        72
+      ]
     },
     "fidelity": null
   },

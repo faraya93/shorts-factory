@@ -73,6 +73,6 @@ What the table says: with a single-object prompt, a prominent prop is what the r
 
 ## Wall time, spend ($0 expected), anything skipped
 
-About 35 min wall (search 3 min, clean-up and rig 10 min, poses and stills 12 min, three reading rounds 8 min, QA and record 2 min). Spend $0, no account created. Skipped: BlenderKit search (not needed), fidelity check, a wrist/forearm sleeve (a production concern). Seal: `asset_library.py seal` OK; sha recorded in `asset.json`.
+Clock-measured upper bound about 34 min (last prior commit 00:18, this commit 00:53 on 2026-11-11); the phase split is an estimate. Spend $0, no account created. Skipped: BlenderKit search (not needed), fidelity check, a wrist/forearm sleeve (a production concern). Seal: `asset_library.py seal` OK; sha recorded in `asset.json`.
 
 Lessons for `human-figure` (written into its brief): (1) strip imported animation data at once, it hides pose errors at render time; (2) express rotations in armature axes and test one bone per axis with a numeric grid search before looking; (3) blind-name the posed asset bare, a prop makes readers name the prop; (4) keep the hand/limb large in the still and the whole shape in frame.
