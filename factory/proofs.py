@@ -97,7 +97,10 @@ def settle_asset(prod: Path, proof_id: str) -> bool:
     slug = p.get("element_id")
     errs, _ = al.validate(slug, al.source_ids())
     ready = not errs and al.read_meta(slug).get("status") == "ready"
-    p["status"] = "passed" if ready else p.get("status", "pending")
+    named = (al.read_meta(slug).get("checks") or {}).get("blind_naming") or {}
+    p["status"] = "passed" if ready else ("failed" if named.get("pass") is False and named.get("guesses") else p.get("status", "pending"))   # a failed isolated naming settles the seal: no re-roll
+    if not ready and named.get("guesses"):
+        p.setdefault("readings", []).append({"date": date.today().isoformat(), "asset_blind_naming": named})
     p.setdefault("readings", []).append({"date": date.today().isoformat(), "asset": slug, "ready": ready, "errors": errs})
     _save(prod, spec)
     return ready

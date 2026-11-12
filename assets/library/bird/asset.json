@@ -11,7 +11,7 @@
   "family": "objects",
   "created": "2026-11-11",
   "status": "in_progress",
-  "route": null,
+  "route": "code-primitive",
   "brief": {
     "must_read_as": "a bird",
     "seen_at": "perched on a wire, and a flock in flight",
@@ -43,17 +43,17 @@
     "retrieved": null
   },
   "licence": {
-    "id": null,
+    "id": "own-work",
     "url": null,
     "attribution": null,
-    "note": null,
+    "note": "built in this factory (bird_rig)",
     "decision": null
   },
   "files": {
-    "blend": "bird.blend",
+    "blend": null,
     "sha256": null,
     "collection": "asset",
-    "rig_module": null,
+    "rig_module": "bird_rig",
     "build_script": null
   },
   "real_size_m": null,
@@ -63,9 +63,19 @@
       "date": null
     },
     "blind_naming": {
-      "pass": null,
-      "date": null,
-      "guesses": []
+      "pass": false,
+      "date": "2026-11-11",
+      "guesses": [
+        "a gray pigeon (3D cartoon bird perched on a rail)",
+        "pigeon (a grey, low-poly 3D-rendered pigeon standing on a rail)",
+        "pigeon (gray 3D cartoon bird, perched on a rail)"
+      ],
+      "confidences": [
+        90,
+        93,
+        88
+      ],
+      "reader_cost_usd": 0.006874
     },
     "fidelity": null
   },

@@ -16,8 +16,33 @@
    "build": "asset job; library route first (CC0 > RF > CC-BY).",
    "bar": "as the proof's own text says",
    "on_fail": "the job's candidates; a bird that will not seal returns the topic to the creative session. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "asset_blind_naming": {
+      "pass": false,
+      "date": "2026-11-11",
+      "guesses": [
+       "a gray pigeon (3D cartoon bird perched on a rail)",
+       "pigeon (a grey, low-poly 3D-rendered pigeon standing on a rail)",
+       "pigeon (gray 3D cartoon bird, perched on a rail)"
+      ],
+      "confidences": [
+       90,
+       93,
+       88
+      ],
+      "reader_cost_usd": 0.006874
+     }
+    },
+    {
+     "date": "2026-11-11",
+     "asset": "bird",
+     "ready": false,
+     "errors": []
+    }
+   ]
   },
   {
    "id": "W1",
