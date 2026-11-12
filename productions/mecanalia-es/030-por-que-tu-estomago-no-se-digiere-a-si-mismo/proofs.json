@@ -30,8 +30,28 @@
    "build": "digestive-system + chunk + acid.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: the chunk with a fat edge and grain lines (a steak cue), whole in frame. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "red dome-shaped blob on a green-yellow saucer (flying saucer or UFO); alternatives: a red jelly dome on a glossy dish, or a red cap sitting on a disc",
+      "flying saucer (UFO) with a red dome; alternatives: a hamburger patty on a plate, a jellyfish",
+      "a red dome-shaped blob sitting on a yellow-green disc, like a UFO or a meat patty on a plate"
+     ],
+     "confidences": [
+      45,
+      45,
+      35
+     ],
+     "mean_confidence": 41.7,
+     "stills": [
+      "build/proofs/P1/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.005168
+    }
+   ]
   },
   {
    "id": "P2",
@@ -54,8 +74,28 @@
    "build": "asset + layered block + gel.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: the section drawn curved like a slice of the stomach itself, the organ silhouette behind it. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "translucent glass cone",
+      "translucent cone (ice-cream-cone-like); alternatives: stacked pastel candy blocks, pink translucent blob. Plainly, nothing here clearly resembles one specific object, and the image is cropped at the right edge.",
+      "translucent glass cone or funnel (alternatives: stack of pastel bars or erasers; pink translucent blob like a gummy or jelly figure)"
+     ],
+     "confidences": [
+      35,
+      25,
+      30
+     ],
+     "mean_confidence": 30.0,
+     "stills": [
+      "build/proofs/P2/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.005361
+    }
+   ]
   },
   {
    "id": "P3",
@@ -80,8 +120,28 @@
    "build": "P2 + drops.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: fewer, larger drops with bubble trails. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "abstract 3D render of a pink layered slab under a translucent green sheet with floating spheres; no specific object",
+      "a pink layered dessert bar with green jelly and candy balls",
+      "a layered pink and green dessert bar with floating candy balls"
+     ],
+     "confidences": [
+      15,
+      25,
+      30
+     ],
+     "mean_confidence": 23.3,
+     "stills": [
+      "build/proofs/P3/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.005006
+    }
+   ]
   },
   {
    "id": "P4",
@@ -105,8 +165,28 @@
    "build": "P2 + cell rows.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: the damaged cells marked red and the new ones in the accent. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "pink studded candy bar",
+      "pink bumpy candy bar, like a gummy or sweets tray",
+      "pink gumdrop tray"
+     ],
+     "confidences": [
+      35,
+      20,
+      25
+     ],
+     "mean_confidence": 26.7,
+     "stills": [
+      "build/proofs/P4/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.005138
+    }
+   ]
   }
  ]
 }
