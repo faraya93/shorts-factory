@@ -1,0 +1,71 @@
+{
+  "slug": "apple",
+  "name": "Apple",
+  "aliases": [
+    "apple",
+    "manzana"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "ready",
+  "route": "library",
+  "brief": {
+    "must_read_as": "a whole apple",
+    "seen_at": "hero of production 025, 30-60% of the frame; cut in half by a build in the production rig for the cross-section",
+    "moving_parts": [],
+    "states": [
+      "whole, upright, stem on"
+    ],
+    "style_notes": "One of the two scanned apples of the source file, separated by loose parts, scaled to 78 mm wide, origin at the base, stem added as its own object. Skin keeps its scan texture; the production retints it. Cut state is not part of this asset (a build in the production rig)."
+  },
+  "source": {
+    "registry_id": "blenderkit",
+    "url": "https://www.blendkit.com/asset-gallery-detail/82287cf7-1284-4db3-bcf0-1beb10278b7f/",
+    "asset_id": "931f47db-4789-4ccc-8742-f6c7ff9c425b",
+    "author": "Free poly",
+    "retrieved": "2026-11-11"
+  },
+  "licence": {
+    "id": "CC0-1.0",
+    "url": "https://www.blendkit.com/docs/licenses/",
+    "attribution": null,
+    "note": "CC0, no attribution needed",
+    "decision": null
+  },
+  "files": {
+    "blend": "apple.blend",
+    "sha256": "35f4d44fe6cd14dc274cba3fdb0f43f0b00bdeda181226cbe7512a578a0f4955",
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": [
+    0.078,
+    0.077,
+    0.077
+  ],
+  "checks": {
+    "qa": {
+      "pass": true,
+      "date": "2026-11-11"
+    },
+    "blind_naming": {
+      "pass": true,
+      "date": "2026-11-11",
+      "guesses": [
+        "apple (gray, unpainted 3D render; alternatives: pear, potato)",
+        "apple (a plain gray 3D-rendered apple with a stem)",
+        "apple (alternatives: tomato, peach)"
+      ],
+      "confidences": [
+        95,
+        96,
+        96
+      ]
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}
