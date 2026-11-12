@@ -7,6 +7,14 @@ A braked proof unit (block B5) builds each still, reads it with tools/blind_read
 A unit whose proofs.json holds any proof not "passed" is not batch-eligible: the runner refuses it and tools/return_topic.py never draws it.
 A folder without proofs.json predates the rule (B4, 2026-11-11) and is not refused here.
 
+Redesign session 2026-11-11 (docs/current/reports/redesign-2026-11-11.md; doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"):
+- STILL CONFORMANCE: a proof still is read only when it was rendered under the reader-still policy (factory/gate.py STILL_POLICY, half-resolution Cycles; tools/proof_still.py --reader writes the
+  sidecar) and the builder recorded a `conformance` note against the staging spec with no deviation. `require_conforming` runs BEFORE the readers: a non-conforming still is not read, so no reading is spent.
+- ONE PROMPT: proofs are read under the single-object prompt only (the `multi` prompt failed its calibration, docs/current/reports/multi-calibration-2026-11-11.json); every reading records its prompt and hash.
+- ONE ALIAS SET PER PHYSICAL ELEMENT: `alias_sets` {name: [aliases]} at the top of proofs.json; a proof that names `alias_sets` must declare `aliases` == the union of those sets (in order) + its own
+  `event_aliases`, and a script element with the same id must declare the same list. Sets hold only words declared before any reading of that element.
+- STOP-LOSS: a proof is designed at most twice (`round` 1 or 2). A round-2 proof that fails is that element's boundary: the unit is returned, there is no third design round.
+
 usage: .venv/bin/python factory/proofs.py check productions/<ch>/<video>"""
 import json
 import shutil
@@ -16,6 +24,8 @@ from pathlib import Path
 
 NAME = "proofs.json"
 STATUSES = ("pending", "passed", "failed")
+MAX_ROUNDS = 2
+READER_RES = (540, 960)            # 50% of the 1080x1920 frame: factory/gate.py STILL_POLICY["res"]
 
 
 def errors(prod: Path) -> list[str]:
@@ -34,6 +44,49 @@ def errors(prod: Path) -> list[str]:
             out.append(f"{prod.name}: proof {p.get('id')!r} has status {st!r}, not one of {STATUSES}")
         elif st != "passed":
             out.append(f"{prod.name}: proof {p.get('id')} ({p.get('element_id')}) is {st}: not batch-eligible until every proof has passed")
+    return out + lint(prod, spec)
+
+
+def union(spec: dict, p: dict) -> list[str]:
+    """The alias list a proof that names `alias_sets` must declare: its sets in order, then its own event words, first occurrence kept."""
+    sets = spec.get("alias_sets") or {}
+    seen, out = set(), []
+    for a in [x for name in p.get("alias_sets") or [] for x in sets.get(name, [])] + list(p.get("event_aliases") or []):
+        if a not in seen:
+            seen.add(a)
+            out.append(a)
+    return out
+
+
+def lint(prod: Path, spec: dict) -> list[str]:
+    """Alias-set consistency (proofs and the script's elements) and the stop-loss. Proofs without `alias_sets` predate the rule and are not linted for aliases."""
+    out = []
+    sets = spec.get("alias_sets") or {}
+    script = prod / "script.json"
+    elements = {}
+    if script.exists():
+        try:
+            for sc in json.loads(script.read_text(encoding="utf-8")).get("scenes") or []:
+                for e in sc.get("elements") or []:
+                    elements.setdefault(e.get("id"), e)
+        except ValueError:
+            pass
+    for p in spec.get("proofs") or []:
+        pid = p.get("id")
+        if int(p.get("round", 1)) > MAX_ROUNDS:
+            out.append(f"{prod.name}: proof {pid} is at design round {p.get('round')}: the stop-loss allows {MAX_ROUNDS}; the element is a boundary and the unit is returned")
+        if not p.get("alias_sets"):
+            continue
+        missing = [n for n in p["alias_sets"] if n not in sets]
+        if missing:
+            out.append(f"{prod.name}: proof {pid} names alias sets {missing} that proofs.json does not declare")
+            continue
+        want = union(spec, p)
+        if p.get("aliases") != want:
+            out.append(f"{prod.name}: proof {pid} aliases differ from its alias sets {p['alias_sets']} + event_aliases (one alias set per physical element per unit)")
+        el = elements.get(p.get("element_id"))
+        if el is not None and el.get("aliases") != want:
+            out.append(f"{prod.name}: script element {p.get('element_id')!r} aliases differ from proof {pid}'s (one alias set per physical element per unit)")
     return out
 
 
@@ -60,7 +113,52 @@ def require_pending(prod: Path, proof_id: str) -> dict:
     return p
 
 
-def record_reading(prod: Path, proof_id: str, guesses: list[str], confidences: list[int], stills: list[str] | None = None, reader_cost: float | None = None) -> bool:
+def png_size(path: Path) -> tuple[int, int]:
+    head = path.read_bytes()[:24]
+    if head[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError(f"{path}: not a PNG")
+    return int.from_bytes(head[16:20], "big"), int.from_bytes(head[20:24], "big")
+
+
+def conformance_errors(p: dict, stills: list[str]) -> list[str]:
+    """Why these stills may not be read for this proof (empty = conforming): the reader-still policy sidecar (tools/proof_still.py --reader), the half-resolution size, and the builder's
+    conformance note against the staging spec with no deviation (a deviation defers the reading, it never spends it)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    out = []
+    note = p.get("conformance") or {}
+    if note.get("matches_staging") is not True:
+        out.append(f"proof {p.get('id')}: no builder conformance note with matches_staging true (write it against the staging spec before any reader runs)")
+    if note.get("deviations"):
+        out.append(f"proof {p.get('id')}: the builder recorded deviations from the staging spec {note['deviations']}: the reading is deferred until the still matches the spec")
+    for s in stills:
+        f = Path(s)
+        side = f.with_suffix(".render.json")
+        try:
+            pol = json.loads(side.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            out.append(f"{s}: no reader-still sidecar {side.name}: render it with tools/proof_still.py --reader (half-resolution Cycles)")
+            continue
+        if pol.get("engine") != "CYCLES" or pol.get("res") != 50:
+            out.append(f"{s}: rendered {pol}, not the reader-still policy (CYCLES, res 50)")
+        try:
+            if png_size(f) != READER_RES:
+                out.append(f"{s}: {png_size(f)}, not the reader-still size {READER_RES}")
+        except (OSError, ValueError) as e:
+            out.append(str(e))
+    return out
+
+
+def require_conforming(prod: Path, proof_id: str, stills: list[str]) -> dict:
+    """Called by tools/blind_read.py --record proof BEFORE the readers run (redesign session 2026-11-11): a settled proof or a non-conforming still is refused without spending a reading."""
+    p = require_pending(prod, proof_id)
+    errs = conformance_errors(p, stills)
+    if errs:
+        raise SystemExit("not read (no reading spent):\n" + "\n".join(errs))
+    return p
+
+
+def record_reading(prod: Path, proof_id: str, guesses: list[str], confidences: list[int], stills: list[str] | None = None, reader_cost: float | None = None,
+                   prompt: str | None = None, prompt_sha256: str | None = None) -> bool:
     """Judge one element reading with the gate's own matcher and bar (asset_library.judge_guesses, aliases exactly as declared in proofs.json), append it to the proof's readings and settle the
     proof from it. The stills the readers judged are kept under build/proofs/<id>/."""
     sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -81,7 +179,8 @@ def record_reading(prod: Path, proof_id: str, guesses: list[str], confidences: l
             shutil.copyfile(s, dst)
             kept.append(str(dst.relative_to(prod)))
     p.setdefault("readings", []).append({"date": date.today().isoformat(), "pass": ok, "guesses": guesses, "confidences": confidences,
-                                          "mean_confidence": round(sum(confidences) / max(1, len(confidences)), 1), "stills": kept,
+                                          "mean_confidence": round(sum(confidences) / max(1, len(confidences)), 1), "stills": kept, "round": int(p.get("round", 1)),
+                                          **({"prompt": prompt, "prompt_sha256": prompt_sha256} if prompt else {}),
                                           **({"reader_cost_usd": reader_cost} if reader_cost is not None else {})})
     p["status"] = "passed" if ok else "failed"
     _save(prod, spec)

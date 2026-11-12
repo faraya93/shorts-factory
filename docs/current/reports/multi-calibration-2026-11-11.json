@@ -27,7 +27,25 @@
     "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s06/still-0090.png",
     "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s07/still-0150.png"
    ],
-   "readings": null
+   "readings": [
+    {
+     "guess": "blue glossy block; brown cylinder peg; orange backdrop. These are abstract 3D renders that do not clearly resemble any specific real object.",
+     "confidence": 20,
+     "cost_usd": 0.005585720000000001
+    },
+    {
+     "guess": "Abstract 3D-rendered shapes, nothing specific: blue block with brown cylinders, red-ribbed white panel, brown coil-wrapped capsule",
+     "confidence": 25,
+     "cost_usd": 0.0056570200000000005
+    },
+    {
+     "guess": "blue rectangular block; brown cylindrical pegs; teal string with beads (abstract 3D-rendered objects on a salmon background, not recognizable as a specific real-world thing)",
+     "confidence": 25,
+     "cost_usd": 0.00555732
+    }
+   ],
+   "gate_pass": false,
+   "agrees_with_owner": true
   },
   {
    "production": "007",
@@ -46,7 +64,25 @@
     "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s06/still-0120.png",
     "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s07/still-0200.png"
    ],
-   "readings": null
+   "readings": [
+    {
+     "guess": "blue spheres/balls; white cloud; yellow and purple toy cars on a balance scale",
+     "confidence": 80,
+     "cost_usd": 0.00545532
+    },
+    {
+     "guess": "blue sphere cluster; white cloud; toy cars on a balance scale",
+     "confidence": 60,
+     "cost_usd": 0.0054614200000000016
+    },
+    {
+     "guess": "blue spheres/particles, white fluffy cloud, yellow-and-purple toy vehicles",
+     "confidence": 45,
+     "cost_usd": 0.00550782
+    }
+   ],
+   "gate_pass": true,
+   "agrees_with_owner": false
   },
   {
    "production": "008",
@@ -68,7 +104,25 @@
     "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s06/still-0120.png",
     "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s07/still-0180.png"
    ],
-   "readings": null
+   "readings": [
+    {
+     "guess": "clear glasses of water with ice cubes; water (H2O) molecule lattice; blue liquid tank with bubbles and fish",
+     "confidence": 60,
+     "cost_usd": 0.0055542199999999995
+    },
+    {
+     "guess": "glasses of iced water; water-molecule and ice-lattice models; swimming fish",
+     "confidence": 45,
+     "cost_usd": 0.0056075199999999995
+    },
+    {
+     "guess": "glass of water with ice cubes; water molecules (H2O model); fish in a tank",
+     "confidence": 40,
+     "cost_usd": 0.00551772
+    }
+   ],
+   "gate_pass": false,
+   "agrees_with_owner": true
   },
   {
    "production": "009",
@@ -89,7 +143,25 @@
     "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s06/still-0100.png",
     "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s07/still-0180.png"
    ],
-   "readings": null
+   "readings": [
+    {
+     "guess": "3D orange spheres with pink spikes (virus-like molecules) on purple background, blue glossy balls, pink abacus or lollipop",
+     "confidence": 35,
+     "cost_usd": 0.0017375700000000001
+    },
+    {
+     "guess": "purple background, glossy 3D orange-and-pink molecule spheres, blue spheres",
+     "confidence": 72,
+     "cost_usd": 0.00171457
+    },
+    {
+     "guess": "orange and pink molecule-like spheres, blue spheres, purple background",
+     "confidence": 75,
+     "cost_usd": 0.00555563
+    }
+   ],
+   "gate_pass": false,
+   "agrees_with_owner": true
   },
   {
    "production": "010",
@@ -108,7 +180,25 @@
     "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s06/still-0120.png",
     "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s07/still-0200.png"
    ],
-   "readings": null
+   "readings": [
+    {
+     "guess": "blue bulbous vase, pink translucent bottles, teal arc ring",
+     "confidence": 55,
+     "cost_usd": 0.00546761
+    },
+    {
+     "guess": "blue double-bulb vase, pink glass bottles, teal arc on magenta wall",
+     "confidence": 60,
+     "cost_usd": 0.00538411
+    },
+    {
+     "guess": "blue bulbous vase; pink glass bottles; teal ring on magenta wall",
+     "confidence": 60,
+     "cost_usd": 0.00547711
+    }
+   ],
+   "gate_pass": false,
+   "agrees_with_owner": true
   },
   {
    "production": "011",
@@ -132,7 +222,25 @@
     "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s06/still-0120.png",
     "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s07/still-0200.png"
    ],
-   "readings": null
+   "readings": [
+    {
+     "guess": "chocolate-coated egg shapes, white popcorn-like puffs, silver metal pot",
+     "confidence": 55,
+     "cost_usd": 0.00546693
+    },
+    {
+     "guess": "chocolate-coated eggs; white popcorn-like puffs; silver metal bowl",
+     "confidence": 50,
+     "cost_usd": 0.00558163
+    },
+    {
+     "guess": "white popcorn clusters; chocolate-coated eggs; silver metal bowl",
+     "confidence": 35,
+     "cost_usd": 0.00550483
+    }
+   ],
+   "gate_pass": false,
+   "agrees_with_owner": true
   },
   {
    "production": "004",
@@ -151,7 +259,25 @@
     "productions/mecanalia-es/004-imanes/build/gate/s06/still-0200.png",
     "productions/mecanalia-es/004-imanes/build/gate/s07/still-0330.png"
    ],
-   "readings": null
+   "readings": [
+    {
+     "guess": "blue and yellow cube blocks; silver paperclips; silver cylindrical battery",
+     "confidence": 80,
+     "cost_usd": 0.00544912
+    },
+    {
+     "guess": "blue and yellow cube blocks, silver paperclip, dashed magnetic field lines on a white board",
+     "confidence": 80,
+     "cost_usd": 0.0055517200000000004
+    },
+    {
+     "guess": "blue and yellow cubes, silver paperclips, dashed magnetic field lines",
+     "confidence": 55,
+     "cost_usd": 0.00560872
+    }
+   ],
+   "gate_pass": false,
+   "agrees_with_owner": false
   },
   {
    "production": "005",
@@ -174,7 +300,35 @@
     "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s08/still-0120.png",
     "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s09/still-0200.png"
    ],
-   "readings": null
+   "readings": [
+    {
+     "guess": "1. white pipe-and-tank channels with blue water; 2. brown and yellow-green balls; 3. dark maze of connected tubes (likely a physics puzzle game)",
+     "confidence": 60,
+     "cost_usd": 0.00673722
+    },
+    {
+     "guess": "blue water in white tanks and channels; brown and yellow-green balls rolling through them; a maze of white pipes and dark-walled chutes",
+     "confidence": 60,
+     "cost_usd": 0.0067633200000000015
+    },
+    {
+     "guess": "1. white maze-like chutes and channels; 2. blue water filling containers; 3. small brown and yellow balls (sand-like mud also appears). Looks like a 3D physics puzzle game, not a real-world scene.",
+     "confidence": 60,
+     "cost_usd": 0.0067734200000000005
+    }
+   ],
+   "gate_pass": false,
+   "agrees_with_owner": false
   }
- ]
+ ],
+ "summary": {
+  "rejected_passed": [
+   "007"
+  ],
+  "accepted_failed": [
+   "004",
+   "005"
+  ],
+  "reader_cost_usd": 0.128678
+ }
 }
