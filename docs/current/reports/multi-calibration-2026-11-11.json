@@ -1,0 +1,180 @@
+{
+ "date": "2026-11-11",
+ "purpose": "Calibration replay of the `multi` reading prompt before the lens decision on the proof-gate supplement (docs/current/reports/proof-gate-recommendation-2026-11-11.md section 1). CALIBRATION, not gate readings: nothing here settles an element, a proof or an asset.",
+ "declared_before_any_reading": "Set, stills and aliases fixed here and committed BEFORE any reader ran. Aliases copied unchanged from likeness-calibration.json (fixed 2026-11-04). Stills: every gate still of each video (build/gate/s*/still-*.png), the same set the 2026-11-04 calibration read. Readers: tools/blind_read.py --multi, 3 isolated Haiku readers per video, no --record. Judged with asset_library.judge_guesses at the live bar (3 readers, mean >= 60, none under 45, every reader names an alias).",
+ "decision_rule": "If `multi` passes ANY owner-rejected video (006-011 originals), the supplement is dropped (recommendation section 7). Positive controls 004 and 005 are expected to pass; a failed control is recorded as a signal, not a reason to adopt.",
+ "prompt": "multi",
+ "prompt_sha256": "8055930bf6508141",
+ "rows": [
+  {
+   "production": "006",
+   "subject": "wrinkled fingers in water",
+   "owner": "rejected",
+   "aliases": [
+    "finger",
+    "fingertip",
+    "hand",
+    "dedo",
+    "yema",
+    "mano"
+   ],
+   "stills": [
+    "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s01/still-0060.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s02/still-0090.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s03/still-0090.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s04/still-0090.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s05/still-0090.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s06/still-0090.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/006-pieles-arrugadas-agua/build/gate/s07/still-0150.png"
+   ],
+   "readings": null
+  },
+  {
+   "production": "007",
+   "subject": "cloud",
+   "owner": "rejected",
+   "aliases": [
+    "cloud",
+    "nube"
+   ],
+   "stills": [
+    "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s01/still-0150.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s02/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s03/still-0100.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s04/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s05/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s06/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/007-nube-cuantos-autos-pesa/build/gate/s07/still-0200.png"
+   ],
+   "readings": null
+  },
+  {
+   "production": "008",
+   "subject": "ice",
+   "owner": "rejected",
+   "aliases": [
+    "ice",
+    "iceberg",
+    "ice cube",
+    "hielo",
+    "ice block"
+   ],
+   "stills": [
+    "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s01/still-0150.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s02/still-0200.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s03/still-0100.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s04/still-0150.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s05/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s06/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/008-hielo-que-pasaria-si-se-hundiera/build/gate/s07/still-0180.png"
+   ],
+   "readings": null
+  },
+  {
+   "production": "009",
+   "subject": "soap",
+   "owner": "rejected",
+   "aliases": [
+    "soap",
+    "soap bar",
+    "bar of soap",
+    "jabon"
+   ],
+   "stills": [
+    "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s01/still-0150.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s02/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s03/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s04/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s05/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s06/still-0100.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/009-jabon-agua-sola-no-quita-grasa/build/gate/s07/still-0180.png"
+   ],
+   "readings": null
+  },
+  {
+   "production": "010",
+   "subject": "heart",
+   "owner": "rejected",
+   "aliases": [
+    "heart",
+    "corazon"
+   ],
+   "stills": [
+    "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s01/still-0150.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s02/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s03/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s04/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s05/still-0100.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s06/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/010-corazon-botellas-al-dia/build/gate/s07/still-0200.png"
+   ],
+   "readings": null
+  },
+  {
+   "production": "011",
+   "subject": "corn and popcorn",
+   "owner": "rejected",
+   "aliases": [
+    "corn",
+    "maize",
+    "popcorn",
+    "kernel",
+    "maiz",
+    "palomita",
+    "palomitas"
+   ],
+   "stills": [
+    "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s01/still-0150.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s02/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s03/still-0100.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s04/still-0080.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s05/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s06/still-0120.png",
+    "productions/_archive/retired-006-011-rejected-2026-11-04/011-palomitas-por-que-explota-el-maiz/build/gate/s07/still-0200.png"
+   ],
+   "readings": null
+  },
+  {
+   "production": "004",
+   "subject": "magnet",
+   "owner": "accepted",
+   "aliases": [
+    "magnet",
+    "iman"
+   ],
+   "stills": [
+    "productions/mecanalia-es/004-imanes/build/gate/s01/still-0230.png",
+    "productions/mecanalia-es/004-imanes/build/gate/s02/still-0200.png",
+    "productions/mecanalia-es/004-imanes/build/gate/s03/still-0260.png",
+    "productions/mecanalia-es/004-imanes/build/gate/s04/still-0150.png",
+    "productions/mecanalia-es/004-imanes/build/gate/s05/still-0120.png",
+    "productions/mecanalia-es/004-imanes/build/gate/s06/still-0200.png",
+    "productions/mecanalia-es/004-imanes/build/gate/s07/still-0330.png"
+   ],
+   "readings": null
+  },
+  {
+   "production": "005",
+   "subject": "toilet",
+   "owner": "accepted",
+   "aliases": [
+    "toilet",
+    "inodoro",
+    "wc",
+    "commode"
+   ],
+   "stills": [
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s01/still-0060.png",
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s02/still-0090.png",
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s03/still-0120.png",
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s04/still-0150.png",
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s05/still-0100.png",
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s06/still-0120.png",
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s07/still-0120.png",
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s08/still-0120.png",
+    "productions/mecanalia-es/005-inodoro-donde-va-todo/build/gate/s09/still-0200.png"
+   ],
+   "readings": null
+  }
+ ]
+}
