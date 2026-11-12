@@ -1,0 +1,9 @@
+{
+ "script_by": "creative-session",
+ "model": "claude-opus-5-5",
+ "at": "2026-11-11",
+ "record": "docs/current/reports/b4-2026-11-11.md; lens-decisions.md 2026-11-11 'Block B4'",
+ "evidence": "Script written (026-030) or revived on the P7 route (022) by the block B4 creative session, Opus 5.5, 2026-11-11, in this working tree; proofs.json written by the same session.",
+ "script_sha256": "895081e2f40d681aec9196a367fdbad7c782bf8f12e975e6fbac6885c45d631c",
+ "script_rev": "working tree"
+}

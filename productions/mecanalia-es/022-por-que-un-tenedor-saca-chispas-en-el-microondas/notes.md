@@ -1,6 +1,6 @@
 # por-que-un-tenedor-saca-chispas-en-el-microondas: production notes (developed script, 2026-11-11)
 
-Status: DEVELOPED SCRIPT ON FILE (developed set of the 2026-11-11 creative session; lens-decisions row "Developed set 019-024"). Nothing modelled, rendered, queued or published. The production proceeds FROM THIS SCRIPT (produce skill step 1), starting at step 3 (render-cost classes) and the beat sheet; the script may change only through the Reshape ladder, logged here and in lens-decisions.
+Status (current, 2026-11-11 block B4): REVIVED on the report's P7 route and stamped; not batch-eligible until `proofs.json` A1 (microwave-oven sealed) and N1 (one new scene-4 reading under the event declaration) have passed. The RETURNED record below is history. Original status line: Status: DEVELOPED SCRIPT ON FILE (developed set of the 2026-11-11 creative session; lens-decisions row "Developed set 019-024"). Nothing modelled, rendered, queued or published. The production proceeds FROM THIS SCRIPT (produce skill step 1), starting at step 3 (render-cost classes) and the beat sheet; the script may change only through the Reshape ladder, logged here and in lens-decisions.
 
 ## Publish package draft (Spanish; the owner publishes)
 - **Título:** ¿Por qué un tenedor saca chispas en el microondas y una cuchara no? ⚡
@@ -91,3 +91,14 @@ Asset need: electric spark and arc (`electric-arc`) and microwave oven (`microwa
 ## RETURNED 2026-11-11
 Scene 4 element 'sparks between fork tines' failed blind naming on every rung: rung 1 x3 (close on tines with teal arcs 92/80/80 'fork, teal bug'; bluish-white arcs 90/85/85 'fork, rake'; tight on the gap 25/45/30), rung 2 (miniature bolt to the cavity ceiling: 85/85/85 'grape sparking in a microwave', 85/85/92 'fork sparking in a microwave', bolt alone 55/40/45 'lightning bolt'), rung 4 context staging (whole oven in frame) 96/95/96 'microwave oven with a fork and spoon sparking inside': readers describe the event at high confidence but write 'sparking', not an alias (spark, sparks, electric arc, arc, chispa, lightning), and no alias may be added after a guess. Hero oven 97/96/95 and scenes 1-3 and 5 passed; scene 6 declares no element. The next rung would replace the hero mechanism.
 Replacement: productions/mecanalia-es/026-por-que-se-hundio-el-titanic-si-decian-que-era-insumergible.
+
+## REVIVED 2026-11-11 (block B4, P7 route of docs/current/reports/architecture-second-opinion-2026-11-11.md; owner-ordered)
+- Scene 4 element `tine-sparks` declared `kind: "event"` with the verb forms of its own nouns: spark, sparks, sparking, electric arc, arc, arcing, chispa, chispeando, lightning (script.json and scenes.json). Doctrine: doctrine-production.md "Event elements". The seven earlier readings stay FAIL under their old declaration; none is re-judged.
+- Scene 4's primary staging is the rung-4 context staging (whole oven in frame, arcs at the tine tips); narration unchanged. A pass will still be flagged here as "passed via context staging" (it originated as rung 4).
+- Hero route `code-primitive`, `library_assets: ["microwave-oven"]`: the oven is the micro_rig build and must land in the library (proof A1). Declaring it changes the hero fingerprint, so the frozen hero record (97/96/95) goes stale and the hero is read once more after A1, in production.
+- Records 1-3 and 5 are kept as they are; the gate decides their freshness under element-scoped invalidation.
+- Sidecar `returned.json` renamed `returned-2026-11-11.json` (precedent: 014) so the runner and tools/status.py do not treat the folder as returned.
+- If N1 fails there is no further rung: 022 is returned again and not revived a second time.
+
+## Ledger (from 2026-11-11, appended)
+- 2026-11-11: revived on the P7 route, stamped and proof-specified by the block B4 creative session (Opus); record docs/current/reports/b4-2026-11-11.md.

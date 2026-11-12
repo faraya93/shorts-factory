@@ -1,8 +1,8 @@
 {
   "video": "por-que-un-tenedor-saca-chispas-en-el-microondas",
-  "status": "scene-designed (runner 2026-11-11); see notes.md production log",
+  "status": "developed script, revived on the P7 route by the block B4 creative session (2026-11-11); scene-design fields from the 2026-11-11 production session kept; see notes.md",
   "primary_engine": "code3d",
-  "hero_route": "asset",
+  "hero_route": "code-primitive",
   "preset": "coral",
   "prefix": "micro",
   "gate_version": 2,
@@ -20,8 +20,10 @@
   "share_archetype": "ese amigo que mete al microondas el plato con el tenedor encima",
   "theme": "microwave",
   "main_tension": "dangerous",
-  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects and energy graphics on a stylised stage); the oven, fork, spoon, door screen, waves and arcs are geometric builds and energy graphics because the library oven candidates are unsealed search results and no fork, spoon or arc asset is sealed.",
-  "library_assets": [],
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects and energy graphics on a stylised stage); the oven, fork, spoon, door screen, waves and arcs are geometric builds and energy graphics because the library oven candidates are unsealed search results and no fork, spoon or arc asset is sealed. Hero route code-primitive (block B4): the oven is a geometric build (micro_rig.oven) and lands in assets/library/microwave-oven.",
+  "library_assets": [
+    "microwave-oven"
+  ],
   "description": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no? Porque la carga se amontona en las puntas de sus dientes y rompe el aire.\nY el propio microondas está hecho de metal, solo que liso. ⚡\nEnvíaselo a ese amigo que mete al microondas el plato con el tenedor encima.",
   "hashtags": [
     "#microondas",
@@ -64,89 +66,207 @@
   },
   "hero_colours": {},
   "gate_stills": {
-    "1": [10, 105, 185],
-    "2": [10, 200, 275],
-    "3": [10, 180, 230],
-    "4": [10, 60, 170],
-    "5": [10, 120, 240],
-    "6": [10, 150, 235]
+    "1": [
+      10,
+      105,
+      185
+    ],
+    "2": [
+      10,
+      200,
+      275
+    ],
+    "3": [
+      10,
+      180,
+      230
+    ],
+    "4": [
+      10,
+      60,
+      170
+    ],
+    "5": [
+      10,
+      120,
+      240
+    ],
+    "6": [
+      10,
+      150,
+      235
+    ]
   },
   "scene_elements": {
     "1": [
       {
         "id": "microwave-oven",
         "name": "microwave oven (cutaway, door open)",
-        "aliases": ["microwave", "microwave oven", "oven", "microondas"],
+        "aliases": [
+          "microwave",
+          "microwave oven",
+          "oven",
+          "microondas"
+        ],
         "route": "build",
         "source": "micro_rig.oven: steel shell, open cavity, turning plate, hinged door with window and screen, control panel with display and keypad",
-        "frames": [105]
+        "frames": [
+          105
+        ]
       },
       {
         "id": "fork-spoon",
         "name": "fork and spoon on a plate",
-        "aliases": ["fork", "spoon", "cutlery", "tenedor", "cuchara"],
+        "aliases": [
+          "fork",
+          "spoon",
+          "cutlery",
+          "tenedor",
+          "cuchara"
+        ],
         "route": "build",
         "source": "micro_rig.fork and micro_rig.spoon: geometric steel cutlery on the turning plate",
-        "frames": [185]
+        "frames": [
+          185
+        ]
       }
     ],
     "2": [
       {
         "id": "cavity-waves",
         "name": "glowing waves bouncing inside a microwave cavity",
-        "aliases": ["microwave", "microwave oven", "microwaves", "oven"],
+        "aliases": [
+          "microwave",
+          "microwave oven",
+          "microwaves",
+          "oven"
+        ],
         "route": "build",
         "source": "micro_rig.waves: translucent accent slabs bouncing between the cavity walls, inside the oven build",
-        "frames": [200]
+        "frames": [
+          200
+        ]
       }
     ],
     "3": [
       {
         "id": "fork-tines",
         "name": "fork tines glowing",
-        "aliases": ["fork", "tenedor", "fork tines"],
+        "aliases": [
+          "fork",
+          "tenedor",
+          "fork tines"
+        ],
         "route": "build",
         "source": "micro_rig.fork with emissive accent tip beads",
-        "frames": [180]
+        "frames": [
+          180
+        ]
       }
     ],
     "4": [
       {
         "id": "tine-sparks",
         "name": "sparks between fork tines",
-        "aliases": ["spark", "sparks", "electric arc", "arc", "chispa", "lightning"],
+        "aliases": [
+          "spark",
+          "sparks",
+          "sparking",
+          "electric arc",
+          "arc",
+          "arcing",
+          "chispa",
+          "chispeando",
+          "lightning"
+        ],
         "route": "build",
-        "source": "micro_rig.burst_arcs: short branching accent arcs between the tine tips",
-        "frames": [60]
+        "source": "micro_rig.oven + micro_rig.burst_arcs: the whole oven in frame (door open, keypad, plate), branching arcs between the fork's tine tips (the staging of the 2026-11-11 rung-4 reading, now the scene's primary staging; block B4, P7 route)",
+        "frames": [
+          60
+        ],
+        "kind": "event"
       }
     ],
     "5": [
       {
         "id": "oven-door",
         "name": "microwave door with its metal screen",
-        "aliases": ["microwave", "microwave oven", "microwave door", "oven door"],
+        "aliases": [
+          "microwave",
+          "microwave oven",
+          "microwave door",
+          "oven door"
+        ],
         "route": "build",
         "source": "micro_rig.oven door: frame, window glass, perforated metal screen lit in the accent",
-        "frames": [220]
+        "frames": [
+          220
+        ]
       }
     ]
   },
   "visibility": {
     "1": {
-      "microwave-oven": {"objects": ["oven_*"], "frames": [105]},
-      "fork-spoon": {"objects": ["fork_*", "spoon_*"], "frames": [185]}
+      "microwave-oven": {
+        "objects": [
+          "oven_*"
+        ],
+        "frames": [
+          105
+        ]
+      },
+      "fork-spoon": {
+        "objects": [
+          "fork_*",
+          "spoon_*"
+        ],
+        "frames": [
+          185
+        ]
+      }
     },
     "2": {
-      "cavity-waves": {"objects": ["wave_*"], "frames": [200]}
+      "cavity-waves": {
+        "objects": [
+          "wave_*"
+        ],
+        "frames": [
+          200
+        ]
+      }
     },
     "3": {
-      "fork-tines": {"objects": ["tipglow_*", "charge_*"], "frames": [180]}
+      "fork-tines": {
+        "objects": [
+          "tipglow_*",
+          "charge_*"
+        ],
+        "frames": [
+          180
+        ]
+      }
     },
     "4": {
-      "tine-sparks": {"objects": ["arc_*"], "frames": [60]}
+      "tine-sparks": {
+        "objects": [
+          "arc_*"
+        ],
+        "frames": [
+          60
+        ]
+      }
     },
     "5": {
-      "oven-door": {"objects": ["oven_door*", "oven_screen*", "oven_handle*"], "frames": [220]}
+      "oven-door": {
+        "objects": [
+          "oven_door*",
+          "oven_screen*",
+          "oven_handle*"
+        ],
+        "frames": [
+          220
+        ]
+      }
     }
   },
   "scenes": [
@@ -158,9 +278,21 @@
       "camera": "órbita lenta alrededor del plato giratorio",
       "target_duration_s": 6.5,
       "render_cost_class": "opaque",
-      "emphasis": ["chispas", "cualquier"],
+      "emphasis": [
+        "chispas",
+        "cualquier"
+      ],
       "overlays": [
-        {"type": "label", "style": "tag", "text_or_value": "¿CUALQUIER METAL?", "at_word": "cualquier", "offset_s": 0.0, "visible_s": 2.4, "x": 0.5, "y": 0.62}
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿CUALQUIER METAL?",
+          "at_word": "cualquier",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.62
+        }
       ]
     },
     {
@@ -171,9 +303,22 @@
       "camera": "travelling lateral a través de la cavidad, de pared a pared",
       "target_duration_s": 10.7,
       "render_cost_class": "opaque",
-      "emphasis": ["rebotan", "miles", "metal."],
+      "emphasis": [
+        "rebotan",
+        "miles",
+        "metal."
+      ],
       "overlays": [
-        {"type": "chip", "text_or_value": "2,45 GHz", "at_word": "miles", "offset_s": 0.0, "duration_s": 0.5, "visible_s": 2.6, "x": 0.72, "y": 0.6}
+        {
+          "type": "chip",
+          "text_or_value": "2,45 GHz",
+          "at_word": "miles",
+          "offset_s": 0.0,
+          "duration_s": 0.5,
+          "visible_s": 2.6,
+          "x": 0.72,
+          "y": 0.6
+        }
       ]
     },
     {
@@ -184,20 +329,35 @@
       "camera": "empuje desde la cuchara hacia las puntas del tenedor",
       "target_duration_s": 8.0,
       "render_cost_class": "opaque",
-      "emphasis": ["reparte", "puntas"],
+      "emphasis": [
+        "reparte",
+        "puntas"
+      ],
       "overlays": [
-        {"type": "ring", "radius": 0.2, "x": 0.56, "y": 0.58, "at_word": "puntas", "offset_s": 0.0, "duration_s": 0.8, "visible_s": 1.8}
+        {
+          "type": "ring",
+          "radius": 0.2,
+          "x": 0.56,
+          "y": 0.58,
+          "at_word": "puntas",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 1.8
+        }
       ]
     },
     {
       "name": "chispa",
       "narration": "Ahí el empuje es tan fuerte que rompe el aire: el aire se vuelve chispa, como un rayo en miniatura.",
-      "what_changes": "The air at the tines breaks down: arcs leap between the tips with a flash, branch and snap off.",
+      "what_changes": "The air at the tines breaks down: with the whole oven in frame (door open, keypad, turning plate), arcs leap between the fork's tips with a flash, branch and snap off; the spoon beside it stays dark.",
       "transformation": "puntas brillantes → saltan chispas entre los dientes",
       "camera": "primer plano que retrocede de golpe con cada chispa",
       "target_duration_s": 7.0,
       "render_cost_class": "opaque",
-      "emphasis": ["rompe", "chispa,"],
+      "emphasis": [
+        "rompe",
+        "chispa,"
+      ],
       "overlays": []
     },
     {
@@ -208,9 +368,22 @@
       "camera": "retroceso a todo el horno y empuje hacia la puerta",
       "target_duration_s": 8.3,
       "render_cost_class": "opaque",
-      "emphasis": ["metal,", "lisas,", "rejilla"],
+      "emphasis": [
+        "metal,",
+        "lisas,",
+        "rejilla"
+      ],
       "overlays": [
-        {"type": "label", "style": "tag", "text_or_value": "METAL", "at_word": "metal,", "offset_s": 0.0, "visible_s": 2.4, "x": 0.74, "y": 0.6}
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "METAL",
+          "at_word": "metal,",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.74,
+          "y": 0.6
+        }
       ]
     },
     {
@@ -221,9 +394,21 @@
       "camera": "retroceso desde las puntas hasta el horno entero",
       "target_duration_s": 8.0,
       "render_cost_class": "opaque",
-      "emphasis": ["puntas:", "envíaselo"],
+      "emphasis": [
+        "puntas:",
+        "envíaselo"
+      ],
       "overlays": [
-        {"type": "label", "style": "tag", "text_or_value": "ENVÍASELO", "at_word": "Envíaselo", "offset_s": 0.0, "visible_s": 2.6, "x": 0.78, "y": 0.62}
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.78,
+          "y": 0.62
+        }
       ]
     }
   ],
@@ -247,5 +432,8 @@
   ],
   "narration_words": 139,
   "est_duration_s": 47.9,
-  "duration_band_s": [45, 60]
+  "duration_band_s": [
+    45,
+    60
+  ]
 }

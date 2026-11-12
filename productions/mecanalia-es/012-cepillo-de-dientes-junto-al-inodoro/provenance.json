@@ -1,0 +1,9 @@
+{
+ "script_by": "creative-session",
+ "model": "claude-opus-5-5",
+ "at": "2026-11-11",
+ "record": "docs/current/reports/b4-2026-11-11.md; lens-decisions.md 2026-11-11 'Block B4'; lens-decisions.md 2026-11-07 'Topic slate' and 2026-11-08 '012 cepillo, Reshape ladder on scene 3'",
+ "evidence": "Script written in a0b82cd (topic slate, Co-Authored-By Claude Opus 5.5); its only later change, 6d9edf7 (Co-Authored-By Claude Opus 5.5), is the recorded rung-3 narration line of scene 3 plus scene-design fields. No other commit touched it. Stamped after the fact by block B4 from these records.",
+ "script_sha256": "338afad355921f93cc551cb17ec9558da0f198671a1de56156d59b21c6c8f67b",
+ "script_rev": "6d9edf7"
+}

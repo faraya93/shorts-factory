@@ -1,0 +1,299 @@
+{
+  "video": "por-que-a-los-33-mineros-de-chile-los-sacaron-en-una-capsula",
+  "status": "developed script, STANDBY (block B4 creative session, 2026-11-11; bank status standby 029). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "human-figure"
+  ],
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 33 (fill 2), developed 2026-11-11 by the B4 creative session as a standby",
+  "title": "¿Por qué a los 33 mineros de Chile los sacaron en una cápsula? ⛏️",
+  "topic_family": "objects",
+  "structure_variant": "story",
+  "staging_mode_proposal": "cutaway: the hill cut open from the surface down to the refuge, so the blocked ramp, the probe holes and the rescue shaft are in one section.",
+  "curiosity_score": 9,
+  "curiosity_reason": "The rescue was followed live across the Spanish-speaking world and beyond; the capsule is iconic; dangerous. Fame evidence in the bank entry.",
+  "hook_question": "¿Por qué a los 33 mineros de Chile los sacaron en una cápsula y no por el túnel de la mina?",
+  "false_belief": "Los rescataron por el mismo túnel por donde entraron.",
+  "turn": "Scene 4: seventeen days in, a probe drill comes back up with a note tied to it: they are alive, and the thin hole becomes their lifeline.",
+  "closing_reframe": "La salida no fue el túnel de la mina: fue el hoyo por donde subió su primer mensaje.",
+  "share_archetype": "ese amigo que se mete a una cueva sin avisarle a nadie",
+  "theme": "mine rescue",
+  "main_tension": "dangerous",
+  "engine_reason": "code3d (engine selection: rigid rock strata in section, straight drill strings, a cylindrical capsule): hill section, ramp, rock block, drill and capsule are geometric builds; the miners are the sealed human-figure (standing, seated).",
+  "description": "¿Por qué a los 33 mineros de Chile los sacaron en una cápsula? Porque una roca gigante tapó la única rampa de salida.\nPrimero los encontró una sonda fina, que subió con un papel: 'Estamos bien'. ⛏️\nEnvíaselo a ese amigo que se mete a una cueva sin avisarle a nadie.",
+  "hashtags": [
+    "#mineros",
+    "#chile",
+    "#historia",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "human-figure, standing and seated poses only (sealed). Miners: fig_shirt and fig_pants in one dusty work colour, fig_boots dark; no helmet lamps beyond a small accent dot on the head; no faces (the figure is faceless). No likeness of any real miner."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué a los 33 mineros de Chile los sacaron en una cápsula y no por el túnel de la mina? Muchos creen que salieron por donde entraron.",
+      "what_changes": "A hill in the desert, cut open: a ramp spirals down inside it; at the top a narrow steel capsule rises out of a hole in the ground; the tag ¿POR EL TÚNEL? points at the ramp's mouth.",
+      "transformation": "cerro cortado → una cápsula sale por un hoyo y no por la rampa",
+      "camera": "órbita desde la boca de la mina hasta el hoyo de la cápsula",
+      "overlays_plan": [
+        "tag ¿POR EL TÚNEL? at 'túnel'",
+        "counter 33 at '33'"
+      ],
+      "elements": [
+        {
+          "id": "mine-section",
+          "kind": "object",
+          "name": "a mine cut open inside a hill, with a ramp spiralling down",
+          "route": "build: layered rock section, helical ramp, desert surface (no library asset)",
+          "risk": "high: an abstract section may read as a 'cake' or 'layers'; the ramp mouth and the capsule are the cue; proof P1",
+          "aliases": [
+            "mine",
+            "mine shaft",
+            "mine tunnel",
+            "underground mine",
+            "mine cross-section",
+            "tunnel",
+            "cave",
+            "mina"
+          ]
+        }
+      ],
+      "est_duration_s": 9.7
+    },
+    {
+      "name": "derrumbe",
+      "narration": "En agosto de dos mil diez, en la mina San José, en Chile, una roca del tamaño de un edificio tapó la única rampa de salida.",
+      "what_changes": "Deep in the section, a huge block of rock breaks off and drops across the ramp; dust bursts out along the tunnel; the ramp below the block is sealed.",
+      "transformation": "rampa abierta → un bloque gigante la tapa",
+      "camera": "bajada por la rampa y frenazo cuando cae el bloque",
+      "overlays_plan": [
+        "chip 2010 at 'diez'"
+      ],
+      "elements": [
+        {
+          "id": "rockfall",
+          "kind": "event",
+          "name": "a huge rock collapsing onto a mine tunnel",
+          "route": "build: rigid rock block falling across the ramp in the section; dust as a stylised particle burst",
+          "risk": "high: event element; proof P2",
+          "aliases": [
+            "cave-in",
+            "collapse",
+            "rockfall",
+            "mine collapse",
+            "collapsing",
+            "falling rock",
+            "rock falling",
+            "landslide",
+            "derrumbe"
+          ]
+        }
+      ],
+      "est_duration_s": 9.0
+    },
+    {
+      "name": "refugio",
+      "narration": "Treinta y tres mineros quedaron abajo, a unos setecientos metros. Arriba, nadie sabía si estaban vivos.",
+      "what_changes": "Down at the bottom of the section, a small lit room: thirty-three figures gather in it; far above, on the surface, the drill rigs arrive and set up.",
+      "transformation": "mina en silencio → mineros en el refugio y máquinas llegando arriba",
+      "camera": "subida vertical desde el refugio hasta la superficie, setecientos metros de roca",
+      "overlays_plan": [
+        "counter 700 m at 'setecientos'"
+      ],
+      "elements": [
+        {
+          "id": "miners-refuge",
+          "kind": "object",
+          "name": "a group of miners in an underground room",
+          "route": "human-figure (sealed, standing and seated), 33 instances in a lit chamber in the rock section",
+          "risk": "medium: sealed asset and poses; the rock around them is the cue for 'underground'; proof P1 covers the section",
+          "aliases": [
+            "miners",
+            "people",
+            "group of people",
+            "workers",
+            "people underground",
+            "trapped miners",
+            "mineros"
+          ]
+        }
+      ],
+      "est_duration_s": 5.5
+    },
+    {
+      "name": "mensaje",
+      "narration": "Perforaron hoyos finos, a ciegas. Diecisiete días después, una sonda llegó al refugio, y volvió a subir con un papel amarrado: 'Estamos bien en el refugio los 33'.",
+      "what_changes": "The turn: thin drill strings bore down through the section, missing the refuge; one breaks through its ceiling; it is pulled back up, and at the surface a folded paper hangs from its tip and opens.",
+      "transformation": "sondas a ciegas → una llega al refugio y sube con el mensaje",
+      "camera": "seguimiento de la sonda hacia abajo y de vuelta hacia arriba con el papel",
+      "overlays_plan": [
+        "counter día 17 at 'diecisiete'"
+      ],
+      "elements": [
+        {
+          "id": "drill-note",
+          "kind": "object",
+          "name": "a drill bit with a paper note tied to it",
+          "route": "build: drill string and bit, folded paper with a tie; the paper carries no readable text (the words are in the narration and subtitles)",
+          "risk": "high: a paper on a rod may read as a 'flag'; proof P3",
+          "aliases": [
+            "drill",
+            "drill bit",
+            "drill with a note",
+            "note",
+            "paper note",
+            "message",
+            "drill and paper",
+            "sonda",
+            "mensaje"
+          ]
+        }
+      ],
+      "est_duration_s": 9.7
+    },
+    {
+      "name": "palomas",
+      "narration": "Por ese hoyo les bajaron comida, agua y cartas, en tubos que llamaron palomas.",
+      "what_changes": "Slim tubes slide down the thin hole one after another and arrive in the refuge; the figures open them.",
+      "transformation": "hoyo vacío → tubos con comida que bajan al refugio",
+      "camera": "travelling vertical junto a los tubos que bajan",
+      "overlays_plan": [
+        "label PALOMAS tag at 'palomas'"
+      ],
+      "elements": [
+        {
+          "id": "supply-tubes",
+          "kind": "object",
+          "name": "tubes sliding down a narrow borehole",
+          "route": "build: slim capsules in the borehole of the section",
+          "risk": "medium: secondary; read with the scene",
+          "aliases": [
+            "tube",
+            "tubes",
+            "capsule",
+            "capsules",
+            "pipe",
+            "supply tube",
+            "borehole",
+            "paloma"
+          ]
+        }
+      ],
+      "est_duration_s": 4.8
+    },
+    {
+      "name": "taladro",
+      "narration": "Volver por la rampa era imposible: el bloque seguía ahí y la roca seguía cayendo. Así que ensancharon un hoyo hasta que cupiera una persona. Tardaron más de un mes.",
+      "what_changes": "Beside the blocked ramp, chips of rock still fall; on the surface a large drill bores a wider shaft down beside the thin one, its bit chewing through the strata; a day counter runs.",
+      "transformation": "hoyo fino → un pozo ancho que baja hasta el refugio",
+      "camera": "travelling hacia abajo siguiendo la broca grande",
+      "overlays_plan": [
+        "counter +30 días at 'mes'",
+        "mark red X on the ramp at 'imposible'"
+      ],
+      "elements": [
+        {
+          "id": "big-drill",
+          "kind": "object",
+          "name": "a large drill boring a shaft down through rock",
+          "route": "build: drill rig on the surface, wide bit in the section",
+          "risk": "medium-high: proof P2 shares the rock section; the rig is the cue",
+          "aliases": [
+            "drill",
+            "drilling rig",
+            "drill rig",
+            "drilling",
+            "boring",
+            "drill bit",
+            "borehole",
+            "taladro"
+          ]
+        }
+      ],
+      "est_duration_s": 10.3
+    },
+    {
+      "name": "capsula",
+      "narration": "En octubre bajó una cápsula de acero, apenas más ancha que un hombre, y los subió uno por uno. A los sesenta y nueve días, habían salido los treinta y tres.",
+      "what_changes": "A narrow steel capsule descends the wide shaft, a figure steps in, and it rises to the surface; the trip repeats faster and faster while a counter climbs to 33, and the refuge empties.",
+      "transformation": "33 abajo → uno por uno suben en la cápsula hasta que el refugio queda vacío",
+      "camera": "seguimiento de la cápsula subiendo por el pozo",
+      "overlays_plan": [
+        "counter 1→33 over the trips",
+        "chip 69 días at 'nueve'"
+      ],
+      "elements": [
+        {
+          "id": "rescue-capsule",
+          "kind": "object",
+          "name": "a narrow rescue capsule rising up a shaft with a person inside",
+          "route": "build: tall steel cylinder cage with a figure inside, winch line, in the shaft of the section",
+          "risk": "high: a cylinder in a shaft may read as an 'elevator' or 'rocket'; proof P4",
+          "aliases": [
+            "capsule",
+            "rescue capsule",
+            "escape capsule",
+            "pod",
+            "rescue pod",
+            "elevator",
+            "lift",
+            "cápsula"
+          ]
+        }
+      ],
+      "est_duration_s": 10.7
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que la salida no fue el túnel de la mina: fue el hoyo por donde subió su primer mensaje. Envíaselo a ese amigo que se mete a una cueva sin avisarle a nadie.",
+      "what_changes": "Single reframe image: the whole section: the ramp still blocked, and beside it the thin hole and the wide shaft lit in the accent from the empty refuge to the surface.",
+      "transformation": "rescate terminado → el corte entero con el hoyo y el pozo encendidos junto a la rampa tapada",
+      "camera": "retroceso desde el refugio vacío hasta el cerro entero",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 11.7
+    }
+  ],
+  "sources": [
+    "The collapse on 5 August 2010 at the San José mine near Copiapó, Atacama region, Chile, trapping 33 miners about 700 m underground and about 5 km from the entrance: Encyclopaedia Britannica 'Chile mine rescue of 2010'; Interesting Engineering 'The improbable rescue of Los 33' (live search 2026-11-11). FLAGGED: confirm the date at the beat sheet.",
+    "The ramp blocked by a single huge block (the 'megabloque'). FLAGGED: 'del tamaño de un edificio' needs a source giving its size at the beat sheet (it is commonly reported as about 700,000 t, the height of a 45-storey building); if none is read, the narration says 'una roca gigante', with the same staging.",
+    "Day 17 (22 August 2010): a probe drill reached the refuge and returned with the note 'Estamos bien en el refugio los 33'. FLAGGED: not confirmed by the 2026-11-11 search; read it in Britannica or a Chilean government source at the beat sheet. The story does not stand without the turn, so if it cannot be sourced the topic is returned (format policy 'Historia', Sourcing).",
+    "Supplies sent down the borehole in tubes called 'palomas'. FLAGGED: confirm at the beat sheet; if unsourced, scene 5 drops the name and keeps the tubes.",
+    "Plan B (Schramm T130XD) widened a pilot hole and reached the miners on 9 October 2010 after about a month of drilling; the pilot hole was about 12 inches wide (Wikipedia 'Rescue plans for 2010 Copiapó mining accident', live search 2026-11-11). Spoken as 'más de un mes'. FLAGGED: confirm the start date of Plan B drilling at the beat sheet.",
+    "The Fénix 2 capsule: a 3.95 m steel cylinder 'just wide enough to hold one man'; each ascent about 15 minutes; Operation San Lorenzo from 23:00 on 12 October; all 33 out 69 days after the collapse (Wikipedia 'Fénix capsules'; Britannica Kids 'Chile mine rescue of 2010'). Spoken as 'apenas más ancha que un hombre' and 'a los sesenta y nueve días'.",
+    "Return through the ramp impossible: the block and continuing instability (same Britannica article). FLAGGED with the block size."
+  ],
+  "simplifications": [
+    "The mine is a stylised section; the real ramp winds about 5 km; the refuge, the holes and the shaft are drawn closer together than they were.",
+    "Several probe holes and three drilling plans are reduced to a few probes and one large drill.",
+    "The capsule is a plain steel cage without the national colours it carried."
+  ],
+  "historia_checks": {
+    "one_complete_story": "From the collapse to the last miner out; the outcome (all 33 out, day 69) is told in scene 7 before the reframe. Not serialized.",
+    "mechanism_heart": "Remove the mechanism sentences (blind probe drilling, the note on the bit, the supply tubes, the widened shaft, the one-man capsule) and only 'they were trapped and got out' remains. PASS.",
+    "people": "Stylised faceless figures (sealed human-figure); no real miner is shown or named."
+  },
+  "narration_words": 207,
+  "est_duration_s": 71.4,
+  "duration_band_s": [
+    55,
+    75
+  ],
+  "flatness_test": [
+    "1. hook: the hill in section; a capsule rises out of a hole, not the ramp.",
+    "2. derrumbe: a huge rock drops and seals the ramp.",
+    "3. refugio: 33 figures in the refuge below; drill rigs arrive on the surface.",
+    "4. mensaje: probes bore down blind; one breaks into the refuge and comes up with a note (turn).",
+    "5. palomas: supply tubes slide down the thin hole into the refuge.",
+    "6. taladro: a big drill bores a wide shaft beside the blocked ramp.",
+    "7. capsula: the capsule lifts the miners one by one until the refuge is empty.",
+    "8. cierre: the whole section with the hole and shaft lit beside the blocked ramp."
+  ]
+}

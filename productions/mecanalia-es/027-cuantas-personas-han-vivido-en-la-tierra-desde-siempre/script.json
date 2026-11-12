@@ -1,0 +1,234 @@
+{
+  "video": "cuantas-personas-han-vivido-en-la-tierra-desde-siempre",
+  "status": "developed script (block B4 creative session, 2026-11-11). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "library_assets": [
+    "human-figure",
+    "earth-globe"
+  ],
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 32 (fill 2), drawn 2026-11-11 as the replacement for returned 023; script written by the B4 creative session",
+  "title": "¿Cuántas personas han vivido en la Tierra desde siempre? 🌍",
+  "topic_family": "numbers",
+  "structure_variant": "scale",
+  "staging_mode_proposal": "stage: one figure on the Coral stage, multiplied with a pull-back at each step until the globe sits on the stage wrapped in rings of people.",
+  "curiosity_score": 9,
+  "curiosity_reason": "The 'more alive now than ever died' line circulates as a fact and is false; enormous; puts the viewer inside the count.",
+  "hook_question": "¿Cuántas personas han vivido en la Tierra desde siempre?",
+  "false_belief": "Hoy hay más gente viva que todos los muertos de la historia juntos.",
+  "turn": "Scene 5: the living ring is one of more than thirteen; for every person alive, more than twelve have already lived and died.",
+  "closing_reframe": "Los vivos no somos la mayoría: somos menos de uno de cada trece.",
+  "share_archetype": "ese amigo que reenvía datos curiosos sin revisarlos",
+  "theme": "human population",
+  "main_tension": "enormous",
+  "engine_reason": "code3d on the asset route (engine selection: numbers spectacle by instancing): the sealed human-figure as the unit, instanced into rows and rings; the Earth as the library asset earth-globe (open job, sealed before production).",
+  "description": "¿Cuántas personas han vivido en la Tierra desde siempre? Más de cien mil millones, contando desde hace unos doscientos mil años.\nPor cada persona viva hoy, más de doce ya vivieron y murieron. 🌍\nEnvíaselo a ese amigo que reenvía datos curiosos sin revisarlos.",
+  "hashtags": [
+    "#poblacion",
+    "#numeros",
+    "#historia",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "human-figure standing pose only (sealed). The living: fig_shirt in the accent colour. The dead: one neutral grey for fig_skin, fig_shirt, fig_pants and fig_boots (a desaturated figure, no ghost or skeleton imagery)."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Cuántas personas han vivido en la Tierra desde siempre? Se dice que hoy hay más gente viva que todos los muertos de la historia juntos.",
+      "what_changes": "One standing figure on the stage, lit in the accent; around it a crowd pops up row by row; the tag ¿MÁS VIVOS QUE MUERTOS? hangs above the crowd.",
+      "transformation": "una persona sola → una multitud que aparece alrededor",
+      "camera": "retroceso desde la figura hasta la multitud",
+      "overlays_plan": [
+        "tag ¿MÁS VIVOS QUE MUERTOS? at 'vivos'"
+      ],
+      "elements": [
+        {
+          "id": "person",
+          "kind": "object",
+          "name": "a person standing",
+          "route": "library human-figure, standing pose (sealed asset, sealed pose)",
+          "risk": "low",
+          "aliases": [
+            "person",
+            "human",
+            "man",
+            "woman",
+            "figure",
+            "human figure",
+            "people",
+            "crowd",
+            "persona"
+          ]
+        }
+      ],
+      "est_duration_s": 8.6
+    },
+    {
+      "name": "vivos",
+      "narration": "Empecemos por los vivos: somos unos ocho mil millones. En fila, hombro con hombro, daríamos unas cien vueltas a la Tierra.",
+      "what_changes": "The crowd forms a single file that runs off the stage; the camera pulls back until the globe sits on the stage and the file wraps it as a glowing accent ring, then a second, third... until a thick band of rings circles it.",
+      "transformation": "multitud en el escenario → una fila que envuelve la Tierra muchas veces",
+      "camera": "gran retroceso desde la fila hasta el planeta entero",
+      "overlays_plan": [
+        "counter 8.000.000.000 at 'millones'",
+        "chip ×100 at 'vueltas'"
+      ],
+      "elements": [
+        {
+          "id": "ring-of-people",
+          "kind": "object",
+          "name": "a line of people circling the Earth",
+          "route": "library earth-globe (open job) + human-figure instances along a ring, accent band at globe scale",
+          "risk": "medium-high: at globe scale the figures become a band; the near figures in the first frames are the cue; proof P1",
+          "aliases": [
+            "earth",
+            "planet earth",
+            "globe",
+            "the earth",
+            "world",
+            "people around the earth",
+            "line of people around the earth",
+            "ring of people",
+            "planeta",
+            "tierra"
+          ]
+        }
+      ],
+      "est_duration_s": 7.2
+    },
+    {
+      "name": "antes",
+      "narration": "Pero la gente lleva unos doscientos mil años naciendo y muriendo. Los demógrafos sumaron a todos los que nacieron alguna vez, generación tras generación.",
+      "what_changes": "Behind the living ring, grey figures appear in waves, generation after generation, each wave standing behind the last, filling the stage outward like rings of a tree; a year counter runs backwards.",
+      "transformation": "solo los vivos → oleadas grises de todos los que vivieron antes",
+      "camera": "travelling hacia atrás a través de las oleadas, de los vivos a las más antiguas",
+      "overlays_plan": [
+        "chip 200.000 años at 'doscientos'"
+      ],
+      "elements": [
+        {
+          "id": "grey-crowd",
+          "kind": "object",
+          "name": "waves of grey people behind a coloured crowd",
+          "route": "human-figure instances, grey recolour, rows by instancing (pattern: 016 instanced heaps passed with a reference object in frame)",
+          "risk": "medium: a grey crowd may read as statues; proof P2",
+          "aliases": [
+            "crowd",
+            "people",
+            "crowd of people",
+            "group of people",
+            "many people",
+            "army",
+            "multitud",
+            "personas",
+            "gente"
+          ]
+        }
+      ],
+      "est_duration_s": 8.3
+    },
+    {
+      "name": "total",
+      "narration": "La cuenta pasa de cien mil millones de personas. Si cada fila de vivos es una de estas vueltas, los que ya murieron envuelven la Tierra doce veces más.",
+      "what_changes": "Back at globe scale: the accent band of the living stays; around it grey bands stack outward, one per eight billion, until more than twelve grey bands surround the single accent one.",
+      "transformation": "una banda de vivos → más de doce bandas grises alrededor",
+      "camera": "órbita amplia alrededor del planeta mientras se apilan las bandas",
+      "overlays_plan": [
+        "counter +100.000.000.000 at 'millones'",
+        "counter ×12 at 'doce'"
+      ],
+      "elements": [
+        {
+          "id": "rings-stack",
+          "kind": "object",
+          "name": "the Earth wrapped in many bands",
+          "route": "earth-globe + stacked band instances (accent and grey)",
+          "risk": "medium: proof P1 (same staging, more bands)",
+          "aliases": [
+            "earth",
+            "planet earth",
+            "globe",
+            "the earth",
+            "world",
+            "planet with rings",
+            "planeta",
+            "tierra"
+          ]
+        }
+      ],
+      "est_duration_s": 10.0
+    },
+    {
+      "name": "giro",
+      "narration": "O sea, por cada persona viva hoy, hay más de doce que ya vivieron y murieron. Más que un equipo de fútbol completo.",
+      "what_changes": "The turn: back down to people scale: one accent figure stands on the stage; twelve grey figures step in around it one by one, lining up like a football team behind its captain.",
+      "transformation": "una persona viva sola → rodeada por doce que vivieron antes",
+      "camera": "bajada desde el planeta hasta una sola figura y órbita cerrada",
+      "overlays_plan": [
+        "counter 1 at 'viva'",
+        "counter 12 at 'doce'"
+      ],
+      "elements": [
+        {
+          "id": "one-and-twelve",
+          "kind": "object",
+          "name": "one coloured person surrounded by twelve grey people",
+          "route": "human-figure standing, 13 instances, recolour",
+          "risk": "low-medium: sealed asset and pose; a small group reads as people; proof P2 covers the grey recolour",
+          "aliases": [
+            "people",
+            "group of people",
+            "crowd",
+            "team",
+            "person",
+            "figures",
+            "personas",
+            "gente"
+          ]
+        }
+      ],
+      "est_duration_s": 7.9
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que los vivos no somos la mayoría: somos menos de uno de cada trece. Envíaselo a ese amigo que reenvía datos curiosos sin revisarlos.",
+      "what_changes": "Single reframe image: the camera rises from the thirteen figures back out to the globe, where the one accent band is the thinnest layer of a thick grey shell.",
+      "transformation": "trece personas → el planeta con una sola banda de color entre todas las grises",
+      "camera": "retroceso vertical desde las figuras hasta el planeta",
+      "overlays_plan": [
+        "counter 1/13 at 'trece'",
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 8.6
+    }
+  ],
+  "sources": [
+    "People ever born: Population Reference Bureau, 'How Many People Have Ever Lived on Earth?' (Kaneda and Haub): more than 108 billion in the 2019/2020 update (table total 108,760,543,790); about 117 billion in the update dated to the November 2022 data (cited by secondary sources; FLAGGED: read the figure on the PRB page at the beat sheet). The narration says 'pasa de cien mil millones', true under both updates.",
+    "Start of the count: PRB begins its estimate about 190,000 BCE (FLAGGED: confirm the start date in the same PRB article); spoken as 'unos doscientos mil años'.",
+    "Living population about 8 billion: UN World Population Prospects (the 8-billion mark, November 2022).",
+    "Derived, not a source figure: dead per living person = (ever born - living) / living = (108 - 8) / 8 = 12.5 or (117 - 8) / 8 = 13.6, so 'más de doce' holds under both PRB updates; living share = 8/108 = 1/13.5 or 8/117 = 1/14.6, so 'menos de uno de cada trece' holds under both. The 'twelve more times around' line in scene 4 is the same ratio expressed as bands.",
+    "Derived: a file shoulder to shoulder at about 0.5 m per person: 8e9 x 0.5 m = 4 million km; Earth's equatorial circumference 40,075 km; 4,000,000 / 40,075 = about 100 turns. The 0.5 m shoulder width is an assumption, stated here; spoken as 'unas cien vueltas'."
+  ],
+  "simplifications": [
+    "The rings of people are drawn as bands at globe scale; at that scale the figures are not individually visible.",
+    "The dead are shown as grey figures for the count only; every person who ever lived is drawn with the same figure."
+  ],
+  "narration_words": 147,
+  "est_duration_s": 50.7,
+  "duration_band_s": [
+    50,
+    60
+  ],
+  "flatness_test": [
+    "1. hook: one figure, then a crowd appears around it.",
+    "2. vivos: the crowd becomes a single file that wraps the globe in a band of about a hundred turns.",
+    "3. antes: waves of grey figures from earlier generations fill in behind the living.",
+    "4. total: grey bands stack around the globe, more than twelve for the single accent band.",
+    "5. giro: one living figure, twelve grey figures step in around it (turn).",
+    "6. cierre: pull-back to the globe: the accent band is the thinnest layer of a grey shell."
+  ]
+}

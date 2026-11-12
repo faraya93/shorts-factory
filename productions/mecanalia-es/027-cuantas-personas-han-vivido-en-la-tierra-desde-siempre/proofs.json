@@ -1,0 +1,122 @@
+{
+ "spec_by": "creative-session",
+ "model": "claude-opus-5-5",
+ "at": "2026-11-11",
+ "record": "docs/current/reports/b4-2026-11-11.md",
+ "doctrine": "docs/current/specs/doctrine-topics-and-scripts.md 'Blind proofs before batch eligibility'",
+ "batch_eligible_when": "every proof has status 'passed' (an element reading under the bar, an asset sealed 'ready', a render-cost class recorded)",
+ "built_by": "a braked Sonnet proof unit (block B5); never an Opus session, never a production session",
+ "proofs": [
+  {
+   "id": "A1",
+   "scene": 2,
+   "element_id": "earth-globe",
+   "kind_of_proof": "asset seal",
+   "staging": "ASSET SEAL, not an element reading: finish the open job assets/library/earth-globe (state 'whole globe') under asset-system, isolated blind naming with factory/asset_library.py (no context staging for sealing).",
+   "build": "asset job; a CC0 Earth texture on a sphere is the expected route (licence logged in LICENSES.md).",
+   "bar": "as the proof's own text says",
+   "on_fail": "the job's own candidates; a globe that will not seal returns the topic to the creative session. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+   "status": "pending",
+   "readings": []
+  },
+  {
+   "id": "P1",
+   "scene": 2,
+   "element_id": "ring-of-people",
+   "name": "a line of people circling the Earth",
+   "kind": "object",
+   "aliases": [
+    "earth",
+    "planet earth",
+    "globe",
+    "the earth",
+    "world",
+    "people around the earth",
+    "line of people around the earth",
+    "ring of people",
+    "planeta",
+    "tierra"
+   ],
+   "kind_of_proof": "element reading",
+   "staging": "The globe on the stage, a single file of figures leaving the stage edge in the foreground and wrapping the globe as an accent band; mid pull-back frame.",
+   "build": "earth-globe + paper_rig.figure instances + a band.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
+   "on_fail": "Rung 1: an earlier frame of the pull-back, with ten near figures large in the foreground. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+   "status": "pending",
+   "readings": []
+  },
+  {
+   "id": "P2",
+   "scene": 3,
+   "element_id": "grey-crowd",
+   "name": "waves of grey people behind a coloured crowd",
+   "kind": "object",
+   "aliases": [
+    "crowd",
+    "people",
+    "crowd of people",
+    "group of people",
+    "many people",
+    "army",
+    "multitud",
+    "personas",
+    "gente"
+   ],
+   "kind_of_proof": "element reading",
+   "staging": "Rows of grey figures behind a front row of accent-shirted figures, filling the stage, camera at head height.",
+   "build": "paper_rig.figure instanced, grey recolour.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
+   "on_fail": "Rung 1: the grey made warmer (stone-free: a light taupe), not pure neutral, so it is not read as statues. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+   "status": "pending",
+   "readings": []
+  },
+  {
+   "id": "P3",
+   "scene": 4,
+   "element_id": "rings-stack",
+   "name": "the Earth wrapped in many bands",
+   "kind": "object",
+   "aliases": [
+    "earth",
+    "planet earth",
+    "globe",
+    "the earth",
+    "world",
+    "planet with rings",
+    "planeta",
+    "tierra"
+   ],
+   "kind_of_proof": "element reading",
+   "staging": "The globe with one accent band and twelve grey bands stacked outward, 3/4 view.",
+   "build": "P1 still with grey bands.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
+   "on_fail": "Rung 1: fewer, thicker bands with figure silhouettes visible on the nearest one. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+   "status": "pending",
+   "readings": []
+  },
+  {
+   "id": "P4",
+   "scene": 5,
+   "element_id": "one-and-twelve",
+   "name": "one coloured person surrounded by twelve grey people",
+   "kind": "object",
+   "aliases": [
+    "people",
+    "group of people",
+    "crowd",
+    "team",
+    "person",
+    "figures",
+    "personas",
+    "gente"
+   ],
+   "kind_of_proof": "element reading",
+   "staging": "One accent figure, twelve grey figures in a loose team formation around it, full bodies in frame.",
+   "build": "13 paper_rig.figure instances.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
+   "on_fail": "Rung 1: tighter frame on the accent figure with six grey figures behind. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+   "status": "pending",
+   "readings": []
+  }
+ ]
+}

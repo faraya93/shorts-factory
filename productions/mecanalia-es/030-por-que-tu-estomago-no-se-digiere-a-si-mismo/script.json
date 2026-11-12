@@ -1,0 +1,228 @@
+{
+  "video": "por-que-tu-estomago-no-se-digiere-a-si-mismo",
+  "status": "developed script, STANDBY (block B4 creative session, 2026-11-11; bank status standby 030). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "library_assets": [
+    "digestive-system"
+  ],
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 34 (fill 2), developed 2026-11-11 by the B4 creative session as a standby",
+  "title": "¿Por qué tu estómago no se digiere a sí mismo? 🫃",
+  "topic_family": "body",
+  "structure_variant": "chain",
+  "staging_mode_proposal": "cutaway: the sealed digestive system in x-ray, then a section through the stomach wall showing its layers, the mucus gel and the acid.",
+  "curiosity_score": 9,
+  "curiosity_reason": "Everyone knows the stomach is full of acid; hidden.",
+  "hook_question": "¿Por qué tu estómago no se digiere a sí mismo?",
+  "false_belief": "El ácido del estómago es débil, por eso no lo daña.",
+  "turn": "Scene 5: some acid still gets through, and the surface cells are wrecked anyway: the lining survives by replacing them every few days.",
+  "closing_reframe": "Tu estómago sí se ataca a sí mismo: solo que se repara más rápido de lo que se daña.",
+  "share_archetype": "ese amigo que se come cualquier cosa sin pensarlo dos veces",
+  "theme": "digestion",
+  "main_tension": "bodily",
+  "engine_reason": "code3d on the asset route (engine selection: a stylised anatomy asset with a layered section and energy graphics): the sealed digestive-system asset in its x-ray state; the wall section, mucus, acid and cells are builds and materials.",
+  "description": "¿Por qué tu estómago no se digiere a sí mismo? Porque una capa de moco con bicarbonato frena el ácido antes de tocar la pared.\nY lo que se daña, se renueva cada pocos días. 🫃\nEnvíaselo a ese amigo que se come cualquier cosa sin pensarlo dos veces.",
+  "hashtags": [
+    "#cuerpohumano",
+    "#estomago",
+    "#ciencia",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "No figure on screen."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué tu estómago no se digiere a sí mismo? Mucha gente cree que el ácido del estómago es débil, y por eso no lo daña.",
+      "what_changes": "The digestive system in x-ray on the stage; a bite of food slides down the oesophagus and drops into the stomach, which glows with acid; the tag ¿ÁCIDO DÉBIL? hangs on it.",
+      "transformation": "estómago vacío → cae un bocado al ácido",
+      "camera": "bajada siguiendo el bocado por el esófago hasta el estómago",
+      "overlays_plan": [
+        "tag ¿ÁCIDO DÉBIL? at 'débil'"
+      ],
+      "elements": [
+        {
+          "id": "stomach-xray",
+          "kind": "object",
+          "name": "a human stomach in an x-ray digestive system",
+          "route": "library digestive-system (sealed; x-ray material state)",
+          "risk": "low: sealed asset; the x-ray state is its brief",
+          "aliases": [
+            "stomach",
+            "digestive system",
+            "digestive tract",
+            "human stomach",
+            "stomach anatomy",
+            "estómago"
+          ]
+        }
+      ],
+      "est_duration_s": 9.0
+    },
+    {
+      "name": "acido",
+      "narration": "Al contrario: fabrica ácido clorhídrico, tan fuerte que, junto con sus enzimas, deshace la carne que comes.",
+      "what_changes": "Inside the stomach, a piece of meat sinks into a pool of glowing acid; its surface frays and comes apart into strands and then a cloud.",
+      "transformation": "trozo de carne entero → se deshace en el ácido",
+      "camera": "empuje dentro del estómago hasta el trozo de carne",
+      "overlays_plan": [
+        "label HCl tag at 'clorhídrico'"
+      ],
+      "elements": [
+        {
+          "id": "meat-dissolving",
+          "kind": "event",
+          "name": "a piece of meat dissolving in stomach acid",
+          "route": "build: meat chunk (material route, stylised, no real texture) inside the stomach section; acid as an emissive liquid",
+          "risk": "high: event element; proof P1",
+          "aliases": [
+            "meat dissolving",
+            "dissolving",
+            "food dissolving",
+            "digesting",
+            "digestion",
+            "food being digested",
+            "meat",
+            "steak",
+            "food in the stomach",
+            "stomach acid"
+          ]
+        }
+      ],
+      "est_duration_s": 5.9
+    },
+    {
+      "name": "moco",
+      "narration": "Y la pared del estómago también es carne. Lo que la salva es una capa de moco espeso que la cubre por dentro.",
+      "what_changes": "Push-through into the wall: a section of the stomach wall in layers, and on its inner face a thick translucent gel spreads out and covers it, between the acid and the cells.",
+      "transformation": "pared desnuda frente al ácido → una capa de moco la cubre",
+      "camera": "travelling a través de la pared, del ácido a las capas",
+      "overlays_plan": [
+        "label MOCO tag at 'moco'"
+      ],
+      "elements": [
+        {
+          "id": "wall-mucus",
+          "kind": "object",
+          "name": "a cross-section of the stomach wall with a mucus layer",
+          "route": "build: layered wall section (muscle, cell row, gel), stylised, attached to the digestive-system stomach",
+          "risk": "high: a layer stack reads as a 'cake' unless the stomach is in frame; proof P2",
+          "aliases": [
+            "stomach wall",
+            "stomach lining",
+            "stomach cross-section",
+            "stomach",
+            "mucus",
+            "mucus layer",
+            "gastric mucosa",
+            "estómago"
+          ]
+        }
+      ],
+      "est_duration_s": 7.9
+    },
+    {
+      "name": "bicarbonato",
+      "narration": "Ese moco atrapa bicarbonato, que neutraliza el ácido justo antes de que toque las células.",
+      "what_changes": "Acid droplets fall into the gel; as they sink they meet bicarbonate beads, fizz and change from the acid colour to neutral before reaching the cell row.",
+      "transformation": "gotas de ácido → se apagan dentro del moco antes de la pared",
+      "camera": "seguimiento de una gota de ácido hundiéndose en el moco",
+      "overlays_plan": [
+        "label BICARBONATO tag at 'bicarbonato'"
+      ],
+      "elements": [
+        {
+          "id": "acid-neutralised",
+          "kind": "event",
+          "name": "acid drops neutralised inside a mucus layer",
+          "route": "same section as P2; drops as emissive spheres with a colour change and fizz",
+          "risk": "high: event element, read with the P2 section",
+          "aliases": [
+            "stomach lining",
+            "stomach wall",
+            "mucus",
+            "mucus layer",
+            "acid",
+            "stomach acid",
+            "neutralizing",
+            "neutralising",
+            "fizzing",
+            "bubbling"
+          ]
+        }
+      ],
+      "est_duration_s": 5.2
+    },
+    {
+      "name": "renueva",
+      "narration": "Aun así, algo de ácido pasa y daña las células de la superficie. Por eso se renuevan cada pocos días, antes de que el daño avance.",
+      "what_changes": "The turn: a few drops get through; cells on the surface darken, crack and peel away; new cells push up from below and take their place, row after row, and the gel closes over them again.",
+      "transformation": "células dañadas → se desprenden y otras nuevas ocupan su lugar",
+      "camera": "empuje a la fila de células y retroceso cuando suben las nuevas",
+      "overlays_plan": [
+        "mark red on the damaged cells at 'daña'"
+      ],
+      "elements": [
+        {
+          "id": "cells-renewing",
+          "kind": "event",
+          "name": "damaged cells peeling off a stomach lining as new ones grow",
+          "route": "same section as P2; cells as rounded blocks, peel and rise animation",
+          "risk": "high: event element; proof P3",
+          "aliases": [
+            "stomach lining",
+            "stomach wall",
+            "cells",
+            "cell renewal",
+            "cells regenerating",
+            "regenerating",
+            "peeling",
+            "shedding",
+            "healing"
+          ]
+        }
+      ],
+      "est_duration_s": 9.0
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que tu estómago sí se ataca a sí mismo: solo que se repara más rápido de lo que se daña. Envíaselo a ese amigo que se come cualquier cosa sin pensarlo dos veces.",
+      "what_changes": "Single reframe image: back out to the whole stomach in x-ray, its inner lining lit in the accent and renewing in waves while the acid churns inside.",
+      "transformation": "corte de la pared → el estómago entero renovando su revestimiento",
+      "camera": "retroceso desde la pared hasta el sistema digestivo completo",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 11.7
+    }
+  ],
+  "sources": [
+    "Stomach acid is hydrochloric acid secreted by parietal cells; with pepsin it digests protein (meat): standard physiology; TeachMePhysiology 'Mucus production' and 'Gastric acid' (live search 2026-11-11). FLAGGED: add a textbook or Britannica reference at the beat sheet. No pH value is spoken.",
+    "Protection: surface (foveolar) cells secrete a thick mucus gel; bicarbonate trapped in it keeps the cell surface near neutral while the lumen is strongly acidic; tight junctions between cells: TeachMePhysiology 'Mucus production'; IFLScience 'Your stomach juices are so acidic they can digest zinc and meat, so why don't they digest you?' (live search 2026-11-11).",
+    "Renewal: the surface lining is replaced every few days (commonly given as 3-5 days). FLAGGED: only secondary sources were found on 2026-11-11; read a physiology source at the beat sheet. Spoken as 'cada pocos días', no number.",
+    "When the barrier fails the acid damages the wall (peptic ulcer): TeachMePhysiology. Not spoken as a medical claim; the script makes no health advice.",
+    "No number is spoken or rendered in this script."
+  ],
+  "simplifications": [
+    "The wall section is enlarged and reduced to a few layers; the mucus is drawn as a uniform gel and bicarbonate as beads.",
+    "Cell renewal is shown as a row replaced in seconds; it takes days."
+  ],
+  "narration_words": 141,
+  "est_duration_s": 48.6,
+  "duration_band_s": [
+    40,
+    50
+  ],
+  "flatness_test": [
+    "1. hook: a bite drops into the stomach's acid.",
+    "2. acido: a piece of meat comes apart in the acid.",
+    "3. moco: the wall in section; a thick gel spreads over its inner face.",
+    "4. bicarbonato: acid drops fizz and turn neutral inside the gel.",
+    "5. renueva: damaged surface cells peel off and new ones push up (turn).",
+    "6. cierre: the whole stomach, its lining renewing in waves."
+  ]
+}

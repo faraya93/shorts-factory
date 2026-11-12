@@ -1,0 +1,227 @@
+{
+  "video": "por-que-los-pajaros-pueden-pararse-en-los-cables-electricos",
+  "status": "developed script (block B4 creative session, 2026-11-11). Not scene-designed, not rendered, not queued, not published.",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "library_assets": [
+    "bird"
+  ],
+  "preset": null,
+  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "source": "docs/current/idea-bank.md banked rank 6 (fill 1, re-scored 2026-11-11), drawn 2026-11-11 as the replacement for returned 025; script written by the B4 creative session",
+  "title": "¿Por qué los pájaros pueden pararse en los cables eléctricos? 🐦",
+  "topic_family": "objects",
+  "structure_variant": "journey",
+  "staging_mode_proposal": "world: a street at dusk modelled as an environment (sky gradient, a row of poles, three wires in catenary curves, a rooftop line), the camera travelling along the wire with the current. First `world` production: its environment is measured first (format policy 'Staging mode', proof P3).",
+  "curiosity_score": 9,
+  "curiosity_reason": "Seen daily in every city of every country; the insulating-feet explanation is the one everyone gives.",
+  "hook_question": "¿Por qué los pájaros pueden pararse en los cables eléctricos sin electrocutarse?",
+  "false_belief": "Sus patas los aíslan de la electricidad.",
+  "turn": "Scene 5: a bird that touches two things at once, the wire and the pole, opens a path through its body, which is why big birds are the ones electrocuted.",
+  "closing_reframe": "Al pájaro no lo salvan sus patas: lo salva tocar un solo cable.",
+  "share_archetype": "ese amigo que cambia un enchufe sin cortar la luz",
+  "theme": "electricity",
+  "main_tension": "dangerous",
+  "engine_reason": "code3d on the asset route (engine selection: rigid poles and wires, energy graphics): the bird is the library asset bird (open job, perched pose sealed before production); poles, wires and the street are geometric world builds; the current is emissive accent pulses.",
+  "description": "¿Por qué los pájaros pueden pararse en los cables eléctricos? Porque sus dos patas están en el mismo cable, al mismo voltaje.\nSi tocan el cable y el poste a la vez, la corriente sí los cruza. 🐦\nEnvíaselo a ese amigo que cambia un enchufe sin cortar la luz.",
+  "hashtags": [
+    "#electricidad",
+    "#pajaros",
+    "#ciencia",
+    "#shorts"
+  ],
+  "wardrobe": [
+    "No human figure on screen."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué los pájaros pueden pararse en los cables eléctricos sin electrocutarse? Casi todos creen que sus patas los aíslan de la electricidad.",
+      "what_changes": "A street at dusk: a small bird glides in and lands on the middle wire between two poles; the wire bounces under it; the tag ¿PATAS AISLANTES? appears by its feet.",
+      "transformation": "cable vacío → un pájaro aterriza encima",
+      "camera": "seguimiento del pájaro en vuelo hasta que se posa, y acercamiento a las patas",
+      "overlays_plan": [
+        "tag ¿PATAS AISLANTES? at 'aíslan'"
+      ],
+      "elements": [
+        {
+          "id": "bird-on-wire",
+          "kind": "object",
+          "name": "a small bird perched on a power line",
+          "route": "library bird (open job; perched-on-a-wire state) on a geometric wire between poles",
+          "risk": "medium-high: the hero is an unsealed asset; the wire and poles are the context cue; proof P1",
+          "aliases": [
+            "bird",
+            "bird on a wire",
+            "bird on a power line",
+            "sparrow",
+            "pigeon",
+            "swallow",
+            "songbird",
+            "pájaro",
+            "ave"
+          ]
+        }
+      ],
+      "est_duration_s": 7.9
+    },
+    {
+      "name": "viaje",
+      "narration": "Sigamos a la electricidad. Viaja por el cobre del cable, empujada por la diferencia de voltaje entre un extremo de la línea y el otro.",
+      "what_changes": "The camera drops onto the wire far down the line: accent pulses race along the copper toward the bird, passing pole after pole; at the far end of the line a high glow, at the other a low one.",
+      "transformation": "cable apagado → pulsos de corriente que corren por él hacia el pájaro",
+      "camera": "travelling rasante a lo largo del cable, acompañando los pulsos",
+      "overlays_plan": [
+        "label VOLTAJE tag at 'voltaje'"
+      ],
+      "elements": [
+        {
+          "id": "current-on-wire",
+          "kind": "event",
+          "name": "electric current flowing along a power line",
+          "route": "emissive accent pulses travelling inside a semi-transparent wire jacket; poles in frame",
+          "risk": "medium-high: readers may name only 'power lines'; the pulses are the event; proof P2",
+          "aliases": [
+            "electricity",
+            "electric current",
+            "current",
+            "electrical current",
+            "electricity flowing",
+            "current flowing",
+            "flowing electricity",
+            "electrified power line",
+            "electrified wire",
+            "electricidad",
+            "corriente"
+          ]
+        }
+      ],
+      "est_duration_s": 8.6
+    },
+    {
+      "name": "patas",
+      "narration": "Al llegar al pájaro, podría desviarse: subir por una pata, cruzar su cuerpo y bajar por la otra.",
+      "what_changes": "The pulses reach the bird's feet and slow; a dotted ghost path draws up one leg, through the body and down the other leg, as if offering the current a detour.",
+      "transformation": "corriente bajo las patas → aparece el posible desvío por el cuerpo del pájaro",
+      "camera": "empuje a las patas y subida por el cuerpo del pájaro",
+      "overlays_plan": [],
+      "elements": [
+        {
+          "id": "bird-detour",
+          "kind": "object",
+          "name": "bird on a wire with a dotted path through its legs and body",
+          "route": "bird asset + dotted accent curve; the bird stays in its sealed perched state",
+          "risk": "medium: proof P1 covers the bird on the wire; the dotted path is an annotation",
+          "aliases": [
+            "bird",
+            "bird on a wire",
+            "bird on a power line",
+            "sparrow",
+            "songbird",
+            "pájaro"
+          ]
+        }
+      ],
+      "est_duration_s": 6.2
+    },
+    {
+      "name": "mismo",
+      "narration": "Pero no lo hace: sus dos patas están en el mismo cable, al mismo voltaje. Sin diferencia entre ellas, nada empuja la corriente por el pájaro, y sigue de largo por el cobre.",
+      "what_changes": "Both feet light in the same accent shade; the ghost path fades out; the pulses pass under the feet without slowing and race on down the line; the bird preens, unbothered.",
+      "transformation": "posible desvío → la corriente pasa de largo bajo las patas",
+      "camera": "travelling lateral que deja al pájaro atrás siguiendo los pulsos",
+      "overlays_plan": [
+        "label = between the two feet at 'mismo'"
+      ],
+      "elements": [
+        {
+          "id": "current-past-bird",
+          "kind": "event",
+          "name": "current passing under a bird on a wire",
+          "route": "same staging as P2 with the bird in frame",
+          "risk": "medium: proof P2",
+          "aliases": [
+            "bird on a wire",
+            "bird on a power line",
+            "bird",
+            "electricity",
+            "electric current",
+            "current flowing",
+            "electricity flowing",
+            "pájaro"
+          ]
+        }
+      ],
+      "est_duration_s": 11.4
+    },
+    {
+      "name": "poste",
+      "narration": "El peligro es tocar dos cosas a la vez, como el cable y el poste. Ahí sí hay diferencia, y la corriente cruza el cuerpo. Por eso las aves grandes, que alcanzan con las alas, son las que más mueren electrocutadas.",
+      "what_changes": "The turn: the camera pulls back along the whole line to a pole top; a large bird lands on the crossarm and spreads its wings, one wingtip touching the wire; a red path lights from the wire through the wing and body down into the pole; an error-red X closes over it before anything else happens.",
+      "transformation": "pájaro chico a salvo → un ave grande toca cable y poste y la corriente la cruza",
+      "camera": "retroceso a lo largo de toda la línea hasta lo alto del poste",
+      "overlays_plan": [
+        "mark red X at 'electrocutadas'"
+      ],
+      "elements": [
+        {
+          "id": "big-bird-pole",
+          "kind": "object",
+          "name": "a large bird with spread wings on a power pole",
+          "route": "library bird (flying, wings spread state, scaled up) on a geometric pole crossarm; red emissive path",
+          "risk": "high: a scaled songbird may not read as a large bird; the pole and wire are the cue; proof P4",
+          "aliases": [
+            "bird",
+            "large bird",
+            "eagle",
+            "hawk",
+            "bird of prey",
+            "bird on a power pole",
+            "bird on a utility pole",
+            "bird with spread wings",
+            "pájaro",
+            "ave",
+            "águila"
+          ]
+        }
+      ],
+      "est_duration_s": 14.1
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que al pájaro no lo salvan sus patas: lo salva tocar un solo cable. Envíaselo a ese amigo que cambia un enchufe sin cortar la luz.",
+      "what_changes": "Single reframe image: back on the middle wire, the small bird sits with both feet lit the same shade while the pulses stream under it; the camera rises to show the whole street of poles and wires, every bird on a single wire.",
+      "transformation": "un pájaro en el cable → la calle entera con pájaros a salvo en sus cables",
+      "camera": "subida desde el pájaro hasta la calle entera",
+      "overlays_plan": [
+        "ENVÍASELO tag at_word 'envíaselo'"
+      ],
+      "elements": [],
+      "est_duration_s": 9.3
+    }
+  ],
+  "sources": [
+    "Mechanism: a bird on one wire has both feet at essentially the same potential, so there is no voltage across its body and no current through it; the current stays in the conductor. Danger comes when the body bridges two points at different potential (two conductors, or a conductor and a grounded pole). Indiana Public Media 'A Moment of Science: Bird on a wire'; MIT Alumni Association explainer (live search 2026-11-11). FLAGGED: add one utility or textbook reference at the beat sheet.",
+    "Large birds (raptors: eagles, hawks, owls) are the ones most often electrocuted, because their wingspan can bridge a conductor and a pole or two conductors; utilities fit raptor-safe poles. SciShow summary (live search 2026-11-11). FLAGGED: cite the Avian Power Line Interaction Committee (APLIC), 'Suggested Practices for Avian Protection on Power Lines' (2006), at the beat sheet; if it cannot be read, scene 5's last sentence becomes 'Por eso las aves grandes corren más peligro', with the same staging.",
+    "No number is spoken or rendered in this script."
+  ],
+  "simplifications": [
+    "Current is drawn as pulses moving along the wire; the electrons drift slowly and the energy travels in the field. The 'detour' path is an annotation, not a physical path that current 'tries'.",
+    "Both feet are shown at exactly the same potential; in reality the short stretch of wire between them has a tiny voltage drop, far too small to matter.",
+    "The pole is shown as grounded wood/metal for clarity; real crossarm hardware varies."
+  ],
+  "narration_words": 167,
+  "est_duration_s": 57.6,
+  "duration_band_s": [
+    45,
+    60
+  ],
+  "flatness_test": [
+    "1. hook: a bird lands on an empty wire.",
+    "2. viaje: current pulses race along the wire toward the bird.",
+    "3. patas: the pulses reach the feet and a dotted detour through the bird appears.",
+    "4. mismo: both feet light the same shade, the detour fades and the pulses pass under the bird.",
+    "5. poste: a large bird on the pole spreads its wings onto the wire and a red path crosses its body (turn).",
+    "6. cierre: the whole street, every bird safe on a single wire."
+  ]
+}

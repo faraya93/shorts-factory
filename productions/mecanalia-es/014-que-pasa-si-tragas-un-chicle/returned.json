@@ -1,0 +1,8 @@
+{
+ "reason": "Returned to the bank by block B4 (2026-11-11), not stamped: git shows a Sonnet production session rewrote its script (8f93bf4, 390 lines, structure change), so it has no proven Opus script; its protagonist (the gum) failed all six isolated stagings (means 30-52) and only rung 4 is untried. Re-developing a full script before the one measurement that decides the topic repeats the cost the second opinion measured (returns = 42% of batch spend). The rung-4 attempt becomes a blind proof (proofs.json G1, G2); only if both pass does a creative session re-develop and stamp the script in this folder.",
+ "at": "2026-11-11",
+ "replacement": null,
+ "replacement_pending": null,
+ "refill_due": false,
+ "by": "block B4 lens decision (docs/current/reports/lens-decisions.md 2026-11-11 '014 returned to the bank')"
+}

@@ -1,0 +1,36 @@
+{
+ "spec_by": "creative-session",
+ "model": "claude-opus-5-5",
+ "at": "2026-11-11",
+ "record": "docs/current/reports/b4-2026-11-11.md",
+ "doctrine": "docs/current/specs/doctrine-topics-and-scripts.md 'Blind proofs before batch eligibility'",
+ "priority": "after the canary units' proofs; optional for block B5",
+ "decides": "both pass: a creative session re-develops and stamps 014 (bank rank 39); either fails: the topic is exhausted (bank status 'returned'), with no further attempt",
+ "built_by": "a braked Sonnet proof unit; never an Opus session",
+ "proofs": [
+  {
+   "id": "G1",
+   "scene": 1,
+   "element_id": "gum",
+   "kind_of_proof": "element reading (the revival's rung-4 context staging, one attempt)",
+   "staging": "The chewed gum entering the top of the visible x-ray tract (sealed digestive-system), the open stick pack in the sealed hand-articulated 'open' pose above it.",
+   "build": "chicle_rig + digestive-system + hand-articulated (sealed poses)",
+   "aliases_from": "scenes.json scene_elements of 014 as fixed 2026-11-09",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as fixed 2026-11-09, none added",
+   "status": "pending",
+   "readings": []
+  },
+  {
+   "id": "G2",
+   "scene": 6,
+   "element_id": "gum-ball",
+   "kind_of_proof": "element reading (rung 4, one attempt)",
+   "staging": "A frame wide enough that the whole colon loop and its neighbouring tract read around the pile of separate gum pieces.",
+   "build": "chicle_rig + digestive-system",
+   "aliases_from": "gum ball, wad of gum, chewing gum, blockage (fixed 2026-11-09)",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as fixed 2026-11-09, none added",
+   "status": "pending",
+   "readings": []
+  }
+ ]
+}

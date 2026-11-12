@@ -1,6 +1,6 @@
 # que-pasa-si-tragas-un-chicle — production notes (script stage, topic slate 2026-11-07)
 
-Status: SCRIPT ONLY. Nothing modelled, rendered, queued or published. Next stage: asset search for every element below, then scene design (design lens), then the beat sheet with word locks.
+Status (current, 2026-11-11 block B4): RETURNED TO THE BANK, unstamped; see the last section. Original status line: Status: SCRIPT ONLY. Nothing modelled, rendered, queued or published. Next stage: asset search for every element below, then scene design (design lens), then the beat sheet with word locks.
 
 ## Publish package (Spanish; the owner publishes)
 - **Título:** ¿Qué pasa si te tragas un chicle? 😳
@@ -112,3 +112,7 @@ Folder restored from `productions/_archive/returned-013-014-2026-11-09/` with it
 **Re-check of the built script under the widened format policy:** hook "¿Qué pasaría si...", false belief explicit: pass. 7 scenes, `chain` (changed from `journey` on 2026-11-09 for rotation), 57.3 s inside the whatif band 45-60 s: pass. Turn (scene 6, Milov 1998) before the reframe: pass. Closing standard and behaviour archetype: pass. Numbers: only the crossed-out "7 años" (the myth itself): pass. Staging-mode proposal: `cutaway`. **When drawn, re-check the rotation:** the production's variant and scene count must not make three in a row with the two productions before it. If they would, the scriptwriter lens changes the draw order, never the mechanism (format policy).
 
 **Next step for the production that draws it (rung 4, ONE attempt per element):** scene 1 gum: the chewed piece entering the top of the visible x-ray tract, with the open stick pack in the sealed `open` hand above it (aliases fixed 2026-11-09 for the gum element, none added). Scene 6 ball: a frame wide enough that the whole colon loop and its neighbouring tract read around the pile, with the pieces still separate (aliases gum ball, wad of gum, chewing gum, blockage). Either element failing exhausts the ladder: return with `tools/return_topic.py`. A pass is flagged here as "passed via context staging". The hand-draw limit described in 013's notes applies here too.
+
+## RETURNED TO THE BANK 2026-11-11 (block B4 lens decision)
+Returned to the bank by block B4 (2026-11-11), not stamped: git shows a Sonnet production session rewrote its script (8f93bf4, 390 lines, structure change), so it has no proven Opus script; its protagonist (the gum) failed all six isolated stagings (means 30-52) and only rung 4 is untried. Re-developing a full script before the one measurement that decides the topic repeats the cost the second opinion measured (returns = 42% of batch spend). The rung-4 attempt becomes a blind proof (proofs.json G1, G2); only if both pass does a creative session re-develop and stamp the script in this folder.
+Sidecar: returned.json (the 2026-11-09 one stays as returned-2026-11-09.json). Bank rank 39 back to `banked`, proof first. The script on file is NOT an input for any session: a creative session that draws this entry writes and stamps a new one.

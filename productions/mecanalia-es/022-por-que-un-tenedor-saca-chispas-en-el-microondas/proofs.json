@@ -1,0 +1,49 @@
+{
+ "spec_by": "creative-session",
+ "model": "claude-opus-5-5",
+ "at": "2026-11-11",
+ "record": "docs/current/reports/b4-2026-11-11.md",
+ "doctrine": "docs/current/specs/doctrine-topics-and-scripts.md 'Blind proofs before batch eligibility'; doctrine-production.md 'Event elements'",
+ "batch_eligible_when": "A1 sealed 'ready' and N1 passed",
+ "built_by": "a braked Sonnet proof unit (block B5); never an Opus session, never a production session",
+ "proofs": [
+  {
+   "id": "A1",
+   "scene": 1,
+   "element_id": "microwave-oven",
+   "kind_of_proof": "asset seal",
+   "staging": "ASSET SEAL: land the oven built in code3d/lib/micro_rig.py (oven(), door closed and open states) in the open job assets/library/microwave-oven as route code-primitive, licence own-work, and seal it with isolated blind naming (factory/asset_library.py; no context staging for sealing). Precedent: ocean-liner from titanic_rig, 2026-11-11.",
+   "build": "micro_rig.oven; no change to the rig (editing a rig library invalidates composition-gate records).",
+   "bar": "asset-system seal rules",
+   "on_fail": "the job's library candidates (Poly Haven Vintage Microwave, BlenderKit low-poly microwave); an oven that will not seal returns the topic.",
+   "status": "pending",
+   "readings": []
+  },
+  {
+   "id": "N1",
+   "scene": 4,
+   "element_id": "tine-sparks",
+   "name": "sparks between fork tines",
+   "kind": "event",
+   "aliases": [
+    "spark",
+    "sparks",
+    "sparking",
+    "electric arc",
+    "arc",
+    "arcing",
+    "chispa",
+    "chispeando",
+    "lightning"
+   ],
+   "kind_of_proof": "element reading (P7 route: one new reading under the event declaration)",
+   "staging": "The scene-4 still at frame 60 of the CURRENT scene script (micro_04.py as left by the production, the rung-4 context staging: whole oven, door open, keypad, arcs between the tine tips). Re-render it (half-resolution Cycles); do not reuse the files of the earlier readings.",
+   "build": "micro_rig + code3d/scenes/micro_04.py as committed; no edits.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared, none added after a guess; every reading counts",
+   "on_fail": "No further rung: this element has used rungs 1, 2 and 4 under its old declaration. A failed N1 returns 022 again (tools/return_topic.py) and it is not revived a second time; the reading is recorded either way.",
+   "status": "pending",
+   "readings": [],
+   "note": "The seven earlier readings stay FAIL under their noun-only declaration and are never re-judged (doctrine-production.md 'Event elements'). The verb forms were derived mechanically from the element's own declared nouns (spark -> sparking, arc -> arcing, chispa -> chispeando), not taken from a reader's guess."
+  }
+ ]
+}

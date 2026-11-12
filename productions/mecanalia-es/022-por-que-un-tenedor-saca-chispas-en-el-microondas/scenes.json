@@ -9,8 +9,10 @@
   "false_belief": "Cualquier metal hace chispas dentro del microondas.",
   "closing_reframe": "No chispea el metal: chispean las puntas.",
   "share_archetype": "ese amigo que mete al microondas el plato con el tenedor encima",
-  "hero_route": "asset",
-  "library_assets": [],
+  "hero_route": "code-primitive",
+  "library_assets": [
+    "microwave-oven"
+  ],
   "structure_variant": "chain",
   "scene_elements": {
     "1": [
@@ -86,16 +88,20 @@
         "aliases": [
           "spark",
           "sparks",
+          "sparking",
           "electric arc",
           "arc",
+          "arcing",
           "chispa",
+          "chispeando",
           "lightning"
         ],
         "route": "build",
-        "source": "micro_rig.burst_arcs: short branching accent arcs between the tine tips",
+        "source": "micro_rig.oven + micro_rig.burst_arcs: the whole oven in frame (door open, keypad, plate), branching arcs between the fork's tine tips (the staging of the 2026-11-11 rung-4 reading, now the scene's primary staging; block B4, P7 route)",
         "frames": [
           60
-        ]
+        ],
+        "kind": "event"
       }
     ],
     "5": [
