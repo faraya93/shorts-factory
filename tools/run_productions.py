@@ -7,7 +7,10 @@ usage: .venv/bin/python tools/run_productions.py --batch tools/batches/<name>.js
 Never --bare (it drops CLAUDE.md, hooks and the subscription login). Wall-clock limit per session in place of --max-turns (SF_RUN_HOURS, default 6). Permissions come from tools/runner-settings.json, never --dangerously-skip-permissions.
 A PREFLIGHT runs before any unit: any denied command class halts the batch. State and streams: output/runner/<batch>/. Outcomes: verified or returned (next unit), stopped (next unit, the production's own merits), infra or budget (HALT.json + a desktop alert, the batch stops).
 Stability hardening 2026-11-09 (docs/current/reports/lens-decisions.md): a fix round is charged only to a session that made NO progress (production files and verifier output both unchanged); a queued final (build/queued.json) always gets exactly
-one callback session after its render ends, exempt from the session cap; every unit has a budget (SF_UNIT_MAX_SESSIONS, SF_UNIT_MAX_HOURS of active time, usage-limit waits excluded) whose exhaustion halts the batch loudly."""
+one callback session after its render ends, exempt from the session cap; every unit has a budget (SF_UNIT_MAX_SESSIONS, SF_UNIT_MAX_HOURS of active time, usage-limit waits excluded) whose exhaustion halts the batch loudly.
+Accounting, brake and liveness 2026-11-11 (docs/current/reports/architecture-second-opinion-2026-11-11.md, block B1): every session's cost is recorded as a DELTA of the cumulative total_cost_usd per session id (never summed raw), with deduplicated API calls, first and peak context and cache reads;
+usage-limit polls are counted apart and are never sessions; reader (blind_read) runs and cost are summed from build/reader-ledger.jsonl; an emergency brake (SF_UNIT_MAX_USD, SF_UNIT_MAX_CALLS) ends a unit as "stopped", never as a halt;
+state.json carries the runner's pid, heartbeat and next-retry time under "_runner"; a returned or stopped unit has its own artefacts committed."""
 import argparse
 import fcntl
 import json
@@ -28,8 +31,11 @@ MAX_LIMIT_WAIT_S = float(os.environ.get("SF_LIMIT_MAX_WAIT_S", str(36 * 3600)))
 RENDER_MAX_S = float(os.environ.get("SF_RENDER_MAX_HOURS", "24")) * 3600
 RENDER_POLL_S = 15.0
 FIX_ROUNDS = int(os.environ.get("SF_FIX_ROUNDS", "2"))              # sessions launched after a session that made no progress; one more no-progress session stops the unit
-UNIT_MAX_SESSIONS = int(os.environ.get("SF_UNIT_MAX_SESSIONS", "12"))  # per unit, usage-limit resumes included; the post-render callback is exempt
+UNIT_MAX_SESSIONS = int(os.environ.get("SF_UNIT_MAX_SESSIONS", "12"))  # per unit, real sessions only (usage-limit polls never count); the post-render callback is exempt
 UNIT_MAX_HOURS = float(os.environ.get("SF_UNIT_MAX_HOURS", "14"))     # per unit, active time: sessions + render waits, usage-limit waits excluded
+UNIT_MAX_USD = float(os.environ.get("SF_UNIT_MAX_USD", "22.00"))      # emergency brake: summed delta notional per unit (about 2x the largest measured unit, 019 at US$11.43)
+UNIT_MAX_CALLS = int(os.environ.get("SF_UNIT_MAX_CALLS", "500"))      # emergency brake: cumulative deduplicated main-session API calls per unit (019 made about 244)
+HEARTBEAT_S = float(os.environ.get("SF_HEARTBEAT_S", "30"))
 CALLBACK_MIN_HOURS = 1.0                                            # the post-render callback always gets at least this much session time
 SHORT_TURNS = 10                                                    # a denial in a session this short that changed nothing is the infrastructure signature (from the 2026-11-08/09 records; judgement)
 OUT = ROOT / "output" / "runner"
@@ -68,7 +74,8 @@ def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str |
     log = OUT / f"{name}-{n}.jsonl"
     cmd = session_cmd(prompt, resume)
     p = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, text=True, env={k: v for k, v in os.environ.items() if not k.startswith("CLAUDECODE")})
-    out = {"session_id": resume, "limited": False, "timed_out": False, "result": "", "is_error": False, "denials": [], "turns": 0, "saw_result": False}
+    out = {"session_id": resume, "limited": False, "timed_out": False, "result": "", "is_error": False, "denials": [], "turns": 0, "saw_result": False, "total_cost": None}
+    calls: dict[str, tuple[int, int]] = {}                                    # message id -> (context, cache read) of that API call (an assistant message is streamed once per content block)
     deadline = time.time() + (HOURS if hours is None else hours) * 3600
 
     def watchdog():
@@ -91,8 +98,15 @@ def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str |
                 continue
             if ev.get("session_id"):
                 out["session_id"] = ev["session_id"]
+            if ev.get("type") == "assistant" and not ev.get("parent_tool_use_id"):
+                msg = ev.get("message") or {}
+                ctx = context_tokens(msg.get("usage"))
+                if msg.get("id") and ctx:                                    # a limit poll streams one all-zero message: not an API call
+                    calls[msg["id"]] = (ctx, int((msg.get("usage") or {}).get("cache_read_input_tokens") or 0))
             if ev.get("type") == "result":
                 out.update(saw_result=True, result=str(ev.get("result", "")), is_error=bool(ev.get("is_error")), denials=ev.get("permission_denials") or [], turns=ev.get("num_turns") or 0)
+                if isinstance(ev.get("total_cost_usd"), (int, float)):
+                    out["total_cost"] = float(ev["total_cost_usd"])
                 if ev.get("is_error") and LIMIT.search(out["result"]):
                     out["limited"] = True
     p.wait()
@@ -100,7 +114,15 @@ def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str |
     if p.returncode and not out["result"] and LIMIT.search(tail):             # the CLI can print the limit and exit without a result event
         out["limited"] = True
     out["tail"] = tail
+    ctxs = [c for c, _ in calls.values()]
+    out["usage"] = {"api_calls": len(calls), "first_ctx": ctxs[0] if ctxs else 0, "peak_ctx": max(ctxs, default=0), "cache_read": sum(cr for _, cr in calls.values())}
     return out
+
+
+def context_tokens(usage: dict | None) -> int:
+    """Tokens the model read for one API call: fresh input + cache creation + cache read."""
+    u = usage or {}
+    return sum(int(u.get(k) or 0) for k in ("input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens"))
 
 
 def infra_denials(denials: list[dict]) -> list[dict]:
@@ -200,7 +222,128 @@ def verify(prod: Path) -> tuple[bool, str]:
 
 def save(state: dict) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "state.json").write_text(json.dumps(state, indent=1))
+    runner = state.get("_runner")
+    if runner and runner.get("alive"):
+        runner["heartbeat"] = now()
+    tmp = OUT / "state.json.tmp"
+    tmp.write_text(json.dumps(state, indent=1))
+    os.replace(tmp, OUT / "state.json")                                      # atomic: a reader of state.json never sees a half-written file
+
+
+def now() -> str:
+    return datetime.now().isoformat(timespec="seconds")
+
+
+def set_live(state: dict, **kw) -> None:
+    """Liveness block of state.json (key "_runner"): pid, alive, heartbeat, next_retry_at, status. Answers "is a batch active, and until when" from the file alone."""
+    state.setdefault("_runner", {}).update(kw)
+
+
+def start_heartbeat(state: dict) -> threading.Event:
+    """pid + heartbeat every HEARTBEAT_S while the runner lives, also through a session, a render wait or a usage-limit sleep. A reader treats a heartbeat older than ~3x heartbeat_every_s as a dead runner."""
+    set_live(state, pid=os.getpid(), alive=True, started=now(), heartbeat_every_s=HEARTBEAT_S, next_retry_at=None)
+    stop = threading.Event()
+
+    def beat():
+        while not stop.wait(HEARTBEAT_S):
+            try:
+                save(state)
+            except (RuntimeError, OSError, ValueError):                    # the main thread was mutating the dict mid-dump: skip this tick
+                pass
+    threading.Thread(target=beat, daemon=True).start()
+    return stop
+
+
+# ---- per-unit accounting ------------------------------------------------------------------------------------------
+def new_acct() -> dict:
+    return {"cost_usd": 0.0, "api_calls": 0, "cache_read_tokens": 0, "peak_ctx": 0, "first_ctx": None, "limit_polls": 0, "reader_runs": 0, "reader_cost_usd": 0.0, "cum_by_session": {}, "session_log": []}
+
+
+def reader_totals(prod: Path) -> tuple[int, float]:
+    """(reader runs, reader cost) from the production's append-only build/reader-ledger.jsonl, written by tools/blind_read.py; recomputed whole each time, so it cannot double count."""
+    runs, cost = 0, 0.0
+    try:
+        for line in (prod / "build" / "reader-ledger.jsonl").read_text().splitlines():
+            try:
+                e = json.loads(line)
+            except ValueError:
+                continue
+            runs += int(e.get("readers") or 0)
+            cost += float(e.get("cost_usd") or 0.0)
+    except OSError:
+        pass
+    return runs, round(cost, 6)
+
+
+def is_poll(r: dict) -> bool:
+    """A usage-limit poll: the session ended on the limit before it made a single API call. The session that first hit the limit after real work is a real session."""
+    return bool(r.get("limited")) and not r.get("usage", {}).get("api_calls")
+
+
+def account(st: dict, r: dict, prod: Path, n: int, poll: bool) -> None:
+    """Records one session. total_cost_usd is CUMULATIVE per session id across resumes (a limit poll repeats the previous figure), so the cost of this session is the difference to the last figure recorded for that id; the raw field is never summed."""
+    a = st.setdefault("acct", new_acct())
+    u = r.get("usage") or {}
+    delta = 0.0
+    sid, total = r.get("session_id"), r.get("total_cost")
+    if total is not None:
+        delta = max(0.0, total - a["cum_by_session"].get(sid, 0.0))
+        a["cum_by_session"][sid] = max(total, a["cum_by_session"].get(sid, 0.0))
+    a["cost_usd"] = round(a["cost_usd"] + delta, 6)
+    a["api_calls"] += u.get("api_calls", 0)
+    a["cache_read_tokens"] += u.get("cache_read", 0)
+    a["peak_ctx"] = max(a["peak_ctx"], u.get("peak_ctx", 0))
+    if a["first_ctx"] is None and u.get("first_ctx"):
+        a["first_ctx"] = u["first_ctx"]
+    if poll:
+        a["limit_polls"] += 1
+    a["reader_runs"], a["reader_cost_usd"] = reader_totals(prod)
+    a["session_log"].append({"n": n, "poll": poll, "session_id": sid, "delta_cost_usd": round(delta, 6), "cumulative_cost_usd": total, "api_calls": u.get("api_calls", 0), "first_ctx": u.get("first_ctx", 0), "peak_ctx": u.get("peak_ctx", 0), "cache_read_tokens": u.get("cache_read", 0)})
+
+
+def brake(st: dict) -> str | None:
+    """The emergency brake, checked before any continuation session launches: a unit that has spent more than SF_UNIT_MAX_USD of summed delta notional or more than SF_UNIT_MAX_CALLS API calls is ended as 'stopped'."""
+    a = st.get("acct") or {}
+    if a.get("cost_usd", 0.0) > UNIT_MAX_USD:
+        return f"emergency brake: US${a['cost_usd']:.2f} notional spent, over the US${UNIT_MAX_USD:.2f} ceiling"
+    if a.get("api_calls", 0) > UNIT_MAX_CALLS:
+        return f"emergency brake: {a['api_calls']} API calls, over the {UNIT_MAX_CALLS}-call ceiling"
+    return None
+
+
+# ---- return-path commit -------------------------------------------------------------------------------------------
+CODE_TREES = ("code3d/lib", "code3d/scenes", "assets/library")                 # the trees a build writes to (the same as fingerprint())
+
+
+def git(*args: str) -> subprocess.CompletedProcess:
+    return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True)
+
+
+def untracked(paths: list[str]) -> set[str]:
+    out = git("ls-files", "--others", "--exclude-standard", "--", *paths).stdout
+    return {l for l in out.splitlines() if l}
+
+
+def commit_unit(prod: Path, st: dict, outcome: str) -> str:
+    """A terminal unit (returned or stopped) leaves nothing untracked behind: commits its production folder and the files it created under code3d/lib, code3d/scenes and assets/library
+    (untracked now, not at its first session). Only those paths are committed (a pathspec commit), never other staged or modified work. No push. A failure is logged, never raised."""
+    try:
+        rel = str(prod.relative_to(ROOT))
+        mine = sorted((untracked(list(CODE_TREES)) - set(st.get("untracked_before", []))) | untracked([rel]))
+        tracked_changes = [l[3:] for l in git("status", "--porcelain", "--", rel).stdout.splitlines()]
+        paths = sorted(set(mine) | set(tracked_changes))
+        if not paths:
+            return "nothing to commit"
+        add = git("add", "--", *paths)
+        if add.returncode:
+            return f"git add failed: {add.stderr.strip()[:200]}"
+        a = st.get("acct") or {}
+        msg = (f"{prod.name}: {outcome} ({str(st.get('status', ''))[:100]}); unit artefacts committed by the runner\n\n"
+               f"{len(paths)} path(s); {a.get('api_calls', 0)} API calls, US${a.get('cost_usd', 0.0):.2f} notional.")
+        c = git("commit", "-m", msg, "--", *paths)
+        return f"committed {len(paths)} path(s)" if c.returncode == 0 else f"git commit failed: {(c.stderr or c.stdout).strip()[:200]}"
+    except Exception as e:                                                   # never fails the runner
+        return f"commit error: {e}"
 
 
 def log(msg: str) -> None:
@@ -229,6 +372,7 @@ def over_budget(st: dict) -> str | None:
 
 def finish(st: dict, state: dict, outcome: str, status: str) -> str:
     st["outcome"], st["status"] = outcome, status
+    st["next_retry_at"] = None
     save(state)
     return outcome
 
@@ -239,6 +383,10 @@ def run_unit(prod: Path, state: dict) -> str:
     Callback rule: a final queued by a session (build/queued.json) gets exactly one callback session once its chain has ended, exempt from the session cap and with at least CALLBACK_MIN_HOURS."""
     name, rel = prod.name, str(prod.relative_to(ROOT))
     st = state.setdefault(name, {"session": None, "sessions": 0, "fix_rounds": 0, "status": "running"})
+    st.setdefault("acct", new_acct())
+    st.setdefault("launches", 0)                                             # every launched claude process, polls included: names the stream files
+    if "untracked_before" not in st:                                         # what already sat untracked in the build trees: the return-path commit takes only what this unit adds
+        st["untracked_before"] = sorted(untracked(list(CODE_TREES)))
     st.setdefault("active_s", 0.0)
     st.setdefault("callbacks", [])
     st.setdefault("fix_rounds", 0)
@@ -272,30 +420,44 @@ def run_unit(prod: Path, state: dict) -> str:
             why = over_budget(st)
             if why:
                 return finish(st, state, "budget", f"budget: {why}")
+        why = brake(st)
+        if why:                                                              # a unit outcome, not an infrastructure halt: the batch moves on
+            log(f"BRAKE {rel}: {why}")
+            return finish(st, state, "stopped", f"stopped: {why}")
         resumed_after_limit = False
-        st["sessions"] += 1
-        n = st["sessions"]
+        st["launches"] += 1
         st["status"] = "post-render callback" if callback else st["status"]
         save(state)
         left_h = max(0.0, UNIT_MAX_HOURS - st["active_s"] / 3600)
         hours = max(min(HOURS, left_h), CALLBACK_MIN_HOURS if callback else 0.05)
         before = fingerprint(prod)
         t0 = time.time()
-        r = run_session(prod, name, n, prompt, st["session"], hours)
+        r = run_session(prod, name, st["launches"], prompt, st["session"], hours)
         st["session"] = r["session_id"]
         st["last_denials"] = len(r.get("denials", []))
+        poll = is_poll(r)
+        if not poll:
+            st["sessions"] += 1                                              # a usage-limit poll is never a session, in any budget or ceiling
+        n = st["sessions"]
+        account(st, r, prod, st["launches"], poll)
         if r["limited"]:                                                     # resume the SAME session after the reset: no paying twice; the wait is not active time
             st["active_s"] += time.time() - t0
             if waited >= MAX_LIMIT_WAIT_S:
                 return finish(st, state, "infra", "stopped: usage limit did not reset")
             st["status"] = "waiting for usage limit reset"
+            retry = time.time() + POLL_LIMIT_S
+            st["next_retry_at"] = datetime.fromtimestamp(retry).isoformat(timespec="seconds")
+            set_live(state, next_retry_at=st["next_retry_at"], waiting_unit=name)
             save(state)
             time.sleep(POLL_LIMIT_S)
+            st["next_retry_at"] = None
+            set_live(state, next_retry_at=None, waiting_unit=None)
             waited += POLL_LIMIT_S
             prompt, resumed_after_limit = "The usage limit has reset. Continue where you stopped.", True
             continue
         st["active_s"] += time.time() - t0
         waited = 0.0
+        st["next_retry_at"] = None
         changed = fingerprint(prod) != before
         why = infra_signature(r, changed)
         if why:
@@ -337,6 +499,16 @@ def run_queue(queue: list[str], state: dict) -> int:
     """Walks the queue in order; a replacement drawn by a returned unit joins it in the same run. Exit 0, or 3 when the batch halted."""
     state["_queue"] = list(dict.fromkeys(state.get("_queue", []) + queue))
     units = state
+    stop_beat = start_heartbeat(state)
+    try:
+        return _run_queue(queue, state, units)
+    finally:
+        stop_beat.set()
+        set_live(state, alive=False, ended=now(), next_retry_at=None, waiting_unit=None)
+        save(state)
+
+
+def _run_queue(queue: list[str], state: dict, units: dict) -> int:
     i = 0
     while i < len(state["_queue"]):
         rel = state["_queue"][i]
@@ -348,6 +520,10 @@ def run_queue(queue: list[str], state: dict) -> int:
         outcome = run_unit(prod, state)
         st = units[prod.name]
         log(f"END {rel}: {outcome}: {st['status']}")
+        if outcome in ("returned", "stopped"):                               # terminal outcome: leave no untracked rigs or notes behind
+            st["commit"] = commit_unit(prod, st, outcome)
+            log(f"COMMIT {rel}: {st['commit']}")
+            save(state)
         if outcome in ("infra", "budget"):
             (OUT / "HALT.json").write_text(json.dumps({"at": datetime.now().isoformat(timespec="seconds"), "unit": rel, "outcome": outcome, "status": st["status"]}, indent=1))
             log(f"BATCH HALTED ({outcome}); see HALT.json")

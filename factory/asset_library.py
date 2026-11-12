@@ -313,10 +313,11 @@ def blind_pack(stills: list[str], multi: bool = False) -> tuple[Path, str]:
     return out, prompt
 
 
-def record_blind(slug: str, guesses: list[str], confidences: list[int]) -> bool:
+def record_blind(slug: str, guesses: list[str], confidences: list[int], reader_cost: float | None = None) -> bool:
     m = read_meta(slug)
     ok = judge_guesses(m["aliases"], guesses, confidences)
-    m["checks"]["blind_naming"] = {"pass": ok, "date": date.today().isoformat(), "guesses": guesses, "confidences": confidences}
+    m["checks"]["blind_naming"] = {"pass": ok, "date": date.today().isoformat(), "guesses": guesses, "confidences": confidences,
+                                    **({"reader_cost_usd": reader_cost} if reader_cost is not None else {})}
     write_meta(m)
     write_readme(m)
     return ok
@@ -335,7 +336,7 @@ def _save_read(production: Path, key: str, stills: list[str]) -> dict:
     return out
 
 
-def record_likeness(production: Path, slug: str, guesses: list[str], confidences: list[int], stills: list[str] | None = None, isolation: str | None = None) -> bool:
+def record_likeness(production: Path, slug: str, guesses: list[str], confidences: list[int], stills: list[str] | None = None, isolation: str | None = None, reader_cost: float | None = None) -> bool:
     """The production-side twin of the blind naming: the hero as it appears in this video's own stills, written next to the gate record."""
     sys.path.insert(0, str(ROOT / "factory"))
     import gate
@@ -344,12 +345,13 @@ def record_likeness(production: Path, slug: str, guesses: list[str], confidences
     rec.mkdir(parents=True, exist_ok=True)
     (rec / "likeness.json").write_text(json.dumps({"pass": ok, "date": date.today().isoformat(), "asset": slug, "guesses": guesses, "confidences": confidences,
                                                    "fingerprint": gate.hero_fingerprint(production) if gate.v2(production) else gate.fingerprint(production),
-                                                   **({"reader_isolation": isolation} if isolation else {}), **({"read_stills": _save_read(production, "hero", stills)} if stills else {})},
+                                                   **({"reader_isolation": isolation} if isolation else {}), **({"reader_cost_usd": reader_cost} if reader_cost is not None else {}),
+                                                   **({"read_stills": _save_read(production, "hero", stills)} if stills else {})},
                                                   indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return ok
 
 
-def record_element(production: Path, scene: int, element_id: str, guesses: list[str], confidences: list[int], stills: list[str] | None = None, isolation: str | None = None) -> bool:
+def record_element(production: Path, scene: int, element_id: str, guesses: list[str], confidences: list[int], stills: list[str] | None = None, isolation: str | None = None, reader_cost: float | None = None) -> bool:
     """Extended likeness gate (every scene's key element): blind naming against the aliases declared for that element in scenes.json `scene_elements`."""
     sys.path.insert(0, str(ROOT / "factory"))
     import gate
@@ -365,7 +367,7 @@ def record_element(production: Path, scene: int, element_id: str, guesses: list[
     path = rec / "elements.json"
     data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     data[f"{scene}:{element_id}"] = {"pass": ok, "date": date.today().isoformat(), "element": el["name"], "guesses": guesses, "confidences": confidences,
-                                     "fingerprint": gate.scene_fingerprint(production, scene), **({"reader_isolation": isolation} if isolation else {}),
+                                     "fingerprint": gate.scene_fingerprint(production, scene), **({"reader_isolation": isolation} if isolation else {}), **({"reader_cost_usd": reader_cost} if reader_cost is not None else {}),
                                      **({"read_stills": _save_read(production, f"{scene}:{element_id}", stills)} if stills else {})}
     if floor is not None:
         data[f"{scene}:{element_id}"]["floor_exception"] = {"floor": floor, "reason": exc.get("reason"), "authorised": exc.get("authorised")}

@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "factory"))
 SRC = (ROOT / "tools" / "run_productions.py").read_text()
 
 
@@ -385,6 +386,227 @@ def test_callback_survives_a_runner_restart():
         (prod / "build" / "queued.json").write_text(json.dumps({"pid": 1, "at": "2026-11-09T09:58:12"}))
         assert r.pending_callback(prod, {})["at"] == "2026-11-09T09:58:12"
         assert r.pending_callback(prod, {"callbacks": ["2026-11-09T09:58:12"]}) is None
+
+
+# ---- block B1 (2026-11-11): accounting, brake, liveness, return-path commit, reader cost ---------------------------------
+ACCT_STUB = r"""#!{py}
+import json, os, sys
+from pathlib import Path
+plan = json.loads(Path(os.environ["SF_STUB_PLAN"]).read_text())
+args = Path(os.environ["SF_STUB_ARGS"]); n = len(args.read_text().splitlines()) if args.exists() else 0
+with args.open("a") as f: f.write(json.dumps(sys.argv[1:]) + "\n")
+s = plan[min(n, len(plan) - 1)]
+root = Path(os.environ["SF_STUB_ROOT"])
+for rel, text in (s.get("write") or {}).items():
+    q = root / rel; q.parent.mkdir(parents=True, exist_ok=True); q.write_text(text)
+for e in s["events"]:
+    print(json.dumps(e), flush=True)
+sys.exit(1 if s.get("exit1") else 0)
+"""
+
+
+def _asst(mid, ctx, cr=0, dup=False):
+    ev = {"type": "assistant", "session_id": "S", "message": {"id": mid, "usage": {"input_tokens": 2, "cache_creation_input_tokens": ctx - cr - 2, "cache_read_input_tokens": cr}}}
+    return [ev, ev] if dup else [ev]
+
+
+def _res(cost, limited=False, turns=5):
+    return {"type": "result", "session_id": "S", "is_error": limited, "total_cost_usd": cost, "num_turns": turns,
+            "result": "Claude usage limit reached, resets 7pm" if limited else "done"}
+
+
+def _poll(cost=4.5):
+    return {"events": [{"type": "assistant", "session_id": "S", "message": {"id": "z", "usage": {"input_tokens": 0, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 0}}}, _res(cost, limited=True, turns=1)], "exit1": True}
+
+
+class _Env:
+    """In-process runner against a scripted claude, in a temp tree that is its own git repo."""
+    def __init__(self, plan, verify=None, **attrs):
+        self.plan, self.verify, self.attrs = plan, verify, attrs
+
+    def __enter__(self):
+        import run_productions as r
+        self.r, self.t = r, Path(tempfile.mkdtemp())
+        t = self.t
+        subprocess.run(["git", "init", "-q"], cwd=t, check=True)
+        subprocess.run(["git", "config", "user.email", "t@t"], cwd=t); subprocess.run(["git", "config", "user.name", "t"], cwd=t)
+        (t / "README").write_text("x"); subprocess.run(["git", "add", "-A"], cwd=t); subprocess.run(["git", "commit", "-qm", "init"], cwd=t, check=True)
+        self.prod = t / "productions" / "c" / "015-x"; self.prod.mkdir(parents=True)
+        (t / "plan.json").write_text(json.dumps(self.plan))
+        bin_ = t / "claude"; bin_.write_text(ACCT_STUB.replace("{py}", sys.executable)); bin_.chmod(0o755)
+        self.saved = {k: getattr(r, k) for k in ("OUT", "ROOT", "CLAUDE", "POLL_LIMIT_S", "wait_for_render", "verify", "alert", "UNIT_MAX_SESSIONS", "UNIT_MAX_USD", "UNIT_MAX_CALLS", "HEARTBEAT_S")}
+        self.env = {k: os.environ.get(k) for k in ("SF_STUB_PLAN", "SF_STUB_ARGS", "SF_STUB_ROOT")}
+        os.environ.update(SF_STUB_PLAN=str(t / "plan.json"), SF_STUB_ARGS=str(t / "args"), SF_STUB_ROOT=str(self.prod))
+        r.OUT, r.ROOT, r.CLAUDE, r.POLL_LIMIT_S, r.alert = t / "out", t, str(bin_), 0, lambda *a: None
+        r.wait_for_render = lambda *a: None
+        r.verify = self.verify or (lambda p: ((p / "done").exists(), "FAIL not done"))
+        for k, v in self.attrs.items():
+            setattr(r, k, v)
+        return self
+
+    def __exit__(self, *a):
+        for k, v in self.saved.items():
+            setattr(self.r, k, v)
+        for k, v in self.env.items():
+            os.environ.pop(k, None) if v is None else os.environ.__setitem__(k, v)
+        import shutil
+        shutil.rmtree(self.t, ignore_errors=True)
+
+
+def test_delta_accounting_never_double_counts_a_resume():
+    """One session id across a limit, three polls and a resume: the raw total_cost_usd is cumulative and every poll repeats it; the unit's cost is the last cumulative figure, once."""
+    plan = [{"events": _asst("m1", 70000, 0) + _asst("m2", 72000, 70000, dup=True) + [_res(4.5, limited=True, turns=9)], "write": {"a": "1"}, "exit1": True},
+            _poll(), _poll(), _poll(),
+            {"events": _asst("m3", 80000, 72000) + _asst("m4", 90000, 80000) + [_res(6.25)], "write": {"done": "1"}}]
+    with _Env(plan) as e:
+        r = e.r
+        st = {}
+        assert r.run_unit(e.prod, st) == "verified", st
+        a = st["015-x"]["acct"]
+        assert abs(a["cost_usd"] - 6.25) < 1e-9, a                          # NOT 4.5*4 + 6.25
+        assert a["api_calls"] == 4 and a["limit_polls"] == 3 and a["peak_ctx"] == 90000 and a["first_ctx"] == 70000, a   # the duplicated message id counts once
+        assert a["cache_read_tokens"] == 70000 + 72000 + 80000 and st["015-x"]["sessions"] == 2, (a, st["015-x"]["sessions"])
+        assert [x["delta_cost_usd"] for x in a["session_log"]] == [4.5, 0, 0, 0, 1.75], a["session_log"]
+
+
+def test_polls_never_count_as_sessions_in_any_budget():
+    """Old runner: every poll was a session, so a long limit halted the batch for 'budget' right after a productive session. Now four polls leave a 2-session budget intact."""
+    plan = [{"events": _asst("m1", 70000) + [_res(1.0, limited=True)], "write": {"a": "1"}, "exit1": True}, _poll(1.0), _poll(1.0), _poll(1.0), _poll(1.0),
+            {"events": _asst("m2", 71000) + [_res(2.0)], "write": {"b": "1"}},
+            {"events": _asst("m3", 72000) + [_res(3.0)], "write": {"done": "1"}}]
+    with _Env(plan, UNIT_MAX_SESSIONS=3) as e:
+        st = {}
+        out = e.r.run_unit(e.prod, st)
+        u = st["015-x"]
+        assert out == "verified" and u["acct"]["limit_polls"] == 4 and u["sessions"] == 3, (out, u)   # 1 + 2 real sessions, 4 polls apart
+        assert abs(u["acct"]["cost_usd"] - 3.0) < 1e-9, u["acct"]
+
+
+def test_brake_stops_a_unit_on_the_cost_ceiling():
+    plan = [{"events": _asst(f"m{i}", 70000) + [_res(12.0 * i)], "write": {f"w{i}": "1"}} for i in range(1, 6)]
+    with _Env(plan) as e:
+        st = {}
+        out = e.r.run_unit(e.prod, st)
+        u = st["015-x"]
+        assert out == "stopped" and "emergency brake" in u["status"] and "US$24.00" in u["status"] and u["sessions"] == 2 and u["acct"]["cost_usd"] == 24.0, u
+
+
+def test_brake_stops_a_unit_on_the_call_ceiling():
+    plan = [{"events": sum((_asst(f"s{i}-m{j}", 70000) for j in range(3)), []) + [_res(0.1 * (i + 1))], "write": {f"w{i}": "1"}} for i in range(1, 8)]
+    with _Env(plan, UNIT_MAX_CALLS=7) as e:
+        st = {}
+        out = e.r.run_unit(e.prod, st)
+        u = st["015-x"]
+        assert out == "stopped" and "9 API calls" in u["status"] and u["sessions"] == 3, u        # 3 + 3 = 6 is within 7; 9 is over: no fourth session
+
+
+def test_brake_is_a_stop_not_a_halt():
+    rc, calls, halted = _queue({"010-a": "stopped", "011-b": "verified"}, ["productions/c/010-a", "productions/c/011-b"])
+    assert rc == 0 and calls == ["010-a", "011-b"] and not halted, calls
+
+
+def test_liveness_fields_pid_heartbeat_and_next_retry():
+    """state.json answers 'is a batch active, and until when': pid, heartbeat, and the next-retry time while a usage limit is being waited out."""
+    import time as _t
+    seen = {}
+    plan = [{"events": _asst("m1", 70000) + [_res(1.0, limited=True)], "write": {"a": "1"}, "exit1": True},
+            {"events": _asst("m2", 71000) + [_res(2.0)], "write": {"done": "1"}}]
+    with _Env(plan, HEARTBEAT_S=0.2) as e:
+        r = e.r
+        real_sleep = r.time.sleep
+
+        def spy(x):
+            if x == 0:
+                seen["during_wait"] = json.loads((r.OUT / "state.json").read_text())
+            real_sleep(x)
+        r.time.sleep = spy
+        try:
+            r.POLL_LIMIT_S = 0.0
+            out = {}
+            state = {}
+            rc = r.run_queue(["productions/c/015-x"], state)
+        finally:
+            r.time.sleep = real_sleep
+        assert rc == 0
+        w = seen["during_wait"]
+        assert w["_runner"]["pid"] == os.getpid() and w["_runner"]["alive"] and w["_runner"]["heartbeat"], w["_runner"]
+        assert w["_runner"]["next_retry_at"] and w["015-x"]["next_retry_at"] and w["015-x"]["status"] == "waiting for usage limit reset", w
+        fin = json.loads((r.OUT / "state.json").read_text())
+        assert fin["_runner"]["alive"] is False and fin["_runner"]["next_retry_at"] is None and fin["_runner"]["ended"], fin["_runner"]
+
+
+def test_heartbeat_thread_refreshes_state_while_a_unit_runs():
+    import time as _t
+    with _Env([{"events": []}], HEARTBEAT_S=0.1) as e:
+        r = e.r
+        state = {}
+        stop = r.start_heartbeat(state)
+        try:
+            first = json.loads((r.OUT / "state.json").read_text()) if (r.OUT / "state.json").exists() else None
+            _t.sleep(0.5)
+            on_disk = json.loads((r.OUT / "state.json").read_text())
+            assert on_disk["_runner"]["pid"] == os.getpid() and on_disk["_runner"]["alive"] and on_disk["_runner"]["heartbeat_every_s"] == 0.1
+        finally:
+            stop.set()
+
+
+def _git_log(t):
+    return subprocess.run(["git", "log", "--name-only", "--format=%s"], cwd=t, capture_output=True, text=True).stdout
+
+
+def test_return_path_commits_the_units_own_artefacts_only():
+    """A returned unit commits its production folder and the rig it created; a rig already untracked before it started, and unrelated modified work, stay as they were."""
+    plan = [{"events": _asst("m1", 70000) + [_res(1.0)],
+             "write": {"notes.md": "RETURNED", "returned.json": json.dumps({"reason": "ladder exhausted", "replacement": None}), "../../../code3d/lib/new_rig.py": "x=1", "../../../code3d/scenes/new_01.py": "y=1"}}]
+    with _Env(plan) as e:
+        r, t = e.r, e.t
+        (t / "code3d" / "lib").mkdir(parents=True)
+        (t / "code3d" / "lib" / "old_rig.py").write_text("old")                 # untracked BEFORE the unit: not this unit's
+        (t / "README").write_text("modified by someone else")
+        state = {}
+        rc = r.run_queue(["productions/c/015-x"], state)
+        log = _git_log(t)
+        assert rc == 0 and state["015-x"]["outcome"] == "returned" and state["015-x"]["commit"].startswith("committed"), state["015-x"]
+        assert "productions/c/015-x/notes.md" in log and "productions/c/015-x/returned.json" in log and "code3d/lib/new_rig.py" in log and "code3d/scenes/new_01.py" in log, log
+        status = subprocess.run(["git", "status", "--porcelain"], cwd=t, capture_output=True, text=True).stdout
+        assert "old_rig.py" in status and "README" in status and "new_rig.py" not in status and "015-x" not in status, status
+
+
+def test_return_path_commits_a_stopped_unit_and_never_fails_the_runner():
+    plan = [{"events": _asst(f"m{i}", 70000) + [_res(12.0 * i)], "write": {f"w{i}": "1"}} for i in range(1, 4)]
+    with _Env(plan) as e:
+        state = {}
+        assert e.r.run_queue(["productions/c/015-x"], state) == 0
+        assert state["015-x"]["outcome"] == "stopped" and state["015-x"]["commit"].startswith("committed"), state["015-x"]
+        e.r.ROOT = e.t / "nowhere"                                              # a broken repo: the commit reports, never raises
+        assert not e.r.commit_unit(e.prod, {}, "stopped").startswith("committed")
+
+
+def test_blind_read_reports_cost_from_json_output():
+    import blind_read as br
+    assert br.unwrap(json.dumps({"type": "result", "result": '{"guess": "fork", "confidence": 90}', "total_cost_usd": 0.0123})) == ('{"guess": "fork", "confidence": 90}', 0.0123)
+    assert br.unwrap(json.dumps([{"type": "system"}, {"type": "result", "result": "r", "total_cost_usd": 0.5}])) == ("r", 0.5)
+    assert br.unwrap('{"guess": "x"}') == ('{"guess": "x"}', 0.0)
+    assert "--output-format" in (ROOT / "tools" / "blind_read.py").read_text() and '"json"' in (ROOT / "tools" / "blind_read.py").read_text()
+
+
+def test_reader_cost_is_recorded_in_the_gate_record_and_summed_per_unit():
+    """blind_read writes each reading's cost into the record and an append-only ledger; the runner sums the ledger into the unit's accounting (two readings of one element both count)."""
+    import blind_read as br
+    import asset_library as al
+    import run_productions as r
+    with tempfile.TemporaryDirectory() as t:
+        prod = Path(t)
+        br.ledger(prod, "4:sparks", [{"cost_usd": 0.01}, {"cost_usd": 0.02}, {"cost_usd": 0.03}])
+        br.ledger(prod, "4:sparks", [{"cost_usd": 0.01}, {"cost_usd": 0.01}, {"cost_usd": 0.01}])
+        assert r.reader_totals(prod) == (6, 0.09)
+        st = {}
+        r.account(st, {"session_id": "S", "total_cost": 1.0, "usage": {"api_calls": 1}}, prod, 1, False)
+        assert st["acct"]["reader_runs"] == 6 and st["acct"]["reader_cost_usd"] == 0.09
+        r.account(st, {"session_id": "S", "total_cost": 1.0, "usage": {}, "limited": True}, prod, 2, True)    # a poll recomputes, never re-adds
+        assert st["acct"]["reader_runs"] == 6 and st["acct"]["cost_usd"] == 1.0 and st["acct"]["limit_polls"] == 1
+    src = (ROOT / "factory" / "asset_library.py").read_text()
+    assert src.count("reader_cost_usd") >= 3 and "reader_cost=cost" in (ROOT / "tools" / "blind_read.py").read_text()
 
 
 if __name__ == "__main__":

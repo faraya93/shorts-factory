@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -21,13 +22,35 @@ FORMAT = ' Reply with ONLY one line of JSON: {"guess": "<your answer as text>", 
 
 def read_once(folder: Path, prompt: str) -> dict:
     env = {k: v for k, v in os.environ.items() if not k.startswith(("CLAUDECODE", "CLAUDE_CODE_ENTRYPOINT", "CLAUDE_PROJECT"))}
-    r = subprocess.run(["claude", "-p", prompt + FORMAT, "--tools", "Read", "--allowedTools", "Read", "--setting-sources", "", "--strict-mcp-config", "--no-session-persistence", "--model", MODEL, "--output-format", "text"],
+    r = subprocess.run(["claude", "-p", prompt + FORMAT, "--tools", "Read", "--allowedTools", "Read", "--setting-sources", "", "--strict-mcp-config", "--no-session-persistence", "--model", MODEL, "--output-format", "json"],
                        cwd=folder, capture_output=True, text=True, env=env, timeout=240, stdin=subprocess.DEVNULL)
-    m = re.search(r"\{.*\}", r.stdout, re.S)
+    text, cost = unwrap(r.stdout)
+    m = re.search(r"\{.*\}", text, re.S)
     if not m:
         raise SystemExit(f"reader returned no JSON (exit {r.returncode}): {(r.stdout + r.stderr)[-500:]}")
     d = json.loads(m.group(0))
-    return {"guess": str(d["guess"]), "confidence": int(d["confidence"])}
+    return {"guess": str(d["guess"]), "confidence": int(d["confidence"]), "cost_usd": cost}
+
+
+def unwrap(stdout: str) -> tuple[str, float]:
+    """`--output-format json` wraps the reply in one result object (or a list of events whose last is the result): (reply text, total_cost_usd). Output that is not that wrapper is returned as is, at cost 0."""
+    try:
+        obj = json.loads(stdout)
+    except ValueError:
+        return stdout, 0.0
+    if isinstance(obj, list):
+        obj = next((e for e in reversed(obj) if isinstance(e, dict) and e.get("type") == "result"), {})
+    if not isinstance(obj, dict) or "result" not in obj:
+        return stdout, 0.0
+    return str(obj.get("result", "")), float(obj.get("total_cost_usd") or 0.0)
+
+
+def ledger(production: Path, key: str, res: list[dict]) -> None:
+    """Append-only reader cost ledger the runner sums per unit (build/reader-ledger.jsonl): elements.json keeps only the last reading of an element, the ledger keeps every one."""
+    path = production / "build" / "reader-ledger.jsonl"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a") as f:
+        f.write(json.dumps({"at": datetime.now().isoformat(timespec="seconds"), "key": key, "readers": len(res), "cost_usd": round(sum(r.get("cost_usd", 0.0) for r in res), 6)}) + "\n")
 
 
 def read(stills: list[str], multi: bool, readers: int) -> list[dict]:
@@ -45,16 +68,19 @@ def main() -> int:
     a = ap.parse_args()
     res = read(a.stills, a.multi, a.readers)
     guesses, confs = [r["guess"] for r in res], [r["confidence"] for r in res]
+    cost = round(sum(r["cost_usd"] for r in res), 6)
     print(json.dumps(res, ensure_ascii=False))
     if not a.record:
         return 0
     kind, *rest = a.record
     if kind == "element":
-        ok = al.record_element(Path(rest[0]).resolve(), int(rest[1]), rest[2], guesses, confs, a.stills, "headless")
+        ok = al.record_element(Path(rest[0]).resolve(), int(rest[1]), rest[2], guesses, confs, a.stills, "headless", reader_cost=cost)
+        ledger(Path(rest[0]).resolve(), f"{rest[1]}:{rest[2]}", res)
     elif kind == "likeness":
-        ok = al.record_likeness(Path(rest[0]).resolve(), rest[1], guesses, confs, a.stills, "headless")
+        ok = al.record_likeness(Path(rest[0]).resolve(), rest[1], guesses, confs, a.stills, "headless", reader_cost=cost)
+        ledger(Path(rest[0]).resolve(), "hero", res)
     else:
-        ok = al.record_blind(rest[0], guesses, confs)
+        ok = al.record_blind(rest[0], guesses, confs, reader_cost=cost)
     print("PASS" if ok else "FAIL")
     return 0 if ok else 1
 
