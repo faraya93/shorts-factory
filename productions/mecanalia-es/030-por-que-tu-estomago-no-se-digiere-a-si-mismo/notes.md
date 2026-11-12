@@ -90,3 +90,7 @@ Rung 3 changes narration only where a line is given; otherwise the narration is 
 
 ## Ledger (one line per event, appended, never rewritten)
 - 2026-11-11: script written and stamped by the block B4 creative session (Opus); proofs.json written; record docs/current/reports/b4-2026-11-11.md.
+
+## RETURNED 2026-11-11
+CAPABILITY BOUNDARY (redesign session 2026-11-11, lens decision on proof-gate-recommendation-2026-11-11.md section 2): magnified tissue and cellular-scale sections do not read. B5 proofs P1-P4 all failed: readers named 'flying saucer', 'translucent cone', 'dessert bar', 'candy bar' at 15-45; the same family as 012's droplets and 025's seed interior. The mechanism heart (mucus, bicarbonate, lining renewal) lives at that scale, so no staging keeps the promise. Not redesigned; the class is added to the modellability screen.
+Replacement: pending a creative session (no eligible developed standby).

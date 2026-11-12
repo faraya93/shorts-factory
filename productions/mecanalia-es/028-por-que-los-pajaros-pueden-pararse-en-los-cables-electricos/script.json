@@ -4,7 +4,8 @@
   "primary_engine": "code3d",
   "hero_route": "asset",
   "library_assets": [
-    "bird"
+    "pigeon",
+    "eagle"
   ],
   "preset": null,
   "preset_note": "Chosen by the design lens at scene design (composition gate).",
@@ -48,7 +49,7 @@
           "id": "bird-on-wire",
           "kind": "object",
           "name": "a small bird perched on a power line",
-          "route": "library bird (open job; perched-on-a-wire state) on a geometric wire between poles",
+          "route": "library pigeon (species-level job, variant of bird, bird_rig; proof A1 round 2) on opaque cables between poles",
           "risk": "medium-high: the hero is an unsealed asset; the wire and poles are the context cue; proof P1",
           "aliases": [
             "bird",
@@ -68,7 +69,7 @@
     {
       "name": "viaje",
       "narration": "Sigamos a la electricidad. Viaja por el cobre del cable, empujada por la diferencia de voltaje entre un extremo de la línea y el otro.",
-      "what_changes": "The camera drops onto the wire far down the line: accent pulses race along the copper toward the bird, passing pole after pole; at the far end of the line a high glow, at the other a low one.",
+      "what_changes": "The camera drops onto the wire far down the line: accent pulses race along the opaque cables toward the bird, passing pole after pole; at the far end of the line a high glow, at the other a low one.",
       "transformation": "cable apagado → pulsos de corriente que corren por él hacia el pájaro",
       "camera": "travelling rasante a lo largo del cable, acompañando los pulsos",
       "overlays_plan": [
@@ -76,27 +77,34 @@
       ],
       "elements": [
         {
-          "id": "current-on-wire",
-          "kind": "event",
-          "name": "electric current flowing along a power line",
-          "route": "emissive accent pulses travelling inside a semi-transparent wire jacket; poles in frame",
-          "risk": "medium-high: readers may name only 'power lines'; the pulses are the event; proof P2",
+          "id": "power-line",
+          "kind": "object",
+          "name": "a power line on wooden poles",
+          "route": "build: opaque dark cables (matte black insulation, never translucent) on glass or ceramic insulators on a wooden crossarm, wooden poles receding (W1 environment)",
+          "risk": "medium: proof P2 round 2 (stop-loss)",
           "aliases": [
-            "electricity",
-            "electric current",
-            "current",
-            "electrical current",
-            "electricity flowing",
-            "current flowing",
-            "flowing electricity",
-            "electrified power line",
-            "electrified wire",
-            "electricidad",
-            "corriente"
+            "power line",
+            "power lines",
+            "electric wire",
+            "electrical wire",
+            "power cable",
+            "cable",
+            "wire",
+            "wires",
+            "utility pole",
+            "power pole",
+            "electric pole",
+            "telephone pole",
+            "poste",
+            "cable eléctrico",
+            "tendido eléctrico"
           ]
         }
       ],
-      "est_duration_s": 8.6
+      "est_duration_s": 8.6,
+      "cues": [
+        "electric current as accent pulses along the cables: a cue on the power line, not a gated element ('electric current as a visible thing on its own' is a capability boundary, lens decision 2026-11-11)"
+      ]
     },
     {
       "name": "patas",
@@ -109,16 +117,19 @@
         {
           "id": "bird-detour",
           "kind": "object",
-          "name": "bird on a wire with a dotted path through its legs and body",
-          "route": "bird asset + dotted accent curve; the bird stays in its sealed perched state",
-          "risk": "medium: proof P1 covers the bird on the wire; the dotted path is an annotation",
+          "name": "pigeon on a power line (a dotted detour path through it as a cue)",
+          "route": "library pigeon (sealed perched) + dotted accent curve as a cue",
+          "risk": "medium: proof P3 round 2 (stop-loss)",
           "aliases": [
             "bird",
             "bird on a wire",
             "bird on a power line",
             "sparrow",
+            "pigeon",
+            "swallow",
             "songbird",
-            "pájaro"
+            "pájaro",
+            "ave"
           ]
         }
       ],
@@ -136,28 +147,32 @@
       "elements": [
         {
           "id": "current-past-bird",
-          "kind": "event",
-          "name": "current passing under a bird on a wire",
-          "route": "same staging as P2 with the bird in frame",
-          "risk": "medium: proof P2",
+          "kind": "object",
+          "name": "pigeon on a power line, both feet lit the same shade",
+          "route": "library pigeon (sealed perched) on the cable; current pulses under it as a cue",
+          "risk": "medium: proof P4 round 2 (stop-loss)",
           "aliases": [
+            "bird",
             "bird on a wire",
             "bird on a power line",
-            "bird",
-            "electricity",
-            "electric current",
-            "current flowing",
-            "electricity flowing",
-            "pájaro"
+            "sparrow",
+            "pigeon",
+            "swallow",
+            "songbird",
+            "pájaro",
+            "ave"
           ]
         }
       ],
-      "est_duration_s": 11.4
+      "est_duration_s": 11.4,
+      "cues": [
+        "current pulses passing under the feet: a cue, not a gated element (capability boundary, lens decision 2026-11-11)"
+      ]
     },
     {
       "name": "poste",
       "narration": "El peligro es tocar dos cosas a la vez, como el cable y el poste. Ahí sí hay diferencia, y la corriente cruza el cuerpo. Por eso las aves grandes, que alcanzan con las alas, son las que más mueren electrocutadas.",
-      "what_changes": "The turn: the camera pulls back along the whole line to a pole top; a large bird lands on the crossarm and spreads its wings, one wingtip touching the wire; a red path lights from the wire through the wing and body down into the pole; an error-red X closes over it before anything else happens.",
+      "what_changes": "The turn: the camera pulls back along the whole line to a pole top; an eagle lands on the crossarm and spreads its wings, one wingtip touching the wire; a red path lights from the wire through the wing and body down into the pole; an error-red X closes over it before anything else happens.",
       "transformation": "pájaro chico a salvo → un ave grande toca cable y poste y la corriente la cruza",
       "camera": "retroceso a lo largo de toda la línea hasta lo alto del poste",
       "overlays_plan": [
@@ -167,20 +182,16 @@
         {
           "id": "big-bird-pole",
           "kind": "object",
-          "name": "a large bird with spread wings on a power pole",
-          "route": "library bird (flying, wings spread state, scaled up) on a geometric pole crossarm; red emissive path",
-          "risk": "high: a scaled songbird may not read as a large bird; the pole and wire are the cue; proof P4",
+          "name": "an eagle with spread wings on a power pole",
+          "route": "library eagle (job opened 2026-11-11; seal proof A2) on a pole crossarm; red emissive path as a cue",
+          "risk": "high: new asset; proofs A2 and P5 round 2 (stop-loss)",
           "aliases": [
-            "bird",
-            "large bird",
             "eagle",
             "hawk",
+            "falcon",
             "bird of prey",
-            "bird on a power pole",
-            "bird on a utility pole",
-            "bird with spread wings",
-            "pájaro",
-            "ave",
+            "raptor",
+            "large bird",
             "águila"
           ]
         }

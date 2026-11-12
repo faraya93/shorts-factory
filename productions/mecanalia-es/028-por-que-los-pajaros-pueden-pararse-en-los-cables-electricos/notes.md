@@ -1,6 +1,6 @@
 # por-que-los-pajaros-pueden-pararse-en-los-cables-electricos: production notes (developed script, block B4 creative session 2026-11-11)
 
-Status: DEVELOPED SCRIPT ON FILE (stamped; block B4). Not batch-eligible until every proof in `proofs.json` has passed (doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"). Nothing modelled, rendered, queued or published. A production proceeds FROM THIS SCRIPT; it changes it only through the Reshape ladder, logged in the ledger below.
+Status: DEVELOPED SCRIPT ON FILE (stamped; block B4, re-stamped by the redesign session 2026-11-11). A1 (pigeon seal), P2-P5 at design round 2 and A2 (eagle seal, new) pending one braked proof unit (a round-2 failure returns the unit); W1 and P1 passed. Not batch-eligible until every proof in `proofs.json` has passed (doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"). Sections below that describe the bird asset and the proofs describe round 1; `proofs.json` and the ledger govern. Nothing modelled, rendered, queued or published. A production proceeds FROM THIS SCRIPT; it changes it only through the Reshape ladder, logged in the ledger below.
 Staging mode: world. A street at dusk modelled as an environment (sky gradient, a row of poles, three wires in catenary curves, a rooftop line); the camera travels along the wire with the current. First `world` production: its riskiest environment frame is timed first (W1). Rotation: 024 cutaway, 026 and 027 stage; world keeps every window at three or fewer of one mode.
 
 ## Publish package draft (Spanish; the owner publishes)
@@ -93,6 +93,7 @@ Rung 3 changes narration only where a line is given; otherwise the narration is 
 
 ## Ledger (one line per event, appended, never rewritten)
 - 2026-11-11: script written and stamped by the block B4 creative session (Opus); proofs.json written; record docs/current/reports/b4-2026-11-11.md.
+- 2026-11-11 (redesign session, Opus; rung: none, pre-production proof round 2): A1 becomes the species-level job assets/library/pigeon (declaration error recorded, no alias added to the bird job); new asset job eagle and seal proof A2 for scene 5; P2 gates the power line (opaque cables) with current as a cue; P3/P4 read the pigeon under the unit's one alias set 'pigeon' (as P1 declared before any reading); current is not a gated element anywhere (capability boundary). library_assets now pigeon, eagle; script re-stamped, narration unchanged. Stop-loss: a round-2 failure returns the unit.
 
 ## Earlier stub (kept verbatim)
 # 028-por-que-los-pajaros-pueden-pararse-en-los-cables-electricos: production notes

@@ -74,7 +74,8 @@
    "built_by_b5": {
     "script": "code3d/scenes/proof_31.py",
     "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   },
+   "round": 1
   },
   {
    "id": "P2",
@@ -83,22 +84,31 @@
    "name": "waves of grey people behind a coloured crowd",
    "kind": "object",
    "aliases": [
-    "crowd",
+    "person",
+    "human",
+    "man",
+    "woman",
+    "figure",
+    "human figure",
     "people",
+    "crowd",
+    "persona",
     "crowd of people",
     "group of people",
     "many people",
     "army",
     "multitud",
     "personas",
-    "gente"
+    "gente",
+    "team",
+    "figures"
    ],
    "kind_of_proof": "element reading",
-   "staging": "Rows of grey figures behind a front row of accent-shirted figures, filling the stage, camera at head height.",
-   "build": "paper_rig.figure instanced, grey recolour.",
-   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
-   "on_fail": "Rung 1: the grey made warmer (stone-free: a light taupe), not pure neutral, so it is not read as statues. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "failed",
+   "staging": "Three rows of the SEALED human-figure (assets/library/human-figure, standing pose: a sealed pose; never paper_rig.figure) filling the lower two thirds of the frame. Front row: five figures in their own accent shirts, full body, each about 40% of the frame height, faces, hands and shoes readable. Behind them two rows of the same figure in the grey recolour (shirt and trousers only), receding, partly occluded. Camera at chest height, 3/4 on the front row. No year counter in the still. Reader still: tools/proof_still.py --reader (half-resolution Cycles, factory/gate.py STILL_POLICY); the builder writes the conformance note (tools/proof_note.py --conform) against this staging before any reader runs; any deviation defers the reading.",
+   "build": "human-figure (library, standing) instanced; grey recolour of clothing materials only; stage per identity.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py, single-object prompt), mean confidence >= 60, no reader under 45, aliases exactly as declared here (alias set 'people'), none added after a guess; every reading counts",
+   "on_fail": "STOP-LOSS: this is design round 2. If it fails, the element is a boundary for this unit and 027 is returned (tools/return_topic.py); there is no third design round.",
+   "status": "pending",
    "readings": [
     {
      "date": "2026-11-11",
@@ -120,10 +130,39 @@
      "reader_cost_usd": 0.00517
     }
    ],
-   "built_by_b5": {
-    "script": "code3d/scenes/proof_32.py",
-    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   "design_history": [
+    {
+     "element_id": "grey-crowd",
+     "name": "waves of grey people behind a coloured crowd",
+     "kind": "object",
+     "aliases": [
+      "crowd",
+      "people",
+      "crowd of people",
+      "group of people",
+      "many people",
+      "army",
+      "multitud",
+      "personas",
+      "gente"
+     ],
+     "staging": "Rows of grey figures behind a front row of accent-shirted figures, filling the stage, camera at head height.",
+     "build": "paper_rig.figure instanced, grey recolour.",
+     "on_fail": "Rung 1: the grey made warmer (stone-free: a light taupe), not pure neutral, so it is not read as statues. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+     "status": "failed",
+     "built_by_b5": {
+      "script": "code3d/scenes/proof_32.py",
+      "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+     },
+     "round": 1,
+     "readings": "readings without a 'round' field (the B5 reading of 2026-11-11)"
+    }
+   ],
+   "alias_sets": [
+    "people"
+   ],
+   "redesign": "From the B5 reading: all three readers named a crowd (alias matched, 40/95/90) and two wrote 'Not a single object'; one reader was under 45. The B5 build used paper_rig.figure, small, many. Round 2 uses the sealed human-figure at readable scale, fewer and larger figures (recommendation 2026-11-11 section 2). The 'multi' prompt the recommendation proposed for crowds is NOT used: it failed its calibration.",
+   "round": 2
   },
   {
    "id": "P3",
@@ -171,7 +210,8 @@
    "built_by_b5": {
     "script": "code3d/scenes/proof_33.py",
     "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   },
+   "round": 1
   },
   {
    "id": "P4",
@@ -180,21 +220,31 @@
    "name": "one coloured person surrounded by twelve grey people",
    "kind": "object",
    "aliases": [
-    "people",
-    "group of people",
-    "crowd",
-    "team",
     "person",
-    "figures",
+    "human",
+    "man",
+    "woman",
+    "figure",
+    "human figure",
+    "people",
+    "crowd",
+    "persona",
+    "crowd of people",
+    "group of people",
+    "many people",
+    "army",
+    "multitud",
     "personas",
-    "gente"
+    "gente",
+    "team",
+    "figures"
    ],
    "kind_of_proof": "element reading",
-   "staging": "One accent figure, twelve grey figures in a loose team formation around it, full bodies in frame.",
-   "build": "13 paper_rig.figure instances.",
-   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
-   "on_fail": "Rung 1: tighter frame on the accent figure with six grey figures behind. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "failed",
+   "staging": "Team photo: one figure in its accent shirt front and centre, full body, about 55% of the frame height; behind it the twelve grey figures of the same sealed human-figure (standing pose) in two rows of six, the back row on a low step, full bodies, all facing camera. Camera at chest height, straight on and slightly above, so the thirteen figures fill the frame width. Reader still: tools/proof_still.py --reader (half-resolution Cycles, factory/gate.py STILL_POLICY); the builder writes the conformance note (tools/proof_note.py --conform) against this staging before any reader runs; any deviation defers the reading.",
+   "build": "human-figure (library, standing) x13; grey recolour of clothing materials on twelve.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py, single-object prompt), mean confidence >= 60, no reader under 45, aliases exactly as declared here (alias set 'people'), none added after a guess; every reading counts",
+   "on_fail": "STOP-LOSS: this is design round 2. If it fails, the element is a boundary for this unit and 027 is returned (tools/return_topic.py); there is no third design round.",
+   "status": "pending",
    "readings": [
     {
      "date": "2026-11-11",
@@ -216,10 +266,67 @@
      "reader_cost_usd": 0.005042
     }
    ],
-   "built_by_b5": {
-    "script": "code3d/scenes/proof_34.py",
-    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   "design_history": [
+    {
+     "element_id": "one-and-twelve",
+     "name": "one coloured person surrounded by twelve grey people",
+     "kind": "object",
+     "aliases": [
+      "people",
+      "group of people",
+      "crowd",
+      "team",
+      "person",
+      "figures",
+      "personas",
+      "gente"
+     ],
+     "staging": "One accent figure, twelve grey figures in a loose team formation around it, full bodies in frame.",
+     "build": "13 paper_rig.figure instances.",
+     "on_fail": "Rung 1: tighter frame on the accent figure with six grey figures behind. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+     "status": "failed",
+     "built_by_b5": {
+      "script": "code3d/scenes/proof_34.py",
+      "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+     },
+     "round": 1,
+     "readings": "readings without a 'round' field (the B5 reading of 2026-11-11)"
+    }
+   ],
+   "alias_sets": [
+    "people"
+   ],
+   "redesign": "From the B5 reading: all three named the figures (85/60/35) but read them small ('mannequins, chess pieces'); one reader at 35. Round 2: the sealed figure at readable scale, the accent figure central and largest, the beat's own image (a football team behind its captain).",
+   "round": 2
   }
- ]
+ ],
+ "alias_sets": {
+  "people": [
+   "person",
+   "human",
+   "man",
+   "woman",
+   "figure",
+   "human figure",
+   "people",
+   "crowd",
+   "persona",
+   "crowd of people",
+   "group of people",
+   "many people",
+   "army",
+   "multitud",
+   "personas",
+   "gente",
+   "team",
+   "figures"
+  ]
+ },
+ "alias_sets_note": "One alias set per physical element per unit (lens decision 2026-11-11, redesign session): the union of the words this unit declared for the human figure before any reading (block B4: script scene 1 'person', proofs P2 and P4). 'mannequin' and 'humanoid' sit on the sealed human-figure asset's own list but are NOT carried into this set: 'mannequin' first appeared in this unit as a failed reader's guess (P4), so carrying it would read as an alias added after a guess.",
+ "redesign_session": {
+  "at": "2026-11-11",
+  "model": "claude-opus-5-5",
+  "record": "docs/current/reports/redesign-2026-11-11.md",
+  "batch_eligible_when": "every proof has status 'passed'"
+ }
 }

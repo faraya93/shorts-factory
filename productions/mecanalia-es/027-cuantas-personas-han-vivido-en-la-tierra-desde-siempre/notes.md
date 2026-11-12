@@ -1,6 +1,6 @@
 # cuantas-personas-han-vivido-en-la-tierra-desde-siempre: production notes (developed script, block B4 creative session 2026-11-11)
 
-Status: DEVELOPED SCRIPT ON FILE (stamped; block B4). Not batch-eligible until every proof in `proofs.json` has passed (doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"). Nothing modelled, rendered, queued or published. A production proceeds FROM THIS SCRIPT; it changes it only through the Reshape ladder, logged in the ledger below.
+Status: DEVELOPED SCRIPT ON FILE (stamped; block B4, re-stamped by the redesign session 2026-11-11). Proofs P2, P4 at design round 2 (pending one braked proof unit; a round-2 failure returns the unit); A1, P1, P3 passed. Not batch-eligible until every proof in `proofs.json` has passed (doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"). Sections below that describe the proofs describe round 1; `proofs.json` and the ledger govern. Nothing modelled, rendered, queued or published. A production proceeds FROM THIS SCRIPT; it changes it only through the Reshape ladder, logged in the ledger below.
 Staging mode: stage. One figure on the Coral stage, multiplied with a pull-back each step; at globe scale the earth-globe asset sits on the stage. Rotation: 022 and 024 cutaway, 026 stage; a second stage keeps every five-window at three or fewer of one mode.
 
 ## Publish package draft (Spanish; the owner publishes)
@@ -97,6 +97,7 @@ Rung 3 changes narration only where a line is given; otherwise the narration is 
 
 ## Ledger (one line per event, appended, never rewritten)
 - 2026-11-11: script written and stamped by the block B4 creative session (Opus); proofs.json written; record docs/current/reports/b4-2026-11-11.md.
+- 2026-11-11 (redesign session, Opus; rung: none, pre-production proof round 2): P2 and P4 rebuilt on the sealed human-figure at readable scale (B5 used paper_rig.figure), P4 as a team photo; one alias set 'people' for the unit (script scenes 1, 3, 5 aligned; 'mannequin' excluded). Script what_changes for scenes 3 and 5 edited, narration unchanged, re-stamped. Stop-loss: a round-2 failure returns the unit. Why: B5 readings (crowd named, one reader under 45 each time).
 
 ## Earlier stub (kept verbatim)
 # 027-cuantas-personas-han-vivido-en-la-tierra-desde-siempre: production notes

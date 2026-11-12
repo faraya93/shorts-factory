@@ -1,6 +1,6 @@
 # por-que-a-los-33-mineros-de-chile-los-sacaron-en-una-capsula: production notes (developed script, block B4 creative session 2026-11-11)
 
-Status: DEVELOPED STANDBY (bank status `standby 029 2026-11-11`): stamped script on file, in no batch. Not batch-eligible until every proof in `proofs.json` has passed (doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"). Nothing modelled, rendered, queued or published. A production proceeds FROM THIS SCRIPT; it changes it only through the Reshape ladder, logged in the ledger below.
+Status: DEVELOPED STANDBY, PARKED 2026-11-11 (redesign session): stamped script on file, in no batch; no proofs are built until a slot needs it and its FLAGGED turn fact is sourced. Not batch-eligible until every proof in `proofs.json` has passed (doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"). Nothing modelled, rendered, queued or published. A production proceeds FROM THIS SCRIPT; it changes it only through the Reshape ladder, logged in the ledger below.
 Staging mode: cutaway. The hill cut open from the surface to the refuge, so the blocked ramp, the probe holes and the rescue shaft are in one section. Rotation: as the standby after 028 (world), 026 and 027 stage, 024 cutaway: two cutaways in any five.
 
 ## Publish package draft (Spanish; the owner publishes)
@@ -118,3 +118,4 @@ Rung 3 changes narration only where a line is given; otherwise the narration is 
 
 ## Ledger (one line per event, appended, never rewritten)
 - 2026-11-11: script written and stamped by the block B4 creative session (Opus); proofs.json written; record docs/current/reports/b4-2026-11-11.md.
+- 2026-11-11 (redesign session, Opus): PARKED. No proofs are built until a slot needs it and its FLAGGED turn fact is sourced (recommendation section 2); bank rank 33 marked.

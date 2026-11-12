@@ -60,7 +60,16 @@
             "human figure",
             "people",
             "crowd",
-            "persona"
+            "persona",
+            "crowd of people",
+            "group of people",
+            "many people",
+            "army",
+            "multitud",
+            "personas",
+            "gente",
+            "team",
+            "figures"
           ]
         }
       ],
@@ -102,7 +111,7 @@
     {
       "name": "antes",
       "narration": "Pero la gente lleva unos doscientos mil años naciendo y muriendo. Los demógrafos sumaron a todos los que nacieron alguna vez, generación tras generación.",
-      "what_changes": "Behind the living ring, grey figures appear in waves, generation after generation, each wave standing behind the last, filling the stage outward like rings of a tree; a year counter runs backwards.",
+      "what_changes": "Behind the living, grey figures (the same figure as the living) step in, wave after wave, each row standing behind the last and filling the stage outward like the rings of a tree; the front row stays large and close; a year counter runs backwards.",
       "transformation": "solo los vivos → oleadas grises de todos los que vivieron antes",
       "camera": "travelling hacia atrás a través de las oleadas, de los vivos a las más antiguas",
       "overlays_plan": [
@@ -113,18 +122,27 @@
           "id": "grey-crowd",
           "kind": "object",
           "name": "waves of grey people behind a coloured crowd",
-          "route": "human-figure instances, grey recolour, rows by instancing (pattern: 016 instanced heaps passed with a reference object in frame)",
-          "risk": "medium: a grey crowd may read as statues; proof P2",
+          "route": "library human-figure (sealed, standing pose) instanced at readable scale, grey recolour of clothing only; proof P2 round 2",
+          "risk": "medium: proof P2 round 2 (stop-loss)",
           "aliases": [
-            "crowd",
+            "person",
+            "human",
+            "man",
+            "woman",
+            "figure",
+            "human figure",
             "people",
+            "crowd",
+            "persona",
             "crowd of people",
             "group of people",
             "many people",
             "army",
             "multitud",
             "personas",
-            "gente"
+            "gente",
+            "team",
+            "figures"
           ]
         }
       ],
@@ -164,7 +182,7 @@
     {
       "name": "giro",
       "narration": "O sea, por cada persona viva hoy, hay más de doce que ya vivieron y murieron. Más que un equipo de fútbol completo.",
-      "what_changes": "The turn: back down to people scale: one accent figure stands on the stage; twelve grey figures step in around it one by one, lining up like a football team behind its captain.",
+      "what_changes": "The turn: back down to people scale: one accent figure stands on the stage, large and central; twelve grey figures step in behind it one by one into two rows of six, like a football team photo behind its captain.",
       "transformation": "una persona viva sola → rodeada por doce que vivieron antes",
       "camera": "bajada desde el planeta hasta una sola figura y órbita cerrada",
       "overlays_plan": [
@@ -176,17 +194,27 @@
           "id": "one-and-twelve",
           "kind": "object",
           "name": "one coloured person surrounded by twelve grey people",
-          "route": "human-figure standing, 13 instances, recolour",
-          "risk": "low-medium: sealed asset and pose; a small group reads as people; proof P2 covers the grey recolour",
+          "route": "library human-figure (sealed, standing pose) x13, grey recolour of clothing on twelve; team-photo rows; proof P4 round 2",
+          "risk": "medium: proof P4 round 2 (stop-loss)",
           "aliases": [
-            "people",
-            "group of people",
-            "crowd",
-            "team",
             "person",
-            "figures",
+            "human",
+            "man",
+            "woman",
+            "figure",
+            "human figure",
+            "people",
+            "crowd",
+            "persona",
+            "crowd of people",
+            "group of people",
+            "many people",
+            "army",
+            "multitud",
             "personas",
-            "gente"
+            "gente",
+            "team",
+            "figures"
           ]
         }
       ],

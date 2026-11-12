@@ -1,6 +1,6 @@
 # por-que-se-hundio-el-titanic-si-decian-que-era-insumergible: production notes (developed script, block B4 creative session 2026-11-11)
 
-Status: DEVELOPED SCRIPT ON FILE (stamped; block B4). Not batch-eligible until every proof in `proofs.json` has passed (doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"). Nothing modelled, rendered, queued or published. A production proceeds FROM THIS SCRIPT; it changes it only through the Reshape ladder, logged in the ledger below.
+Status: DEVELOPED SCRIPT ON FILE (stamped; block B4, re-stamped by the redesign session 2026-11-11). Proofs P1, P4, P5 at design round 2 (pending one braked proof unit; a round-2 failure returns the unit); P2, P3, P6, P7 passed. Not batch-eligible until every proof in `proofs.json` has passed (doctrine-topics-and-scripts.md "Blind proofs before batch eligibility"). The "Blind proofs" and "Per-element fallbacks" sections below describe round 1; `proofs.json` and the ledger govern. Nothing modelled, rendered, queued or published. A production proceeds FROM THIS SCRIPT; it changes it only through the Reshape ladder, logged in the ledger below.
 Staging mode: stage. The liner on a sea slab on the Coral stage, the hull turning x-ray for the compartments; cutaway is excluded by rotation (019, 022, 024 are cutaway: a cutaway 026 would make four in 019-026), and world is not needed for a story told inside one hull.
 
 ## Publish package draft (Spanish; the owner publishes)
@@ -118,6 +118,7 @@ Rung 3 changes narration only where a line is given; otherwise the narration is 
 ## Ledger (one line per event, appended, never rewritten)
 - 2026-11-11: script written and stamped by the block B4 creative session (Opus); proofs.json written; record docs/current/reports/b4-2026-11-11.md.
 - 2026-11-11: the Sonnet-written script and scenes.json of the paused batch session are kept as script-sonnet-2026-11-11.json and scenes-sonnet-2026-11-11.json (records, not inputs); its narration audio and stills moved to build/superseded-sonnet-2026-11-11/; its runner state was reset (tools/run_productions.py --reset) so no session can resume.
+- 2026-11-11 (redesign session, Opus; rung: none, pre-production proof round 2): P1 iceberg restaged as the subject of its frame (foreground, night stage); P4 restaged as the flooding compartments close (carrier word 'titanic' dropped from its aliases); scene 5's key element is now the ice tray (P5 reads it in the scene, the hull spill is its echo, no longer declared). Script what_changes for scenes 1, 4, 5 and the scene-1 camera edited, narration unchanged, re-stamped. Stop-loss: a round-2 failure returns the unit. Why: B5 readings (P1 liner named, P4 hull named, P5 water read as glass).
 
 ## Earlier stub (kept verbatim)
 # 026-por-que-se-hundio-el-titanic-si-decian-que-era-insumergible: production notes

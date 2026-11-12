@@ -37,9 +37,9 @@
     {
       "name": "hook",
       "narration": "¿Por qué se hundió el Titanic si decían que era insumergible? Casi todos creen que el iceberg le abrió un agujero gigante en el casco.",
-      "what_changes": "Night on the stage: the liner steams across the sea slab, smoke trailing from its funnels; a faceted iceberg slides in ahead of the bow; the tag ¿AGUJERO GIGANTE? hangs over the bow.",
+      "what_changes": "Night on the stage: the liner steams across the sea slab, smoke trailing from its funnels; the camera runs low along it from stern to bow and on ahead, until a faceted iceberg fills the foreground with the liner small behind it; the tag ¿AGUJERO GIGANTE? hangs over the bow.",
       "transformation": "barco navegando tranquilo → aparece el iceberg delante de la proa",
-      "camera": "travelling lateral junto al barco, de popa a proa",
+      "camera": "travelling lateral bajo junto al barco, de popa a proa, y sigue hasta que el iceberg llena el primer plano",
       "overlays_plan": [
         "tag ¿AGUJERO GIGANTE? at 'agujero'"
       ],
@@ -67,7 +67,7 @@
           "kind": "object",
           "name": "iceberg ahead of a ship",
           "route": "build: faceted low-poly ice mass, pale blue-white, most of it below the sea slab (seen through the translucent sea)",
-          "risk": "medium: unsealed; proof P1",
+          "risk": "medium: proof P1 round 2 (stop-loss)",
           "aliases": [
             "iceberg",
             "ice",
@@ -150,7 +150,7 @@
     {
       "name": "cinco",
       "narration": "Pero las rendijas recorrían la proa, y el agua entró en al menos cinco compartimentos a la vez. Uno más de los que el barco aguantaba.",
-      "what_changes": "Inside the x-ray hull, water jets in through the slits and five bow boxes fill together; the fifth box lights in the error colour; the bow starts to dip.",
+      "what_changes": "Close inside the bow, the cutaway section fills the frame: water jets spray in through the slits and the boxes fill together while the camera tracks aft along them, box after box, until the fifth lights in the error colour; the water surfaces tilt as the bow starts to dip.",
       "transformation": "cuatro compartimentos que aguantaba → cinco llenos, la proa empieza a bajar",
       "camera": "empuje dentro del casco a lo largo de los compartimentos de proa",
       "overlays_plan": [
@@ -162,19 +162,19 @@
           "id": "bow-flooding",
           "kind": "event",
           "name": "water flooding the front compartments of a ship",
-          "route": "ocean-liner x-ray state; water as a physically based blue material rising in the boxes",
-          "risk": "medium-high: proof P3",
+          "route": "ocean-liner cutaway section close (hull staging passed as P2); water in the P7 route rising in the boxes, jets with foam",
+          "risk": "medium-high: proof P4 round 2 (stop-loss)",
           "aliases": [
+            "flooding",
+            "flooded",
+            "flooded compartments",
             "flooding ship",
             "ship flooding",
-            "flooding",
-            "sinking ship",
-            "sinking",
-            "flooded compartments",
             "water flooding a ship",
             "ship filling with water",
             "filling with water",
-            "titanic"
+            "sinking ship",
+            "sinking"
           ]
         }
       ],
@@ -183,7 +183,7 @@
     {
       "name": "desborde",
       "narration": "Y aquí estaba el problema: las paredes no llegaban hasta arriba. Con la proa hundiéndose, el agua pasó por encima de cada una al compartimento siguiente, como en una cubeta de hielo inclinada.",
-      "what_changes": "The turn: the bow tilts down; the water in the full bow boxes climbs to the open wall tops and pours over each one into the next box, then the next; beside the ship, an ice-cube tray tilts the same way and spills cube to cube.",
+      "what_changes": "The turn: the camera opens on the x-ray hull as the bow tilts down and the water in the full bow boxes reaches the open wall tops; it travels forward past the hull to an ice-cube tray in the foreground, tilted the same way, spilling cell to cell over its dividers, while behind it the hull's boxes overflow one into the next.",
       "transformation": "agua contenida en la proa → se desborda por encima de cada pared hacia atrás",
       "camera": "travelling a lo largo de los bordes de las paredes, siguiendo el agua de un compartimento al siguiente",
       "overlays_plan": [
@@ -191,30 +191,11 @@
       ],
       "elements": [
         {
-          "id": "bulkhead-spill",
-          "kind": "event",
-          "name": "water spilling over the walls inside a tilted ship",
-          "route": "ocean-liner x-ray state tilted bow-down; water sheets pouring over the wall tops",
-          "risk": "high: the turn of the story and an event element; proof P3",
-          "aliases": [
-            "water spilling",
-            "spilling",
-            "overflowing",
-            "water overflowing",
-            "flooding",
-            "flooding ship",
-            "sinking ship",
-            "sinking",
-            "flooded compartments",
-            "ship filling with water"
-          ]
-        },
-        {
           "id": "ice-tray",
           "kind": "object",
           "name": "tilted ice-cube tray spilling water",
           "route": "build: geometric plastic tray, water material in the cells",
-          "risk": "low-medium: a tray with water reads; secondary element, read with the scene",
+          "risk": "low-medium: the key element of scene 5 since the 2026-11-11 redesign; read alone as P7 (passed), in the scene as P5 round 2",
           "aliases": [
             "ice cube tray",
             "ice tray",
@@ -223,7 +204,8 @@
           ]
         }
       ],
-      "est_duration_s": 11.4
+      "est_duration_s": 11.4,
+      "echo": "The hull spill (water over the open wall tops of the x-ray hull, same water route as the tray) stays on screen behind the tray as its echo. It is no longer a declared element: redesign session 2026-11-11, after it read as 'a ship in a blue glass block' (B5 P5)."
     },
     {
       "name": "final",

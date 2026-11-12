@@ -1,0 +1,70 @@
+{
+  "slug": "eagle",
+  "name": "Eagle (wings spread)",
+  "aliases": [
+    "eagle",
+    "hawk",
+    "bird of prey",
+    "raptor",
+    "águila",
+    "falcon",
+    "large bird"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "in_progress",
+  "route": null,
+  "brief": {
+    "must_read_as": "an eagle or hawk: a large bird of prey",
+    "seen_at": "028 scene 5: on a power-pole crossarm, wings spread, one wingtip touching the wire",
+    "moving_parts": [
+      "wings spread pose (a landing flare)"
+    ],
+    "states": [
+      "perched on a crossarm, wings spread"
+    ],
+    "style_notes": "Stylised, chunky, never photoreal; hooked beak and dark plumage with a pale head or barred chest so the silhouette says raptor. Library route first: CC0, then Royalty-Free, then CC-BY; NC/ND/SA/unknown never; no account, no payment. Log the source in LICENSES.md. If no free-licence raptor is found, a build may be tried once; the seal bar is unchanged.",
+    "commission": {
+      "source": "redesign session 2026-11-11",
+      "trigger": "028 P5 round 2 (the scaled pigeon read as a pigeon, 93 x3: size did not come across)",
+      "replaces": "the scaled bird in 028 scene 5"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": null,
+    "url": null,
+    "attribution": null,
+    "note": null,
+    "decision": null
+  },
+  "files": {
+    "blend": "eagle.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": null,
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": []
+}

@@ -10,13 +10,13 @@
   {
    "id": "A1",
    "scene": 1,
-   "element_id": "bird",
+   "element_id": "pigeon",
    "kind_of_proof": "asset seal",
-   "staging": "ASSET SEAL: finish assets/library/bird in both brief states (perched; flying, wings spread), isolated blind naming with factory/asset_library.py.",
-   "build": "asset job; library route first (CC0 > RF > CC-BY).",
-   "bar": "as the proof's own text says",
-   "on_fail": "the job's candidates; a bird that will not seal returns the topic to the creative session. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "failed",
+   "staging": "ASSET SEAL of the species-level job assets/library/pigeon (variant of the bird job; bird_rig unchanged), both brief states (perched on a wire; flying, wings spread), isolated blind naming from a FRESH still set rendered under the reader-still policy (factory/asset_library.py; no context staging for sealing; no still of the bird job's reading reused).",
+   "build": "bird_rig as is; asset_library save and seal under the pigeon slug.",
+   "bar": "asset-system seal rules, aliases exactly as declared in assets/library/pigeon/asset.json",
+   "on_fail": "STOP-LOSS: design round 2. If it fails, the element is a boundary for this unit and 028 is returned (tools/return_topic.py); there is no third design round.",
+   "status": "pending",
    "readings": [
     {
      "date": "2026-11-11",
@@ -43,10 +43,35 @@
      "errors": []
     }
    ],
-   "built_by_b5": {
-    "script": "code3d/scenes/proof_21.py",
-    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   "design_history": [
+    {
+     "element_id": "bird",
+     "staging": "ASSET SEAL: finish assets/library/bird in both brief states (perched; flying, wings spread), isolated blind naming with factory/asset_library.py.",
+     "build": "asset job; library route first (CC0 > RF > CC-BY).",
+     "on_fail": "the job's candidates; a bird that will not seal returns the topic to the creative session. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+     "status": "failed",
+     "built_by_b5": {
+      "script": "code3d/scenes/proof_21.py",
+      "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+     },
+     "round": 1,
+     "readings": "readings without a 'round' field (B5, 2026-11-11)"
+    }
+   ],
+   "redesign": "The bird job failed its isolated naming: 'pigeon' 88-93 from all three readers, one reply without 'bird' (the class-level alias). Recorded as a DECLARATION ERROR (the asset was declared at class level while P1 of this unit had already declared 'pigeon' for the same bird before any reading); the bird job's reading stays FAIL and gains no alias. Forward rule: an organic asset is declared at species level with its class (recommendation section 2).",
+   "round": 2
+  },
+  {
+   "id": "A2",
+   "scene": 5,
+   "element_id": "eagle",
+   "kind_of_proof": "asset seal",
+   "round": 1,
+   "staging": "ASSET SEAL: assets/library/eagle (opened 2026-11-11 by the redesign session, aliases fixed before any reading), state 'perched on a crossarm, wings spread'; library route first (CC0, then Royalty-Free, then CC-BY; NC/ND/SA/unknown never; no account, no payment; LICENSES.md), isolated blind naming under the reader-still policy (no context staging for sealing).",
+   "build": "asset job.",
+   "bar": "asset-system seal rules, aliases exactly as declared in assets/library/eagle/asset.json",
+   "on_fail": "No free-licence raptor, or one that does not seal: scene 5's element has no route and 028 is returned (the stop-loss also covers P5).",
+   "status": "pending"
   },
   {
    "id": "W1",
@@ -70,7 +95,8 @@
    "built_by_b5": {
     "script": "code3d/scenes/proof_52.py",
     "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   },
+   "round": 1
   },
   {
    "id": "P1",
@@ -119,33 +145,41 @@
    "built_by_b5": {
     "script": "code3d/scenes/proof_51.py",
     "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   },
+   "round": 1,
+   "alias_sets": [
+    "pigeon"
+   ]
   },
   {
    "id": "P2",
    "scene": 2,
-   "element_id": "current-on-wire",
-   "name": "electric current flowing along a power line",
-   "kind": "event",
+   "element_id": "power-line",
+   "name": "a power line on wooden poles",
+   "kind": "object",
    "aliases": [
-    "electricity",
-    "electric current",
-    "current",
-    "electrical current",
-    "electricity flowing",
-    "current flowing",
-    "flowing electricity",
-    "electrified power line",
-    "electrified wire",
-    "electricidad",
-    "corriente"
+    "power line",
+    "power lines",
+    "electric wire",
+    "electrical wire",
+    "power cable",
+    "cable",
+    "wire",
+    "wires",
+    "utility pole",
+    "power pole",
+    "electric pole",
+    "telephone pole",
+    "poste",
+    "cable eléctrico",
+    "tendido eléctrico"
    ],
    "kind_of_proof": "element reading",
-   "staging": "Low along the wire, three accent pulses inside a translucent jacket racing toward camera, poles receding.",
-   "build": "wires + beads.",
-   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
-   "on_fail": "Rung 1: pulses brighter with motion streaks, the jacket opaque grey with a cut-away window showing the copper and the pulses. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "failed",
+   "staging": "Dusk, low along the line, the camera just under the nearest cable: three opaque dark cables (matte black insulation, never translucent) on glass or ceramic insulators on a wooden crossarm on a wooden pole in the near third of the frame; the next poles recede in perspective. Current is a CUE here, not the gated element: 'electric current as a visible thing on its own' is a capability boundary (lens decision 2026-11-11). It is drawn as small emissive accent pulses with short streaks riding along the cable. Reader still: tools/proof_still.py --reader (half-resolution Cycles, factory/gate.py STILL_POLICY); the builder writes the conformance note (tools/proof_note.py --conform) against this staging before any reader runs; any deviation defers the reading.",
+   "build": "the W1 street environment (passed at 6.8 s/frame) with opaque cables, insulators and crossarms; pulses as emissive cue.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py, single-object prompt), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
+   "on_fail": "STOP-LOSS: design round 2. If it fails, the element is a boundary for this unit and 028 is returned (tools/return_topic.py); there is no third design round.",
+   "status": "pending",
    "readings": [
     {
      "date": "2026-11-11",
@@ -167,31 +201,65 @@
      "reader_cost_usd": 0.005186
     }
    ],
-   "built_by_b5": {
-    "script": "code3d/scenes/proof_52.py",
-    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   "design_history": [
+    {
+     "element_id": "current-on-wire",
+     "name": "electric current flowing along a power line",
+     "kind": "event",
+     "aliases": [
+      "electricity",
+      "electric current",
+      "current",
+      "electrical current",
+      "electricity flowing",
+      "current flowing",
+      "flowing electricity",
+      "electrified power line",
+      "electrified wire",
+      "electricidad",
+      "corriente"
+     ],
+     "staging": "Low along the wire, three accent pulses inside a translucent jacket racing toward camera, poles receding.",
+     "build": "wires + beads.",
+     "on_fail": "Rung 1: pulses brighter with motion streaks, the jacket opaque grey with a cut-away window showing the copper and the pulses. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+     "status": "failed",
+     "built_by_b5": {
+      "script": "code3d/scenes/proof_52.py",
+      "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+     },
+     "round": 1,
+     "readings": "readings without a 'round' field (B5, 2026-11-11)"
+    }
+   ],
+   "alias_sets": [
+    "power-line"
+   ],
+   "redesign": "From the B5 reading: 'glass-tube railing' 30/30/30: the translucent jacket made the wire read as glass, and the event (current) was never named. Round 2 gates the carrier, a power line that reads as one, and draws the current as a cue on it (recommendation sections 2 and 2-boundaries; the multi pair reading is not used: it failed its calibration).",
+   "round": 2
   },
   {
    "id": "P3",
    "scene": 3,
    "element_id": "bird-detour",
-   "name": "bird on a wire with a dotted path through its legs and body",
+   "name": "pigeon on a power line (a dotted detour path through it as a cue)",
    "kind": "object",
    "aliases": [
     "bird",
     "bird on a wire",
     "bird on a power line",
     "sparrow",
+    "pigeon",
+    "swallow",
     "songbird",
-    "pájaro"
+    "pájaro",
+    "ave"
    ],
    "kind_of_proof": "element reading",
-   "staging": "The bird on the wire, a dotted accent path up one leg, through the body and down the other.",
-   "build": "P1 + real_kit.tube dotted path.",
-   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
-   "on_fail": "Rung 1: no change to the bird; the path drawn outside the body as an arching arrow. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "failed",
+   "staging": "The sealed pigeon (assets/library/pigeon, perched state) on the middle of three opaque dark cables (matte black insulation, never translucent) on glass or ceramic insulators on a wooden crossarm, about a quarter of the frame, one pole and its crossarm behind, dusk. A thin dotted accent path up one leg, through the body and down the other, thin enough that the bird's silhouette stays whole: a cue. Reader still: tools/proof_still.py --reader (half-resolution Cycles, factory/gate.py STILL_POLICY); the builder writes the conformance note (tools/proof_note.py --conform) against this staging before any reader runs; any deviation defers the reading.",
+   "build": "pigeon (sealed perched) + P2 cables and pole + real_kit.tube dotted path.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py, single-object prompt), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
+   "on_fail": "STOP-LOSS: design round 2. If it fails, the element is a boundary for this unit and 028 is returned (tools/return_topic.py); there is no third design round.",
+   "status": "pending",
    "readings": [
     {
      "date": "2026-11-11",
@@ -213,33 +281,60 @@
      "reader_cost_usd": 0.004886
     }
    ],
-   "built_by_b5": {
-    "script": "code3d/scenes/proof_53.py",
-    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   "design_history": [
+    {
+     "element_id": "bird-detour",
+     "name": "bird on a wire with a dotted path through its legs and body",
+     "kind": "object",
+     "aliases": [
+      "bird",
+      "bird on a wire",
+      "bird on a power line",
+      "sparrow",
+      "songbird",
+      "pájaro"
+     ],
+     "staging": "The bird on the wire, a dotted accent path up one leg, through the body and down the other.",
+     "build": "P1 + real_kit.tube dotted path.",
+     "on_fail": "Rung 1: no change to the bird; the path drawn outside the body as an arching arrow. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+     "status": "failed",
+     "built_by_b5": {
+      "script": "code3d/scenes/proof_53.py",
+      "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+     },
+     "round": 1,
+     "readings": "readings without a 'round' field (B5, 2026-11-11)"
+    }
+   ],
+   "alias_sets": [
+    "pigeon"
+   ],
+   "redesign": "From the B5 reading: 'pigeon' 85 x3 against a list that omitted 'pigeon' (alias specification error). Round 2: the unit's one alias set for the bird, a fresh build on the sealed pigeon and the opaque cable (the B5 wire read as a rail).",
+   "round": 2
   },
   {
    "id": "P4",
    "scene": 4,
    "element_id": "current-past-bird",
-   "name": "current passing under a bird on a wire",
-   "kind": "event",
+   "name": "pigeon on a power line, both feet lit the same shade (current under it as a cue)",
+   "kind": "object",
    "aliases": [
+    "bird",
     "bird on a wire",
     "bird on a power line",
-    "bird",
-    "electricity",
-    "electric current",
-    "current flowing",
-    "electricity flowing",
-    "pájaro"
+    "sparrow",
+    "pigeon",
+    "swallow",
+    "songbird",
+    "pájaro",
+    "ave"
    ],
    "kind_of_proof": "element reading",
-   "staging": "The bird on the wire, both feet lit the same shade, pulses passing under the feet.",
-   "build": "P1 + P2.",
-   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
-   "on_fail": "Rung 1: the bird in the background, pulses large in the foreground. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "failed",
+   "staging": "The sealed pigeon perched on the middle opaque cable as in P3, both feet lit the same accent shade; accent pulses pass along the cable under its feet. Current is a CUE here, not the gated element: 'electric current as a visible thing on its own' is a capability boundary (lens decision 2026-11-11). It is drawn as small emissive accent pulses with short streaks riding along the cable. Reader still: tools/proof_still.py --reader (half-resolution Cycles, factory/gate.py STILL_POLICY); the builder writes the conformance note (tools/proof_note.py --conform) against this staging before any reader runs; any deviation defers the reading.",
+   "build": "P3 staging without the dotted path, with the P2 pulses.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py, single-object prompt), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
+   "on_fail": "STOP-LOSS: design round 2. If it fails, the element is a boundary for this unit and 028 is returned (tools/return_topic.py); there is no third design round.",
+   "status": "pending",
    "readings": [
     {
      "date": "2026-11-11",
@@ -261,36 +356,60 @@
      "reader_cost_usd": 0.004165
     }
    ],
-   "built_by_b5": {
-    "script": "code3d/scenes/proof_54.py",
-    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   "design_history": [
+    {
+     "element_id": "current-past-bird",
+     "name": "current passing under a bird on a wire",
+     "kind": "event",
+     "aliases": [
+      "bird on a wire",
+      "bird on a power line",
+      "bird",
+      "electricity",
+      "electric current",
+      "current flowing",
+      "electricity flowing",
+      "pájaro"
+     ],
+     "staging": "The bird on the wire, both feet lit the same shade, pulses passing under the feet.",
+     "build": "P1 + P2.",
+     "on_fail": "Rung 1: the bird in the background, pulses large in the foreground. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+     "status": "failed",
+     "built_by_b5": {
+      "script": "code3d/scenes/proof_54.py",
+      "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+     },
+     "round": 1,
+     "readings": "readings without a 'round' field (B5, 2026-11-11)"
+    }
+   ],
+   "alias_sets": [
+    "pigeon"
+   ],
+   "redesign": "From the B5 reading: 'pigeon' 90 x3 against a list without 'pigeon'; the event part (current) was never named. Round 2 gates the bird with the unit's alias set; current as a cue (boundary).",
+   "round": 2
   },
   {
    "id": "P5",
    "scene": 5,
    "element_id": "big-bird-pole",
-   "name": "a large bird with spread wings on a power pole",
+   "name": "an eagle with spread wings on a power pole",
    "kind": "object",
    "aliases": [
-    "bird",
-    "large bird",
     "eagle",
     "hawk",
+    "falcon",
     "bird of prey",
-    "bird on a power pole",
-    "bird on a utility pole",
-    "bird with spread wings",
-    "pájaro",
-    "ave",
+    "raptor",
+    "large bird",
     "águila"
    ],
    "kind_of_proof": "element reading",
-   "staging": "The bird asset in its wings-spread state, scaled large, on a pole crossarm, one wingtip on the wire, a red path through wing and body into the pole.",
-   "build": "bird (sealed spread state) + pole + red tube.",
-   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
-   "on_fail": "Rung 1: darker plumage recolour and hooked-beak silhouette from the side (a raptor cue); if the bird asset cannot read as large, rung 2. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "failed",
+   "staging": "The sealed eagle (assets/library/eagle) on the crossarm of a wooden pole, wings spread wide, one wingtip touching an opaque cable; the eagle about half the frame width, side-on 3/4 so the hooked beak and the wingspan against the pole read; dusk sky. A thin red emissive path from the cable through the wing and body into the pole: a cue. Reader still: tools/proof_still.py --reader (half-resolution Cycles, factory/gate.py STILL_POLICY); the builder writes the conformance note (tools/proof_note.py --conform) against this staging before any reader runs; any deviation defers the reading.",
+   "build": "eagle (sealed, proof A2) + pole, crossarm, insulators, cables + red tube.",
+   "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py, single-object prompt), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
+   "on_fail": "STOP-LOSS: design round 2. If it fails, the element is a boundary for this unit and 028 is returned (tools/return_topic.py); there is no third design round.",
+   "status": "pending",
    "readings": [
     {
      "date": "2026-11-11",
@@ -312,10 +431,87 @@
      "reader_cost_usd": 0.004016
     }
    ],
-   "built_by_b5": {
-    "script": "code3d/scenes/proof_55.py",
-    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
-   }
+   "design_history": [
+    {
+     "element_id": "big-bird-pole",
+     "name": "a large bird with spread wings on a power pole",
+     "kind": "object",
+     "aliases": [
+      "bird",
+      "large bird",
+      "eagle",
+      "hawk",
+      "bird of prey",
+      "bird on a power pole",
+      "bird on a utility pole",
+      "bird with spread wings",
+      "pájaro",
+      "ave",
+      "águila"
+     ],
+     "staging": "The bird asset in its wings-spread state, scaled large, on a pole crossarm, one wingtip on the wire, a red path through wing and body into the pole.",
+     "build": "bird (sealed spread state) + pole + red tube.",
+     "on_fail": "Rung 1: darker plumage recolour and hooked-beak silhouette from the side (a raptor cue); if the bird asset cannot read as large, rung 2. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
+     "status": "failed",
+     "built_by_b5": {
+      "script": "code3d/scenes/proof_55.py",
+      "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+     },
+     "round": 1,
+     "readings": "readings without a 'round' field (B5, 2026-11-11)"
+    }
+   ],
+   "alias_sets": [
+    "eagle"
+   ],
+   "redesign": "From the B5 reading: 'cartoon pigeon with outstretched wings on a power line' 93 x3: a scaled pigeon reads as a pigeon, neither size nor species came across. Round 2 sources a raptor (asset job eagle, library route first); the beat's fact (large birds are the ones most electrocuted) stays FLAGGED for the APLIC citation at the beat sheet, with the script's written fallback sentence.",
+   "round": 2
   }
- ]
+ ],
+ "alias_sets": {
+  "pigeon": [
+   "bird",
+   "bird on a wire",
+   "bird on a power line",
+   "sparrow",
+   "pigeon",
+   "swallow",
+   "songbird",
+   "pájaro",
+   "ave"
+  ],
+  "eagle": [
+   "eagle",
+   "hawk",
+   "falcon",
+   "bird of prey",
+   "raptor",
+   "large bird",
+   "águila"
+  ],
+  "power-line": [
+   "power line",
+   "power lines",
+   "electric wire",
+   "electrical wire",
+   "power cable",
+   "cable",
+   "wire",
+   "wires",
+   "utility pole",
+   "power pole",
+   "electric pole",
+   "telephone pole",
+   "poste",
+   "cable eléctrico",
+   "tendido eléctrico"
+  ]
+ },
+ "alias_sets_note": "One alias set per physical element per unit (lens decision 2026-11-11, redesign session). 'pigeon' is exactly the list the unit declared for the small bird before any reading (block B4: script scene 1 and proof P1, which passed on it); P3's B4 list was a subset that omitted 'pigeon', the inconsistency the recommendation (section 4, item 4) found. No word that first appeared in a reader's guess is in any set (dove, seagull, duck, rail, railing, glass tube are excluded). 'eagle' and 'power-line' are new elements declared here, before any reading.",
+ "redesign_session": {
+  "at": "2026-11-11",
+  "model": "claude-opus-5-5",
+  "record": "docs/current/reports/redesign-2026-11-11.md",
+  "batch_eligible_when": "every proof has status 'passed'"
+ }
 }

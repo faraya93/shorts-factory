@@ -1,0 +1,76 @@
+{
+  "slug": "pigeon",
+  "name": "Pigeon (perched and flying)",
+  "aliases": [
+    "pigeon",
+    "bird",
+    "paloma",
+    "pájaro",
+    "ave"
+  ],
+  "family": "objects",
+  "created": "2026-11-11",
+  "status": "in_progress",
+  "route": "code-primitive",
+  "brief": {
+    "must_read_as": "a pigeon (species level, the name readers give it)",
+    "seen_at": "perched on a power line (028 scenes 1, 3, 4, 6); landing in flight (028 scene 1)",
+    "moving_parts": [
+      "armature for a perched pose and a flapping cycle"
+    ],
+    "states": [
+      "perched on a wire",
+      "flying, wings spread"
+    ],
+    "style_notes": "Stylised, the bird_rig pigeon unchanged. Sealed from a FRESH still set in both states (no still of the bird job's reading is reused).",
+    "declaration_error": {
+      "recorded": "2026-11-11, redesign session (docs/current/reports/redesign-2026-11-11.md; lens-decisions.md 2026-11-11)",
+      "what": "The bird job (assets/library/bird) was declared at class level (bird, birds, goose, pájaro, ave) for a build that reads at species level. Its isolated naming read 'pigeon' 88-93 and failed because one reader wrote only the species. That reading stays FAIL; no alias is added to the bird job.",
+      "why_not_an_added_alias": "'pigeon' was declared for this same physical bird before any reading, in 028's script element bird-on-wire and proof P1 (block B4, 2026-11-11), and P1 passed on it. This job's aliases are only words declared for the bird before any reading (pigeon, bird, pájaro, ave) plus 'paloma', the Spanish for the declared 'pigeon'. Words that first appeared in a reader's guess (dove, seagull, duck, goose as read) are excluded.",
+      "forward_rule": "An organic asset is declared at the level readers name (species), together with its class."
+    },
+    "commission": {
+      "source": "redesign session 2026-11-11",
+      "trigger": "028 A1 round 2",
+      "replaces": "the bird job for 028"
+    }
+  },
+  "source": {
+    "registry_id": null,
+    "url": null,
+    "asset_id": null,
+    "author": null,
+    "retrieved": null
+  },
+  "licence": {
+    "id": "own-work",
+    "url": null,
+    "attribution": null,
+    "note": "built in this factory (bird_rig)",
+    "decision": null
+  },
+  "files": {
+    "blend": "pigeon.blend",
+    "sha256": null,
+    "collection": "asset",
+    "rig_module": "bird_rig",
+    "build_script": null
+  },
+  "real_size_m": null,
+  "checks": {
+    "qa": {
+      "pass": null,
+      "date": null
+    },
+    "blind_naming": {
+      "pass": null,
+      "date": null,
+      "guesses": []
+    },
+    "fidelity": null
+  },
+  "owner_verdict": "pending",
+  "rejected_candidates": [],
+  "productions": [],
+  "variant_of": "bird"
+}
