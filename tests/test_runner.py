@@ -178,6 +178,54 @@ def test_refusal_reads_the_real_stamp():
         assert r.provenance_errors(prod)
 
 
+def test_a_unit_with_a_proof_not_passed_is_refused_and_one_without_proofs_is_not():
+    import run_productions as r
+    with tempfile.TemporaryDirectory() as t:
+        prod = Path(t) / "031-x"; prod.mkdir()
+        assert r.proof_errors(prod) == [], "a folder without proofs.json predates the rule"
+        spec = {"proofs": [{"id": "P1", "element_id": "a", "status": "passed"}, {"id": "P2", "element_id": "b", "status": "pending"}]}
+        (prod / "proofs.json").write_text(json.dumps(spec))
+        bad = r.proof_errors(prod)
+        assert len(bad) == 1 and "P2" in bad[0], bad
+        spec["proofs"][1]["status"] = "failed"
+        (prod / "proofs.json").write_text(json.dumps(spec))
+        assert r.proof_errors(prod)
+        spec["proofs"][1]["status"] = "ok"
+        (prod / "proofs.json").write_text(json.dumps(spec))
+        assert "not one of" in r.proof_errors(prod)[0], "an unknown status never counts as passed"
+        spec["proofs"][1]["status"] = "passed"
+        (prod / "proofs.json").write_text(json.dumps(spec))
+        assert r.proof_errors(prod) == []
+
+
+def test_runner_refuses_a_stamped_unit_whose_proofs_are_pending():
+    import run_productions as r
+    old = r.proof_errors
+    try:
+        r.proof_errors = lambda p: ["pending"] if p.name == "011-b" else []
+        rc, calls, halted = _queue({"010-a": "verified", "011-b": "verified"}, ["productions/c/010-a", "productions/c/011-b"])
+    finally:
+        r.proof_errors = old
+    assert rc == 0 and calls == ["010-a"] and not halted, calls
+    assert "011-b" in _queue.state["_refused"]
+
+
+def test_return_topic_never_draws_a_standby_whose_proofs_are_pending():
+    import return_topic as rt
+    old = rt.BANK, rt.DECISIONS, rt.ROOT
+    with tempfile.TemporaryDirectory() as t:
+        t = Path(t)
+        try:
+            rt, ch, prod = _return_fixture(t, BANK)
+            for n in ("019-toilet", "020-ice", "021-fork"):
+                (ch / n).mkdir(); _stamp(ch / n)
+            (ch / "020-ice" / "proofs.json").write_text(json.dumps({"proofs": [{"id": "P1", "element_id": "ice", "status": "pending"}]}))
+            rec = rt.return_topic(prod, "ladder exhausted")
+            assert rec["replacement"] == "productions/c/021-fork", rec    # 019 out by balance, 020 out on its pending proof
+        finally:
+            rt.BANK, rt.DECISIONS, rt.ROOT = old
+
+
 def test_settings_deny_writing_the_provenance_stamp():
     deny = json.loads((ROOT / "tools" / "runner-settings.json").read_text())["permissions"]["deny"]
     for rule in ("Write(**/provenance.json)", "Edit(**/provenance.json)", "Bash(.venv/bin/python factory/provenance.py stamp:*)"):

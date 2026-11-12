@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "factory"))
 import provenance  # noqa: E402
+import proofs  # noqa: E402
 BANK = ROOT / "docs" / "current" / "idea-bank.md"
 DECISIONS = ROOT / "docs" / "current" / "reports" / "lens-decisions.md"
 ROLLING = re.compile(r"(\d{3}) ([a-z][a-z ]*?) / ([a-z]+)( \(returned)?")
@@ -95,10 +96,10 @@ def slugify(hook: str) -> str:
 
 
 def standby_folder(channel: Path, e: Entry) -> Path | None:
-    """The standby's folder, only when it carries a valid Opus provenance stamp (factory/provenance.py)."""
+    """The standby's folder, only when it carries a valid Opus provenance stamp (factory/provenance.py) and every blind proof in it has passed (factory/proofs.py, block B4)."""
     num = STANDBY.match(e.status).group(1)
     folder = next((d for d in sorted(channel.iterdir()) if d.is_dir() and d.name.startswith(num + "-")), None)
-    return folder if folder is not None and not provenance.errors(folder) else None
+    return folder if folder is not None and not provenance.errors(folder) and not proofs.errors(folder) else None
 
 
 def draw(text: str, returning: int, channel: Path) -> tuple[Entry, Path] | None:

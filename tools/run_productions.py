@@ -15,7 +15,7 @@ Context cap, handoff and callback as code 2026-11-11 (block B3): the hook (tools
 build/checkpoint.md; a session that reached the cap is continued by a FRESH session briefed from that checkpoint (never --resume: a resume re-reads the whole context, 021-5 re-wrote 326k); a usage-limit
 resume is fresh too when the last context was over SF_RESUME_MAX_CTX and a checkpoint exists. The post-render callback is a fresh session, and the runner itself builds and checks the publish package first; when
 that and the verifier pass, the session only writes the report. The runner re-hashes provenance.json around every session: a changed stamp halts the batch (the stamp does not rest on permission rules alone).
-Script provenance 2026-11-11 (block B2): a unit whose folder has no Opus creative-session stamp (factory/provenance.py) is REFUSED before any session and recorded under "_refused"; the batch moves on."""
+Script provenance 2026-11-11 (block B2): a unit whose folder has no Opus creative-session stamp (factory/provenance.py) is REFUSED before any session and recorded under "_refused"; the batch moves on. Blind proofs 2026-11-11 (block B4): so is a unit whose proofs.json holds a proof not passed (factory/proofs.py)."""
 import argparse
 import fcntl
 import json
@@ -631,6 +631,13 @@ def provenance_errors(prod: Path) -> list[str]:
     return provenance.errors(prod)
 
 
+def proof_errors(prod: Path) -> list[str]:
+    """Every blind proof in the unit's proofs.json must have passed (factory/proofs.py, block B4, P8); empty means it may start."""
+    sys.path.insert(0, str(ROOT / "factory"))
+    import proofs
+    return proofs.errors(prod)
+
+
 def run_queue(queue: list[str], state: dict) -> int:
     """Walks the queue in order; a replacement drawn by a returned unit joins it in the same run. Exit 0, or 3 when the batch halted."""
     state["_queue"] = list(dict.fromkeys(state.get("_queue", []) + queue))
@@ -652,8 +659,8 @@ def _run_queue(queue: list[str], state: dict, units: dict) -> int:
         prod = ROOT / rel
         if units.get(prod.name, {}).get("outcome") in ("verified", "returned", "stopped"):
             continue
-        bad = provenance_errors(prod)
-        if bad:                                                              # no Opus script on record: never start a session that would write one (doctrine "Who writes the script")
+        bad = provenance_errors(prod) or proof_errors(prod)
+        if bad:                                                              # no Opus script on record, or a blind proof not passed: never start a session (doctrine "Who writes the script", "Blind proofs before batch eligibility")
             state.setdefault("_refused", {})[prod.name] = {"at": now(), "why": bad}
             save(state)
             log(f"REFUSED {rel}: {'; '.join(bad)}")
