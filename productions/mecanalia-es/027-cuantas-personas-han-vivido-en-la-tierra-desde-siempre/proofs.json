@@ -16,8 +16,15 @@
    "build": "asset job; a CC0 Earth texture on a sphere is the expected route (licence logged in LICENSES.md).",
    "bar": "as the proof's own text says",
    "on_fail": "the job's own candidates; a globe that will not seal returns the topic to the creative session. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "asset": "earth-globe",
+     "ready": true,
+     "errors": []
+    }
+   ]
   },
   {
    "id": "P1",
@@ -42,8 +49,32 @@
    "build": "earth-globe + paper_rig.figure instances + a band.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: an earlier frame of the pull-back, with ten near figures large in the foreground. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": true,
+     "guesses": [
+      "a glossy 3D globe with a teal rim, Earth-like continents, and a line of small figures beneath it",
+      "a glossy blue-and-green globe in a teal ring",
+      "a glass-domed globe (Earth in a snow globe or bubble) with a line of small figures below it"
+     ],
+     "confidences": [
+      90,
+      85,
+      85
+     ],
+     "mean_confidence": 86.7,
+     "stills": [
+      "build/proofs/P1/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.004367
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_31.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P2",
@@ -67,8 +98,32 @@
    "build": "paper_rig.figure instanced, grey recolour.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: the grey made warmer (stone-free: a light taupe), not pure neutral, so it is not read as statues. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "crowd of small 3D human figurines on a peach floor",
+      "No single object: a crowd of small 3D human figures standing on a peach floor",
+      "Not a single object: a crowd of small 3D human figures (mostly grey-blue, a few teal in front) on a peach backdrop. Alternatives: a group of mannequins or a crowd illustration."
+     ],
+     "confidences": [
+      40,
+      95,
+      90
+     ],
+     "mean_confidence": 75.0,
+     "stills": [
+      "build/proofs/P2/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.00517
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_32.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P3",
@@ -91,8 +146,32 @@
    "build": "P1 still with grey bands.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: fewer, thicker bands with figure silhouettes visible on the nearest one. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": true,
+     "guesses": [
+      "a glossy 3D globe sitting in a stack of concentric grey rings, like a planet in a spiral coil",
+      "a glass globe (Earth) sitting in a stacked coil of gray rings, like a spring or ribbed dish",
+      "a glossy globe/Earth marble sitting in a stack of grey concentric rings (looks like a coiled spring or a ring-stacked pedestal)"
+     ],
+     "confidences": [
+      80,
+      60,
+      60
+     ],
+     "mean_confidence": 66.7,
+     "stills": [
+      "build/proofs/P3/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.00428
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_33.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P4",
@@ -115,8 +194,32 @@
    "build": "13 paper_rig.figure instances.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: tighter frame on the accent figure with six grey figures behind. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "a group of small grey-and-navy mannequin figures standing on an orange floor; alternatives: chess pieces on an orange board, scattered toy people; the figures are clearly recognizable, so this is not a vague shape",
+      "group of small grey mannequin figures; alternatives: chess pieces, toy soldiers",
+      "a crowd of small grey mannequin figures standing on an orange floor"
+     ],
+     "confidences": [
+      85,
+      60,
+      35
+     ],
+     "mean_confidence": 60.0,
+     "stills": [
+      "build/proofs/P4/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.005042
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_34.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   }
  ]
 }

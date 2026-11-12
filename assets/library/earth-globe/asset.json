@@ -10,8 +10,8 @@
   ],
   "family": "whatif",
   "created": "2026-11-10",
-  "status": "in_progress",
-  "route": null,
+  "status": "ready",
+  "route": "code-primitive",
   "brief": {
     "must_read_as": "the planet Earth",
     "seen_at": "whole globe filling the frame",
@@ -20,8 +20,7 @@
       "core and mantle layers separable for a cutaway"
     ],
     "states": [
-      "whole globe",
-      "cutaway to the core"
+      "whole globe"
     ],
     "style_notes": "Stylised; CC0 textures first.",
     "commission": {
@@ -44,17 +43,17 @@
     "retrieved": null
   },
   "licence": {
-    "id": null,
+    "id": "own-work",
     "url": null,
     "attribution": null,
-    "note": null,
+    "note": "built in this factory (globe_rig)",
     "decision": null
   },
   "files": {
-    "blend": "earth-globe.blend",
+    "blend": null,
     "sha256": null,
     "collection": "asset",
-    "rig_module": null,
+    "rig_module": "globe_rig",
     "build_script": null
   },
   "real_size_m": null,
@@ -64,9 +63,19 @@
       "date": null
     },
     "blind_naming": {
-      "pass": null,
-      "date": null,
-      "guesses": []
+      "pass": true,
+      "date": "2026-11-11",
+      "guesses": [
+        "glossy 3D globe with blue oceans and green continents, inside a clear glass sphere",
+        "a glossy stylized globe or planet ball with blue oceans and green continents",
+        "stylized globe or planet Earth ball with continents, in a glass sphere"
+      ],
+      "confidences": [
+        90,
+        90,
+        90
+      ],
+      "reader_cost_usd": 0.004028
     },
     "fidelity": null
   },
