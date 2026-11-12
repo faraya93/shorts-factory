@@ -1,0 +1,480 @@
+{
+  "channel": "mecanalia-es",
+  "video": "por-que-no-te-envenenas-si-te-tragas-una-semilla-de-manzana",
+  "title": "¿Por qué no te envenenas si te tragas una semilla de manzana? 🍎",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects on a stylised stage); sealed library asset apple, geometric builds for the cut halves, seeds, pads and tube.",
+  "hook_question": "¿Por qué no te envenenas si te tragas una semilla de manzana?",
+  "false_belief": "Una sola semilla de manzana te puede intoxicar.",
+  "closing_reframe": "La semilla no es veneno: es una cápsula que solo se abre si la rompes.",
+  "share_archetype": "ese amigo que escupe cada semilla de la manzana por miedo",
+  "hero_route": "asset",
+  "library_assets": [
+    "apple"
+  ],
+  "structure_variant": "chain",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "apple-cut",
+        "name": "apple split open showing its core with seeds",
+        "aliases": [
+          "apple",
+          "cut apple",
+          "apple half",
+          "halved apple",
+          "apple cross-section",
+          "manzana"
+        ],
+        "route": "asset",
+        "source": "library apple (sealed) cut in two by a build in manz_rig; flesh cap and core are materials",
+        "frames": [
+          200
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "seed-open",
+        "name": "apple seed with its shell parted",
+        "aliases": [
+          "seed",
+          "apple seed",
+          "pip",
+          "nut",
+          "semilla"
+        ],
+        "route": "build",
+        "source": "teardrop seed built in manz_rig (shell halves around a kernel); read inside the cut apple",
+        "frames": [
+          150
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "seed-through",
+        "name": "whole apple seed travelling through a tube",
+        "aliases": [
+          "seed",
+          "apple seed",
+          "pip",
+          "nut",
+          "semilla"
+        ],
+        "route": "build",
+        "source": "teardrop seed built in manz_rig riding in a half tube with juice drops",
+        "frames": [
+          130
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "seed-crushed",
+        "name": "apple seed between two pads breaking open",
+        "aliases": [
+          "seed",
+          "apple seed",
+          "pip",
+          "nut",
+          "semilla"
+        ],
+        "route": "build",
+        "source": "teardrop seed built in manz_rig between two pressing pads",
+        "frames": [
+          125
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "seed-pile",
+        "name": "a heap of apple seeds beside an apple",
+        "aliases": [
+          "seed",
+          "seeds",
+          "apple seeds",
+          "pile of seeds",
+          "pips",
+          "semillas"
+        ],
+        "route": "build",
+        "source": "instanced teardrop seeds from manz_rig beside the sealed apple",
+        "frames": [
+          215
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "apple-reframe",
+        "name": "apple beside a closed seed with a glowing seam",
+        "aliases": [
+          "apple",
+          "seed",
+          "apple seed",
+          "manzana",
+          "semilla"
+        ],
+        "route": "asset",
+        "source": "library apple (sealed) with the closed seed from manz_rig",
+        "frames": [
+          270
+        ]
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "manz_rig.Fruit",
+    "manz_rig.Mats",
+    "manz_rig.lights",
+    "manz_rig.look"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      60
+    ]
+  },
+  "visibility": {
+    "1": {
+      "apple-cut": {
+        "objects": [
+          "half_*"
+        ],
+        "frames": [
+          200
+        ]
+      }
+    },
+    "2": {
+      "seed-open": {
+        "objects": [
+          "seed_*"
+        ],
+        "frames": [
+          150
+        ]
+      }
+    },
+    "3": {
+      "seed-through": {
+        "objects": [
+          "seed_*"
+        ],
+        "frames": [
+          130
+        ]
+      }
+    },
+    "4": {
+      "seed-crushed": {
+        "objects": [
+          "seed_*"
+        ],
+        "frames": [
+          125
+        ]
+      }
+    },
+    "5": {
+      "seed-pile": {
+        "objects": [
+          "pile_*"
+        ],
+        "frames": [
+          215
+        ]
+      }
+    },
+    "6": {
+      "apple-reframe": {
+        "objects": [
+          "seed_*"
+        ],
+        "frames": [
+          270
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "manz-set",
+  "scene_script_prefix": "manz",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "¿Por qué no te envenenas si te tragas una semilla de manzana? Porque su cáscara dura la mantiene cerrada, y el cianuro solo sale si la rompes. 🍎 Envíaselo a ese amigo que escupe cada semilla de la manzana por miedo.",
+  "gate_stills": {
+    "1": [
+      60,
+      130,
+      200
+    ],
+    "2": [
+      20,
+      110,
+      190
+    ],
+    "3": [
+      20,
+      130,
+      260
+    ],
+    "4": [
+      20,
+      125,
+      200
+    ],
+    "5": [
+      20,
+      130,
+      215
+    ],
+    "6": [
+      20,
+      120,
+      270
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "asset_rig",
+    "avion_rig",
+    "manz_rig"
+  ],
+  "support_colours": {
+    "board": "#4A3B5C",
+    "plate": "#B9B3D1",
+    "reason": "Starting values, measured in notes.md: a pale lilac plate where every hero is dark red, cream or brown and the accent is deep teal."
+  },
+  "hero_colours": {
+    "skin": "#8E2A32",
+    "flesh": "#F4E7C6",
+    "core": "#D9CFA3",
+    "seed": "#4B2C1E",
+    "pad": "#51555A",
+    "tube": "#F0E6D8"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Por qué no te envenenas si te tragas una semilla de manzana? Dicen que una sola semilla te puede intoxicar.",
+      "target_duration_s": 7.4,
+      "transformation": "manzana entera → abierta, con las semillas a la vista",
+      "camera": "órbita desde la manzana entera hacia el corte abierto",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "semilla",
+        "intoxicar."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿VENENO?",
+          "at_word": "intoxicar.",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.72,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "amigdalina",
+      "prompt": "Escena dibujada con código (coral): amigdalina.",
+      "narration": "Es verdad que dentro de cada semilla hay amigdalina, un compuesto que puede soltar cianuro, un veneno de verdad.",
+      "target_duration_s": 8.0,
+      "transformation": "semilla cerrada → cáscara abierta con el compuesto brillando adentro",
+      "camera": "empuje desde el corte hasta una sola semilla",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "amigdalina,",
+        "cianuro,"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "AMIGDALINA",
+          "at_word": "amigdalina,",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.72,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "entera",
+      "prompt": "Escena dibujada con código (coral): entera.",
+      "narration": "Pero está encerrado bajo una cáscara dura. Si te la tragas entera, los jugos no la rompen: pasa por tu cuerpo intacta y sale igual que entró.",
+      "target_duration_s": 9.6,
+      "transformation": "semilla que entra → semilla idéntica que sale, sin soltar nada",
+      "camera": "seguimiento de la semilla a lo largo del tubo",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "dura.",
+        "intacta"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "rota",
+      "prompt": "Escena dibujada con código (coral): rota.",
+      "narration": "En cambio, si la masticas, la cáscara se rompe, el compuesto se mezcla con sus enzimas y suelta el cianuro.",
+      "target_duration_s": 6.0,
+      "transformation": "semilla cerrada → cáscara rota y el compuesto escapa",
+      "camera": "empuje a las almohadillas y retroceso con la nube",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "masticas,",
+        "rompe"
+      ],
+      "data_overlays": [
+        {
+          "type": "mark",
+          "kind": "x",
+          "text_or_value": "x",
+          "at_word": "rompe",
+          "offset_s": 0.0,
+          "visible_s": 2.2,
+          "x": 0.7,
+          "y": 0.58
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 5,
+      "name": "muchas",
+      "prompt": "Escena dibujada con código (coral): muchas.",
+      "narration": "Y aun así, cada semilla suelta tan poquito que tendrías que masticar muchísimas, de muchas manzanas, para que importara.",
+      "target_duration_s": 8.0,
+      "transformation": "una semilla → un montón de semillas junto a la manzana",
+      "camera": "retroceso ascendente a lo largo del montón",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "poquito",
+        "muchísimas,"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 6,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que la semilla no es veneno: es una cápsula que solo se abre si la rompes. Envíaselo a ese amigo que escupe cada semilla de la manzana por miedo.",
+      "target_duration_s": 11.0,
+      "transformation": "semilla suelta → cápsula cerrada junto a la manzana",
+      "camera": "retroceso suave hasta la manzana y la semilla",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "cápsula",
+        "envíaselo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.76,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

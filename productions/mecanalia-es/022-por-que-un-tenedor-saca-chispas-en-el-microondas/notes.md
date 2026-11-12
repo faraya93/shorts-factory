@@ -75,3 +75,19 @@ Routes: Builds: fork, spoon, plate, door screen (geometric); waves (energy graph
 - Scene 2 waves (trigger: fail). Rung 1: the oven walls stay in frame, the waves as ripples on the plate surface. Rung 2: the beat is carried by the glow sloshing inside the fork and spoon, without free waves. Narration unchanged.
 
 Unresolved fallbacks: none. Batch: cleared for the 2026-11-11 batch.
+
+## PRODUCTION LOG 2026-11-11 (runner session; the script above is the developed one)
+Staging mode: cutaway (as proposed; rotation 019 cutaway, 020 stage, 022 cutaway, nothing above three in five). Route: the library oven candidates were unsealed search results; the oven (open door, turning plate, window door with a metal-wire screen, keypad panel), fork, spoon, waves, charge beads and arcs are geometric builds and energy graphics in `code3d/lib/micro_rig.py`, scenes `micro_01..06.py` (hero_route asset declared, library_assets empty). Cost classes: all six `opaque` (predicted 2-4 s/frame). Colour gate PASS (close-ups raised to a high camera angle so no shadowed stage pixels fall in frame). Hero (oven, scene 1, frame 105) read 97/96/95 and 97/95/97 after a rig edit; frozen.
+Readings that passed: oven 97/96/95; fork-spoon on the plate (after a push-in re-stage, the wide frame had named only the oven) 62/60/60; cavity waves 90/92/92; fork tines 85/90/93; oven door 80/80/70.
+
+### Ladder log, scene 4 element `tine-sparks` (aliases fixed in the script: spark, sparks, electric arc, arc, chispa, lightning; none added)
+- Rung 1, close on the tines, dark-teal arcs: "silver fork lying on a dark plate; alternatives: teal bug or insect" 92/80/80 FAIL.
+- Rung 1 again, bluish-white arcs and tighter frame: "fork; alternatives: rake, comb" 90/85/85 FAIL. Third framing, tight on the gap between two tines: "metal grate ... stick figure" 25/45/30 FAIL.
+- Rung 2 (beat rewritten, same job and narration: a miniature bolt rises from the tines to the cavity ceiling): with a flash ball readers named "a grape sparking inside a microwave" 85/85/85 FAIL; without it "metal fork sparking in a microwave" 85/85/92 FAIL; with a thick bolt alone "lightning bolt" 55/40/45 FAIL (context lost).
+- Rung 4 context staging (the whole oven with its keypad and open door in frame, the bolt rising inside): "microwave oven with a fork and spoon sparking inside" 96/95/96 FAIL: every reader names the event, but as "sparking", which is not an alias (whole-word match: "spark", "sparks"). Passed via context staging: NO.
+- The ladder is exhausted for this element. Not done: adding the aliases "sparking" or "arcing" (forbidden after a guess); dropping the element from the declaration.
+Asset need: electric spark and arc (`electric-arc`) and microwave oven (`microwave-oven`); both improvised here as builds (the arc cost five rounds).
+
+## RETURNED 2026-11-11
+Scene 4 element 'sparks between fork tines' failed blind naming on every rung: rung 1 x3 (close on tines with teal arcs 92/80/80 'fork, teal bug'; bluish-white arcs 90/85/85 'fork, rake'; tight on the gap 25/45/30), rung 2 (miniature bolt to the cavity ceiling: 85/85/85 'grape sparking in a microwave', 85/85/92 'fork sparking in a microwave', bolt alone 55/40/45 'lightning bolt'), rung 4 context staging (whole oven in frame) 96/95/96 'microwave oven with a fork and spoon sparking inside': readers describe the event at high confidence but write 'sparking', not an alias (spark, sparks, electric arc, arc, chispa, lightning), and no alias may be added after a guess. Hero oven 97/96/95 and scenes 1-3 and 5 passed; scene 6 declares no element. The next rung would replace the hero mechanism.
+Replacement: productions/mecanalia-es/026-por-que-se-hundio-el-titanic-si-decian-que-era-insumergible.

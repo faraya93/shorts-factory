@@ -1,0 +1,259 @@
+{
+  "video": "por-que-se-hundio-el-titanic-si-decian-que-era-insumergible",
+  "status": "scene-designed (produce session 2026-11-11); see notes.md production log",
+  "primary_engine": "code3d",
+  "hero_route": "asset",
+  "preset": "coral",
+  "prefix": "titan",
+  "gate_version": 2,
+  "source": "docs/current/idea-bank.md banked rank 31 (fill 2), drawn 2026-11-11 as the replacement for returned 022",
+  "title": "¿Por qué se hundió el Titanic si decían que era insumergible? 🚢",
+  "topic_family": "objects",
+  "structure_variant": "story",
+  "staging_mode": "cutaway",
+  "curiosity_score": 10,
+  "curiosity_reason": "The most famous shipwreck; the 'unsinkable' question is carried by nearly everyone; dangerous.",
+  "hook_question": "¿Por qué se hundió el Titanic si decían que era insumergible?",
+  "false_belief": "El iceberg le abrió un agujero gigante en el casco.",
+  "turn": "Scene 4: the bulkheads did not reach the top, so the water spilled over each one into the next compartment.",
+  "closing_reframe": "No lo hundió un agujero, sino unas paredes abiertas por arriba.",
+  "share_archetype": "ese amigo que llena la bañera hasta el borde y se mete igual",
+  "theme": "shipwrecks",
+  "main_tension": "dangerous",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: a rigid, geometric hull cut lengthwise, bulkheads, a faceted iceberg and a water level driven by code); the liner is a library asset built from primitives (ocean-liner), the water a translucent material.",
+  "library_assets": [
+    "ocean-liner"
+  ],
+  "description": "¿Por qué se hundió el Titanic si decían que era insumergible? No fue un agujero gigante: el iceberg solo rozó la proa.\nLas paredes que dividían el casco no llegaban hasta arriba, y el agua se fue desbordando de un compartimento al siguiente. 🚢\nEnvíaselo a ese amigo que llena la bañera hasta el borde y se mete igual.",
+  "hashtags": [
+    "#titanic",
+    "#historia",
+    "#ingenieria",
+    "#shorts"
+  ],
+  "caption_draft": "¿Por qué se hundió el Titanic si decían que era insumergible? No fue un agujero: fueron unas paredes abiertas por arriba. 🚢 Envíaselo a ese amigo que llena la bañera hasta el borde y se mete igual.",
+  "wardrobe": [
+    "No figure on screen (Historia: people off screen under the drawability rule)."
+  ],
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "avion_rig",
+    "titanic_rig"
+  ],
+  "hero_rig": [
+    "titanic_rig.Liner",
+    "titanic_rig.Mats",
+    "titanic_rig.Sea",
+    "titanic_rig.lights",
+    "titanic_rig.look"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      120
+    ]
+  },
+  "hero_colours": {
+    "hull": "#23252B",
+    "deck": "#B58A55",
+    "white": "#F1EEE8",
+    "buff": "#E4A83C",
+    "bulk": "#EFE6D2",
+    "floor": "#8B8F96",
+    "sea": "#2A6F8F",
+    "water": "#4FB3D9",
+    "ice": "#B9D3E3"
+  },
+  "support_colours": {
+    "board": "#4A3B5C",
+    "plate": "#3B4A6B",
+    "reason": "Provisional (production 026 round 0): the hull, deck, deckhouse, funnels, sea and iceberg carry their own colours; the plate and board are not used by any scene. Measured values replace this at the gate."
+  },
+  "gate_stills": {
+    "1": [10, 120, 200],
+    "2": [10, 120, 250],
+    "3": [10, 150, 300],
+    "4": [10, 150, 280],
+    "5": [10, 150, 280],
+    "6": [10, 150, 290]
+  },
+  "scene_elements": {
+    "1": [
+      {
+        "id": "liner-exterior",
+        "name": "ocean liner afloat at sea",
+        "aliases": ["ship", "ocean liner", "liner", "passenger ship", "cruise ship", "steamship", "steamer", "titanic", "boat", "barco", "buque", "transatlántico"],
+        "route": "asset",
+        "source": "library ocean-liner (built from primitives in titanic_rig) on a translucent sea",
+        "frames": [120]
+      }
+    ],
+    "2": [
+      {
+        "id": "hull-cutaway",
+        "name": "ship hull cut lengthwise with its bulkheads",
+        "aliases": ["ship", "ship hull", "hull", "ship cutaway", "ship cross-section", "ocean liner", "liner", "boat", "barco", "casco", "titanic"],
+        "route": "asset",
+        "source": "library ocean-liner, cutaway state (titanic_rig.Liner: near hull half swung away, lid lifted, fifteen bulkheads)",
+        "frames": [250]
+      }
+    ],
+    "3": [
+      {
+        "id": "iceberg-graze",
+        "name": "iceberg grazing the bow of a liner",
+        "aliases": ["iceberg", "ship hitting an iceberg", "ship and iceberg", "ship", "ocean liner", "liner", "titanic", "boat", "barco", "iceberg collision", "collision", "ice"],
+        "route": "asset",
+        "source": "library ocean-liner with a faceted iceberg and the slit row on the bow plates (titanic_rig)",
+        "frames": [150]
+      }
+    ],
+    "4": [
+      {
+        "id": "bulkhead-spill",
+        "name": "water spilling over the tops of the bulkheads of a bow-down hull",
+        "aliases": ["flooding ship", "sinking ship", "ship sinking", "flooded ship", "ship hull", "ship cutaway", "flooded compartments", "water spilling", "ship", "ocean liner", "liner", "boat", "barco", "titanic", "hull"],
+        "route": "asset",
+        "source": "library ocean-liner, cutaway state, water level held flat in the world by titanic_rig.Liner._water",
+        "frames": [280]
+      }
+    ],
+    "5": [
+      {
+        "id": "liner-sinking",
+        "name": "liner sinking bow first",
+        "aliases": ["sinking ship", "ship sinking", "flooded ship", "shipwreck", "ship", "ocean liner", "liner", "boat", "barco", "titanic", "hull", "ship hull", "ship cutaway"],
+        "route": "asset",
+        "source": "library ocean-liner, cutaway state, pitched bow down and dropping below the sea panels",
+        "frames": [280]
+      }
+    ],
+    "6": [
+      {
+        "id": "liner-reframe",
+        "name": "flooded hull with every bulkhead top lit",
+        "aliases": ["flooded ship", "sinking ship", "ship sinking", "ship hull", "ship cutaway", "hull", "ship", "ocean liner", "liner", "boat", "barco", "titanic"],
+        "route": "asset",
+        "source": "library ocean-liner, cutaway state, bulkhead tops lit in the accent",
+        "frames": [290]
+      }
+    ]
+  },
+  "visibility": {
+    "1": {"liner-exterior": {"objects": ["liner_hull_far", "liner_hull_near", "liner_tier*", "liner_funnel*"], "frames": [120]}},
+    "2": {"hull-cutaway": {"objects": ["liner_bulk*", "liner_hull_far"], "frames": [250]}},
+    "3": {"iceberg-graze": {"objects": ["berg"], "frames": [150]}},
+    "4": {"bulkhead-spill": {"objects": ["liner_water*", "liner_spill*"], "frames": [280]}},
+    "5": {"liner-sinking": {"objects": ["liner_hull_far", "liner_bulk*"], "frames": [280]}},
+    "6": {"liner-reframe": {"objects": ["liner_bulk*"], "frames": [290]}}
+  },
+  "sources": [
+    "Sixteen watertight compartments, divided by fifteen transverse bulkheads; built to stay afloat with any four of the first compartments flooded: Encyclopaedia Britannica 'Titanic'; British Wreck Commissioner's Inquiry testimony of Edward Wilding (titanicinquiry.org BOTInq19Wilding03); Mark Chirnside, 'Would higher watertight bulkheads have saved Titanic?' (live search 2026-11-11).",
+    "The bulkheads did not reach the top of the hull and the water spilled over their tops from one compartment to the next as the bow went down: Chirnside FAQ and the museum PDF 'Practically Unsinkable' (live search 2026-11-11).",
+    "The iceberg scraped along the starboard side and ruptured at least five of the supposedly watertight compartments toward the bow: Encyclopaedia Britannica 'Titanic'. Sources differ between five and six, so the script says 'al menos cinco'.",
+    "The damage was a row of narrow openings, not one long gash: the 1996 expedition's sonar survey, reported by The Times 1997 'Six Narrow Slits that Sank the Titanic' (University of Exeter database record 14137) and the Deseret News 1997-04-08 'Did small holes in hull doom Titanic'. No count is spoken or shown.",
+    "The collision at about 11:40 p.m. on 14 April 1912 (Live Science, citing the British Wreck Commissioner's Inquiry) and the sinking at about 2:20 a.m. on 15 April: about two hours and forty minutes (live search 2026-11-11; some sources give 2:27, so the narration says 'dos horas y cuarenta minutos', a rounded span).",
+    "About 1,500 people died: Encyclopaedia Britannica 'Titanic' ('killing about 1,500 passengers and ship personnel'). Spoken as 'unas mil quinientas personas'.",
+    "FLAGGED, not used: the survivor count (sources give 705 or 710) is not spoken or shown."
+  ],
+  "simplifications": [
+    "The liner is a stylised toy-scale model with no livery or name; the compartments are enlarged and open-topped like an ice tray, drawn as a lengthwise cut; the sea is a translucent slab and thin panels.",
+    "The water in each compartment keeps a level surface in the world when the ship pitches; the order in which compartments fill is staged, not simulated."
+  ],
+  "narration_words": 169,
+  "est_duration_s": 58,
+  "duration_band_s": [55, 75],
+  "flatness_test": [
+    "1. hook: a liner afloat at sea; an iceberg drifts in at the bow; the tag ¿AGUJERO? hangs over the bow.",
+    "2. diseño: the ship opens lengthwise; fifteen walls rise and split the hull into sixteen compartments; four flood and the ship still floats.",
+    "3. choque: the iceberg grazes the bow plates and a row of narrow slits opens; the cutaway then shows five bow compartments taking water.",
+    "4. desborde: the bow goes down; the walls do not reach the top, so the water spills over each one into the next compartment, in turn.",
+    "5. final: compartment after compartment fills, the bow drops further and the ship goes under the sea line.",
+    "6. cierre: single reframe image: the flooded hull with every wall top lit, the row of open tops that did it."
+  ],
+  "scenes": [
+    {
+      "name": "hook",
+      "narration": "¿Por qué se hundió el Titanic si decían que era insumergible? Todos creen que el iceberg le abrió un agujero gigante.",
+      "what_changes": "A liner afloat on a calm sea; an iceberg drifts into the frame at the bow; the tag ¿AGUJERO? hangs over the bow.",
+      "transformation": "barco tranquilo en el mar → el iceberg aparece ante la proa; camera: órbita desde la popa hacia la proa",
+      "camera": "órbita desde la popa hacia la proa y empuje hacia el iceberg",
+      "target_duration_s": 7.2,
+      "emphasis": ["Titanic", "agujero"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "¿AGUJERO?", "at_word": "agujero", "offset_s": 0.0, "visible_s": 2.6, "x": 0.72, "y": 0.62}
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "name": "diseno",
+      "narration": "Pero su casco no era una sola caverna: unas paredes lo dividían en dieciséis compartimentos, y podía flotar con cuatro inundados. Por eso lo llamaron insumergible.",
+      "what_changes": "The ship opens lengthwise; fifteen walls rise one by one and split the hull into sixteen compartments; four bow compartments flood and the ship still floats.",
+      "transformation": "casco entero → casco abierto, dividido en dieciséis compartimentos; cuatro se inundan y flota; camera: travelling a lo largo del casco",
+      "camera": "travelling a lo largo del casco, de la popa a la proa, con picado suave",
+      "target_duration_s": 9.5,
+      "emphasis": ["paredes", "dieciséis", "cuatro", "insumergible"],
+      "overlays": [
+        {"type": "counter", "style": "mono", "text_or_value": "16", "from": 0, "at_word": "dieciséis", "offset_s": 0.0, "duration_s": 1.2, "visible_s": 2.6, "x": 0.3, "y": 0.52},
+        {"type": "chip", "text_or_value": "4 INUNDADOS", "at_word": "cuatro", "offset_s": 0.0, "visible_s": 2.8, "x": 0.72, "y": 0.5}
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "name": "choque",
+      "narration": "La noche del catorce de abril de mil novecientos doce, el iceberg solo rozó el costado de la proa. No hizo un agujero: abrió una hilera de rendijas finas, y el agua llenó al menos cinco compartimentos.",
+      "what_changes": "The iceberg slides along the bow plates and a row of narrow slits opens one after another; the ship then opens lengthwise and shows five bow compartments taking water.",
+      "transformation": "casco cerrado rozado por el iceberg → hilera de rendijas finas; se abre y cinco compartimentos de proa reciben agua; camera: seguimiento del roce y elevación a vista cenital",
+      "camera": "seguimiento a ras del casco junto al roce, luego elevación hasta una vista casi cenital sobre la proa",
+      "target_duration_s": 11.5,
+      "emphasis": ["rozó", "rendijas", "cinco"],
+      "overlays": [
+        {"type": "chip", "text_or_value": "14 ABR 1912", "at_word": "doce","offset_s": 0.0, "visible_s": 2.4, "x": 0.72, "y": 0.46},
+        {"type": "chip", "text_or_value": "5 INUNDADOS", "at_word": "cinco", "offset_s": 0.0, "visible_s": 2.6, "x": 0.72, "y": 0.52}
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "name": "desborde",
+      "narration": "Con cinco llenos, la proa bajó. Y las paredes no llegaban hasta arriba: el agua se desbordó al siguiente, y luego al siguiente, como en una bandeja de cubos de hielo.",
+      "what_changes": "The turn: the bow dips; the water in the full compartments climbs the wall tops and spills over each one into the next compartment, in turn.",
+      "transformation": "cinco compartimentos llenos → el agua rebasa las paredes y llena uno tras otro; camera: elevación sobre la proa y travelling hacia la popa",
+      "camera": "plano elevado sobre la proa que acompaña el desborde hacia la popa",
+      "target_duration_s": 10.3,
+      "emphasis": ["paredes", "arriba:", "desbordó", "hielo"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "SIN TAPA", "at_word": "arriba:", "offset_s": 0.0, "visible_s": 2.6, "x": 0.74, "y": 0.6}
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "name": "final",
+      "narration": "Compartimento tras compartimento, se fue llenando todo. Dos horas y cuarenta minutos después del choque, el barco se hundió, y murieron unas mil quinientas personas.",
+      "what_changes": "Compartment after compartment fills; the bow drops further and the whole ship slides under the sea line.",
+      "transformation": "barco inclinado que se llena → el barco desaparece bajo la línea del mar; camera: retroceso lateral",
+      "camera": "retroceso lateral desde el casco hasta el mar abierto, con descenso final",
+      "target_duration_s": 10.0,
+      "emphasis": ["Compartimento", "cuarenta", "hundió", "quinientas"],
+      "overlays": [
+        {"type": "chip", "text_or_value": "2 H 40 MIN", "at_word": "cuarenta", "offset_s": 0.0, "visible_s": 2.6, "x": 0.72, "y": 0.44},
+        {"type": "chip", "text_or_value": "1 500", "at_word": "mil", "offset_s": 0.0, "visible_s": 2.6, "x": 0.72, "y": 0.52}
+      ],
+      "render_cost_class": "glass_water_sss"
+    },
+    {
+      "name": "cierre",
+      "narration": "Así que no lo hundió un agujero, sino unas paredes abiertas por arriba. Sígueme, y envíaselo a ese amigo que llena la bañera hasta el borde y se mete igual.",
+      "what_changes": "Single reframe image: the flooded bow-down hull, every wall top lighting up in the accent one after another; the camera pulls back.",
+      "transformation": "casco hundiéndose → las paredes abiertas por arriba se iluminan una a una; camera: retroceso y elevación",
+      "camera": "retroceso y elevación desde la proa hasta una vista lateral completa",
+      "target_duration_s": 10.0,
+      "emphasis": ["paredes", "envíaselo"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "ENVÍASELO", "at_word": "envíaselo", "offset_s": 0.0, "visible_s": 2.6, "x": 0.76, "y": 0.62}
+      ],
+      "render_cost_class": "glass_water_sss"
+    }
+  ]
+}

@@ -10,8 +10,8 @@
   ],
   "family": "objects",
   "created": "2026-11-11",
-  "status": "in_progress",
-  "route": null,
+  "status": "ready",
+  "route": "code-primitive",
   "brief": {
     "must_read_as": "a large passenger ship (an ocean liner)",
     "seen_at": "whole ship at sea, and a lengthwise cutaway of its hull",
@@ -45,29 +45,38 @@
     "retrieved": null
   },
   "licence": {
-    "id": null,
+    "id": "own-work",
     "url": null,
     "attribution": null,
-    "note": null,
+    "note": "built in this factory (titanic_rig)",
     "decision": null
   },
   "files": {
-    "blend": "ocean-liner.blend",
+    "blend": null,
     "sha256": null,
     "collection": "asset",
-    "rig_module": null,
+    "rig_module": "titanic_rig",
     "build_script": null
   },
   "real_size_m": null,
   "checks": {
     "qa": {
-      "pass": null,
-      "date": null
+      "pass": true,
+      "date": "2026-11-11"
     },
     "blind_naming": {
-      "pass": null,
-      "date": null,
-      "guesses": []
+      "pass": true,
+      "date": "2026-11-11",
+      "guesses": [
+        "low-poly toy ocean liner with four yellow funnels",
+        "low-poly 3D model of an ocean liner with four yellow funnels, like the Titanic",
+        "toy ocean liner with four yellow funnels (3D render)"
+      ],
+      "confidences": [
+        88,
+        90,
+        90
+      ]
     },
     "fidelity": null
   },

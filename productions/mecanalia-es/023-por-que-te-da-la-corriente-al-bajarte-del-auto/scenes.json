@@ -1,0 +1,513 @@
+{
+  "channel": "mecanalia-es",
+  "video": "por-que-te-da-la-corriente-al-bajarte-del-auto",
+  "title": "¿Por qué te da la corriente cuando te bajas del auto? ⚡",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
+  "hook_question": "¿Por qué te da la corriente cuando te bajas del auto?",
+  "false_belief": "El auto acumula electricidad y te la pasa.",
+  "closing_reframe": "El auto no te da la corriente: se la das tú a él.",
+  "share_archetype": "ese amigo que cierra la puerta del auto con el codo para que no le dé la corriente",
+  "hero_route": "asset",
+  "library_assets": [
+    "human-figure",
+    "cartoon-car",
+    "hand-articulated"
+  ],
+  "structure_variant": "chain",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "person-car",
+        "name": "person standing beside a car",
+        "aliases": [
+          "person",
+          "human figure",
+          "figure",
+          "mannequin",
+          "man",
+          "woman",
+          "car"
+        ],
+        "route": "asset",
+        "source": "sealed human-figure (standing) beside the sealed cartoon-car",
+        "frames": [
+          150
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "person-rising",
+        "name": "person getting up out of a car seat",
+        "aliases": [
+          "person",
+          "human figure",
+          "figure",
+          "mannequin",
+          "car seat",
+          "seat"
+        ],
+        "route": "asset",
+        "source": "sealed human-figure, seated then standing, in the sealed cartoon-car with its roof slid away",
+        "frames": [
+          130
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "person-walking",
+        "name": "person walking, glowing with charge",
+        "aliases": [
+          "person",
+          "human figure",
+          "figure",
+          "mannequin",
+          "man",
+          "woman"
+        ],
+        "route": "asset",
+        "source": "sealed human-figure (walking) with an accent glow",
+        "frames": [
+          80
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "spark-hand",
+        "name": "spark between a hand and a car door",
+        "aliases": [
+          "spark",
+          "static spark",
+          "electric spark",
+          "static electricity",
+          "chispa"
+        ],
+        "route": "build",
+        "source": "sealed hand-articulated (door) + sealed cartoon-car door + accent arc tube",
+        "frames": [
+          130
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "fuel-pump",
+        "name": "fuel pump with the nozzle in a car",
+        "aliases": [
+          "fuel pump",
+          "gas pump",
+          "petrol pump",
+          "gas station",
+          "fuel dispenser",
+          "gasoline pump"
+        ],
+        "route": "build",
+        "source": "geometric fuel dispenser (body, display, hose, nozzle) beside the sealed cartoon-car",
+        "frames": [
+          150
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "person-car-charge",
+        "name": "person glowing, charge flowing into a car",
+        "aliases": [
+          "person",
+          "human figure",
+          "figure",
+          "mannequin",
+          "man",
+          "woman",
+          "car"
+        ],
+        "route": "asset",
+        "source": "sealed human-figure and cartoon-car with an accent cage; declared at the beat sheet, before any reading",
+        "frames": [
+          200
+        ]
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "corr_rig.person",
+    "corr_rig.car",
+    "corr_rig.Mats",
+    "corr_rig.lights",
+    "corr_rig.look"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      150
+    ]
+  },
+  "visibility": {
+    "1": {
+      "person-car": {
+        "objects": [
+          "fig_*",
+          "car_*"
+        ],
+        "frames": [
+          150
+        ]
+      }
+    },
+    "2": {
+      "person-rising": {
+        "objects": [
+          "fig_*",
+          "car_*"
+        ],
+        "frames": [
+          130
+        ]
+      }
+    },
+    "3": {
+      "person-walking": {
+        "objects": [
+          "fig_*"
+        ],
+        "frames": [
+          80
+        ]
+      }
+    },
+    "4": {
+      "spark-hand": {
+        "objects": [
+          "arc_*",
+          "hand_*"
+        ],
+        "frames": [
+          130
+        ]
+      }
+    },
+    "5": {
+      "fuel-pump": {
+        "objects": [
+          "pump_*"
+        ],
+        "frames": [
+          150
+        ]
+      }
+    },
+    "6": {
+      "person-car-charge": {
+        "objects": [
+          "fig_*",
+          "car_*"
+        ],
+        "frames": [
+          200
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "corr-set",
+  "scene_script_prefix": "corr",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "¿Por qué te da la corriente cuando te bajas del auto? Porque al deslizarte por el asiento te cargas tú, y la carga salta cuando tocas el metal. ⚡ Envíaselo a ese amigo que cierra la puerta del auto con el codo para que no le dé la corriente.",
+  "gate_stills": {
+    "1": [
+      10,
+      150,
+      235
+    ],
+    "2": [
+      10,
+      130,
+      250
+    ],
+    "3": [
+      10,
+      80,
+      195
+    ],
+    "4": [
+      10,
+      130,
+      185
+    ],
+    "5": [
+      10,
+      150,
+      275
+    ],
+    "6": [
+      10,
+      200,
+      265
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "asset_rig",
+    "avion_rig",
+    "rayo_rig",
+    "corr_rig"
+  ],
+  "support_colours": {
+    "board": "#4B3A5A",
+    "plate": "#6B7482",
+    "reason": "Board reused from 019/020 (measured against the same coral stage); the ground plate is a mid slate so the grey-navy trousers of the recurring person stay separate from it (the dark 020 road #2B3441 is almost the trouser colour #2E3347); re-measured by this production's colour gate."
+  },
+  "hero_colours": {
+    "skin": "#E1E6EE"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Por qué te da la corriente cuando te bajas del auto? Parece que el auto está cargado y te la pasa. Pero la carga la llevas tú.",
+      "target_duration_s": 8,
+      "transformation": "persona junto al auto → la mano se acerca y salta la chispa; la etiqueta pasa del auto a la persona",
+      "camera": "órbita baja entre el auto y la persona",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "auto",
+        "tú."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿EL AUTO?",
+          "at_word": {
+            "word": "auto",
+            "nth": 2
+          },
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.3,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "TÚ",
+          "at_word": "tú.",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.72,
+          "y": 0.5
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "asiento",
+      "prompt": "Escena dibujada con código (coral): asiento.",
+      "narration": "Al bajarte, tu ropa se frota contra el asiento y se despegan. Ese roce te roba cargas: el asiento queda con unas y tú con otras.",
+      "target_duration_s": 8,
+      "transformation": "sentado en el asiento → se levanta y el cuerpo se carga de luz al despegarse",
+      "camera": "travelling lateral bajo, siguiendo al cuerpo al levantarse",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "roce",
+        "cargas:"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "voltaje",
+      "prompt": "Escena dibujada con código (coral): voltaje.",
+      "narration": "Así, tu cuerpo puede llegar a miles de voltios. Ni lo sientes, mientras no toques nada.",
+      "target_duration_s": 8,
+      "transformation": "cuerpo apenas cargado → camina y la carga sube con cada paso",
+      "camera": "seguimiento de frente que retrocede delante de la persona",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "miles",
+        "voltios."
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "3000+ V",
+          "from": 0,
+          "at_word": "miles",
+          "offset_s": 0.0,
+          "duration_s": 1.6,
+          "visible_s": 3.4,
+          "x": 0.5,
+          "y": 0.5
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "chispa",
+      "prompt": "Escena dibujada con código (coral): chispa.",
+      "narration": "Cuando tu mano se acerca a la puerta de metal, toda esa carga salta de golpe por el aire: esa es la chispa.",
+      "target_duration_s": 8,
+      "transformation": "mano cargada cerca de la puerta → salta la chispa y el cuerpo se apaga",
+      "camera": "empuje lento hacia la mano que se acerca a la puerta",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "carga",
+        "chispa."
+      ],
+      "data_overlays": [
+        {
+          "type": "ring",
+          "text_or_value": "",
+          "at_word": "chispa.",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.52
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 5,
+      "name": "giro",
+      "prompt": "Escena dibujada con código (coral): giro.",
+      "narration": "Esa misma chispa es la que de verdad preocupa en una estación de servicio, no el celular. Por eso piden no volver a subirte al auto mientras cargas combustible.",
+      "target_duration_s": 8,
+      "transformation": "persona en el surtidor → se sube y se baja del auto y la chispa salta en la manguera",
+      "camera": "travelling desde el surtidor hasta la mano en la pistola",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "chispa",
+        "celular."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¡NO EL CELULAR!",
+          "at_word": "celular.",
+          "offset_s": 0.0,
+          "visible_s": 3.0,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 6,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que el auto no te da la corriente: se la das tú a él. Envíaselo a ese amigo que cierra la puerta del auto con el codo para que no le dé la corriente.",
+      "target_duration_s": 8,
+      "transformation": "persona cargada → la carga pasa de la persona al auto",
+      "camera": "retroceso desde la mano hasta la persona y el auto enteros",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "tú",
+        "envíaselo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.78,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

@@ -1,0 +1,482 @@
+{
+  "channel": "mecanalia-es",
+  "video": "por-que-un-tenedor-saca-chispas-en-el-microondas",
+  "title": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no? ⚡",
+  "topic_family": "objects",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects and energy graphics on a stylised stage); the oven, fork, spoon, door screen, waves and arcs are geometric builds and energy graphics because the library oven candidates are unsealed search results and no fork, spoon or arc asset is sealed.",
+  "hook_question": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no?",
+  "false_belief": "Cualquier metal hace chispas dentro del microondas.",
+  "closing_reframe": "No chispea el metal: chispean las puntas.",
+  "share_archetype": "ese amigo que mete al microondas el plato con el tenedor encima",
+  "hero_route": "asset",
+  "library_assets": [],
+  "structure_variant": "chain",
+  "scene_elements": {
+    "1": [
+      {
+        "id": "microwave-oven",
+        "name": "microwave oven (cutaway, door open)",
+        "aliases": [
+          "microwave",
+          "microwave oven",
+          "oven",
+          "microondas"
+        ],
+        "route": "build",
+        "source": "micro_rig.oven: steel shell, open cavity, turning plate, hinged door with window and screen, control panel with display and keypad",
+        "frames": [
+          105
+        ]
+      },
+      {
+        "id": "fork-spoon",
+        "name": "fork and spoon on a plate",
+        "aliases": [
+          "fork",
+          "spoon",
+          "cutlery",
+          "tenedor",
+          "cuchara"
+        ],
+        "route": "build",
+        "source": "micro_rig.fork and micro_rig.spoon: geometric steel cutlery on the turning plate",
+        "frames": [
+          185
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "cavity-waves",
+        "name": "glowing waves bouncing inside a microwave cavity",
+        "aliases": [
+          "microwave",
+          "microwave oven",
+          "microwaves",
+          "oven"
+        ],
+        "route": "build",
+        "source": "micro_rig.waves: translucent accent slabs bouncing between the cavity walls, inside the oven build",
+        "frames": [
+          200
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "fork-tines",
+        "name": "fork tines glowing",
+        "aliases": [
+          "fork",
+          "tenedor",
+          "fork tines"
+        ],
+        "route": "build",
+        "source": "micro_rig.fork with emissive accent tip beads",
+        "frames": [
+          180
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "tine-sparks",
+        "name": "sparks between fork tines",
+        "aliases": [
+          "spark",
+          "sparks",
+          "electric arc",
+          "arc",
+          "chispa",
+          "lightning"
+        ],
+        "route": "build",
+        "source": "micro_rig.burst_arcs: short branching accent arcs between the tine tips",
+        "frames": [
+          60
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "oven-door",
+        "name": "microwave door with its metal screen",
+        "aliases": [
+          "microwave",
+          "microwave oven",
+          "microwave door",
+          "oven door"
+        ],
+        "route": "build",
+        "source": "micro_rig.oven door: frame, window glass, perforated metal screen lit in the accent",
+        "frames": [
+          220
+        ]
+      }
+    ]
+  },
+  "gate_version": 2,
+  "hero_rig": [
+    "micro_rig.oven",
+    "micro_rig.Mats",
+    "micro_rig.build",
+    "micro_rig.fork",
+    "micro_rig.spoon",
+    "micro_rig.lights",
+    "micro_rig.look"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      105
+    ]
+  },
+  "visibility": {
+    "1": {
+      "microwave-oven": {
+        "objects": [
+          "oven_*"
+        ],
+        "frames": [
+          105
+        ]
+      },
+      "fork-spoon": {
+        "objects": [
+          "fork_*",
+          "spoon_*"
+        ],
+        "frames": [
+          185
+        ]
+      }
+    },
+    "2": {
+      "cavity-waves": {
+        "objects": [
+          "wave_*"
+        ],
+        "frames": [
+          200
+        ]
+      }
+    },
+    "3": {
+      "fork-tines": {
+        "objects": [
+          "tipglow_*",
+          "charge_*"
+        ],
+        "frames": [
+          180
+        ]
+      }
+    },
+    "4": {
+      "tine-sparks": {
+        "objects": [
+          "arc_*"
+        ],
+        "frames": [
+          60
+        ]
+      }
+    },
+    "5": {
+      "oven-door": {
+        "objects": [
+          "oven_door*",
+          "oven_screen*",
+          "oven_handle*"
+        ],
+        "frames": [
+          220
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "micro-set",
+  "scene_script_prefix": "micro",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no? Porque la carga se amontona en las puntas de sus dientes y rompe el aire. ⚡ Envíaselo a ese amigo que mete al microondas el plato con el tenedor encima.",
+  "gate_stills": {
+    "1": [
+      10,
+      105,
+      185
+    ],
+    "2": [
+      10,
+      200,
+      275
+    ],
+    "3": [
+      10,
+      180,
+      230
+    ],
+    "4": [
+      10,
+      60,
+      170
+    ],
+    "5": [
+      10,
+      120,
+      240
+    ],
+    "6": [
+      10,
+      150,
+      235
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "machine_kit",
+    "asset_rig",
+    "avion_rig",
+    "micro_rig"
+  ],
+  "support_colours": {
+    "board": "#4B3A5A",
+    "plate": "#2B3441",
+    "reason": "Reused from 019 and 020 (measured there against the same coral stage and light-grey heroes); re-measured by this production's gate."
+  },
+  "hero_colours": {},
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no? Dicen que cualquier metal chispea.",
+      "target_duration_s": 6.5,
+      "transformation": "tenedor y cuchara quietos → el tenedor chispea y la cuchara no",
+      "camera": "órbita lenta alrededor del plato giratorio",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "chispas",
+        "cualquier"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿CUALQUIER METAL?",
+          "at_word": "cualquier",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.5,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "ondas",
+      "prompt": "Escena dibujada con código (coral): ondas.",
+      "narration": "Adentro, las microondas rebotan de pared en pared, y su campo cambia de sentido miles de millones de veces por segundo: empuja las cargas del metal de un lado a otro.",
+      "target_duration_s": 10.7,
+      "transformation": "horno vacío de ondas → las ondas rebotan y la carga va y viene dentro del metal",
+      "camera": "travelling lateral a través de la cavidad, de pared a pared",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "rebotan",
+        "miles",
+        "metal."
+      ],
+      "data_overlays": [
+        {
+          "type": "chip",
+          "text_or_value": "2,45 GHz",
+          "at_word": "miles",
+          "offset_s": 0.0,
+          "duration_s": 0.5,
+          "visible_s": 2.6,
+          "x": 0.72,
+          "y": 0.6
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "puntas",
+      "prompt": "Escena dibujada con código (coral): puntas.",
+      "narration": "En la cuchara, la carga se reparte por toda la curva. En el tenedor, se amontona en las cuatro puntas de los dientes.",
+      "target_duration_s": 8.0,
+      "transformation": "carga repartida en ambos → la cuchara queda pareja y las puntas del tenedor se encienden",
+      "camera": "empuje desde la cuchara hacia las puntas del tenedor",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "reparte",
+        "puntas"
+      ],
+      "data_overlays": [
+        {
+          "type": "ring",
+          "radius": 0.2,
+          "x": 0.56,
+          "y": 0.58,
+          "at_word": "puntas",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 1.8
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "chispa",
+      "prompt": "Escena dibujada con código (coral): chispa.",
+      "narration": "Ahí el empuje es tan fuerte que rompe el aire: el aire se vuelve chispa, como un rayo en miniatura.",
+      "target_duration_s": 7.0,
+      "transformation": "puntas brillantes → saltan chispas entre los dientes",
+      "camera": "primer plano que retrocede de golpe con cada chispa",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "rompe",
+        "chispa,"
+      ],
+      "data_overlays": [],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 5,
+      "name": "giro",
+      "prompt": "Escena dibujada con código (coral): giro.",
+      "narration": "Pero las paredes del microondas también son de metal, y no chispean: son lisas, sin puntas. Hasta la rejilla de la puerta es metal.",
+      "target_duration_s": 8.3,
+      "transformation": "chispas en el tenedor → todo el horno se ilumina parejo, sin chispas, hasta la rejilla de la puerta",
+      "camera": "retroceso a todo el horno y empuje hacia la puerta",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "metal,",
+        "lisas,",
+        "rejilla"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "METAL",
+          "at_word": "metal,",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.74,
+          "y": 0.6
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 6,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que no chispea el metal: chispean las puntas. Envíaselo a ese amigo que mete al microondas el plato con el tenedor encima.",
+      "target_duration_s": 8.0,
+      "transformation": "tenedor y cuchara → las puntas chispean y todo lo liso queda tranquilo",
+      "camera": "retroceso desde las puntas hasta el horno entero",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "puntas:",
+        "envíaselo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.78,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

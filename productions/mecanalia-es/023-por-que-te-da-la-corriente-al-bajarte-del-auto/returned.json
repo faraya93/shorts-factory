@@ -1,0 +1,7 @@
+{
+ "reason": "Reshape ladder exhausted on scene 4 element spark-hand (aliases spark / static spark / electric spark / static electricity / chispa; unsealed class, accent arc tube). Hero human-figure passed (72 mean, none under 60, frozen); scenes 3 (70/70/70), 5 pump (85/85/92) and 6 (88/92/92) passed. Five isolated readings of the spark all failed to name it: rung 1 (hand and arc in a tight frame, arc thin teal then thick teal) read 'car door being opened by a hand' (92/92/90) and 'purple sedan car with a hand and blue cylinder touching its door' (85/80/88); rung 2 (beat rewritten to the chrome door handle, white-hot arc, same narration) read 'car door handle' (70/72/90) and 'car door' (65/80/75); rung 4 (context staging, hand and door in frame, thin jagged white arc with a starburst) read 'spider crawling on a car door' (60/55/60). Readers always name the car door or hand, never the spark; the sealed car, hand and door dominate any frame where the spark is a small accent, the same failure as the 020 arc. A fix needs a different hero mechanism for the beat (spark as the subject with no car) which is outside the ladder. Scene 2 (person rising from the seat, 85/80/92 named the convertible car, aliases lack car) also failed one reading, not laddered. Rigs and drafts are kept: code3d/lib/corr_rig.py, code3d/scenes/corr_01..06.py.",
+ "at": "2026-11-11",
+ "replacement": "productions/mecanalia-es/027-cuantas-personas-han-vivido-en-la-tierra-desde-siempre",
+ "refill_due": true,
+ "undrawn": 7
+}

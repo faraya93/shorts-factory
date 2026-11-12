@@ -1,0 +1,705 @@
+{
+  "channel": "mecanalia-es",
+  "video": "cuantas-veces-doblar-una-hoja-para-llegar-a-la-luna",
+  "title": "¿Cuántas veces tendrías que doblar una hoja para llegar a la Luna? 🌕",
+  "topic_family": "numbers",
+  "primary_engine": "code3d",
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
+  "hook_question": "¿Cuántas veces tendrías que doblar una hoja de papel para llegar a la Luna?",
+  "false_belief": "Harían falta miles o millones de dobleces.",
+  "closing_reframe": "No hacen falta millones de dobleces: cada uno duplica todo lo anterior.",
+  "share_archetype": "ese amigo que, cuando le cuentas esto, saca una hoja para intentarlo",
+  "hero_route": "asset",
+  "library_assets": [
+    "human-figure"
+  ],
+  "structure_variant": "scale",
+  "gate_version": 2,
+  "hero_rig": [
+    "paper_rig.figure",
+    "paper_rig.Mats",
+    "paper_rig.look"
+  ],
+  "hero_still": {
+    "scene": 3,
+    "frames": [
+      40
+    ]
+  },
+  "scene_elements": {
+    "1": [
+      {
+        "id": "sheet",
+        "name": "a sheet of paper folding in half",
+        "aliases": [
+          "paper",
+          "sheet of paper",
+          "paper sheet",
+          "hoja",
+          "page"
+        ],
+        "route": "build",
+        "source": "paper_rig.Sheet: two thin white slabs on a hinge (geometric, reads instantly)",
+        "frames": [
+          150
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "stack-edge",
+        "name": "edge of a stack of paper sheets",
+        "aliases": [
+          "paper",
+          "stack of paper",
+          "paper stack",
+          "ream",
+          "papers"
+        ],
+        "route": "build",
+        "source": "paper_rig.layers: layered white slabs with alternating edge tone (geometric)",
+        "frames": [
+          150
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "person-stack",
+        "name": "person standing beside a stack of paper",
+        "aliases": [
+          "person",
+          "human figure",
+          "figure",
+          "mannequin",
+          "man",
+          "woman"
+        ],
+        "route": "asset",
+        "source": "library human-figure (sealed, pose standing, default outfit) beside the paper column",
+        "frames": [
+          40
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "mountain",
+        "name": "snow-capped mountain beside the paper column",
+        "aliases": [
+          "mountain",
+          "mountain peak",
+          "everest",
+          "peak",
+          "montaña"
+        ],
+        "route": "build",
+        "source": "paper_rig.mountain: lumpy ridged cone with a rock-to-snow height ramp, cloud puffs at its waist",
+        "frames": [
+          60
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "column-space",
+        "name": "paper column rising into space",
+        "aliases": [
+          "paper",
+          "stack of paper",
+          "paper stack",
+          "column of paper"
+        ],
+        "route": "build",
+        "source": "paper_rig.column: tall layered paper tower, layered edge large in the foreground, over the sky-to-black backdrop; context staging: a person at its foot and loose sheets in the air",
+        "frames": [
+          20
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "moon",
+        "name": "the Moon",
+        "aliases": [
+          "moon",
+          "the moon",
+          "luna",
+          "lunar"
+        ],
+        "route": "build",
+        "source": "paper_rig.moon: grey sphere with a procedural crater bump and mare patches, in black space",
+        "frames": [
+          100
+        ]
+      }
+    ],
+    "7": [
+      {
+        "id": "student-strip",
+        "name": "person beside a long strip of folded paper",
+        "aliases": [
+          "person",
+          "human figure",
+          "figure",
+          "mannequin",
+          "woman",
+          "man"
+        ],
+        "route": "asset",
+        "source": "library human-figure (sealed, standing, red wardrobe) beside a long paper strip and a thick folded wad",
+        "frames": [
+          200
+        ]
+      }
+    ],
+    "8": [
+      {
+        "id": "closing-climb",
+        "name": "a sheet of paper and the paper column climbing",
+        "aliases": [
+          "paper",
+          "sheet of paper",
+          "stack of paper",
+          "paper stack",
+          "column of paper",
+          "page"
+        ],
+        "route": "build",
+        "source": "paper_rig.Sheet then paper_rig.column in one continuous move",
+        "frames": [
+          60
+        ]
+      }
+    ]
+  },
+  "visibility": {
+    "1": {
+      "sheet": {
+        "objects": [
+          "sheet_*"
+        ],
+        "frames": [
+          150
+        ]
+      }
+    },
+    "2": {
+      "stack-edge": {
+        "objects": [
+          "layer_*"
+        ],
+        "frames": [
+          150
+        ]
+      }
+    },
+    "3": {
+      "person-stack": {
+        "objects": [
+          "fig_*"
+        ],
+        "frames": [
+          40
+        ]
+      }
+    },
+    "4": {
+      "mountain": {
+        "objects": [
+          "mount_*"
+        ],
+        "frames": [
+          60
+        ]
+      }
+    },
+    "5": {
+      "column-space": {
+        "objects": [
+          "column_*"
+        ],
+        "frames": [
+          20
+        ]
+      }
+    },
+    "6": {
+      "moon": {
+        "objects": [
+          "moon_*"
+        ],
+        "frames": [
+          100
+        ]
+      }
+    },
+    "7": {
+      "student-strip": {
+        "objects": [
+          "fig_*",
+          "strip_*"
+        ],
+        "frames": [
+          200
+        ]
+      }
+    },
+    "8": {
+      "closing-climb": {
+        "objects": [
+          "column_*",
+          "sheet_*"
+        ],
+        "frames": [
+          60
+        ]
+      }
+    }
+  },
+  "model": "blender-5.2.3-cycles",
+  "voice": "es-CL-LorenzoNeural",
+  "resolution": "1080x1920",
+  "aspect_ratio": "9:16",
+  "style": "Not used: code3d scenes are rendered in Blender from the visual_identity block (exact hex values).",
+  "visual_identity": {
+    "background": {
+      "hex": "#FEA181",
+      "description": "CORAL studio seamless: stage gradient #FEA181 to #EC9172, plinth #1D1B2E, soft contact shadow, no vignette"
+    },
+    "palette": [
+      {
+        "hex": "#FEA181",
+        "name": "stage top"
+      },
+      {
+        "hex": "#EC9172",
+        "name": "stage bottom"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "plinth"
+      },
+      {
+        "hex": "#2D2A2B",
+        "name": "passive dark grey"
+      },
+      {
+        "hex": "#51555A",
+        "name": "passive grey"
+      },
+      {
+        "hex": "#DAD8D7",
+        "name": "passive light grey"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent gold"
+      },
+      {
+        "hex": "#0A5C6B",
+        "name": "accent amber"
+      },
+      {
+        "hex": "#1D1B2E",
+        "name": "annotation teal"
+      },
+      {
+        "hex": "#7A0019",
+        "name": "error red"
+      }
+    ],
+    "lighting": "bright soft studio, one large soft key, cool-white rim, gentle shadow under the object (Cycles shadow-catcher floor), no halo, no vignette",
+    "materials": "simplified chunky smooth-shaded models, real PBR colours (painted plastic, rubber, brushed steel), flat clean cross-section cuts, no outlines, no cel bands, no photo textures",
+    "unify": {
+      "saturation": 1.04,
+      "contrast": 1.03,
+      "warmth": 0.0,
+      "grain": 5,
+      "vignette_angle": 0,
+      "lift": ""
+    },
+    "qa_tolerance_de": 15,
+    "text_theme": "coral"
+  },
+  "render_style": "paper-set",
+  "scene_script_prefix": "paper",
+  "audio": {
+    "narration_volume": 1.0,
+    "effects_volume": 0.3,
+    "music_volume": 0.1,
+    "clip_audio": "off",
+    "music_file": null,
+    "music_credit": null,
+    "clip_gate_db": -35
+  },
+  "render_args": [
+    "look=coral"
+  ],
+  "identity_preset": "coral",
+  "caption_draft": "¿Cuántas veces tendrías que doblar una hoja para llegar a la Luna? Solo 42, porque cada doblez duplica el grosor. 🌕 Envíaselo a ese amigo que, cuando le cuentas esto, saca una hoja para intentarlo.",
+  "gate_stills": {
+    "1": [
+      10,
+      150,
+      200
+    ],
+    "2": [
+      10,
+      150,
+      190
+    ],
+    "3": [
+      10,
+      40,
+      100,
+      120
+    ],
+    "4": [
+      10,
+      60,
+      130
+    ],
+    "5": [
+      10,
+      20,
+      90,
+      170
+    ],
+    "6": [
+      10,
+      100,
+      160
+    ],
+    "7": [
+      10,
+      200,
+      250
+    ],
+    "8": [
+      10,
+      60,
+      280
+    ]
+  },
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "asset_rig",
+    "avion_rig",
+    "paper_rig"
+  ],
+  "support_colours": {
+    "board": "#4B3A5A",
+    "plate": "#2B3441",
+    "reason": "Reused from 019/020 (measured there against the same coral stage and light heroes); re-measured by this production's gate."
+  },
+  "hero_colours": {
+    "skin": "#E1E6EE"
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "hook",
+      "prompt": "Escena dibujada con código (coral): hook.",
+      "narration": "¿Cuántas veces tendrías que doblar una hoja de papel para llegar a la Luna? Seguro piensas que miles. Son muchísimas menos.",
+      "target_duration_s": 7.2,
+      "transformation": "hoja extendida en el suelo → se dobla por primera vez",
+      "camera": "empuje bajo desde la Luna en el horizonte hasta la hoja",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "miles."
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "¿MILES?",
+          "at_word": "miles.",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.74,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 2,
+      "name": "duplica",
+      "prompt": "Escena dibujada con código (coral): duplica.",
+      "narration": "Una hoja mide una décima de milímetro. Cada vez que la doblas, su grosor se duplica: dos hojas, cuatro, ocho.",
+      "target_duration_s": 6.9,
+      "transformation": "una capa → dos → cuatro → ocho capas",
+      "camera": "primer plano lateral del canto que sube con cada doblez",
+      "shot_type": "closeup",
+      "subtitle_emphasis": [
+        "duplica:"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "0,1 mm",
+          "from": 0,
+          "at_word": "décima",
+          "offset_s": 0.0,
+          "duration_s": 1.0,
+          "visible_s": 2.4,
+          "x": 0.72,
+          "y": 0.62
+        },
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "×2",
+          "at_word": "duplica:",
+          "offset_s": 0.0,
+          "visible_s": 3.4,
+          "x": 0.72,
+          "y": 0.5
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 3,
+      "name": "persona",
+      "prompt": "Escena dibujada con código (coral): persona.",
+      "narration": "Al doblez catorce, la pila ya es más alta que una persona.",
+      "target_duration_s": 4.1,
+      "transformation": "pila pequeña → pila más alta que una persona",
+      "camera": "retroceso a plano medio junto a la persona",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "catorce,",
+        "persona."
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "14 DOBLECES",
+          "from": 0,
+          "at_word": "catorce,",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 2.0,
+          "x": 0.74,
+          "y": 0.62
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "1,6 m",
+          "from": 0,
+          "at_word": "persona.",
+          "offset_s": 0.0,
+          "duration_s": 0.6,
+          "visible_s": 1.0,
+          "x": 0.74,
+          "y": 0.52
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 4,
+      "name": "montana",
+      "prompt": "Escena dibujada con código (coral): montana.",
+      "narration": "Al doblez veintisiete, pasa la cima del Everest, la montaña más alta del mundo.",
+      "target_duration_s": 4.8,
+      "transformation": "pila a ras de suelo → la pila supera la cima nevada",
+      "camera": "subida vertical pegada a la pila, la montaña pasa de lado",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "veintisiete,",
+        "Everest,"
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "27",
+          "from": 0,
+          "at_word": "veintisiete,",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 1.8,
+          "x": 0.76,
+          "y": 0.62
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "13 km",
+          "from": 0,
+          "at_word": "cima",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 1.6,
+          "x": 0.76,
+          "y": 0.5
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 5,
+      "name": "espacio",
+      "prompt": "Escena dibujada con código (coral): espacio.",
+      "narration": "Al doblez treinta y dos, ya está en el espacio, más arriba de donde orbitan los astronautas.",
+      "target_duration_s": 5.9,
+      "transformation": "cielo azul → cielo negro con estrellas mientras la pila sigue subiendo",
+      "camera": "retroceso lateral amplio que muestra la columna entera atravesando el cielo hasta el negro",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "espacio,",
+        "astronautas."
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "32",
+          "from": 0,
+          "at_word": "treinta",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 2.4,
+          "x": 0.76,
+          "y": 0.62
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "430 km",
+          "from": 0,
+          "at_word": "espacio,",
+          "offset_s": 0.0,
+          "duration_s": 0.9,
+          "visible_s": 2.4,
+          "x": 0.76,
+          "y": 0.5
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 6,
+      "name": "luna",
+      "prompt": "Escena dibujada con código (coral): luna.",
+      "narration": "Y al doblez cuarenta y dos, supera los trescientos ochenta mil kilómetros: llega a la Luna.",
+      "target_duration_s": 5.5,
+      "transformation": "Luna lejana → la punta de la pila llega a la Luna",
+      "camera": "órbita alrededor de la Luna mirando hacia la pila",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "kilómetros:",
+        "Luna."
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "42",
+          "from": 0,
+          "at_word": "cuarenta",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 2.4,
+          "x": 0.76,
+          "y": 0.62
+        },
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "384 400 km",
+          "from": 0,
+          "at_word": "kilómetros:",
+          "offset_s": 0.0,
+          "duration_s": 1.2,
+          "visible_s": 2.6,
+          "x": 0.72,
+          "y": 0.5
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 7,
+      "name": "giro",
+      "prompt": "Escena dibujada con código (coral): giro.",
+      "narration": "Pero en la vida real, nadie ha pasado de doce. En 2002, una estudiante lo logró con una tira de papel de más de un kilómetro.",
+      "target_duration_s": 9.0,
+      "transformation": "columna hasta la Luna → se desploma y queda una tira larguísima doblada doce veces",
+      "camera": "travelling largo a lo largo de la tira hasta la estudiante",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "doce.",
+        "kilómetro."
+      ],
+      "data_overlays": [
+        {
+          "type": "counter",
+          "style": "mono",
+          "text_or_value": "12",
+          "from": 0,
+          "at_word": "doce.",
+          "offset_s": 0.0,
+          "duration_s": 0.8,
+          "visible_s": 2.0,
+          "x": 0.76,
+          "y": 0.62
+        },
+        {
+          "type": "chip",
+          "text_or_value": "2002",
+          "at_word": "2002,",
+          "offset_s": 0.0,
+          "visible_s": 2.4,
+          "x": 0.76,
+          "y": 0.5
+        },
+        {
+          "type": "chip",
+          "text_or_value": "1,2 km",
+          "at_word": "kilómetro.",
+          "offset_s": 0.0,
+          "visible_s": 2.0,
+          "x": 0.76,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    },
+    {
+      "id": 8,
+      "name": "cierre",
+      "prompt": "Escena dibujada con código (coral): cierre.",
+      "narration": "Así que no hacen falta millones de dobleces: cada uno duplica todo lo anterior. Envíaselo a ese amigo que, cuando le cuentas esto, saca una hoja para intentarlo.",
+      "target_duration_s": 9.7,
+      "transformation": "una hoja → un doblez más y la pila vuelve a subir hasta la Luna",
+      "camera": "subida continua de la hoja a la Luna",
+      "shot_type": "establishing",
+      "subtitle_emphasis": [
+        "duplica",
+        "envíaselo"
+      ],
+      "data_overlays": [
+        {
+          "type": "label",
+          "style": "tag",
+          "text_or_value": "ENVÍASELO",
+          "at_word": "Envíaselo",
+          "offset_s": 0.0,
+          "visible_s": 2.6,
+          "x": 0.76,
+          "y": 0.62
+        }
+      ],
+      "render_cost_class": "opaque"
+    }
+  ]
+}

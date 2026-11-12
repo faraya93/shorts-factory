@@ -1,15 +1,16 @@
 {
   "video": "por-que-un-tenedor-saca-chispas-en-el-microondas",
-  "status": "developed script (developed set, 2026-11-11 creative session). Not scene-designed, not rendered, not queued, not published.",
+  "status": "scene-designed (runner 2026-11-11); see notes.md production log",
   "primary_engine": "code3d",
   "hero_route": "asset",
-  "preset": null,
-  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "preset": "coral",
+  "prefix": "micro",
+  "gate_version": 2,
   "source": "docs/current/idea-bank.md banked rank 4 (fill 1), drawn 2026-11-11 for the developed set",
   "title": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no? ⚡",
   "topic_family": "objects",
   "structure_variant": "chain",
-  "staging_mode_proposal": "cutaway: everything happens inside the oven cavity: a cutaway of the microwave keeps the fork, the spoon, the walls and the door mesh in one frame",
+  "staging_mode": "cutaway",
   "curiosity_score": 9,
   "curiosity_reason": "Everyone has been warned about metal in the microwave, and many have seen the sparks; dangerous.",
   "hook_question": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no?",
@@ -19,11 +20,8 @@
   "share_archetype": "ese amigo que mete al microondas el plato con el tenedor encima",
   "theme": "microwave",
   "main_tension": "dangerous",
-  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
-  "library_assets": [
-    "build",
-    "library: Poly Haven 'Vintage Microwave' (BlenderKit cab01678"
-  ],
+  "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects and energy graphics on a stylised stage); the oven, fork, spoon, door screen, waves and arcs are geometric builds and energy graphics because the library oven candidates are unsealed search results and no fork, spoon or arc asset is sealed.",
+  "library_assets": [],
   "description": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no? Porque la carga se amontona en las puntas de sus dientes y rompe el aire.\nY el propio microondas está hecho de metal, solo que liso. ⚡\nEnvíaselo a ese amigo que mete al microondas el plato con el tenedor encima.",
   "hashtags": [
     "#microondas",
@@ -31,9 +29,126 @@
     "#ciencia",
     "#shorts"
   ],
+  "caption_draft": "¿Por qué un tenedor saca chispas en el microondas y una cuchara no? Porque la carga se amontona en las puntas de sus dientes y rompe el aire. ⚡ Envíaselo a ese amigo que mete al microondas el plato con el tenedor encima.",
   "wardrobe": [
     "No figure on screen."
   ],
+  "rig_libs": [
+    "tape_rig",
+    "setpiece",
+    "real_kit",
+    "machine_kit",
+    "asset_rig",
+    "avion_rig",
+    "micro_rig"
+  ],
+  "hero_rig": [
+    "micro_rig.oven",
+    "micro_rig.Mats",
+    "micro_rig.build",
+    "micro_rig.fork",
+    "micro_rig.spoon",
+    "micro_rig.lights",
+    "micro_rig.look"
+  ],
+  "hero_still": {
+    "scene": 1,
+    "frames": [
+      105
+    ]
+  },
+  "support_colours": {
+    "board": "#4B3A5A",
+    "plate": "#2B3441",
+    "reason": "Reused from 019 and 020 (measured there against the same coral stage and light-grey heroes); re-measured by this production's gate."
+  },
+  "hero_colours": {},
+  "gate_stills": {
+    "1": [10, 105, 185],
+    "2": [10, 200, 275],
+    "3": [10, 180, 230],
+    "4": [10, 60, 170],
+    "5": [10, 120, 240],
+    "6": [10, 150, 235]
+  },
+  "scene_elements": {
+    "1": [
+      {
+        "id": "microwave-oven",
+        "name": "microwave oven (cutaway, door open)",
+        "aliases": ["microwave", "microwave oven", "oven", "microondas"],
+        "route": "build",
+        "source": "micro_rig.oven: steel shell, open cavity, turning plate, hinged door with window and screen, control panel with display and keypad",
+        "frames": [105]
+      },
+      {
+        "id": "fork-spoon",
+        "name": "fork and spoon on a plate",
+        "aliases": ["fork", "spoon", "cutlery", "tenedor", "cuchara"],
+        "route": "build",
+        "source": "micro_rig.fork and micro_rig.spoon: geometric steel cutlery on the turning plate",
+        "frames": [185]
+      }
+    ],
+    "2": [
+      {
+        "id": "cavity-waves",
+        "name": "glowing waves bouncing inside a microwave cavity",
+        "aliases": ["microwave", "microwave oven", "microwaves", "oven"],
+        "route": "build",
+        "source": "micro_rig.waves: translucent accent slabs bouncing between the cavity walls, inside the oven build",
+        "frames": [200]
+      }
+    ],
+    "3": [
+      {
+        "id": "fork-tines",
+        "name": "fork tines glowing",
+        "aliases": ["fork", "tenedor", "fork tines"],
+        "route": "build",
+        "source": "micro_rig.fork with emissive accent tip beads",
+        "frames": [180]
+      }
+    ],
+    "4": [
+      {
+        "id": "tine-sparks",
+        "name": "sparks between fork tines",
+        "aliases": ["spark", "sparks", "electric arc", "arc", "chispa", "lightning"],
+        "route": "build",
+        "source": "micro_rig.burst_arcs: short branching accent arcs between the tine tips",
+        "frames": [60]
+      }
+    ],
+    "5": [
+      {
+        "id": "oven-door",
+        "name": "microwave door with its metal screen",
+        "aliases": ["microwave", "microwave oven", "microwave door", "oven door"],
+        "route": "build",
+        "source": "micro_rig.oven door: frame, window glass, perforated metal screen lit in the accent",
+        "frames": [220]
+      }
+    ]
+  },
+  "visibility": {
+    "1": {
+      "microwave-oven": {"objects": ["oven_*"], "frames": [105]},
+      "fork-spoon": {"objects": ["fork_*", "spoon_*"], "frames": [185]}
+    },
+    "2": {
+      "cavity-waves": {"objects": ["wave_*"], "frames": [200]}
+    },
+    "3": {
+      "fork-tines": {"objects": ["tipglow_*", "charge_*"], "frames": [180]}
+    },
+    "4": {
+      "tine-sparks": {"objects": ["arc_*"], "frames": [60]}
+    },
+    "5": {
+      "oven-door": {"objects": ["oven_door*", "oven_screen*", "oven_handle*"], "frames": [220]}
+    }
+  },
   "scenes": [
     {
       "name": "hook",
@@ -41,35 +156,12 @@
       "what_changes": "Contrast, two actors: a cut-away microwave with a fork and a spoon on the turning plate; the fork crackles with sparks at its tines while the spoon stays dark; tag ¿CUALQUIER METAL? appears.",
       "transformation": "tenedor y cuchara quietos → el tenedor chispea y la cuchara no",
       "camera": "órbita lenta alrededor del plato giratorio",
-      "overlays_plan": [
-        "tag ¿CUALQUIER METAL? at 'cualquier'"
-      ],
-      "elements": [
-        {
-          "name": "microwave oven (cutaway)",
-          "route": "library: Poly Haven 'Vintage Microwave' (BlenderKit cab01678, CC0, 138 MB) or BlenderKit 'Low Poly Microwave Oven' (c629cd93, RF); the open job `microwave-oven` brief (states door closed, open, cutaway showing metal walls) is the spec, built by the production under asset-system (g)",
-          "risk": "medium: an unsealed class; a box with a window door, keypad and glass plate is a strong read",
-          "aliases": [
-            "microwave",
-            "microwave oven",
-            "oven",
-            "microondas"
-          ]
-        },
-        {
-          "name": "fork and spoon on a plate",
-          "route": "build, geometric (fork, spoon, glass plate); library alternative BlenderKit 'fork' (1142edef, RF)",
-          "risk": "low",
-          "aliases": [
-            "fork",
-            "spoon",
-            "cutlery",
-            "tenedor",
-            "cuchara"
-          ]
-        }
-      ],
-      "est_duration_s": 6.2
+      "target_duration_s": 6.5,
+      "render_cost_class": "opaque",
+      "emphasis": ["chispas", "cualquier"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "¿CUALQUIER METAL?", "at_word": "cualquier", "offset_s": 0.0, "visible_s": 2.4, "x": 0.5, "y": 0.62}
+      ]
     },
     {
       "name": "ondas",
@@ -77,23 +169,12 @@
       "what_changes": "The cavity fills with accent wave fronts bouncing between the walls; inside the fork and the spoon a glow sloshes from one end to the other in time with them.",
       "transformation": "horno vacío de ondas → las ondas rebotan y la carga va y viene dentro del metal",
       "camera": "travelling lateral a través de la cavidad, de pared a pared",
-      "overlays_plan": [
-        "chip 2,45 GHz at 'miles'"
-      ],
-      "elements": [
-        {
-          "name": "glowing waves bouncing inside a microwave cavity",
-          "route": "energy graphics (emissive rings, doctrine language) inside the oven build",
-          "risk": "medium: energy graphics need the oven walls in frame",
-          "aliases": [
-            "microwave",
-            "microwave oven",
-            "microwaves",
-            "oven"
-          ]
-        }
-      ],
-      "est_duration_s": 10.7
+      "target_duration_s": 10.7,
+      "render_cost_class": "opaque",
+      "emphasis": ["rebotan", "miles", "metal."],
+      "overlays": [
+        {"type": "chip", "text_or_value": "2,45 GHz", "at_word": "miles", "offset_s": 0.0, "duration_s": 0.5, "visible_s": 2.6, "x": 0.72, "y": 0.6}
+      ]
     },
     {
       "name": "puntas",
@@ -101,22 +182,12 @@
       "what_changes": "Close-up side by side: the glow spreads evenly over the spoon's bowl, while on the fork it drains into the four tine tips, which brighten one by one.",
       "transformation": "carga repartida en ambos → la cuchara queda pareja y las puntas del tenedor se encienden",
       "camera": "empuje desde la cuchara hacia las puntas del tenedor",
-      "overlays_plan": [
-        "ring dotted around the tines at 'puntas'"
-      ],
-      "elements": [
-        {
-          "name": "fork tines glowing",
-          "route": "fork build with an emissive tip mask",
-          "risk": "low",
-          "aliases": [
-            "fork",
-            "tenedor",
-            "fork tines"
-          ]
-        }
-      ],
-      "est_duration_s": 7.9
+      "target_duration_s": 8.0,
+      "render_cost_class": "opaque",
+      "emphasis": ["reparte", "puntas"],
+      "overlays": [
+        {"type": "ring", "radius": 0.2, "x": 0.56, "y": 0.58, "at_word": "puntas", "offset_s": 0.0, "duration_s": 0.8, "visible_s": 1.8}
+      ]
     },
     {
       "name": "chispa",
@@ -124,23 +195,10 @@
       "what_changes": "The air at the tines breaks down: arcs leap between the tips with a flash, branch and snap off.",
       "transformation": "puntas brillantes → saltan chispas entre los dientes",
       "camera": "primer plano que retrocede de golpe con cada chispa",
-      "overlays_plan": [],
-      "elements": [
-        {
-          "name": "sparks between fork tines",
-          "route": "build: small branching emissive arcs under the open job `electric-arc` brief (state 'small arc between two points')",
-          "risk": "medium: an unsealed class; the fork is the context cue",
-          "aliases": [
-            "spark",
-            "sparks",
-            "electric arc",
-            "arc",
-            "chispa",
-            "lightning"
-          ]
-        }
-      ],
-      "est_duration_s": 6.9
+      "target_duration_s": 7.0,
+      "render_cost_class": "opaque",
+      "emphasis": ["rompe", "chispa,"],
+      "overlays": []
     },
     {
       "name": "giro",
@@ -148,23 +206,12 @@
       "what_changes": "The turn: pull-back to the whole cutaway oven; its walls light evenly, without a single spark; the camera pushes to the door, where the metal screen behind the glass lights as a fine grid.",
       "transformation": "chispas en el tenedor → todo el horno se ilumina parejo, sin chispas, hasta la rejilla de la puerta",
       "camera": "retroceso a todo el horno y empuje hacia la puerta",
-      "overlays_plan": [
-        "label METAL tag at 'metal,'"
-      ],
-      "elements": [
-        {
-          "name": "microwave door with its metal screen",
-          "route": "oven build/import; the screen is a geometric perforated plate behind the window",
-          "risk": "medium",
-          "aliases": [
-            "microwave",
-            "microwave oven",
-            "microwave door",
-            "oven door"
-          ]
-        }
-      ],
-      "est_duration_s": 8.3
+      "target_duration_s": 8.3,
+      "render_cost_class": "opaque",
+      "emphasis": ["metal,", "lisas,", "rejilla"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "METAL", "at_word": "metal,", "offset_s": 0.0, "visible_s": 2.4, "x": 0.74, "y": 0.6}
+      ]
     },
     {
       "name": "cierre",
@@ -172,27 +219,23 @@
       "what_changes": "Single reframe image: the fork's four tips spark once more beside the dark, smooth spoon, while the whole oven glows calmly around them.",
       "transformation": "tenedor y cuchara → las puntas chispean y todo lo liso queda tranquilo",
       "camera": "retroceso desde las puntas hasta el horno entero",
-      "overlays_plan": [
-        "ENVÍASELO tag at_word 'envíaselo'"
-      ],
-      "elements": [],
-      "est_duration_s": 7.9
+      "target_duration_s": 8.0,
+      "render_cost_class": "opaque",
+      "emphasis": ["puntas:", "envíaselo"],
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "ENVÍASELO", "at_word": "Envíaselo", "offset_s": 0.0, "visible_s": 2.6, "x": 0.78, "y": 0.62}
+      ]
     }
   ],
   "sources": [
-    "Mechanism: the oven's field drives charge in the metal; charge gathers at sharp points (field enhancement) until the air breaks down into a spark; smooth objects without points usually do not arc, though they can under some conditions: NPR 'Science Out of the Box: Microwave antics, don't stick a fork in it' (3 November 2006) and Physics Forums 'Metal in microwave ovens' (live search 2026-11-11). FLAGGED: add one physics or manufacturer reference at the beat sheet.",
+    "Mechanism: the oven's field drives charge in the metal; charge gathers at sharp points (field enhancement) until the air breaks down into a spark; smooth objects without points usually do not arc, though they can under some conditions: NPR 'Science Out of the Box: Microwave antics, don't stick a fork in it' (3 November 2006) and Physics Forums 'Metal in microwave ovens' (live search 2026-11-11).",
     "Oven frequency about 2.45 GHz (patent literature and EMF-Portal, live search 2026-11-11); the field reverses direction about 4.9 billion times a second, so 'miles de millones de veces por segundo' holds.",
     "The oven's metal case and a metal-wire screen in the door keep the microwaves inside: Swiss Federal Office of Public Health fact sheet 'Microwave ovens'; UL 'Radarange to modern-day microwaves' (screen holes about 1 mm) (live search 2026-11-11)."
   ],
   "simplifications": [
     "A spoon CAN arc in some conditions (edges, size, field pattern); the hook question states the common case and the narration says the spoon's charge spreads out, not that a spoon never sparks.",
-    "Waves and charge are drawn as glows; both are invisible."
-  ],
-  "narration_words": 139,
-  "est_duration_s": 47.9,
-  "duration_band_s": [
-    45,
-    60
+    "Waves and charge are drawn as glows; both are invisible.",
+    "The oven is drawn with its door open and the front of the cavity uncovered; the real oven is operated with the door closed."
   ],
   "flatness_test": [
     "1. hook: Contrast, two actors: a cut-away microwave with a fork and a spoon on the turning plate; the fork crackles with sparks at its tines while the spoon stays dark; tag ¿CUALQUIER METAL? appears.",
@@ -201,5 +244,8 @@
     "4. chispa: The air at the tines breaks down: arcs leap between the tips with a flash, branch and snap off.",
     "5. giro: The turn: pull-back to the whole cutaway oven; its walls light evenly, without a single spark; the camera pushes to the door, where the metal screen behind the glass lights as a fine grid.",
     "6. cierre: Single reframe image: the fork's four tips spark once more beside the dark, smooth spoon, while the whole oven glows calmly around them."
-  ]
+  ],
+  "narration_words": 139,
+  "est_duration_s": 47.9,
+  "duration_band_s": [45, 60]
 }

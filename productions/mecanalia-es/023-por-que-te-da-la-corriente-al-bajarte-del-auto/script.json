@@ -3,8 +3,40 @@
   "status": "developed script (developed set, 2026-11-11 creative session). Not scene-designed, not rendered, not queued, not published.",
   "primary_engine": "code3d",
   "hero_route": "asset",
-  "preset": null,
-  "preset_note": "Chosen by the design lens at scene design (composition gate).",
+  "preset": "coral",
+  "prefix": "corr",
+  "caption_draft": "¿Por qué te da la corriente cuando te bajas del auto? Porque al deslizarte por el asiento te cargas tú, y la carga salta cuando tocas el metal. ⚡ Envíaselo a ese amigo que cierra la puerta del auto con el codo para que no le dé la corriente.",
+  "gate_version": 2,
+  "staging_mode": "stage",
+  "support_colours": {
+    "board": "#4B3A5A",
+    "plate": "#6B7482",
+    "reason": "Board reused from 019/020 (measured against the same coral stage); the ground plate is a mid slate so the grey-navy trousers of the recurring person stay separate from it (the dark 020 road #2B3441 is almost the trouser colour #2E3347); re-measured by this production's colour gate."
+  },
+  "hero_colours": {
+    "skin": "#E1E6EE"
+  },
+  "rig_libs": ["tape_rig", "setpiece", "real_kit", "asset_rig", "avion_rig", "rayo_rig", "corr_rig"],
+  "hero_rig": ["corr_rig.person", "corr_rig.car", "corr_rig.Mats", "corr_rig.lights", "corr_rig.look"],
+  "hero_still": {"scene": 1, "frames": [150]},
+  "gate_stills": {"1": [10, 150, 235], "2": [10, 130, 250], "3": [10, 80, 195], "4": [10, 130, 185], "5": [10, 150, 275], "6": [10, 200, 265]},
+  "scene_elements": {
+    "1": [{"id": "person-car", "name": "person standing beside a car", "aliases": ["person", "human figure", "figure", "mannequin", "man", "woman", "car"], "route": "asset", "source": "sealed human-figure (standing) beside the sealed cartoon-car", "frames": [150]}],
+    "2": [{"id": "person-rising", "name": "person getting up out of a car seat", "aliases": ["person", "human figure", "figure", "mannequin", "car seat", "seat"], "route": "asset", "source": "sealed human-figure, seated then standing, in the sealed cartoon-car with its roof slid away", "frames": [130]}],
+    "3": [{"id": "person-walking", "name": "person walking, glowing with charge", "aliases": ["person", "human figure", "figure", "mannequin", "man", "woman"], "route": "asset", "source": "sealed human-figure (walking) with an accent glow", "frames": [80]}],
+    "4": [{"id": "spark-hand", "name": "spark between a hand and a car door", "aliases": ["spark", "static spark", "electric spark", "static electricity", "chispa"], "route": "build", "source": "sealed hand-articulated (door) + sealed cartoon-car door + accent arc tube", "frames": [130]}],
+    "5": [{"id": "fuel-pump", "name": "fuel pump with the nozzle in a car", "aliases": ["fuel pump", "gas pump", "petrol pump", "gas station", "fuel dispenser", "gasoline pump"], "route": "build", "source": "geometric fuel dispenser (body, display, hose, nozzle) beside the sealed cartoon-car", "frames": [150]}],
+    "6": [{"id": "person-car-charge", "name": "person glowing, charge flowing into a car", "aliases": ["person", "human figure", "figure", "mannequin", "man", "woman", "car"], "route": "asset", "source": "sealed human-figure and cartoon-car with an accent cage; declared at the beat sheet, before any reading", "frames": [200]}]
+  },
+  "visibility": {
+    "1": {"person-car": {"objects": ["fig_*", "car_*"], "frames": [150]}},
+    "2": {"person-rising": {"objects": ["fig_*", "car_*"], "frames": [130]}},
+    "3": {"person-walking": {"objects": ["fig_*"], "frames": [80]}},
+    "4": {"spark-hand": {"objects": ["arc_*", "hand_*"], "frames": [130]}},
+    "5": {"fuel-pump": {"objects": ["pump_*"], "frames": [150]}},
+    "6": {"person-car-charge": {"objects": ["fig_*", "car_*"], "frames": [200]}}
+  },
+  "library_assets_declared": ["human-figure", "cartoon-car", "hand-articulated"],
   "source": "docs/current/idea-bank.md banked rank 9 (fill 1), drawn 2026-11-11 for the developed set",
   "title": "¿Por qué te da la corriente cuando te bajas del auto? ⚡",
   "topic_family": "objects",
@@ -20,11 +52,7 @@
   "theme": "electricity",
   "main_tension": "hidden",
   "engine_reason": "code3d on the asset route (CLAUDE.md engine selection: rigid objects, figures and energy graphics on a stylised stage); sealed library assets and poses where named, geometric builds otherwise.",
-  "library_assets": [
-    "library hand-articulated",
-    "library human-figure",
-    "library human-figure (standing"
-  ],
+  "library_assets": ["human-figure", "cartoon-car", "hand-articulated"],
   "description": "¿Por qué te da la corriente cuando te bajas del auto? Porque al deslizarte por el asiento te cargas tú, y la carga salta cuando tocas el metal.\nEsa misma chispa, y no el celular, es la que preocupa en una estación de servicio. ⚡\nEnvíaselo a ese amigo que cierra la puerta del auto con el codo para que no le dé la corriente.",
   "hashtags": [
     "#electricidad",
@@ -62,7 +90,13 @@
           ]
         }
       ],
-      "est_duration_s": 9.3
+      "est_duration_s": 9.3,
+      "emphasis": ["auto", "tú."],
+      "render_cost_class": "opaque",
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "¿EL AUTO?", "at_word": {"word": "auto", "nth": 2}, "offset_s": 0.0, "visible_s": 2.6, "x": 0.3, "y": 0.62},
+        {"type": "label", "style": "tag", "text_or_value": "TÚ", "at_word": "tú.", "offset_s": 0.0, "visible_s": 2.4, "x": 0.72, "y": 0.5}
+      ]
     },
     {
       "name": "asiento",
@@ -86,7 +120,10 @@
           ]
         }
       ],
-      "est_duration_s": 9.0
+      "est_duration_s": 9.0,
+      "emphasis": ["roce", "cargas:"],
+      "render_cost_class": "opaque",
+      "overlays": []
     },
     {
       "name": "voltaje",
@@ -112,7 +149,12 @@
           ]
         }
       ],
-      "est_duration_s": 5.5
+      "est_duration_s": 5.5,
+      "emphasis": ["miles", "voltios."],
+      "render_cost_class": "opaque",
+      "overlays": [
+        {"type": "counter", "style": "mono", "text_or_value": "3000+ V", "from": 0, "at_word": "miles", "offset_s": 0.0, "duration_s": 1.6, "visible_s": 3.4, "x": 0.5, "y": 0.5}
+      ]
     },
     {
       "name": "chispa",
@@ -137,7 +179,12 @@
           ]
         }
       ],
-      "est_duration_s": 7.9
+      "est_duration_s": 7.9,
+      "emphasis": ["carga", "chispa."],
+      "render_cost_class": "opaque",
+      "overlays": [
+        {"type": "ring", "text_or_value": "", "at_word": "chispa.", "offset_s": 0.0, "visible_s": 2.4, "x": 0.5, "y": 0.52}
+      ]
     },
     {
       "name": "giro",
@@ -163,7 +210,12 @@
           ]
         }
       ],
-      "est_duration_s": 10.0
+      "est_duration_s": 10.0,
+      "emphasis": ["chispa", "celular."],
+      "render_cost_class": "opaque",
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "¡NO EL CELULAR!", "at_word": "celular.", "offset_s": 0.0, "visible_s": 3.0, "x": 0.5, "y": 0.62}
+      ]
     },
     {
       "name": "cierre",
@@ -175,7 +227,12 @@
         "ENVÍASELO tag at_word 'envíaselo'"
       ],
       "elements": [],
-      "est_duration_s": 12.1
+      "est_duration_s": 12.1,
+      "emphasis": ["tú", "envíaselo"],
+      "render_cost_class": "opaque",
+      "overlays": [
+        {"type": "label", "style": "tag", "text_or_value": "ENVÍASELO", "at_word": "Envíaselo", "offset_s": 0.0, "visible_s": 2.6, "x": 0.78, "y": 0.62}
+      ]
     }
   ],
   "sources": [
