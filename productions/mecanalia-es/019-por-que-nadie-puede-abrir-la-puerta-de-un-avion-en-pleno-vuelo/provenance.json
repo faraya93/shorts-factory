@@ -1,0 +1,9 @@
+{
+ "script_by": "creative-session",
+ "model": "claude-opus-5-5",
+ "at": "2026-11-11",
+ "record": "docs/current/reports/creative-session-2026-11-11.md Part 2; lens-decisions.md 2026-11-11 'Developed set 019-024'",
+ "evidence": "Script written in 371c522 (developed set, Co-Authored-By Claude Opus 5.5). Later script changes are the production session's recorded Reshape-ladder edits (its lens-decisions row and notes.md Ladder log). Stamped after the fact by block B2 (2026-11-11) from these records.",
+ "script_sha256": "fd3fc3f80054341e572606e3c6088af4fc21544a24371490da0a63b06030ddf1",
+ "script_rev": "371c522"
+}

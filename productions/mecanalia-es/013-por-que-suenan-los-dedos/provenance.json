@@ -1,0 +1,9 @@
+{
+ "script_by": "creative-session",
+ "model": "claude-opus-5-5",
+ "at": "2026-11-11",
+ "record": "docs/current/reports/creative-session-2026-11-11.md Part 1; lens-decisions.md 2026-11-11 'Revival review of the archived returns'",
+ "evidence": "Script written in a0b82cd (2026-11-07 slate, Co-Authored-By Claude Opus 5.5), archived unchanged in f0186f9 (100% rename), re-routed and re-checked in 371c522 (Co-Authored-By Claude Opus 5.5); no other commit touched it. Stamped after the fact by block B2 (2026-11-11) from these records.",
+ "script_sha256": "b276e483e5e5c5a60fee0ce7604f780b847c8c0c3118814083d049dc5a5c0d63",
+ "script_rev": "371c522"
+}
