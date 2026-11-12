@@ -147,6 +147,15 @@ where judgment is involved.
   organization"); scenes.json, costs.json, notes.md and publish.json are
   versioned, generated media is gitignored.
 
+## Runner session mechanics (lens decision 2026-11-11, block B3; forward-only; record: docs/current/reports/b3-2026-11-11.md)
+How the runner's headless sessions are bounded. These are mechanics, not production rules: no gate, bar or threshold is touched.
+- **Context cap and handoff.** The runner publishes each session's live context to a file (`SF_CTX_FILE`); at `SF_CTX_CAP` (default 200,000 tokens) the PreToolUse hook (`tools/hook_blender_guard.py`) denies every tool except writing the production's `build/checkpoint.md`. A session that reached the cap is continued by a FRESH session briefed from that checkpoint, never `--resume`. Sessions keep the checkpoint current at every stage boundary; it is excluded from the progress fingerprint like notes.md. A usage-limit resume is fresh too when the last context was over `SF_RESUME_MAX_CTX` (150,000) and a checkpoint exists. Without a checkpoint nothing can be handed over and the old resume applies.
+- **Callback as code.** After a queued final's render the runner builds and checks the publish package (`tools/publish_package.py`) and runs the verifier itself; the callback is a FRESH session. When all of that passes, the session only writes the report (produce step 12); when it fails, the session gets the failure text and the full callback job.
+- **Startup isolation.** Runner sessions load no skills, no claude.ai connectors and no unused tools: `--disable-slash-commands`, `--strict-mcp-config` with `tools/runner-mcp.json` (Blender only), `--disallowed-tools`, and the produce skill's text appended to the system prompt. `SF_ISOLATE=0` restores the old startup.
+- **Inline Python and scripts.** The hook denies inline Python (heredoc, `python -`, `python -c`) that spawns a process, reaches the network, reflects, or names provenance, producer, `.env` or Blender; and a runner session runs only the `tools/`, `factory/` and `tests/` scripts as they stand in the commit the batch started from (`SF_TOOLS_REV`). The provenance stamp does not rest on these alone: the runner hashes `provenance.json` around every session and halts the batch if it changed.
+- **Sanctioned tools.** `tools/status.py <prod>` orients in one call; `tools/iterate.py <prod> <scene> <frames>` drafts, builds one contact sheet and reports which stills are pixel-identical to the last iteration.
+- **What did not change.** The gate (thresholds, readers, isolation, matcher), the ladder, the owner-only list, the budgets' meaning (sessions, hours, brake), the runner's model, and every standing production bar. **Precedence:** this section governs the runner's session mechanics; where it and the produce skill differ, this section governs.
+
 ## House rules
 - Never spend without showing the estimate first. The gates are rules,
   not suggestions.
