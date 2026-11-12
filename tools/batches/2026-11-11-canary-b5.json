@@ -1,0 +1,9 @@
+{
+ "name": "2026-11-11-canary-b5",
+ "purpose": "Canary for the architecture second opinion (docs/current/reports/architecture-second-opinion-2026-11-11.md section 5; metrics list there; block B5 report docs/current/reports/b5-2026-11-11.md). NOT LAUNCHED BY THE SESSION THAT WROTE IT: the owner launches it. COMPOSITION AS WRITTEN: the three Opus-scripted, stamped canary candidates with the fewest failed blind proofs (027 two of five, 026 three of seven, 028 five of seven; 022 was returned by its own failed proof N1; 029 and 030 are standbys, 030 failed all four, 029 was not built). Every one of the three still has a proof not passed, so the runner REFUSES it today (factory/proofs.py): launching this file as it stands runs nothing. Each unit becomes runnable only after a creative session redesigns its failed proofs from the recorded readings and a braked proof unit re-reads them under the unchanged bar. Edit this list (drop a unit, add a developed standby whose proofs have passed) before launching; do not edit the proofs or the bar. No arming, no publishing.",
+ "units": [
+  "productions/mecanalia-es/027-cuantas-personas-han-vivido-en-la-tierra-desde-siempre",
+  "productions/mecanalia-es/026-por-que-se-hundio-el-titanic-si-decian-que-era-insumergible",
+  "productions/mecanalia-es/028-por-que-los-pajaros-pueden-pararse-en-los-cables-electricos"
+ ]
+}
