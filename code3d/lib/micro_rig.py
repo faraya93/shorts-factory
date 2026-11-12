@@ -13,6 +13,7 @@ import bpy
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import avion_rig as av  # noqa: E402
 import common as c  # noqa: E402
+import looks  # noqa: E402
 import machine_kit as mk  # noqa: E402
 import setpiece as sp  # noqa: E402
 import tape_rig as tr  # noqa: E402
@@ -33,7 +34,7 @@ STEEL = "#B8C0C9"
 SHELL = "#D8DBDF"
 INNER = "#E6E8EB"
 PLATE = "#2B3441"
-INK = "#1D1B2E"
+WAVE_FALLBACK = "#117A8B"                   # only for runs with no identity look applied
 ease = av.ease
 look = av.look
 lights = av.lights
@@ -79,9 +80,10 @@ class Mats:
         self.ink = S.ink
         self.accent = S.accent
         self.red = S.error
-        self.wave, self.wave_k = glow_mat("wave_glow", "#0A5C6B", 3.0)
-        self.wall, self.wall_k = glow_mat("wall_glow", "#0A5C6B", 3.0)
-        self.screen_mat, self.screen_k = glow_mat("screen_glow", "#0A5C6B", 4.0)
+        teal = ((looks.current() or {}).get("accent")) or (S.p or {}).get("accent") or WAVE_FALLBACK      # the wave glow IS the identity accent: read it, never a literal
+        self.wave, self.wave_k = glow_mat("wave_glow", teal, 3.0)
+        self.wall, self.wall_k = glow_mat("wall_glow", teal, 3.0)
+        self.screen_mat, self.screen_k = glow_mat("screen_glow", teal, 4.0)
         self.core = tr.gold_emit("spark_core", "#EAFBFF", 9.0)                       # the hot centre of a spark (rung 1 of the sparks element: bluish-white)
         self.halo, self.halo_k = glow_mat("spark_halo", "#7FD8EA", 1.0)
         self.screen_steel = tr.plain("screen_steel", "#7F8892", rough=0.3, metallic=0.8)

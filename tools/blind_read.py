@@ -1,6 +1,6 @@
 """Isolated blind readers (2026-11-08). The audit found 158 of 174 past readers had CLAUDE.md in their context, which names the catalogue's subjects. Each reader here is a fresh headless session
 in an empty neutral folder (no CLAUDE.md to discover, no project memory, no settings, no MCP, Read tool only) that sees only neutrally named copies of the stills.
-usage: .venv/bin/python tools/blind_read.py [--record element <prod> <scene> <id> | likeness <prod> <slug> | blind <slug>] [--multi] [--readers 3] <still> [...]
+usage: .venv/bin/python tools/blind_read.py [--record element <prod> <scene> <id> | likeness <prod> <slug> | proof <prod> <proof id> | blind <slug>] [--multi] [--readers 3] <still> [...]
 Every reading is counted: a low reader is never discarded or re-rolled (report 2026-11-08, flag 9)."""
 import argparse
 import json
@@ -66,6 +66,9 @@ def main() -> int:
     ap.add_argument("--readers", type=int, default=al.MIN_BLIND_GUESSES)
     ap.add_argument("stills", nargs="+")
     a = ap.parse_args()
+    if a.record and a.record[0] == "proof":                    # settled proofs are never read again: refuse before the readers run
+        import proofs
+        proofs.require_pending(Path(a.record[1]).resolve(), a.record[2])
     res = read(a.stills, a.multi, a.readers)
     guesses, confs = [r["guess"] for r in res], [r["confidence"] for r in res]
     cost = round(sum(r["cost_usd"] for r in res), 6)
@@ -76,6 +79,10 @@ def main() -> int:
     if kind == "element":
         ok = al.record_element(Path(rest[0]).resolve(), int(rest[1]), rest[2], guesses, confs, a.stills, "headless", reader_cost=cost)
         ledger(Path(rest[0]).resolve(), f"{rest[1]}:{rest[2]}", res)
+    elif kind == "proof":                                      # block B5: a blind proof in <prod>/proofs.json (factory/proofs.py), same readers, same matcher, same bar
+        import proofs
+        ok = proofs.record_reading(Path(rest[0]).resolve(), rest[1], guesses, confs, a.stills, reader_cost=cost)
+        ledger(Path(rest[0]).resolve(), f"proof:{rest[1]}", res)
     elif kind == "likeness":
         ok = al.record_likeness(Path(rest[0]).resolve(), rest[1], guesses, confs, a.stills, "headless", reader_cost=cost)
         ledger(Path(rest[0]).resolve(), "hero", res)

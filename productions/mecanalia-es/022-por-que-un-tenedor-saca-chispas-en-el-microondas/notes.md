@@ -102,3 +102,7 @@ Replacement: productions/mecanalia-es/026-por-que-se-hundio-el-titanic-si-decian
 
 ## Ledger (from 2026-11-11, appended)
 - 2026-11-11: revived on the P7 route, stamped and proof-specified by the block B4 creative session (Opus); record docs/current/reports/b4-2026-11-11.md.
+
+## RETURNED 2026-11-11
+Block B5 proof N1 (P7 route, one new scene-4 reading under the event declaration, aliases spark/sparks/sparking/electric arc/arc/arcing/chispa/chispeando/lightning) FAILED: three isolated readers named 'microwave oven with open door' at 96/96/95, none named the arc; the eighth reading of this element overall (seven earlier) (rungs 1, 2, 4 and the P7 reading); proofs.json states a failed N1 returns 022 for good
+Replacement: pending a creative session (no eligible developed standby).

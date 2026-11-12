@@ -41,8 +41,28 @@
    "build": "micro_rig + code3d/scenes/micro_04.py as committed; no edits.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared, none added after a guess; every reading counts",
    "on_fail": "No further rung: this element has used rungs 1, 2 and 4 under its old declaration. A failed N1 returns 022 again (tools/return_topic.py) and it is not revived a second time; the reading is recorded either way.",
-   "status": "pending",
-   "readings": [],
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "microwave oven with open door",
+      "microwave oven with open door",
+      "microwave oven with open door"
+     ],
+     "confidences": [
+      96,
+      96,
+      95
+     ],
+     "mean_confidence": 95.7,
+     "stills": [
+      "build/proofs/N1/2026-11-11-1-still-0060.png"
+     ],
+     "reader_cost_usd": 0.002893
+    }
+   ],
    "note": "The seven earlier readings stay FAIL under their noun-only declaration and are never re-judged (doctrine-production.md 'Event elements'). The verb forms were derived mechanically from the element's own declared nouns (spark -> sparking, arc -> arcing, chispa -> chispeando), not taken from a reader's guess."
   }
  ]

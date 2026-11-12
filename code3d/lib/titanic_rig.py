@@ -29,7 +29,7 @@ LIGHT_K = 3.0
 BULK_X = [-L / 2 + L * (i + 1) / NC for i in range(NB)]
 EDGE_X = [-L / 2] + BULK_X + [L / 2]         # compartment k spans EDGE_X[k]..EDGE_X[k+1]; k = 0 is the stern, NC - 1 the bow
 
-HULL, DECK, WHITE, BUFF, INK = "#23252B", "#B58A55", "#F1EEE8", "#E4A83C", "#1D1B2E"
+HULL, DECK, WHITE, BUFF = "#23252B", "#B58A55", "#F1EEE8", "#E4A83C"
 SEA, ICE, WATER, BULK, FLOOR = "#2A6F8F", "#B9D3E3", "#4FB3D9", "#EFE6D2", "#8B8F96"
 
 ease = av.ease
