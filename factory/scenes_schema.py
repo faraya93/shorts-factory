@@ -165,7 +165,32 @@ def validate_production(cfg: dict) -> list[str]:
                 errors.append(f"scene {sid}: engine_override may only be 'keyframes', got {override!r}")
             elif primary != "t2v":
                 errors.append(f"scene {sid}: engine_override keyframes is only allowed inside a t2v production")
+    errors += element_kind_errors(cfg)
     return errors
+
+
+VERB_FORM = re.compile(r"\b\w{3,}(ing|ando|iendo)\b", re.I)
+
+
+def element_kind_errors(cfg: dict) -> list[str]:
+    """Event elements (doctrine-production.md "Every element at hero standard", 2026-11-11): an element that is a happening (sparks, an arc, a splash)
+    declares kind "event" and, at script stage, before any reading, at least one verb-form alias readers write for it ("sparking", "arcing")."""
+    out = []
+    for sid, els in (cfg.get("scene_elements") or {}).items():
+        for el in els or []:
+            kind = el.get("kind", "object")
+            if kind not in ("object", "event"):
+                out.append(f"scene {sid}: element {el.get('id')!r} kind must be 'object' or 'event', got {kind!r}")
+            elif kind == "event" and not any(VERB_FORM.search(str(a)) for a in el.get("aliases") or []):
+                out.append(f"scene {sid}: event element {el.get('id')!r} needs a verb-form alias declared before any reading (e.g. 'sparking'), not only nouns")
+    return out
+
+
+def validate_folder(prod: Path) -> list[str]:
+    """scenes.json schema plus the script provenance stamp (factory/provenance.py), required from production PROVENANCE_FROM on."""
+    import provenance
+    cfg = json.loads((prod / "scenes.json").read_text(encoding="utf-8"))
+    return validate_production(cfg) + provenance.gate_errors(prod)
 
 
 def build_prompt(cfg: dict, scene: dict) -> str:
@@ -192,7 +217,6 @@ def audio_clause(cfg: dict, scene: dict) -> str:
 
 
 if __name__ == "__main__":
-    config = json.loads((Path(sys.argv[1]) / "scenes.json").read_text(encoding="utf-8"))
-    problems = validate_production(config)
+    problems = validate_folder(Path(sys.argv[1]).resolve())
     print("\n".join(f"  - {p}" for p in problems) if problems else "scenes.json: OK")
     sys.exit(1 if problems else 0)

@@ -10,7 +10,8 @@ Stability hardening 2026-11-09 (docs/current/reports/lens-decisions.md): a fix r
 one callback session after its render ends, exempt from the session cap; every unit has a budget (SF_UNIT_MAX_SESSIONS, SF_UNIT_MAX_HOURS of active time, usage-limit waits excluded) whose exhaustion halts the batch loudly.
 Accounting, brake and liveness 2026-11-11 (docs/current/reports/architecture-second-opinion-2026-11-11.md, block B1): every session's cost is recorded as a DELTA of the cumulative total_cost_usd per session id (never summed raw), with deduplicated API calls, first and peak context and cache reads;
 usage-limit polls are counted apart and are never sessions; reader (blind_read) runs and cost are summed from build/reader-ledger.jsonl; an emergency brake (SF_UNIT_MAX_USD, SF_UNIT_MAX_CALLS) ends a unit as "stopped", never as a halt;
-state.json carries the runner's pid, heartbeat and next-retry time under "_runner"; a returned or stopped unit has its own artefacts committed."""
+state.json carries the runner's pid, heartbeat and next-retry time under "_runner"; a returned or stopped unit has its own artefacts committed.
+Script provenance 2026-11-11 (block B2): a unit whose folder has no Opus creative-session stamp (factory/provenance.py) is REFUSED before any session and recorded under "_refused"; the batch moves on."""
 import argparse
 import fcntl
 import json
@@ -497,6 +498,13 @@ def run_unit(prod: Path, state: dict) -> str:
         prompt = FIX_PROMPT.format(prod=rel, k=st["fix_rounds"], n=FIX_ROUNDS) + text
 
 
+def provenance_errors(prod: Path) -> list[str]:
+    """The unit's script must carry an Opus creative-session stamp (factory/provenance.py); empty means it may start."""
+    sys.path.insert(0, str(ROOT / "factory"))
+    import provenance
+    return provenance.errors(prod)
+
+
 def run_queue(queue: list[str], state: dict) -> int:
     """Walks the queue in order; a replacement drawn by a returned unit joins it in the same run. Exit 0, or 3 when the batch halted."""
     state["_queue"] = list(dict.fromkeys(state.get("_queue", []) + queue))
@@ -518,6 +526,13 @@ def _run_queue(queue: list[str], state: dict, units: dict) -> int:
         prod = ROOT / rel
         if units.get(prod.name, {}).get("outcome") in ("verified", "returned", "stopped"):
             continue
+        bad = provenance_errors(prod)
+        if bad:                                                              # no Opus script on record: never start a session that would write one (doctrine "Who writes the script")
+            state.setdefault("_refused", {})[prod.name] = {"at": now(), "why": bad}
+            save(state)
+            log(f"REFUSED {rel}: {'; '.join(bad)}")
+            continue
+        state.get("_refused", {}).pop(prod.name, None)
         log(f"START {rel}")
         outcome = run_unit(prod, state)
         st = units[prod.name]
@@ -537,7 +552,7 @@ def _run_queue(queue: list[str], state: dict, units: dict) -> int:
                 log(f"QUEUED replacement {st['replacement']}")
                 save(state)
             else:
-                log(f"NO REPLACEMENT for {rel}: no eligible banked entry; refill due")
+                log(f"NO REPLACEMENT for {rel}: no developed standby is eligible; replacement pending a creative session")
     log("BATCH DONE")
     return 0
 

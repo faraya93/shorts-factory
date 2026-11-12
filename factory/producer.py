@@ -146,7 +146,8 @@ def main() -> int:
     cfg = json.loads((prod / "scenes.json").read_text())
 
     # schema gate: an incomplete or contradictory scenes.json aborts BEFORE any network call or spend
-    problems = validate_production(cfg)
+    import provenance
+    problems = validate_production(cfg) + provenance.gate_errors(prod.resolve())   # no spend on a script without an Opus creative-session stamp
     if not problems:  # only a valid schema can name routes; the producer implements t2v so far
         problems = [f"scene {s['id']}: engine {effective_engine(cfg, s)!r} is not implemented in the producer yet"
                     for s in cfg["scenes"] if effective_engine(cfg, s) != "t2v"]

@@ -130,7 +130,7 @@ def test_returned_sidecar_is_a_completed_unit_before_the_verifier():
         assert out == "returned" and st["p"]["replacement"] == "productions/x/099-y" and st["p"]["fix_rounds"] == 0, st
 
 
-def _queue(outcomes: dict, queue: list):
+def _queue(outcomes: dict, queue: list, stamped=lambda p: True):
     import run_productions as r
     calls = []
     def fake(prod, state):
@@ -139,21 +139,48 @@ def _queue(outcomes: dict, queue: list):
         state[prod.name] = {"status": o, "outcome": o, **({"replacement": "productions/c/900-new"} if o == "returned" else {})}
         return o
     with tempfile.TemporaryDirectory() as t:
-        old = r.OUT, r.run_unit, r.alert, r.commit_unit
+        old = r.OUT, r.run_unit, r.alert, r.commit_unit, r.provenance_errors
         r.OUT, r.run_unit, r.commit_unit = Path(t), fake, lambda *a: "stubbed"          # never let a queue test commit to the real repo
+        r.provenance_errors = lambda p: [] if stamped(p) else [f"{p.name}: no provenance.json"]
         r.alert = lambda *a: calls.append("ALERT") and None
         try:
-            rc = r.run_queue(queue, {})
+            state = {}
+            rc = r.run_queue(queue, state)
             halted = (Path(t) / "HALT.json").exists() and "ALERT" in calls
             calls[:] = [c for c in calls if c != "ALERT"]
         finally:
-            r.OUT, r.run_unit, r.alert, r.commit_unit = old
+            r.OUT, r.run_unit, r.alert, r.commit_unit, r.provenance_errors = old
+    _queue.state = state
     return rc, calls, halted
 
 
 def test_replacement_joins_the_queue_in_the_same_run():
     rc, calls, _ = _queue({"010-a": "returned", "011-b": "verified", "900-new": "verified"}, ["productions/c/010-a", "productions/c/011-b"])
     assert rc == 0 and calls == ["010-a", "011-b", "900-new"], calls
+
+
+def test_unit_without_an_opus_stamp_is_refused_and_the_batch_moves_on():
+    rc, calls, halted = _queue({"010-a": "verified", "011-b": "verified"}, ["productions/c/010-a", "productions/c/011-b"], stamped=lambda p: p.name != "010-a")
+    assert rc == 0 and calls == ["011-b"] and not halted, calls
+    assert "010-a" in _queue.state["_refused"] and "010-a" not in _queue.state
+
+
+def test_refusal_reads_the_real_stamp():
+    import run_productions as r
+    with tempfile.TemporaryDirectory() as t:
+        prod = Path(t) / "030-x"; prod.mkdir()
+        assert r.provenance_errors(prod)
+        (prod / "script.json").write_text("{}")
+        (prod / "provenance.json").write_text(json.dumps({"script_by": "creative-session", "model": "claude-opus-5-5", "record": "r", "script_sha256": "0" * 64}))
+        assert r.provenance_errors(prod) == []
+        (prod / "provenance.json").write_text(json.dumps({"script_by": "creative-session", "model": "claude-sonnet-5-5", "record": "r", "script_sha256": "0" * 64}))
+        assert r.provenance_errors(prod)
+
+
+def test_settings_deny_writing_the_provenance_stamp():
+    deny = json.loads((ROOT / "tools" / "runner-settings.json").read_text())["permissions"]["deny"]
+    for rule in ("Write(**/provenance.json)", "Edit(**/provenance.json)", "Bash(.venv/bin/python factory/provenance.py stamp:*)"):
+        assert rule in deny, rule
 
 
 def test_budget_halts_the_batch_like_infra():
@@ -208,32 +235,47 @@ BANK = """Rolling-window tags: 012 toilet / gross; 014 digestion / bodily; 016 t
 | Rank | Status | Hook | Family | Structure | Curiosity | Hero | Reshape | Theme | Main tension |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | drawn 017 2026-11-09 | "¿Qué pasaría si?" | whatif | fork | 10 | h | none | elevators | dangerous |
-| 2 | banked (fill 1) | "¿Por qué el inodoro hace ruido?" | objects | chain | 9 | h | none | toilet | gross |
-| 3 | banked (fill 1) | "¿Por qué un tenedor saca chispas en el microondas?" | objects | chain | 9 | h | none | microwave | dangerous |
+| 2 | standby 019 2026-11-11 | "¿Por qué el inodoro hace ruido?" | objects | chain | 9 | h | none | toilet | gross |
+| 3 | standby 020 2026-11-11 | "¿Por qué suena el hielo?" | objects | chain | 9 | h | none | ice | hidden |
+| 4 | standby 021 2026-11-11 | "¿Por qué un tenedor saca chispas en el microondas?" | objects | chain | 9 | h | none | microwave | dangerous |
+| 5 | banked (fill 1) | "¿Por qué pica el chile?" | body | chain | 9 | h | none | spice | bodily |
 """
 
 
-def test_return_topic_records_everything_and_draws_inside_balance():
-    sys.path.insert(0, str(ROOT / "tools"))
-    import new_production as np
+def _stamp(folder: Path) -> None:
+    (folder / "script.json").write_text("{}", encoding="utf-8")
+    (folder / "provenance.json").write_text(json.dumps({"script_by": "creative-session", "model": "claude-opus-5-5", "record": "r", "script_sha256": "0" * 64}), encoding="utf-8")
+
+
+def _return_fixture(t: Path, bank: str):
     import return_topic as rt
+    rt.BANK, rt.DECISIONS, rt.ROOT = t / "b.md", t / "l.md", t
+    rt.BANK.write_text(bank, encoding="utf-8"); rt.DECISIONS.write_text("", encoding="utf-8")
+    ch = t / "productions" / "c"; ch.mkdir(parents=True)
+    prod = ch / "014-gum"; prod.mkdir(); (prod / "notes.md").write_text("x", encoding="utf-8")
+    (ch / "INDEX.md").write_text("| 014 | gum | body | script | d | n |\n", encoding="utf-8")
+    return rt, ch, prod
+
+
+def test_return_topic_draws_a_stamped_standby_inside_balance_and_records_everything():
+    sys.path.insert(0, str(ROOT / "tools"))
+    old = None
+    import return_topic as rt
+    old = rt.BANK, rt.DECISIONS, rt.ROOT
     with tempfile.TemporaryDirectory() as t:
         t = Path(t)
-        rt.BANK, rt.DECISIONS, np_create = t / "b.md", t / "l.md", np.create
-        rt.BANK.write_text(BANK, encoding="utf-8"); rt.DECISIONS.write_text("", encoding="utf-8")
-        ch = t / "productions" / "c"; ch.mkdir(parents=True)
-        prod = ch / "014-gum"; prod.mkdir(); (prod / "notes.md").write_text("x", encoding="utf-8")
-        (ch / "INDEX.md").write_text("| 014 | gum | body | script | d | n |\n", encoding="utf-8")
-        rt.ROOT = t
-        def fake(channel, slug, family=""):
-            p = ch / f"018-{slug}"; p.mkdir(); return p
-        np.create = fake
         try:
+            rt, ch, prod = _return_fixture(t, BANK)
+            for n in ("019-toilet", "020-ice", "021-fork"):
+                (ch / n).mkdir()
+            _stamp(ch / "019-toilet"); _stamp(ch / "021-fork")          # 020 has a folder but no stamp: never drawn
             rec = rt.return_topic(prod, "rungs 1-2 failed, 0 of 3 named it")
-            assert rec["replacement"] == "productions/c/018-por-que-un-tenedor-saca-chispas-en-el-microondas", rec     # toilet skipped: 012 and 016-style cap
-            assert rec["refill_due"] and rec["undrawn"] == 1
+            assert rec["replacement"] == "productions/c/021-fork", rec     # toilet skipped by balance, ice skipped for no stamp
+            assert rec["replacement_pending"] is None and rec["standby"] == 2 and rec["undrawn"] == 1 and rec["refill_due"]
             b = rt.BANK.read_text(encoding="utf-8")
-            assert "drawn 018" in b and "014 digestion / bodily (returned" in b
+            assert "drawn 021 " in b and "replacement for returned 014" in b and "014 digestion / bodily (returned" in b
+            assert "banked (fill 1)" in b, "a raw banked entry is never drawn by a return"
+            assert sorted(d.name for d in ch.iterdir() if d.is_dir()) == ["014-gum", "019-toilet", "020-ice", "021-fork"], "no folder is created"
             assert "RETURNED" in (prod / "notes.md").read_text(encoding="utf-8") and "RETURNED" in (ch / "INDEX.md").read_text(encoding="utf-8")
             assert "014 RETURNED" in rt.DECISIONS.read_text(encoding="utf-8") and json.loads((prod / "returned.json").read_text())["replacement"]
             try:
@@ -242,7 +284,23 @@ def test_return_topic_records_everything_and_draws_inside_balance():
             except SystemExit:
                 pass
         finally:
-            np.create = np_create
+            rt.BANK, rt.DECISIONS, rt.ROOT = old
+
+
+def test_return_with_no_standby_creates_no_folder_and_waits_for_a_creative_session():
+    import return_topic as rt
+    old = rt.BANK, rt.DECISIONS, rt.ROOT
+    with tempfile.TemporaryDirectory() as t:
+        t = Path(t)
+        try:
+            rt, ch, prod = _return_fixture(t, BANK.replace("standby 020", "banked (fill 1) 020").replace("standby 021", "banked (fill 1) 021"))
+            rec = rt.return_topic(prod, "ladder exhausted")
+            assert rec["replacement"] is None and rec["replacement_pending"] == "creative session", rec
+            assert [d.name for d in ch.iterdir() if d.is_dir()] == ["014-gum"]
+            assert "pending a creative session" in (prod / "notes.md").read_text(encoding="utf-8")
+            assert "replacement pending a creative session" in rt.DECISIONS.read_text(encoding="utf-8")
+        finally:
+            rt.BANK, rt.DECISIONS, rt.ROOT = old
 
 
 def test_return_with_no_eligible_entry_records_refill():
@@ -432,6 +490,7 @@ class _Env:
         subprocess.run(["git", "config", "user.email", "t@t"], cwd=t); subprocess.run(["git", "config", "user.name", "t"], cwd=t)
         (t / "README").write_text("x"); subprocess.run(["git", "add", "-A"], cwd=t); subprocess.run(["git", "commit", "-qm", "init"], cwd=t, check=True)
         self.prod = t / "productions" / "c" / "015-x"; self.prod.mkdir(parents=True)
+        (self.prod / "script.json").write_text("{}"); (self.prod / "provenance.json").write_text(json.dumps({"script_by": "creative-session", "model": "claude-opus-5-5", "record": "test", "script_sha256": "0" * 64}))
         (t / "plan.json").write_text(json.dumps(self.plan))
         bin_ = t / "claude"; bin_.write_text(ACCT_STUB.replace("{py}", sys.executable)); bin_.chmod(0o755)
         self.saved = {k: getattr(r, k) for k in ("OUT", "ROOT", "CLAUDE", "POLL_LIMIT_S", "wait_for_render", "verify", "alert", "UNIT_MAX_SESSIONS", "UNIT_MAX_USD", "UNIT_MAX_CALLS", "HEARTBEAT_S")}

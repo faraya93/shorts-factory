@@ -176,6 +176,40 @@ def test_effective_engine():
     assert effective_engine(VALID, {"engine_override": "keyframes"}) == "keyframes"
 
 
+def test_event_elements_need_a_verb_form_alias():
+    cfg = copy.deepcopy(VALID)
+    cfg["scene_elements"] = {"4": [{"id": "sparks", "name": "sparks", "kind": "event", "aliases": ["spark", "electric arc", "chispa"]}]}
+    assert any("verb-form alias" in e for e in validate_production(cfg))
+    cfg["scene_elements"]["4"][0]["aliases"].append("sparking")
+    assert not any("verb-form" in e for e in validate_production(cfg))
+    cfg["scene_elements"]["4"][0]["kind"] = "thing"
+    assert any("kind must be" in e for e in validate_production(cfg))
+    cfg["scene_elements"]["4"][0].pop("kind")
+    assert not any("kind" in e or "verb-form" in e for e in validate_production(cfg)), "objects (the default) need no verb form"
+
+
+def test_provenance_stamp_is_required_from_025_and_only_opus_can_stamp():
+    import json
+    import tempfile
+    import provenance
+    with tempfile.TemporaryDirectory() as t:
+        old, new = Path(t) / "024-old", Path(t) / "025-new"
+        for d in (old, new):
+            d.mkdir(); (d / "script.json").write_text("{}"); (d / "scenes.json").write_text(json.dumps(VALID))
+        assert provenance.gate_errors(old) == [], "productions before 025 are not gated"
+        assert provenance.gate_errors(new) and scenes_schema.validate_folder(new)
+        try:
+            provenance.stamp(new, "claude-sonnet-5-5", "r")
+            raise AssertionError("a Sonnet stamp was accepted")
+        except SystemExit:
+            pass
+        rec = provenance.stamp(new, "claude-opus-5-5", "docs/current/reports/x.md")
+        assert rec["script_by"] == "creative-session" and len(rec["script_sha256"]) == 64
+        assert provenance.gate_errors(new) == [] and scenes_schema.validate_folder(new) == []
+        again = provenance.stamp(new, "claude-opus-5-5", "second creative session")
+        assert again["history"][0]["record"] == "docs/current/reports/x.md", "a re-stamp keeps the earlier stamp"
+
+
 if __name__ == "__main__":
     tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
     for name, fn in tests:

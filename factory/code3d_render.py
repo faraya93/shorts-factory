@@ -42,6 +42,11 @@ def main() -> int:
     cfg = json.loads((prod / "scenes.json").read_text(encoding="utf-8"))
     prefix = cfg.get("scene_script_prefix", "scene")
     if args.mode == "final" and not args.encode_only:                                  # HARD BLOCK (owner 2026-10-28): no full render without a fresh passing gate record
+        import provenance
+        bad = provenance.gate_errors(prod)                                            # and none for a script without an Opus creative-session stamp (2026-11-11)
+        if bad:
+            print("RENDER BLOCKED by script provenance: " + "; ".join(bad))
+            return 2
         import gate
         ok, msg = gate.check(prod, n)
         if not ok:

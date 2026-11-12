@@ -4,6 +4,7 @@
       "Bash(.venv/bin/python:*)", "Bash(SF_ALLOW_GUI=1 .venv/bin/python:*)", "Bash(tools/*)",
       "Bash(git add:*)", "Bash(git commit:*)", "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git mv:*)", "Bash(git show:*)", "Bash(git ls-files:*)", "Bash(git rev-parse:*)", "Bash(git push origin main:*)",
       "Bash(ls:*)", "Bash(cat:*)", "Bash(head:*)", "Bash(tail:*)", "Bash(wc:*)", "Bash(grep:*)", "Bash(find:*)", "Bash(sed:*)", "Bash(awk:*)", "Bash(cut:*)", "Bash(sort:*)", "Bash(uniq:*)", "Bash(tr:*)", "Bash(stat:*)", "Bash(du:*)", "Bash(ps:*)", "Bash(mkdir:*)", "Bash(cp:*)", "Bash(mv:*)", "Bash(ffmpeg:*)", "Bash(ffprobe:*)", "Bash(sleep:*)", "Bash(echo:*)", "Bash(date:*)", "Bash(pgrep:*)", "Bash(cd:*)"],
-    "deny": ["Bash(.venv/bin/python factory/producer.py:*)", "Bash(git push --force:*)", "Bash(git reset --hard:*)", "Bash(rm -rf:*)", "mcp__blender__generate_3d", "Bash(curl:*)"]
+    "deny": ["Bash(.venv/bin/python factory/producer.py:*)", "Bash(git push --force:*)", "Bash(git reset --hard:*)", "Bash(rm -rf:*)", "mcp__blender__generate_3d", "Bash(curl:*)",
+      "Write(**/provenance.json)", "Edit(**/provenance.json)", "Bash(.venv/bin/python factory/provenance.py stamp:*)"]
   }
 }
