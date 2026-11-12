@@ -64,6 +64,37 @@ def test_new_production_takes_the_next_number_and_never_reuses_one():
         raise AssertionError("an unknown channel must be rejected")
 
 
+CLAUDE_MD_BUDGET = 22_000          # bytes; CLAUDE.md "How to read doctrine" (block B2, 2026-11-11): it is in every call's context
+DOCTRINE = ROOT / "docs" / "current" / "specs"
+HOMES = ("doctrine-topics-and-scripts.md", "doctrine-format-and-look.md", "doctrine-production.md", "doctrine-pipeline.md")
+
+
+def test_claude_md_stays_within_its_size_budget():
+    size = len((ROOT / "CLAUDE.md").read_bytes())
+    assert size <= CLAUDE_MD_BUDGET, f"CLAUDE.md is {size} bytes, over its {CLAUDE_MD_BUDGET}-byte budget: move rule text to its canonical home and keep a summary"
+
+
+def test_every_home_pointer_in_claude_md_resolves_to_one_section():
+    import doc_section
+    text = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    pointers = re.findall(r"home: (doctrine-[a-z-]+\.md) \"([^\"]+)\"", text)
+    assert len(pointers) >= 15, pointers
+    for fn, sec in pointers:
+        body = (DOCTRINE / fn).read_text(encoding="utf-8")
+        got = doc_section.section(body, sec)
+        assert got and got.startswith("## "), (fn, sec)
+    for fn in HOMES:
+        assert fn in text and (DOCTRINE / fn).exists(), fn
+
+
+def test_doc_section_reads_headings_and_bold_labels():
+    import doc_section
+    doc = "# T\n\n## Alpha (x)\nbody a\n### Sub\nsub\n## Beta\n- **Drawing (y):** d1\n  cont\n- **Who writes:** w\n"
+    assert doc_section.section(doc, "alpha") == "## Alpha (x)\nbody a\n### Sub\nsub\n"
+    assert doc_section.section(doc, "Drawing") == "- **Drawing (y):** d1\n  cont\n"
+    assert doc_section.section(doc, "nothing") is None
+
+
 if __name__ == "__main__":
     tests = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
     for name, fn in tests:

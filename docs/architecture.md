@@ -1,8 +1,8 @@
 # Architecture and repository organization
 
 Written 2026-10-31 with the `architecture-designer` skill (user level, `~/.claude/skills/`). The model in Part A is the owner's; this file records it, the
-mechanisms that implement it, and every deviation. Part B is the repository organization convention (also summarised in CLAUDE.md, which wins on conflict
-only for rules that CLAUDE.md states explicitly).
+mechanisms that implement it, and every deviation. Part B is the repository organization convention (also stated in the standing doctrine, CLAUDE.md "Repository organization"
+with its home `docs/current/specs/doctrine-pipeline.md` since 2026-11-11, which wins on conflict only for rules it states explicitly).
 
 ## Part A: the model
 
