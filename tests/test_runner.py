@@ -139,15 +139,15 @@ def _queue(outcomes: dict, queue: list):
         state[prod.name] = {"status": o, "outcome": o, **({"replacement": "productions/c/900-new"} if o == "returned" else {})}
         return o
     with tempfile.TemporaryDirectory() as t:
-        old = r.OUT, r.run_unit, r.alert
-        r.OUT, r.run_unit = Path(t), fake
+        old = r.OUT, r.run_unit, r.alert, r.commit_unit
+        r.OUT, r.run_unit, r.commit_unit = Path(t), fake, lambda *a: "stubbed"          # never let a queue test commit to the real repo
         r.alert = lambda *a: calls.append("ALERT") and None
         try:
             rc = r.run_queue(queue, {})
             halted = (Path(t) / "HALT.json").exists() and "ALERT" in calls
             calls[:] = [c for c in calls if c != "ALERT"]
         finally:
-            r.OUT, r.run_unit, r.alert = old
+            r.OUT, r.run_unit, r.alert, r.commit_unit = old
     return rc, calls, halted
 
 
@@ -570,6 +570,17 @@ def test_return_path_commits_the_units_own_artefacts_only():
         assert "productions/c/015-x/notes.md" in log and "productions/c/015-x/returned.json" in log and "code3d/lib/new_rig.py" in log and "code3d/scenes/new_01.py" in log, log
         status = subprocess.run(["git", "status", "--porcelain"], cwd=t, capture_output=True, text=True).stdout
         assert "old_rig.py" in status and "README" in status and "new_rig.py" not in status and "015-x" not in status, status
+
+
+def test_commit_without_a_start_snapshot_never_takes_other_peoples_files():
+    """Regression: a unit state with no untracked_before (a fake unit, an old state file) once committed every untracked rig in the repo. Now the code trees are left alone."""
+    with _Env([{"events": []}]) as e:
+        (e.t / "code3d" / "lib").mkdir(parents=True)
+        (e.t / "code3d" / "lib" / "someone_elses_rig.py").write_text("x")
+        (e.prod / "notes.md").write_text("n")
+        out = e.r.commit_unit(e.prod, {"status": "s"}, "stopped")
+        files = subprocess.run(["git", "show", "--name-only", "--format=", "HEAD"], cwd=e.t, capture_output=True, text=True).stdout
+        assert out.startswith("committed") and "015-x/notes.md" in files and "someone_elses_rig" not in files, (out, files)
 
 
 def test_return_path_commits_a_stopped_unit_and_never_fails_the_runner():

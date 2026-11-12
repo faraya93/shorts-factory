@@ -329,7 +329,9 @@ def commit_unit(prod: Path, st: dict, outcome: str) -> str:
     (untracked now, not at its first session). Only those paths are committed (a pathspec commit), never other staged or modified work. No push. A failure is logged, never raised."""
     try:
         rel = str(prod.relative_to(ROOT))
-        mine = sorted((untracked(list(CODE_TREES)) - set(st.get("untracked_before", []))) | untracked([rel]))
+        before = st.get("untracked_before")                                  # no start snapshot = no way to tell this unit's files from anyone else's: then the code trees are left alone
+        created = untracked(list(CODE_TREES)) - set(before) if before is not None else set()
+        mine = sorted(created | untracked([rel]))
         tracked_changes = [l[3:] for l in git("status", "--porcelain", "--", rel).stdout.splitlines()]
         paths = sorted(set(mine) | set(tracked_changes))
         if not paths:
