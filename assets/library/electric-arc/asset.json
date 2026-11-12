@@ -12,7 +12,7 @@
   "family": "objects",
   "created": "2026-11-10",
   "status": "in_progress",
-  "route": null,
+  "route": "code-primitive",
   "brief": {
     "must_read_as": "an electric spark or lightning bolt",
     "seen_at": "small arc in macro to a full bolt across the frame",
@@ -22,9 +22,8 @@
       "flicker over time"
     ],
     "states": [
-      "small arc between two points",
-      "single spark",
-      "full branching bolt"
+      "full branching bolt",
+      "small arc between two points"
     ],
     "style_notes": "Emissive with bloom, in the channel accent. Stops at the spark: no fire, the fire route is unmeasured.",
     "commission": {
@@ -48,17 +47,17 @@
     "retrieved": null
   },
   "licence": {
-    "id": null,
+    "id": "own-work",
     "url": null,
     "attribution": null,
-    "note": null,
+    "note": "built in this factory (arc_rig)",
     "decision": null
   },
   "files": {
-    "blend": "electric-arc.blend",
+    "blend": null,
     "sha256": null,
     "collection": "asset",
-    "rig_module": null,
+    "rig_module": "arc_rig",
     "build_script": null
   },
   "real_size_m": null,
@@ -68,9 +67,19 @@
       "date": null
     },
     "blind_naming": {
-      "pass": null,
-      "date": null,
-      "guesses": []
+      "pass": false,
+      "date": "2026-11-11",
+      "guesses": [
+        "electric arc between two metal rods (alternatives: lightning bolt; glowing jointed stick figure)",
+        "lightning bolt",
+        "lightning bolt (electric arc crackling between two metal rods)"
+      ],
+      "confidences": [
+        35,
+        60,
+        60
+      ],
+      "reader_cost_usd": 0.007298
     },
     "fidelity": null
   },

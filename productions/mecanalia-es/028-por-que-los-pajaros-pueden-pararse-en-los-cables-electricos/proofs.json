@@ -42,7 +42,11 @@
      "ready": false,
      "errors": []
     }
-   ]
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_21.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "W1",
@@ -53,8 +57,20 @@
    "build": "the street environment.",
    "bar": "as the proof's own text says",
    "on_fail": "above 15 s/frame: cost_restage on paper (fewer poles, sky as a gradient world shader) before modelling more. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "seconds_per_frame": 6.8,
+     "render_cost_class": "glass_water_sss",
+     "pass": true,
+     "note": "scene-2 frame (proof_52) at final profile, 75%, wall time incl. Blender start (upper bound), tools/proof_still.py --final"
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_52.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P1",
@@ -78,8 +94,32 @@
    "build": "bird (sealed perched state) + wires + poles.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: closer, the bird a quarter of the frame, one pole and its crossarm behind. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": true,
+     "guesses": [
+      "stylized 3D pigeon perched on a rail",
+      "a pigeon perched on a rail",
+      "pigeon perched on a rail"
+     ],
+     "confidences": [
+      85,
+      90,
+      92
+     ],
+     "mean_confidence": 89.0,
+     "stills": [
+      "build/proofs/P1/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.004324
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_51.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P2",
@@ -105,8 +145,32 @@
    "build": "wires + beads.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: pulses brighter with motion streaks, the jacket opaque grey with a cut-away window showing the copper and the pulses. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "clear glass-tube railing on a wooden frame",
+      "glass-tube railing on wooden posts",
+      "overhead pipe rack or glass-tube railing on wooden posts"
+     ],
+     "confidences": [
+      30,
+      30,
+      30
+     ],
+     "mean_confidence": 30.0,
+     "stills": [
+      "build/proofs/P2/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.005186
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_52.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P3",
@@ -127,8 +191,32 @@
    "build": "P1 + real_kit.tube dotted path.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: no change to the bird; the path drawn outside the body as an arching arrow. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "stylized 3D gray pigeon perched on a bar",
+      "stylized 3D pigeon perched on a bar",
+      "cartoon pigeon perched on a rail; alternatives: stylized duck, seagull"
+     ],
+     "confidences": [
+      85,
+      85,
+      85
+     ],
+     "mean_confidence": 85.0,
+     "stills": [
+      "build/proofs/P3/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.004886
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_53.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P4",
@@ -151,8 +239,32 @@
    "build": "P1 + P2.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: the bird in the background, pulses large in the foreground. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "a cartoon pigeon or dove standing on a glass rail",
+      "cartoon pigeon or seagull standing on a glass rail",
+      "a cartoon 3D pigeon standing on a glass rail"
+     ],
+     "confidences": [
+      90,
+      90,
+      90
+     ],
+     "mean_confidence": 90.0,
+     "stills": [
+      "build/proofs/P4/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.004165
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_54.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P5",
@@ -178,8 +290,32 @@
    "build": "bird (sealed spread state) + pole + red tube.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: darker plumage recolour and hooked-beak silhouette from the side (a raptor cue); if the bird asset cannot read as large, rung 2. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "stylized 3D pigeon perched on a power line",
+      "a cartoon pigeon with outstretched wings perched on a power line",
+      "cartoon pigeon perched on a power line"
+     ],
+     "confidences": [
+      93,
+      93,
+      93
+     ],
+     "mean_confidence": 93.0,
+     "stills": [
+      "build/proofs/P5/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.004016
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_55.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   }
  ]
 }

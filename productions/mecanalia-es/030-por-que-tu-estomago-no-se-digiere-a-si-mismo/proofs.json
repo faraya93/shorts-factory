@@ -51,7 +51,11 @@
      ],
      "reader_cost_usd": 0.005168
     }
-   ]
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_41.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P2",
@@ -95,7 +99,11 @@
      ],
      "reader_cost_usd": 0.005361
     }
-   ]
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_42.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P3",
@@ -141,7 +149,11 @@
      ],
      "reader_cost_usd": 0.005006
     }
-   ]
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_43.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P4",
@@ -186,7 +198,11 @@
      ],
      "reader_cost_usd": 0.005138
     }
-   ]
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_44.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   }
  ]
 }

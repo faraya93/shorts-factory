@@ -1,0 +1,21 @@
+"""Block B5 proof 028-P3 (a still): the bird on the wire with a dotted accent path up one leg, through the body and down the other."""
+import math
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "lib"))
+import bird_rig as br  # noqa: E402
+import proof_kit as pk  # noqa: E402
+import real_kit as rk  # noqa: E402
+import setpiece as sp  # noqa: E402
+import wire_rig as wr  # noqa: E402
+
+S = sp.Shot(30, floor_z=wr.GROUND_Z)
+p = S.p or {}
+m = wr.Mats(pk.accent(), p.get("error", "#7A0019"))
+wr.street(m, -90.0, 270.0, 90.0)
+br.Bird(loc=(0.0, 0.0, 0.0), scale=1.0)
+wr.dotted(m, [(-1.0, 0.9, 0.0), (0.2, 0.9, 3.0), (0.2, 0.0, 3.4), (0.2, -0.9, 3.0), (-1.0, -0.9, 0.0)], n=26)
+S.cam([(0.0, (0.0, 0.0, 2.5), 40.0, -4.0, -8.0), (S.T, (0.0, 0.0, 2.5), 40.0, -4.0, -8.0)])
+rk.softboxes(0.7, centre=(0, -60, 80))
+S.go()
