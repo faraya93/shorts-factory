@@ -56,8 +56,9 @@ echo '{{"type":"result","is_error":false,"result":"ok","session_id":"S1","num_tu
 """
         out, st = _harness(t, stub, True)
         assert out == "verified", st
-        args = (t / "args").read_text().splitlines()
-        assert "--resume S1" not in args[0] and "--resume S1" in args[1], args
+        text = (t / "args").read_text()                    # the appended procedure text is multi-line, so the lines are not one-per-launch: the first launch is the first "-p"
+        first, second = text.split("-p ", 2)[1], text.split("-p ", 2)[2]
+        assert text.count("--resume S1") == 1 and "--resume S1" not in first and "--resume S1" in second, text[-300:]
 
 
 def test_production_talk_about_limits_is_not_a_limit():
@@ -493,7 +494,7 @@ class _Env:
         (self.prod / "script.json").write_text("{}"); (self.prod / "provenance.json").write_text(json.dumps({"script_by": "creative-session", "model": "claude-opus-5-5", "record": "test", "script_sha256": "0" * 64}))
         (t / "plan.json").write_text(json.dumps(self.plan))
         bin_ = t / "claude"; bin_.write_text(ACCT_STUB.replace("{py}", sys.executable)); bin_.chmod(0o755)
-        self.saved = {k: getattr(r, k) for k in ("OUT", "ROOT", "CLAUDE", "POLL_LIMIT_S", "wait_for_render", "verify", "alert", "UNIT_MAX_SESSIONS", "UNIT_MAX_USD", "UNIT_MAX_CALLS", "HEARTBEAT_S")}
+        self.saved = {k: getattr(r, k) for k in ("OUT", "ROOT", "CLAUDE", "POLL_LIMIT_S", "wait_for_render", "verify", "alert", "UNIT_MAX_SESSIONS", "UNIT_MAX_USD", "UNIT_MAX_CALLS", "HEARTBEAT_S", "package_steps", "CTX_CAP", "RESUME_MAX_CTX", "FIX_ROUNDS")}
         self.env = {k: os.environ.get(k) for k in ("SF_STUB_PLAN", "SF_STUB_ARGS", "SF_STUB_ROOT")}
         os.environ.update(SF_STUB_PLAN=str(t / "plan.json"), SF_STUB_ARGS=str(t / "args"), SF_STUB_ROOT=str(self.prod))
         r.OUT, r.ROOT, r.CLAUDE, r.POLL_LIMIT_S, r.alert = t / "out", t, str(bin_), 0, lambda *a: None
@@ -677,6 +678,110 @@ def test_reader_cost_is_recorded_in_the_gate_record_and_summed_per_unit():
         assert st["acct"]["reader_runs"] == 6 and st["acct"]["cost_usd"] == 1.0 and st["acct"]["limit_polls"] == 1
     src = (ROOT / "factory" / "asset_library.py").read_text()
     assert src.count("reader_cost_usd") >= 3 and "reader_cost=cost" in (ROOT / "tools" / "blind_read.py").read_text()
+
+
+# ---- block B3 (2026-11-11): context cap and handoff, fresh callback, callback as code, stamp integrity -------------------
+def _args(e):
+    return [json.loads(l) for l in (e.t / "args").read_text().splitlines()]
+
+
+def _prompt(a):
+    return a[a.index("-p") + 1]
+
+
+def test_session_that_reached_the_context_cap_is_continued_by_a_fresh_session_from_its_checkpoint():
+    """The hook closes a session at SF_CTX_CAP down to a checkpoint write; the runner never --resumes it (a resume re-reads the whole context)."""
+    plan = [{"events": _asst("m1", 70000) + _asst("m2", 205000, 70000) + [_res(5.0)], "write": {"a": "1", "build/checkpoint.md": "STAGE 7: next step is the gate for scene 4"}},
+            {"events": _asst("m3", 60000) + [_res(1.0)], "write": {"done": "1"}}]
+    with _Env(plan, CTX_CAP=200000) as e:
+        st = {}
+        out = e.r.run_unit(e.prod, st)
+        a = _args(e)
+        assert out == "verified" and len(a) == 2, (out, st)
+        assert "--resume" not in a[1] and "FRESH session" in _prompt(a[1]) and "STAGE 7: next step" in _prompt(a[1]), _prompt(a[1])[:300]
+        assert st[e.prod.name]["handoffs"] == 1
+
+
+def test_cap_without_a_checkpoint_resumes_as_before_and_below_the_cap_nothing_changes():
+    plan = [{"events": _asst("m1", 205000) + [_res(5.0)], "write": {"a": "1"}}, {"events": _asst("m3", 60000) + [_res(1.0)], "write": {"done": "1"}}]
+    with _Env(plan, CTX_CAP=200000) as e:
+        e.r.run_unit(e.prod, {})
+        assert "--resume" in _args(e)[1]
+    plan = [{"events": _asst("m1", 150000) + [_res(5.0)], "write": {"a": "1", "build/checkpoint.md": "cp"}}, {"events": _asst("m3", 60000) + [_res(1.0)], "write": {"done": "1"}}]
+    with _Env(plan, CTX_CAP=200000) as e:
+        e.r.run_unit(e.prod, {})
+        assert "--resume" in _args(e)[1] and "FRESH" not in _prompt(_args(e)[1])
+
+
+def test_checkpoint_rewrites_are_not_progress():
+    """Like notes.md: a session that only rewrites its checkpoint has built nothing, so it is charged a fix round."""
+    plan = [{"events": _asst(f"m{i}", 205000) + [_res(5.0)], "write": {"build/checkpoint.md": f"v{i}"}} for i in range(3)]
+    with _Env(plan, CTX_CAP=200000) as e:
+        e.r.FIX_ROUNDS = 1
+        st = {}
+        out = e.r.run_unit(e.prod, st)
+        assert out == "stopped" and "no progress" in st[e.prod.name]["status"], st
+
+
+def test_usage_limit_resume_is_fresh_only_when_the_context_was_big_and_a_checkpoint_exists():
+    big = [{"events": _asst("m1", 260000) + [_res(4.5, limited=True, turns=9)], "write": {"a": "1", "build/checkpoint.md": "CP-BIG"}, "exit1": True},
+           {"events": _asst("m3", 60000) + [_res(1.0)], "write": {"done": "1"}}]
+    with _Env(big, CTX_CAP=0) as e:
+        e.r.run_unit(e.prod, {})
+        a = _args(e)
+        assert "--resume" not in a[1] and "CP-BIG" in _prompt(a[1]) and "usage limit" in _prompt(a[1]), a[1]
+    small = [{"events": _asst("m1", 90000) + [_res(4.5, limited=True, turns=9)], "write": {"a": "1", "build/checkpoint.md": "CP"}, "exit1": True},
+             {"events": _asst("m3", 60000) + [_res(1.0)], "write": {"done": "1"}}]
+    with _Env(small, CTX_CAP=0) as e:
+        e.r.run_unit(e.prod, {})
+        assert "--resume" in _args(e)[1] and "has reset" in _prompt(_args(e)[1])
+
+
+QUEUE = {"build/queued.json": json.dumps({"pid": 0, "at": "q1"})}
+
+
+def test_callback_is_a_fresh_session_and_the_runner_builds_the_package_first():
+    """Package built and verifier green by code: the fresh session only writes the report. When the code steps fail, the fresh session gets the failure and the full job."""
+    calls = []
+    with _Env([{"events": _asst("m1", 120000) + [_res(5.0)], "write": QUEUE}, {"events": _asst("m2", 30000) + [_res(0.4)], "write": {"report": "1"}}], verify=lambda p: (True, "PASS")) as e:
+        e.r.package_steps = lambda prod: (calls.append(prod.name) or True, "")
+        st = {}
+        out = e.r.run_unit(e.prod, st)
+        a = _args(e)
+        assert out == "verified" and calls == ["015-x"] and len(a) == 2, (out, st)
+        assert "--resume" not in a[1] and "only produce skill step 12" in _prompt(a[1]) and "re-run the verifier" in _prompt(a[1]), _prompt(a[1])[:200]
+    with _Env([{"events": _asst("m1", 120000) + [_res(5.0)], "write": QUEUE}, {"events": _asst("m2", 30000) + [_res(0.4)], "write": {"done": "1"}}]) as e:
+        e.r.package_steps = lambda prod: (False, "publish_package build failed: no Publish package section")
+        out = e.r.run_unit(e.prod, {})
+        a = _args(e)
+        assert out == "verified" and "--resume" not in a[1] and "no Publish package section" in _prompt(a[1]) and "publish_package.py build" in _prompt(a[1]), _prompt(a[1])[:300]
+
+
+def test_package_steps_build_and_check_with_the_real_tools():
+    import run_productions as r
+    with tempfile.TemporaryDirectory() as t:
+        ok, text = r.package_steps(Path(t))
+        assert not ok and "publish_package build failed" in text
+
+
+def test_a_changed_stamp_halts_the_batch():
+    """The stamp does not rest on permission rules or the hook alone: the runner hashes it around every session."""
+    forged = json.dumps({"script_by": "creative-session", "model": "claude-opus-5-5", "record": "forged", "script_sha256": "1" * 64})
+    with _Env([{"events": _asst("m1", 70000) + [_res(2.0)], "write": {"provenance.json": forged, "a": "1"}}]) as e:
+        st = {}
+        out = e.r.run_unit(e.prod, st)
+        assert out == "infra" and "provenance.json changed" in st[e.prod.name]["status"], st
+    with _Env([{"events": _asst("m1", 70000) + [_res(2.0)], "write": {"done": "1"}}]) as e:
+        assert e.r.run_unit(e.prod, {}) == "verified"
+
+
+def test_runner_sessions_carry_the_cap_and_the_tools_commit_and_say_how_to_orient():
+    import run_productions as r
+    env = r.session_env()
+    assert env["SF_CTX_CAP"] == str(r.CTX_CAP) and len(env.get("SF_TOOLS_REV", "")) == 40
+    for needle in ("tools/status.py", "tools/iterate.py", "build/checkpoint.md"):
+        assert needle in r.STANDING
+    assert "--max-turns" not in SRC.split("def session_cmd")[1].split("def ")[0]
 
 
 if __name__ == "__main__":

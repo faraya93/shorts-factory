@@ -11,6 +11,10 @@ one callback session after its render ends, exempt from the session cap; every u
 Accounting, brake and liveness 2026-11-11 (docs/current/reports/architecture-second-opinion-2026-11-11.md, block B1): every session's cost is recorded as a DELTA of the cumulative total_cost_usd per session id (never summed raw), with deduplicated API calls, first and peak context and cache reads;
 usage-limit polls are counted apart and are never sessions; reader (blind_read) runs and cost are summed from build/reader-ledger.jsonl; an emergency brake (SF_UNIT_MAX_USD, SF_UNIT_MAX_CALLS) ends a unit as "stopped", never as a halt;
 state.json carries the runner's pid, heartbeat and next-retry time under "_runner"; a returned or stopped unit has its own artefacts committed.
+Context cap, handoff and callback as code 2026-11-11 (block B3): the hook (tools/hook_blender_guard.py) reads SF_CTX_CAP and, once a session's context passes it, denies every tool but writing
+build/checkpoint.md; a session that reached the cap is continued by a FRESH session briefed from that checkpoint (never --resume: a resume re-reads the whole context, 021-5 re-wrote 326k); a usage-limit
+resume is fresh too when the last context was over SF_RESUME_MAX_CTX and a checkpoint exists. The post-render callback is a fresh session, and the runner itself builds and checks the publish package first; when
+that and the verifier pass, the session only writes the report. The runner re-hashes provenance.json around every session: a changed stamp halts the batch (the stamp does not rest on permission rules alone).
 Script provenance 2026-11-11 (block B2): a unit whose folder has no Opus creative-session stamp (factory/provenance.py) is REFUSED before any session and recorded under "_refused"; the batch moves on."""
 import argparse
 import fcntl
@@ -36,6 +40,11 @@ UNIT_MAX_SESSIONS = int(os.environ.get("SF_UNIT_MAX_SESSIONS", "12"))  # per uni
 UNIT_MAX_HOURS = float(os.environ.get("SF_UNIT_MAX_HOURS", "14"))     # per unit, active time: sessions + render waits, usage-limit waits excluded
 UNIT_MAX_USD = float(os.environ.get("SF_UNIT_MAX_USD", "22.00"))      # emergency brake: summed delta notional per unit (about 2x the largest measured unit, 019 at US$11.43)
 UNIT_MAX_CALLS = int(os.environ.get("SF_UNIT_MAX_CALLS", "500"))      # emergency brake: cumulative deduplicated main-session API calls per unit (019 made about 244)
+CTX_CAP = int(os.environ.get("SF_CTX_CAP", "200000"))               # context tokens at which the hook closes the session down to a checkpoint write (about the cost knee: cost grows with context x calls); 0 disables
+RESUME_MAX_CTX = int(os.environ.get("SF_RESUME_MAX_CTX", "150000"))  # a --resume after a usage limit only when the last context was at most this; above it a fresh session from the checkpoint is cheaper
+ISOLATE = os.environ.get("SF_ISOLATE", "1") != "0"                  # startup isolation (P13); SF_ISOLATE=0 is the way back if a measurement ever shows it hurting
+DISALLOWED_TOOLS = ["Artifact", "ArtifactComments", "ArtifactData", "CronCreate", "CronDelete", "CronList", "PushNotification", "RemoteTrigger", "ScheduleWakeup", "EnterPlanMode", "ExitPlanMode", "EnterWorktree",
+                    "ExitWorktree", "NotebookEdit", "SendMessage", "SendToProject", "SendToProjectContext", "DesignSync", "ListMcpResourcesTool", "ReadMcpResourceTool", "ReadMcpResourceDirTool", "ListAgents"]
 HEARTBEAT_S = float(os.environ.get("SF_HEARTBEAT_S", "30"))
 CALLBACK_MIN_HOURS = 1.0                                            # the post-render callback always gets at least this much session time
 SHORT_TURNS = 10                                                    # a denial in a session this short that changed nothing is the infrastructure signature (from the 2026-11-08/09 records; judgement)
@@ -44,10 +53,12 @@ LIMIT = re.compile(r"(usage|session|weekly|hourly|rate)[ -]?limit|hit your .*lim
 API_FAILURE = re.compile(r"classifier gave no verdict|API Error|overloaded_error|Internal server error", re.I)
 MODEL = os.environ.get("SF_RUN_MODEL", "sonnet")                    # pinned so a settings change cannot silently alter a batch; "Drawing" doctrine: production sessions are Sonnet
 STANDING = ("Headless session, don't-ask mode. One purpose per Bash call. The working directory is the repo root: never cd. Run Python tools as .venv/bin/python tools/x.py. Change files with Write or Edit, never with shell redirection. "
-            "Repeat a command by making one call per item or with a .venv/bin/python heredoc, never a for loop. Never background with &. A denial applies to that command form only: rewrite it in an allowed form and continue; never conclude that Bash is unavailable. "
+            "Repeat a command by making one call per item or with a small .venv/bin/python heredoc that only reads and computes (a hook denies inline Python that spawns processes, reaches the network or names provenance, producer, .env or Blender: put such logic in a tool), never a for loop. Never background with &. "
+            "Orient with ONE call: .venv/bin/python tools/status.py <prod>; iterate a scene with ONE call: .venv/bin/python tools/iterate.py <prod> <scene> <frames> (drafts, one contact sheet, a summary; read the sheet, not each still, and never re-read a still it calls IDENTICAL). "
+            "Keep <prod>/build/checkpoint.md current at every stage boundary (stage, done and verified, exact next step, open decisions, failing measurements): when your context passes the cap a hook denies every tool except writing that file and a fresh session continues from it. A denial applies to that command form only: rewrite it in an allowed form and continue; never conclude that Bash is unavailable. "
             "Keep working until one of these is true: queue_final.py printed QUEUED, the production verifies, the topic is returned, or a blocker remains that you cannot clear under CLAUDE.md. Multi-hour builds are expected and there is no time pressure: "
             "never end the session to report partial progress or because the remaining work is long. Skill helper scripts that start Blender (blender-core run_in_blender.py) run only as .venv/bin/python tools/blender_run.py --skill -- <script> <args>.")
-PROMPT = ("Use the produce skill to run production {prod} from its current state, under CLAUDE.md. Do not publish, spend money or create accounts. Queue the final with .venv/bin/python tools/queue_final.py <prod> and stop when it prints QUEUED; "
+PROMPT = ("Follow the produce procedure (appended to your system prompt) to run production {prod} from its current state, under CLAUDE.md. Do not publish, spend money or create accounts. Queue the final with .venv/bin/python tools/queue_final.py <prod> and stop when it prints QUEUED; "
           "this runner waits for the render and calls you back to finish the package. When you are blocked on a standing bar, follow the Reshape ladder; if it is exhausted, return the topic with .venv/bin/python tools/return_topic.py <prod> --reason \"...\" and stop. "
           "That command replaces any older note asking for hand-written RETURNED or REPLACEMENT lines and bank marks.")
 CONTINUE_PROMPT = ("Your previous session ended before the production was complete. Continue the build of {prod} from its current state under CLAUDE.md (produce skill) and do not stop until the final is QUEUED, the topic is returned, or a blocker remains. "
@@ -57,6 +68,10 @@ FIX_PROMPT = ("Your previous session ended WITHOUT CHANGING ANYTHING in {prod} (
 CALLBACK_PROMPT = ("The final render of {prod} that you queued has ended (chain log output/chain-{name}.log). Do not re-render. Finish the production from produce skill step 11: read the chain log, run .venv/bin/python tools/verify_production.py {prod}, "
                    "build the package with .venv/bin/python tools/publish_package.py build {prod} and check it with .venv/bin/python tools/publish_package.py check {prod}, then step 12 (report in notes.md, INDEX.md, commit). "
                    "If the render failed, say so plainly in notes.md and fix what the chain log shows. The verifier currently says:\n")
+HANDOFF_INTRO = ("You are a FRESH session continuing {prod}: the previous session {why} and handed over. Everything it knew is in the files and in its checkpoint below. Do not re-read what the checkpoint says is done; "
+                 "start with .venv/bin/python tools/status.py {prod} only if the checkpoint leaves the state unclear, then take its next step.\n--- build/checkpoint.md ---\n{checkpoint}\n--- end of checkpoint ---\n")
+REPORT_PROMPT = ("The final render of {prod} that you queued has ended and the runner has already built the publish package and run the verifier: it PASSES. Do not re-render, re-run the verifier or rebuild the package. "
+                 "Finish only produce skill step 12: the report in notes.md (estimate vs actual, appended as one ledger line per event), the INDEX.md row, new staging lessons in assets/patterns.md, and the commit. Then stop.")
 SKILL = Path.home() / ".claude" / "skills" / "produce" / "SKILL.md"
 
 
@@ -64,9 +79,46 @@ class InfraFailure(Exception):
     """The route is broken, not the production: halt the batch, spend no fix round."""
 
 
+def procedure_text() -> str:
+    """The produce skill's body (no frontmatter), appended to the system prompt: the runner's sessions load no skills, and every one used exactly one (produce)."""
+    try:
+        text = SKILL.read_text(encoding="utf-8")
+    except OSError:
+        return ""
+    return re.sub(r"\A---\n.*?\n---\n", "", text, count=1, flags=re.S).strip()
+
+
 def session_cmd(prompt: str, resume: str | None) -> list[str]:
-    cmd = [CLAUDE, "-p", prompt, "--output-format", "stream-json", "--verbose", "--permission-mode", "dontAsk", "--settings", str(ROOT / "tools" / "runner-settings.json"), "--model", MODEL, "--append-system-prompt", STANDING]
+    system = STANDING
+    isolated = ISOLATE and bool(procedure_text())                              # no procedure text, no isolation: the session would have nothing to follow
+    if isolated:
+        system += "\n\nNo skills are installed in this session. The produce procedure follows; wherever a message says 'the produce skill', this is it.\n\n" + procedure_text()
+    cmd = [CLAUDE, "-p", prompt, "--output-format", "stream-json", "--verbose", "--permission-mode", "dontAsk", "--settings", str(ROOT / "tools" / "runner-settings.json"), "--model", MODEL, "--append-system-prompt", system]
+    if isolated:                                                               # session startup isolation (block B3, P13): skills, claude.ai connectors and unused tools out of the context
+        cmd += ["--disable-slash-commands", "--strict-mcp-config", "--mcp-config", str(ROOT / "tools" / "runner-mcp.json"), "--disallowed-tools", *DISALLOWED_TOOLS]
     return cmd + ["--resume", resume] if resume else cmd
+
+
+_TOOLS_REV: list = []
+
+
+def tools_rev() -> str | None:
+    """HEAD when the runner process first launched a session, fixed for the batch: a session that commits a script of its own cannot make it runnable."""
+    if not _TOOLS_REV:
+        r = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True)
+        _TOOLS_REV.append(r.stdout.strip() if r.returncode == 0 else "")
+    return _TOOLS_REV[0] or None
+
+
+def session_env(ctx_file: Path | None = None) -> dict:
+    env = {k: v for k, v in os.environ.items() if not k.startswith("CLAUDECODE")}
+    if ctx_file:
+        env["SF_CTX_FILE"] = str(ctx_file)                                     # the hook reads the session's live context from here (its own transcript lags a call behind)
+    env["SF_CTX_CAP"] = str(CTX_CAP)                                           # read by the hook; only runner sessions carry it
+    rev = tools_rev()
+    if rev:
+        env["SF_TOOLS_REV"] = rev                                              # the hook lets a session run only the tools/factory/tests scripts of this commit
+    return env
 
 
 def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str | None, hours: float | None = None) -> dict:
@@ -74,7 +126,9 @@ def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str |
     OUT.mkdir(parents=True, exist_ok=True)
     log = OUT / f"{name}-{n}.jsonl"
     cmd = session_cmd(prompt, resume)
-    p = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, text=True, env={k: v for k, v in os.environ.items() if not k.startswith("CLAUDECODE")})
+    ctx_file = OUT / f"{name}-{n}.ctx"
+    publish_ctx(ctx_file, 0)
+    p = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, text=True, env=session_env(ctx_file))
     out = {"session_id": resume, "limited": False, "timed_out": False, "result": "", "is_error": False, "denials": [], "turns": 0, "saw_result": False, "total_cost": None}
     calls: dict[str, tuple[int, int]] = {}                                    # message id -> (context, cache read) of that API call (an assistant message is streamed once per content block)
     deadline = time.time() + (HOURS if hours is None else hours) * 3600
@@ -104,6 +158,7 @@ def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str |
                 ctx = context_tokens(msg.get("usage"))
                 if msg.get("id") and ctx:                                    # a limit poll streams one all-zero message: not an API call
                     calls[msg["id"]] = (ctx, int((msg.get("usage") or {}).get("cache_read_input_tokens") or 0))
+                    publish_ctx(ctx_file, ctx)
             if ev.get("type") == "result":
                 out.update(saw_result=True, result=str(ev.get("result", "")), is_error=bool(ev.get("is_error")), denials=ev.get("permission_denials") or [], turns=ev.get("num_turns") or 0)
                 if isinstance(ev.get("total_cost_usd"), (int, float)):
@@ -116,8 +171,18 @@ def run_session(prod: Path | None, name: str, n: int, prompt: str, resume: str |
         out["limited"] = True
     out["tail"] = tail
     ctxs = [c for c, _ in calls.values()]
-    out["usage"] = {"api_calls": len(calls), "first_ctx": ctxs[0] if ctxs else 0, "peak_ctx": max(ctxs, default=0), "cache_read": sum(cr for _, cr in calls.values())}
+    out["usage"] = {"hit_cap": bool(CTX_CAP) and max(ctxs, default=0) >= CTX_CAP, "api_calls": len(calls), "first_ctx": ctxs[0] if ctxs else 0, "peak_ctx": max(ctxs, default=0), "cache_read": sum(cr for _, cr in calls.values())}
     return out
+
+
+def publish_ctx(path: Path, ctx: int) -> None:
+    """Atomically publishes the session's latest context for the hook (tools/hook_blender_guard.py, SF_CTX_FILE). Never fails the runner."""
+    try:
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(str(int(ctx)))
+        os.replace(tmp, path)
+    except OSError:
+        pass
 
 
 def context_tokens(usage: dict | None) -> int:
@@ -150,7 +215,7 @@ def _walk(root: Path) -> list[str]:
     for d, dirs, files in os.walk(root):
         dirs[:] = [x for x in dirs if x != "__pycache__"]
         for f in files:
-            if f == "notes.md":
+            if f in ("notes.md", "checkpoint.md"):                               # a session that only rewrites its notes or its checkpoint made no build progress
                 continue
             p = Path(d) / f
             try:
@@ -365,6 +430,47 @@ def alert(title: str, msg: str) -> None:
         pass
 
 
+def checkpoint_text(prod: Path) -> str:
+    try:
+        t = (prod / "build" / "checkpoint.md").read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return ""
+    return t if len(t) <= 8000 else "...(older part cut)\n" + t[-8000:]
+
+
+def last_real_peak(st: dict) -> int:
+    """Peak context of the last session that made API calls (a limit poll made none)."""
+    for e in reversed((st.get("acct") or {}).get("session_log", [])):
+        if not e.get("poll"):
+            return int(e.get("peak_ctx") or 0)
+    return 0
+
+
+def handoff_prompt(prod: Path, rel: str, why: str) -> str | None:
+    """The brief of a fresh continuation, or None when no checkpoint exists (then nothing can be handed over and the session is resumed as before)."""
+    cp = checkpoint_text(prod)
+    return HANDOFF_INTRO.format(prod=rel, why=why, checkpoint=cp) if cp.strip() else None
+
+
+def stamp_digest(prod: Path) -> str | None:
+    import hashlib
+    try:
+        return hashlib.sha256((prod / "provenance.json").read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+
+def package_steps(prod: Path) -> tuple[bool, str]:
+    """Callback as code: build and check the publish package with the repo's own tools. Failure text goes to the callback session; success means the session only writes the report."""
+    out = []
+    for cmd in ("build", "check"):
+        r = subprocess.run([sys.executable, str(ROOT / "tools" / "publish_package.py"), cmd, str(prod)], capture_output=True, text=True, cwd=ROOT)
+        if r.returncode:
+            out.append(f"publish_package {cmd} failed: {(r.stdout + r.stderr).strip()[-600:]}")
+            break
+    return not out, "\n".join(out)
+
+
 def over_budget(st: dict) -> str | None:
     if st["sessions"] >= UNIT_MAX_SESSIONS:
         return f"session budget spent: {st['sessions']} of {UNIT_MAX_SESSIONS} sessions without a verified, returned or stopped outcome"
@@ -410,15 +516,19 @@ def run_unit(prod: Path, state: dict) -> str:
             finally:
                 st["active_s"] += time.time() - t0
             st["callbacks"].append(q["at"])
+            pkg_ok, pkg_text = package_steps(prod)                               # callback as code: the package is built and checked here, not by a session
             try:
                 ok, text = verify(prod)
             except InfraFailure as e:
                 return finish(st, state, "infra", f"infrastructure failure: {e}")
-            if ok:
-                return finish(st, state, "verified", "verified")
             st["last_verifier"] = text
-            prompt, callback = CALLBACK_PROMPT.format(prod=rel, name=name) + text, True
-            log(f"CALLBACK {rel}: render of the final queued at {q['at']} ended")
+            st["session"] = None                                                 # the callback is always a FRESH session: the build session's context is at its largest and nothing in it is needed
+            if ok and pkg_ok:
+                prompt, callback = REPORT_PROMPT.format(prod=rel), True
+                log(f"CALLBACK {rel}: render ended, package built and verifier PASS by the runner; report-only session")
+            else:
+                prompt, callback = CALLBACK_PROMPT.format(prod=rel, name=name) + (pkg_text + "\n" if pkg_text else "") + text, True
+                log(f"CALLBACK {rel}: render of the final queued at {q['at']} ended; fix session")
         elif not resumed_after_limit:
             why = over_budget(st)
             if why:
@@ -434,6 +544,7 @@ def run_unit(prod: Path, state: dict) -> str:
         left_h = max(0.0, UNIT_MAX_HOURS - st["active_s"] / 3600)
         hours = max(min(HOURS, left_h), CALLBACK_MIN_HOURS if callback else 0.05)
         before = fingerprint(prod)
+        stamp_before = stamp_digest(prod)
         t0 = time.time()
         r = run_session(prod, name, st["launches"], prompt, st["session"], hours)
         st["session"] = r["session_id"]
@@ -457,10 +568,16 @@ def run_unit(prod: Path, state: dict) -> str:
             set_live(state, next_retry_at=None, waiting_unit=None)
             waited += POLL_LIMIT_S
             prompt, resumed_after_limit = "The usage limit has reset. Continue where you stopped.", True
+            if last_real_peak(st) > RESUME_MAX_CTX:                              # a resume re-reads the whole big context (021-5 re-wrote 326k): a fresh session from the checkpoint is cheaper
+                hp = handoff_prompt(prod, rel, f"stopped on the usage limit at a {last_real_peak(st) // 1000}k context")
+                if hp:
+                    st["session"], prompt = None, hp + "Continue from its next step."
             continue
         st["active_s"] += time.time() - t0
         waited = 0.0
         st["next_retry_at"] = None
+        if stamp_digest(prod) != stamp_before:                                   # no permission rule is the only guard of the stamp: any change made during a session is an integrity breach
+            return finish(st, state, "infra", f"infrastructure failure: provenance.json changed during session {st['launches']} (a production session never writes the stamp)")
         changed = fingerprint(prod) != before
         why = infra_signature(r, changed)
         if why:
@@ -487,15 +604,24 @@ def run_unit(prod: Path, state: dict) -> str:
             return finish(st, state, "verified", "verified")
         progress = changed or (st.get("last_verifier") is not None and text != st["last_verifier"])
         st["last_verifier"] = text
+        capped = bool(r.get("usage", {}).get("hit_cap"))
         if progress:
             st["status"] = f"session {n} made progress; continuing"
             prompt = CONTINUE_PROMPT.format(prod=rel) + text
-            continue
-        if st["fix_rounds"] >= FIX_ROUNDS:
-            return finish(st, state, "stopped", f"stopped: no progress in session {n} after {FIX_ROUNDS} fix round(s) without progress")
-        st["fix_rounds"] += 1
-        st["status"] = f"fix round {st['fix_rounds']} (session {n} made no progress)"
-        prompt = FIX_PROMPT.format(prod=rel, k=st["fix_rounds"], n=FIX_ROUNDS) + text
+        else:
+            if st["fix_rounds"] >= FIX_ROUNDS:
+                return finish(st, state, "stopped", f"stopped: no progress in session {n} after {FIX_ROUNDS} fix round(s) without progress")
+            st["fix_rounds"] += 1
+            st["status"] = f"fix round {st['fix_rounds']} (session {n} made no progress)"
+            prompt = FIX_PROMPT.format(prod=rel, k=st["fix_rounds"], n=FIX_ROUNDS) + text
+        if capped:                                                               # context cap reached: hand over to a fresh session, never --resume
+            hp = handoff_prompt(prod, rel, f"reached its {CTX_CAP // 1000}k context cap")
+            if hp:
+                st["session"], st["handoffs"] = None, st.get("handoffs", 0) + 1
+                prompt = hp + prompt
+                log(f"HANDOFF {rel}: session {n} reached the context cap; fresh session from build/checkpoint.md")
+            else:
+                log(f"HANDOFF {rel}: session {n} reached the cap but wrote no build/checkpoint.md; the next session resumes it")
 
 
 def provenance_errors(prod: Path) -> list[str]:
