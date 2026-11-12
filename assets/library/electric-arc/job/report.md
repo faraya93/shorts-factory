@@ -37,3 +37,6 @@ The job stays open; asset.json is unchanged (the brief's states are completed by
 - committed script 020 (scenes 2, 3, 6: full branching bolt; arc from wheel to road)
 - committed script 022 (scene 4: small arcs between fork tines)
 - committed script 023 (scenes 4-5: single spark from fingertip to door and at the nozzle)
+
+## Closed 2026-11-11 (redesign session)
+Status `rejected`: capability boundary (a free-standing electric arc does not read under the isolated single-object reader). The naming reading stays on record as it is. `code3d/lib/arc_rig.py` is kept for arcs drawn as ungated cues. Doctrine: doctrine-topics-and-scripts.md "Capability boundaries".

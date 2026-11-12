@@ -11,7 +11,7 @@
   ],
   "family": "objects",
   "created": "2026-11-10",
-  "status": "in_progress",
+  "status": "rejected",
   "route": "code-primitive",
   "brief": {
     "must_read_as": "an electric spark or lightning bolt",
@@ -85,5 +85,10 @@
   },
   "owner_verdict": "pending",
   "rejected_candidates": [],
-  "productions": []
+  "productions": [],
+  "closed": {
+    "at": "2026-11-11",
+    "by": "redesign session (lens decision, lens-decisions.md 2026-11-11 'Redesign session')",
+    "reason": "Capability boundary: a free-standing electric arc does not read under the isolated single-object reader (asset naming 35/60/60 on 2026-11-11; 022 rung-2 bolt alone 55/40/45; 023 five failures). The job is closed; code3d/lib/arc_rig.py is kept for arcs drawn as ungated cues. Doctrine: doctrine-topics-and-scripts.md 'Capability boundaries'."
+  }
 }
