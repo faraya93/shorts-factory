@@ -26,8 +26,32 @@
    "build": "titanic_rig.Liner + Sea + Iceberg; camera only.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: iceberg larger, whiter, with the underwater mass clearly darker blue below the slab; the liner smaller behind it. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "ocean liner (Titanic-style steamship); alternatives: cruise ship, ferry",
+      "Titanic-style ocean liner with four funnels (alternatives: cruise ship, iceberg)",
+      "Cruise ship with four funnels (Titanic-style ocean liner); alternatives: passenger steamship, toy boat model"
+     ],
+     "confidences": [
+      85,
+      90,
+      93
+     ],
+     "mean_confidence": 89.3,
+     "stills": [
+      "build/proofs/P1/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.005049
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_01.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P2",
@@ -54,8 +78,32 @@
    "build": "titanic_rig.Liner in an x-ray material state.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: keep the shell opaque and lift the deck lid away instead (the rig's existing cutaway state). A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": true,
+     "guesses": [
+      "ocean liner ship model with four yellow funnels (Titanic-style)",
+      "ocean liner steamship with four yellow funnels (Titanic-style)",
+      "ocean liner ship with four yellow funnels (Titanic-style steamship model)"
+     ],
+     "confidences": [
+      88,
+      80,
+      90
+     ],
+     "mean_confidence": 86.0,
+     "stills": [
+      "build/proofs/P2/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.00472
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_02.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P3",
@@ -79,8 +127,32 @@
    "build": "P1 scene with the iceberg moved against the bow; slits as emissive cuts.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: pull back so both the whole bow and the iceberg's peak are in frame. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": true,
+     "guesses": [
+      "iceberg (low-poly, in front of a ship); alternatives: crystal rock, glacier chunk",
+      "low-poly iceberg",
+      "iceberg"
+     ],
+     "confidences": [
+      92,
+      88,
+      92
+     ],
+     "mean_confidence": 90.7,
+     "stills": [
+      "build/proofs/P3/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.004936
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_03.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P4",
@@ -105,8 +177,32 @@
    "build": "P2 still + real_kit.water boxes.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: show the hull exterior too, the bow lower in the sea slab, water visible through the shell. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "cutaway ocean liner with four yellow smokestacks, half-submerged in water",
+      "cutaway model of a steamship hull (Titanic-style), alternatives: ocean liner, cruise ship",
+      "cutaway ocean liner model (Titanic-style ship)"
+     ],
+     "confidences": [
+      72,
+      75,
+      80
+     ],
+     "mean_confidence": 75.7,
+     "stills": [
+      "build/proofs/P4/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.005022
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_04.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P5",
@@ -131,8 +227,32 @@
    "build": "P4 still with the tilt and spill sheets.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: closer on two boxes so the wall top and the falling sheet fill the frame, the funnels still in frame top left. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "failed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": false,
+     "guesses": [
+      "Titanic-style ocean liner model with yellow funnels, seen in a blue glass case",
+      "Titanic-style ocean liner ship model with yellow funnels in water",
+      "Titanic-style ocean liner model with three yellow funnels, seen in a blue glass block"
+     ],
+     "confidences": [
+      85,
+      85,
+      85
+     ],
+     "mean_confidence": 85.0,
+     "stills": [
+      "build/proofs/P5/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.00418
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_05.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P6",
@@ -156,8 +276,32 @@
    "build": "titanic_rig.Liner root pitch and sink + Sea.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: steeper angle (35 degrees), stern high, propellers visible. A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": true,
+     "guesses": [
+      "a sinking ocean liner (Titanic-style steamship with yellow funnels) tilting into the sea",
+      "a sinking ocean liner (Titanic-style steamship) with yellow funnels, tilted in the sea",
+      "sinking ocean liner (Titanic-style steamship) with yellow funnels, tilting into the sea"
+     ],
+     "confidences": [
+      92,
+      90,
+      90
+     ],
+     "mean_confidence": 90.7,
+     "stills": [
+      "build/proofs/P6/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.004327
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_06.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   },
   {
    "id": "P7",
@@ -176,8 +320,32 @@
    "build": "new tray build.",
    "bar": "unchanged gate bar: three isolated readers (tools/blind_read.py), mean confidence >= 60, no reader under 45, aliases exactly as declared here, none added after a guess; every reading counts",
    "on_fail": "Rung 1: half-frozen cubes in some cells (an ice cue). A failed proof goes back to a creative session, which redesigns from the actual readings; it is not a production ladder rung.",
-   "status": "pending",
-   "readings": []
+   "status": "passed",
+   "readings": [
+    {
+     "date": "2026-11-11",
+     "pass": true,
+     "guesses": [
+      "ice cube tray (white plastic tray with blue compartments)",
+      "white plastic ice cube tray with blue-tinted compartments",
+      "ice cube tray"
+     ],
+     "confidences": [
+      88,
+      85,
+      85
+     ],
+     "mean_confidence": 86.0,
+     "stills": [
+      "build/proofs/P7/2026-11-11-1-still-0010.png"
+     ],
+     "reader_cost_usd": 0.004155
+    }
+   ],
+   "built_by_b5": {
+    "script": "code3d/scenes/proof_07.py",
+    "render": "tools/proof_still.py (EEVEE draft path, 1080x1920, frame 10)"
+   }
   }
  ]
 }
